@@ -1,0 +1,147 @@
+.wrapper-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,360px);
+  justify-content: center;
+}
+.div-heading-title{
+
+  padding-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 102;
+  width:200px
+}
+.ground-form {
+  padding-top: 10px;
+  flex-wrap: wrap;
+  color:  var(--form-text-color);
+  background-color: var(--page-background-color);
+}
+.div-form{
+  height: auto;
+  width: 350px;
+  max-width: auto;
+  min-width: auto;
+
+  background-color: var(--form-background-color);
+  box-shadow:5px 5px 5px var(--form-box-shadows);
+  border-radius: 5px;
+
+
+}
+.grid-container-flow-meters-communication{
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+  grid-template-rows: repeat(auto);
+  grid-auto-rows: 30px;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content:center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.grid-container-communicationStatus-column1{
+  display: grid;
+  grid-column:1;
+  text-align: right;
+  float: right;
+  align-items: center;
+}
+.grid-container-communicationStatus-column3{
+  display: grid;
+  grid-column: 3;
+  text-align: left;
+  float: left;
+  align-items: center;
+  font-weight: bold;
+
+
+}
+.grid-container-communicationStatus-column3-img{
+  display: grid;
+  grid-column: 3;
+
+  width:20px;
+  height: 20px;
+
+  justify-items: center;
+  align-items: center;
+
+
+}
+h1{
+  text-align: center;
+  color: white;
+  font-size:120%;
+}
+h3{
+  text-align: center;
+  /* padding-top: 5px; */
+  margin-top: 5px;
+  font-size: 20px;
+  padding-top: 0;
+
+}
+h4{
+  text-align: center;
+}
+.img3{
+  width:25px;
+  height: 25px;
+  z-index:1;
+  padding-bottom:0px;
+  margin-right: 0;
+  margin-left: auto;
+}
+.ps-form {
+  padding-top: 10px;
+  color:  var(--form-text-color);
+}
+:host ::ng-deep.mat-form-field-label {
+  color: var(--overview-table-filter-color) !important;
+
+ }
+
+ :host ::ng-deep.mat-form-field-underline {
+  background-color: var(--overview-table-filter-color) !important;
+
+}
+:host mat-datepicker-toggle {
+  color: var(--overview-table-filter-color) !important;
+ }
+
+
+
+@media screen and (min-height : 500px)
+{
+  .chart { margin-left: auto;
+    margin-right: auto;
+    background-color: var(--form-background-color);
+    height: 500px;
+    width: 94%;
+    box-shadow:5px 5px 5px  var(--form-box-shadows);
+    color: var(--form-text-color2);
+    border-radius: 7px;
+  }
+}
+
+@media screen and (max-height : 500px)
+{
+  .chart {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--form-background-color);
+    height: 500px;
+    width: 92%;
+    box-shadow:5px 5px 5px  var(--form-box-shadows);
+    color: var(--form-text-color2);
+    border-radius: 7px;
+  }
+}
+button{
+  background-color: rgb(89, 105, 128);
+  color: white;
+}

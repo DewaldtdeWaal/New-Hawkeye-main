@@ -1,0 +1,85 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Kareedouw</h1></div>
+  <div class="wrapper-grid">
+
+
+
+    <section class="res-form" fxLayoutAlign="center ">
+      <form fxLayout="column">
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication </h3></div>
+
+
+          <div class="div-form">
+            <div class="grid-container-flow-meters-communication" >
+              <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+              <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+              <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+              <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:4px"></div>
+                </div>
+                <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                 <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:4px">
+                 </div>
+
+              <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+              <div class="grid-container-flow-meters-general-column3">{{ variable.kark_R_comms_UT}}</div>
+              <div class="grid-container-flow-meters-general-column1">Battery Unit Last Update:</div>
+              <div class="grid-container-flow-meters-general-column3">{{ variable.kark_R_battery_unit_UT}}</div>
+              <div class="grid-container-flow-meters-general-column1">Battery Level:</div>
+              <div class="grid-container-flow-meters-general-column3">{{ variable.kark_R_battery_lvl}} %</div>
+
+              </div>
+
+              <section class="basic-grid" style="margin:auto;">
+              <div *ngIf="showKark1 == 'true'" class="grid-button">
+                <button class="button-color" a routerLink="/hawkeye/groundwater/kareedouwk1" style="height: 28px;" >K1</button></div>
+
+
+
+
+
+                <div *ngIf="showKark2 == 'true'" class="grid-button">
+                  <button class="button-color" a routerLink="/hawkeye/groundwater/kareedouwk2" style="height: 28px;"  >K2</button></div>
+
+                </section>
+
+
+                <br>
+
+
+              </div>
+
+
+              </form>
+              </section>
+
+  <section class="res-form" fxLayoutAlign="center center">
+
+    <form fxLayout="column">
+
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Reservoir</h3>
+      </div>
+
+
+  <div class="div-form">
+
+
+  <br>
+  <br>
+
+
+  <div fxLayoutAlign="center " > <div class="circle1">
+    <div class="circle2-b"><div [ngStyle]="{'height.%' : 100- variable.kark_R_lvl }" class="fill"><div class="lvl-font">{{variable.kark_R_lvl}}%</div></div></div>
+  </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  </div>
+    </form>
+    </section>
+  </div>
+  </div>

@@ -1,0 +1,60 @@
+
+
+
+
+mat-icon{
+ color:rgb(87, 87, 87)
+}
+.div-heading-title{
+
+  padding-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 102;
+  width:200px;
+  color:white;
+}
+
+
+.ps-form {
+  padding-top: 10px;
+  background-color:rgb(244, 244, 244);
+}
+
+.div-form{
+  height: auto;
+  width: 700px;
+  max-width: auto;
+  min-width: auto;
+
+  box-shadow:5px 5px 5px rgb(233, 233, 233);
+  background-color: #ffffff;
+  border-radius: 5px;
+
+
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.panel{
+  height: 190px !important;
+  width: 20px !important;;
+
+}
+
+
+button:hover {
+  background-color: #4CAF50;
+  color: white
+}
+
+
+h2{
+
+  color:  var(--form-text-color);
+}

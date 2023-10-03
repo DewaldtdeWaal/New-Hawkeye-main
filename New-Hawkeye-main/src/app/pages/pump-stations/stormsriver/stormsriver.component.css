@@ -1,0 +1,356 @@
+.wrapper-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,360px);
+  justify-content: center;
+
+}
+.div-heading-title{
+
+  padding-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 102;
+  width:200px
+}
+.ground-form {
+  padding-top: 10px;
+  flex-wrap: wrap;
+  color:  var(--form-text-color);
+  background-color: var(--page-background-color);
+}
+.div-form{
+  height: auto;
+  width: 350px;
+  max-width: auto;
+  min-width: auto;
+
+  background-color: var(--form-background-color);
+  box-shadow:5px 5px 5px var(--form-box-shadows);
+  border-radius: 5px;
+
+
+}
+.grid-container-flow-meters-communication{
+  display: grid;
+  grid-template-columns:  1fr 20px 1fr;
+  grid-auto-rows: 30px;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content:center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.grid-container-communicationStatus-column1{
+  display: grid;
+  grid-column:1;
+  text-align: right;
+  float: right;
+  align-items: center;
+}
+.grid-container-communicationStatus-column3{
+  display: grid;
+  grid-column: 3;
+  text-align: left;
+  float: left;
+  align-items: center;
+  font-weight: bold;
+
+
+}
+.grid-container-communicationStatus-column3-img{
+  display: grid;
+  grid-column: 3;
+  width:20px;
+  height: 20px;
+  /* grid-area: 1 / 3 / span 1 /  span 1 ; */
+  justify-items: center;
+  align-items: center;
+
+
+
+}
+h1{
+  text-align: center;
+  color: white;
+
+}
+h3{
+  text-align: center;
+  /* padding-top: 5px; */
+  margin-top: 5px;
+  font-size: 20px;
+  padding-top: 0;
+
+}
+h4{
+  text-align: center;
+}
+
+
+.grid-container-pumpstation{
+  display: grid;
+  /* overflow: hidden; */
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-column-gap:5px;
+  grid-auto-rows: 30px;
+  width:95%;
+  margin:auto;
+  column-gap: 10px;
+  font-size: 12px;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.grid-pumpstation-column2-right-align{
+  display:grid;
+  grid-column: 2;
+  text-align:right;
+  float:right;
+  align-items: center;
+
+
+
+}
+.led-grey {
+  margin: 0 auto;
+  width: 15px;
+  height: 15px;
+  background-color: #ffffff;
+  border:1px solid rgb(88, 88, 88);
+  border-radius: 50%;
+  box-shadow:  inset #585858 0 -1px 9px;
+}
+
+.led-red {
+  margin: 0 auto;
+  width: 15px;
+  height: 15px;
+  border:1px solid rgb(88, 88, 88);
+  border-radius: 50%;
+
+  background-color: #ff0000;
+
+}
+.led-green {
+  margin: 0 auto;
+  width: 15px;
+  height: 15px;
+  border:1px solid rgb(88, 88, 88);
+  border-radius: 50%;
+  background-color: #00ff0d;
+
+
+}
+
+.grid-container-general-img-green{
+
+  display: grid;
+
+  margin: left;
+
+    grid-column:  1;
+
+    width: 10px;
+    height: 10px;
+
+    border:1px solid rgb(88, 88, 88);
+
+    border-radius: 50%;
+    /* background-color: #ccff7b;
+    box-shadow:  inset #41f01e 0 -1px 9px; */
+    background-color: #00ff0d;
+    /* box-shadow:  inset #41f01e 0 -1px 9px; */
+
+}
+.grid-container-general-img-grey {
+  display: grid;
+
+  margin: left;
+
+  grid-column:  1;
+
+  width: 10px;
+  height: 10px;
+
+  border:1px solid rgb(88, 88, 88);
+  border-radius: 50%;
+  /* background-color: #ccff7b;
+  box-shadow:  inset #41f01e 0 -1px 9px; */
+  /* background-color: #585858; */
+  box-shadow:  inset #585858 0 -1px 9px;
+  /* box-shadow:  inset #41f01e 0 -1px 9px; */
+
+}
+.grid-container-general-img-red {
+  display: block;
+
+  margin: left;
+
+  grid-column:  1;
+
+  width: 10px;
+  height: 10px;
+
+  border:1px solid rgb(88, 88, 88);
+  border-radius: 50%;
+  /* background-color: #ccff7b;
+  box-shadow:  inset #41f01e 0 -1px 9px; */
+  background-color: #ff0000;
+  /* box-shadow:  inset #41f01e 0 -1px 9px; */
+
+}
+.grid-pumpstation-column3-left-align{
+  display:grid;
+  grid-column: 3;
+  text-align:left;
+  float:left;
+  align-items: center;
+  font-weight: bold;
+
+
+
+}
+
+.button-color{
+  background: #A9A9A9;
+  border-radius:5%;
+  border-color: #A9A9A9;
+  color:white;
+  height: 100%;
+
+}
+.grid-button{
+  height: 100%;
+  display: grid;
+  grid-column:1 / span 3;
+  width:33%;
+  margin: auto;
+  background-color: #D3D3D3;
+  color: #D3D3D3;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.grid-column-one{
+  grid-column: 1;
+  grid-row: 1/ span 3;
+
+  justify-items: center;
+  align-items: center;
+  margin:  auto;
+
+}
+.pump{
+  display: grid;
+  width:80%;
+  height:80%;
+ margin:  auto;
+}
+
+:host ::ng-deep.mat-form-field-label {
+  color: var(--overview-table-filter-color) !important;
+ }
+
+ :host ::ng-deep.mat-form-field-underline {
+  background-color: var(--overview-table-filter-color) !important;
+}
+
+@media screen and (min-width : 200px)
+{
+  h1
+  {
+    font-size: 24px;
+
+  }
+}
+
+@media screen and (max-width : 375px)
+{
+  h1
+  {
+    font-size: 19px;
+  }
+}
+table {
+  padding-left: 14px;
+  width: 96%;
+
+  background-color: var(--form-background-color);
+  color:  var(--form-text-color);
+  /* font-family: 'Rubik', sans-serif !important; */
+}
+td{
+  font-size:12px;
+  font-family: 'Rubik', sans-serif !important;
+color:  var(--ps-table-td-color);
+text-align: left;
+background-color: var( --ps-table-td-fault-color)
+}
+
+th{
+  font-weight:600;
+  color:  var(--ps-table-th-color);
+}
+
+
+/* new grid */
+
+
+.grid-container-flow-meters-general{
+  display: grid;
+  grid-template-columns:  0.8fr 0.2fr 20px 1fr;
+  grid-auto-rows: 30px;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content:center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+
+.grid-container-general-column1{
+  display: grid;
+  grid-column:1;
+  text-align: right;
+  float: right;
+  align-items: center;
+  overflow: none;
+  font-size: 12px;
+
+}
+.grid-container-general-column2{
+  display: grid;
+  grid-column:2;
+  text-align: right;
+  float: right;
+  align-items: center;
+  overflow: none;
+}
+
+
+.grid-container-general-column4{
+  display: grid;
+  grid-column:4;
+  text-align: left;
+  float: left;
+  align-items: center;
+  overflow: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+
+.img2{
+  width:25px;
+  height: 25px;
+  z-index:1;
+  padding-bottom:0px;
+  margin-right: 0;
+  margin-left: auto;
+
+
+}

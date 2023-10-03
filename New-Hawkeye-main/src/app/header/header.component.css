@@ -1,0 +1,133 @@
+
+span{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .mat-menu-content{
+  background-color: var(--form-background-color);
+  color: var(--form-text-color)
+}
+mat-toolbar{
+  position: -webkit-fixed;
+  position: fixed !important;
+  background-color: rgb(89, 105, 128);
+
+
+  width: 100%;
+  z-index: 101;
+
+}
+
+.icon{
+  font-size: 28px;
+  color: white!important;
+}
+a{
+
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  color: aliceblue;
+  float: right;
+}
+
+
+
+button{
+  font-family: Arial, Helvetica, sans-serif;
+  color: aliceblue  !important;
+  z-index: 0;
+  text-align: left !important;
+  /* color: white !important; */
+
+}
+button:hover{
+background-color: rgb(50, 74, 107);
+}
+
+ ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  display: flex;
+}
+
+ .spacer {
+  flex: 1 1 auto;
+}
+
+.item{
+  color:rgb(88, 88, 88);
+}
+
+.icon{
+  font-size: 28px;
+}
+
+
+ mat-sidenav {
+    width: 280px;
+    padding:15px;
+    background-color: rgb(89, 105, 128) ;
+}
+
+.main-content {
+    padding:20px;
+}
+
+
+
+
+
+
+
+
+
+/* .example-container {
+  height: 500px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+} */
+/* .example-sidenav {
+   user-select: none;
+} */
+/* .full-width {
+  width: 100%;
+} */
+.menu-button {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+}
+.menu-button.rotated {
+  transform: rotate(180deg);
+}
+
+.sub-button{
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+}
+.sub-button.rotated {
+  transform: rotate(180deg);
+}
+.submenu {
+  overflow-y: hidden;
+  transition: transform 300ms ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  padding-left: 20px;
+}
+.submenu.expanded {
+  transform: scaleY(1);
+}

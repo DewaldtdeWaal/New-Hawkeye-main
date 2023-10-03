@@ -1,0 +1,114 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Isuzu</h1></div>
+  <div class="wrapper-grid">
+
+
+
+    <section class="res-form" fxLayoutAlign="center ">
+      <form fxLayout="column">
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication </h3></div>
+
+
+          <div class="div-form">
+            <div class="grid-container-flow-meters-communication">
+              <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+              <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+              <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+              <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+                </div>
+                <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                 <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+                 </div>
+
+              <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+              <div class="grid-container-flow-meters-general-column3">{{isuzu_ut}}</div>
+
+
+
+
+              </div>
+              </div>
+
+              </form>
+              </section>
+
+
+
+              <section class="ground-form" fxLayoutAlign="center ">
+                <form fxLayout="column" >
+
+                  <div style="margin-bottom: 8px"  class="div-form">
+                    <h3 style="padding-top: 8px; ">Oven 1</h3>
+                  </div>
+                  <div class="div-form">
+                    <div class="grid-container-pumpstation">
+
+                      <div class="grid-pumpstation-column2-right-align">VSD Frequency:</div>
+                      <div class="grid-pumpstation-column3-left-align"> {{isuzu_oven1_vsd_speed}} Hz</div>
+                      <div class="grid-pumpstation-column2-right-align">Heat Exchanger Temperature:</div>
+                      <div class="grid-pumpstation-column3-left-align">{{isuzu_oven1_heat_ecvh_temp}} &#xb0;C </div>
+                      <div class="grid-pumpstation-column2-right-align">Oven Temperature 1:</div>
+                      <div class="grid-pumpstation-column3-left-align">{{isuzu_oven1_temp1}} &#xb0;C </div>
+                      <div class="grid-pumpstation-column2-right-align">Oven Temperature 2:</div>
+                      <div class="grid-pumpstation-column3-left-align">{{isuzu_oven1_temp2}} &#xb0;C </div>
+
+                      </div>
+
+                      </div>
+
+                      </form>
+                      </section>
+
+
+
+
+                      <section class="ground-form" fxLayoutAlign="center ">
+                        <form fxLayout="column" >
+
+                          <div style="margin-bottom: 8px"  class="div-form">
+                            <h3 style="padding-top: 8px; ">Oven 2</h3>
+                          </div>
+                          <div class="div-form">
+                            <div class="grid-container-pumpstation">
+
+                              <div class="grid-pumpstation-column2-right-align">VSD Frequency:</div>
+                              <div class="grid-pumpstation-column3-left-align">{{isuzu_oven2_vsd_speed}} Hz</div>
+                              <div class="grid-pumpstation-column2-right-align">Heat Exchanger Temperature:</div>
+                              <div class="grid-pumpstation-column3-left-align">{{isuzu_oven2_heat_ecvh_temp}} &#xb0;C </div>
+                              <div class="grid-pumpstation-column2-right-align">Oven Temperature 1:</div>
+                              <div class="grid-pumpstation-column3-left-align">{{isuzu_oven2_temp1}} &#xb0;C </div>
+                              <div class="grid-pumpstation-column2-right-align">Oven Temperature 2:</div>
+                              <div class="grid-pumpstation-column3-left-align">{{isuzu_oven2_temp2}} &#xb0;C </div>
+
+                              </div>
+
+                              </div>
+
+                              </form>
+                              </section>
+
+
+
+
+    </div>
+
+    <div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
+      <h3 style="padding-top: 10px; color: var(--form-text-color); ">Oven 1</h3>
+    </div>
+    <br>
+    <div id="main" echarts  [options]="ovenOne" class="chart" ></div>
+    <br>
+    <br>
+
+    <div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
+      <h3 style="padding-top: 10px; color: var(--form-text-color); ">Oven 2</h3>
+    </div>
+    <br>
+    <div id="main" echarts  [options]="ovenTwo" class="chart" ></div>
+    <br>
+    <br>
+
+
+
+    </div>

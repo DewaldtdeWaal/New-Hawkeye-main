@@ -1,0 +1,54 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Driver Edit</h1></div>
+  <br>
+  <br>
+
+  <form #myForm="ngForm" #f="ngForm" (ngSubmit)="onSubmitToDataBase(f)">
+    <div class="wrapper-grid">
+
+      <!-- How do I populate this mat form field with a value from the typescript -->
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>IP Address</mat-label>
+        <input matInput [(ngModel)]="ipaddress"  name="ipaddress" required style="color: var(--overview-table-filter-color)">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>Driver Name</mat-label>
+        <input matInput [(ngModel)]="driverName"  name="driverName" required style="color: var(--overview-table-filter-color)">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="siteDescription"  name="siteDescription" required style="color: var(--overview-table-filter-color)">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>Site Type</mat-label>
+        <mat-select  #fontSize (selectionChange)="onSiteType($event)" [(value)] = siteType>
+          <ng-container *ngFor="let option of siteTypeOptions">
+            <mat-option class="myOptionClass" [value]="option">{{ option }}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <br>
+    <br>
+
+    <button mat-raised-button type="submit" color="primary">Submit To DB</button>
+  </form>
+
+
+  <h1 [style.color] = "'black'"
+  [style.text-align] = "'center'" >
+  {{ message }}
+</h1>
+
+<br>
+<br>
+<br>

@@ -1,0 +1,108 @@
+
+.form{
+  height:auto
+}
+.div-heading-title{
+  padding-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  width:60%;
+
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 102;
+}
+body{
+ padding: 1em;
+
+  }
+
+h1{
+  text-align: center;
+  color: white;
+}
+
+h1{
+  text-align: center;
+}
+
+
+.mat-form-field {
+  font-size: 14px;
+  width: 450px;
+}
+
+.container1 {
+
+  overflow: auto;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.container2 {
+
+  max-height: 100%;
+
+
+  overflow: auto;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+
+
+}
+
+table {
+  width: 100%;
+
+  /* font-family: 'Rubik', sans-serif !important; */
+
+}
+
+th{
+  font-weight: bold;
+  z-index: 1
+}
+
+
+
+td
+{font-family: 'Rubik', sans-serif !important;
+color: rgb(88, 88, 88);
+font-weight:400;
+
+}
+
+
+
+@media screen and (min-width : 200px)
+{
+  h1
+  {
+    font-size: 24px;
+
+  }
+}
+
+@media screen and (max-width : 375px)
+{
+  h1
+  {
+    font-size: 19px;
+  }
+}
+
+
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}

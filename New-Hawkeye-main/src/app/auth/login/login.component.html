@@ -1,0 +1,61 @@
+
+
+<section class="login-form" fxLayoutAlign="center center">
+
+
+  <form  *ngIf="isLoading==false"  fxLayout="column"  #f="ngForm" (ngSubmit)="onLogin(f) ">
+
+
+      <!-- <h2 style="text-align:center">Login to Mac Automation</h2> -->
+      <img class = "img2"src="assets/img/HNB.png" >
+      <!-- <h4 style="text-align:center" >  <strong>HawkEye</strong> </h4> -->
+      <a  href="https://www.macautomation.co.za/">
+        <img class="img1" src="assets/img/logo.jpg" >
+      </a>
+  <br>
+  <mat-form-field  class="staticColorLabel">
+   <input
+   class="staticColorLabel"
+  type="email"
+  matInput placeholder= "Your Email"
+  ngModel name="email"
+  required
+  email
+  #emailInput="ngModel">
+
+  <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty</mat-error>
+  <mat-error *ngIf="!emailInput.hasError('required')">E-mail does not exsist</mat-error>
+
+
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="staticColorLabel" hintLabel="Should be at least 6 characters long.">
+    <input
+    class="staticColorLabel"
+    type="password"
+    matInput
+    placeholder="Your Password"
+    ngModel name="password"
+    required
+    minlength="6"
+    #pwInput="ngModel">
+    <mat-hint align="end">{{pwInput.value?.length}} / 6</mat-hint>
+
+  </mat-form-field>
+  <br>
+    <button  class="btn1" type="submit"  mat-raised-button color="primary" >Login</button>
+    <a href="https://www.macautomation.co.za/">Sign-up for HawkEye</a>
+
+
+    <button class="snackbar" *ngIf="authService.error==true" mat-stroked-button (click)="openSnackBar()">
+      {{authService.errorMessage}}!
+    </button>
+    </form>
+
+
+
+    <mat-spinner *ngIf="isLoading==true"></mat-spinner>
+  </section>
+
+

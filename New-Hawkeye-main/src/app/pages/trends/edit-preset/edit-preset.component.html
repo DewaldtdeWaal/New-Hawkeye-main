@@ -1,0 +1,1127 @@
+
+
+
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Add Preset</h1></div>
+  <br>
+<br>
+
+  <section class="form" fxLayoutAlign="center center">
+
+
+  <div class="div-form">
+      <div style="width: 90%; margin-left: 17px; padding-top: 17px;">
+
+          <h1 style=" background-color:rgb(101, 101, 101) ; border-radius: 3px;">Trend Tags</h1>
+
+                <form fxLayout="column"  #f="ngForm">
+                  <mat-form-field class="example-form-field">
+                    <mat-label  style="color: var(--overview-table-filter-color);" >Enter Preset Name</mat-label>
+                    <input style="color: var(--overview-table-filter-color)"[(ngModel)]="presetName" ngModel name="presetName" matInput type="text">
+                  </mat-form-field>
+      <p *ngIf="createPresetErr==true" style="padding-top: 1px; color: red;">Name already exists</p>
+
+
+                  <mat-form-field class="example-form-field">
+                      <mat-label  style="color: var(--overview-table-filter-color);" >Enter Preset Description</mat-label>
+                      <textarea style="color: var(--overview-table-filter-color)"[(ngModel)]="presetDescription" ngModel name="presetDescription" matInput type="text"></textarea>
+                    </mat-form-field>
+        <!-- <p *ngIf="createPresetErr==true" style="padding-top: 1px; color: red;">Name already exists</p> -->
+                    <!-- <button mat-raised-button style="color:white;background-color:rgb(23, 86, 175);" color="primary">Save Preset</button> -->
+
+                </form>
+
+
+
+                <h1 style=" background-color:rgb(101, 101, 101) ; border-radius: 3px;">Select Tags</h1>
+
+
+      </div>
+
+      <mat-accordion style="width: 800px;" multi>
+
+        <div *ngIf="showAuto==true">
+          <button #nameRef id="Resbutton" (click)="showAutoMenu = !showAutoMenu" style="width: 100%;" mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;" >Automation
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showAutoMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
+
+            <div *ngIf="showAutoMenu==true">
+              <mat-expansion-panel *ngIf="isuzuTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title style="color: var(--overview-table-filter-color);">
+              Isuzu
+                </mat-panel-title>
+                <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of isuzuTagListArr; index as i">
+                  <mat-checkbox style="color: var(--overview-table-filter-color); " color="primary" [(ngModel)]="isuzuSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+              </div>
+
+
+            <hr>
+            </div>
+
+        <div *ngIf="showRes==true">
+          <button  (click)="showResMenu = !showResMenu" style="width: 100%;" mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;" >Reservoirs
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showResMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
+
+
+          <div *ngIf="showResMenu==true">
+              <div style="width: 90%; margin-left: 17px;">
+
+
+                <mat-expansion-panel *ngIf="airPortTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title style="color: var(--overview-table-filter-color);">
+                Airport
+                  </mat-panel-title>
+                  <mat-panel-description style="color: blue;">
+
+                  </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of airPortTagListArr; index as i">
+                    <mat-checkbox style="color: var(--overview-table-filter-color); " color="primary" [(ngModel)]="airPortSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+                <mat-expansion-panel *ngIf="bergenTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title style="color: var(--overview-table-filter-color);">
+                Bergendal
+                  </mat-panel-title>
+                  <mat-panel-description style="color: blue;">
+
+                  </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of bergenTagListArr; index as i">
+                    <mat-checkbox style="color: var(--overview-table-filter-color); " color="primary" [(ngModel)]="bergenTagsSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+            <mat-expansion-panel *ngIf="bhbTagListArr[0]!=undefined"  style="  background-color: var(--form-background-color);" expanded='false' >
+              <mat-expansion-panel-header>
+              <mat-panel-title style="color: var(--overview-table-filter-color);">
+            Blue Horizon Bay
+              </mat-panel-title>
+              <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngFor="let d of bhbTagListArr; index as i">
+                <mat-checkbox style="color: var(--overview-table-filter-color); " color="primary" [(ngModel)]="bhbTagsSelected[i]" >{{d}}</mat-checkbox>
+              </div>
+              </mat-expansion-panel>
+
+
+
+
+
+                <mat-expansion-panel *ngIf="chtTagListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title style="color: var(--overview-table-filter-color);">
+            Chatty
+                </mat-panel-title>
+                    <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of chtTagListArr; index as i">
+                  <mat-checkbox style="color: var(--overview-table-filter-color);" color="primary" [(ngModel)]="chtTagsSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+
+
+
+
+                  <mat-expansion-panel  *ngIf="cheTagListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title  style="color: var(--overview-table-filter-color);">
+                Chelsea
+                  </mat-panel-title>
+                      <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of cheTagListArr; index as i">
+                    <mat-checkbox  style="color: var(--overview-table-filter-color);" color="primary" [(ngModel)]="cheTagsSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+
+                  <mat-expansion-panel  *ngIf="cgkTagListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title style="color: var(--overview-table-filter-color);">
+                  Coega Kop
+                    </mat-panel-title>
+                        <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of driftTagListArr; index as i">
+                      <mat-checkbox style="color: var(--overview-table-filter-color);" class="font-size" color="primary" [(ngModel)]="cgkTagsSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+
+                    <mat-expansion-panel  *ngIf="damcampTagListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title style="color: var(--overview-table-filter-color);">
+                        Damcamp
+                      </mat-panel-title>
+                          <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of damcampTagListArr; index as i">
+                        <mat-checkbox style="color: var(--overview-table-filter-color);" class="font-size" color="primary" [(ngModel)]="damcampTagsSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+
+                    <mat-expansion-panel  *ngIf="driftTagListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title style="color: var(--overview-table-filter-color);">
+                        Driftsands
+                      </mat-panel-title>
+                          <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of driftTagListArr; index as i">
+                        <mat-checkbox style="color: var(--overview-table-filter-color);" class="font-size" color="primary" [(ngModel)]="driftTagsSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+                    <mat-expansion-panel *ngIf="emerTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title style="color: var(--overview-table-filter-color);">
+                        Emerald Hill
+                      </mat-panel-title>
+                          <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of emerTagListArr; index as i">
+                        <mat-checkbox style="color: var(--overview-table-filter-color);" class="font-size" color="primary" [(ngModel)]="emerTagsSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+                    <mat-expansion-panel  *ngIf="grTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"   expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title style="color: var(--overview-table-filter-color);"  >
+                   Grassridge
+                      </mat-panel-title>
+                          <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of grTagListArr; index as i">
+                        <mat-checkbox style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="grTagsSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+
+                      <mat-expansion-panel  *ngIf="gbTagListArr[0]!=undefined"  style="background-color: var(--form-background-color);"  expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                     Greenbushes
+                        </mat-panel-title>
+                            <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of gbTagListArr; index as i">
+                          <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="gbTagsSelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
+
+                        <mat-expansion-panel   *ngIf="hbTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                          <mat-expansion-panel-header>
+                          <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                       Heatherbank
+                          </mat-panel-title>
+                              <mat-panel-description  style="color: blue;">
+
+              </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div *ngFor="let d of hbTagListArr; index as i">
+                            <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="hbTagsSelected[i]" >{{d}}</mat-checkbox>
+                          </div>
+                          </mat-expansion-panel>
+
+                          <mat-expansion-panel   *ngIf="holdingTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                            <mat-expansion-panel-header>
+                            <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                         Holding
+                            </mat-panel-title>
+                                <mat-panel-description  style="color: blue;">
+
+                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngFor="let d of holdingTagListArr; index as i">
+                              <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="holdingTagsSelected[i]" >{{d}}</mat-checkbox>
+                            </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel *ngIf="mwrTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                           Motherwell
+                              </mat-panel-title>
+                                  <mat-panel-description  style="color: blue;">
+
+                  </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of mwrTagListArr; index as i">
+                                <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="mwrTagsSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
+
+
+
+
+
+
+
+                          <mat-expansion-panel *ngIf="kroonTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                            <mat-expansion-panel-header>
+                            <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                         Kroonvale
+                            </mat-panel-title>
+                                <mat-panel-description  style="color: blue;">
+
+                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngFor="let d of kroonTagListArr; index as i">
+                              <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="kroonTagsSelected[i]" >{{d}}</mat-checkbox>
+                            </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel *ngIf="kruisRTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                           Kruisfontein
+                              </mat-panel-title>
+                                  <mat-panel-description  style="color: blue;">
+
+                  </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of kruisRTagListArr; index as i">
+                                <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="kruisRSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
+
+
+                              <mat-expansion-panel *ngIf="kwanoListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                                <mat-expansion-panel-header>
+                                <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                             Kwanobuhle
+                                </mat-panel-title>
+                                    <mat-panel-description  style="color: blue;">
+
+                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let d of kwanoListArr; index as i">
+                                  <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="kwanoSelected[i]" >{{d}}</mat-checkbox>
+                                </div>
+                                </mat-expansion-panel>
+
+                          <mat-expansion-panel  *ngIf="lhTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"    expanded='false' >
+                            <mat-expansion-panel-header>
+                            <mat-panel-title    style="color: var(--overview-table-filter-color);" >
+                         Lovemore Heights
+                            </mat-panel-title>
+                                <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngFor="let d of lhTagListArr; index as i">
+                              <mat-checkbox    style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="lhTagsSelected[i]" >{{d}}</mat-checkbox>
+                            </div>
+                            </mat-expansion-panel>
+
+
+                            <mat-expansion-panel *ngIf="maliTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title    style="color: var(--overview-table-filter-color);" >
+                           Malabar
+                              </mat-panel-title>
+                                  <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of maliTagListArr; index as i">
+                                <mat-checkbox    style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="maliTagsSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
+
+
+                            <mat-expansion-panel  *ngIf="oliTagListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title style="color: var(--overview-table-filter-color);">
+                          Olifantskop
+                              </mat-panel-title>
+                                  <mat-panel-description style="color: blue;">
+
+                            </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of oliTagListArr; index as i">
+                                <mat-checkbox style="color: var(--overview-table-filter-color);" color="primary" [(ngModel)]="oliTagSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
+
+
+                          <mat-expansion-panel   *ngIf="rdTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"   expanded='false' >
+                            <mat-expansion-panel-header>
+                            <mat-panel-title   style="color: var(--overview-table-filter-color);"    >
+                        Rosedale
+                            </mat-panel-title>
+                                <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngFor="let d of rdTagListArr; index as i">
+                              <mat-checkbox   style="color: var(--overview-table-filter-color);"     color="primary" [(ngModel)]="rdTagsSelected[i]" >{{d}}</mat-checkbox>
+                            </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel *ngIf="schoeTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title   style="color: var(--overview-table-filter-color);"   >
+                                Schoemanshoek
+                              </mat-panel-title>
+                                  <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of schoeTagListArr; index as i">
+                                <mat-checkbox   style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="schoeTagsSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
+
+                              <mat-expansion-panel *ngIf="stGeorgeTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                                <mat-expansion-panel-header>
+                                <mat-panel-title   style="color: var(--overview-table-filter-color);"   >
+                                  St Georges
+                                </mat-panel-title>
+                                    <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let d of stGeorgeTagListArr; index as i">
+                                  <mat-checkbox   style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="stGeorgeTagsSelected[i]" >{{d}}</mat-checkbox>
+                                </div>
+                                </mat-expansion-panel>
+
+
+                            <mat-expansion-panel  *ngIf="smTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title   style="color: var(--overview-table-filter-color);"   >
+                          Summit
+                              </mat-panel-title>
+                                  <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of smTagListArr; index as i">
+                                <mat-checkbox   style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="smTagsSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
+
+
+
+                            <mat-expansion-panel  *ngIf="thTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title   style="color: var(--overview-table-filter-color);"  >
+                          Theescombe
+                              </mat-panel-title>
+                                  <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of thTagListArr; index as i">
+                                <mat-checkbox   style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="thTagsSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
+
+                              <mat-expansion-panel  *ngIf="tinroofTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                                <mat-expansion-panel-header>
+                                <mat-panel-title   style="color: var(--overview-table-filter-color);"  >
+                            Tin Roof
+                                </mat-panel-title>
+                                    <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let d of tinroofTagListArr; index as i">
+                                  <mat-checkbox   style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="tinroofTagsSelected[i]" >{{d}}</mat-checkbox>
+                                </div>
+                                </mat-expansion-panel>
+
+
+
+
+                              <mat-expansion-panel *ngIf="umiTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                                <mat-expansion-panel-header>
+                                <mat-panel-title   style="color: var(--overview-table-filter-color);"  >
+                            Umasizakhe
+                                </mat-panel-title>
+                                    <mat-panel-description style="color: blue;">
+
+                </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let d of umiTagListArr; index as i">
+                                  <mat-checkbox   style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="umiTagsSelected[i]" >{{d}}</mat-checkbox>
+                                </div>
+                                </mat-expansion-panel>
+
+
+                              <mat-expansion-panel  *ngIf="vrhTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                                <mat-expansion-panel-header>
+                                <mat-panel-title  style="color: var(--overview-table-filter-color);">
+                           Van Riebeeck Hoogte
+                                </mat-panel-title>
+                                    <mat-panel-description style="color: blue;">
+
+              </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let d of vrhTagListArr; index as i">
+                                  <mat-checkbox  style="color: var(--overview-table-filter-color);" color="primary" [(ngModel)]="vrhTagsSelected[i]" >{{d}}</mat-checkbox>
+                                </div>
+                                </mat-expansion-panel>
+
+
+                                <mat-expansion-panel   *ngIf="vsTagListArr[0]!=undefined"  style="background-color: var(--form-background-color);"   expanded='false' >
+                                  <mat-expansion-panel-header>
+                                  <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                            Van Stadens
+                                  </mat-panel-title>
+                                      <mat-panel-description style="color: blue;">
+
+                                       </mat-panel-description>
+                                  </mat-expansion-panel-header>
+                                  <div *ngFor="let d of vsTagListArr; index as i">
+                                    <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="vsTagsSelected[i]" >{{d}}</mat-checkbox>
+                                  </div>
+                                  </mat-expansion-panel>
+
+                                  <mat-expansion-panel *ngIf="wolwasTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                                    <mat-expansion-panel-header>
+                                    <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                              Wolwas
+                                    </mat-panel-title>
+                                        <mat-panel-description style="color: blue;">
+
+                                         </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div *ngFor="let d of wolwasTagListArr; index as i">
+                                      <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="wolwasTagsSelected[i]" >{{d}}</mat-checkbox>
+                                    </div>
+                                    </mat-expansion-panel>
+
+
+                              </div>
+                                </div>
+          <hr>
+
+</div>
+<div *ngIf="showPS==true">
+          <button   (click)="showPSMenu = !showPSMenu" style="width: 100%;" mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;">Pump Stations
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showPSMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
+          <div *ngIf="showPSMenu==true">
+              <div style="width: 90%; margin-left: 17px;">
+
+                <mat-expansion-panel *ngIf="bushyPSTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title style="color: var(--overview-table-filter-color);"   >
+                Bushy Park
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of bushyPSTagListArr; index as i">
+                    <mat-checkbox style="color: var(--overview-table-filter-color);"    color="primary" [(ngModel)]="bushyPSSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+
+         <mat-expansion-panel *ngIf="chePSTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+           <mat-expansion-panel-header>
+           <mat-panel-title  style="color: var(--overview-table-filter-color);">
+         Chelsea
+           </mat-panel-title>
+               <mat-panel-description style="color: blue;">
+
+         </mat-panel-description>
+           </mat-expansion-panel-header>
+           <div *ngFor="let d of chePSTagListArr; index as i">
+             <mat-checkbox  style="color: var(--overview-table-filter-color);" color="primary" [(ngModel)]="chePSTagsSelected[i]" >{{d}}</mat-checkbox>
+           </div>
+           </mat-expansion-panel>
+
+
+            <mat-expansion-panel  *ngIf="cgTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"   expanded='false' >
+              <mat-expansion-panel-header>
+              <mat-panel-title  style="color: var(--overview-table-filter-color);">
+          Crown Gardens
+              </mat-panel-title>
+                  <mat-panel-description style="color: rgb(170, 185, 34);">
+
+                   </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngFor="let d of cgTagListArr; index as i">
+                <mat-checkbox  style="color: var(--overview-table-filter-color);" color="primary" [(ngModel)]="cgTagsSelected[i]" >{{d}}</mat-checkbox>
+              </div>
+              </mat-expansion-panel>
+
+
+              <mat-expansion-panel  *ngIf="mwTagListArr[0]!=undefined" style="background-color: var(--form-background-color);" expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title style="color: var(--overview-table-filter-color);" >
+           Motherwell
+                </mat-panel-title>
+                    <mat-panel-description style="color: rgb(170, 185, 34);">
+
+                     </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of mwTagListArr; index as i">
+                  <mat-checkbox style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="mwTagsSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel *ngIf="effTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+               NMU Effluent
+                  </mat-panel-title>
+                      <mat-panel-description  style="color: blue;">
+
+      </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of effTagListArr; index as i">
+                    <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="effTagsSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+
+
+
+                <mat-expansion-panel  *ngIf="stanTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+           Stanford Road
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(170, 185, 34);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of stanTagListArr; index as i">
+                    <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="stanTagsSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel  *ngIf="stormsTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                      Storms River
+                    </mat-panel-title>
+                        <mat-panel-description style="color: rgb(170, 185, 34);">
+
+                         </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of stormsTagListArr; index as i">
+                      <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="stormsTagSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+          </div>
+          </div>
+          <hr>
+          </div>
+          <div *ngIf="showFPT==true">
+          <button  (click)="showFM_Menu = !showFM_Menu" mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;"  >FPT
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showFM_Menu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
+
+            <div *ngIf="showFM_Menu==true">
+              <div style="width: 90%; margin-left: 17px;">
+
+                <mat-expansion-panel  *ngIf="bethTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title style="color: var(--overview-table-filter-color);"   >
+              Bethelsdorp
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+
+
+                  <div *ngFor="let d of bethTagListArr; index as i">
+                    <mat-checkbox style="color: var(--overview-table-filter-color);"    color="primary" [(ngModel)]="bethTagSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel *ngIf="bushyFPTTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title style="color: var(--overview-table-filter-color);"   >
+                  Bushy Park
+                    </mat-panel-title>
+                        <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                         </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of bushyFPTTagListArr; index as i">
+                      <mat-checkbox style="color: var(--overview-table-filter-color);"    color="primary" [(ngModel)]="bushyFPTSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+
+                  <mat-expansion-panel  *ngIf="cgkIDZTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+              <mat-expansion-panel-header>
+              <mat-panel-title style="color: var(--overview-table-filter-color);"   >
+          Coega IDZT
+              </mat-panel-title>
+                  <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                   </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngFor="let d of cgkIDZTagListArr; index as i">
+                <mat-checkbox style="color: var(--overview-table-filter-color);"    color="primary" [(ngModel)]="cgkIDZTagsSelected[i]" >{{d}}</mat-checkbox>
+              </div>
+              </mat-expansion-panel>
+
+
+
+
+
+              <mat-expansion-panel  *ngIf="fmtTagListArr[0]!=undefined" style="background-color: var(--form-background-color);" expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+          FM Tower
+                </mat-panel-title>
+                    <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                     </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of fmtTagListArr; index as i">
+                  <mat-checkbox  style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="fmtTagsSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+
+                <mat-expansion-panel  *ngIf="gbwTagListArr[0]!=undefined" style="background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+            Gamtoos Break Water
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of gbwTagListArr; index as i">
+                    <mat-checkbox  style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="gbwTagsSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+
+
+                <mat-expansion-panel  *ngIf="gamtoosTagListArr[0]!=undefined"  style="background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title style="color: var(--overview-table-filter-color);"  >
+          Gamtoos Bridge
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of gamtoosTagListArr; index as i">
+                    <mat-checkbox style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="gamtoosTagsSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel *ngIf="humOffTakeTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+           Humansdorp Offtake
+                    </mat-panel-title>
+                        <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                         </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of humOffTakeTagListArr; index as i">
+                      <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="humOffTakeSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+
+
+                    <mat-expansion-panel *ngIf="jeffBayOffTakeTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+             Jeffreys Bay Off Take
+                      </mat-panel-title>
+                          <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                           </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of jeffBayOffTakeTagListArr; index as i">
+                        <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="jeffBayOffTakeSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+
+                      <mat-expansion-panel *ngIf="kougaMainLineTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                          Kouga Main Line
+                        </mat-panel-title>
+                            <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                             </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of kougaMainLineTagListArr; index as i">
+                          <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="kougaMainLineSelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
+
+                        <mat-expansion-panel *ngIf="onsParadysTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                          <mat-expansion-panel-header>
+                          <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                          Ons Paradys
+                          </mat-panel-title>
+                              <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                               </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div *ngFor="let d of onsParadysTagListArr; index as i">
+                            <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="onsParadysSelected[i]" >{{d}}</mat-checkbox>
+                          </div>
+                          </mat-expansion-panel>
+
+
+
+
+
+                  <mat-expansion-panel  *ngIf="uitTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+           UItenhage Flow Chamber
+                    </mat-panel-title>
+                        <mat-panel-description style="color: rgb(132, 0, 255);">
+
+                         </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of uitTagListArr; index as i">
+                      <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="uitTagsSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+
+              </div>
+          </div>
+          <hr>
+</div>
+
+<div *ngIf="showGW==true">
+          <button   (click)="showGWMenu = !showGWMenu" mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;" class="item" >Ground Water
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showGWMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
+            <div style="width: 90%; margin-left: 17px;">
+            <div *ngIf="showGWMenu==true">
+
+            <mat-expansion-panel *ngIf="npTagListArr[0]!=undefined"  style="background-color: var(--form-background-color);"  expanded='false' >
+              <mat-expansion-panel-header>
+              <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+          Newton Park Pool
+              </mat-panel-title>
+                  <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                   </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngFor="let d of npTagListArr; index as i">
+                <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="npTagsSelected[i]" >{{d}}</mat-checkbox>
+              </div>
+              </mat-expansion-panel>
+
+                       <mat-expansion-panel *ngIf="karkTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+             Kareedouw
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of karkTagListArr; index as i">
+                    <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="karkTagSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+
+              <mat-expansion-panel  *ngIf="hup1TagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+            HD1
+                </mat-panel-title>
+                    <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                     </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of hup1TagListArr; index as i">
+                  <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="hup1TagSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+
+              <mat-expansion-panel  *ngIf="hup2TagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+            HD2C
+                </mat-panel-title>
+                    <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                     </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of hup2TagListArr; index as i">
+                  <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="hup2TagSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+
+              <mat-expansion-panel  *ngIf="hup3TagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+            HD3
+                </mat-panel-title>
+                    <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                     </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of hup3TagListArr; index as i">
+                  <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="hup3TagSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+
+              <mat-expansion-panel  *ngIf="hup4TagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+            HD4
+                </mat-panel-title>
+                    <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                     </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of hup4TagListArr; index as i">
+                  <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="hup4TagSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+
+
+                <mat-expansion-panel  *ngIf="hup6TagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+              HD6
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of hup6TagListArr; index as i">
+                    <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="hup6TagSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel *ngIf="humGroundListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                Humerail
+                    </mat-panel-title>
+                        <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                         </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of humGroundListArr; index as i">
+                      <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="humGroundSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+
+                    <mat-expansion-panel *ngIf="kruis12GWTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                  Kruisfontein 12
+                      </mat-panel-title>
+                          <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                           </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of kruis12GWTagListArr; index as i">
+                        <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="kruis12GWSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+                      <mat-expansion-panel *ngIf="kruis13GWTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                    Kruisfontein 13
+                        </mat-panel-title>
+                            <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                             </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of kruis13GWTagListArr; index as i">
+                          <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="kruis13GWSelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
+                        <mat-expansion-panel *ngIf="kruis14GWTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                          <mat-expansion-panel-header>
+                          <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                      Kruisfontein 14
+                          </mat-panel-title>
+                              <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                               </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div *ngFor="let d of kruis14GWTagListArr; index as i">
+                            <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="kruis14GWSelected[i]" >{{d}}</mat-checkbox>
+                          </div>
+                          </mat-expansion-panel>
+            </div>
+          </div>
+
+          <hr>
+</div>
+
+<div *ngIf="showWTW==true">
+            <button  (click)="showWTW_Menu = !showWTW_Menu"  mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;" >Water Treatment Works
+              <mat-icon class="menu-button" [ngClass]="{'rotated' : showWTW_Menu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
+              <div *ngIf="showWTW_Menu==true">
+                  <div style="width: 90%; margin-left: 17px;">
+
+
+
+
+                    <mat-expansion-panel  *ngIf="elandTagListArr[0]!=undefined"  style="background-color: var(--form-background-color);"  expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+               Elandsjagt
+                      </mat-panel-title>
+                          <mat-panel-description style="color: rgb(170, 185, 34);">
+
+                           </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of elandTagListArr; index as i">
+                        <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="elandTagSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+
+                      <mat-expansion-panel *ngIf="klmWtwInletListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                 Humansdorp Inlet
+                        </mat-panel-title>
+                            <mat-panel-description style="color: rgb(170, 185, 34);">
+
+                             </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of klmWtwInletListArr; index as i">
+                          <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="klmWtwInletSelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
+                <mat-expansion-panel  *ngIf="ngtTagListArr[0]!=undefined" style="font-size: small;  background-color: var(--form-background-color);" expanded='false' >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title style="color: var(--overview-table-filter-color);"  >
+              Nooitgedacht
+                  </mat-panel-title>
+                      <mat-panel-description style="color: rgb(46, 180, 41);">
+
+                       </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let d of ngtTagListArr; index as i">
+                    <mat-checkbox style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="ngtTagsSelected[i]" >{{d}}</mat-checkbox>
+                  </div>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel  *ngIf="stormsWTWTagListArr[0]!=undefined" style="background-color: var(--form-background-color);"  expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                      Storms River
+                    </mat-panel-title>
+                        <mat-panel-description style="color: rgb(170, 185, 34);">
+
+                         </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of stormsWTWTagListArr; index as i">
+                      <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="stormsWTWTagSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+                  </div>
+              </div>
+
+              <hr>
+            </div>
+
+
+          <div style="width:100%; margin-left: 17px; padding-top: 17px;">
+            <!-- Right Axis -->
+            <mat-form-field style="width: 90%; height: 100%; padding-top: 5px;">
+              <mat-label  style="color: var(--overview-table-filter-color);">Right Axis</mat-label>
+              <mat-select style="color: var(--overview-table-filter-color);"[formControl]="Right"  multiple >
+                <mat-option style="background-color: var(--form-background-color);color: var(--overview-table-filter-color);" *ngFor="let right of selectedTags"  [value]="right" >
+                  {{right}}</mat-option>
+              </mat-select>
+
+            </mat-form-field>
+            <!-- <button>Update</button>
+            <button>Delete</button> -->
+
+
+
+                                       <br>
+
+
+        </div>
+        <button mat-raised-button (click)="onEditPreset(f)" style="float:left;margin-left:170px; color:white;background-color:rgb(0, 84, 209)">Update</button>
+        <button mat-raised-button (click)="onDeletePreset()" style="float:left ;margin-left:13px; color:white;background-color:rgb(209, 0, 0)">Delete</button>
+
+          <br>
+
+
+                                                        </mat-accordion>
+  <br>
+
+  <br>
+  </div>
+
+    </section>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

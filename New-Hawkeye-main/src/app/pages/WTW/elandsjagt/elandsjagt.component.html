@@ -1,0 +1,58 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Elandsjagt</h1></div>
+  <div class="wrapper-grid">
+    <section class="ground-form" fxLayoutAlign="center">
+
+      <form fxLayout="column">
+
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication</h3>
+        </div>
+
+    <div class="div-form">
+      <div class="grid-container-flow-meters-communication">
+
+        <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+        <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+          <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;;padding-top: 5px">
+          </div>
+          <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;;padding-top: 5px" >
+           <img src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+           </div>
+
+        <div class="grid-container-communicationStatus-column1">Last Update:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.wtw_elands_ut}}</div>
+
+  </div>
+
+</div>
+  </form>
+</section>
+
+
+<section class="ground-form" fxLayoutAlign="center">
+
+  <form fxLayout="column">
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Flow Rate</h3>
+    </div>
+
+<div class="div-form">
+  <div class="grid-container-flow-meters-communication">
+
+    <div class="grid-container-communicationStatus-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
+    <div class="grid-container-communicationStatus-column3">{{variable.wtw_elands_FR}} Ml</div>
+    <div class="grid-container-communicationStatus-column1"><img src="assets/img/Symbol/bar.png" class="img3"></div>
+    <div class="grid-container-communicationStatus-column3">{{variable.wtw_elands_P}} bar</div>
+
+</div>
+
+</div>
+</form>
+</section>
+
+
+
+</div>
+

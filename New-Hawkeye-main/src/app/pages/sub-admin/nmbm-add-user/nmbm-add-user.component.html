@@ -1,0 +1,284 @@
+<div style="background-color:white">
+  <section class="add-user-form" fxLayoutAlign="center" >
+
+    <form fxLayout="column"  #f="ngForm" (ngSubmit)="onCreateUser(f)" >
+
+
+
+        <h4 style="text-align:center ">  <strong>Add New User</strong> </h4>
+        <br>
+     <mat-form-field >
+      <input
+     type="text"
+                                matInput placeholder= "First Name"
+     ngModel name="fName"
+     required
+     #fNameInput="ngModel">
+     <mat-error *ngIf="fNameInput.hasError('required')">Field must not be empty</mat-error>
+     </mat-form-field>
+
+     <br>
+     <mat-form-field>
+      <input
+      type="text"
+                              matInput placeholder= "Surname"
+      ngModel name="sName"
+      required
+      #sNameInput="ngModel">
+      <mat-error *ngIf="sNameInput.hasError('required')">Field must not be empty</mat-error>
+     </mat-form-field>
+
+        <br>
+        <mat-form-field hintLabel="Contact number must be 10 digits long.">
+         <input
+        type="text"
+                              matInput placeholder= "Contact Number"
+        ngModel name="cNum"
+        required
+        minlength="10"
+        maxlength="10"
+        pattern="[0-9]*"
+        #cNumInput="ngModel">
+        <mat-error *ngIf="cNumInput.hasError('required')">Field must not be empty</mat-error>
+        <mat-error *ngIf="cNumInput.hasError('pattern')">Digits only</mat-error>
+
+        <mat-hint align="end">{{cNumInput.value?.length}} / 10</mat-hint>
+        </mat-form-field>
+
+     <br>
+
+
+
+
+    <mat-form-field >
+     <input
+    type="email"
+                               matInput placeholder= "User Email"
+    ngModel name="email"
+    required
+    email
+    #emailInput="ngModel">
+    <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty</mat-error>
+    <mat-error *ngIf="!emailInput.hasError('required')">E-mail does not exsist</mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field hintLabel="Should be at least 6 characters long.">
+      <input
+      type="password"
+                                matInput placeholder="Your Password"
+      ngModel name="password"
+      required
+      minlength="6"
+      #pwInput="ngModel">
+      <mat-hint align="end">{{pwInput.value?.length}} / 6</mat-hint>
+    </mat-form-field>
+
+    <mat-error *ngIf="pwInput.value != cPwInput.value">Passwords do not match</mat-error>
+    <br>
+
+    <mat-form-field hintLabel="Should be at least 6 characters long.">
+      <input
+      type="password"
+                                  matInput placeholder="Confirm  Password"
+      ngModel name="cPassword"
+      required
+      minlength="6"
+      #cPwInput="ngModel">
+
+      <mat-hint align="end">{{cPwInput.value?.length}} / 6</mat-hint>
+    </mat-form-field>
+
+    <mat-error *ngIf="pwInput.value != cPwInput.value">Passwords do not match</mat-error>
+  <br>
+  <br>
+  <div style="background-color: white;">
+    <mat-card >
+      <mat-card-header>
+        <div></div>
+        <mat-card-title>Select User's Sites</mat-card-title>
+
+      </mat-card-header>
+      <hr>
+      <h3>Overviews:</h3>
+      <mat-checkbox color="primary"ngModel name="HWK_RO">Reservoirs Overview</mat-checkbox>
+      <br>
+      <mat-checkbox color="primary"ngModel name="HWK_PO">Pumpstation Overview </mat-checkbox>
+      <br>
+      <mat-checkbox color="primary"ngModel name="HWK_FO">FPT Overview </mat-checkbox>
+      <br>
+      <hr>
+
+      <h3>Reservoirs:</h3>
+
+                <mat-checkbox color="primary"ngModel name="NMB_BHB_R">Blue Horizon Bay </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_CHT_R">Chatty </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_CHE_R">Chelsea </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_CGK_R">Coega Kop</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_DRIFT_R">Driftsands</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_EMERALD_R">Emerald Hill </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_FAIR_GW">Fairview </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_FNGH_GW">Fort Nottingham </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_GR_R">Grassridge </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_GLEN_GW">Glendinningvale </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_GB_R">Greenbushes </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_HB_R">Heatherbank </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_LH_R">Lovemore Heights </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_MW_R">Motherwell </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_OLI_R">Olifantskop</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_KWANO_R">Kwanobuhle </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_RD_R">Rosedale </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_SCHOE_R">Schoemanshoek </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_SM_R">Summit </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_STGP_GW">St George's Park </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_TC_R">Theescombe </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_VRH_R">Van Riebeeck Hoogte </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_VS_R">Van Stadens </mat-checkbox>
+                <br>
+
+
+
+
+
+
+
+
+
+
+        <hr>
+      <h3>Pump Stations:</h3>
+
+      <mat-checkbox color="primary"ngModel name="NMB_AIR_PRT">Airport</mat-checkbox>
+      <br>
+                <mat-checkbox color="primary"ngModel name="NMB_BHB_PS">Blue Horizon Bay </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_BFT_PS">Buffelsfontein </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_CHT_PS">Chatty </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_CHE_PS">Chelsea </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="HWK_DEMO_PS">Demo Pump Station</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_HB_PS">Heatherbank </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_LH_PS">Lovemore Heights </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_MW_PS">Motherwell </mat-checkbox>
+                <br>
+
+                <mat-checkbox color="primary" ngModel name="NMB_STAN_R_PS"></mat-checkbox> | <mat-checkbox  ngModel name="NMB_STAN_R_PS_CON"> Stanford Road </mat-checkbox>
+                <br>
+
+                <mat-checkbox color="primary"ngModel name="NMB_TC_PS">Theesecombe </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_VRH_PS">Van Riebeek Hoogte </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_VS_PS">Van Stadens </mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"color="primary"ngModel name="NMB_VW_PS">Verwoerd </mat-checkbox>
+                <br>
+
+                <br>
+                <hr>
+
+                <h3>Ground Water</h3>
+
+
+                <mat-checkbox color="primary"ngModel name="NMB_NPP_GW">Newton Park Pool</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="HUM_HUM_GW">Humerail</mat-checkbox>
+                <br>
+                <hr>
+
+                <h3>Flow Meters:</h3>
+                <mat-checkbox color="primary"ngModel name="NMB_BETH_FPT">Bethelsdorp</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_BUSH_FPT">Bushy Park</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_CIDZT_FPT">Coega IDZT</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_FMT_FPT">FM Tower (FM)</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_GT_BRG_FPT">Gamtoos Bridge</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_GBW_FPT">Gamtoos Break Water</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_UIT_FC_FPT">Uitenhage Flow Chamber</mat-checkbox>
+                <br>
+
+
+
+
+                <hr>
+                <h3>Water Treatment Works:</h3>
+                <mat-checkbox color="primary"ngModel name="NMB_BUSH_PS">Bushy Park</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_ELANDS_WTW">Elandsjagt</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_NGT_WTW">Nooitgedacht</mat-checkbox>
+                <br>
+                <mat-checkbox color="primary"ngModel name="NMB_NGT_WTW">St Georges</mat-checkbox>
+                <br>
+                <hr>
+
+
+
+        <h3>Trends:</h3>
+
+                <!-- <mat-checkbox color="primary"ngModel name="PICKER_TRENDS">Trend Picker</mat-checkbox>
+                <br> -->
+                <mat-checkbox color="primary"ngModel name="V2_PICKER_TRENDS">Trend Picker</mat-checkbox>
+                <br>
+                <hr>
+
+
+
+
+    </mat-card>
+
+  </div>
+    <br>
+      <!-- <button  class="btn1" type="submit" mat-raised-button [disabled]="cPwInput.value!==pwInput.value" >Create User</button> -->
+      <button  class="btn1" type="submit" mat-flat-button>Create User</button>
+
+  <br>
+
+  <button class="snackbarR" *ngIf="adminService.addUserError==true" mat-stroked-button (click)="closeSnackBar()">
+    {{adminService.addUserErrorMsg}}!
+  </button>
+  <button class="snackbarG" *ngIf="adminService.AddUserSuccess==true" mat-stroked-button (click)="closeSnackBar()">
+    {{adminService.AddUserSuccessMsg}}!
+  </button>
+  <br>
+
+
+      </form>
+
+
+    </section>
+
+    </div>
+

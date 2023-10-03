@@ -1,0 +1,165 @@
+
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Humerail</h1></div>
+<div class="wrapper-grid">
+
+  <section class="ground-form" fxLayoutAlign="center">
+
+    <form fxLayout="column">
+
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Communication</h3>
+      </div>
+
+  <div class="div-form">
+    <div class="grid-container-communicationStatus">
+
+      <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+      <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+        <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px">
+        </div>
+        <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px" >
+         <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+         </div>
+      <div class="grid-container-communicationStatus-column1">Last Update:</div>
+      <div class="grid-container-communicationStatus-column3">{{variable.hum_gw_last_update}}</div>
+
+</div>
+</div>
+
+    </form>
+    </section>
+
+
+    <section class="ground-form" fxLayoutAlign="center">
+
+      <form fxLayout="column">
+
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Borehole Pump</h3>
+        </div>
+    <div class="div-form">
+
+
+
+            <div class="grid-container-pump">
+
+              <!-- First Column -->
+
+                <!-- Padding is within appropraite use because it is padding to a fixed item, meaning it won't change it's position when the website loads -->
+                <!-- <div class="grid-image"><img src="assets/img/Pump/Borehole Pump Black.png" style="width:30px; height:180px;"   ></div> -->
+
+                <div *ngIf="theme=='light-theme'"  class="grid-image">
+                  <div class="grid-image"  *ngIf="variable.hum_gw_pump_status=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image"  *ngIf="variable.hum_gw_pump_status=='Pump Fault'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image"  *ngIf="variable.hum_gw_pump_status=='Pump Available'" ><img  src="assets/img/Pump/Borehole Pump Black.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image"  *ngIf="variable.hum_gw_pump_status=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png" style="width:30px; height:180px;" ></div>
+                </div>
+
+                <div *ngIf="theme=='dark-theme'" class="grid-image">
+                  <div class="grid-image" *ngIf="variable.hum_gw_pump_status=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.hum_gw_pump_status=='Pump Fault'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.hum_gw_pump_status=='Pump Available'" ><img  src="assets/img/Pump/Borehole Pump White.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image" *ngIf="variable.hum_gw_pump_status=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png"  style="width:30px; height:180px;" ></div>
+                </div>
+
+
+
+
+              <!-- 2nd and 3rd Column -->
+
+
+                <div class="grid-container-pump-column2-span-2">Mode:</div>
+                <div class="grid-container-pump-column5">{{variable.hum_gw_mode}}</div>
+                <div class="grid-container-pump-column2-span-2">Status:</div>
+                <div class="grid-container-pump-column5">{{variable.hum_gw_pump_status}}</div>
+                <div class="grid-container-pump-column2-span-2">Run Hours:</div>
+                <div class="grid-container-pump-column5">{{variable.hum_gw_run_hours}} h</div>
+                <div class="grid-container-pump-column2">Borehole &nbsp; </div><img src="assets/img/Symbol/LVL.png" style="margin: auto;" class="img3">
+                <div class="grid-container-pump-column5">{{variable.hum_gw_borehole_lvl}} m</div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+            <table mat-elevation-z8 mat-table [dataSource]="generalfaultdatasource" matSort>
+
+              <ng-container matColumnDef="alarm" >
+                <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+                <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="description" >
+                <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+                <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+              </ng-container>
+
+              <tr style="width:30px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+
+            <br>
+
+
+
+</div>
+      </form>
+      </section>
+
+
+      <section class="ground-form" fxLayoutAlign="center">
+
+        <form fxLayout="column">
+
+          <div style="margin-bottom: 8px"  class="div-form">
+            <h3 style="padding-top: 8px; ">Filter Plant</h3>
+          </div>
+
+      <div class="div-form">
+
+        <div class="grid-container-pump">
+          <div class="grid-container-pump-column2">Raw Water Tank &nbsp;</div><img src="assets/img/Symbol/LVL.png" style="margin: auto;" class="img3">
+          <div class="grid-container-pump-column5">{{variable.hum_gw_raw_water_tank_lvl}} %</div>
+          <div class="grid-container-pump-column2">Final Water Tank &nbsp;</div><img src="assets/img/Symbol/LVL.png" style="margin: auto;" class="img3">
+          <div class="grid-container-pump-column5">{{variable.hum_gw_final_water_tank_lvl}} %</div>
+          <div class="grid-container-pump-column2-span-2">Raw Water High Level:</div>
+          <div class="grid-container-pump-column5">
+            <div>
+              <div class="led-box" *ngIf="variable.hum_gw_raw_water_tank_high_level_fault==1" ><div class="led-green"></div></div>
+              <div class="led-box" *ngIf="variable.hum_gw_raw_water_tank_high_level_fault==0" ><div class="led-grey"></div></div>
+          </div></div>
+          <div class="grid-container-pump-column2-span-2">Final Water High Level:</div>
+          <div class="grid-container-pump-column5">
+            <div>
+              <div class="led-box" *ngIf="variable.hum_gw_final_water_tank_high_level_fault==1" ><div class="led-green"></div></div>
+              <div class="led-box" *ngIf="variable.hum_gw_final_water_tank_high_level_fault==0" ><div class="led-grey"></div></div>
+          </div></div>
+
+    </div>
+    </div>
+
+        </form>
+        </section>
+
+
+
+
+
+
+</div>
+
+<!-- <div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
+  <h3 style="padding-top: 10px; color: var(--form-text-color); ">Total Flow Trend</h3>
+</div> -->
+
+
+
+</div>

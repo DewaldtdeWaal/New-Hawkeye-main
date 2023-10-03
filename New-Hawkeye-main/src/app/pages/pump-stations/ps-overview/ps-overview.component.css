@@ -1,0 +1,174 @@
+.div-heading-title{
+
+  padding-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  width:60%;
+
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 102;
+}
+
+
+
+  h1{
+    text-align: center;
+    color: var( --h1-heading-title);
+
+    font-size: 1.5em;
+
+  }
+
+
+
+
+
+
+
+.container1 {
+  overflow: auto;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--overview-res-table-td);
+}
+
+
+
+:host ::ng-deep.mat-form-field-label {
+  color: var(--overview-table-filter-color) !important;
+ }
+
+ :host ::ng-deep.mat-form-field-underline {
+  background-color: var(--overview-table-filter-color) !important;
+}
+
+
+
+
+
+
+body{
+ padding: 1em;
+
+  }
+
+h1{
+  text-align: center;
+  color: white;
+}
+
+
+.mat-form-field {
+  font-size: 14px;
+  width: 450px;
+}
+
+.container1 {
+  overflow: auto;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--overview-res-table-td);
+}
+
+.container2 {
+  max-height: 100%;
+  overflow: auto;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+table {
+  width: 100%;
+  background-color: var(--overview-table-color);
+
+}
+td
+{font-family: 'Rubik', sans-serif !important;
+color: var(--overview-res-table-td);
+font-weight:400;
+
+}
+th{
+  color: var(--overview-res-table-th);
+  font-weight: bold;
+  z-index: 1;
+}
+
+.first{
+  padding: 0;
+height:20px;
+width:100%;
+background:rgb(209, 209, 209);
+position: absolute;
+border-radius:3px;
+
+
+
+}
+
+.second{
+  padding: 0;
+height: 20px;
+background: cornflowerblue;
+position:relative;
+border-radius:3px;
+z-index: 1;
+}
+
+
+.mat-row:hover {
+  background-color: #D3D3D3;
+  cursor: pointer;
+}
+
+
+@media screen and (min-width : 200px)
+{
+  h1
+  {
+    font-size: 24px;
+
+  }
+}
+
+@media screen and (max-width : 375px)
+{
+  h1
+  {
+    font-size: 19px;
+  }
+}
+
+
+.grid-container-communicationStatus-column3-img{
+
+  width:20px;
+  height: 20px;
+
+  justify-items: center;
+  align-items: center;
+
+  width:20px;
+  height:20px;
+  padding-top:4px
+
+}
+
+
+.text-center .mat-header-container {
+  justify-content: flex-end;
+}
+
+.center {
+  display: grid;
+  justify-content: center;
+  height: 5em;
+}

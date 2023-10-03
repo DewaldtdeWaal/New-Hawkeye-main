@@ -1,0 +1,235 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Driver Edit</h1></div>
+  <br>
+  <br>
+
+  <form #myForm="ngForm" #f="ngForm"  >
+    <div class="wrapper-grid">
+
+      <!-- How do I populate this mat form field with a value from the typescript -->
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>IP Address</mat-label>
+        <input matInput [(ngModel)]="ipaddress"  name="ipaddress" required style="color: var(--overview-table-filter-color)">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>Driver Name</mat-label>
+        <input matInput disabled [(ngModel)]="driverName"  name="driverName" required style="color: var(--overview-table-filter-color)">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="siteDescription"  name="siteDescription" required style="color: var(--overview-table-filter-color)">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="center">
+        <mat-label>Site Type</mat-label>
+        <mat-select (selectionChange)="onSiteType($event)" [(value)]="siteType">
+          <ng-container *ngFor="let option of siteTypeOptions">
+            <mat-option class="myOptionClass" [value]="option">{{ option }}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <form #myForm2="ngForm" #f2="ngForm" >
+      <div class="half-grid">
+        <mat-form-field appearance="fill" class="center">
+          <mat-label>Tag Name</mat-label>
+          <input matInput #tagName  [(ngModel)] = "tagNameFill" name="tagName"  #tagNameInput="ngModel" type="text" style="color: var(--overview-table-filter-color)">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="center">
+          <mat-label>Description</mat-label>
+          <input matInput #description  [(ngModel)] = "descriptionNameFill" name="description" #descriptionInput="ngModel" type="text" style="color: var(--overview-table-filter-color)">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="center">
+          <mat-label>Type</mat-label>
+          <mat-select #fontSize (selectionChange)="onTypeSelected($event)" [(value)]="typeDropDownSelected">
+            <ng-container  *ngFor="let option of dataOptions">
+              <mat-option class="myOptionClass" [value]="option">{{ option }}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="center">
+          <mat-label>Unit</mat-label>
+          <input matInput #tagUnit  [(ngModel)] = "unitFill" name="tagUnit" #descriptionInput="ngModel" type="text" style="color: var(--overview-table-filter-color)">
+        </mat-form-field>
+
+
+        <section class="example-section center">
+          <mat-slide-toggle  id="word-swap-slide-button" (click)="wordSwapToggle()"  ngModel name="word_swap_slider" [(ngModel)]="word_swap_control" style="color: var(--overview-table-filter-color)" color="green" >Word Swap</mat-slide-toggle>
+        </section>
+
+        <mat-form-field appearance="fill" class="center">
+          <mat-label>Memory Word</mat-label>
+          <input matInput #register  [(ngModel)] = "memoryWordFill" name="register"  #registerInput="ngModel" type="text" style="color: var(--overview-table-filter-color)">
+        </mat-form-field>
+
+        <ng-container *ngIf="typeDropDownSelected !== undefined && typeDropDownSelected !== 'BOOL'">
+          <mat-form-field appearance="fill" class="center">
+            <mat-label>Scaling</mat-label>
+            <input matInput [(ngModel)]="scalingWordFill" name="scaling" type="text" style="color: var(--overview-table-filter-color)">
+          </mat-form-field>
+        </ng-container>
+
+
+       <div *ngIf="typeDropDownSelected=='BOOL'">
+
+        <mat-form-field appearance="fill" class="center">
+          <mat-label>Number</mat-label>
+          <mat-select #fontSize (selectionChange)="onNumberSelect($event)" [(value)]="numberSelected">
+            <ng-container *ngFor="let option of numberTypeOptions">
+              <mat-option class="myOptionClass" [value]="option">{{ option }}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+        <section class="example-section center">
+          <mat-slide-toggle  id="trend-slide-button" (click)="trendToggle($event)"  ngModel name="trend_slider" [(ngModel)]="trend_control" style="color: var(--overview-table-filter-color)" color="green" >Trend</mat-slide-toggle>
+        </section>
+
+        <div *ngIf="trend_control==true">
+        <mat-form-field appearance="fill" class="center">
+          <mat-label>Period</mat-label>
+          <mat-select #fontSize  (selectionChange)="onPeriodSelected($event)" [(value)]="periodDropDownSelecteds">
+            <ng-container *ngFor="let periodOptionSelected of periodOptions">
+              <mat-option class="myOptionClass" [value]="periodOptionSelected"  >{{ periodOptionSelected }}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+
+
+      </div>
+
+      <div class="grid-container-buttons">
+
+
+        <div class="button-container-column0">
+      <button mat-raised-button type="submit" color="primary" (click)="periodOptions.value=null" (click)="numberTypeOptions.value=null" (click)="dataOptions.value=null" (click)="onAddToTable(f2)" >Add To List</button>
+    </div>
+      <br><br>
+
+      <div class="button-container-column1">
+
+        <!-- How do I hide this button without using ngIf -->
+      <button id="idOverWriteButton" mat-raised-button type="submit" color="primary" (click)="periodOptions.value=null" (click)="overWrite(f2)" >Over Write</button>
+
+    </div>
+
+    <div class="button-container-column2">
+    <button mat-raised-button type="submit" color="primary" (click)="onSubmitToDataBase(f)">Submit To DB</button>
+    </div>
+
+  </div>
+    </form>
+
+    <br><br>
+
+
+
+
+  </form>
+
+
+<br>
+<br>
+<h1 [style.color] = "'black'"
+[style.text-align] = "'center'" >
+{{ message }}
+</h1>
+<br>
+<body>
+  <div class="container2 mat-elevation-z8" >
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="tagName" matSortDirection="asc">
+
+      <ng-container matColumnDef="tagName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Tag Name</th>
+        <td mat-cell *matCellDef="let element"  >{{element.tagName}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Description</th>
+        <td mat-cell *matCellDef="let element"  >{{element.description}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Type</th>
+        <td mat-cell *matCellDef="let element"  >{{element.type}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Unit</th>
+        <td mat-cell *matCellDef="let element"  >{{element.unit}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="wordSwap">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Word Swap</th>
+        <td mat-cell *matCellDef="let element"  >{{element.wordSwap}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="register">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Memory Word</th>
+        <td mat-cell *matCellDef="let element"  >{{element.register}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="scaling">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Scaling</th>
+        <td mat-cell *matCellDef="let element"  >{{element.scaling}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="trend">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Trend</th>
+        <td mat-cell *matCellDef="let element"  >{{element.trend}}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="period">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Period</th>
+        <td mat-cell *matCellDef="let element"  >{{element.period}}  </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="edit">
+
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Copy</th>
+      <td  mat-cell  *matCellDef="let element"> <button  mat-button (click)="editRow(element.tagName)"><mat-icon>file_copy</mat-icon></button></td>
+
+
+
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="delete">
+
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+
+          <!-- wRITE some css for mat-icon -->
+        <td  mat-cell  *matCellDef="let element"> <button mat-button (click)="deleteRow(element.tagName)"><mat-icon>delete</mat-icon>  </button></td>
+            </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+      </table>
+    </div>
+      </body>
+
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+
+</div>

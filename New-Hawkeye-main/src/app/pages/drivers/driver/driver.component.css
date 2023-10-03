@@ -1,0 +1,175 @@
+.div-heading-title{
+  padding-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  width:60%;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 102;
+}
+
+h1{
+  text-align: center;
+  color: var( --h1-heading-title);
+
+  font-size: 1.5em;
+
+}
+
+h3{
+text-align: center;
+/* padding-top: 5px; */
+margin-top: 5px;
+font-size: 20px;
+padding-top: 0;
+}
+h4{
+text-align: center;
+}
+
+
+.item-1{
+  grid-column:1;
+
+
+
+}
+.item-2{
+  grid-column:2;
+
+
+
+
+}
+.item-3{
+  grid-column:3;
+
+
+}
+.item-4{
+  grid-column:4;
+
+
+}
+.item-5{
+  grid-column:5;
+
+
+}
+.item-6{
+  grid-column:6;
+
+
+}
+::ng-deep .mat-select-value{color:var(--form-text-color)!important;}
+
+:host::ng-deep.mat-form-field-label {
+  color: var(--overview-table-filter-color) !important;
+
+
+ }
+
+ :host::ng-deep.mat-form-field-underline {
+  background-color: var(--overview-table-filter-color) !important;
+ }
+
+
+
+
+:host mat-datepicker-toggle {
+  color: var(--overview-table-filter-color) !important;
+ }
+ .wrapper-grid{
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit,360px);
+  justify-content: center;
+  align-content: center;
+  margin:0 auto;
+}
+
+.half-grid{
+
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  justify-content: center;
+}
+
+
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+
+
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+
+table {
+  width: 100%;
+  background-color: var(--overview-table-color);
+
+}
+td
+{font-family: 'Rubik', sans-serif !important;
+color: var(--overview-res-table-td);
+font-weight:400;
+
+}
+th{
+  color: var(--overview-res-table-th);
+  font-weight: bold;
+  z-index: 1;
+}
+.myOptionClass {
+  background-color: var(--form-background-color); color: var(--overview-table-filter-color); font-weight: 600
+}
+
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: rgb(0, 255, 0);
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #4CAF50  ;
+}
+
+:host ::ng-deep.mat-form-field-label {
+  color: var(--overview-table-filter-color) !important;
+ }
+
+ :host ::ng-deep.mat-form-field-underline {
+  background-color: var(--overview-table-filter-color) !important;
+}
+.container1 {
+  overflow: auto;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--overview-res-table-td);
+}
+
+.container2 {
+  max-height: 100%;
+  overflow: auto;
+  max-width:  95%;
+  margin-left: auto;
+  margin-right: auto;
+}

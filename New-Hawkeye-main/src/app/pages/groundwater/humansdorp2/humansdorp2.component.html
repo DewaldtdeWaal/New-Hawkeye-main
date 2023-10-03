@@ -1,0 +1,159 @@
+
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">HD2C</h1></div>
+<div class="wrapper-grid">
+
+  <section class="ground-form" fxLayoutAlign="center">
+
+    <form fxLayout="column">
+
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Communication</h3>
+      </div>
+
+  <div class="div-form">
+    <div class="grid-container-communicationStatus">
+
+      <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+      <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+        <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px">
+        </div>
+        <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px" >
+         <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+         </div>
+      <div class="grid-container-communicationStatus-column1">Last Update:</div>
+      <div class="grid-container-communicationStatus-column3">{{variable.hup2_ut}}</div>
+
+</div>
+<section class="basic-grid" style="margin:auto;">
+  <div *ngIf="show1 == true" class="grid-button">
+    <button class="button-color" a routerLink="/hawkeye/groundwater/humansdorp" style="height: 28px;" >1</button></div>
+
+  <div *ngIf="show3 == true" class="grid-button">
+    <button class="button-color" a routerLink="/hawkeye/groundwater/humansdorp3" style="height: 28px;"  >3</button></div>
+
+    <div *ngIf="show4 == true" class="grid-button">
+      <button class="button-color" a routerLink="/hawkeye/groundwater/humansdorp4" style="height: 28px;"  >4</button></div>
+
+    <div *ngIf="show6 == true" class="grid-button">
+      <button class="button-color" a routerLink="/hawkeye/groundwater/humansdorp6" style="height: 28px;"  >6</button></div>
+
+
+  </section>
+  <br>
+</div>
+
+    </form>
+    </section>
+    <section class="ground-form" fxLayoutAlign="center">
+
+      <form fxLayout="column">
+
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Pump</h3>
+        </div>
+    <div class="div-form">
+
+
+
+            <div class="grid-container-pump">
+
+              <!-- First Column -->
+
+                <!-- Padding is within appropraite use because it is padding to a fixed item, meaning it won't change it's position when the website loads -->
+                <!-- <div class="grid-image"><img src="assets/img/Pump/Borehole Pump Black.png" style="width:30px; height:180px;"   ></div> -->
+
+                 <div *ngIf="theme=='light-theme'"  class="grid-image">
+                  <div class="grid-image"  *ngIf="variable.hup2_pump_mode==null"><img   src="assets/img/Pump/Borehole Pump Black.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image"  *ngIf="variable.hup2_pump_mode=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image"  *ngIf="variable.hup2_pump_mode=='Pump Fault'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image"  *ngIf="variable.hup2_pump_mode=='Available'" ><img  src="assets/img/Pump/Borehole Pump Black.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image"  *ngIf="variable.hup2_pump_mode=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png" style="width:30px; height:180px;" ></div>
+                </div>
+
+                <div *ngIf="theme=='dark-theme'" class="grid-image">
+                  <div class="grid-image" *ngIf="variable.hup2_pump_mode==undefined"><img   src="assets/img/Pump/Borehole Pump White.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.hup2_pump_mode=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.hup2_pump_mode=='Pump Fault'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.hup2_pump_mode=='Available'" ><img  src="assets/img/Pump/Borehole Pump White.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image" *ngIf="variable.hup2_pump_mode=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png"  style="width:30px; height:180px;" ></div>
+                </div>
+
+
+
+              <!-- First and Second Column -->
+
+
+                <div class="grid-container-pump-column2">Mode:</div>
+                <div class="grid-container-pump-column4">{{variable.hup2_mode}}</div>
+                <div class="grid-container-pump-column2">Status:</div>
+                <div class="grid-container-pump-column4">{{variable.hup2_pump_mode}}</div>
+                <div class="grid-container-pump-column2"><img src="assets/img/Symbol/LVL.png" class="img2" ></div>
+                <div class="grid-container-pump-column4">{{variable.hup2_borehole_lvl}} m</div>
+                <div class="grid-container-pump-column2"><img src="assets/img/Symbol/FM.png" class="img2"></div>
+                <div class="grid-container-pump-column4">{{variable.hup2_flow_rate}} l/s</div>
+                <div class="grid-container-pump-column2">Total Flow:</div>
+                <div class="grid-container-pump-column4">{{variable.hup2_total_flow}} m³</div>
+                <div class="grid-container-pump-column2">Timer Status:</div>
+                <div class="grid-container-pump-column4">{{variable.hup2_pump_timer}}</div>
+                <div class="grid-container-pump-column2">Run Hours:</div>
+                <div class="grid-container-pump-column4">{{variable.hup2_run_hours}} h</div>
+
+            </div>
+
+
+
+            <table mat-elevation-z8 mat-table [dataSource]="generalfaultdatasource" matSort>
+
+              <ng-container matColumnDef="alarm" >
+                <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+                <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="description" >
+                <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+                <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+              </ng-container>
+
+              <tr style="width:30px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+
+            <br>
+
+
+
+</div>
+      </form>
+      </section>
+
+
+    </div>
+    <div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
+      <h3 style="padding-top: 10px; color: var(--form-text-color); ">Total Flow Trend</h3>
+    </div>
+
+    <section class="ps-form" fxLayoutAlign="center " >
+      <form fxLayout="column" #f="ngForm" (click)="onDateFilter()">
+      <div style="margin-bottom: 1px"  class="div-form">
+    <mat-form-field style="padding-left: 10px;">
+        <mat-label >Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input style="color:  var(--form-text-color);" matStartDate formControlName="start" placeholder="Start date">
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+     <button style="margin-left: 20px;" mat-raised-button >SEARCH</button>
+      </div>
+      </form>
+      </section>
+    <br>
+    <div id="main" echarts  [options]="options" class="chart" ></div>
+    <br>
+    <br>
+
+    </div>

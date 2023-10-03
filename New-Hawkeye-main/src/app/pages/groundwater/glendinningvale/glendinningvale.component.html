@@ -1,0 +1,81 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Glendenningvale</h1></div>
+  <div class="wrapper-grid">
+
+
+
+    <section class="res-form" fxLayoutAlign="center ">
+      <form fxLayout="column">
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication </h3></div>
+
+
+          <div class="div-form">
+            <div class="grid-container-flow-meters-communication">
+              <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+              <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+              <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+              <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+                </div>
+                <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                 <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+                 </div>
+
+              <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+              <div class="grid-container-flow-meters-general-column3"></div>
+
+
+
+              </div>
+              </div>
+
+              </form>
+              </section>
+      <section class="res-form" fxLayoutAlign="center">
+
+                <form fxLayout="column">
+
+                  <div style="margin-bottom: 8px"  class="div-form">
+                    <h3 style="padding-top: 8px; ">Reservoir</h3>
+                  </div>
+
+
+              <div class="div-form">
+
+
+                <br>
+              <div fxLayoutAlign="center " > <div class="circle1">
+                <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100 }" class="fill"><div class="lvl-font">100%</div></div></div>
+              </div>
+              </div>
+              <br>
+
+
+              </div>
+                </form>
+        </section>
+
+        <section class="res-form" fxLayoutAlign="center ">
+          <form fxLayout="column">
+            <div style="margin-bottom: 8px"  class="div-form">
+              <h3 style="padding-top: 8px; ">Flow Rate</h3></div>
+
+              <div class="div-form">
+
+                <div class="grid-container-flow-meters-flowrate">
+                  <div class="grid-container-flow-rate-general-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
+                  <div class="grid-container-flow-rate-general-column3">Ml/d</div>
+
+
+                </div>
+
+                <br>
+
+                </div>
+                </form>
+                </section>
+
+
+
+  </div>
+</div>

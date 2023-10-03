@@ -1,0 +1,424 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Chelsea</h1></div>
+  <div class="wrapper-grid">
+
+
+    <section class="ground-form" fxLayoutAlign="center">
+
+      <form fxLayout="column">
+
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication</h3>
+        </div>
+
+    <div class="div-form">
+      <div class="grid-container-flow-meters-communication">
+
+        <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+        <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+          <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 5px;">
+          </div>
+          <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 5px;" >
+           <img src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+           </div>
+
+        <div class="grid-container-communicationStatus-column1">Last Update:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.che_ps_ut}}</div>
+        <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
+        <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
+
+        <div *ngIf="showNavigationButton == 'true'" class="grid-button">
+            <button class="button-color"   a routerLink="/hawkeye/reservoirs/chelsea"  >Reservoir</button></div>
+
+      </div>
+    </div>
+
+
+</form>
+</section>
+
+
+<section class="ground-form" fxLayoutAlign="center">
+
+  <form fxLayout="column">
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">General</h3>
+    </div>
+
+<div class="div-form">
+  <div class="grid-container-flow-meters-general">
+
+
+
+    <div class="grid-span-four">Pumpstation</div>
+    <div class="grid-container-general-column1">&nbsp;</div><div class="grid-container-general-column2"><img class="img2" src="assets/img/Symbol/FM.png" ></div>
+    <div class="grid-container-general-column4">{{variable.che_ps_700_flow_rate}} Ml/d</div>
+    <div style="grid-column:1/span 2;" class="grid-container-general-column1">Total Flow</div>
+    <div class="grid-container-general-column4">{{variable.che_ps_700_total_flow}} Ml</div>
+
+    <div class="grid-span-four">Motherwell 760 mm</div>
+    <div class="grid-container-general-column1">&nbsp;</div><div class="grid-container-general-column2"><img class="img2" src="assets/img/Symbol/FM.png" ></div>
+    <div class="grid-container-general-column4">{{variable.che_ps_moth_760_mm}} Ml/d</div>
+
+    <div style=" grid-column:1/span 2;" class="grid-container-general-column1">Total Flow</div>
+    <div class="grid-container-general-column4">{{variable.che_ps_moth_760_mm_total_flow}} Ml</div>
+
+
+    <div class="grid-span-four">Motherwell 900 mm</div>
+    <div class="grid-container-general-column1">&nbsp;</div><div class="grid-container-general-column2"><img class="img2" src="assets/img/Symbol/FM.png" ></div>
+    <div class="grid-container-general-column4">{{variable.che_ps_moth_900_mm}} Ml/d</div>
+
+    <div style=" grid-column:1/span 2;"class="grid-container-general-column1">Total Flow</div>
+    <div class="grid-container-general-column4">{{variable.che_ps_moth_900_mm_total_flow}} Ml</div>
+
+    <div class="grid-span-four">Walker Drive Offtake 500 mm</div>
+    <div class="grid-container-general-column1">&nbsp;</div><div class="grid-container-general-column2"><img class="img2" src="assets/img/Symbol/FM.png" ></div>
+    <div  class="grid-container-general-column4">{{variable.che_ps_walk_drive_off_500_mm}} Ml/d</div>
+
+    <div style=" grid-column:1/span 2;"class="grid-container-general-column1">Total Flow</div>
+    <div  class="grid-container-general-column4">{{variable.che_ps_walk_drive_off_500_mm_total_flow}} Ml</div>
+
+</div>
+
+
+<table mat-elevation-z8 mat-table [dataSource]="dataSourceG" matSort>
+
+  <ng-container matColumnDef="alarm" >
+    <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+    <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description" >
+    <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+    <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<br>
+</div>
+</form>
+
+
+
+</section>
+
+
+
+
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////// PUMP 1-->
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 1</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="variable.che_ps_pumpset_1_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="variable.che_ps_pumpset_1_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_1_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+      </div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Mode:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_mode}}</div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Status:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_pumpstatus}}</div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Run Hours:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_run_hours}} h</div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Actual Speed:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_vsd_actual_speed}} RPM</div>
+      <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_current}} A</div>
+      <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/kW.png" class="img2"></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_power}} kW</div>
+      <div class="grid-container-general-column2">Delivery</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_del_pressure}} bar</div>
+      <div class="grid-container-general-column2">Suction</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_1_suct_pressure}} bar</div>
+
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP1" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////// PUMP 2-->
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 2</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="variable.che_ps_pumpset_2_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="variable.che_ps_pumpset_2_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_2_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+      </div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Mode:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_mode}}</div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Status:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_pumpstatus}}</div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Run Hours:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_run_hours}} h</div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Actual Speed:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_vsd_actual_speed}} RPM</div>
+  <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_current}} A</div>
+  <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/kW.png" class="img2"></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_power}} kW</div>
+  <div class="grid-container-general-column2">Delivery</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_del_pressure}} bar</div>
+  <div class="grid-container-general-column2">Suction</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_2_suct_pressure}} bar</div>
+
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP2" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////// PUMP 3-->
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 3</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="variable.che_ps_pumpset_3_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="variable.che_ps_pumpset_3_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_3_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+      </div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Mode:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_mode}}</div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Status:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_pumpstatus}}</div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Run Hours:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_run_hours}} h</div>
+  <div class="grid-pumpstation-column2-right-align-span-2">Actual Speed:</div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_vsd_actual_speed}} RPM</div>
+  <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_current}} A</div>
+  <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/kW.png" class="img2"></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_power}} kW</div>
+  <div class="grid-container-general-column2">Delivery</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_del_pressure}} bar</div>
+  <div class="grid-container-general-column2">Suction</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+  <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_suct_pressure}} bar</div>
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP3" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////// PUMP 4-->
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 4</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="variable.che_ps_pumpset_4_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="variable.che_ps_pumpset_4_pumpstatus==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="variable.che_ps_pumpset_4_pumpstatus=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+      </div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Mode:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_mode}}</div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Status:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_pumpstatus}}</div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Run Hours:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_run_hours}} h</div>
+      <div class="grid-pumpstation-column2-right-align-span-2">Actual Speed:</div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_vsd_actual_speed}} RPM</div>
+      <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_current}} A</div>
+      <div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/kW.png" class="img2"></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_power}} kW</div>
+      <div class="grid-container-general-column2">Delivery</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_del_pressure}} bar</div>
+      <div class="grid-container-general-column2">Suction</div><div class="grid-pumpstation-column3-right-align"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+      <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_suct_pressure}} bar</div>
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP4" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+
+</div>
+<div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
+  <h3 style="padding-top: 10px; color: var(--form-text-color); ">Total Flow Trend</h3>
+</div>
+
+<section class="ps-form" fxLayoutAlign="center " >
+  <form fxLayout="column" #f="ngForm" (click)="onDateFilter()">
+  <div style="margin-bottom: 1px"  class="div-form">
+<mat-form-field style="padding-left: 10px;">
+    <mat-label >Enter a date range</mat-label>
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input style="color:  var(--form-text-color);" matStartDate formControlName="start" placeholder="Start date">
+      <input matEndDate formControlName="end" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+ <button style="margin-left: 20px;" mat-raised-button >SEARCH</button>
+  </div>
+  </form>
+  </section>
+<br>
+<div id="main" echarts  [options]="options" class="chart" ></div>
+<br>
+<br>
+
+
+</div>

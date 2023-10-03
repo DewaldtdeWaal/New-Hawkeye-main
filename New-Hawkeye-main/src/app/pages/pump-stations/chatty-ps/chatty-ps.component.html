@@ -1,0 +1,220 @@
+<div style="background-color: var(--page-background-color);">
+<div class="div-heading-title"><h1 style="padding-top: 8px; ">Chatty</h1></div>
+<div class="wrapper-grid">
+
+
+  <section class="ground-form" fxLayoutAlign="center">
+
+    <form fxLayout="column">
+
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Communication</h3>
+      </div>
+
+  <div class="div-form">
+    <div class="grid-container-flow-meters-communication">
+
+      <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+      <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+        <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 5px;">
+        </div>
+        <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 5px;" >
+         <img src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+         </div>
+
+      <div class="grid-container-communicationStatus-column1">Last Update:</div>
+      <div class="grid-container-communicationStatus-column3">{{variable.cht_ut}}</div>
+
+      <!-- <div class="grid-container-communicationStatus-column1">Documentation:</div>
+            <div class="grid-container-communicationStatus-column3"><a routerLink="/hawkeye/pumpstations/chatty/chattydownload" style="padding-top:6px" ><mat-icon style="color:grey;">assignment_returned</mat-icon></a></div> -->
+
+
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
+
+      <div *ngIf="showNavigationButton == 'true'" class="grid-button">
+      <button class="button-color"  routerLink="/hawkeye/reservoirs/chatty" >Reservoir</button>
+    </div>
+  </div>
+
+
+
+
+</div>
+</form>
+</section>
+
+<section class="ground-form" fxLayoutAlign="center">
+
+  <form fxLayout="column">
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">General</h3>
+    </div>
+
+<div class="div-form">
+  <div class="grid-container-flow-meters-communication">
+
+    <div class="grid-container-communicationStatus-column1">Pump Station Mode:</div>
+    <div class="grid-container-communicationStatus-column3">{{variable.cht_g_ps_mode}}</div>
+    <div class="grid-container-communicationStatus-column1">Voltage Ok:</div>
+    <div class="grid-container-communicationStatus-column3">
+    <div *ngIf="variable.cht_g_panel_voltage_okay==0" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
+    <div *ngIf="variable.cht_g_panel_voltage_okay==1" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div></div>
+    <div class="grid-container-communicationStatus-column1">Surge Arrester:</div>
+    <div class="grid-container-communicationStatus-column3">
+      <div *ngIf="variable.cht_g_panel_surge_arrestor==0" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
+      <div *ngIf="variable.cht_g_panel_surge_arrestor==1" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div></div>
+
+</div>
+</div>
+</form>
+</section>
+
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 1</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="variable.cht_p1_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="variable.cht_p1_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="variable.cht_p1_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="variable.cht_p1_status=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="variable.cht_p1_status=='Stopped'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="variable.cht_p1_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="variable.cht_p1_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="variable.cht_p1_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="variable.cht_p1_status=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="variable.cht_p1_status=='Stopped'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+
+
+
+
+      </div>
+  <div class="grid-pumpstation-column2-right-align">Mode:</div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p1_mode}}</div>
+  <div class="grid-pumpstation-column2-right-align">Status:</div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p1_status}}</div>
+  <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p1_rt}} h</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p1_a}} A</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/kW.png" class="img2"></div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p1_kw}} kW</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img2" ></div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p1_rpm}} rpm</div>
+  <div class="grid-pumpstation-column2-right-align">VSD Status:</div>
+  <div class="grid-pumpstation-column3-left-align">
+  <div *ngIf="variable.cht_p1_vsd_status==0" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
+  <div *ngIf="variable.cht_p1_vsd_status==1" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
+</div>
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP1" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 2</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="variable.cht_p2_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="variable.cht_p2_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="variable.cht_p2_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="variable.cht_p2_status=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="variable.cht_p2_status=='Stopped'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="variable.cht_p2_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="variable.cht_p2_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="variable.cht_p2_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="variable.cht_p2_status=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="variable.cht_p2_status=='Stopped'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+      </div>
+  <div class="grid-pumpstation-column2-right-align">Mode:</div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p2_mode}}</div>
+  <div class="grid-pumpstation-column2-right-align">Status:</div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p2_status}}</div>
+  <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p2_rt}} h</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p2_a}} A</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/kW.png" class="img2"></div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p2_kw}} kW</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img2" ></div>
+  <div class="grid-pumpstation-column3-left-align">{{variable.cht_p2_rpm}} rpm</div>
+  <div class="grid-pumpstation-column2-right-align">VSD Status:</div>
+  <div class="grid-pumpstation-column3-left-align">
+  <div *ngIf="variable.cht_p2_vsd_status==0" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
+  <div *ngIf="variable.cht_p2_vsd_status==1" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
+</div>
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP2" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+</div>
+</div>

@@ -1,0 +1,98 @@
+
+
+
+<div style="background-color: var(--page-background-color);">
+    <div class="div-heading-title"><h1 style="padding-top: 8px; ">Manage Presets</h1></div>
+    <br>
+<br>
+
+    <section class="form" fxLayoutAlign="center center">
+
+
+    <div class="div-form">
+        <div style="width: 90%; margin-left: 17px; padding-top: 17px;">
+
+            <h1 style=" background-color:rgb(101, 101, 101) ; border-radius: 3px;">User Presets</h1>
+
+            <div style="background-color: white">
+                <div class= "form">
+
+                <body>
+                  <div class="container1" >
+                    <!-- <mat-form-field>
+                      <mat-label class="mat-form-field-underline" style="background-color: blue">Search</mat-label>
+                      <input  matInput (keyup)="applyFilter($event)"  #input>
+
+                    </mat-form-field> -->
+
+
+
+
+
+                  </div>
+
+                  <div class="container2 mat-elevation-z8" >
+
+
+                    <table mat-table [dataSource]="dataSource" matSort>
+
+
+                      <ng-container matColumnDef="presetName" >
+                        <th mat-header-cell *matHeaderCellDef  > Name </th>
+                        <td mat-cell *matCellDef="let element"  >{{element.presetName}}  </td>
+                      </ng-container>
+
+
+                      <ng-container matColumnDef="presetDescription" >
+                        <th mat-header-cell *matHeaderCellDef  > Description </th>
+                        <td mat-cell *matCellDef="let element"> {{element.presetDescription}} </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                      <tr mat-row
+                      (click)="clickedRows.add(row)"
+                      (click)="get_edit_Preset()"
+                      *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    </table>
+
+
+
+                  </div>
+
+
+                </body>
+                </div>
+
+                <br>
+                <br>
+                <br>
+
+                </div>
+
+        </div>
+
+
+    <br>
+
+
+    </div>
+
+      </section>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

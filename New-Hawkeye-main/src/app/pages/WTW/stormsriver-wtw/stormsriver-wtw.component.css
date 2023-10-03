@@ -1,0 +1,256 @@
+.wrapper-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,360px);
+  justify-content: center;
+}
+.div-heading-title{
+
+  padding-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 102;
+  width:200px
+}
+.ground-form {
+  padding-top: 10px;
+  flex-wrap: wrap;
+  color:  var(--form-text-color);
+  background-color: var(--page-background-color);
+}
+.div-form{
+  height: auto;
+  width: 350px;
+  max-width: auto;
+  min-width: auto;
+
+  background-color: var(--form-background-color);
+  box-shadow:5px 5px 5px var(--form-box-shadows);
+  border-radius: 5px;
+
+
+}
+.grid-container-flow-meters-communication{
+  display: grid;
+  grid-template-columns:  1fr 20px 1fr;
+  grid-template-rows: repeat(auto);
+  grid-auto-rows: 30px;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content:center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.grid-container-communicationStatus-column1{
+  display: grid;
+  grid-column:1;
+  text-align: right;
+  float: right;
+  align-items: center;
+}
+.grid-container-communicationStatus-column3{
+  display: grid;
+  grid-column: 3;
+  text-align: left;
+  float: left;
+  align-items: center;
+  font-weight: bold;
+
+
+}
+.grid-container-communicationStatus-column3-img{
+  display: grid;
+  grid-column: 3;
+
+  width:20px;
+  height: 20px;
+  /* grid-area: 1 / 3 / span 1 /  span 1 ; */
+  justify-items: center;
+  align-items: center;
+
+
+
+}
+h1{
+  text-align: center;
+  color: white;
+
+}
+h3{
+  text-align: center;
+  /* padding-top: 5px; */
+  margin-top: 5px;
+  font-size: 20px;
+  padding-top: 0;
+
+}
+h4{
+  text-align: center;
+}
+table {
+  padding-left: 14px;
+  width: 96%;
+
+  background-color: var(--form-background-color);
+  color:  var(--form-text-color);
+  /* font-family: 'Rubik', sans-serif !important; */
+}
+th{
+  font-weight:600;
+  color:  var(--ps-table-th-color);
+}
+.grid-container-pumpstation{
+  display: grid;
+  /* overflow: hidden; */
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap:5px;
+  grid-template-rows: repeat(auto);
+  grid-auto-rows: 30px;
+  width:95%;
+  margin:auto;
+  column-gap: 10px;
+  font-size: 12px;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+
+
+}
+.grid-pumpstation-column2-right-align{
+  display:grid;
+  grid-column: 1;
+  text-align:right;
+  float:right;
+  align-items: center;
+
+
+
+}
+.grid-button{
+  height: 100%;
+  display: grid;
+  grid-column:1 / span 3;
+  width:25%;
+  margin: auto;
+  background-color: #D3D3D3;
+  color: #D3D3D3;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+
+.button-color{
+  background: #A9A9A9;
+  border-radius:5%;
+  border-color: #A9A9A9;
+  color:white;
+  height: 100%;
+
+}
+
+.grid-water{
+  display:grid;
+  grid-template-columns: 1fr  1fr;
+  grid-template-rows: repeat(auto);
+  grid-auto-rows: 30px;
+  column-gap: 5px;
+  width:95%;
+  margin:auto;
+  column-gap: 10px;
+  font-size: 12px;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+}
+
+
+.grid-water-column2{
+  display:grid;
+  grid-column: 2;
+  text-align:left;
+  float:left;
+  align-items: center;
+
+}
+
+.grid-water-column1{
+  display:grid;
+  grid-column: 1;
+  text-align:right;
+  float:right;
+  align-items: center;
+
+}
+.grid-pumpstation-column3-left-align{
+  display:grid;
+  grid-column: 2;
+  text-align:left;
+  float:left;
+  align-items: center;
+
+
+
+}
+
+.res-form {
+  padding-top: 10px;
+  flex-wrap: wrap;
+  color:  var(--form-text-color);
+  background-color: var(--page-background-color)
+}
+
+.circle1 {
+  width:200px;
+  height:200px;
+  border:5px solid var(--res-level-C1-border);
+  border-radius: 105px;
+ /* overflow:hidden; */
+ position:relative;
+  /* background-color:var(--res-level-C1-background-color); */
+  z-index: 1;
+}
+.circle2-b {
+  width:186px;
+  height:186px;
+  border:7px solid var(--res-level-C2-b-border);
+  border-radius: 100px;
+  position:relative;
+  overflow:hidden;
+  background-color:var(--res-level-C2-b-background-color);
+}
+
+
+@keyframes fill {
+  from {
+
+    transform:translateX(-50%) rotate(0deg);
+  }
+  to {
+
+    transform:translateX(-50%) rotate(360deg);
+  }
+}
+
+
+.fill{
+  padding:0px;
+  height:186px;
+  width: 186px;
+  font-size: 18px;
+  background:var(--res-level-fill-background);
+  left:50%;
+  transform:translateX(-50%);
+  position:relative;
+}
+
+.lvl-font{
+  line-height:200px;
+  text-align:center;
+  color:var(--res-level-text-color);
+  font-size:35px;
+  font-weight:500;
+}

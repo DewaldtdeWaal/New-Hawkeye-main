@@ -1,0 +1,107 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Kruisfontein</h1></div>
+  <div class="wrapper-grid">
+
+    <section class="res-form" fxLayoutAlign="center ">
+      <form fxLayout="column">
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication </h3></div>
+
+
+          <div class="div-form">
+            <div class="grid-container-flow-meters-communication">
+              <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+              <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+              <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+              <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px"></div>
+                </div>
+                <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                 <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img" style="width:20px; height:20px; padding-top:5px">
+                 </div>
+
+              <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+              <div class="grid-container-flow-meters-general-column3">{{variable.klm_kruisR_ut}}</div>
+            </div>
+
+
+      <section class="basic-grid" style="margin:auto;">
+        <div *ngIf="showGW12 == 'true'" class="grid-button">
+          <button class="button-color" a routerLink="/hawkeye/groundwater/kruisfontein-gw12" style="height: 28px;" >12</button></div>
+
+
+
+
+
+          <div *ngIf="showGW13 == 'true'" class="grid-button">
+            <button class="button-color" a routerLink="/hawkeye/groundwater/kruisfontein-gw13" style="height: 28px;"  >13</button></div>
+
+            <div *ngIf="showGW14 == 'true'" class="grid-button">
+              <button class="button-color" a routerLink="/hawkeye/groundwater/kruisfontein-gw14" style="height: 28px;"  >14</button></div>
+
+          </section>
+
+<br>
+
+      </div>
+          <br>
+
+
+              </form>
+              </section>
+
+     <section class="res-form" fxLayoutAlign="center ">
+       <form fxLayout="column">
+         <div style="margin-bottom: 8px"  class="div-form">
+           <h3 style="padding-top: 8px; ">Reservoir</h3></div>
+
+
+                    <div class="div-form">
+                      <br>
+
+
+                <div fxLayoutAlign="center " > <div class="circle1">
+                  <div class="circle2-b"><div [ngStyle]="{'height.%' : 100- variable.klm_kruisR_lvl }" class="fill"><div class="lvl-font">{{variable.klm_kruisR_lvl}}%</div></div></div>
+                </div>
+                </div>
+                <div class="grid-container-flow-meters-res">
+                <div class="grid-container-flow-meters-general-column1">&nbsp;</div>
+                <div class="grid-container-flow-meters-general-column3">&nbsp;</div>
+                <div class="grid-container-flow-meters-general-column1">Reservoir High Float:</div>
+                <div class="grid-container-flow-meters-general-column3">
+                  <div >
+                    <div class="led-box" *ngIf="variable.klm_kruisR_high_float==1" ><div class="led-green"></div></div>
+                    <div class="led-box" *ngIf="variable.klm_kruisR_high_float==0" ><div class="led-grey"></div></div>
+                </div></div>
+
+                <div class="grid-container-flow-meters-general-column1">Reservoir Low Float:</div>
+                <div class="grid-container-flow-meters-general-column3"><div>
+                  <div class="led-box" *ngIf="variable.klm_kruisR_low_float==1" ><div class="led-green"></div></div>
+                  <div class="led-box" *ngIf="variable.klm_kruisR_low_float==0" ><div class="led-red"></div></div>
+              </div></div>
+                <div class="grid-container-flow-meters-general-column1">Surge Arrester:</div>
+                <div class="grid-container-flow-meters-general-column3"><div>
+                  <div class="led-box" *ngIf="variable.klm_kruisR_surge_arrestor==0" ><div class="led-green"></div></div>
+                  <div class="led-box" *ngIf="variable.klm_kruisR_surge_arrestor==1" ><div class="led-red"></div></div>
+              </div></div>
+                <div class="grid-container-flow-meters-general-column1">Charger Status:</div>
+                <div class="grid-container-flow-meters-general-column3">
+                  <div>
+                    <div class="led-box" *ngIf="variable.klm_kruisR_low_battery==0" ><div class="led-green"></div></div>
+                    <div class="led-box" *ngIf="variable.klm_kruisR_low_battery==1" ><div class="led-red"></div></div>
+                </div></div>
+                <div class="grid-container-flow-meters-general-column1">Door:</div>
+                <div class="grid-container-flow-meters-general-column3">
+                  <div  *ngIf="variable.klm_kruisR_door_contact==1" >Closed</div>
+                <div *ngIf="variable.klm_kruisR_door_contact==0" >Open</div>
+              </div>
+
+              </div>
+              </div>
+
+
+          </form>
+      </section>
+
+
+  </div>
+  </div>

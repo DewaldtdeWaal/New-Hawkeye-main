@@ -1,0 +1,85 @@
+*{
+  background-color: white;
+}
+mat-form-field{
+  width: 300px;
+  z-index: 0;
+
+}
+.add-user-form {
+  margin-top: 4%;
+  height: 100%;
+  background-color: white;
+}
+
+::ng-deep.mat-form-field-label {
+  color: grey !important;
+
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  background-color: grey !important;
+
+}
+
+button
+{
+  margin-top: 1rem;
+
+}
+
+.btn1{
+   text-align: center;
+   border-radius: 5px;
+   width: 200px;
+   margin-left: auto;
+   margin-right: auto;
+   color: hsl(0, 0%, 100%);
+   background-color: var(--mat-toolbar-background-color);
+}
+
+a{
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 11px;
+}
+
+h2{
+  margin:0;
+  padding:0;
+}
+
+h4{
+  font-family: Arial, Helvetica, sans-serif;
+  color: hsl(0, 0%, 26%);
+  /* color: hsl(231, 48%, 48%); */
+  margin-top:1rem;
+}
+
+img{
+  width: 200px;
+ border-radius: 20px;
+ margin: auto
+
+}
+
+
+.snackbarR{
+  margin-top: 30px;
+  background-color: rgb(253, 239, 239);
+}
+.snackbarG{
+  margin-top: 30px;
+  background-color: rgb(240, 253, 239);
+}
+
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  opacity: 0.03 !important;
+  background-color: #0c9100!important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #0c9100;
+}
+

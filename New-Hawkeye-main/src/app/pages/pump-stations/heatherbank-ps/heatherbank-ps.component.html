@@ -1,0 +1,238 @@
+<div style="background-color: var(--page-background-color);">
+<div class="div-heading-title"><h1 style="padding-top: 8px; ">Heatherbank</h1></div>
+<div class="wrapper-grid">
+
+
+
+
+  <section class="ground-form" fxLayoutAlign="center">
+
+    <form fxLayout="column">
+
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Communication</h3>
+      </div>
+
+  <div class="div-form">
+    <div class="grid-container-flow-meters-communication">
+
+      <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+      <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+        <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 5px;">
+        </div>
+        <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 5px;" >
+         <img src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+         </div>
+
+      <div class="grid-container-communicationStatus-column1">Last Update:</div>
+      <div class="grid-container-communicationStatus-column3">{{hb_PS_UT}}</div>
+
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
+
+      <div *ngIf="showNavigationButton == 'true'" class="grid-button">
+        <button class="button-color"   a routerLink="/hawkeye/reservoirs/heatherbank"  >Reservoir</button>
+      </div>
+
+
+</div>
+
+</div>
+</form>
+</section>
+
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 1</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="hb_P1_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="hb_P1_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="hb_P1_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="hb_P1_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="hb_P1_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="hb_P1_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="hb_P1_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="hb_P1_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="hb_P1_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="hb_P1_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+      </div>
+  <div class="grid-pumpstation-column2-right-align">Mode:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P1_MODE}}</div>
+  <div class="grid-pumpstation-column2-right-align">Status:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P1_STATUS}}</div>
+  <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P1_RH}} h</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P1_CURRENT}} A</div>
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP1" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 2</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="hb_P2_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="hb_P2_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="hb_P2_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="hb_P2_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="hb_P2_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="hb_P2_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="hb_P2_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="hb_P2_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="hb_P2_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="hb_P2_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+      </div>
+  <div class="grid-pumpstation-column2-right-align">Mode:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P2_MODE}}</div>
+  <div class="grid-pumpstation-column2-right-align">Status:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P2_STATUS}}</div>
+  <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P2_RH}} h</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P2_CURRENT}} A</div>
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP2" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+<section class="ground-form" fxLayoutAlign="center ">
+  <form fxLayout="column" >
+
+    <div style="margin-bottom: 8px"  class="div-form">
+      <h3 style="padding-top: 8px; ">Pump 3</h3>
+    </div>
+    <div class="div-form">
+      <div class="grid-container-pumpstation">
+
+          <div class="grid-column-one">
+        <div *ngIf="theme=='light-theme'">
+          <div  *ngIf="hb_P3_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div  *ngIf="hb_P3_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div  *ngIf="hb_P3_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div  *ngIf="hb_P3_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+          <div  *ngIf="hb_P3_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+        <div *ngIf="theme=='dark-theme'">
+          <div *ngIf="hb_P3_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+          <div *ngIf="hb_P3_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+          <div *ngIf="hb_P3_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+          <div *ngIf="hb_P3_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+          <div *ngIf="hb_P3_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+        </div>
+
+      </div>
+  <div class="grid-pumpstation-column2-right-align">Mode:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P3_MODE}}</div>
+  <div class="grid-pumpstation-column2-right-align">Status:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P3_STATUS}}</div>
+  <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P3_RH}} h</div>
+  <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
+  <div class="grid-pumpstation-column3-left-align">{{hb_P3_CURRENT}} A</div>
+
+      </div>
+      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP3" matSort>
+
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      </div>
+    </form>
+
+
+
+</section>
+</div>
+</div>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////// -->

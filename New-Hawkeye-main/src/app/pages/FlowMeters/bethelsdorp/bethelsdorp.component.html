@@ -1,0 +1,81 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px;">Bethelsdorp</h1></div>
+  <div class="wrapper-grid">
+
+
+    <div class="vertical-form">
+    <section class="res-form" fxLayoutAlign="center ">
+      <form fxLayout="column">
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication</h3></div>
+
+          <div class="div-form">
+            <div class="grid-container-general">
+              <div class="grid-container-column-1">Communication Status:</div>
+              <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+                <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px">
+                </div>
+                <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px" >
+                 <img src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+                 </div>
+              <div class="grid-container-column-1">Last Update:</div>
+              <div class="grid-container-column-3">{{variable.beth_ut}}</div>
+
+            </div>
+            </div>
+
+      </form>
+      </section>
+      </div>
+
+      <div class="vertical-form">
+        <section class="res-form" fxLayoutAlign="center ">
+          <form fxLayout="column">
+            <div style="margin-bottom: 8px"  class="div-form">
+              <h3 style="padding-top: 8px; ">Status</h3></div>
+
+              <div class="div-form">
+                <div class="grid-container-general">
+                  <div class="grid-container-column-1">Battery Level:</div>
+              <div class="grid-container-column-3">{{variable.beth_battery_status}} %</div>
+              <div class="grid-container-column-1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
+              <div class="grid-container-column-3">{{variable.beth_flowrate}} Ml/d</div>
+              <div class="grid-container-column-1">Total Flow:</div>
+              <div class="grid-container-column-3">{{variable.beth_totalflow}} Ml</div>
+              <div class="grid-container-column-1"><img src="assets/img/Symbol/bar.png" class="img2"></div>
+              <div class="grid-container-column-3">{{variable.beth_pressure}} bar</div>
+              </div>
+              </div>
+              </form>
+              </section>
+              </div>
+
+
+
+  </div>
+
+<div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
+  <h3 style="padding-top: 10px; color: var(--form-text-color); ">Total Flow Trend</h3>
+</div>
+
+<section class="ps-form" fxLayoutAlign="center " >
+  <form fxLayout="column" #f="ngForm" (click)="onDateFilter()">
+  <div style="margin-bottom: 1px"  class="div-form">
+<mat-form-field style="padding-left: 10px;">
+    <mat-label >Enter a date range</mat-label>
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input style="color:  var(--form-text-color);" matStartDate formControlName="start" placeholder="Start date">
+      <input matEndDate formControlName="end" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+ <button style="margin-left: 20px;" mat-raised-button >SEARCH</button>
+  </div>
+  </form>
+  </section>
+<br>
+<div id="main" echarts  [options]="options" class="chart" ></div>
+<br>
+<br>
+</div>

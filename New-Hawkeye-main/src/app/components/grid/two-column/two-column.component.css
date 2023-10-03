@@ -1,0 +1,29 @@
+.grid-container-flow-meters-communications{
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+  grid-auto-rows: 30px;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content:center;
+  /* padding-bottom: 15px;
+  padding-top: 15px; */
+}
+.grid-container-flow-meters-general-column1{
+  display: grid;
+  grid-column:1;
+  grid-template-rows: 25px;
+  text-align: right;
+  float: right;
+  align-items: center;
+  padding:2px;
+}
+.grid-container-flow-meters-general-column3{
+  display: grid;
+  grid-column: 3;
+  grid-template-rows: 25px;
+  text-align: left;
+  float: left;
+  align-items: center;
+  font-weight: bold;
+  padding:2px;
+}

@@ -1,0 +1,154 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Schoemanshoek</h1></div>
+  <div class="wrapper-grid">
+
+    <div class="vertical-form">
+    <section class="res-form" fxLayoutAlign="center ">
+      <form fxLayout="column">
+        <div style="margin-bottom: 8px"  class="div-form">
+          <h3 style="padding-top: 8px; ">Communication </h3></div>
+
+
+          <div class="div-form">
+            <div class="grid-container-flow-meters-communication">
+              <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+              <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+              <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+              <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+                </div>
+                <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                 <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+                 </div>
+
+              <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+              <div class="grid-container-flow-meters-general-column3">{{nmb_schoe_r_ut}}</div>
+
+
+
+              </div>
+              </div>
+
+              </form>
+              </section>
+
+
+              <section class="res-form" fxLayoutAlign="center">
+                <form fxLayout="column">
+                  <div style="margin-bottom: 8px"  class="div-form">
+                    <h3 style="padding-top: 8px; ">Alarms</h3></div>
+                    <div class="div-form">
+
+                      <table mat-elevation-z8 mat-table [dataSource]="generalfaulttabledatasource" matSort>
+
+                        <ng-container matColumnDef="alarm" >
+                          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+                          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="description" >
+                          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+                          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        </ng-container>
+
+                        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                      </table>
+                      <br>
+                    </div>
+                      <br>
+                      <br>
+
+                </form>
+                <br>
+                <br>
+
+              </section>
+
+
+            </div>
+
+
+              <section class="res-form" fxLayoutAlign="center">
+
+                <form fxLayout="column">
+
+                  <div style="margin-bottom: 8px"  class="div-form">
+                    <h3 style="padding-top: 8px; ">Reservoir</h3>
+                  </div>
+
+
+              <div class="div-form">
+
+
+                <br>
+              <div fxLayoutAlign="center " > <div class="circle1">
+                <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-nmb_schoe_r_res_level }" class="fill"><div class="lvl-font">{{nmb_schoe_r_res_level}}%</div></div></div>
+              </div>
+              </div>
+              <br>
+
+
+              </div>
+                </form>
+        </section>
+
+
+        <section class="res-form" fxLayoutAlign="center ">
+
+          <form fxLayout="column">
+            <div style="margin-bottom: 8px"  class="div-form">
+              <h3 style="padding-top: 8px; ">Actuator Valve</h3>
+            </div>
+
+            <div class="div-form">
+              <div class="grid-container-flow-meters-general">
+                <div class="grid-container-flow-meter-general-column2">PLC Mode</div>
+                <div class="grid-container-flow-meter-general-column4">{{nbm_schoe_r_plc_mode}}</div>
+
+                <div class="grid-container-flow-meter-general-column2">Actuator Mode</div>
+                <div class="grid-container-flow-meter-general-column4">{{nmb_schoe_r_actuator_mode}}</div>
+
+                <div *ngIf="theme=='light-theme'" class="grid-container-flow-meters-general-column1-img">
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Opening'"><img class="img2" src="assets/img/Valves/CV B Moving.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Open'"><img class="img2" src="assets/img/Valves/CV B Opened.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Closing'"><img class="img2" src="assets/img/Valves/CV B Moving.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Closed'"><img class="img2" src="assets/img/Valves/CV B Closed.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Fault Active'"><img class="img2" src="assets/img/Valves/CV Fault.png"></div>
+                 </div>
+                 <div *ngIf="theme=='dark-theme'" class="grid-container-flow-meters-general-column1-img">
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Opening'"><img class="img2" src="assets/img/Valves/CV W Moving.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Open'"><img  class="img2"src="assets/img/Valves/CV W Opened.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Closing'"><img class="img2" src="assets/img/Valves/CV W Moving.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Closed'"><img class="img2"src="assets/img/Valves/CV W Closed.png"></div>
+                  <div class="img2" *ngIf="nmb_schoe_r_actuator_valve_status=='Fault Active'"><img class="img2" src="assets/img/Valves/CV Fault.png"></div>
+                 </div>
+                <div class="grid-container-flow-meter-general-column2">Valve Status</div>
+                <div class="grid-container-flow-meter-general-column4">{{nmb_schoe_r_actuator_valve_status}}</div>
+                <div class="grid-container-flow-meter-general-column2">Voltage Status</div>
+                <div class="grid-container-flow-meter-general-column4">{{nmb_schoe_r_voltage_monitor}}</div>
+
+                <!--  -->
+                <div class="grid-container-flow-meter-general-column2">Actuator Position</div>
+                <div class="grid-container-flow-meter-general-column4">{{nmb_schoe_r_actuator_position}} %</div>
+                <div class="grid-container-flow-meter-general-column2"><img src="assets/img/Symbol/bar.png" class="img2" ></div>
+                <div class="grid-container-flow-meter-general-column4">{{nmb_schoe_r_pressure}} bar</div>
+                <div class="grid-container-flow-meter-general-column2">Actuator Setpoint</div>
+                <div class="grid-container-flow-meter-general-column4">{{nmb_schoe_r_actuator_set_point}} %</div>
+
+
+
+
+
+
+
+
+            </div>
+                </div>
+                </form>
+                </section>
+
+
+
+</div>
+</div>

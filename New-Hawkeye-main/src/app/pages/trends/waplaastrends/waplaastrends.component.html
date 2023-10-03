@@ -1,0 +1,109 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Trend Picker</h1></div>
+  <br>
+
+      <div style="padding-bottom: 6px"></div>
+      <form fxLayout="column"#i="ngForm" (ngSubmit)="onTrendFilter()">
+
+      <div class="wrapper-grid">
+
+
+ <!-- -->
+ <!-- <section class="ps-form" fxLayoutAlign="center " >
+
+    <button class="button tag-select" style="width: 95%; margin-top: 10px;" type="button" mat-raised-button (click)="openDialog()">Tag Selector <mat-icon>expand_more</mat-icon></button>
+
+ </section> -->
+
+        <section  style="color: var(--overview-table-filter-color);"class="ps-form" fxLayoutAlign="center " >
+          <form style="color: var(--overview-table-filter-color);" fxLayout="column" >
+            <mat-form-field   style="width: 350px; height: 100%;" >
+          <mat-label  >Trend Tag</mat-label>
+          <mat-select [formControl]="Sites" multiple >
+            <mat-option style="background-color: var(--form-background-color);color: var(--overview-table-filter-color); font-weight: 600" *ngFor="let site of SitesList" [value]="site" >{{site}}</mat-option>
+          </mat-select>
+            </mat-form-field>
+          </form>
+        </section>
+
+        <section class="ps-form" fxLayoutAlign="center " >
+          <form fxLayout="column" >
+              <mat-form-field  style="width: 350px;">
+                <mat-label  style="color: var(--overview-table-filter-color);">Right Axis</mat-label>
+                <mat-select style="color: var(--overview-table-filter-color);" [formControl]="Right" multiple >
+                  <mat-option style="background-color: var(--form-background-color);color: var(--overview-table-filter-color);" *ngFor="let right of Sites.value"  [value]="right" >
+                    {{right}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </form>
+        </section>
+
+
+
+        <section class="ps-form" fxLayoutAlign="center " >
+            <div style="margin-bottom: 1px"  >
+              <mat-form-field style="padding-left: 5px; width: 240px;">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input style="color: var(--overview-table-filter-color);" [formGroup]="range" [rangePicker]="picker">
+                  <input style="color: var(--overview-table-filter-color)" matStartDate formControlName="start" placeholder="Start date">
+                  <input style="color: var(--overview-table-filter-color)" matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+             <button class="button" style="margin-left: 20px;" mat-raised-button >SEARCH</button>
+            </div>
+
+
+        </section>
+
+        </div>
+
+   </form>
+<!-- Loading bar -->
+   <mat-progress-bar style="background-color: black" *ngIf="isLoading==true" style  mode="indeterminate"></mat-progress-bar>
+
+   <div style="padding-bottom: 15px"></div>
+   <div echarts  [options]="options" class="chart"></div>
+   <br>
+   <br>
+
+   <div class="example-container mat-elevation-z8">
+   <table mat-table [dataSource]="dataSource"  >
+
+    <ng-container matColumnDef="name" >
+      <th mat-header-cell *matHeaderCellDef sticky> Name </th>
+      <td mat-cell *matCellDef="let element"  >{{element.name}}  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="min" >
+     <th mat-header-cell *matHeaderCellDef  > Min </th>
+     <td mat-cell *matCellDef="let element"  >{{element.min}}  </td>
+   </ng-container>
+    <ng-container matColumnDef="max" >
+     <th mat-header-cell *matHeaderCellDef  > Max </th>
+     <td mat-cell *matCellDef="let element"  >{{element.max}}  </td>
+   </ng-container>
+
+   <ng-container matColumnDef="average" >
+     <th mat-header-cell *matHeaderCellDef  > Average </th>
+     <td mat-cell *matCellDef="let element"  >{{element.average}}  </td>
+   </ng-container>
+
+   <ng-container matColumnDef="star" stickyEnd>
+     <th mat-header-cell *matHeaderCellDef></th>
+     <td mat-cell *matCellDef="let element">
+       <mat-icon>more_vert</mat-icon>
+     </td>
+   </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+   </table>
+ </div>
+
+
+
+
+
+

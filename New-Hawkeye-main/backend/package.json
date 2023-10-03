@@ -1,0 +1,17 @@
+{
+  "name": "hawk-eye",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "hammerjs": "^2.0.8",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
+    "mongoose-unique-validator": "^2.0.3",
+    "rxjs": "~6.6.0",
+    "socket.io-client": "^4.1.1",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.11.3"
+  }
+}
