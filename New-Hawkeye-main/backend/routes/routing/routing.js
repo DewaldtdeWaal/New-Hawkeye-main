@@ -113,12 +113,18 @@ function getRoutingFunctions(path, ID, collection){
 
 
 router.post("/pageValues", async (req, res) => {
-
-
   console.log(req.body);
   var query = {id: req.body.Id};
+  db.collection(req.body.Collection).findOne(query, function(err, data){
+    if(err) throw err;
+    res.status(200).json(data);
+  })
+})
+router.get("/pageValues", function (req,res) {
+
+  var query = {id: "klm_hup_wtw"};
   var routingArray=[]
-  dbo.collection(req.body.Collection).find(query).toArray(function(err,data){
+  dbo.collection("WTW_CurrentVals").find(query).toArray(function(err,data){
 
     if(err) throw err;
     var i=0;
@@ -136,10 +142,6 @@ router.post("/pageValues", async (req, res) => {
   })
 
 
-
- // })
-
 })
-
 
 module.exports = router;

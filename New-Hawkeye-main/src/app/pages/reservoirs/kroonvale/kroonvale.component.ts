@@ -33,7 +33,7 @@ export class KroonvaleComponent implements OnInit {
       this.data =  result;
 
       console.log(this.data)
-     this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
      this.variable.comms = Common.getLastUpdate(this.variable.kroon_r_ut)
     });
 
@@ -52,8 +52,14 @@ export class KroonvaleComponent implements OnInit {
 
 
     this.intervalLoop = setInterval(() => {
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-     this.variable.comms = Common.getLastUpdate(this.variable.kroon_r_ut)
+
+      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
+        this.data =  result;
+
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+       this.variable.comms = Common.getLastUpdate(this.variable.kroon_r_ut)
+      });
 
       }, 60000);
 

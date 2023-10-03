@@ -44,7 +44,7 @@ export class KareedouwkresComponent implements OnInit {
       this.data =  result;
 
       console.log(this.data)
-     this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
      this.variable.comms = Common.getLastUpdateBattery(this.variable.kark_R_comms_UT, this.variable.kark_R_battery_unit_UT)
@@ -86,7 +86,7 @@ export class KareedouwkresComponent implements OnInit {
       this.data =  result;
 
       console.log(this.data)
-     this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
      this.variable.comms = Common.getLastUpdateBattery(this.variable.kark_R_comms_UT, this.variable.kark_R_battery_unit_UT)

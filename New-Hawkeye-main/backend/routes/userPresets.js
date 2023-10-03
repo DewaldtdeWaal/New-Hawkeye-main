@@ -24,7 +24,7 @@ rightSelectedSites:rightSelectedSites
     userPresets.save().then(result =>{
     res.status(201).json({
        message: "Preset saved successfully",
-       result: result, 
+       result: result,
      });
    })
    .catch(err=>{
@@ -37,7 +37,7 @@ rightSelectedSites:rightSelectedSites
   router.post('/get-user-preset-names', function(req,res){
 
     var userEmail = req.body.userEmail
-     
+
     var presetName_arr=[];
     var presetDescription_arr=[];
 
@@ -59,7 +59,7 @@ rightSelectedSites:rightSelectedSites
 
 
     var userEmail = req.body.userEmail
-     
+
     var presetName_arr=[];
     var presetDescription_arr=[];
 
@@ -108,7 +108,7 @@ rightSelectedSites:rightSelectedSites
 
     let updatedInfo={
       presetName:newPresetName,
-      presetDescription:newPresetDescription, 
+      presetDescription:newPresetDescription,
       selectedSites:req.body.selectedSites,
       rightSelectedSites:req.body.rightSelectedSites
     }

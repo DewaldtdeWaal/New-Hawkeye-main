@@ -35,18 +35,27 @@ export class VanriebeeckComponent implements OnInit {
 
 
   constructor(private webSocketService: WebSocketService, private ls:ListeningService,private VHS:VanRiebeekHoogteService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
-    this.VHS.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       console.log(this.data)
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+    // this.VHS.GetSiteValues()
+    // .subscribe(rsp => {
+    //    this.data = rsp;
+    //    console.log(this.data)
+    //    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
 
-    this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
+    // this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
 
-    })
+    // })
+
+
+    this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
 
+     this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
+    });
 
 
 
@@ -77,9 +86,16 @@ export class VanriebeeckComponent implements OnInit {
 
 
     this.intervalLoop = setInterval(() =>{
+      this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").then((result) => {
+        this.data =  result;
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+
+       this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
+      });
     },60000)
 
 

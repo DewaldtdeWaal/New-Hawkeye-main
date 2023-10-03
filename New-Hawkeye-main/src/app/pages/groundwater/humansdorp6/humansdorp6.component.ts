@@ -9,6 +9,7 @@ import { ReportService } from 'src/app/Service-Files/report.service';
 import {Common} from 'src/app/class/common';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -159,26 +160,20 @@ show1:any
   },
 }
 
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp6Service,public recieve:Common,private authService: AuthService ) {
+  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp6Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ) {
+    this.theme = localStorage.getItem("theme");
 
+    this.pm.findPageData("klm_hup6_gw", "GRDW_CurrentVals").then((result) => {
+      this.data =  result;
 
-    this.hum.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.variable.comms = Common.getLastUpdate(this.variable.hup6_ut)
 
-       Common.getRouteWithFault(this.tagArr,this.variable,this.data.routingArray,this.faultArr,this.faultVariable)
-       this.variable.comms = Common.getLastUpdate(this.variable.hup6_ut)
+     var alarmG:any []=[this.faultVariable.hup6_voltage,this.faultVariable.hup6_pump_general_fault,this.faultVariable.hup6_borehole_level_pr_fault,this.faultVariable.hup6_battery,this.faultVariable.hup6_charge,this.faultVariable.hup6_trip_fault,this.faultVariable.hup6_no_flow_fault,this.faultVariable.hup6_24_timer,this.faultVariable.hup6_stop_level,this.faultVariable.hup6_fault,this.faultVariable.hup6_estop_active,this.faultVariable.hup6_pump_suf]
+
+     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
     });
-
-
-    this.theme = localStorage.getItem("theme")
-    setTimeout(() => {
-
-      var alarmG:any []=[this.faultVariable.hup6_voltage,this.faultVariable.hup6_pump_general_fault,this.faultVariable.hup6_borehole_level_pr_fault,this.faultVariable.hup6_battery,this.faultVariable.hup6_charge,this.faultVariable.hup6_trip_fault,this.faultVariable.hup6_no_flow_fault,this.faultVariable.hup6_24_timer,this.faultVariable.hup6_stop_level,this.faultVariable.hup6_fault,this.faultVariable.hup6_estop_active,this.faultVariable.hup6_pump_suf]
-
-      this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-
-    },2000)
 
 
 
@@ -235,31 +230,17 @@ show1:any
   this.intervalLoop = setInterval(() =>{
 
 
-    updateTemp = tagVals[1];
 
-    if(updateTemp !==undefined){
+    this.pm.findPageData("klm_hup6_gw", "GRDW_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.variable.comms = Common.getLastUpdate(this.variable.hup6_ut)
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+     var alarmG:any []=[this.faultVariable.hup6_voltage,this.faultVariable.hup6_pump_general_fault,this.faultVariable.hup6_borehole_level_pr_fault,this.faultVariable.hup6_battery,this.faultVariable.hup6_charge,this.faultVariable.hup6_trip_fault,this.faultVariable.hup6_no_flow_fault,this.faultVariable.hup6_24_timer,this.faultVariable.hup6_stop_level,this.faultVariable.hup6_fault,this.faultVariable.hup6_estop_active,this.faultVariable.hup6_pump_suf]
 
-
-      Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
-
-
-
-    }
-
-    this.variable.comms = Common.getLastUpdate(this.variable.hup6_ut)
-
-setTimeout(()=>{
-
-  var alarmG:any []=[this.faultVariable.hup6_voltage,this.faultVariable.hup6_borehole_level_pr_fault,this.faultVariable.hup6_battery,this.faultVariable.hup6_charge,this.faultVariable.hup6_trip_fault,this.faultVariable.hup6_no_flow_fault,this.faultVariable.hup6_24_timer,this.faultVariable.hup6_stop_level,this.faultVariable.hup6_fault,this.faultVariable.hup6_estop_active,this.faultVariable.hup6_pump_suf]
-
-      this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-
-
-},2000)
-
-
+     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+    });
 
 
 },60000)

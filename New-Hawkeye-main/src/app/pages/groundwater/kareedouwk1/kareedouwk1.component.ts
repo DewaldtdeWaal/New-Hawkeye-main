@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import {Common} from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -167,31 +168,20 @@ displayedColumns :string[]= ['alarm', 'description'];
   total_flow_KARK_K1_array:any;
 
 
-  constructor(private GWS:GroundwaterService, public rs: ReportService,private ws: WebSocketService,private authService: AuthService,public recieve:Common ) {
+  constructor(private GWS:GroundwaterService, public rs: ReportService,private ws: WebSocketService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
     this.theme = localStorage.getItem("theme");
-    this.GWS.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       Common.getRouteWithFault(this.tagArr,this.variable,this.data.routingArray,this.faultArr,this.faultVariable)
-       this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT)
 
+    this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
 
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT);
 
-    })
+       var alarmG:any []=[this.faultVariable.gw_kark_k1_estop, this.faultVariable.gw_kark_k1_vsd_fault, this.faultVariable.gw_kark_k1_voltage_ok, this.faultVariable.gw_kark_k1_panel_door_open,this.faultVariable.gw_kark_k1_low_flow_fault,this.faultVariable.gw_kark_k1_charger_ok,this.faultVariable.gw_kark_k1_borehol_low_level_fault,this.faultVariable.gw_kark_k1_surge_arrester_ok,this.faultVariable.gw_kark_k1_warning_level,this.faultVariable.gw_kark_k1_room_alarm]
 
-    setTimeout(() => {
-
-      this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT)
-
-
-      var alarmG:any []=[this.faultVariable.gw_kark_k1_estop, this.faultVariable.gw_kark_k1_vsd_fault, this.faultVariable.gw_kark_k1_voltage_ok, this.faultVariable.gw_kark_k1_panel_door_open,this.faultVariable.gw_kark_k1_low_flow_fault,this.faultVariable.gw_kark_k1_charger_ok,this.faultVariable.gw_kark_k1_borehol_low_level_fault,this.faultVariable.gw_kark_k1_surge_arrester_ok,this.faultVariable.gw_kark_k1_warning_level,this.faultVariable.gw_kark_k1_room_alarm]
-
-      this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-
-
-
-
-    },2000)
+     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+    });
 
 
 
@@ -236,28 +226,17 @@ displayedColumns :string[]= ['alarm', 'description'];
 
     errorVals = this.recieve.recieveNonMVals(this.faultArr)
     this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[1];
+      this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
 
-      if(updateTemp !==undefined){
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+        this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT);
 
-        this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+         var alarmG:any []=[this.faultVariable.gw_kark_k1_estop, this.faultVariable.gw_kark_k1_vsd_fault, this.faultVariable.gw_kark_k1_voltage_ok, this.faultVariable.gw_kark_k1_panel_door_open,this.faultVariable.gw_kark_k1_low_flow_fault,this.faultVariable.gw_kark_k1_charger_ok,this.faultVariable.gw_kark_k1_borehol_low_level_fault,this.faultVariable.gw_kark_k1_surge_arrester_ok,this.faultVariable.gw_kark_k1_warning_level,this.faultVariable.gw_kark_k1_room_alarm]
 
-
-        Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
-
-
-
-
-
-  setTimeout(() => {
-
-  this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT)
-  var alarmG:any []=[this.faultVariable.gw_kark_k1_estop, this.faultVariable.gw_kark_k1_vsd_fault, this.faultVariable.gw_kark_k1_voltage_ok, this.faultVariable.gw_kark_k1_panel_door_open,this.faultVariable.gw_kark_k1_low_flow_fault,this.faultVariable.gw_kark_k1_charger_ok,this.faultVariable.gw_kark_k1_borehol_low_level_fault,this.faultVariable.gw_kark_k1_surge_arrester_ok,this.faultVariable.gw_kark_k1_warning_level,this.faultVariable.gw_kark_k1_room_alarm]
-
-  this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-
-},2000)
-      }
+       this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+      });
 
 },60000)
 

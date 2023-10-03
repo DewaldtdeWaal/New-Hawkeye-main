@@ -36,15 +36,25 @@ export class LovemoreheightsComponent implements OnInit {
 
 
   constructor(private webSocketService: WebSocketService, private LHS: LovemoreHeightsService, private userService: UsersService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-    this.LHS.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+    // this.LHS.GetSiteValues()
+    // .subscribe(rsp => {
+    //    this.data = rsp;
+    //    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
 
-       this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
+    //    this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
 
-    })
+    // })
 
+
+    this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+    this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
+    });
 
   }
 
@@ -71,9 +81,15 @@ export class LovemoreheightsComponent implements OnInit {
 
 
     this.intervalLoop = setInterval(() =>{
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+      this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").then((result) => {
+        this.data =  result;
+
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
 
       this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
+      });
 
     },60000);
 }

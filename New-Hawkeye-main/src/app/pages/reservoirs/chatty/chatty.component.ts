@@ -68,26 +68,14 @@ export class ChattyComponent implements OnInit {
       this.data =  result;
 
       console.log(this.data)
-     this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
     this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
     });
 
 
-  //   this.chat.GetSiteValues()
-  //   .subscribe(rsp => {
-  //      this.data = rsp;
 
-
-  //      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-
-  //      this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
-
-  //   })
-
-  //   this.theme = localStorage.getItem("theme");
-  // }
 
   }
 
@@ -122,7 +110,7 @@ export class ChattyComponent implements OnInit {
         this.data =  result;
 
         console.log(this.data)
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
       this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)

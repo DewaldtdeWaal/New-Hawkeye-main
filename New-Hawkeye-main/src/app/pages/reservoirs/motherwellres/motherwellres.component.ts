@@ -30,15 +30,25 @@ export class MotherwellresComponent implements OnInit
   intervalLoop: any;
   data: any=[];
     constructor( private buff:motherwellComponent, private ws:WebSocketService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-      this.buff.GetSiteValues()
-      .subscribe(rsp => {
-         this.data = rsp;
-         console.log(this.data);
-         this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+      // this.buff.GetSiteValues()
+      // .subscribe(rsp => {
+      //    this.data = rsp;
+      //    console.log(this.data);
+      //    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
 
-         this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
-      })
+      //    this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
+      // })
 
+
+      this.pm.findPageData("nmbm_mw_ps", "PS_CurrentVals").then((result) => {
+        this.data =  result;
+
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+      this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
+      });
 
 
 

@@ -33,7 +33,7 @@ tagArr:any=[
         this.data =  result;
 
         console.log(this.data)
-             this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+             this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
           this.variable.comms = Common.getLastUpdateBattery(this.variable.bergen_r_ut, this.variable.bergen_r_poll_ut)
       });
 }
@@ -54,7 +54,7 @@ tagArr:any=[
         this.data =  result;
 
         console.log(this.data)
-             this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+             this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
           this.variable.comms = Common.getLastUpdateBattery(this.variable.bergen_r_ut, this.variable.bergen_r_poll_ut)
       });
 

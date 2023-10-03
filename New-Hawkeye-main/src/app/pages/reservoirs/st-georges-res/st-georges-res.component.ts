@@ -33,12 +33,19 @@ export class StGeorgesResComponent implements OnInit {
 
   intervalLoop: any
   constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,private route:stGeorgesParkComponent,public recieve:Common,private pm:pagePostMethod) {
-    this.route.GetSiteValues()
-    .subscribe(rsp=> {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-      this.variable.comms = Common.getLastUpdate(this.variable.st_georges_wtw_ut)
-    })
+
+
+    this.pm.findPageData("nmbm_st_georges_wtw", "WTW_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+    this.variable.comms = Common.getLastUpdate(this.variable.st_georges_wtw_ut)
+    });
+
+
    }
 
   ngOnInit() {
@@ -48,11 +55,15 @@ export class StGeorgesResComponent implements OnInit {
 
     this.intervalLoop = setInterval(() =>{
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+      this.pm.findPageData("nmbm_st_georges_wtw", "WTW_CurrentVals").then((result) => {
+        this.data =  result;
 
-     this.variable.comms = Common.getLastUpdate(this.variable.st_georges_wtw_ut)
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-     console.log(this.variable)
+
+      this.variable.comms = Common.getLastUpdate(this.variable.st_georges_wtw_ut)
+      });
 
     },60000)
   }

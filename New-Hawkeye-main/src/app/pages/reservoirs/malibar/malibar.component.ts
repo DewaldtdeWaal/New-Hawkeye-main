@@ -26,33 +26,38 @@ export class MalibarComponent implements OnInit {
     data: any=[];
 
   constructor( private mali: malibarService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod) {
-    this.mali.GetSiteValues()
-    .subscribe(rsp => {
 
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
 
-      console.log(this.variable)
+    this.pm.findPageData("nmbm_mali_r", "R_CurrentVals").then((result) => {
+      this.data =  result;
 
-      this.variable.comms = Common.getLastUpdate(this.variable.mali_ut)
-    })
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+    this.variable.comms = Common.getLastUpdate(this.variable.mali_ut)
+    });
   }
 
   ngOnInit() {
 
-    var tagVals:any=[]
+    // var tagVals:any=[]
 
 
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
+    // tagVals = this.recieve.recieveNMBMVals(this.tagArr);
 
 
     this.intervalLoop = setInterval(() =>{
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+      this.pm.findPageData("nmbm_mali_r", "R_CurrentVals").then((result) => {
+        this.data =  result;
+
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
 
       this.variable.comms = Common.getLastUpdate(this.variable.mali_ut)
-
-      console.log(this.variable)
-    },10000);
+      });
+    },60000);
 
 
   }

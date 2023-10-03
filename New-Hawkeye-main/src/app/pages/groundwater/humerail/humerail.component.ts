@@ -5,6 +5,7 @@ import { EChartsOption } from 'echarts';
 import {MatTableDataSource} from '@angular/material/table';
 import {Common} from 'src/app/class/common';
 import {humerail6Service} from 'src/app/Service-Files/GRDW/groundwater.service';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -114,27 +115,23 @@ export class HumerailComponent implements OnInit {
 
 
 
-  constructor(private ws: WebSocketService,private hum: humerail6Service,public recieve:Common ) {
+  constructor(private ws: WebSocketService,private hum: humerail6Service,public recieve:Common,private pm:pagePostMethod ) {
 
-    var updateTemp:any;
     this.theme = localStorage.getItem("theme");
 
-    this.hum.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       Common.getRouteWithFault(this.tagArr,this.variable,this.data.routingArray,this.faultArr,this.faultVariable)
-       this.variable.comms = Common.getLastUpdate(this.variable.hup6_ut)
-    }
-    )
 
-    setTimeout(() => {
+
+    this.pm.findPageData("nmbm_hum_gw", "GRDW_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.comms = Common.getLastUpdate(this.variable.hum_gw_last_update)
 
       var alarmG:any []=[this.faultVariable.hum_gw_voltage_ok,this.faultVariable.hum_gw_VSD_Fault,  this.faultVariable.hum_gw_borehole_low_level_fault,  this.faultVariable.hum_gw_raw_water_tank_low_level_fault,this.faultVariable.hum_gw_final_water_tank_low_level_fault]
 
       this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-    },2000)
-
-
+    });
 
 
   }
@@ -152,28 +149,21 @@ export class HumerailComponent implements OnInit {
     errorVals = this.recieve.recieveNMBMVals(this.faultArr)
     this.intervalLoop = setInterval(() =>{
 
-      updateTemp = tagVals[1];
+      this.pm.findPageData("nmbm_hum_gw", "GRDW_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+        this.comms = Common.getLastUpdate(this.variable.hum_gw_last_update)
 
-      if(updateTemp !==undefined){
+        var alarmG:any []=[this.faultVariable.hum_gw_voltage_ok,this.faultVariable.hum_gw_VSD_Fault,  this.faultVariable.hum_gw_borehole_low_level_fault,  this.faultVariable.hum_gw_raw_water_tank_low_level_fault,this.faultVariable.hum_gw_final_water_tank_low_level_fault]
 
-        this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-
-
-        Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
-
-
-        setTimeout(() =>{
-          var alarmG:any []=[this.faultVariable.hum_gw_voltage_ok,this.faultVariable.hum_gw_VSD_Fault,  this.faultVariable.hum_gw_borehole_low_level_fault,  this.faultVariable.hum_gw_raw_water_tank_low_level_fault,this.faultVariable.hum_gw_final_water_tank_low_level_fault]
-
-          this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-        },2000)
-
-      }
-      this.comms = Common.getLastUpdate(this.variable.hum_gw_last_update)
+        this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+      });
 
 
 
-    },6000)
+
+    },60000)
   }
   ngOnDestroy(){
     if(this.intervalLoop){

@@ -1,6 +1,6 @@
 
 <div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">{{variable.siteName}}</h1></div>
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Kruisfontein Borehole 12</h1></div>
 <div class="wrapper-grid">
   <section class="ground-form" fxLayoutAlign="center">
 
@@ -58,17 +58,17 @@
 
 
       <div class="grid-container-general">
-        <div class="grid-container-general-column1">{{variable.gw_klm_kruis12_number_of_starts.description}}: </div>
-        <div class="grid-container-general-column3" >{{variable.gw_klm_kruis12_number_of_starts.value}}</div>
+        <div class="grid-container-general-column1">Number of starts: </div>
+        <div class="grid-container-general-column3" >{{variable.gw_klm_kruis12_number_of_starts}}</div>
 
-        <div  class="grid-container-general-column1">{{variable.gw_klm_kruis12_run_hours.description}}: </div>
-        <div class="grid-container-general-column3">{{variable.gw_klm_kruis12_run_hours.value}}&nbsp;{{variable.gw_klm_kruis12_run_hours.measurement}}</div>
-        <div class="grid-container-general-column1">Control Mode:</div>
+        <div  class="grid-container-general-column1">Run Hours: </div>
+        <div class="grid-container-general-column3">{{variable.gw_klm_kruis12_run_hours}}  Hours</div>
+        <div class="grid-container-general-column1">Control Mode: </div>
         <div class="grid-container-general-column3" >{{variable.gw_klm_kruis12_control_mode}} </div>
-        <div class="grid-container-general-column1">{{variable.gw_klm_kruis12_target_flow.description}}: </div>
-        <div class="grid-container-general-column3" >{{variable.gw_klm_kruis12_target_flow.value}}&nbsp;{{variable.gw_klm_kruis12_target_flow.measurement}}</div>
-        <div class="grid-container-general-column1">{{variable.gw_klm_kruis12_target_freq.description}}: </div>
-        <div class="grid-container-general-column3" >{{variable.gw_klm_kruis12_target_freq.value}}&nbsp;{{variable.gw_klm_kruis12_target_freq.measurement}}</div>
+        <div class="grid-container-general-column1">Target Flow: </div>
+        <div class="grid-container-general-column3" >{{variable.gw_klm_kruis12_target_flow}} l/s</div>
+        <div class="grid-container-general-column1">Target Frequincy: </div>
+        <div class="grid-container-general-column3" >{{variable.gw_klm_kruis12_target_freq}} Hz</div>
 
 
         <div class="grid-container-general-column1">&nbsp;</div>
@@ -76,7 +76,23 @@
 
       </div>
 
+      <!-- <table mat-elevation-z8 mat-table [dataSource]="generalfaultdatasource" matSort>
 
+        <ng-container matColumnDef="alarm" >
+          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
+          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" >
+          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
+          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+<br> -->
     </div>
 
     </form>
@@ -117,23 +133,26 @@
                   <div class="grid-image" *ngIf="variable.gw_klm_kruis12_status=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png"  style="width:30px; height:180px;" ></div>
                 </div>
 
+
+
               <!-- First and Second Column -->
+
 
                 <div class="grid-container-pump-column2">Mode:</div>
                 <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_mode}}</div>
                 <div class="grid-container-pump-column2">Status:</div>
                 <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_status}}</div>
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/LVL.png" class="img2" ></div>
-                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_lvl.value}}&nbsp;{{variable.gw_klm_kruis12_lvl.measurement}}</div>
+                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_lvl}} m</div>
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/rpm-hz.png" class="img2" ></div>
-                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_vsd.value}}&nbsp;{{variable.gw_klm_kruis12_vsd.measurement}}</div>
+                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_vsd}} Hz</div>
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/bar.png" class="img2"></div>
-                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_bar.value}}&nbsp;{{variable.gw_klm_kruis12_bar.measurement}}</div>
+                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_bar}} bar</div>
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/FM.png" class="img2"></div>
-                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_flow_rate.value}}&nbsp;{{variable.gw_klm_kruis12_flow_rate.measurement}}</div>
+                <div class="grid-container-pump-column4">{{variable.gw_klm_kruis12_flow_rate}} l/s</div>
 
-                <div class="grid-container-pump-column2">{{variable.gw_klm_kruis12_TF.description}}: </div>
-                <div class="grid-container-pump-column4" >{{variable.gw_klm_kruis12_TF.value}}&nbsp;{{variable.gw_klm_kruis12_TF.measurement}}</div>
+                <div class="grid-container-pump-column2">Total Flow: </div>
+                <div class="grid-container-pump-column4" >{{variable.gw_klm_kruis12_TF}} m³</div>
             </div>
 
 
@@ -156,6 +175,8 @@
 
             <br>
 
+
+
 </div>
       </form>
       </section>
@@ -172,16 +193,23 @@
         <div class="grid-container-power">
 
           <div class="grid-container-power-column1"><img src="assets/img/Symbol/V.png" class="img2"></div>
-          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_voltage.value}}&nbsp;{{variable.gw_klm_kruis12_voltage.measurement}}</div>
+          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_voltage}} V</div>
           <div class="grid-container-power-column1"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
-          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_current.value}}&nbsp;{{variable.gw_klm_kruis12_current.measurement}}</div>
+          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_current}} A</div>
           <div class="grid-container-power-column1"><img src="assets/img/Symbol/kW.png" class="img2"></div>
-          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_power.value}}&nbsp;{{variable.gw_klm_kruis12_power.measurement}}</div>
-          <div class="grid-container-power-column1">{{variable.gw_klm_kruis12_total_power.description}}:</div>
-          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_total_power.value}}&nbsp;{{variable.gw_klm_kruis12_total_power.measurement}}</div>
+          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_power}} KW</div>
+          <div class="grid-container-power-column1">Total Power:</div>
+          <div class="grid-container-power-column3">{{variable.gw_klm_kruis12_total_power}} kWh</div>
           <div class="grid-container-power-column1"></div>
           <div class="grid-container-power-column3"></div>
           </div>
+
+
+
+
+
+
+
 
   </div>
         </form>
@@ -214,4 +242,5 @@
       <div id="main" echarts  [options]="options" class="chart" ></div>
       <br>
       <br>
+
       </div>

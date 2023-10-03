@@ -12,6 +12,7 @@ import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -151,19 +152,19 @@ gw_klm_kruis13_res_ful:{
   tableDataPump1: PeriodicElement[] = [];
   dataSourceP1:any = new MatTableDataSource(this.tableDataPump1);
   public authListenerSubs!: Subscription;
-  constructor(private ls:ListeningService, private ws:WebSocketService,  public rs: ReportService,public recieve:Common,private authService: AuthService,private GWS:kruisfonteinRouting )  {
-    this.GWS.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.theme = localStorage.getItem("theme");
-     this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-     this.faultVariable =   Common.getFaultRouteData(this.faultArr,this.faultVariable,this.data.routingArray)
+  constructor(private ls:ListeningService, private ws:WebSocketService,  public rs: ReportService,public recieve:Common,private authService: AuthService,private GWS:kruisfonteinRouting,private pm:pagePostMethod )  {
+    this.theme = localStorage.getItem("theme");
+    this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
+
      this.variable.comms = Common.getLastUpdate(this.variable.gw_klm_kruis13_UT)
      var alarm1: any [] = [this.faultVariable.gw_klm_kruis13_bar_fault,this.faultVariable.gw_klm_kruis13_lvl_fault,this.faultVariable.gw_klm_kruis13_flow_fault,this.faultVariable.gw_klm_kruis13_voltage_not_okay,this.faultVariable.gw_klm_kruis13_emergency_stop,this.faultVariable.gw_klm_kruis13_vsd_fault,this.faultVariable.gw_klm_kruis13_res_communication_fault,this.faultVariable.gw_klm_kruis13_res_ful,]
-
-     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-
-    })
+    this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+    });
 
 
    }
@@ -201,14 +202,16 @@ gw_klm_kruis13_res_ful:{
     errorVals = this.recieve.recieveNonMVals(this.faultArr)
 
     this.intervalLoop = setInterval(() =>{
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdate(this.variable.gw_klm_kruis13_UT)
+      this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+       this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
 
-      Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
-      var alarm1: any [] = [this.faultVariable.gw_klm_kruis13_bar_fault,this.faultVariable.gw_klm_kruis13_lvl_fault,this.faultVariable.gw_klm_kruis13_flow_fault,this.faultVariable.gw_klm_kruis13_voltage_not_okay,this.faultVariable.gw_klm_kruis13_emergency_stop,this.faultVariable.gw_klm_kruis13_vsd_fault,this.faultVariable.gw_klm_kruis13_res_communication_fault,this.faultVariable.gw_klm_kruis13_res_ful,]
+       this.variable.comms = Common.getLastUpdate(this.variable.gw_klm_kruis13_UT)
+       var alarm1: any [] = [this.faultVariable.gw_klm_kruis13_bar_fault,this.faultVariable.gw_klm_kruis13_lvl_fault,this.faultVariable.gw_klm_kruis13_flow_fault,this.faultVariable.gw_klm_kruis13_voltage_not_okay,this.faultVariable.gw_klm_kruis13_emergency_stop,this.faultVariable.gw_klm_kruis13_vsd_fault,this.faultVariable.gw_klm_kruis13_res_communication_fault,this.faultVariable.gw_klm_kruis13_res_ful,]
       this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-
-console.log(this.variable)
+      });
     },60000 )
     var trend: any = {};
     this.rs.Get_Kruis13_TotalFlows().subscribe(data => {

@@ -30,12 +30,15 @@ export class WolwasComponent implements OnInit {
 
 
 
-      this.graf.GetSiteValues()
-      .subscribe(rsp => {
-         this.data = rsp;
-         this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-         this.variable.comms = Common.getLastUpdateBattery(this.variable.wolwas_r_ut, this.variable.wolwas_r_poll_ut)
-      })
+    this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+    this.variable.comms = Common.getLastUpdate(this.variable.damp_r_ut)
+    });
 
    }
 
@@ -51,10 +54,15 @@ export class WolwasComponent implements OnInit {
     this.intervalLoop = setInterval(() =>{
 
 
+      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
+        this.data =  result;
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-    this.variable.comms = Common.getLastUpdateBattery(this.variable.wolwas_r_ut, this.variable.wolwas_r_poll_ut)
+
+      this.variable.comms = Common.getLastUpdate(this.variable.damp_r_ut)
+      });
 
   },60000)
 

@@ -36,7 +36,15 @@ export class UmasizakheComponent implements OnInit {
       })
 
 
+      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
+        this.data =  result;
 
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+      this.variable.comms = Common.getLastUpdateBattery(this.variable.tin_r_ut, this.variable.tin_r_poll_ut)
+      });
 
 
 

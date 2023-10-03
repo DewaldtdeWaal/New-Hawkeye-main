@@ -60,7 +60,7 @@ DateArr: any;
     this.data =  result;
 
     console.log(this.data)
-   this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
   this.variable.comms = Common.getLastUpdate(this.variable.che_r_ut)

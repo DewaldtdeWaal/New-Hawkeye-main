@@ -29,7 +29,7 @@ export class DamcampComponent implements OnInit {
       this.data =  result;
 
       console.log(this.data)
-     this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
     this.variable.comms = Common.getLastUpdate(this.variable.damp_r_ut)
@@ -50,7 +50,7 @@ export class DamcampComponent implements OnInit {
         this.data =  result;
 
         console.log(this.data)
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
       this.variable.comms = Common.getLastUpdate(this.variable.damp_r_ut)

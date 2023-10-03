@@ -43,16 +43,16 @@ export class KruisfonteinRComponent implements OnInit {
   userSites:string[];
   public authListenerSubs!: Subscription;
   constructor(private authService: AuthService,private GWS:kruisfonteinRouting,public recieve:Common,private pm:pagePostMethod) {
-    this.GWS.GetSiteValues()
-    .subscribe(rsp => {
 
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
 
-      console.log(this.variable)
 
-      this.variable.comms = Common.getLastUpdate(this.variable.klm_kruisR_ut)
-    })
+    this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable = Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.klm_kruisR_ut)
+    });
 
    }
 
@@ -94,8 +94,13 @@ export class KruisfonteinRComponent implements OnInit {
 
 
    this.intervalLoop = setInterval(() => {
-    this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-   this.variable.comms = Common.getLastUpdate(this.variable.klm_kruisR_ut)
+    this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    // this.comms = Common.getLastUpdate(this.variable.klm_kruisR_ut)
+    });
 
     }, 60000);
   }

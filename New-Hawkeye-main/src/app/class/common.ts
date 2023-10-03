@@ -298,7 +298,15 @@ public async recieveRouteData(tagArr:any = [],variable:any,data:any){
 
 }
 
+public async recieveRouteDatas(tagArr:any = [],variable:any,data:any){
 
+  for(var i = 0; i < tagArr.length; i++) {
+    variable[tagArr[i]] = data[tagArr[i]]
+  }
+
+  return variable;
+
+}
 
 public recieveNMBMVals(tagArr: any[]){
   var tagVals:any = []
@@ -357,10 +365,25 @@ public static getRouteWithFault(tagArr:any = [],variable:any,data:any,faultArr:a
   Common.getFaultRouteData(faultArr,faultVariable,data)
 }
 
+public static getRouteWithFaults(tagArr:any = [],variable:any,data:any,faultArr:any,faultVariable:any){
+  Common.getRouteDatas(tagArr,variable,data)
+  Common.getFaultRouteDatas(faultArr,faultVariable,data)
+}
 
+static getRouteDatas(tagArr:any = [],variable:any,data:any){
+
+  for(var i = 0; i < tagArr.length; i++) {
+    variable[tagArr[i]] = data[tagArr[i]]
+  }
+
+  return variable;
+
+}
 
 
 static getRouteData(tagArr:any = [],variable:any,data:any){
+
+  console.log(data)
 
   for(var i = 0; i < tagArr.length; i++) {
     variable[tagArr[i]] = data[0][tagArr[i]]
@@ -374,6 +397,16 @@ public static getFaultRouteData(tagArr:any = [],variable:any,data:any){
 
   for(var i = 0; i < tagArr.length; i++) {
     variable[tagArr[i]].value = data[0][tagArr[i]]
+  }
+
+  return variable;
+
+}
+
+public static getFaultRouteDatas(tagArr:any = [],variable:any,data:any){
+
+  for(var i = 0; i < tagArr.length; i++) {
+    variable[tagArr[i]].value = data[tagArr[i]]
   }
 
   return variable;

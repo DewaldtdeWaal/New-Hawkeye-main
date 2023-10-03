@@ -21,7 +21,7 @@
          <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
          </div>
       <div class="grid-container-communicationStatus-column1">Last Update:</div>
-      <div class="grid-container-communicationStatus-column3">{{ last_update }}</div>
+      <div class="grid-container-communicationStatus-column3">{{ variable.last_update }}</div>
 
 </div>
 </div>
@@ -42,15 +42,15 @@
 
       <div class="grid-container-general">
       <div  class="grid-container-general-column1">Annual Yield Setpoint: </div>
-        <div class="grid-container-general-column3"> {{ annualyieldsetpoint}} kl</div>
+        <div class="grid-container-general-column3"> {{ variable.annualyieldsetpoint}} kl</div>
         <div class="grid-container-general-column1">Annual Yield To Date: </div>
-        <div class="grid-container-general-column3" >{{totalyieldtodate}} kl</div>
+        <div class="grid-container-general-column3" >{{variable.totalyieldtodate}} kl</div>
         <div  class="grid-container-general-column1">Run Hours: </div>
-        <div class="grid-container-general-column3"> {{runhours}} Hours</div>
+        <div class="grid-container-general-column3"> {{variable.runhours}} Hours</div>
         <div class="grid-container-general-column1">Total Flow: </div>
-        <div class="grid-container-general-column3" >{{totalflow}} kl</div>
+        <div class="grid-container-general-column3" >{{variable.totalflow}} kl</div>
         <div class="grid-container-general-column1">Target Flow: </div>
-        <div class="grid-container-general-column3" >{{targetflowsetpoint}} l/s</div>
+        <div class="grid-container-general-column3" >{{variable.targetflowsetpoint}} l/s</div>
         <div class="grid-container-general-column1">&nbsp;</div>
         <div class="grid-container-general-column3" >&nbsp;</div>
 
@@ -98,19 +98,19 @@
                 <!-- <div class="grid-image"><img src="assets/img/Pump/Borehole Pump Black.png" style="width:30px; height:180px;"   ></div> -->
 
                  <div *ngIf="theme=='light-theme'"  class="grid-image">
-                  <div class="grid-image"  *ngIf="status==null"><img   src="assets/img/Pump/Borehole Pump Black.png"   style="width:30px; height:180px;"></div>
-                  <div class="grid-image"  *ngIf="status=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
-                  <div class="grid-image"  *ngIf="status=='Fault Active'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;" ></div>
-                  <div class="grid-image"  *ngIf="status=='Available'" ><img  src="assets/img/Pump/Borehole Pump Black.png"  style="width:30px; height:180px;" ></div>
-                  <div class="grid-image"  *ngIf="status=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png" style="width:30px; height:180px;" ></div>
+                  <div class="grid-image"  *ngIf="variable.status==null"><img   src="assets/img/Pump/Borehole Pump Black.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image"  *ngIf="variable.status=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image"  *ngIf="variable.status=='Fault Active'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image"  *ngIf="variable.status=='Available'" ><img  src="assets/img/Pump/Borehole Pump Black.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image"  *ngIf="variable.status=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png" style="width:30px; height:180px;" ></div>
                 </div>
 
                 <div *ngIf="theme=='dark-theme'" class="grid-image">
-                  <div class="grid-image" *ngIf="status==undefined"><img   src="assets/img/Pump/Borehole Pump White.png"   style="width:30px; height:180px;"></div>
-                  <div class="grid-image" *ngIf="status=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
-                  <div class="grid-image" *ngIf="status=='Fault Active'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;"></div>
-                  <div class="grid-image" *ngIf="status=='Available'" ><img  src="assets/img/Pump/Borehole Pump White.png"  style="width:30px; height:180px;" ></div>
-                  <div class="grid-image" *ngIf="status=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image" *ngIf="variable.status==undefined"><img   src="assets/img/Pump/Borehole Pump White.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.status=='Pump Running'" ><img  src="assets/img/Pump/Borehole Pump Green.png"   style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.status=='Fault Active'" ><img  src="assets/img/Pump/Borehole Pump Red.png"  style="width:30px; height:180px;"></div>
+                  <div class="grid-image" *ngIf="variable.status=='Available'" ><img  src="assets/img/Pump/Borehole Pump White.png"  style="width:30px; height:180px;" ></div>
+                  <div class="grid-image" *ngIf="variable.status=='Not Available'" ><img  src="assets/img/Pump/Borehole Pump Grey.png"  style="width:30px; height:180px;" ></div>
                 </div>
 
 
@@ -119,18 +119,18 @@
 
 
                 <div class="grid-container-pump-column2">Mode:</div>
-                <div class="grid-container-pump-column4">{{pumpmode}}</div>
+                <div class="grid-container-pump-column4">{{variable.pumpmode}}</div>
                 <div class="grid-container-pump-column2">Status:</div>
-                <div class="grid-container-pump-column4">{{status}}</div>
+                <div class="grid-container-pump-column4">{{variable.status}}</div>
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/LVL.png" class="img2" ></div>
-                <div class="grid-container-pump-column4">{{waterlevel}} m</div>
+                <div class="grid-container-pump-column4">{{variable.boreholelevel}} m</div>
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/rpm-hz.png" class="img2" ></div>
-                <div class="grid-container-pump-column4">{{vsdfrequency}} Hz</div>
+                <div class="grid-container-pump-column4">{{variable.vsdfrequency}} Hz</div>
 
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/FM.png" class="img2"></div>
-                <div class="grid-container-pump-column4">{{flowrate}} l/s</div>
+                <div class="grid-container-pump-column4">{{variable.flowrate}} l/s</div>
                 <div class="grid-container-pump-column2"><img src="assets/img/Symbol/bar.png" class="img2"></div>
-                <div class="grid-container-pump-column4">{{pressure}} bar</div>
+                <div class="grid-container-pump-column4">{{variable.pressure}} bar</div>
             </div>
 
 
@@ -173,13 +173,13 @@
         <div class="grid-container-power">
 
           <div class="grid-container-power-column1"><img src="assets/img/Symbol/V.png" class="img2"></div>
-          <div class="grid-container-power-column3">{{voltage}} V</div>
+          <div class="grid-container-power-column3">{{variable.voltage}} V</div>
           <div class="grid-container-power-column1"><img src="assets/img/Symbol/vsdCurrent.png" class="img2"></div>
-          <div class="grid-container-power-column3">{{current}} A</div>
+          <div class="grid-container-power-column3">{{variable.current}} A</div>
           <div class="grid-container-power-column1"><img src="assets/img/Symbol/kW.png" class="img2"></div>
-          <div class="grid-container-power-column3">{{power}} KW</div>
+          <div class="grid-container-power-column3">{{variable.power}} KW</div>
           <div class="grid-container-power-column1">Total Power:</div>
-          <div class="grid-container-power-column3">{{totalpower}} kWh</div>
+          <div class="grid-container-power-column3">{{variable.totalpower}} kWh</div>
           <div class="grid-container-power-column1"></div>
           <div class="grid-container-power-column3"></div>
           </div>

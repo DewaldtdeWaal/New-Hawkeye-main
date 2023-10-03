@@ -40,7 +40,7 @@ export class HoldingComponent implements OnInit {
         this.data =  result;
 
         console.log(this.data)
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
        this.variable.comms = Common.getLastUpdateBattery(this.variable.hol_r_ut, this.variable.hol_r_poll_ut)
@@ -60,7 +60,7 @@ export class HoldingComponent implements OnInit {
         this.data =  result;
 
         console.log(this.data)
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
        this.variable.comms = Common.getLastUpdateBattery(this.variable.hol_r_ut, this.variable.hol_r_poll_ut)
