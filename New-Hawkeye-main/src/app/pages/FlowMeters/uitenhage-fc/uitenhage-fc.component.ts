@@ -8,6 +8,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import {Uitenhage} from 'src/app/Service-Files/FPT/uitenhage.service';
 import {Common} from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 export interface PeriodicElement {
   alarm: string;
@@ -121,28 +123,27 @@ export class UitenhageFCComponent implements OnInit {
     }
 
   }
-  constructor(private uit:Uitenhage, private ws: WebSocketService,public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common ) {
+  isLoading: boolean = false;
+  collectionName: any = "FPT_UIT_FC_TF"
+trendTag: any = ["totalFlow"]
+  constructor(private uit:Uitenhage, private ws: WebSocketService,public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common,private pm:pagePostMethod ,private pt: PostTrend) {
 
-    this.uit.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
+    this.isLoading = true;
+
+    this.pm.findPageData("nmbm_uit_fc_fpt", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
 
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-       this.faultVariable =   Common.getFaultRouteData(this.faultArr,this.faultVariable,this.data.routingArray)
-       this.variable.comms = Common.getLastUpdate(this.variable.fpt_uit_fc_ut)
+    this.variable.comms = Common.getLastUpdate(this.variable.fpt_uit_fc_ut)
 
 
+    var alarm1: any [] = [this.faultVariable.fpt_uit_fc_surge_arrester_fault,this.faultVariable.fpt_uit_fc_charger_fault,this.faultVariable.fpt_uit_fc_remote_io_comms,this.faultVariable.fpt_uit_fc_pressure_analog_signal,this.faultVariable.fpt_uit_fc_flow_meter_comms]
+    this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
     });
-    setTimeout(() => {
 
-      var alarm1: any [] = [this.faultVariable.fpt_uit_fc_surge_arrester_fault,this.faultVariable.fpt_uit_fc_charger_fault,this.faultVariable.fpt_uit_fc_remote_io_comms,this.faultVariable.fpt_uit_fc_pressure_analog_signal,this.faultVariable.fpt_uit_fc_flow_meter_comms]
-      this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
-
-
-
-
-    },1000)
 
 
 
@@ -153,32 +154,24 @@ export class UitenhageFCComponent implements OnInit {
 
 
 
-    var tagVals:any=[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-    errorVals = this.recieve.recieveNMBMVals(this.faultArr)
 
-
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
 
 
-      updateTemp=tagVals[0];
-      if(updateTemp !== undefined){
 
-        this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-        Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
+      this.pm.findPageData("nmbm_uit_fc_fpt", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
 
-      }
-
-      console.log(this.faultVariable)
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
 
-            this.variable.comms = Common.getLastUpdate(this.variable.fpt_uit_fc_ut)
+      this.variable.comms = Common.getLastUpdate(this.variable.fpt_uit_fc_ut)
 
 
-            var alarm1: any [] = [this.faultVariable.fpt_uit_fc_surge_arrester_fault,this.faultVariable.fpt_uit_fc_charger_fault,this.faultVariable.fpt_uit_fc_remote_io_comms,this.faultVariable.fpt_uit_fc_pressure_analog_signal,this.faultVariable.fpt_uit_fc_flow_meter_comms]
-            this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
+      var alarm1: any [] = [this.faultVariable.fpt_uit_fc_surge_arrester_fault,this.faultVariable.fpt_uit_fc_charger_fault,this.faultVariable.fpt_uit_fc_remote_io_comms,this.faultVariable.fpt_uit_fc_pressure_analog_signal,this.faultVariable.fpt_uit_fc_flow_meter_comms]
+      this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
+      });
 
 
 
@@ -188,9 +181,9 @@ export class UitenhageFCComponent implements OnInit {
 
 
     var trend: any = {};
-    this.rs.Get_UIT_Total_Flows().subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.TotalFlow_UIT_Arr = trend.TotalFlow_UIT_Arr;
+      this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0];
       this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any
@@ -207,7 +200,7 @@ export class UitenhageFCComponent implements OnInit {
 
 
         this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","Uitenhage Total Flow",this.TotalFlow_UIT_Arr)
-
+        this.isLoading = false;
     })
 
 
@@ -215,19 +208,21 @@ export class UitenhageFCComponent implements OnInit {
   }
 
   onDateFilter(){
+    this.isLoading = true;
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
     const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 var trend :any;
 
-this.rs.Get_UIT_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
-
-  this.TotalFlow_UIT_Arr = trend.TotalFlow_UIT_Arr;
+  this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0];
   this.DateArr = trend.DateArr;
 
 
 
 this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","Uitenhage Total Flow",this.TotalFlow_UIT_Arr)
+
+this.isLoading = false;
 })
 
 

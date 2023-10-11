@@ -7,6 +7,7 @@ import { ChattyService} from 'src/app/Service-Files/Reservoir/chatty.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
   alarm: string;
   description: string;
@@ -52,7 +53,7 @@ export class ChattyPSComponent  {
 
   dataSourceP1:any  = new MatTableDataSource(this.ELEMENT_DATA_P1);
   dataSourceP2:any = new MatTableDataSource(this.ELEMENT_DATA_P2);
-theme: any;
+theme: any = localStorage.getItem("theme");
 
   static TEST: string;
   data: any=[];
@@ -124,42 +125,24 @@ theme: any;
     "cht_p2_vsd_status",//23
   ]
 
-  constructor(private ls:ListeningService, private ws: WebSocketService, private us:UsersService,private chat:ChattyService   ,private userService: UsersService,private authService: AuthService,public recieve:Common ) {
-  this.chat.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
+  constructor(private ls:ListeningService, private ws: WebSocketService, private us:UsersService,private chat:ChattyService   ,private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
 
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+    this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
+      this.data =  result;
 
-       this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
-
-
-       this.faultVariable.cht_p1_no_flow_fault.value = this.data.routingArray[0].cht_p1_no_flow_fault
-       this.faultVariable =   Common.getFaultRouteData(this.tagArr,this.faultVariable,this.data.routingArray)
-
-
-
-    })
-
-    this.theme = localStorage.getItem("theme");
-    setTimeout(() => {
-
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data.routingArray)
+      this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
 
       var alarm1: any [] = [this.faultVariable.cht_p1_no_flow_fault,this.faultVariable.cht_p1_estop_fault,this.faultVariable.cht_p1_circuit_breaker_fault]
       var alarm2: any [] = [this.faultVariable.cht_p2_no_flow_fault,this.faultVariable.cht_p2_estop_fault,this.faultVariable.cht_p2_circuit_breaker_fault]
 
       this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
       this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-      console.log(this.faultVariable)
-
-
-
-
-    },60000)
+    });
 
 
    }
-
+   isLoading: boolean = false;
 
   ngOnInit(){
 
@@ -179,49 +162,19 @@ theme: any;
     }
 
 
-
-
-    var tagVals:any =[]
-
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      if(updateTemp !==undefined){
-        this.variable.cht_ut=tagVals[0]
+      this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
+        this.data =  result;
 
-        this.variable.cht_g_panel_surge_arrestor=tagVals[1];
-        this.variable.cht_g_panel_voltage_okay=tagVals[2];
-        this.variable.cht_g_ps_mode=tagVals[3];
-        this.variable.cht_p1_rt=tagVals[4];
-        this.variable.cht_p1_a=tagVals[5];
-        this.variable.cht_p1_kw=tagVals[6];
-        this.variable.cht_p1_rpm=tagVals[7];
-        this.variable.cht_p1_status=tagVals[8];
-        this.variable.cht_p1_mode=tagVals[9];
-        this.variable.cht_p1_vsd_status=tagVals[13];
-        this.variable.cht_p2_rt=tagVals[14];
-        this.variable.cht_p2_a=tagVals[15];
-        this.variable.cht_p2_kw=tagVals[16];
-        this.variable.cht_p2_rpm=tagVals[17];
-        this.variable.cht_p2_status=tagVals[18];
-        this.variable.cht_p2_mode=tagVals[19];
-        this.variable.cht_p2_vsd_status=tagVals[23];
-        this.faultVariable.cht_p1_no_flow_fault.value=tagVals[10];
-        this.faultVariable.cht_p1_estop_fault.value=tagVals[11];
-        this.faultVariable.cht_p1_circuit_breaker_fault.value=tagVals[12];
-        this.faultVariable.cht_p2_no_flow_fault.value=tagVals[20];
-        this.faultVariable.cht_p2_estop_fault.value=tagVals[21];
-        this.faultVariable.cht_p2_circuit_breaker_fault.value=tagVals[22];
+        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data.routingArray)
+        this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
 
         var alarm1: any [] = [this.faultVariable.cht_p1_no_flow_fault,this.faultVariable.cht_p1_estop_fault,this.faultVariable.cht_p1_circuit_breaker_fault]
         var alarm2: any [] = [this.faultVariable.cht_p2_no_flow_fault,this.faultVariable.cht_p2_estop_fault,this.faultVariable.cht_p2_circuit_breaker_fault]
 
         this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
         this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-      }
-      this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
+      });
 
     },60000 )
   }

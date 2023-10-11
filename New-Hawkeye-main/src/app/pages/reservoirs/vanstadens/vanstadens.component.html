@@ -21,7 +21,7 @@
              </div>
 
           <div class="grid-container-flow-meters-general-column1">Last Update:</div>
-          <div class="grid-container-flow-meters-general-column3">{{vs_UT}}</div>
+          <div class="grid-container-flow-meters-general-column3">{{variable.vs_R_UT}}</div>
 
           <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
           <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-co5umn3"></div>
@@ -50,7 +50,7 @@
 <br>
 
 <div fxLayoutAlign="center " > <div class="circle1">
-  <div class="circle2-b"><div [ngStyle]="{'height.%' : 100-res }" class="fill"><div class="lvl-font">{{vs_RL}}%</div></div></div>
+  <div class="circle2-b"><div [ngStyle]="{'height.%' : 100-variable.vs_R_LVL }" class="fill"><div class="lvl-font">{{variable.vs_R_LVL}}%</div></div></div>
 </div>
 </div>
 <br>
@@ -73,16 +73,16 @@
         <h3 style="padding-top: 8px; ">Status</h3></div>
         <div class="div-form">
           <div class="grid-container-flow-meters-flowrate" >
-          <div  *ngIf="vs_SA==0" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
-          <div  *ngIf="vs_SA==1" class="grid-container-column-1" ><div class="column1-led-red"></div></div>
+          <div  *ngIf="variable.vs_R_SURGE_ARRESTOR==0" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
+          <div  *ngIf="variable.vs_R_SURGE_ARRESTOR==1" class="grid-container-column-1" ><div class="column1-led-red"></div></div>
           <div class="grid-container-column-2">Surge Arrester:</div>
-          <div  *ngIf="vs_SA==0" class="grid-container-column-4" >Ok </div>
-          <div  *ngIf="vs_SA==1" class="grid-container-column-4" >Not Ok</div>
-          <div  *ngIf="vs_CHS==0" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
-          <div  *ngIf="vs_CHS==1" class="grid-container-column-1" ><div class="column1-led-grey"></div></div>
+          <div  *ngIf="variable.vs_R_SURGE_ARRESTOR==0" class="grid-container-column-4" >Ok </div>
+          <div  *ngIf="variable.vs_R_SURGE_ARRESTOR==1" class="grid-container-column-4" >Not Ok</div>
+          <div  *ngIf="variable.vs_R_CHARGER_STATUS==0" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
+          <div  *ngIf="variable.vs_R_CHARGER_STATUS==1" class="grid-container-column-1" ><div class="column1-led-grey"></div></div>
           <div class="grid-container-column-2">Charger Status:</div>
-          <div  *ngIf="vs_CHS==0" class="grid-container-column-4" >Ok</div>
-          <div  *ngIf="vs_CHS==1" class="grid-container-column-4" >Not Ok</div>
+          <div  *ngIf="variable.vs_R_CHARGER_STATUS==0" class="grid-container-column-4" >Ok</div>
+          <div  *ngIf="variable.vs_R_CHARGER_STATUS==1" class="grid-container-column-4" >Not Ok</div>
             </div>
           </div>
           </form>

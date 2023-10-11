@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Common } from 'src/app/class/common';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { bushyService } from 'src/app/Service-Files/Reservoir/reservoir.service';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
 @Component({
   selector: 'app-bushypark-wtw',
@@ -43,13 +44,21 @@ tagArr:any = [
 ];
 userSites:string[];
 public authListenerSubs!: Subscription;
-constructor(private bush: bushyService,public recieve:Common,private authService: AuthService ) {
-  this.bush.GetSiteValues()
-  .subscribe(rsp => {
-     this.data = rsp;
-    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+constructor(private bush: bushyService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ) {
+  // this.bush.GetSiteValues()
+  // .subscribe(rsp => {
+  //    this.data = rsp;
+  //   this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+  //   this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
+  // })
+
+
+  this.pm.findPageData("nmbm_bush_r", "R_CurrentVals").then((result) => {
+    this.data =  result;
+
+    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
     this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
-  })
+  });
 
 }
 
@@ -76,8 +85,12 @@ var tagVals:any =[]
 
 tagVals = this.recieve.recieveNMBMVals(this.tagArr);
 setInterval(() => {
-  this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
- this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
+  this.pm.findPageData("nmbm_bush_r", "R_CurrentVals").then((result) => {
+    this.data =  result;
+
+    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
+  });
   }, 60000);
 
 

@@ -24,7 +24,7 @@
            </div>
 
         <div class="grid-container-communicationStatus-column1">Last Update:</div>
-        <div class="grid-container-communicationStatus-column3">{{bf_PS_UT}}</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.bf_PS_UT}}</div>
 
   </div>
 
@@ -45,8 +45,8 @@
 
 
       <div class="grid-container-general-column2"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-      <div class="grid-container-general-column4">{{bf_G_FR}} Ml/d</div>
-      <div class="grid-container-general-column1">Suction</div><img src="assets/img/Symbol/bar.png" class="img3" style="margin: auto;"><div class="grid-container-general-column2"></div><div style="grid-row:2" class="grid-container-general-column4">{{bf_G_SP}} bar</div>
+      <div class="grid-container-general-column4">{{variable.bf_G_FR}} Ml/d</div>
+      <div class="grid-container-general-column1">Suction</div><img src="assets/img/Symbol/bar.png" class="img3" style="margin: auto;"><div class="grid-container-general-column2"></div><div style="grid-row:2" class="grid-container-general-column4">{{variable.bf_G_SP}} bar</div>
 
   </div>
   <table mat-elevation-z8 mat-table [dataSource]="dataSourceG" >
@@ -86,28 +86,28 @@
 
             <div class="grid-column-one">
           <div *ngIf="theme=='light-theme'">
-            <div  *ngIf="bf_P1_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div  *ngIf="bf_P1_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div  *ngIf="bf_P1_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div  *ngIf="bf_P1_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
-            <div  *ngIf="bf_P1_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P1_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P1_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div  *ngIf="variable.bf_P1_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div  *ngIf="variable.bf_P1_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+            <div  *ngIf="variable.bf_P1_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
           <div *ngIf="theme=='dark-theme'">
-            <div *ngIf="bf_P1_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div *ngIf="bf_P1_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div *ngIf="bf_P1_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div *ngIf="bf_P1_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
-            <div *ngIf="bf_P1_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P1_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P1_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div *ngIf="variable.bf_P1_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div *ngIf="variable.bf_P1_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+            <div *ngIf="variable.bf_P1_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
         </div>
     <div class="grid-pumpstation-column2-right-align">Mode:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P1_MODE}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P1_MODE}}</div>
     <div class="grid-pumpstation-column2-right-align">Status:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P1_STATUS}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P1_STATUS}}</div>
     <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P1_RH}} h</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P1_RH}} h</div>
 
         </div>
         <table mat-elevation-z8 mat-table [dataSource]="dataSourceP1" matSort>
@@ -145,28 +145,28 @@
 
             <div class="grid-column-one">
           <div *ngIf="theme=='light-theme'">
-            <div  *ngIf="bf_P2_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div  *ngIf="bf_P2_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div  *ngIf="bf_P2_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div  *ngIf="bf_P2_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
-            <div  *ngIf="bf_P2_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P2_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P2_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div  *ngIf="variable.bf_P2_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div  *ngIf="variable.bf_P2_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+            <div  *ngIf="variable.bf_P2_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
           <div *ngIf="theme=='dark-theme'">
-            <div *ngIf="bf_P2_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div *ngIf="bf_P2_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div *ngIf="bf_P2_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div *ngIf="bf_P2_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
-            <div *ngIf="bf_P2_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P2_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P2_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div *ngIf="variable.bf_P2_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div *ngIf="variable.bf_P2_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+            <div *ngIf="variable.bf_P2_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
         </div>
     <div class="grid-pumpstation-column2-right-align">Mode:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P2_MODE}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P2_MODE}}</div>
     <div class="grid-pumpstation-column2-right-align">Status:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P2_STATUS}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P2_STATUS}}</div>
     <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P2_RH}} h</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P2_RH}} h</div>
 
         </div>
         <table mat-elevation-z8 mat-table [dataSource]="dataSourceP2" matSort>
@@ -204,28 +204,28 @@
 
             <div class="grid-column-one">
           <div *ngIf="theme=='light-theme'">
-            <div  *ngIf="bf_P3_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div  *ngIf="bf_P3_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div  *ngIf="bf_P3_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div  *ngIf="bf_P3_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
-            <div  *ngIf="bf_P3_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P3_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P3_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div  *ngIf="variable.bf_P3_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div  *ngIf="variable.bf_P3_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+            <div  *ngIf="variable.bf_P3_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
           <div *ngIf="theme=='dark-theme'">
-            <div *ngIf="bf_P3_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div *ngIf="bf_P3_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div *ngIf="bf_P3_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div *ngIf="bf_P3_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
-            <div *ngIf="bf_P3_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P3_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P3_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div *ngIf="variable.bf_P3_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div *ngIf="variable.bf_P3_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+            <div *ngIf="variable.bf_P3_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
         </div>
     <div class="grid-pumpstation-column2-right-align">Mode:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P3_MODE}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P3_MODE}}</div>
     <div class="grid-pumpstation-column2-right-align">Status:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P3_STATUS}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P3_STATUS}}</div>
     <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P3_RH}} h</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P3_RH}} h</div>
 
         </div>
         <table mat-elevation-z8 mat-table [dataSource]="dataSourceP3" matSort>
@@ -263,28 +263,28 @@
 
             <div class="grid-column-one">
           <div *ngIf="theme=='light-theme'">
-            <div  *ngIf="bf_P4_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div  *ngIf="bf_P4_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div  *ngIf="bf_P4_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div  *ngIf="bf_P4_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
-            <div  *ngIf="bf_P4_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P4_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div  *ngIf="variable.bf_P4_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div  *ngIf="variable.bf_P4_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div  *ngIf="variable.bf_P4_STATUS=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
+            <div  *ngIf="variable.bf_P4_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
           <div *ngIf="theme=='dark-theme'">
-            <div *ngIf="bf_P4_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-            <div *ngIf="bf_P4_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-            <div *ngIf="bf_P4_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-            <div *ngIf="bf_P4_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
-            <div *ngIf="bf_P4_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P4_STATUS==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
+            <div *ngIf="variable.bf_P4_STATUS=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
+            <div *ngIf="variable.bf_P4_STATUS=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
+            <div *ngIf="variable.bf_P4_STATUS=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
+            <div *ngIf="variable.bf_P4_STATUS=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
           </div>
 
         </div>
     <div class="grid-pumpstation-column2-right-align">Mode:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P4_MODE}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P4_MODE}}</div>
     <div class="grid-pumpstation-column2-right-align">Status:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P4_STATUS}}</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P4_STATUS}}</div>
     <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
-    <div class="grid-pumpstation-column3-left-align">{{bf_P4_RH}} h</div>
+    <div class="grid-pumpstation-column3-left-align">{{variable.bf_P4_RH}} h</div>
 
         </div>
         <table mat-elevation-z8 mat-table [dataSource]="dataSourceP4" matSort>

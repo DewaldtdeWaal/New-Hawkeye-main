@@ -11,6 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 export interface PeriodicElement{
   alarm: string;
@@ -211,8 +212,8 @@ export class NewtonparkpoolComponent implements OnInit {
      ]
 
 
-  constructor(private ls:ListeningService, private ws:WebSocketService, private nppfs: NewtonParkPoolService, public rs: ReportService,public recieve:Common,private pm:pagePostMethod )  {
-
+  constructor( public rs: ReportService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend )  {
+    this.isLoading = true;
 
 
 
@@ -238,7 +239,8 @@ export class NewtonparkpoolComponent implements OnInit {
   });
 
   }
-
+  collectionName: any = "NPP_TF_Trend"
+  trendTag: any = ["totalflow"]
   ngOnInit() {
 
 
@@ -269,9 +271,9 @@ export class NewtonparkpoolComponent implements OnInit {
 
 
   var trend: any = {};
-  this.rs.Get_NPP_TotalFlows().subscribe(data => {
+  this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
     trend=data
-    this.totalflow_array = trend.totalflow_array;
+    this.totalflow_array = trend.TotalFlowArr[0];
 
     this.DateArr = trend.DateArr;
       var theme:any
@@ -318,23 +320,23 @@ export class NewtonparkpoolComponent implements OnInit {
         }
       ]
       };
-
+      this.isLoading = false;
   }
   )
 
   }
 
-
+  isLoading: boolean = false;
   onDateFilter(){
+    this.isLoading = true;
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
     const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
   var trend :any;
 
-  this.rs.Get_NPP_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-  trend=data
-
-  this.totalflow_array = trend.totalflow_array;
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+    trend=data
+    this.totalflow_array = trend.TotalFlowArr[0];
   this.DateArr = trend.DateArr;
   var theme:any
   var tooltipBackground:any;
@@ -382,6 +384,8 @@ export class NewtonparkpoolComponent implements OnInit {
     }
   ]
   };
+
+  this.isLoading = false;
   })
 
 

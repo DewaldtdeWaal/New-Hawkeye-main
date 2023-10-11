@@ -9,6 +9,8 @@ import {Common} from 'src/app/class/common';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
 import { FormControl, FormGroup } from '@angular/forms';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import {PostTrend} from 'src/app/Service-Files/PageTrend/pagePost.service'
 export interface PeriodicElement {
   alarm: string;
   description: string;
@@ -77,7 +79,7 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
   public authListenerSubs!: Subscription;
   showNavigationButton: string;
   intervalLoop: any;
-  theme: string | null;
+  theme:any = localStorage.getItem("theme");
   dataSourceG:any
   dataSourceP1:any;
   dataSourceP2:any;
@@ -373,48 +375,40 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
   ]
   options: EChartsOption;
 
-
-  constructor( public rs: ReportService,private che: ChelseaService,private webSocketService: WebSocketService,private userService: UsersService,private authService: AuthService,public recieve:Common  ) {
-
+  chelseaTrendTag:any[] = ["che_ps_700_total_flow","che_ps_moth_760_mm_total_flow","che_ps_moth_900_mm_total_flow","che_ps_walk_drive_off_500_mm_total_flow"]
 
 
+  constructor( public rs: ReportService,private pt: PostTrend,private authService: AuthService,public recieve:Common,private pm:pagePostMethod  ) {
 
-    this.che.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
 
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-      this.faultVariable =   Common.getFaultRouteData(this.faultArr,this.faultVariable,this.data.routingArray)
+    this.isLoading = true;
 
-      console.log(this.faultVariable)
-      this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
 
+
+
+
+
+      this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
+        this.data =  result;
+
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+        this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
+         var alarmG: any [] = [this.faultVariable.che_ps_flood_alarm,this.faultVariable.che_ps_pumpset_g_control_voltage_loss]
+         var alarm1: any [] = [this.faultVariable.che_ps_pumpset_1_no_flow_fault,this.faultVariable.che_ps_pumpset_1_ESTOP,this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_1_drive_fault ,this.faultVariable.che_ps_pumpset_1_pres_fault,this.faultVariable.che_ps_pumpset_1_temp_fault,this.faultVariable.che_ps_pumpset_1_vib_fault]
+         var alarm2: any [] = [this.faultVariable.che_ps_pumpset_2_no_flow_fault,this.faultVariable.che_ps_pumpset_2_ESTOP,this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_2_drive_fault ,this.faultVariable.che_ps_pumpset_2_pres_fault,this.faultVariable.che_ps_pumpset_2_temp_fault,this.faultVariable.che_ps_pumpset_2_vib_fault]
+         var alarm3: any [] = [this.faultVariable.che_ps_pumpset_3_no_flow_fault,this.faultVariable.che_ps_pumpset_3_ESTOP,this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_3_drive_fault ,this.faultVariable.che_ps_pumpset_3_pres_fault,this.faultVariable.che_ps_pumpset_3_temp_fault,this.faultVariable.che_ps_pumpset_3_vib_fault]
+         var alarm4: any [] = [this.faultVariable.che_ps_pumpset_4_no_flow_fault,this.faultVariable.che_ps_pumpset_4_ESTOP,this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_4_drive_fault ,this.faultVariable.che_ps_pumpset_4_pres_fault,this.faultVariable.che_ps_pumpset_4_temp_fault,this.faultVariable.che_ps_pumpset_4_vib_fault]
+
+         this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
+         this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+         this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+         this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+         this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
       });
 
-      this.theme = localStorage.getItem("theme");
-        setTimeout(() => {
-
-
-          var alarmG: any [] = [this.faultVariable.che_ps_flood_alarm,this.faultVariable.che_ps_pumpset_g_control_voltage_loss]
-          var alarm1: any [] = [this.faultVariable.che_ps_pumpset_1_no_flow_fault,this.faultVariable.che_ps_pumpset_1_ESTOP,this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_1_drive_fault ,this.faultVariable.che_ps_pumpset_1_pres_fault,this.faultVariable.che_ps_pumpset_1_temp_fault,this.faultVariable.che_ps_pumpset_1_vib_fault]
-          var alarm2: any [] = [this.faultVariable.che_ps_pumpset_2_no_flow_fault,this.faultVariable.che_ps_pumpset_2_ESTOP,this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_2_drive_fault ,this.faultVariable.che_ps_pumpset_2_pres_fault,this.faultVariable.che_ps_pumpset_2_temp_fault,this.faultVariable.che_ps_pumpset_2_vib_fault]
-          var alarm3: any [] = [this.faultVariable.che_ps_pumpset_3_no_flow_fault,this.faultVariable.che_ps_pumpset_3_ESTOP,this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_3_drive_fault ,this.faultVariable.che_ps_pumpset_3_pres_fault,this.faultVariable.che_ps_pumpset_3_temp_fault,this.faultVariable.che_ps_pumpset_3_vib_fault]
-          var alarm4: any [] = [this.faultVariable.che_ps_pumpset_4_no_flow_fault,this.faultVariable.che_ps_pumpset_4_ESTOP,this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_4_drive_fault ,this.faultVariable.che_ps_pumpset_4_pres_fault,this.faultVariable.che_ps_pumpset_4_temp_fault,this.faultVariable.che_ps_pumpset_4_vib_fault]
-
-          this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
-          this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-          this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-          this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-          this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-
-
-
-
-
-      },2000)
      }
 
-
+     isLoading: boolean = false;
   ngOnInit() {
 
 
@@ -443,69 +437,40 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
 
     this.intervalLoop = setInterval(() =>{
 
-      if(tagVals[0]!= undefined){
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
+      this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
+        this.data =  result;
 
-        this.faultVariable.che_ps_pumpset_g_control_voltage_loss.value = errorVals[0]
-        this.faultVariable.che_ps_flood_alarm.value = errorVals[1]
-        this.faultVariable.che_ps_pumpset_1_no_flow_fault.value = errorVals[2]
-        this.faultVariable.che_ps_pumpset_1_ESTOP.value = errorVals[3]
-        this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip.value = errorVals[4]
-        this.faultVariable.che_ps_pumpset_1_drive_fault.value = errorVals[5]
-        this.faultVariable.che_ps_pumpset_1_pres_fault.value = errorVals[6]
-        this.faultVariable.che_ps_pumpset_1_temp_fault.value = errorVals[7]
-        this.faultVariable.che_ps_pumpset_1_vib_fault.value = errorVals[8]
-        this.faultVariable.che_ps_pumpset_2_no_flow_fault.value = errorVals[11]
-        this.faultVariable.che_ps_pumpset_2_ESTOP.value = errorVals[10]
-        this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip.value = errorVals[11]
-        this.faultVariable.che_ps_pumpset_2_drive_fault.value = errorVals[12]
-        this.faultVariable.che_ps_pumpset_2_pres_fault.value = errorVals[13]
-        this.faultVariable.che_ps_pumpset_2_temp_fault.value = errorVals[14]
-        this.faultVariable.che_ps_pumpset_2_vib_fault.value = errorVals[15]
-        this.faultVariable.che_ps_pumpset_3_no_flow_fault.value = errorVals[16]
-        this.faultVariable.che_ps_pumpset_3_ESTOP.value = errorVals[17]
-        this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip.value = errorVals[18]
-        this.faultVariable.che_ps_pumpset_3_drive_fault.value = errorVals[19]
-        this.faultVariable.che_ps_pumpset_3_pres_fault.value = errorVals[20]
-        this.faultVariable.che_ps_pumpset_3_temp_fault.value = errorVals[21]
-        this.faultVariable.che_ps_pumpset_3_vib_fault.value = errorVals[22]
-        this.faultVariable.che_ps_pumpset_4_no_flow_fault.value = errorVals[23]
-        this.faultVariable.che_ps_pumpset_4_ESTOP.value = errorVals[24]
-        this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip.value = errorVals[25]
-        this.faultVariable.che_ps_pumpset_4_drive_fault.value = errorVals[26]
-        this.faultVariable.che_ps_pumpset_4_pres_fault.value = errorVals[27]
-        this.faultVariable.che_ps_pumpset_4_temp_fault.value = errorVals[28]
-        this.faultVariable.che_ps_pumpset_4_vib_fault.value = errorVals[29]
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+        this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
+         var alarmG: any [] = [this.faultVariable.che_ps_flood_alarm,this.faultVariable.che_ps_pumpset_g_control_voltage_loss]
+         var alarm1: any [] = [this.faultVariable.che_ps_pumpset_1_no_flow_fault,this.faultVariable.che_ps_pumpset_1_ESTOP,this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_1_drive_fault ,this.faultVariable.che_ps_pumpset_1_pres_fault,this.faultVariable.che_ps_pumpset_1_temp_fault,this.faultVariable.che_ps_pumpset_1_vib_fault]
+         var alarm2: any [] = [this.faultVariable.che_ps_pumpset_2_no_flow_fault,this.faultVariable.che_ps_pumpset_2_ESTOP,this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_2_drive_fault ,this.faultVariable.che_ps_pumpset_2_pres_fault,this.faultVariable.che_ps_pumpset_2_temp_fault,this.faultVariable.che_ps_pumpset_2_vib_fault]
+         var alarm3: any [] = [this.faultVariable.che_ps_pumpset_3_no_flow_fault,this.faultVariable.che_ps_pumpset_3_ESTOP,this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_3_drive_fault ,this.faultVariable.che_ps_pumpset_3_pres_fault,this.faultVariable.che_ps_pumpset_3_temp_fault,this.faultVariable.che_ps_pumpset_3_vib_fault]
+         var alarm4: any [] = [this.faultVariable.che_ps_pumpset_4_no_flow_fault,this.faultVariable.che_ps_pumpset_4_ESTOP,this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_4_drive_fault ,this.faultVariable.che_ps_pumpset_4_pres_fault,this.faultVariable.che_ps_pumpset_4_temp_fault,this.faultVariable.che_ps_pumpset_4_vib_fault]
 
+         this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
+         this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+         this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+         this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+         this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
+      });
 
-      setTimeout(() => {
-        var alarmG: any [] = [this.faultVariable.che_ps_flood_alarm,this.faultVariable.che_ps_pumpset_g_control_voltage_loss]
-        var alarm1: any [] = [this.faultVariable.che_ps_pumpset_1_no_flow_fault,this.faultVariable.che_ps_pumpset_1_ESTOP,this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_1_drive_fault ,this.faultVariable.che_ps_pumpset_1_pres_fault,this.faultVariable.che_ps_pumpset_1_temp_fault,this.faultVariable.che_ps_pumpset_1_vib_fault]
-        var alarm2: any [] = [this.faultVariable.che_ps_pumpset_2_no_flow_fault,this.faultVariable.che_ps_pumpset_2_ESTOP,this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_2_drive_fault ,this.faultVariable.che_ps_pumpset_2_pres_fault,this.faultVariable.che_ps_pumpset_2_temp_fault,this.faultVariable.che_ps_pumpset_2_vib_fault]
-        var alarm3: any [] = [this.faultVariable.che_ps_pumpset_3_no_flow_fault,this.faultVariable.che_ps_pumpset_3_ESTOP,this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_3_drive_fault ,this.faultVariable.che_ps_pumpset_3_pres_fault,this.faultVariable.che_ps_pumpset_3_temp_fault,this.faultVariable.che_ps_pumpset_3_vib_fault]
-        var alarm4: any [] = [this.faultVariable.che_ps_pumpset_4_no_flow_fault,this.faultVariable.che_ps_pumpset_4_ESTOP,this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_4_drive_fault ,this.faultVariable.che_ps_pumpset_4_pres_fault,this.faultVariable.che_ps_pumpset_4_temp_fault,this.faultVariable.che_ps_pumpset_4_vib_fault]
-
-        this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
-        this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-        this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-        this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-    },2000)
-  }
-  this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
-
-    }, 3000)
+    }, 60000)
 
     var trend: any = {};
-    this.rs.GET_CHEL_TotalFlow().subscribe(data => {
-      trend=data
-      this.CHE_PS_700_TF_arr = trend.CHE_PS_700_TF_arr
-      this.CHE_PS_760_MM_TF_arr = trend.CHE_PS_760_MM_TF_arr
-      this.CHE_PS_900_MM_TF_arr = trend.CHE_PS_900_MM_TF_arr
-      this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr = trend.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr
+
+    this.pt.getPostTrend("CHEL_TF_TREND", this.chelseaTrendTag,null,null).then((data) => {
+
+      trend=data;
+
+
+      this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0]
+      this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1]
+      this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2]
+      this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3]
       this.DateArr = trend.DateArr;
+
       var theme:any
       var tooltipBackground:any
 
@@ -567,11 +532,264 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
 
     }
 
+    this.isLoading = false;
+    })
+  //   this.rs.GET_CHEL_TotalFlow().subscribe(data => {
+  //     trend=data
+  //     this.CHE_PS_700_TF_arr = trend.CHE_PS_700_TF_arr
+  //     this.CHE_PS_760_MM_TF_arr = trend.CHE_PS_760_MM_TF_arr
+  //     this.CHE_PS_900_MM_TF_arr = trend.CHE_PS_900_MM_TF_arr
+  //     this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr = trend.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr
+  //     this.DateArr = trend.DateArr;
+  //     var theme:any
+  //     var tooltipBackground:any
+
+  //     if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
+  //     {
+  //       theme = '#FFFFFF'
+  //       tooltipBackground = 'rgba(50,50,50,0.7)'
+  //     }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
+  //     {
+  //     theme = '#797979'
+  //     tooltipBackground = 'rgba(255, 255, 255, 1)'
+  //     }
+  //     this.options = {
+  //       tooltip: {
+  //         backgroundColor: tooltipBackground,
+  //         textStyle:{ color: theme,},
+  //          trigger: 'axis',
+  //          position: ['10%', '10%']
+  //        },
+  //       grid: {
+  //         bottom:"18%"
+  //       },
+  //       xAxis: {
+  //           type: 'category',
+  //           data: this.DateArr,
+  //           axisLabel: { interval: 0, rotate: 90, color: theme },
+  //       },
+  //       yAxis:   {
+  //         type: 'value',
+  //         scale: true,
+  //         name: 'Total Flow Ml',
+  //         nameTextStyle: { color: theme},
+  //         boundaryGap: [0.2, 0.2],
+  //         min: 0,
+  //         axisLabel: { rotate: 90, color: theme},
+  //     },
+  //     series: [ {
+  //     name: 'Pumpstation Total Flow',
+  //     data: this.CHE_PS_700_TF_arr,
+  //     type: 'bar',
+  // },
+  // {
+  //   name: 'Motherwell 760 mm Total Flow',
+  //     data: this.CHE_PS_760_MM_TF_arr,
+  //     type: 'bar',
+  // },
+  // {
+  //   name: 'Motherwell 900 mm Total Flow',
+  //     data: this.CHE_PS_900_MM_TF_arr,
+  //     type: 'bar',
+  // },{
+  //   name: 'Motherwell Walker Drive Offtake 500 mm',
+  //   data: this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr,
+  //   type: 'bar',
+  // }]
 
 
-  })
+
+
+  //   }
+
+
+
+  // })
 }
 onDateFilter(){
+  this.isLoading = true;
+  var start = this.range.value.start+'';
+  var end = this.range.value.end+'';
+
+ var startARR = start.toString().split(" ")
+ var endARR = end.toString().split(" ")
+
+
+ switch (startARR[1]) {
+  case "Jan":
+    startARR[1] = "1"
+      break;
+      case "Feb":
+        startARR[1] = "2"
+          break;
+          case "Mar":
+            startARR[1] = "3"
+              break;
+              case "Apr":
+                startARR[1] = "4"
+                  break;
+                  case "May":
+                    startARR[1] = "5"
+                      break;
+                      case "Jun":
+                        startARR[1] = "6"
+                          break;
+                          case "Jul":
+                            startARR[1] = "7"
+                              break;
+                              case "Aug":
+                                startARR[1] = "8"
+                                  break;
+                                  case "Sep":
+                                    startARR[1] = "9"
+                                      break;
+                                      case "Oct":
+                                        startARR[1] = "10"
+                                          break;
+                                          case "Nov":
+                                            startARR[1] = "11"
+                                              break;
+                                              case "Dec":
+                                                startARR[1] = "12"
+                                                  break;
+                                                }
+switch (endARR[1]) {
+  case "Jan":
+    endARR[1] = "1"
+      break;
+      case "Feb":
+        endARR[1] = "2"
+          break;
+          case "Mar":
+            endARR[1] = "3"
+              break;
+              case "Apr":
+                endARR[1] = "4"
+                  break;
+                  case "May":
+                    endARR[1] = "5"
+                      break;
+                      case "Jun":
+                        endARR[1] = "6"
+                          break;
+                          case "Jul":
+                            endARR[1] = "7"
+                              break;
+                              case "Aug":
+                                endARR[1] = "8"
+                                  break;
+                                  case "Sep":
+                                    endARR[1] = "9"
+                                      break;
+                                      case "Oct":
+                                        endARR[1] = "10"
+                                          break;
+                                          case "Nov":
+                                            endARR[1] = "11"
+                                              break;
+                                              case "Dec":
+                                                endARR[1] = "12"
+                                                  break;
+                                                }
+
+if (startARR[1].length==1){
+startARR[1] = "0" + startARR[1]
+}
+
+if (endARR[1].length==1){
+endARR[1] = "0" + endARR[1]
+}
+
+
+var newStart = startARR[3] +"-"+startARR[1]+"-"+startARR[2]
+var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
+
+console.log(newStart)
+console.log(newEnd)
+
+var trend :any;
+
+//this.rs.GET_CHEL_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+
+  this.pt.getPostTrend("CHEL_TF_TREND", this.chelseaTrendTag,newStart,newEnd).then((data) => {
+
+
+trend=data
+
+this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0]
+this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1]
+this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2]
+this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3]
+this.DateArr = trend.DateArr;
+var theme:any
+var tooltipBackground:any;
+
+if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
+{
+theme = '#FFFFFF'
+tooltipBackground = 'rgba(50,50,50,0.7)'
+}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
+{
+theme = '#797979'
+tooltipBackground = 'rgba(255, 255, 255, 1)'
+}
+
+this.options = {
+tooltip: {
+  backgroundColor: tooltipBackground,
+  textStyle:{ color: theme,},
+   trigger: 'axis',
+   position: ['10%', '10%']
+ },
+grid: {
+  bottom:"18%"
+},
+
+xAxis: {
+    type: 'category',
+    data: this.DateArr,
+    axisLabel: { interval: 0, rotate: 90, color: theme },
+},
+yAxis:   {
+  type: 'value',
+  scale: true,
+  name: 'Total Flow Ml',
+  nameTextStyle: { color: theme},
+  boundaryGap: [0.2, 0.2],
+  min: 0,
+  axisLabel: { rotate: 90, color: theme},
+},
+series: [ {
+  name: 'Pumpstation Total Flow',
+  data: this.CHE_PS_700_TF_arr,
+  type: 'bar',
+},
+{
+name: 'Motherwell 760 mm Total Flow',
+  data: this.CHE_PS_760_MM_TF_arr,
+  type: 'bar',
+},
+{
+name: 'Motherwell 900 mm Total Flow',
+  data: this.CHE_PS_900_MM_TF_arr,
+  type: 'bar',
+},{
+name: 'Motherwell Walker Drive Offtake 500 mm',
+data: this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr,
+type: 'bar',
+}]
+};
+
+this.isLoading = false;
+})
+
+
+}
+
+
+
+NewDateFilter(){
+
   var start = this.range.value.start+'';
   var end = this.range.value.end+'';
 
@@ -670,74 +888,7 @@ var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
 
 var trend :any;
 
-this.rs.GET_CHEL_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-trend=data
-
-this.CHE_PS_700_TF_arr = trend.CHE_PS_700_TF_arr
-this.CHE_PS_760_MM_TF_arr = trend.CHE_PS_760_MM_TF_arr
-this.CHE_PS_900_MM_TF_arr = trend.CHE_PS_900_MM_TF_arr
-this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr = trend.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr
-this.DateArr = trend.DateArr;
-var theme:any
-var tooltipBackground:any;
-
-if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-{
-theme = '#FFFFFF'
-tooltipBackground = 'rgba(50,50,50,0.7)'
-}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-{
-theme = '#797979'
-tooltipBackground = 'rgba(255, 255, 255, 1)'
-}
-
-this.options = {
-tooltip: {
-  backgroundColor: tooltipBackground,
-  textStyle:{ color: theme,},
-   trigger: 'axis',
-   position: ['10%', '10%']
- },
-grid: {
-  bottom:"18%"
-},
-
-xAxis: {
-    type: 'category',
-    data: this.DateArr,
-    axisLabel: { interval: 0, rotate: 90, color: theme },
-},
-yAxis:   {
-  type: 'value',
-  scale: true,
-  name: 'Total Flow Ml',
-  nameTextStyle: { color: theme},
-  boundaryGap: [0.2, 0.2],
-  min: 0,
-  axisLabel: { rotate: 90, color: theme},
-},
-series: [ {
-  name: 'Pumpstation Total Flow',
-  data: this.CHE_PS_700_TF_arr,
-  type: 'bar',
-},
-{
-name: 'Motherwell 760 mm Total Flow',
-  data: this.CHE_PS_760_MM_TF_arr,
-  type: 'bar',
-},
-{
-name: 'Motherwell 900 mm Total Flow',
-  data: this.CHE_PS_900_MM_TF_arr,
-  type: 'bar',
-},{
-name: 'Motherwell Walker Drive Offtake 500 mm',
-data: this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr,
-type: 'bar',
-}]
-};
-})
-
+//this.pt.getPostTrend4()
 
 }
 
@@ -746,5 +897,8 @@ type: 'bar',
         clearInterval(this.intervalLoop)
       }
     }
+
+
+
 
 }

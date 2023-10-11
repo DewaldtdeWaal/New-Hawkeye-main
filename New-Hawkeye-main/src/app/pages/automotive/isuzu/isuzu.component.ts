@@ -3,6 +3,7 @@ import { EChartsOption } from 'echarts';
 import { Common } from 'src/app/class/common';
 import {IsuzuService} from 'src/app/Service-Files/Automotive/automotive.service'
 import {ReportService} from 'src/app/Service-Files/report.service'
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 
 @Component({
@@ -37,32 +38,40 @@ ISUZU_OVEN2_HEAT_ECVH_TEMP_arr: any[]=[]
   isuzu_oven1_temp1: any;
   isuzu_oven1_heat_ecvh_temp: any;
   isuzu_oven1_vsd_speed: any;
-  theme: string | null;
   intervalLoop: any;
   updateloop:any
 
-  constructor(private ws: WebSocketService,public rs:ReportService, public is:IsuzuService,public recieve:Common  ) {
-    this.is.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-    this.isuzu_ut = this.data.routingArray[0].isuzu_ut;
-    this.comms = Common.getLastUpdate(this.isuzu_ut)
-    this.isuzu_oven1_vsd_speed = this.data.routingArray[0].isuzu_oven1_vsd_speed
-    this.isuzu_oven1_heat_ecvh_temp = this.data.routingArray[0].isuzu_oven1_heat_ecvh_temp
-    this.isuzu_oven1_temp1 = this.data.routingArray[0].isuzu_oven1_temp1
-    this.isuzu_oven1_temp2 = this.data.routingArray[0].isuzu_oven1_temp2
-    this.isuzu_oven2_vsd_speed = this.data.routingArray[0].isuzu_oven2_vsd_speed
-    this.isuzu_oven2_heat_ecvh_temp = this.data.routingArray[0].isuzu_oven2_heat_ecvh_temp
-    this.isuzu_oven2_temp1 = this.data.routingArray[0].isuzu_oven2_temp1
-    this.isuzu_oven2_temp2 = this.data.routingArray[0].isuzu_oven2_temp2
+  variable :any= {
+    isuzu_ut:null,
+isuzu_oven1_vsd_speed:null,
+isuzu_oven1_heat_ecvh_temp:null,
+isuzu_oven1_temp1:null,
+isuzu_oven1_temp2:null,
+isuzu_oven2_vsd_speed:null,
+isuzu_oven2_heat_ecvh_temp:null,
+isuzu_oven2_temp1:null,
+isuzu_oven2_temp2:null,
+  }
+    tagArr:any=[
+"isuzu_ut",
+"isuzu_oven1_vsd_speed",
+"isuzu_oven1_heat_ecvh_temp",
+"isuzu_oven1_temp1",
+"isuzu_oven1_temp2",
+"isuzu_oven2_vsd_speed",
+"isuzu_oven2_heat_ecvh_temp",
+"isuzu_oven2_temp1",
+"isuzu_oven2_temp2",
+    ]
 
+  constructor(private ws: WebSocketService,public rs:ReportService, public is:IsuzuService,public recieve:Common , private pm:pagePostMethod ) {
+   this.pm.findPageData("isuzu_auto", "AUTO_CurrentVals").then((result) => {
+    this.data =  result;
 
-
-
-
-
-
-   });
+    console.log(this.data)
+   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+   this.comms = Common.getLastUpdate(this.variable.isuzu_ut)
+  });
 
 
 
@@ -240,22 +249,14 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
 
     this.intervalLoop = setInterval(() =>{
 
-      updateTemp = tagVals[0];
 
-      if(updateTemp !==undefined){
-     this.isuzu_ut = tagVals[0]
-     this.isuzu_oven1_vsd_speed = tagVals[1]
-     this.isuzu_oven1_heat_ecvh_temp = tagVals[2]
-     this.isuzu_oven1_temp1 = tagVals[3]
-     this.isuzu_oven1_temp2 = tagVals[4]
-     this.isuzu_oven2_vsd_speed = tagVals[5]
-     this.isuzu_oven2_heat_ecvh_temp = tagVals[6]
-     this.isuzu_oven2_temp1 = tagVals[7]
-     this.isuzu_oven2_temp2 = tagVals[8]
+   this.pm.findPageData("isuzu_auto", "AUTO_CurrentVals").then((result) => {
+    this.data =  result;
 
-
-    }
-    this.comms = Common.getLastUpdate(this.isuzu_ut)
+    console.log(this.data)
+   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+   this.comms = Common.getLastUpdate(this.variable.isuzu_ut)
+  });
     },60000)
 
 

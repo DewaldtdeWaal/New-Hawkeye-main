@@ -12,6 +12,7 @@ import {Common} from 'src/app/class/common';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 //HumansDorp1Servicea
 export interface PeriodicElement{
@@ -35,7 +36,7 @@ export class HumansdorpComponent implements OnInit {
   generalfaulttable: PeriodicElement[] = [];
   generalfaultdatasource :any = new MatTableDataSource(this.generalfaulttable);
   intervalLoop: any
-  theme:any;
+  theme:any  = localStorage.getItem("theme");
   pumpmode: any ;
   pressure: any
 flowrate :any
@@ -170,9 +171,9 @@ show6:any
   },
 }
 
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp1Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ) {
+  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp1Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
+    this.isLoading = true;
 
-    this.theme = localStorage.getItem("theme");
 
 
     this.pm.findPageData("klm_hup_gw", "GRDW_CurrentVals").then((result) => {
@@ -184,15 +185,18 @@ show6:any
      var alarmG:any []=[this.faultVariable.hup1_voltage,this.faultVariable.hup1_pump_general_fault,this.faultVariable.hup1_borehole_level_pr_fault,this.faultVariable.hup1_battery,this.faultVariable.hup1_charge,this.faultVariable.hup1_trip_fault,this.faultVariable.hup1_no_flow_fault,this.faultVariable.hup1_24_timer,this.faultVariable.hup1_stop_level,this.faultVariable.hup1_fault,this.faultVariable.hup1_estop_active,this.faultVariable.hup1_pump_suf]
 
      this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+
+
     });
 
 
 
   }
-
+  isLoading: boolean = false;
   userSites:string[];
   public authListenerSubs!: Subscription;
-
+  trendTag:any = ["total_flow_HD1"]
+  collectionName:any ="KLM_HUP_TF_TREND"
   ngOnInit() {
 
     this.userSites = this.authService.getUserSites();
@@ -256,16 +260,23 @@ show6:any
 
 
 var trend: any = {};
-this.rs.Get_HUP1_TotalFlows().subscribe(data => {
-  trend=data
-  this.total_flow_HD1_array = trend.total_flow_HD1_array;
+
+
+
+
+
+
+  this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+    trend=data
+  this.total_flow_HD1_array = trend.TotalFlowArr[0];
 
   this.DateArr = trend.DateArr;
     var theme:any
     var tooltipBackground:any
 
 
-    this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_HD1_array)
+    this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_HD1_array);
+    this.isLoading = false;
 
 }
 )
@@ -274,7 +285,7 @@ this.rs.Get_HUP1_TotalFlows().subscribe(data => {
 
 
 onDateFilter(){
-
+  this.isLoading = true;
 
 
 const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
@@ -282,15 +293,17 @@ const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
 var trend :any;
 
-this.rs.Get_HUP1_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-trend=data
 
-this.total_flow_HD1_array = trend.total_flow_HD1_array;
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+    trend=data
+  this.total_flow_HD1_array = trend.TotalFlowArr[0];
+
 this.DateArr = trend.DateArr;
-var theme:any
-var tooltipBackground:any;
 
-this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_HD1_array)
+
+this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_HD1_array);
+
+this.isLoading = false;
 })
 
 

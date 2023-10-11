@@ -21,6 +21,11 @@
   color:  var(--form-text-color);
   background-color: var(--page-background-color);
 }
+
+.ps-form {
+  padding-top: 10px;
+  color:  var(--form-text-color);
+}
 .grid-container-communicationStatus{
   display: grid;
   overflow: hidden;

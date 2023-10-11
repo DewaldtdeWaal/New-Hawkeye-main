@@ -24,7 +24,7 @@
                </div>
 
             <div class="grid-container-flow-meters-general-column1">Last Update:</div>
-            <div class="grid-container-flow-meters-general-column3">{{gb_UT}}</div>
+            <div class="grid-container-flow-meters-general-column3">{{variable.gb_R_UT}}</div>
 
 
 
@@ -51,7 +51,7 @@
 
 <div fxLayoutAlign="center " > <div class="circle1">
 
-  <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100 - gb_RL }" class="fill"><div class="lvl-font">{{gb_RL}}%</div></div></div>
+  <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100 - variable.gb_R_LVL }" class="fill"><div class="lvl-font">{{variable.gb_R_LVL}}%</div></div></div>
 </div>
 </div>
 
@@ -74,25 +74,25 @@
         <h3 style="padding-top: 8px; ">Flow Rate </h3></div>
         <div class="div-form">
           <div class="grid-container-flow-meters-flowrate" >
-          <div  *ngIf="gb_SA==0" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
-          <div  *ngIf="gb_SA==1" class="grid-container-column-1" ><div class="column1-led-red"></div></div>
+          <div  *ngIf="variable.gb_R_SURGE_ARRESTOR==0" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
+          <div  *ngIf="variable.gb_R_SURGE_ARRESTOR==1" class="grid-container-column-1" ><div class="column1-led-red"></div></div>
           <div class="grid-container-column-2">Surge Arrester:</div>
-          <div  *ngIf="gb_SA==0" class="grid-container-column-4" >Ok</div>
-          <div  *ngIf="gb_SA==1" class="grid-container-column-4" >Not Ok</div>
-          <div  *ngIf="gb_CHS==1" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
-          <div  *ngIf="gb_CHS==0" class="grid-container-column-1" ><div class="column1-led-red"></div></div>
+          <div  *ngIf="variable.gb_R_SURGE_ARRESTOR==0" class="grid-container-column-4" >Ok</div>
+          <div  *ngIf="variable.gb_R_SURGE_ARRESTOR==1" class="grid-container-column-4" >Not Ok</div>
+          <div  *ngIf="variable.gb_R_CHARGER_STATUS==1" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
+          <div  *ngIf="variable.gb_R_CHARGER_STATUS==0" class="grid-container-column-1" ><div class="column1-led-red"></div></div>
           <div class="grid-container-column-2">Charger Status:</div>
-          <div  *ngIf="gb_CHS==0" class="grid-container-column-4" >Not Ok</div>
-          <div  *ngIf="gb_CHS==1" class="grid-container-column-4" >Ok</div>
+          <div  *ngIf="variable.gb_R_CHARGER_STATUS==0" class="grid-container-column-4" >Not Ok</div>
+          <div  *ngIf="variable.gb_R_CHARGER_STATUS==1" class="grid-container-column-4" >Ok</div>
           <div class="grid-container-column-2"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-          <div class="grid-container-column-4">{{gb_FR}} Ml/d</div>
+          <div class="grid-container-column-4">{{variable.gb_R_FR}} Ml/d</div>
           <div class="grid-container-column-2">Total Flow Forward:</div>
-          <div class="grid-container-column-4">{{gb_FRF}} Ml</div>
+          <div class="grid-container-column-4">{{variable.gb_R_FRF}} Ml</div>
           <div class="grid-container-column-2">Total Flow Reverse:</div>
-          <div class="grid-container-column-4">{{gb_FRR}} Ml</div>
+          <div class="grid-container-column-4">{{variable.gb_R_FRR}} Ml</div>
           <div class="grid-container-column-2">Door:</div>
-          <div  *ngIf="gb_D==1" class="grid-container-column-4" >Closed</div>
-          <div  *ngIf="gb_D==0" class="grid-container-column-4" >Open</div>
+          <div  *ngIf="variable.gb_R_DOOR==1" class="grid-container-column-4" >Closed</div>
+          <div  *ngIf="variable.gb_R_DOOR==0" class="grid-container-column-4" >Open</div>
             </div>
           </div>
           </form>
@@ -122,7 +122,9 @@
   </div>
   </form>
   </section>
-<br>
+  <br>
+<mat-progress-bar style="background-color: black" *ngIf="isLoading==true" style  mode="indeterminate"></mat-progress-bar>
+      <br>
 <div id="main" echarts  [options]="options" class="chart" ></div>
 <br>
 <br>

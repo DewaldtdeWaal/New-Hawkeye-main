@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import { Common } from 'src/app/class/common'
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 
 export interface PeriodicElement{
@@ -31,7 +32,7 @@ export class Kareedouwk2Component implements OnInit {
 
 
 
-  theme: any
+  theme: any = localStorage.getItem("theme");
   DateArr: any;
   data:any = []
   generalfaulttable: PeriodicElement[] = [];
@@ -158,9 +159,11 @@ showKarkR:any;
 
   }
   total_flow_KARK_K2_array:any;
+  collectionName:any ="KARK_K2_TOTAL_FLOW"
+  trendTag:any = ["gw_kark_k2_total_flow"]
 
-  constructor(private GWS:GroundwaterService, public rs: ReportService,private ws: WebSocketService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-    this.theme = localStorage.getItem("theme");
+  constructor(private GWS:GroundwaterService, public rs: ReportService,private ws: WebSocketService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+    this.isLoading  = true;
     this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
       this.data =  result;
 
@@ -175,7 +178,7 @@ showKarkR:any;
     });
 
   }
-
+  isLoading: boolean = false;
   ngOnInit(){
 
     this.showKarkR = "false";
@@ -201,14 +204,7 @@ showKarkR:any;
       }
     }
 
-    var tagVals:any =[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
 
-
-    var updateTemp:any;
-
-    errorVals = this.recieve.recieveNonMVals(this.faultArr)
     this.intervalLoop = setInterval(() =>{
 
       this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
@@ -227,9 +223,9 @@ showKarkR:any;
 },60000)
 
 var trend: any = {};
-this.rs.Get_KARK_K2_TotalFlows().subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
   trend=data
-  this.total_flow_KARK_K2_array = trend.total_flow_KARK_K2_array;
+  this.total_flow_KARK_K2_array =  trend.TotalFlowArr[0];
 
   this.DateArr = trend.DateArr;
     var theme:any
@@ -276,22 +272,23 @@ this.rs.Get_KARK_K2_TotalFlows().subscribe(data => {
       }
     ]
     };
-
+    this.isLoading  = false;
 }
 )
 
   }
 
   onDateFilter(){
+    this.isLoading  = true;
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
     const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
   var trend :any;
 
-  this.rs.Get_KARK_K2_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-  this.total_flow_KARK_K2_array = trend.total_flow_KARK_K2_array;
+  this.total_flow_KARK_K2_array =  trend.TotalFlowArr[0];
   this.DateArr = trend.DateArr;
   var theme:any
   var tooltipBackground:any;
@@ -339,6 +336,7 @@ this.rs.Get_KARK_K2_TotalFlows().subscribe(data => {
     }
   ]
   };
+  this.isLoading  = false;
   })
 
 

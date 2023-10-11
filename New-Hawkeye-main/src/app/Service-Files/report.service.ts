@@ -84,12 +84,30 @@ Get_Wessels_Total_Feeds():Observable<any[]>{
 
 }
 
-Post_Wessels_Total_Feeds(array:any[]){
+async Post_Wessels_Total_Feeds(array:any[]){
+  try{
+  var returnVariable
+  var data;
   const obj: Wessels ={
 
     sites:array// [TF_wes1_fl_p1_feed_A_arr,  TF_wes1_fl_p1_feed_B_arr, TF_wes1_fl_p1_feed_C_arr]
   }
-  return this.http.post(this.su.serverURL+"/feedlots/wessels", obj )
+  //return this.http.post(this.su.serverURL+"/feedlots/wessels", obj )
+
+  returnVariable =  this.http.post(this.su.serverURL + "/feedlots/wessels", obj).toPromise().then(DATA =>{
+
+    data = DATA
+
+
+    return data;
+
+  })
+
+
+}catch(err){
+console.log(err)
+}
+return returnVariable
 
 }
 
@@ -404,23 +422,47 @@ GetTrend( sitesChosen: any[], newStart:string, newEnd:string, StringQuery:string
 
 
 
-GetTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ):Observable<any[]>{
+
+
+
+async GetTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ){
   const sites : Sites={
     sites: sitesChosen,
     startDate: newStart,
     endDate: newEnd
   };
-  return this.http.post<any[]>(this.su.trendURL+"/trends/reslevels/customrestrends",sites)
+
+  return  this.http.post(this.su.trendURL+"/trends/reslevels/customrestrends", sites).toPromise().then(data =>{
+    return data;
+  });
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-GetWesTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ):Observable<any[]>{
+// GetWesTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ):Observable<any[]>{
+//   const sites : Sites={
+//     sites: sitesChosen,
+//     startDate: newStart,
+//     endDate: newEnd
+//   };
+//   return this.http.post<any[]>(this.su.serverURL+"/westrends/values",sites)
+// }
+
+async GetWesTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ){
   const sites : Sites={
     sites: sitesChosen,
     startDate: newStart,
     endDate: newEnd
   };
-  return this.http.post<any[]>(this.su.serverURL+"/westrends/values",sites)
+  return  this.http.post(this.su.serverURL+"/westrends/values", sites).toPromise().then(data =>{
+
+
+
+
+    return data
+  });
+
 }
+
+
 
 Post_Trend_Sites( sitesChosen: any[], newStart:string, newEnd:string ):Observable<any[]>{
   const sites : Sites={

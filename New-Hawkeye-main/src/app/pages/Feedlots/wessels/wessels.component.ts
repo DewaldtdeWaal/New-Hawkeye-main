@@ -6,6 +6,7 @@ import { ReportService } from 'src/app/Service-Files/report.service';
 import { Subscription } from 'rxjs';
 import { Common } from 'src/app/class/common';
 import { FormControl, FormGroup } from '@angular/forms';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 const MaterialModule =[
   MatButtonModule
 ]
@@ -32,7 +33,12 @@ export class WesselsComponent implements OnInit {
 
   option: EChartsOption;
 
-
+  TF24_wes1_fl_feed_A_arr:any
+  TF24_wes1_fl_feed_B_arr:any
+  TF24_wes1_fl_feed_C_arr:any
+  TF31_wes1_fl_feed_A_arr:any
+  TF31_wes1_fl_feed_B_arr:any
+  TF31_wes1_fl_feed_C_arr:any
 
   DateArr: any;
   barOptions: EChartsOption;
@@ -43,71 +49,7 @@ export class WesselsComponent implements OnInit {
 public authListenerSubs!: Subscription;
 //#region Variables
 comms:any
-wes1_fl_ut:any;
-  wes1_fl_p1_feed_A: any;
-  wes1_fl_p1_feed_B: any;
-  wes1_fl_p1_feed_C: any;
-  wes1_fl_p2_feed_A: any;
-  wes1_fl_p2_feed_B: any;
-  wes1_fl_p2_feed_C: any;
-  wes1_fl_p3_feed_A: any;
-  wes1_fl_p3_feed_B: any;
-  wes1_fl_p3_feed_C: any;
-  wes1_fl_p4_feed_A: any;
-  wes1_fl_p4_feed_B: any;
-  wes1_fl_p4_feed_C: any;
-  wes1_fl_p5_feed_A: any;
-  wes1_fl_p5_feed_B: any;
-  wes1_fl_p5_feed_C: any;
-  wes1_fl_p6_feed_A: any;
-  wes1_fl_p6_feed_B: any;
-  wes1_fl_p6_feed_C: any;
-  wes1_fl_p7_feed_A: any;
-  wes1_fl_p7_feed_B: any;
-  wes1_fl_p8_feed_A: any;
-  wes1_fl_p7_feed_C: any;
-  wes1_fl_p8_feed_B: any;
-  wes1_fl_p8_feed_C: any;
-  wes1_fl_p12_feed_C: any;
-  wes1_fl_p12_feed_B: any;
-  wes1_fl_p9_feed_A: any;
-  wes1_fl_p9_feed_B: any;
-  wes1_fl_p11_feed_C: any;
-  wes1_fl_p10_feed_C: any;
-  wes1_fl_p10_feed_B: any;
-  wes1_fl_p9_feed_C: any;
-  wes1_fl_p10_feed_A: any;
-  wes1_fl_p11_feed_A: any;
-  wes1_fl_p12_feed_A: any;
-  wes1_fl_p11_feed_B: any;
-  wes1_f1_feed_A_total: any;
-  wes1_f1_feed_B_total: any;
-  wes1_f1_feed_C_total: any;
-  wes2_fl_p1_lambs: any;
-  wes2_fl_p2_lambs: any;
-  wes2_fl_p3_lambs: any;
-  wes2_fl_p4_lambs: any;
-  wes2_fl_p5_lambs: any;
-  wes2_fl_p6_lambs: any;
-  wes2_fl_p8_lambs: any;
-  wes2_fl_p7_lambs: any;
-  wes2_fl_p9_lambs: any;
-  wes2_fl_p11_lambs: any;
-  wes2_fl_p12_lambs: any;
-  wes2_fl_p10_lambs: any;
 
-
-
-  wes2_fl_sa_silo_levels: any;
-  wes2_fl_sb_silo_levels: any;
-  wes2_fl_sc_silo_levels: any;
-
-  TF24_wes1_fl_feed_A_arr: any;
-  TF24_wes1_fl_feed_B_arr: any;
-  TF24_wes1_fl_feed_C_arr: any;
-  TF31_wes1_fl_feed_A_arr: any;
-  TF31_wes1_fl_feed_B_arr: any;
-  TF31_wes1_fl_feed_C_arr: any;
   intervalLoop:any
   DateArr31: any[]=[];
   trend: any = {};
@@ -124,76 +66,164 @@ wes1_fl_ut:any;
 
 //#endregion
 
+ tagArr:any=[
+  "wes1_fl_ut",//0
+  "wes1_fl_p1_feed_A",//1
+  "wes1_fl_p1_feed_B",//2
+  "wes1_fl_p1_feed_C",//3
+  "wes1_fl_p2_feed_A",//4
+  "wes1_fl_p2_feed_B",//5
+  "wes1_fl_p2_feed_C",//6
+  "wes1_fl_p3_feed_A",//7
+  "wes1_fl_p3_feed_B",//8
+  "wes1_fl_p3_feed_C",//9
+  "wes1_fl_p4_feed_A",//10
+  "wes1_fl_p4_feed_B",//11
+  "wes1_fl_p4_feed_C",//12
+  "wes1_fl_p5_feed_A",//13
+  "wes1_fl_p5_feed_B",//14
+  "wes1_fl_p5_feed_C",//15
+  "wes1_fl_p6_feed_A",//16
+  "wes1_fl_p6_feed_B",//17
+  "wes1_fl_p6_feed_C",//18
+  "wes1_fl_p7_feed_A",//19
+  "wes1_fl_p7_feed_B",//20
+  "wes1_fl_p7_feed_C",//21
+  "wes1_fl_p8_feed_A",//22
+  "wes1_fl_p8_feed_B",//23
+  "wes1_fl_p8_feed_C",//24
+  "wes1_fl_p9_feed_A",//25
+  "wes1_fl_p9_feed_B",//26
+  "wes1_fl_p9_feed_C",//27
+  "wes1_fl_p10_feed_A",//28
+  "wes1_fl_p10_feed_B",//29
+  "wes1_fl_p10_feed_C",//30
+  "wes1_fl_p11_feed_A",//31
+  "wes1_fl_p11_feed_B",//32
+  "wes1_fl_p11_feed_C",//33
+  "wes1_fl_p12_feed_A",//34
+  "wes1_fl_p12_feed_B",//35
+  "wes1_fl_p12_feed_C",//36
+  "wes1_f1_feed_A_total",//37
+  "wes1_f1_feed_B_total",//38
+  "wes1_f1_feed_C_total",//39
+  "wes2_fl_p1_lambs",//40
+  "wes2_fl_p2_lambs",//41
+  "wes2_fl_p3_lambs",//42
+  "wes2_fl_p4_lambs",//43
+  "wes2_fl_p5_lambs",//44
+  "wes2_fl_p6_lambs",//45
+  "wes2_fl_p7_lambs",//46
+  "wes2_fl_p8_lambs",//47
+  "wes2_fl_p9_lambs",//48
+  "wes2_fl_p10_lambs",//49
+  "wes2_fl_p11_lambs",//50
+  "wes2_fl_p12_lambs",//51
+  "wes_fl_saft",//52
+  "wes_fl_sbft",//53
+  "wes_fl_scft",//54
+  "wes2_fl_pen1_feed_type",//55
+  "wes2_fl_pen2_feed_type",//56
+  "wes2_fl_pen3_feed_type",//57
+  "wes2_fl_pen4_feed_type",//58
+  "wes2_fl_pen5_feed_type",//59
+  "wes2_fl_pen6_feed_type",//60
+  "wes2_fl_pen7_feed_type",//61
+  "wes2_fl_pen8_feed_type",//62
+  "wes2_fl_pen9_feed_type",//63
+  "wes2_fl_pen10_feed_type",//64
+  "wes2_fl_pen11_feed_type",//65
+  "wes2_fl_pen12_feed_type",//66
+  "wes2_fl_sa_silo_levels",//67
+  "wes2_fl_sb_silo_levels",//68
+  "wes2_fl_sc_silo_levels",//69
+]
+
+variable :any= {
+  wes1_fl_ut:null,
+  wes1_fl_p1_feed_A:null,
+  wes1_fl_p1_feed_B:null,
+  wes1_fl_p1_feed_C:null,
+  wes1_fl_p2_feed_A:null,
+  wes1_fl_p2_feed_B:null,
+  wes1_fl_p2_feed_C:null,
+  wes1_fl_p3_feed_A:null,
+  wes1_fl_p3_feed_B:null,
+  wes1_fl_p3_feed_C:null,
+  wes1_fl_p4_feed_A:null,
+  wes1_fl_p4_feed_B:null,
+  wes1_fl_p4_feed_C:null,
+  wes1_fl_p5_feed_A:null,
+  wes1_fl_p5_feed_B:null,
+  wes1_fl_p5_feed_C:null,
+  wes1_fl_p6_feed_A:null,
+  wes1_fl_p6_feed_B:null,
+  wes1_fl_p6_feed_C:null,
+  wes1_fl_p7_feed_A:null,
+  wes1_fl_p7_feed_B:null,
+  wes1_fl_p7_feed_C:null,
+  wes1_fl_p8_feed_A:null,
+  wes1_fl_p8_feed_B:null,
+  wes1_fl_p8_feed_C:null,
+  wes1_fl_p9_feed_A:null,
+  wes1_fl_p9_feed_B:null,
+  wes1_fl_p9_feed_C:null,
+  wes1_fl_p10_feed_A:null,
+  wes1_fl_p10_feed_B:null,
+  wes1_fl_p10_feed_C:null,
+  wes1_fl_p11_feed_A:null,
+  wes1_fl_p11_feed_B:null,
+  wes1_fl_p11_feed_C:null,
+  wes1_fl_p12_feed_A:null,
+  wes1_fl_p12_feed_B:null,
+  wes1_fl_p12_feed_C:null,
+  wes1_f1_feed_A_total:null,
+  wes1_f1_feed_B_total:null,
+  wes1_f1_feed_C_total:null,
+  wes2_fl_p1_lambs:null,
+  wes2_fl_p2_lambs:null,
+  wes2_fl_p3_lambs:null,
+  wes2_fl_p4_lambs:null,
+  wes2_fl_p5_lambs:null,
+  wes2_fl_p6_lambs:null,
+  wes2_fl_p7_lambs:null,
+  wes2_fl_p8_lambs:null,
+  wes2_fl_p9_lambs:null,
+  wes2_fl_p10_lambs:null,
+  wes2_fl_p11_lambs:null,
+  wes2_fl_p12_lambs:null,
+  wes_fl_saft:null,
+  wes_fl_sbft:null,
+  wes_fl_scft:null,
+  wes2_fl_pen1_feed_type:null,
+  wes2_fl_pen2_feed_type:null,
+  wes2_fl_pen3_feed_type:null,
+  wes2_fl_pen4_feed_type:null,
+  wes2_fl_pen5_feed_type:null,
+  wes2_fl_pen6_feed_type:null,
+  wes2_fl_pen7_feed_type:null,
+  wes2_fl_pen8_feed_type:null,
+  wes2_fl_pen9_feed_type:null,
+  wes2_fl_pen10_feed_type:null,
+  wes2_fl_pen11_feed_type:null,
+  wes2_fl_pen12_feed_type:null,
+  wes2_fl_sa_silo_levels:null,
+  wes2_fl_sb_silo_levels:null,
+  wes2_fl_sc_silo_levels:null,
 
 
-  constructor(public rs: ReportService, private wes :WesselsService,public recieve:Common ) {
+}
 
-    this.wes.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.wes1_fl_ut=this.data.routingArray[0].wes1_fl_ut
-       this.wes1_fl_p1_feed_A=this.data.routingArray[0].wes1_fl_p1_feed_A;
-       this.wes1_fl_p1_feed_B=this.data.routingArray[0].wes1_fl_p1_feed_B;
-       this.wes1_fl_p1_feed_C=this.data.routingArray[0].wes1_fl_p1_feed_C;
-       this.wes1_fl_p2_feed_A=this.data.routingArray[0].wes1_fl_p2_feed_A;
-       this.wes1_fl_p2_feed_B=this.data.routingArray[0].wes1_fl_p2_feed_B;
-       this.wes1_fl_p2_feed_C=this.data.routingArray[0].wes1_fl_p2_feed_C;
-       this.wes1_fl_p3_feed_A=this.data.routingArray[0].wes1_fl_p3_feed_A;
-       this.wes1_fl_p3_feed_B=this.data.routingArray[0].wes1_fl_p3_feed_B;
-       this.wes1_fl_p3_feed_C=this.data.routingArray[0].wes1_fl_p3_feed_C;
-       this.wes1_fl_p4_feed_A=this.data.routingArray[0].wes1_fl_p4_feed_A;
-       this.wes1_fl_p4_feed_B=this.data.routingArray[0].wes1_fl_p4_feed_B;
-       this.wes1_fl_p4_feed_C=this.data.routingArray[0].wes1_fl_p4_feed_C;
-       this.wes1_fl_p5_feed_A=this.data.routingArray[0].wes1_fl_p5_feed_A;
-       this.wes1_fl_p5_feed_B=this.data.routingArray[0].wes1_fl_p5_feed_B;
-       this.wes1_fl_p5_feed_C=this.data.routingArray[0].wes1_fl_p5_feed_C;
-       this.wes1_fl_p6_feed_A=this.data.routingArray[0].wes1_fl_p6_feed_A;
-       this.wes1_fl_p6_feed_B=this.data.routingArray[0].wes1_fl_p6_feed_B;
-       this.wes1_fl_p6_feed_C=this.data.routingArray[0].wes1_fl_p6_feed_C;
-       this.wes1_fl_p7_feed_A=this.data.routingArray[0].wes1_fl_p7_feed_A;
-       this.wes1_fl_p7_feed_B=this.data.routingArray[0].wes1_fl_p7_feed_B;
-       this.wes1_fl_p7_feed_C=this.data.routingArray[0].wes1_fl_p7_feed_C;
-       this.wes1_fl_p8_feed_A=this.data.routingArray[0].wes1_fl_p8_feed_A;
-       this.wes1_fl_p8_feed_B=this.data.routingArray[0].wes1_fl_p8_feed_B;
-       this.wes1_fl_p8_feed_C=this.data.routingArray[0].wes1_fl_p8_feed_C;
-       this.wes1_fl_p9_feed_A=this.data.routingArray[0].wes1_fl_p9_feed_A;
-       this.wes1_fl_p9_feed_B=this.data.routingArray[0].wes1_fl_p9_feed_B;
-       this.wes1_fl_p9_feed_C=this.data.routingArray[0].wes1_fl_p9_feed_C;
-       this.wes1_fl_p10_feed_A=this.data.routingArray[0].wes1_fl_p10_feed_A;
-       this.wes1_fl_p10_feed_B=this.data.routingArray[0].wes1_fl_p10_feed_B;
-       this.wes1_fl_p10_feed_C=this.data.routingArray[0].wes1_fl_p10_feed_C;
-       this.wes1_fl_p11_feed_A=this.data.routingArray[0].wes1_fl_p11_feed_A;
-       this.wes1_fl_p11_feed_B=this.data.routingArray[0].wes1_fl_p11_feed_B;
-       this.wes1_fl_p11_feed_C=this.data.routingArray[0].wes1_fl_p11_feed_C;
-       this.wes1_fl_p12_feed_A=this.data.routingArray[0].wes1_fl_p12_feed_A;
-       this.wes1_fl_p12_feed_B=this.data.routingArray[0].wes1_fl_p12_feed_B;
-       this.wes1_fl_p12_feed_C=this.data.routingArray[0].wes1_fl_p12_feed_C;
-       this.wes2_fl_p1_lambs=this.data.routingArray[0].wes2_fl_p1_lambs;
-       this.wes2_fl_p2_lambs=this.data.routingArray[0].wes2_fl_p2_lambs;
-       this.wes2_fl_p3_lambs=this.data.routingArray[0].wes2_fl_p3_lambs;
-       this.wes2_fl_p4_lambs=this.data.routingArray[0].wes2_fl_p4_lambs;
-       this.wes2_fl_p5_lambs=this.data.routingArray[0].wes2_fl_p5_lambs;
-       this.wes2_fl_p6_lambs=this.data.routingArray[0].wes2_fl_p6_lambs;
-       this.wes2_fl_p7_lambs=this.data.routingArray[0].wes2_fl_p7_lambs;
-       this.wes2_fl_p8_lambs=this.data.routingArray[0].wes2_fl_p8_lambs;
-       this.wes2_fl_p9_lambs=this.data.routingArray[0].wes2_fl_p9_lambs;
-       this.wes2_fl_p10_lambs=this.data.routingArray[0].wes2_fl_p10_lambs;
-       this.wes2_fl_p11_lambs=this.data.routingArray[0].wes2_fl_p11_lambs;
-       this.wes2_fl_p12_lambs=this.data.routingArray[0].wes2_fl_p12_lambs;
-       this.wes2_fl_sa_silo_levels=this.data.routingArray[0].wes2_fl_sa_silo_levels;
-       this.wes2_fl_sb_silo_levels=this.data.routingArray[0].wes2_fl_sb_silo_levels;
-       this.wes2_fl_sc_silo_levels=this.data.routingArray[0].wes2_fl_sc_silo_levels;
-       this.wes1_f1_feed_A_total=this.data.routingArray[0].wes1_f1_feed_A_total;
-       this.wes1_f1_feed_B_total=this.data.routingArray[0].wes1_f1_feed_B_total;
-       this.wes1_f1_feed_C_total=this.data.routingArray[0].wes1_f1_feed_C_total;
+  constructor(public rs: ReportService,public recieve:Common,private pm:pagePostMethod, ) {
+    this.Event0();
 
 
+    this.pm.findPageData("wes1_fl", "FL_CurrentVals").then((result) => {
+      this.data =  result;
 
-       this.comms = Common.getLastUpdate(this.wes1_fl_ut);
-      }) ;
-
-      this.Event0();
-
+    Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    this.comms = Common.getLastUpdate(this.variable.wes1_fl_ut)
+    })
   }
 
 
@@ -211,7 +241,7 @@ wes1_fl_ut:any;
     var trend: any = {};
 
     var array = ['wes1_f1_feed_A_total','wes1_f1_feed_B_total','wes1_f1_feed_C_total']
-    this.rs.Post_Wessels_Total_Feeds(array).subscribe(data => {
+    this.rs.Post_Wessels_Total_Feeds(array).then(data => {
       trend=data
       this.TF24_wes1_fl_feed_A_arr = trend.TF24_wes1_fl_feed_A_arr;
       this.TF24_wes1_fl_feed_B_arr = trend.TF24_wes1_fl_feed_B_arr;
@@ -377,7 +407,7 @@ wes1_fl_ut:any;
    var array:any
    var trend: any = {};
    this.isLoading=true;
-   for(i = 1;  i < 13; i++)
+
  array = ["wes1_fl_p"+lot+"_feed_A","wes1_fl_p"+lot+"_feed_B","wes1_fl_p"+lot+"_feed_C","wes2_fl_p"+lot+"_lambs"]
  this.name24= "Feedlot "+lot+" (24 Hour Trend)"
  this.name32="Feedlot "+lot+" (31 Day Trend)"
@@ -387,7 +417,7 @@ wes1_fl_ut:any;
 
 
 
-  this.rs.Post_Wessels_Total_Feeds(array).subscribe((data: any) => {
+  this.rs.Post_Wessels_Total_Feeds(array).then((data) => {
     trend=data
     this.TF24_wes1_fl_feed_A_arr = trend.TF24_wes1_fl_feed_A_arr;
     this.TF24_wes1_fl_feed_B_arr = trend.TF24_wes1_fl_feed_B_arr;
@@ -554,7 +584,6 @@ wes1_fl_ut:any;
     this.showSilos=true;
 
 
-    for(i = 1;  i < 13; i++)
   array = ["wes2_fl_sa_silo_levels","wes2_fl_sb_silo_levels","wes2_fl_sc_silo_levels","wes2_fl_p1_lambs","wes_fl_saft","wes_fl_sbft","wes_fl_scft" ]//I'm Passing a field for Sheep.  The algoritm requires the 4th value be for sheep.
   this.name24="24 Hour Trend Data"
   this.name32="31 Day Trend Data"
@@ -563,7 +592,7 @@ wes1_fl_ut:any;
 
 
 
-   this.rs.Post_Wessels_Total_Feeds(array).subscribe((data: any) => {
+   this.rs.Post_Wessels_Total_Feeds(array).then((data: any) => {
      trend=data
      this.TF24_wes1_fl_feed_A_arr = trend.TF24_wes1_fl_feed_A_arr;
      this.TF24_wes1_fl_feed_B_arr = trend.TF24_wes1_fl_feed_B_arr;
@@ -857,66 +886,12 @@ wes1_fl_ut:any;
     var updateTemp:any;
    this.intervalLoop = setInterval(() =>{
 
-      updateTemp = tagVals[0];
-      if(updateTemp !==undefined){
-        this.wes1_fl_ut= tagVals[0];
-        this.wes1_fl_p1_feed_A=tagVals[1];
-        this.wes1_fl_p1_feed_B=tagVals[2];
-        this.wes1_fl_p1_feed_C=tagVals[3];
-        this.wes1_fl_p2_feed_A=tagVals[4];
-        this.wes1_fl_p2_feed_B=tagVals[5];
-        this.wes1_fl_p2_feed_C=tagVals[6];
-        this.wes1_fl_p3_feed_A=tagVals[7];
-        this.wes1_fl_p3_feed_B=tagVals[8];
-        this.wes1_fl_p3_feed_C=tagVals[9];
-        this.wes1_fl_p4_feed_A=tagVals[10];
-        this.wes1_fl_p4_feed_B=tagVals[11];
-        this.wes1_fl_p4_feed_C=tagVals[12];
-        this.wes1_fl_p5_feed_A=tagVals[13];
-        this.wes1_fl_p5_feed_B=tagVals[14];
-        this.wes1_fl_p5_feed_C=tagVals[15];
-        this.wes1_fl_p6_feed_A=tagVals[16];
-        this.wes1_fl_p6_feed_B=tagVals[17];
-        this.wes1_fl_p6_feed_C=tagVals[18];
-        this.wes1_fl_p7_feed_A=tagVals[19];
-        this.wes1_fl_p7_feed_B=tagVals[20];
-        this.wes1_fl_p7_feed_C=tagVals[21];
-        this.wes1_fl_p8_feed_A=tagVals[22];
-        this.wes1_fl_p8_feed_B=tagVals[23];
-        this.wes1_fl_p8_feed_C=tagVals[24];
-        this.wes1_fl_p9_feed_A=tagVals[25];
-        this.wes1_fl_p9_feed_B=tagVals[26];
-        this.wes1_fl_p9_feed_C=tagVals[27];
-        this.wes1_fl_p10_feed_A=tagVals[28];
-        this.wes1_fl_p10_feed_B=tagVals[29];
-        this.wes1_fl_p10_feed_C=tagVals[30];
-        this.wes1_fl_p11_feed_A=tagVals[31];
-        this.wes1_fl_p11_feed_B=tagVals[32];
-        this.wes1_fl_p11_feed_C=tagVals[33];
-        this.wes1_fl_p12_feed_A=tagVals[34];
-        this.wes1_fl_p12_feed_B=tagVals[35];
-        this.wes1_fl_p12_feed_C=tagVals[36];
-        this.wes1_f1_feed_A_total=tagVals[37]
-        this.wes1_f1_feed_B_total=tagVals[38]
-        this.wes1_f1_feed_C_total=tagVals[39]
-        this.wes2_fl_p1_lambs=tagVals[40]
-        this.wes2_fl_p2_lambs=tagVals[41]
-        this.wes2_fl_p3_lambs=tagVals[42]
-        this.wes2_fl_p4_lambs=tagVals[43]
-        this.wes2_fl_p5_lambs=tagVals[44]
-        this.wes2_fl_p6_lambs=tagVals[45]
-        this.wes2_fl_p7_lambs=tagVals[46]
-        this.wes2_fl_p8_lambs=tagVals[47]
-        this.wes2_fl_p9_lambs=tagVals[48]
-        this.wes2_fl_p10_lambs=tagVals[49]
-        this.wes2_fl_p11_lambs=tagVals[50]
-        this.wes2_fl_p12_lambs=tagVals[51]
-        this.wes2_fl_sa_silo_levels=tagVals[67]
-        this.wes2_fl_sb_silo_levels=tagVals[68]
-        this.wes2_fl_sc_silo_levels=tagVals[69]
+    this.pm.findPageData("wes1_fl", "FL_CurrentVals").then((result) => {
+      this.data =  result;
 
-        }
-        this.comms = Common.getLastUpdate(this.wes1_fl_ut)
+    Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    this.comms = Common.getLastUpdate(this.variable.wes1_fl_ut)
+    })
  },60000)
   }
   ngOnDestroy(){

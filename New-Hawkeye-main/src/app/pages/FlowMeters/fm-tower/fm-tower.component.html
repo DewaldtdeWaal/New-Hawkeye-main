@@ -21,7 +21,7 @@
          <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
          </div>
       <div class="grid-container-communicationStatus-column1">Last Update:</div>
-      <div class="grid-container-communicationStatus-column3">{{ fmt_FM_UT }}</div>
+      <div class="grid-container-communicationStatus-column3">{{ variable.fmt_FM_UT }}</div>
 
 
       </div>
@@ -39,21 +39,21 @@
             </div>
             <div class="div-form">
               <div class="grid-container-general">
-                <div *ngIf="fmt_FM_LOW_B=='0'" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
-                <div *ngIf="fmt_FM_LOW_B=='1'" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
+                <div *ngIf="variable.fmt_FM_LOW_B=='0'" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
+                <div *ngIf="variable.fmt_FM_LOW_B=='1'" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
 
 
 
                 <div class="grid-pumpstation-column2-right-align">Battery Status:</div>
                 <div class="grid-pumpstation-column4-left-align">
-                  <div *ngIf="fmt_FM_LOW_B=='0'" >OK</div>
-                <div *ngIf="fmt_FM_LOW_B=='1'"  >NOT OK</div></div>
+                  <div *ngIf="variable.fmt_FM_LOW_B=='0'" >OK</div>
+                <div *ngIf="variable.fmt_FM_LOW_B=='1'"  >NOT OK</div></div>
                 <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-                <div class="grid-pumpstation-column4-left-align">{{fmt_FM_FR}} Ml/d</div>
+                <div class="grid-pumpstation-column4-left-align">{{variable.fmt_FM_FR}} Ml/d</div>
                 <div class="grid-pumpstation-column2-right-align">Total Flow:</div>
-                <div class="grid-pumpstation-column4-left-align">{{fmt_FM_TF}} Ml</div>
+                <div class="grid-pumpstation-column4-left-align">{{variable.fmt_FM_TF}} Ml</div>
                 <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/bar.png" class="img3"></div>
-                <div class="grid-pumpstation-column4-left-align">{{fmt_FM_PRESS}} bar</div>
+                <div class="grid-pumpstation-column4-left-align">{{variable.fmt_FM_PRESS}} bar</div>
                 <div class="grid-pumpstation-column2-right-align">&nbsp;</div><div class="grid-pumpstation-column4-left-align">&nbsp;</div>
 
 
@@ -75,13 +75,13 @@
                 </div>
                 <div class="div-form">
                   <div class="grid-container-general">
-                    <div *ngIf="fmt_FM_ALM_ARMD=='1'" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
-                    <div *ngIf="fmt_FM_ALM_ARMD=='0'" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
+                    <div *ngIf="variable.fmt_FM_ALM_ARMD=='1'" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
+                    <div *ngIf="variable.fmt_FM_ALM_ARMD=='0'" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
 
                     <div class="grid-pumpstation-column2-right-align">Alarm Armed:</div>
                     <div class="grid-pumpstation-column4-left-align">
-                   <div *ngIf="fmt_FM_ALM_ARMD=='1'" >Yes</div>
-                    <div *ngIf="fmt_FM_ALM_ARMD=='0'" >No</div></div>
+                   <div *ngIf="variable.fmt_FM_ALM_ARMD=='1'" >Yes</div>
+                    <div *ngIf="variable.fmt_FM_ALM_ARMD=='0'" >No</div></div>
 
 
 
@@ -117,25 +117,25 @@
             </div>
             <div class="div-form">
               <div class="grid-container-pepper-spray">
-                <div *ngIf="fmt_FM_PEPPER_S_ARMD=='1'" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
-                <div *ngIf="fmt_FM_PEPPER_S_ARMD=='0'" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
+                <div *ngIf="variable.fmt_FM_PEPPER_S_ARMD=='1'" class="grid-column-1" ><div class="grid-container-general-img-green"></div></div>
+                <div *ngIf="variable.fmt_FM_PEPPER_S_ARMD=='0'" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
 
                 <div class="grid-pumpstation-column2-right-align">Pepper Spray Armed:</div>
                 <div class="grid-pumpstation-column4-left-align">
-                <div *ngIf="fmt_FM_PEPPER_S_ARMD=='1'">Yes</div>
-                <div *ngIf="fmt_FM_PEPPER_S_ARMD=='0'" >No</div></div>
+                <div *ngIf="variable.fmt_FM_PEPPER_S_ARMD=='1'">Yes</div>
+                <div *ngIf="variable.fmt_FM_PEPPER_S_ARMD=='0'" >No</div></div>
 
-                <div *ngIf="fmt_FM_PEPPER_S_ALM==0" class="grid-column-1" ><div class="grid-container-general-img-grey"></div></div>
-                <div *ngIf="fmt_FM_PEPPER_S_ALM==1" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
+                <div *ngIf="variable.fmt_FM_PEPPER_S_ALM==0" class="grid-column-1" ><div class="grid-container-general-img-grey"></div></div>
+                <div *ngIf="variable.fmt_FM_PEPPER_S_ALM==1" class="grid-column-1"  ><div class="grid-container-general-img-red"></div></div>
 
                 <div class="grid-pumpstation-column2-right-align">Pepper Spray Alarm:</div>
                 <div class="grid-pumpstation-column4-left-align">
-                  <div *ngIf="fmt_FM_PEPPER_S_ALM=='1'" class="grid-column-4" >Yes</div>
-                  <div *ngIf="fmt_FM_PEPPER_S_ALM=='0'" class="grid-column-4">No</div></div>
+                  <div *ngIf="variable.fmt_FM_PEPPER_S_ALM=='1'" class="grid-column-4" >Yes</div>
+                  <div *ngIf="variable.fmt_FM_PEPPER_S_ALM=='0'" class="grid-column-4">No</div></div>
                 <div class="grid-pumpstation-column2-right-align">Gas Left:</div>
-                <div class="grid-pumpstation-column4-left-align">{{fmt_FM_GAS_L}} Seconds</div>
+                <div class="grid-pumpstation-column4-left-align">{{variable.fmt_FM_GAS_L}} Seconds</div>
                 <div class="grid-pumpstation-column2-right-align">Battery Voltage:</div>
-                <div class="grid-pumpstation-column4-left-align">{{fmt_FM_BATTERY_V}} V</div>
+                <div class="grid-pumpstation-column4-left-align">{{variable.fmt_FM_BATTERY_V}} V</div>
                 <div class="grid-pumpstation-column2-right-align">&nbsp;</div>
                 <div class="grid-pumpstation-column4-left-align">&nbsp;</div>
 
@@ -174,7 +174,9 @@
   </div>
   </form>
   </section>
-<br>
+  <br>
+  <mat-progress-bar style="background-color: black" *ngIf="isLoading==true" style  mode="indeterminate"></mat-progress-bar>
+  <br>
 <div id="main" echarts  [options]="options" class="chart" ></div>
 <br>
 <br>

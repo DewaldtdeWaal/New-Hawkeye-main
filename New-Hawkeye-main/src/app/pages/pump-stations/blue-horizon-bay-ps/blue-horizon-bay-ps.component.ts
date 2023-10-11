@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 
 import {Common} from 'src/app/class/common'
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
 export interface PeriodicElement {
   alarm: string;
@@ -50,7 +51,7 @@ export class BlueHorizonBayPSComponent implements OnInit {
   dataSourceP1:any;
   dataSourceP2:any;
   dataSourceG:any;
-  theme:any
+  theme:any = localStorage.getItem("theme");
   comms: string;
   data: any=[];
   intervalLoop: any
@@ -58,92 +59,99 @@ export class BlueHorizonBayPSComponent implements OnInit {
 
 
   bhb_P1_STATUS: any;
-
-  bhb_P1_STARTUP_FAULT: any= {
+  faultVariable:any={
+  bhb_P1_STARTUP_FAULT:  {
     value: null,
     alarm:"Fault",
     description:"Startup Fault",
     alarmTrip: 1
- };
+ },
 
-  bhb_P1_SOFT_S_FAULT: any= {
+  bhb_P1_SOFT_S_FAULT: {
     value: null,
     alarm:"Fault",
     description:"Soft Start Fault",
     alarmTrip: 1
- };
-  bhb_P1_NO_FLOW: any= {
+ },
+  bhb_P1_NO_FLOW:  {
     value: null,
     alarm:"Fault",
     description:"No Flow Fault",
     alarmTrip: 1
- };
+ },
 
 
-  bhb_P2_SOFT_S_FAULT: any= {
+  bhb_P2_SOFT_S_FAULT:  {
     value: null,
     alarm:"Fault",
     description:"Soft Start Fault",
     alarmTrip: 1
- };
-  bhb_P2_STARTUP_FAULT: any= {
+ },
+  bhb_P2_STARTUP_FAULT: {
     value: null,
     alarm:"Fault",
     description:"Startup Fault",
     alarmTrip: 1
- };
-  bhb_P2_NO_FLOW: any= {
+ },
+  bhb_P2_NO_FLOW:  {
     value: null,
     alarm:"Fault",
     description:"No Flow Fault",
     alarmTrip: 1
- };
-
-
-  constructor( private webSocketService: WebSocketService, private us: UsersService, private buff:blueHorizonBayComponent ,private userService: UsersService,private authService: AuthService,public recieve:Common  ) {
-    this.buff.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-
-      this.bhb_PS_UT=this.data.routingArray[0].bhb_PS_UT
-      this.comms = Common.getLastUpdate(this.bhb_PS_UT)
-      this.bhb_G_TELE_CONTROL=this.data.routingArray[0].bhb_G_TELE_CONTROL
-      this.bhb_G_LOW_LVL_FLOAT = this.data.routingArray[0].bhb_G_LOW_LVL_FLOAT
-      this.bhb_P1_RH = this.data.routingArray[0].bhb_P1_RH
-      this.bhb_P1_MODE = this.data.routingArray[0].bhb_P1_MODE
-      this.bhb_P1_STATUS = this.data.routingArray[0].bhb_P1_STATUS
-      this.bhb_P1_SOFT_S_FAULT.value = this.data.routingArray[0].bhb_P1_SOFT_S_FAULT
-      this.bhb_P1_STARTUP_FAULT.value = this.data.routingArray[0].bhb_P1_STARTUP_FAULT
-      this.bhb_P1_NO_FLOW.value = this.data.routingArray[0].bhb_P1_NO_FLOW
-      this.bhb_P2_RH = this.data.routingArray[0].bhb_P2_RH
-      this.bhb_P2_MODE = this.data.routingArray[0].bhb_P2_MODE
-      this.bhb_P2_STATUS = this.data.routingArray[0].bhb_P2_STATUS
-      this.bhb_P2_SOFT_S_FAULT.value = this.data.routingArray[0].bhb_P2_SOFT_S_FAULT
-      this.bhb_P2_STARTUP_FAULT.value = this.data.routingArray[0].bhb_P2_STARTUP_FAULT
-      this.bhb_P2_NO_FLOW.value = this.data.routingArray[0].bhb_P2_NO_FLOW
-    });
-
-    this.theme = localStorage.getItem("theme");
-
-
-
-    setTimeout(() => {
-
-      var alarm1: any [] = [this.bhb_P1_SOFT_S_FAULT,this.bhb_P1_STARTUP_FAULT,this.bhb_P1_NO_FLOW]
-      var alarm2: any [] = [this.bhb_P2_SOFT_S_FAULT,this.bhb_P2_STARTUP_FAULT,this.bhb_P2_NO_FLOW]
-
-      this.theme = localStorage.getItem("theme");
-
-
-      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+ }
+  }
+  tagArr:any=[
+    "bhb_PS_UT",
+    "bhb_G_TELE_CONTROL",
+    "bhb_G_LOW_LVL_FLOAT",
+    "bhb_P1_RH",
+    "bhb_P1_MODE",
+    "bhb_P1_STATUS",
+    "bhb_P2_RH",
+    "bhb_P2_MODE",
+    "bhb_P2_STATUS",
+]
+variable :any= {
+  bhb_PS_UT:null,
+bhb_G_TELE_CONTROL:null,
+bhb_G_LOW_LVL_FLOAT:null,
+bhb_P1_RH:null,
+bhb_P1_MODE:null,
+bhb_P1_STATUS:null,
+bhb_P2_RH:null,
+bhb_P2_MODE:null,
+bhb_P2_STATUS:null,
+}
+faultArr:any=[
+  "bhb_P1_SOFT_S_FAULT",
+"bhb_P1_STARTUP_FAULT",
+"bhb_P1_NO_FLOW",
+"bhb_P2_SOFT_S_FAULT",
+"bhb_P2_STARTUP_FAULT",
+"bhb_P2_NO_FLOW",
+]
+  constructor( private pm:pagePostMethod,private webSocketService: WebSocketService, private us: UsersService, private buff:blueHorizonBayComponent ,private userService: UsersService,private authService: AuthService,public recieve:Common  ) {
 
 
 
-    },1000)
+    this.pm.findPageData("nmbm_bh_ps", "PS_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+
+     this.comms = Common.getLastUpdate(this.variable.bhb_PS_UT)
+     var alarm1: any [] = [this.faultVariable.bhb_P1_SOFT_S_FAULT,this.faultVariable.bhb_P1_STARTUP_FAULT,this.faultVariable.bhb_P1_NO_FLOW]
+     var alarm2: any [] = [this.faultVariable.bhb_P2_SOFT_S_FAULT,this.faultVariable.bhb_P2_STARTUP_FAULT,this.faultVariable.bhb_P2_NO_FLOW]
 
 
 
+
+     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+     this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+
+
+    })
 
 
 
@@ -177,64 +185,28 @@ export class BlueHorizonBayPSComponent implements OnInit {
     }
 
 
-    var tagVals:any =[]
-    var tagArr=[
-      "bhb_ps_ut",//0
-      "bhb_g_tele_control",//1
-      "bhb_g_low_lvl_float",//2
-      "bhb_p1_rh",//3
-      "bhb_p1_mode",//4
-      "bhb_p1_status",//5
-      "bhb_p1_startup_fault",//6
-      "bhb_p1_soft_s_fault",//7
-      "bhb_p1_no_flow",//8
-      "bhb_p2_rh",//9
-      "bhb_p2_mode",//10
-      "bhb_p2_status",//11
-      "bhb_p2_startup_fault",//12
-      "bhb_p2_soft_s_fault",//13
-      "bhb_p2_no_flow",//14
 
-
-
-
-    ]
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
-  console.log(tagArr)
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      if(updateTemp !==undefined){
-        this.bhb_PS_UT=tagVals[0]
-
-        this.bhb_G_TELE_CONTROL=tagVals[1]
-        this.bhb_G_LOW_LVL_FLOAT=tagVals[2]
-        this.bhb_P1_RH=tagVals[3]
-        this.bhb_P1_MODE=tagVals[4]
-        this.bhb_P1_STATUS=tagVals[5]
-        this.bhb_P1_SOFT_S_FAULT.value=tagVals[6]
-        this.bhb_P1_STARTUP_FAULT.value=tagVals[7]
-        this.bhb_P1_NO_FLOW.value=tagVals[8]
-        this.bhb_P2_RH=tagVals[9]
-        this.bhb_P2_MODE=tagVals[10]
-        this.bhb_P2_STATUS=tagVals[11]
-        this.bhb_P2_SOFT_S_FAULT.value=tagVals[12]
-        this.bhb_P2_STARTUP_FAULT.value=tagVals[13]
-        this.bhb_P2_NO_FLOW.value=tagVals[14]
-      }
 
 
-      this.comms = Common.getLastUpdate(this.bhb_PS_UT)
+      this.pm.findPageData("nmbm_bf_ps", "PS_CurrentVals").then((result) => {
+        this.data =  result;
 
-      var alarm1: any [] = [this.bhb_P1_SOFT_S_FAULT,this.bhb_P1_STARTUP_FAULT,this.bhb_P1_NO_FLOW]
-      var alarm2: any [] = [this.bhb_P2_SOFT_S_FAULT,this.bhb_P2_STARTUP_FAULT,this.bhb_P2_NO_FLOW]
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+
+       this.comms = Common.getLastUpdate(this.variable.bf_PS_UT)
+       var alarm1: any [] = [this.faultVariable.bhb_P1_SOFT_S_FAULT,this.faultVariable.bhb_P1_STARTUP_FAULT,this.faultVariable.bhb_P1_NO_FLOW]
+       var alarm2: any [] = [this.faultVariable.bhb_P2_SOFT_S_FAULT,this.faultVariable.bhb_P2_STARTUP_FAULT,this.faultVariable.bhb_P2_NO_FLOW]
 
 
 
-      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+
+       this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+       this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
 
 
+      })
 
 
 

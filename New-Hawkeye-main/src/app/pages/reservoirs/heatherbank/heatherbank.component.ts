@@ -22,19 +22,35 @@ export class HeatherbankComponent implements OnInit {
   userSites:string[];
   showNavigationButton: string;
 
+  tagArr:any=[
+    "hb_R_LVL",
+"hb_R_UT",
+  ]
 
-
-
+  variable :any= {
+    hb_R_LVL:null,
+hb_R_UT:null,
+  }
   constructor(private  hbs:HeatherBankService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
 
 
-    this.hbs.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.hb_RL = this.data.routingArray[0].hb_R_LVL
-       this.hb_UT = this.data.routingArray[0].hb_R_UT
-       this.comms = Common.getLastUpdate(this.hb_UT)
-    })
+    // this.hbs.GetSiteValues()
+    // .subscribe(rsp => {
+    //    this.data = rsp;
+    //    this.hb_RL = this.data.routingArray[0].hb_R_LVL
+    //    this.hb_UT = this.data.routingArray[0].hb_R_UT
+    //    this.comms = Common.getLastUpdate(this.hb_UT)
+    // })
+
+    this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+     this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
+    });
 
 
 
@@ -60,25 +76,16 @@ export class HeatherbankComponent implements OnInit {
     }
 
 
-
-
-
-    var tagVals:any=[]
-    var tagArr =[
-      'hb_ut',//0
-      'hb_rl',//1
-    ]
-
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
-
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      if(updateTemp !== undefined){
-        this.hb_UT =  tagVals[0];
-        this.hb_RL =  tagVals[1];
-      }
-      this.comms = Common.getLastUpdate(this.hb_UT)
+      this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").then((result) => {
+        this.data =  result;
+
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+       this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
+      });
     },60000);
 
 

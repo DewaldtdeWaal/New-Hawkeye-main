@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -44,7 +45,15 @@ export class StormsriverComponent implements OnInit {
   ps_storms_qp1_status:null,
   }
 
-  theme:any
+displayedColumns :string[]= ['alarm', 'description'];
+
+generalfaulttabledatasource:any;
+gorgepump1faulttabledatasource:any;
+gorgepump2faulttabledatasource:any;
+quarrypump1faulttabledatasource:any;
+quarrypump2faulttabledatasource:any;
+
+  theme:any = localStorage.getItem("theme");
   data:any = []
   faultVariable:any={
   ps_storms_emergency_stop:  {
@@ -219,43 +228,31 @@ export class StormsriverComponent implements OnInit {
     "ps_storms_voltage_ok",//31
 
   ]
-  constructor(private storms:StormsrivierComponent,private authService: AuthService,public recieve:Common ) {
-    this.storms.GetSiteValues()
-    .subscribe(rsp=> {
-      this.data = rsp;
-    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-   this.variable.comms = Common.getLastUpdate(this.variable.ps_storm_UT)
-   this.faultVariable =   Common.getFaultRouteData(this.faultArr,this.faultVariable,this.data.routingArray)
+  constructor(private storms:StormsrivierComponent,private authService: AuthService,public recieve:Common , private pm:pagePostMethod) {
 
 
-    })
 
-    this.theme = localStorage.getItem("theme");
-    setTimeout(() => {
+    this.pm.findPageData("storms_ps", "PS_CurrentVals").then((result) => {
+      this.data =  result;
+      this.theme = localStorage.getItem("theme");
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
+     this.variable.comms = Common.getLastUpdate(this.variable.ps_storm_UT)
+     var alarmG: any [] = [this.faultVariable.ps_storms_emergency_stop,   this.faultVariable.ps_storms_charger_fault,this.faultVariable.ps_storms_flood_warning    ,this.faultVariable.ps_storms_voltage_ok,this.faultVariable.ps_storms_wtw_comms]
+     var alarm1: any [] = [this.faultVariable.ps_storms_gp1_fault_general,this.faultVariable.ps_storms_gp1_vsd_fault,this.faultVariable.ps_storms_gp1_startup_fault,this.faultVariable.ps_storms_gp1_no_flow_fault]
+     var alarm2: any [] = [this.faultVariable.ps_storms_gp2_fault_general,this.faultVariable.ps_storms_gp2_vsd_fault,this.faultVariable.ps_storms_gp2_startup_fault,this.faultVariable.ps_storms_gp2_no_flow_fault]
+     var alarm3: any [] = [this.faultVariable.ps_storms_qp1_fault_general,this.faultVariable.ps_storms_qp1_vsd_fault,this.faultVariable.ps_storms_qp1_startup_fault,this.faultVariable.ps_storms_qp1_no_flow_fault]
+     var alarm4: any [] = [this.faultVariable.ps_storms_qp2_fault_general,this.faultVariable.ps_storms_qp2_vsd_fault,this.faultVariable.ps_storms_qp2_no_flow_fault,this.faultVariable.ps_storms_qp2_startup_fault]
 
-      var alarmG: any [] = [this.faultVariable.ps_storms_emergency_stop,   this.faultVariable.ps_storms_charger_fault,this.faultVariable.ps_storms_flood_warning    ,this.faultVariable.ps_storms_voltage_ok,this.faultVariable.ps_storms_wtw_comms]
-      var alarm1: any [] = [this.faultVariable.ps_storms_gp1_fault_general,this.faultVariable.ps_storms_gp1_vsd_fault,this.faultVariable.ps_storms_gp1_startup_fault,this.faultVariable.ps_storms_gp1_no_flow_fault]
-      var alarm2: any [] = [this.faultVariable.ps_storms_gp2_fault_general,this.faultVariable.ps_storms_gp2_vsd_fault,this.faultVariable.ps_storms_gp2_startup_fault,this.faultVariable.ps_storms_gp2_no_flow_fault]
-      var alarm3: any [] = [this.faultVariable.ps_storms_qp1_fault_general,this.faultVariable.ps_storms_qp1_vsd_fault,this.faultVariable.ps_storms_qp1_startup_fault,this.faultVariable.ps_storms_qp1_no_flow_fault]
-      var alarm4: any [] = [this.faultVariable.ps_storms_qp2_fault_general,this.faultVariable.ps_storms_qp2_vsd_fault,this.faultVariable.ps_storms_qp2_no_flow_fault,this.faultVariable.ps_storms_qp2_startup_fault]
-
-      this.generalfaulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarmG))
-      this.gorgepump1faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.gorgepump2faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm2))
-      this.quarrypump1faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm3))
-      this.quarrypump2faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm4))
-
-    },1000)
+     this.generalfaulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarmG))
+     this.gorgepump1faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
+     this.gorgepump2faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm2))
+     this.quarrypump1faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm3))
+     this.quarrypump2faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm4))
+    });
 
   }
-  displayedColumns :string[]= ['alarm', 'description'];
-
-  generalfaulttabledatasource:any;
-  gorgepump1faulttabledatasource:any;
-  gorgepump2faulttabledatasource:any;
-  quarrypump1faulttabledatasource:any;
-  quarrypump2faulttabledatasource:any;
 
 
 

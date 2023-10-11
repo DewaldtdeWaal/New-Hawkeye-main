@@ -13,6 +13,7 @@ import {Common} from 'src/app/class/common';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 export interface PeriodicElement{
   alarm: string;
@@ -32,7 +33,7 @@ export class KruisfonteinGW14Component implements OnInit {
   total_flow_1_array:any
   generalfaultdatasource :any
   comms:any
-  theme:any;
+  theme:any= localStorage.getItem("theme");
   status:any;
   displayedColumns :string[]= ['alarm', 'description'];
   showGW12:any
@@ -152,14 +153,13 @@ gw_klm_kruis14_res_ful:{
   tableDataPump1: PeriodicElement[] = [];
   dataSourceP1:any = new MatTableDataSource(this.tableDataPump1);
   public authListenerSubs!: Subscription;
-  constructor(private ls:ListeningService, private ws:WebSocketService,  public rs: ReportService,public recieve:Common,private authService: AuthService,private GWS:kruisfonteinRouting ,private pm:pagePostMethod)  {
-    this.theme = localStorage.getItem("theme");
+  constructor(private ls:ListeningService, private ws:WebSocketService,  public rs: ReportService,public recieve:Common,private authService: AuthService,private GWS:kruisfonteinRouting ,private pm:pagePostMethod,private pt: PostTrend)  {
+
     this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
       this.data =  result;
 
       console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-     this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.variable.comms = Common.getLastUpdate(this.variable.gw_klm_kruis14_UT)
      var alarm1: any [] = [this.faultVariable.gw_klm_kruis14_bar_fault,this.faultVariable.gw_klm_kruis14_lvl_fault,this.faultVariable.gw_klm_kruis14_flow_fault,this.faultVariable.gw_klm_kruis14_voltage_not_okay,this.faultVariable.gw_klm_kruis14_emergency_stop,this.faultVariable.gw_klm_kruis14_vsd_fault,this.faultVariable.gw_klm_kruis14_res_communication_fault,this.faultVariable.gw_klm_kruis14_res_ful,]
@@ -168,7 +168,8 @@ gw_klm_kruis14_res_ful:{
 
 
    }
-
+   collectionName:any ="KLM_KRUIS14_TF"
+   trendTag:any = ["gw_klm_kruis14_TF"]
   ngOnInit() {
 
     this.userSites = this.authService.getUserSites();
@@ -214,13 +215,12 @@ gw_klm_kruis14_res_ful:{
       });
     },60000 )
     var trend: any = {};
-    this.rs.Get_Kruis14_TotalFlows().subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.total_flow_1_array = trend.total_flow_1_array;
+      this.total_flow_1_array =  trend.TotalFlowArr[0];
 
       this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any
+
 
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
@@ -231,7 +231,7 @@ gw_klm_kruis14_res_ful:{
   }
 
 
-
+  isLoading: boolean = false;
 
   onDateFilter(){
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
@@ -242,10 +242,9 @@ gw_klm_kruis14_res_ful:{
   this.rs.Get_Kruis14_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
   trend=data
 
-  this.total_flow_1_array = trend.total_flow_1_array;
+  this.total_flow_1_array =  trend.TotalFlowArr[0];
   this.DateArr = trend.DateArr;
-  var theme:any
-  var tooltipBackground:any;
+
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
   })

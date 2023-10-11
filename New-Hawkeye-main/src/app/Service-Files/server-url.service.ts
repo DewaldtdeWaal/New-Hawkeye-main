@@ -1,4 +1,3 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: "root" })
@@ -14,7 +13,7 @@ data: any=[];
   public trendURL:any
 
 
-constructor(private http: HttpClient){
+constructor(){
 
   this.NUM = 2
 
@@ -30,6 +29,7 @@ constructor(private http: HttpClient){
    this.wsNMBMURL ="172.105.70.85";
    this.wsURL= "ws://mac-creations.co.za";
    this.guardURL = "hawkeye";  //Cloud Server - hawkeye
+ //  this.trendURL = "http://mac-creations.co.za:3000";
    this.trendURL = "http://155.93.192.206:3000";
  }
 

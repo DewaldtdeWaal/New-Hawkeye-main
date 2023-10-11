@@ -51,14 +51,12 @@ export class OliphantskopComponent implements OnInit {
   title1:string = "Communication";
   matrix:any = "This is the result"
 
-  theme:any;
+  theme:any= localStorage.getItem("theme");
 
 
   jsonFile:string;
 
   constructor(public recieve:Common,public pbm:pageBuilderMethod, public pb:pageBuilder,private pm:pagePostMethod ) {
-    this.theme = localStorage.getItem("theme");
-
 
     this.fillPage()
 

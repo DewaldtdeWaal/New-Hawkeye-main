@@ -8,6 +8,8 @@ import { UsersService } from 'src/app/Service-Files/users.service';
 import { ListeningService } from 'src/app/listening.service';
 import {CoegaIDZT} from 'src/app/Service-Files/FPT/coegaidzt.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 
 
@@ -58,119 +60,118 @@ export class CoegaIDZTComponent implements OnInit {
   DateArr: any[]=[];
   data: any=[];
 
+  variable:any = {
+        fpt_cidzt_ut:null,
+        fpt_cidzt_surge_arrester_fault:null,
+        fpt_cidzt_charger_fault:null,
+        fpt_cidzt_panel_door:null,
+        fpt_cidzt_battery:null,
+        fpt_cidzt_idz_fm_s:null,
+        fpt_cidzt_mw_fm_s:null,
+        fpt_cidzt_idz_fr:null,
+        fpt_cidzt_idz_tf:null,
+        fpt_cidzt_mw_fr:null,
+        fpt_cidzt_mw_tf:null,
+  }
 
-  fpt_cidzt_surge_arrester_fault:any= {
+  faultVariable:any={
+  fpt_cidzt_surge_arrester_fault: {
     value: null,
   alarm:"Fault",
   description:"Surge Arrester",
     alarmTrip: 1
-  };
-  fpt_cidzt_charger_fault:any= {
+  },
+  fpt_cidzt_charger_fault: {
     value: null,
   alarm:"Fault",
   description:"Charger Fault",
     alarmTrip: 0
-  };
-  constructor(private CIDZT:CoegaIDZT ,private ls:ListeningService, private ws: WebSocketService, private us:UsersService,public rs: ReportService, public recieve:Common ) {
+  }
+}
+
+  tagArr:any = [
+    'fpt_cidzt_ut',//0
+
+
+    'fpt_cidzt_panel_door',//3
+    'fpt_cidzt_battery',//4
+    'fpt_cidzt_idz_fm_s',//5
+    'fpt_cidzt_mw_fm_s',//6
+    'fpt_cidzt_idz_fr',//7
+    'fpt_cidzt_idz_tf',//8
+    'fpt_cidzt_mw_fr',//9
+    'fpt_cidzt_mw_tf',//10
+    "panel_door_stat",
+    "battery_stat",
+  ]
+
+  faultArr:any=[
+
+    "fpt_cidzt_charger_fault",
+    'fpt_cidzt_surge_arrester_fault',//1
+
+  ]
+  constructor(private CIDZT:CoegaIDZT ,private ls:ListeningService, private ws: WebSocketService, private us:UsersService,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+    this.isLoading = true;
+
+
+    this.pm.findPageData("nmbm_cidzt_fpt", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.comms = Common.getLastUpdate(this.variable.fpt_cidzt_ut)
+
+       var alarm1: any [] = [this.faultVariable.fpt_cidzt_surge_arrester_fault,this.faultVariable.fpt_cidzt_charger_fault]
+
+       this.generalfaultdatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
 
 
 
-    this.CIDZT.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.fpt_cidzt_ut = this.data.routingArray[0].fpt_cidzt_ut
-       this.comms = Common.getLastUpdate(this.fpt_cidzt_ut)
-       this.fpt_cidzt_surge_arrester_fault.value = this.data.routingArray[0].fpt_cidzt_surge_arrester_fault
-       this.fpt_cidzt_charger_fault.value = this.data.routingArray[0].fpt_cidzt_charger_fault
-       this.fpt_cidzt_panel_door = this.data.routingArray[0].fpt_cidzt_panel_door
-       this.fpt_cidzt_battery = this.data.routingArray[0].fpt_cidzt_battery
-       this.fpt_cidzt_idz_fm_s = this.data.routingArray[0].fpt_cidzt_idz_fm_s
-       this.fpt_cidzt_mw_fm_s = this.data.routingArray[0].fpt_cidzt_mw_fm_s
-       this.fpt_cidzt_idz_fr = this.data.routingArray[0].fpt_cidzt_idz_fr
-       this.fpt_cidzt_idz_tf = this.data.routingArray[0].fpt_cidzt_idz_tf
-       this.fpt_cidzt_mw_fr = this.data.routingArray[0].fpt_cidzt_mw_fr
-       this.fpt_cidzt_mw_tf = this.data.routingArray[0].fpt_cidzt_mw_tf
-       this.panel_door_stat = this.data.routingArray[0].panel_door_stat
-       this.battery_stat = this.data.routingArray[0].battery_stat
-    })
-
-
-    setTimeout(() => {
-
-
-      var alarm1: any [] = [this.fpt_cidzt_surge_arrester_fault,this.fpt_cidzt_charger_fault]
-
-      this.generalfaultdatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
-
-
-
-
-    },1000)
-
+   })
 
 
   }
 
+  collectionName:any ="FPT_IDZT_TFs"
+trendTag:any =["motherwell_TF","idz_TF"]
 
+isLoading: boolean = false;
   ngOnInit(){
     var trend :any;
 
-    var gCount = 0;
 
-    var tagVals:any=[]
-    var tagArr=[
-      'fpt_cidzt_ut',//0
-      'fpt_cidzt_surge_arrester_fault',//1
-      'fpt_cidzt_charger_fault',//2
-      'fpt_cidzt_panel_door',//3
-      'fpt_cidzt_battery',//4
-      'fpt_cidzt_idz_fm_s',//5
-      'fpt_cidzt_mw_fm_s',//6
-      'fpt_cidzt_idz_fr',//7
-      'fpt_cidzt_idz_tf',//8
-      'fpt_cidzt_mw_fr',//9
-      'fpt_cidzt_mw_tf',//10
-//
-    ]
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
 
 
     var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      console.log(tagVals)
-      if(updateTemp!== undefined){
-        this.fpt_cidzt_ut = tagVals[0]
+      this.pm.findPageData("nmbm_cidzt_fpt", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+        this.comms = Common.getLastUpdate(this.variable.fpt_cidzt_ut)
 
-        this.fpt_cidzt_surge_arrester_fault.value = tagVals[1]
-        this.fpt_cidzt_charger_fault.value = tagVals[2]
-        this.fpt_cidzt_panel_door = tagVals[3]
-        this.fpt_cidzt_battery = tagVals[4]
-        this.fpt_cidzt_idz_fm_s = tagVals[5]
-        this.fpt_cidzt_mw_fm_s = tagVals[6]
-        this.fpt_cidzt_idz_fr = tagVals[7]
-        this.fpt_cidzt_idz_tf = tagVals[8]
-        this.fpt_cidzt_mw_fr = tagVals[9]
-        this.fpt_cidzt_mw_tf = tagVals[10]
+         var alarm1: any [] = [this.faultVariable.fpt_cidzt_surge_arrester_fault,this.faultVariable.fpt_cidzt_charger_fault]
+
+         this.generalfaultdatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
 
 
-      }
-      this.comms = Common.getLastUpdate(this.fpt_cidzt_ut)
 
-      var alarm1: any [] = [this.fpt_cidzt_surge_arrester_fault,this.fpt_cidzt_charger_fault]
-
-      this.generalfaultdatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
-
+     })
 
     },60000)
 
 
 
-    this.rs.Get_IDZT_Total_Flows().subscribe(data => {
-      trend=data
-            this.TotalFlowIDZArr = trend.TotalFlowIDZArr;
+    //this.rs.Get_IDZT_Total_Flows().subscribe(data => {
 
-            this.TotalFlowMWArr = trend.TotalFlowMWArr;
+      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+
+
+      trend=data
+
+
+            this.TotalFlowMWArr =  trend.TotalFlowArr[0];
+            this.TotalFlowIDZArr =  trend.TotalFlowArr[1];
             this.DateArr = trend.DateArr;
             var theme:any
             var tooltipBackground:any;
@@ -224,7 +225,7 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
                 }
             ]
             };
-
+            this.isLoading = false;
           })
   }
 
@@ -236,6 +237,7 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
   });
 
   onDateFilter(){
+    this.isLoading = true;
     var start = this.range.value.start+'';
     var end = this.range.value.end+'';
 
@@ -333,11 +335,11 @@ var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
 
 var trend :any;
 
-this.rs.Get_IDZT_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-        this.TotalFlowMWArr = trend.TotalFlowMWArr;
-        this.TotalFlowIDZArr = trend.TotalFlowIDZArr;
+  this.TotalFlowMWArr =  trend.TotalFlowArr[0];
+  this.TotalFlowIDZArr =  trend.TotalFlowArr[1];
         this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any;
@@ -390,7 +392,7 @@ this.options = {
   }
 ]
 };
-
+this.isLoading = false;
       })
 }
 ngOnDestroy(){

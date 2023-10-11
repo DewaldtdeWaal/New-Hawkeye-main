@@ -141,7 +141,7 @@ var DateArr=[];
       var num2 =data[i].humansdorp_off_TF
       TotalFlowArr[i]= (num1-num2).toFixed(2)
 
-      console.log(TotalFlowArr)
+
 
       d_arr = (data[i+1].date)
       d_arr = d_arr.toLocaleString()

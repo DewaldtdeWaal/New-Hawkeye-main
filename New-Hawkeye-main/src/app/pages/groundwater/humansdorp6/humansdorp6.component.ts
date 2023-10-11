@@ -10,6 +10,7 @@ import {Common} from 'src/app/class/common';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -159,8 +160,10 @@ show1:any
     alarmTrip: 1
   },
 }
+isLoading: boolean = false;
+  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp6Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
 
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp6Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ) {
+    this.isLoading = true;
     this.theme = localStorage.getItem("theme");
 
     this.pm.findPageData("klm_hup6_gw", "GRDW_CurrentVals").then((result) => {
@@ -184,6 +187,8 @@ show1:any
   userSites:string[];
   public authListenerSubs!: Subscription;
 
+  trendTag:any = ["total_flow_HD6"]
+collectionName:any ="KLM_HUP6_TF_TREND"
 
   ngOnInit() {
 
@@ -247,15 +252,18 @@ show1:any
 
 
 var trend: any = {};
-  this.rs.Get_HUP6_TotalFlows().subscribe(data => {
-    trend=data
-    this.total_flow_HD6_array = trend.total_flow_HD6_array;
+this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+  trend=data
+    this.total_flow_HD6_array = trend.TotalFlowArr[0];
 
     this.DateArr = trend.DateArr;
       var theme:any
       var tooltipBackground:any
 
-      this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD6 Total Flow",this.total_flow_HD6_array)
+      this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD6 Total Flow",this.total_flow_HD6_array);
+
+
+    this.isLoading = false;
   }
   )
 
@@ -263,6 +271,10 @@ var trend: any = {};
 
 
   onDateFilter(){
+
+
+    this.isLoading = true;
+
     const start = new Date(this.range.value.start).toISOString().slice(0, 10);
     const end = new Date(this.range.value.end).toISOString().slice(0, 10);
 
@@ -270,14 +282,16 @@ var trend: any = {};
 
   var trend :any;
 
-  this.rs.Get_HUP6_Total_Flows_Dates(start, end).subscribe(data => {
-  trend=data
-
-  this.total_flow_HD6_array = trend.total_flow_HD6_array;
+  this.pt.getPostTrend(this.collectionName, this.trendTag,start,end).then((data) => {
+    trend=data
+      this.total_flow_HD6_array = trend.TotalFlowArr[0];
   this.DateArr = trend.DateArr;
 
 
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD6 Total Flow",this.total_flow_HD6_array)
+  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD6 Total Flow",this.total_flow_HD6_array);
+
+
+  this.isLoading = false;
   })
 
 

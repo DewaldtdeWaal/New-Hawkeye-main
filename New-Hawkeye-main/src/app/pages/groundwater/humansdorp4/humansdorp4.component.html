@@ -152,7 +152,9 @@
     </div>
     </form>
     </section>
-  <br>
+    <br>
+    <mat-progress-bar style="background-color: black" *ngIf="isLoading==true" style  mode="indeterminate"></mat-progress-bar>
+    <br>
   <div id="main" echarts  [options]="options" class="chart" ></div>
   <br>
   <br>

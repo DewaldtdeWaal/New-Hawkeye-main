@@ -22,7 +22,7 @@
                </div>
 
             <div class="grid-container-flow-meters-general-column1">Last Update:</div>
-            <div class="grid-container-flow-meters-general-column3">{{hb_UT}}</div>
+            <div class="grid-container-flow-meters-general-column3">{{variable.hb_R_UT}}</div>
 
             <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
             <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
@@ -52,7 +52,7 @@
 
 
   <div fxLayoutAlign="center " > <div class="circle1">
-    <div class="circle2-b"><div [ngStyle]="{'height.%' :100- hb_RL }" class="fill"><div class="lvl-font">{{hb_RL}}%</div></div></div>
+    <div class="circle2-b"><div [ngStyle]="{'height.%' :100- variable.hb_R_LVL }" class="fill"><div class="lvl-font">{{variable.hb_R_LVL}}%</div></div></div>
   </div>
   </div>
 

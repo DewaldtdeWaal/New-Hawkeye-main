@@ -4,6 +4,7 @@ import {motherwellComponent} from 'src/app/Service-Files/Pumpstation/pumpstation
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
 export interface PeriodicElement{
   alarm: string;
@@ -153,25 +154,17 @@ faultArr:any=[
   "mw_p3_no_flow",//29
 
 ]
-  theme:any;
+  theme:any= localStorage.getItem("theme");
   data: any=[];
 
-  constructor(private buff:motherwellComponent,private authService: AuthService,public recieve:Common )
+  constructor(private buff:motherwellComponent,private authService: AuthService,public recieve:Common, private pm:pagePostMethod )
   {
-      this.theme = localStorage.getItem("theme");
+    this.pm.findPageData("nmbm_mw_ps", "PS_CurrentVals").then((result) => {
+      this.data =  result;
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
 
-    this.buff.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-       this.faultVariable =   Common.getFaultRouteData(this.faultArr,this.faultVariable,this.data.routingArray)
-       this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
-
-    });
-
-    setTimeout(() => {
-
+      this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
       var alarm1: any [] = [this.faultVariable.mw_p1_emergency_stop,this.faultVariable.mw_p1_alarm_trip,this.faultVariable.mw_p1_no_flow]
       var alarm2: any [] = [this.faultVariable.mw_p2_emergency_stop,this.faultVariable.mw_p2_alarm_trip,this.faultVariable.mw_p2_no_flow]
       var alarm3: any [] = [this.faultVariable.mw_p3_emergency_stop,this.faultVariable.mw_p3_alarm_trip,this.faultVariable.mw_p3_no_flow]
@@ -179,8 +172,7 @@ faultArr:any=[
       this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
       this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
       this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-
-    },1000)
+    });
     }
 
   ngOnInit() {
@@ -206,31 +198,20 @@ faultArr:any=[
     errorVals = this.recieve.recieveNMBMVals(this.faultArr)
 
       this.intervalLoop = setInterval(() =>{
+        this.pm.findPageData("nmbm_mw_ps", "PS_CurrentVals").then((result) => {
+          this.data =  result;
+          Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-        if(tagVals[0]!= undefined){
 
-
-
-        this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
           this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
+          var alarm1: any [] = [this.faultVariable.mw_p1_emergency_stop,this.faultVariable.mw_p1_alarm_trip,this.faultVariable.mw_p1_no_flow]
+          var alarm2: any [] = [this.faultVariable.mw_p2_emergency_stop,this.faultVariable.mw_p2_alarm_trip,this.faultVariable.mw_p2_no_flow]
+          var alarm3: any [] = [this.faultVariable.mw_p3_emergency_stop,this.faultVariable.mw_p3_alarm_trip,this.faultVariable.mw_p3_no_flow]
 
-          Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
-
-
-        var alarm1: any [] = [this.faultVariable.mw_p1_emergency_stop,this.faultVariable.mw_p1_alarm_trip,this.faultVariable.mw_p1_no_flow]
-        var alarm2: any [] = [this.faultVariable.mw_p2_emergency_stop,this.faultVariable.mw_p2_alarm_trip,this.faultVariable.mw_p2_no_flow]
-        var alarm3: any [] = [this.faultVariable.mw_p3_emergency_stop,this.faultVariable.mw_p3_alarm_trip,this.faultVariable.mw_p3_no_flow]
-
-        console.log(alarm1)
-
-        this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-        this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-
-
-        }
-
-        console.log("alarm1")
+          this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+          this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+          this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+        });
 
    },60000 )
 }

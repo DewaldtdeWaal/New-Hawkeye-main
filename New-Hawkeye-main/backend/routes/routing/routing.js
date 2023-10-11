@@ -4,10 +4,10 @@ const gvar = require('../../variables');
 
 var MongoClient = require('mongodb').MongoClient;
 var url = gvar.standardConnectionString;
-var dbo
+var db
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
-    dbo = db.db("HawkEye");
+    db = db.db("HawkEye");
 
 })
 
@@ -113,35 +113,17 @@ function getRoutingFunctions(path, ID, collection){
 
 
 router.post("/pageValues", async (req, res) => {
-  console.log(req.body);
+
+  console.log(req.body.Collection)
   var query = {id: req.body.Id};
   db.collection(req.body.Collection).findOne(query, function(err, data){
     if(err) throw err;
     res.status(200).json(data);
   })
 })
-router.get("/pageValues", function (req,res) {
-
-  var query = {id: "klm_hup_wtw"};
-  var routingArray=[]
-  dbo.collection("WTW_CurrentVals").find(query).toArray(function(err,data){
-
-    if(err) throw err;
-    var i=0;
-    while (i < data.length)
-        {
-          routingArray[i] =data[i]
-             i++;
-         }
-    res.status(200).json({
-      routingArray
-         });
 
 
 
-  })
 
-
-})
 
 module.exports = router;

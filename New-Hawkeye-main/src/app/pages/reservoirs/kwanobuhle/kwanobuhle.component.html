@@ -20,7 +20,7 @@
                    <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img" style="width:20px; height:20px; padding-top:2px">
                    </div>
                    <div class="grid-container-communication-general-column1">Last Update:</div>
-                   <div class="grid-container-communication-general-column3">{{kwano_r_ut}}</div>
+                   <div class="grid-container-communication-general-column3">{{variable.kwano_r_ut}}</div>
 
 
 
@@ -41,13 +41,13 @@
     <div class="div-form">
       <div class="grid-container-flow-meters-general">
         <div class="grid-container-flow-meters-general-column1">Pepper Spray Gas Left </div>
-        <div class="grid-container-flow-meters-general-column3"> {{kwano_r_pepper_spray_gas_left}} s </div>
+        <div class="grid-container-flow-meters-general-column3"> {{variable.kwano_r_pepper_spray_gas_left}} s </div>
         <div class="grid-container-flow-meters-general-column1">Pepper Spray Battery Voltage:</div>
-        <div class="grid-container-flow-meters-general-column3">{{kwano_r_pepper_spray_battery_voltage}} V </div>
+        <div class="grid-container-flow-meters-general-column3">{{variable.kwano_r_pepper_spray_battery_voltage}} V </div>
         <div class="grid-container-flow-meters-general-column1">Alarm Status:</div>
-        <div class="grid-container-flow-meters-general-column3">{{kwano_r_alarm_armed}}  </div>
+        <div class="grid-container-flow-meters-general-column3">{{variable.kwano_r_alarm_armed}}  </div>
         <div class="grid-container-flow-meters-general-column1">Pepper Spray Status:</div>
-        <div class="grid-container-flow-meters-general-column3">{{kwano_r_pepper_spray_armed}}  </div>
+        <div class="grid-container-flow-meters-general-column3">{{variable.kwano_r_pepper_spray_armed}}  </div>
       </div>
         <table mat-elevation-z8 mat-table [dataSource]="generalfaulttabledatasource" matSort>
 
@@ -96,7 +96,7 @@
 
               <br>
             <div fxLayoutAlign="center " > <div class="circle1">
-              <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-kwano_r_reservoir_level }" class="fill"><div class="lvl-font">{{kwano_r_reservoir_level}}%</div></div></div>
+              <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-variable.kwano_r_reservoir_level }" class="fill"><div class="lvl-font">{{variable.kwano_r_reservoir_level}}%</div></div></div>
             </div>
             </div>
             <br>
@@ -121,15 +121,15 @@
       <div class="grid-container-flow-meters-general">
         <div class="grid-span-3">Flow Rate 1</div>
         <div class="grid-container-flow-meters-general-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-        <div class="grid-container-flow-meters-general-column3"> {{kwano_r_flow_rate_1}} </div>
+        <div class="grid-container-flow-meters-general-column3"> {{variable.kwano_r_flow_rate_1}} </div>
         <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
-        <div class="grid-container-flow-meters-general-column3">{{kwano_r_total_flow_1}} Ml </div>
+        <div class="grid-container-flow-meters-general-column3">{{variable.kwano_r_total_flow_1}} Ml </div>
         <div class="grid-container-flow-meters-general-column1">&nbsp;</div><div class="grid-container-flow-meters-general-column3">&nbsp; </div>
         <div class="grid-span-3">Flow Rate 2</div>
         <div class="grid-container-flow-meters-general-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-        <div class="grid-container-flow-meters-general-column3"> {{kwano_r_flow_rate_2}} </div>
+        <div class="grid-container-flow-meters-general-column3"> {{variable.kwano_r_flow_rate_2}} </div>
         <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
-        <div class="grid-container-flow-meters-general-column3">{{kwano_r_total_flow_2}} Ml </div>
+        <div class="grid-container-flow-meters-general-column3">{{variable.kwano_r_total_flow_2}} Ml </div>
 
 
     </div>

@@ -9,7 +9,8 @@ const getDriverValues = require('./routes/getDriver/getDriverRoutes')
 const routing = require('./routes/routing/routing')
 
 
-const routeSiteMethod = require("./routes/routeSiteMethod")
+const routeSiteMethod = require("./routes/routeSiteMethod");
+const pageTrend = require("./routes/PageTrend/PageTrend");
 
 //const automotiverouting = require('./routes/Automotive/automotive')
 const newtrendPicker = require('./routes/newTrendpicker');
@@ -157,6 +158,8 @@ app.use(drivers);
 //app.use(humansdorp3);
 //app.use(humansdorp6);
 //app.use(bethelsdorp);
+
+app.use(pageTrend)
 app.use(reservoir);
 app.use(UsersRoutes);
 app.use(TrendPicker);

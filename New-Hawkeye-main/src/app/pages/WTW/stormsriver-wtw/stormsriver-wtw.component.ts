@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 @Component({
   selector: 'app-stormsriver-wtw',
   templateUrl: './stormsriver-wtw.component.html',
@@ -86,16 +87,25 @@ export class StormsriverWTWComponent implements OnInit {
 
   theme: any
   data:any = []
-  constructor(private ws:WebSocketService,private storms:StormsriverComponent  ,private userService: UsersService,private authService: AuthService,public recieve:Common ) {
+  constructor(private ws:WebSocketService,private storms:StormsriverComponent  ,private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
 
-  this.storms.GetSiteValues()
-  .subscribe(rsp=> {
-    this.data = rsp;
+  // this.storms.GetSiteValues()
+  // .subscribe(rsp=> {
+  //   this.data = rsp;
 
-    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-    this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
+  //   this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+  //   this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
 
-  })
+  // })
+
+  this.pm.findPageData("storms_wtw", "WTW_CurrentVals").then((result) => {
+    this.data =  result;
+    this.theme = localStorage.getItem("theme");
+    console.log(this.data)
+   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+   this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
+
+  });
 
    }
   displayedColumns :string[]= ['alarm', 'description'];
@@ -126,9 +136,14 @@ export class StormsriverWTWComponent implements OnInit {
 
    this.intervalLoop = setInterval(() =>{
 
-    this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+    this.pm.findPageData("storms_wtw", "WTW_CurrentVals").then((result) => {
+      this.data =  result;
+      this.theme = localStorage.getItem("theme");
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
 
-    this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
+    });
 },60000)
 
 

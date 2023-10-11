@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-chatty',
   templateUrl: './chatty.component.html',
@@ -61,9 +62,11 @@ export class ChattyComponent implements OnInit {
   showNavigationButton: string;
 
 
+  collectionName: any = "CHATTY_TREND_TF"
+  trendTag: any = ["cht_tf"]
 
-  constructor(private webSocketService: WebSocketService,private ls:ListeningService,public rs: ReportService, private chat: ChattyService, private userService: UsersService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-
+  constructor(public rs: ReportService, private authService: AuthService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+    this.isLoading = true;
     this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
       this.data =  result;
 
@@ -78,7 +81,7 @@ export class ChattyComponent implements OnInit {
 
 
   }
-
+  isLoading: boolean = false;
   ngOnInit() {
     this.showNavigationButton = "false";
     this.userSites = this.authService.getUserSites();
@@ -122,9 +125,9 @@ export class ChattyComponent implements OnInit {
 
 
      var trend: any = {};
-     this.rs.Get_Chatty_TotalFlows().subscribe(data => {
-       trend=data
-       this.chattyTF = trend.chattyTF;
+     this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+      trend=data
+       this.chattyTF =  trend.TotalFlowArr[0];
 
        this.DateArr = trend.DateArr;
          var theme:any
@@ -172,13 +175,14 @@ export class ChattyComponent implements OnInit {
 
          ]
          };
-
+         this.isLoading = false;
      })
 
 
    }
 
    onDateFilter(){
+    this.isLoading = true;
      var start = this.range.value.start+'';
      var end = this.range.value.end+'';
 
@@ -277,10 +281,9 @@ export class ChattyComponent implements OnInit {
 
  var trend :any;
 
- this.rs.Get_Chatty_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-   trend=data
-
-   this.chattyTF = trend.chattyTF;
+ this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+  trend=data
+   this.chattyTF =  trend.TotalFlowArr[0];
    this.DateArr = trend.DateArr;
    var theme:any
    var tooltipBackground:any;
@@ -329,6 +332,8 @@ export class ChattyComponent implements OnInit {
 
 ]
  };
+
+ this.isLoading = false;
  })
 
 

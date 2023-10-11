@@ -1126,7 +1126,7 @@ break;
     else{
 
 
-      this.rs.GetTrend_Sites(this.selectedTags,this.newStart,this.newEnd).subscribe(data => {
+      this.rs.GetTrend_Sites(this.selectedTags,this.newStart,this.newEnd).then((data) => {
 
 
 

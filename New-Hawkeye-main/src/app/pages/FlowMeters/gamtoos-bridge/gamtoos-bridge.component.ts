@@ -9,6 +9,8 @@ import { ListeningService } from 'src/app/listening.service';
 import { EChartsOption } from 'echarts';
 import {Gamtoos} from 'src/app/Service-Files/FPT/gamtoos.service'
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-gamtoos-bridge',
   templateUrl: './gamtoos-bridge.component.html',
@@ -62,21 +64,26 @@ export class GamtoosBridgeComponent implements OnInit {
     "fpt_gt_brg_fm_soco_p_comms_s",//12
 
   ]
-  constructor(private gam:Gamtoos, private ws: WebSocketService,public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common ) {
+  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend) {
 
-  this.gam.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
+    this.isLoading = true;
 
 
+    this.pm.findPageData("nmbm_gt_brg_fpt", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
 
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-       this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
-    })
+
+
+
+   })
 
   }
 
-
+  collectionName: any = "FPT_GT_BRG_TFs"
+  trendTag: any = ["steel_pipe_TF", "socoman_pipe_TF"]
   ngOnInit(){
     var tagVals:any=[]
 
@@ -87,16 +94,26 @@ export class GamtoosBridgeComponent implements OnInit {
     this.intervalLoop = setInterval(() =>{
 
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
+      this.pm.findPageData("nmbm_gt_brg_fpt", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+        this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
+
+
+
+
+     })
 
       },60000)
 
     var trend :any;
-    this.rs.Get_GT_BRG_Total_Flows().subscribe(data => {
+  //  this.rs.Get_GT_BRG_Total_Flows().subscribe(data => {
+
+      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.TotalFlow_STL_Arr = trend.TotalFlow_STL_Arr;
-        this.TotalFlow_SOCO_Arr = trend.TotalFlow_SOCO_Arr;
+      this.TotalFlow_STL_Arr = trend.TotalFlowArr[0];
+        this.TotalFlow_SOCO_Arr = trend.TotalFlowArr[1];
         this.DateArr = trend.DateArr;
             var theme:any
             var tooltipBackground:any;
@@ -147,15 +164,16 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
               }
             ]
             };
-
+            this.isLoading = false;
           })
 
 
 
       }
 
-
+      isLoading: boolean = false;
   onDateFilter(){
+    this.isLoading = true;
     var start = this.range.value.start+'';
     var end = this.range.value.end+'';
 
@@ -253,7 +271,7 @@ var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
 
 var trend :any;
 
-this.rs.Get_GT_BRG_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,newEnd,newStart).then((data) => {
   trend=data
 
         this.TotalFlow_STL_Arr = trend.TotalFlow_STL_Arr;
@@ -312,7 +330,7 @@ this.options = {
   }
 ]
 };
-
+this.isLoading = false;
       })
 }
 

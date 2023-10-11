@@ -5,6 +5,8 @@ import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common'
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-paradise-beach-st-francis-offtake',
   templateUrl: './paradise-beach-st-francis-offtake.component.html',
@@ -35,26 +37,21 @@ export class ParadiseBeachStFrancisOfftakeComponent implements OnInit {
   "jb_PB_SFO_last_seen"
 
 ]
-  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common ) {
-
-    // range = new FormGroup({
-    //   start: new FormControl(),
-    //   end: new FormControl()
-    // });
+  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
 
 
-    this.route.GetSiteValues()
-    .subscribe(rsp => {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+
+    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
       this.variable.comms = Common.getLastUpdateBattery(this.variable.jb_PB_SFO_ut,this.variable.jb_PB_SFO_last_seen)
 
 
-    })
 
-
-   }
+   })
+  }
 
      range = new FormGroup({
     start: new FormControl(),
@@ -162,11 +159,10 @@ var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
 
 var trend :any;
 
-this.rs.Post_PBSFO_Trend_Sites(newStart, newEnd).subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,newEnd,newStart).then((data) => {
   trend=data
-
-        this.jb_ST_Francis_OffTake_Total_Flow_Arr = trend.jb_ST_Francis_OffTake_Total_Flow_Arr;
-        this.jb_Para_Bea_TF_Arr = trend.jb_Para_Bea_TF_Arr
+        this.jb_ST_Francis_OffTake_Total_Flow_Arr = trend.TotalFlowArr[0]
+        this.jb_Para_Bea_TF_Arr = trend.TotalFlowArr[1]
         this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any;
@@ -221,8 +217,9 @@ series: [{
 
       })
 }
-
-
+collectionName:any ="JB_PB_SFO_TOTAL_FLOW"
+trendTag:any = ["jb_ST_Francis_OffTake_Total_Flow","jb_Para_Bea_TF"]
+isLoading: boolean = false;
   ngOnInit() {
     var tagVals:any=[]
 
@@ -232,17 +229,27 @@ series: [{
     this.intervalLoop = setInterval(() =>{
 
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.jb_PB_SFO_ut,this.variable.jb_PB_SFO_last_seen)
+      this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+
+        this.variable.comms = Common.getLastUpdateBattery(this.variable.jb_PB_SFO_ut,this.variable.jb_PB_SFO_last_seen)
+
+
+
+     })
 
     },60000)
     var trend :any;
 
 
-    this.rs.Get_PBSFO_Trend_Sites().subscribe(data => {
+    //this.rs.Get_PBSFO_Trend_Sites().subscribe(data => {
+
+      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-            this.jb_ST_Francis_OffTake_Total_Flow_Arr = trend.jb_ST_Francis_OffTake_Total_Flow_Arr;
-            this.jb_Para_Bea_TF_Arr = trend.jb_Para_Bea_TF_Arr
+            this.jb_ST_Francis_OffTake_Total_Flow_Arr = trend.TotalFlowArr[0]
+            this.jb_Para_Bea_TF_Arr = trend.TotalFlowArr[1]
             this.DateArr = trend.DateArr;
 
             var theme:any

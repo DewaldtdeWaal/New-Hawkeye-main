@@ -7,6 +7,7 @@ import { EChartsOption } from 'echarts';
 import { FormControl, FormGroup } from '@angular/forms';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-greenbushes',
   templateUrl: './greenbushes.component.html',
@@ -21,93 +22,89 @@ export class GreenbushesComponent implements OnInit {
   options: EChartsOption;
   theme:any;
   DateArr: any;
-    gb_FR:any
+    gb_R_FR:any
     gb_RL:any
     intervalLoop: any
-    gb_FRF:any
-    gb_FRR:any
-    gb_SA:any
-    gb_CHS:any
-    gb_D:any
-    gb_UT:any
-    res:any
+    gb_R_FRF:any
+    gb_R_FRR:any
+    gb_R_SURGE_ARRESTOR:any
+    gb_R_CHARGER_STATUS:any
+    gb_R_DOOR:any
+    gb_R_UT:any
+    gb_R_LVL:any
   comms: string;
   data:any=[]
   TotalFlow_GB_FRR_Arr: any[];
   TotalFlow_GB_FRF_Arr: any[];
-  constructor(private webSocketService: WebSocketService, private gbs:GreenBushesService,public rs: ReportService,public recieve:Common,private pm:pagePostMethod ) {
-    this.gbs.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.gb_FR= this.data.routingArray[0].gb_R_FR
-       this.gb_RL= this.data.routingArray[0].gb_R_LVL
-       this.gb_FRF= this.data.routingArray[0].gb_R_FRF
-       this.gb_FRR= this.data.routingArray[0].gb_R_FRR
-       this.gb_SA= this.data.routingArray[0].gb_R_SURGE_ARRESTOR
-       this.gb_CHS= this.data.routingArray[0].gb_R_CHARGER_STATUS
-       this.gb_D= this.data.routingArray[0].gb_R_DOOR
-       this.gb_UT= this.data.routingArray[0].gb_R_UT
-       this.comms = Common.getLastUpdate(this.gb_UT)
-       this.res= this.data.routingArray[0].gb_R_LVL
-    })
+
+  variable :any= {
+
+    gb_R_FR:null,
+    gb_R_FRF:null,
+    gb_R_FRR:null,
+    gb_R_SURGE_ARRESTOR:null,
+    gb_R_CHARGER_STATUS:null,
+    gb_R_DOOR:null,
+    gb_R_UT:null,
+    gb_R_LVL:null,
+
+
+  }
+
+  tagArr:any=[
+    "gb_R_FR",
+    "gb_R_FRF",
+    "gb_R_FRR",
+    "gb_R_SURGE_ARRESTOR",
+    "gb_R_CHARGER_STATUS",
+    "gb_R_DOOR",
+    "gb_R_UT",
+    "gb_R_LVL",
+
+  ]
+  constructor( public rs: ReportService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend, ) {
+
+    this.isLoading = true;
+
+    this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+    this.comms = Common.getLastUpdate(this.variable.gb_R_UT)
+    });
 
    }
-
-  //  recieveVals(tagArr: any[]){
-  //   var tagVals:any = []
-  //   for(let i = 0; i<tagArr.length ;i++){
-  //     this.webSocketService.nmbm_listen(tagArr[i]).subscribe((data:any)=>{
-  //       tagVals[i] = data[tagArr[i]];
-
-  //     })
-  //   }
-  //   return tagVals
-  // }
-
+   trendTag:any =["gb_R_FRR","gb_R_FRF"]
+   collectionName:any = "BR_GB_RES_LVL_TF"
+   isLoading: boolean = false;
   ngOnInit() {
 
 
-    var tagVals:any=[]
-    var tagArr =[
-      'gb_ut',//0
-      'gb_fr',//1
-      'gb_rl',//2
-      'gb_frf',//3
-      'gb_frr',//4
-      'gb_sa',//5
-      'gb_chs',//6
-      'gb_d',//7
-      'gb_res',//8
-    ]
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
 
-
-    var updateTemp:any;
     setInterval(() =>{
-        console.log(tagVals)
-      updateTemp = tagVals[0];
-      if(updateTemp !== undefined){
-        this.gb_UT = tagVals[0];
-        this.gb_FR=  tagVals[1]
-        this.gb_RL=  tagVals[2]
-        this.gb_FRF=  tagVals[3]
-        this.gb_FRR=  tagVals[4]
-        this.gb_SA= tagVals[5]
-        this.gb_CHS=  tagVals[6]
-        this.gb_D=  tagVals[7]
-        this.res =  tagVals[8]
+      this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").then((result) => {
+        this.data =  result;
 
-      }
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-      this.comms = Common.getLastUpdate(this.gb_UT)
+
+      this.comms = Common.getLastUpdate(this.variable.gb_R_UT)
+      });
     },60000);
 
     var trend: any = {};
-    this.rs.Get_GB_TotalFlows().subscribe(data => {
+   // this.rs.Get_GB_TotalFlows().subscribe(data => {
+
+      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.TotalFlow_GB_FRR_Arr = trend.TotalFlow_GB_FRR_Arr;
-      this.TotalFlow_GB_FRF_Arr = trend.TotalFlow_GB_FRF_Arr;
-      console.log(this.TotalFlow_GB_FRF_Arr)
+      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0];
+      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1];
+
+
       this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any
@@ -159,10 +156,11 @@ export class GreenbushesComponent implements OnInit {
           }
         ]
         };
-
+        this.isLoading = false;
     })
       };
       onDateFilter(){
+        this.isLoading = true;
         var start = this.range.value.start+'';
         var end = this.range.value.end+'';
 
@@ -261,11 +259,10 @@ export class GreenbushesComponent implements OnInit {
 
     var trend :any;
 
-    this.rs.Get_GB_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
       trend=data
-
-      this.TotalFlow_GB_FRR_Arr = trend.TotalFlow_GB_FRR_Arr;
-      this.TotalFlow_GB_FRF_Arr = trend.TotalFlow_GB_FRF_Arr;
+      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0];
+      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1];
       this.DateArr = trend.DateArr;
       var theme:any
       var tooltipBackground:any;
@@ -319,6 +316,7 @@ export class GreenbushesComponent implements OnInit {
       }
     ]
     };
+    this.isLoading = false;
     })
 
 

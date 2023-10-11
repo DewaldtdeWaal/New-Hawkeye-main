@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/Service-Files/users.service';
 import {vanStadensComponent} from 'src/app/Service-Files/Pumpstation/pumpstation.service'
 import { Subscription } from 'rxjs';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
   alarm: string;
   description: string;
@@ -26,16 +27,18 @@ faults = true ;
 intervalLoop: any
 
   vs_PS_UT:any
-  vs_G_WATER_D:any
 
-
-  vs_STATUS_P1:any
-  vs_MODE_P1:any
+  vs_P1_STATUS:any
+  vs_P1_MODE:any
   vs_RH_P1 :any
-  vs_SUC_PRESS_P1 :any
-  vs_DEL_PRESS_P1 :any
+  vs_P1_SUC_PRESS :any
+  vs_P1_DEL_PRESS :any
+  vs_P2_STATUS:any
+  vs_P2_MODE:any
+  vs_P2_SUC_PRESS :any
+  vs_P2_DEL_PRESS :any
+  vs_P2_RH :any
 
-  vs_LDP_P1 :any
 
 
 
@@ -44,14 +47,54 @@ intervalLoop: any
   showNavigationButton: string;
 
 
-  vs_STATUS_P2:any
-  vs_MODE_P2:any
-  vs_SUC_PRESS_P2 :any
-  vs_DEL_PRESS_P2 :any
-  vs_RH_P2 :any
+   tagArr:any=[
+    "vs_PS_UT",
+    "vs_P1_STATUS",
+    "vs_P1_MODE",
+    "vs_RH_P1",
+    "vs_P1_SUC_PRESS",
+    "vs_P1_DEL_PRESS",
+    "vs_P2_STATUS",
+    "vs_P2_MODE",
+    "vs_P2_RH",
+    "vs_P2_SUC_PRESS",
+    "vs_P2_DEL_PRESS",
+    "vs_G_WATER_D",
 
-  vs_LDP_P2 :any
+  ]
+  faultArr:any=[
+    "vs_P1_LSP",
+"vs_P1_HDP",
+"vs_P1_STARTER_FAULT",
+"vs_P1_STARTUP_FAULT",
+"vs_P1_LDP",
+"vs_P2_LSP",
+"vs_P2_HDP",
+"vs_P2_STARTER_FAULT",
+"vs_P2_STARTUP_FAULT",
+"vs_P2_LDP",
+"vs_G_COMMS",
+"vs_G_PUMPS_F",
+  ]
 
+  variable :any= {
+    vs_PS_UT:null,
+    vs_P1_STATUS:null,
+    vs_P1_MODE:null,
+    vs_RH_P1:null,
+    vs_P1_SUC_PRESS:null,
+    vs_P1_DEL_PRESS:null,
+    vs_P2_STATUS:null,
+    vs_P2_MODE:null,
+    vs_P2_RH:null,
+    vs_P2_SUC_PRESS:null,
+    vs_P2_DEL_PRESS:null,
+    vs_G_WATER_D:null,
+
+
+
+
+  }
 
 
 
@@ -68,112 +111,107 @@ intervalLoop: any
  @ViewChild(MatSort) sort: MatSort;
  @ViewChild(MatSort) sort2: MatSort;
 
-theme:any;
+theme:any  = localStorage.getItem("theme");
   comms: string;
   data: any=[];
 
-  vs_LSP_P1 :any= {
+  faultVariable:any={
+
+  vs_P1_LSP : {
     value: null,
   alarm:"Fault",
   description:"Low Suction Pressure",
     alarmTrip: 1
-  };
-  vs_HDP_P1 :any= {
+  },
+  vs_P1_HDP : {
     value: null,
   alarm:"Fault",
   description:"High Delivery Pressure",
     alarmTrip: 1
-  };
-  vs_STARTER_FAULT_P1 :any= {
+  },
+  vs_P1_STARTER_FAULT : {
     value: null,
   alarm:"Fault",
   description:"Soft Starter",
     alarmTrip: 1
-  };
-  vs_STARTUP_FAULT_P1 :any= {
+  },
+  vs_P1_STARTUP_FAULT: {
     value: null,
   alarm:"Fault",
   description:"Startup",
     alarmTrip: 1
-  };
+  },
 
-  vs_LSP_P2 :any= {
+  vs_P1_LDP :{
+    value:null,
+    alarm:"Fault",
+    description:"Low Delivery Pressure",
+    alarmTrip: 1
+  },
+
+  vs_P2_LSP : {
     value: null,
   alarm:"Fault",
   description:"Low Suction Pressure",
     alarmTrip: 1
-  };
-  vs_HDP_P2 :any= {
+  },
+  vs_P2_HDP : {
     value: null,
   alarm:"Fault",
   description:"High Delivery Pressure",
     alarmTrip: 1
-  };
-  vs_STARTER_FAULT_P2 :any= {
+  },
+  vs_P2_STARTER_FAULT : {
     value: null,
   alarm:"Fault",
   description:"Soft Starter",
     alarmTrip: 1
-  };
-  vs_STARTUP_FAULT_P2 :any= {
+  },
+  vs_P2_STARTUP_FAULT : {
     value: null,
   alarm:"Fault",
   description:"Startup",
     alarmTrip: 1
-  };
+  },
+  vs_P2_LDP :{
+  value:null,
+  alarm:"Fault",
+  description:"Low Delivery Pressure",
+  alarmTrip: 1
+},
 
-  vs_G_COMMS:any = {
+  vs_G_COMMS: {
     value: null,
   alarm:"Fault",
   description:"Comms Failure",
     alarmTrip: 1
-  };
-  vs_G_PUMPS_F:any = {
+  },
+  vs_G_PUMPS_F: {
     value: null,
   alarm:"Fault",
   description:"Pump Flood",
     alarmTrip: 1
-  };
-  constructor(private authService:AuthService, private webSocketService: WebSocketService,public ls: ListeningService, public us:UsersService,private chat:vanStadensComponent ,private userService: UsersService,public recieve:Common ) {
-    this.chat.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.vs_PS_UT = this.data.routingArray[0].vs_PS_UT
-       this.comms = Common.getLastUpdate(this.vs_PS_UT)
-       this.vs_G_WATER_D = this.data.routingArray[0].vs_G_WATER_D
-       this.vs_STATUS_P1 = this.data.routingArray[0].vs_P1_STATUS
-       this.vs_MODE_P1 = this.data.routingArray[0].vs_P1_MODE
-       this.vs_RH_P1  = this.data.routingArray[0].vs_P1_RH
-       this.vs_SUC_PRESS_P1 =this.data.routingArray[0].vs_P1_SUC_PRESS
-       this.vs_DEL_PRESS_P1 =this.data.routingArray[0].vs_P1_DEL_PRESS
-       this.vs_LDP_P1 =this.data.routingArray[0].vs_P1_LDP
-       this.vs_STATUS_P2=this.data.routingArray[0].vs_P2_STATUS
-       this.vs_MODE_P2=this.data.routingArray[0].vs_P2_MODE
-       this.vs_SUC_PRESS_P2 =this.data.routingArray[0].vs_P2_SUC_PRESS
-       this.vs_DEL_PRESS_P2 =this.data.routingArray[0].vs_P2_DEL_PRESS
-       this.vs_RH_P2 =this.data.routingArray[0].vs_P2_RH
-       this.vs_LDP_P2 =this.data.routingArray[0].vs_P2_LDP
-       this.vs_LSP_P1.value =this.data.routingArray[0].vs_P1_LSP
-       this.vs_HDP_P1.value =this.data.routingArray[0].vs_P1_HDP
-       this.vs_STARTER_FAULT_P1.value =this.data.routingArray[0].vs_P1_STARTER_FAULT
-       this.vs_STARTUP_FAULT_P1.value =this.data.routingArray[0].vs_P1_STARTUP_FAULT
-       this.vs_LSP_P2.value =this.data.routingArray[0].vs_P2_LSP
-      this.vs_HDP_P2.value =this.data.routingArray[0].vs_P2_HDP
-    this.vs_STARTER_FAULT_P2.value =this.data.routingArray[0].vs_P2_STARTER_FAULT
-      this.vs_STARTUP_FAULT_P2.value =this.data.routingArray[0].vs_P2_STARTUP_FAULT
-       this.vs_G_PUMPS_F.value = this.data.routingArray[0].vs_G_PUMPS_F
-       this.vs_G_COMMS.value = this.data.routingArray[0].vs_G_COMMS
-    })
-    this.theme = localStorage.getItem("theme");
+  }}
+  constructor(private authService:AuthService,public ls: ListeningService, public us:UsersService,public recieve:Common, private pm:pagePostMethod ) {
 
-    setTimeout(() => {
-      var alarm1: any [] = [this.vs_LSP_P1,this.vs_HDP_P1,this.vs_STARTER_FAULT_P1,this.vs_STARTUP_FAULT_P1]
-      var alarm2: any [] = [this.vs_LSP_P2,this.vs_HDP_P2,this.vs_STARTER_FAULT_P2,this.vs_STARTUP_FAULT_P2]
-      var alarmG: any [] = [this.vs_G_PUMPS_F,this.vs_G_COMMS]
-      this.dataSourceG= new MatTableDataSource(Common.getAlarmValue(alarmG))
-      this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
-    },1000)
+
+    this.pm.findPageData("nmbm_vs_ps", "PS_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+
+     this.comms = Common.getLastUpdate(this.variable.vs_PS_UT)
+
+     var alarm1: any [] = [this.faultVariable.vs_P1_LSP,this.faultVariable.vs_P1_HDP,this.faultVariable.vs_P1_STARTER_FAULT,this.faultVariable.vs_P1_STARTUP_FAULT, this.faultVariable.vs_P1_LDP]
+     var alarm2: any [] = [this.faultVariable.vs_P2_LSP,this.faultVariable.vs_P2_HDP,this.faultVariable.vs_P2_STARTER_FAULT,this.faultVariable.vs_P2_STARTUP_FAULT, this.faultVariable.vs_P2_LDP]
+     var alarmG: any [] = [this.faultVariable.vs_G_PUMPS_F,this.faultVariable.vs_G_COMMS]
+     this.dataSourceG= new MatTableDataSource(Common.getAlarmValue(alarmG))
+     this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
+     this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
+
+
+    })
 
 
 
@@ -197,75 +235,26 @@ theme:any;
       }
     }
 
-    var tagVals:any =[]
-    var tagArr=[
-      "vs_ps_ut",//0
-      "vs_g_water_f",//1
-      "vs_g_pumps_f",//2
-      "vs_g_comms",//3
-      "vs_p1_status",//4
-      "vs_p1_mode",//5
-      "vs_p1_rh",//6
-      "vs_p1_suc_press",//7
-      "vs_p1_del_press",//8
-      "vs_p1_lsp",//9
-      "vs_p1_ldp",//10
-      "vs_p1_hdp",//11
-      "vs_p1_starter_fault",//12
-      "vs_p1_startup_fault",//13
-      "vs_p2_status",//14
-      "vs_p2_mode",//15
-      "vs_p2_suc_press",//16
-      "vs_p2_del_press",//17
-      "vs_p2_rh",//18
-      "vs_p2_lsp",//19
-      "vs_p2_ldp",//20
-      "vs_p2_hdp",//21
-      "vs_p2_starter_fault",//22
-      "vs_p2_startup_fault]",//23
 
-    ]
-
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
-    console.log(tagArr)
       var updateTemp:any;
       this.intervalLoop = setInterval(() =>{
-        updateTemp = tagVals[0];
-        if(updateTemp !==undefined){
-          this.vs_PS_UT=tagVals[0]
-          this.vs_G_WATER_D=tagVals[1]
-          this.vs_G_PUMPS_F.value=tagVals[2]
-          this.vs_G_COMMS.value=tagVals[3]
-          this.vs_STATUS_P1=tagVals[4]
-          this.vs_MODE_P1=tagVals[5]
-          this.vs_RH_P1=tagVals[6]
-          this.vs_SUC_PRESS_P1=tagVals[7]
-          this.vs_DEL_PRESS_P1=tagVals[8]
-          this.vs_LSP_P1.value=tagVals[9]
-          this.vs_LDP_P1=tagVals[10]
-          this.vs_HDP_P1.value=tagVals[11]
-          this.vs_STARTER_FAULT_P1.value=tagVals[12]
-          this.vs_STARTUP_FAULT_P1.value=tagVals[13]
-          this.vs_STATUS_P2=tagVals[14]
-          this.vs_MODE_P2=tagVals[15]
-          this.vs_SUC_PRESS_P2=tagVals[16]
-          this.vs_DEL_PRESS_P2=tagVals[17]
-          this.vs_RH_P2=tagVals[18]
-          this.vs_LSP_P2.value=tagVals[19]
-          this.vs_LDP_P2=tagVals[20]
-          this.vs_HDP_P2.value=tagVals[21]
-          this.vs_STARTER_FAULT_P2.value=tagVals[22]
-          this.vs_STARTUP_FAULT_P2.value=tagVals[23]
-        }
-        this.comms = Common.getLastUpdate(this.vs_PS_UT)
+        this.pm.findPageData("nmbm_vs_ps", "PS_CurrentVals").then((result) => {
+          this.data =  result;
 
-        var alarm1: any [] = [this.vs_LSP_P1,this.vs_HDP_P1,this.vs_STARTER_FAULT_P1,this.vs_STARTUP_FAULT_P1]
-        var alarm2: any [] = [this.vs_LSP_P2,this.vs_HDP_P2,this.vs_STARTER_FAULT_P2,this.vs_STARTUP_FAULT_P2]
-        var alarmG: any [] = [this.vs_G_PUMPS_F,this.vs_G_COMMS]
+          console.log(this.data)
+          Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-        this.dataSourceG= new MatTableDataSource(Common.getAlarmValue(alarmG))
-        this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
+         this.comms = Common.getLastUpdate(this.variable.vs_PS_UT)
+
+         var alarm1: any [] = [this.faultVariable.vs_P1_LSP,this.faultVariable.vs_P1_HDP,this.faultVariable.vs_P1_STARTER_FAULT,this.faultVariable.vs_P1_STARTUP_FAULT, this.faultVariable.vs_P1_LDP]
+         var alarm2: any [] = [this.faultVariable.vs_P2_LSP,this.faultVariable.vs_P2_HDP,this.faultVariable.vs_P2_STARTER_FAULT,this.faultVariable.vs_P2_STARTUP_FAULT, this.faultVariable.vs_P2_LDP]
+         var alarmG: any [] = [this.faultVariable.vs_G_PUMPS_F,this.faultVariable.vs_G_COMMS]
+         this.dataSourceG= new MatTableDataSource(Common.getAlarmValue(alarmG))
+         this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
+         this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
+
+
+        })
    },60000 );
   }
   ngOnDestroy(){

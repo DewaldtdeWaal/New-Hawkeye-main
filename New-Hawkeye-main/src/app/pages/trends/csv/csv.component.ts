@@ -184,7 +184,7 @@ for (let i = 0; i < this.userSites.length; i++) {
         }
       if (this.Sites.value==null || this.Sites.value==undefined){}
       else{
-        this.rs.GetTrend_Sites(this.Sites.value,this.newStart,this.newEnd).subscribe(data => {
+        this.rs.GetTrend_Sites(this.Sites.value,this.newStart,this.newEnd).then((data) => {
           trend= data;
 
           this.variable = TrendPicker.getRouteDataForTrendPicker(data,this.variable,trendArray)

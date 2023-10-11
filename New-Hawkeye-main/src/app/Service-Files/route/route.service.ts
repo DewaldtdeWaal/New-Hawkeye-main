@@ -28,7 +28,7 @@ export class pagePostMethod{
     returnVariable =  this.http.post(this.su.serverURL + "/pageValues", page).toPromise().then(DATA =>{
 
       this.data = DATA
-      console.log(    this.data )
+
 
       return this.data;
 

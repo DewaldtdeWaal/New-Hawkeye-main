@@ -13,6 +13,7 @@ import {Common} from 'src/app/class/common';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -32,7 +33,7 @@ export class KruisfonteinGW13Component implements OnInit {
 
   generalfaultdatasource :any
   comms:any
-  theme:any;
+  theme:any= localStorage.getItem("theme");
   status:any;
   displayedColumns :string[]= ['alarm', 'description'];
   showGW12:any
@@ -136,6 +137,8 @@ gw_klm_kruis13_res_ful:{
  },
 
   }
+  collectionName:any ="KLM_KRUIS13_TF"
+  trendTag:any = ["gw_klm_kruis13_TF"]
   intervalLoop: any
   faultArr:any=[
 
@@ -152,8 +155,9 @@ gw_klm_kruis13_res_ful:{
   tableDataPump1: PeriodicElement[] = [];
   dataSourceP1:any = new MatTableDataSource(this.tableDataPump1);
   public authListenerSubs!: Subscription;
-  constructor(private ls:ListeningService, private ws:WebSocketService,  public rs: ReportService,public recieve:Common,private authService: AuthService,private GWS:kruisfonteinRouting,private pm:pagePostMethod )  {
-    this.theme = localStorage.getItem("theme");
+  constructor(public rs: ReportService,public recieve:Common,private authService: AuthService,private GWS:kruisfonteinRouting,private pm:pagePostMethod ,private pt: PostTrend)  {
+    this.isLoading  = true;
+
     this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
       this.data =  result;
 
@@ -214,13 +218,12 @@ gw_klm_kruis13_res_ful:{
       });
     },60000 )
     var trend: any = {};
-    this.rs.Get_Kruis13_TotalFlows().subscribe(data => {
+
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.total_flow_1_array = trend.total_flow_1_array;
+      this.total_flow_1_array =  trend.TotalFlowArr[0];
 
       this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any
 
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
@@ -231,7 +234,7 @@ gw_klm_kruis13_res_ful:{
   }
 
 
-
+  isLoading: boolean = false;
 
   onDateFilter(){
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
@@ -239,13 +242,13 @@ gw_klm_kruis13_res_ful:{
 
   var trend :any;
 
-  this.rs.Get_Kruis13_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-  this.total_flow_1_array = trend.total_flow_1_array;
+  this.total_flow_1_array =  trend.TotalFlowArr[0];
   this.DateArr = trend.DateArr;
-  var theme:any
-  var tooltipBackground:any;
+
+
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
   })

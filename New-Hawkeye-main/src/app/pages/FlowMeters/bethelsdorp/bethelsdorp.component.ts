@@ -9,6 +9,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from 'src/app/Service-Files/report.service';
 
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 @Component({
   selector: 'app-bethelsdorp',
@@ -23,6 +25,8 @@ export class BethelsdorpComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
+
+  isLoading: boolean = false;
   variable:any = {
   beth_ut:null,
   beth_totalflow:null,
@@ -44,33 +48,43 @@ export class BethelsdorpComponent implements OnInit {
   options: EChartsOption;
   TotalFlow_BETH_Arr:any[];
   DateArr: any;
-  theme: any;
+  theme: any = localStorage.getItem("theme");
   data:any=[]
   intervalLoop: any;
-  constructor(private beth: BethelsdorpService,public rs: ReportService, public us: UsersService, public recieve:Common ) {
-    this.beth.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-      this.variable.comms = Common.getLastUpdate(this.variable.beth_ut)
+  constructor(public rs: ReportService, public us: UsersService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend  ) {
+
+
+    this.pm.findPageData("nmbm_beth_fpt", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+     this.variable.comms = Common.getLastUpdate(this.variable.beth_ut)
+
     });
-
-
 
    }
 
-
+   collectionName: any = "FPT_BETH_TF"
+   trendTag: any = ["totalFlow"]
   ngOnInit() {
-    var tagVals:any=[]
 
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
 
 
     this.intervalLoop = setInterval(() =>{
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdate(this.variable.beth_ut)
+      this.pm.findPageData("nmbm_beth_fpt", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
 
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+       this.variable.comms = Common.getLastUpdate(this.variable.beth_ut)
+
+      });
 
 
        },60000)
@@ -80,9 +94,13 @@ export class BethelsdorpComponent implements OnInit {
 
 
       var trend: any = {};
-      this.rs.Get_BETH_Total_Flows().subscribe(data => {
+
+      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+        this.isLoading = true;
         trend=data
-        this.TotalFlow_BETH_Arr = trend.TotalFlow_BETH_Arr;
+      this.TotalFlow_BETH_Arr = trend.TotalFlowArr[0];
+
+
         this.DateArr = trend.DateArr;
           var theme:any
           var tooltipBackground:any
@@ -100,7 +118,7 @@ export class BethelsdorpComponent implements OnInit {
           this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Bethelsdorp Total Flow",this.TotalFlow_BETH_Arr)
 
 
-
+          this.isLoading = false;
 
       })
 
@@ -206,10 +224,11 @@ export class BethelsdorpComponent implements OnInit {
 
   var trend :any;
 
-  this.rs.Get_BETH_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-    trend=data
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+    this.isLoading = true;
 
-    this.TotalFlow_BETH_Arr = trend.TotalFlow_BETH_Arr;
+    trend=data
+  this.TotalFlow_BETH_Arr = trend.TotalFlowArr[0];
     this.DateArr = trend.DateArr;
     console.log(this.TotalFlow_BETH_Arr)
 
@@ -227,6 +246,7 @@ export class BethelsdorpComponent implements OnInit {
   }
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Bethelsdorp Total Flow",this.TotalFlow_BETH_Arr)
+  this.isLoading = false;
   })
 
 

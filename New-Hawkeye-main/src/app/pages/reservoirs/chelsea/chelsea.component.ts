@@ -10,6 +10,7 @@ import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
 import { FormControl, FormGroup } from '@angular/forms';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-chelsea',
   templateUrl: './chelsea.component.html',
@@ -52,11 +53,11 @@ DateArr: any;
     "che_r_tf600"
 
   ]
-  constructor(public rs: ReportService,private ws: WebSocketService,private ls:ListeningService,private che: ChelseaService,private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(public rs: ReportService,private ws: WebSocketService,private ls:ListeningService,private che: ChelseaService,private userService: UsersService,private authService: AuthService,public recieve:Common,private pt: PostTrend ,private pm:pagePostMethod) {
+    this.isLoading = true;
 
 
-
-   this.pm.findPageData("nmbm_che_ps_res", "PS_CurrentVals").then((result) => {
+   this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
     this.data =  result;
 
     console.log(this.data)
@@ -89,20 +90,25 @@ DateArr: any;
   }
 
   options: EChartsOption;
-
+  collectionName:any ="CHEL_RES_TF"
+  trendTag:any =   ["che_r_tf1100", "che_r_tf600"]
 
   ngOnInit() {
 
-    var tagVals:any=[]
 
-
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+      this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
+        this.data =  result;
+
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
       this.variable.comms = Common.getLastUpdate(this.variable.che_r_ut)
+
+
+      });
 
 
 
@@ -111,10 +117,12 @@ DateArr: any;
 
 
  var trend: any = {};
- this.rs.GET_CHEL_RES_TotalFlow().subscribe(data => {
+ //this.rs.GET_CHEL_RES_TotalFlow().subscribe(data => {
+
+  this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
    trend=data
-   this.CHE_R_TF1100_arr = trend.CHE_R_TF1100_arr
-   this.CHE_R_TF600_arr = trend.CHE_R_TF600_arr
+   this.CHE_R_TF1100_arr = trend.TotalFlowArr[0]
+   this.CHE_R_TF600_arr = trend.TotalFlowArr[1]
 
 
    this.DateArr = trend.DateArr;
@@ -171,13 +179,14 @@ DateArr: any;
 
  }
 
-
+ this.isLoading = false;
 
 })
   }
 
-
+  isLoading: boolean = false;
   onDateFilter(){
+    this.isLoading = true;
     var start = this.range.value.start+'';
     var end = this.range.value.end+'';
 
@@ -276,11 +285,11 @@ DateArr: any;
 
   var trend :any;
 
-  this.rs.GET_CHEL_RES_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-  this.CHE_R_TF1100_arr = trend.CHE_R_TF1100_arr
-  this.CHE_R_TF600_arr = trend.CHE_R_TF600_arr
+  this.CHE_R_TF1100_arr = trend.TotalFlowArr[0]
+  this.CHE_R_TF600_arr = trend.TotalFlowArr[1]
   this.DateArr = trend.DateArr;
   var theme:any
   var tooltipBackground:any;
@@ -332,6 +341,8 @@ DateArr: any;
  },
     ]
   };
+
+  this.isLoading = false;
   })
 
 

@@ -19,27 +19,52 @@ export class TheescombeComponent implements OnInit {
 
   intervalLoop: any
   tc_RL:any
-  tc_UT:any
-  res:any
+  tc_R_UT:any
+  tc_R_LVL:any
   tc_R_HIGH_FLOAT:any
   tc_R_LOW_FLOAT:any
   data: any=[];
 
+  variable:any ={
+    tc_R_LOW_FLOAT:null,
+tc_R_HIGH_FLOAT:null,
+tc_R_LVL:null,
+tc_R_UT:null,
+tc_RL:null,
+  }
+
+  tagArr:any=[
+"tc_R_LOW_FLOAT",
+"tc_R_HIGH_FLOAT",
+"tc_R_LVL",
+"tc_R_UT",
+"tc_RL",
+  ]
+
   constructor(private webSocketService: WebSocketService, private THS:TheescombeService, private userService: UsersService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-    this.THS.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       console.log(this.data)
-       this.tc_R_LOW_FLOAT  = this.data.routingArray[0].tc_R_LOW_FLOAT
-       this.tc_R_HIGH_FLOAT = this.data.routingArray[0].tc_R_HIGH_FLOAT
-       this.res = this.data.routingArray[0].tc_R_LVL
-       this.tc_UT = this.data.routingArray[0].tc_R_UT
-       this.tc_RL = this.data.routingArray[0].tc_RL
+    // this.THS.GetSiteValues()
+    // .subscribe(rsp => {
+    //    this.data = rsp;
+    //    console.log(this.data)
+    //    this.tc_R_LOW_FLOAT  = this.data.routingArray[0].tc_R_LOW_FLOAT
+    //    this.tc_R_HIGH_FLOAT = this.data.routingArray[0].tc_R_HIGH_FLOAT
+    //    this.tc_R_LVL = this.data.routingArray[0].tc_R_LVL
+    //    this.tc_R_UT = this.data.routingArray[0].tc_R_UT
+    //    this.tc_RL = this.data.routingArray[0].tc_RL
 
-       this.comms = Common.getLastUpdate(this.tc_UT)
+    //    this.comms = Common.getLastUpdate(this.tc_R_UT)
 
 
-    })
+    // })
+
+    this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+     this.comms = Common.getLastUpdate(this.variable.tc_R_UT)
+
+    });
 
 
   }
@@ -56,16 +81,7 @@ export class TheescombeComponent implements OnInit {
 
   ngOnInit(){
 
-    var tagVals:any=[]
-    var tagArr =[
-      'tc_ut',//0
-      'tc_rl',//1
-      'tc_res',//2
-      'tc_high_f',//3
-      'tc_low_f',//4
 
-
-    ]
 
 
     this.showNavigationButton = "false";
@@ -84,20 +100,17 @@ export class TheescombeComponent implements OnInit {
     }
 
 
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
 
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      if(updateTemp !== undefined){
+      this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-        this.tc_UT = tagVals[0];
-        this.tc_R_LOW_FLOAT  = tagVals[4];
-        this.tc_R_HIGH_FLOAT = tagVals[3];
-        this.res = tagVals[1];
-      }
-      this.comms = Common.getLastUpdate(this.tc_UT)
-    },6000);
+       this.comms = Common.getLastUpdate(this.variable.tc_R_UT)
+
+      });
+    },60000);
 }
 
 ngOnDestroy(){

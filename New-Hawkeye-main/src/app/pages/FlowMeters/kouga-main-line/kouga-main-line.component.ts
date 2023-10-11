@@ -5,6 +5,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-kouga-main-line',
   templateUrl: './kouga-main-line.component.html',
@@ -42,11 +44,16 @@ export class KougaMainLineComponent implements OnInit {
   "kou_main_line_pressure",
   "kou_main_line_last_seen",
 ]
-  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common ) {
-    this.route.GetSiteValues()
-    .subscribe(rsp => {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+
+collectionName: any = "ONS_PARA_TOTAL_FLOW"
+trendTag: any = ["ons_para_TF"]
+  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+    this.isLoading = true;
+
+    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
       this.variable.ons_comms = Common.getLastUpdateBattery(this.variable.ons_para_ut,this.variable.ons_para_last_seen)
@@ -54,7 +61,9 @@ export class KougaMainLineComponent implements OnInit {
       this.variable.kou_comms = Common.getLastUpdateBattery(this.variable.kou_main_line_ut,this.variable.kou_main_line_last_seen)
 
 
-    })
+
+
+   })
 
    }
 
@@ -66,23 +75,25 @@ export class KougaMainLineComponent implements OnInit {
 
 
   onDateFilter(){
-
+    this.isLoading = true;
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
     const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
 var trend :any;
 
-this.rs.Post_ONS_Trend_Sites(newStart, newEnd).subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-        this.TotalFlowArr = trend.TotalFlowArr;
+        this.TotalFlowArr = trend.TotalFlowArr[0];
         this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any;
-        this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","",this.TotalFlowArr)
+        this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","",this.TotalFlowArr);
+        this.isLoading = false;
 })
 
   }
+  isLoading: boolean = false;
   ngOnInit() {
     var tagVals:any=[]
 
@@ -105,16 +116,17 @@ this.rs.Post_ONS_Trend_Sites(newStart, newEnd).subscribe(data => {
     var trend :any;
 
 
-    this.rs.Get_ONS_Trend_Sites().subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-            this.TotalFlowArr = trend.TotalFlowArr;
+
+            this.TotalFlowArr = trend.TotalFlowArr[0];
             this.DateArr = trend.DateArr;
 
 
 
 //console.log(this.userService.theme)
 this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","",this.TotalFlowArr)
-
+this.isLoading = false;
           })
   }
   ngOnDestroy(){

@@ -22,7 +22,7 @@
                  </div>
 
               <div class="grid-container-flow-meters-general-column1">Last Update:</div>
-              <div class="grid-container-flow-meters-general-column3">{{rd_r_ut}}</div>
+              <div class="grid-container-flow-meters-general-column3">{{variable.rd_r_ut}}</div>
 
 
 
@@ -47,7 +47,7 @@
 
                 <br>
               <div fxLayoutAlign="center " > <div class="circle1">
-                <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-rd_r_lvl }" class="fill"><div class="lvl-font">{{rd_r_lvl}}%</div></div></div>
+                <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-variable.rd_r_lvl }" class="fill"><div class="lvl-font">{{variable.rd_r_lvl}}%</div></div></div>
               </div>
               </div>
               <br>

@@ -5,6 +5,8 @@ import { Common } from 'src/app/class/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 @Component({
   selector: 'app-humansdorpwtw',
@@ -34,16 +36,21 @@ export class HumansdorpwtwComponent implements OnInit {
       "klm_hup_wtw_TF",
   ]
   intervalLoop:any
-  constructor( private ej: HumansdorpComponent,public recieve:Common,   public rs: ReportService,) {
-    this.ej.GetSiteValues()
-    .subscribe(rsp=> {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-      this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
-    })
+  constructor( public recieve:Common,   public rs: ReportService,private pm:pagePostMethod,private pt: PostTrend) {
+
+    this.isLoading = true;
+
+    this.pm.findPageData("klm_hup_wtw", "WTW_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
+
+    });
 
   }
-
+  collectionName: any = "Humansdrop_wtw_tf"
+  trendTag: any = ["klm_hup_wtw_TF"]
   ngOnInit() {
 
     var tagVals:any = []
@@ -53,18 +60,20 @@ export class HumansdorpwtwComponent implements OnInit {
     this.intervalLoop = setInterval(() =>{
 
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
+      this.pm.findPageData("klm_hup_wtw", "WTW_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+       this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
 
-
-      console.log(this.variable)
+      });
     },60000);
 
 
     var trend: any = {};
-    this.rs.Get_HUP_INLET_TF().subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.total_flow_1_array = trend.total_flow_1_array;
+      this.total_flow_1_array =  trend.TotalFlowArr[0];
 
       this.DateArr = trend.DateArr;
 
@@ -72,27 +81,31 @@ export class HumansdorpwtwComponent implements OnInit {
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
 
+  this.isLoading = false;
     }
     )
 
   }
+
+  isLoading: boolean = false;
   onDateFilter(){
 
-
+    this.isLoading = true;
 
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
     const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
     var trend :any;
 
-    this.rs.Post_HUP_INLET_TF(newStart, newEnd).subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
     trend=data
 
-    this.total_flow_1_array = trend.total_flow_1_array;
+    this.total_flow_1_array =  trend.TotalFlowArr[0];
     this.DateArr = trend.DateArr;
 
 
-    this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_1_array)
+    this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_1_array);
+    this.isLoading = false;
     })
 
 

@@ -10,6 +10,7 @@ import {Common} from 'src/app/class/common';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -161,7 +162,7 @@ show6:any
 
 }
 
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp2Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod  ) {
+  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp2Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ,private pt: PostTrend ) {
     this.theme = localStorage.getItem("theme");
 
     this.pm.findPageData("klm_hup2_gw", "GRDW_CurrentVals").then((result) => {
@@ -185,8 +186,10 @@ show6:any
   userSites:string[];
   public authListenerSubs!: Subscription;
 
+  trendTag:any = ["total_flow_HD2C"]
+  collectionName:any ="KLM_HUP2_TF_TREND"
   ngOnInit() {
-
+    this.isLoading = true;
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
     .subscribe(() => {
@@ -247,37 +250,38 @@ show6:any
 
 
 var trend: any = {};
-this.rs.Get_HUP2_TotalFlows().subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
   trend=data
-  this.total_flow_HD2_array = trend.total_flow_HD2_array;
+this.total_flow_HD2_array = trend.TotalFlowArr[0];
+
+
 
   this.DateArr = trend.DateArr;
-    var theme:any
-    var tooltipBackground:any
+
 
     this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD2C Total Flow",this.total_flow_HD2_array)
-
+    this.isLoading = false;
 }
 )
 
 }
-
+isLoading: boolean = false;
 
 onDateFilter(){
+  this.isLoading = true;
   const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
   const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
 var trend :any;
 
-this.rs.Get_HUP2_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-trend=data
-
-this.total_flow_HD2_array = trend.total_flow_HD2_array;
+this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+  trend=data
+this.total_flow_HD2_array = trend.TotalFlowArr[0];
 this.DateArr = trend.DateArr;
-var theme:any
-var tooltipBackground:any;
 
-this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD2C Total Flow",this.total_flow_HD2_array)
+
+this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD2C Total Flow",this.total_flow_HD2_array);
+this.isLoading = false;
 })
 
 

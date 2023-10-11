@@ -22,7 +22,7 @@
                  </div>
 
               <div class="grid-container-flow-meters-general-column1">Last Update:</div>
-              <div class="grid-container-flow-meters-general-column3">{{emer_ut}}</div>
+              <div class="grid-container-flow-meters-general-column3">{{variable.emer_ut}}</div>
 
 
 
@@ -45,7 +45,7 @@
 
                 <br>
               <div fxLayoutAlign="center " > <div class="circle1">
-                <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-emer_lvl }" class="fill"><div class="lvl-font">{{emer_lvl}}%</div></div></div>
+                <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-variable.emer_lvl }" class="fill"><div class="lvl-font">{{variable.emer_lvl}}%</div></div></div>
               </div>
               </div>
               <br>
@@ -64,9 +64,9 @@
 
                 <div class="grid-container-flow-meters-flowrate">
                   <div class="grid-container-flow-rate-general-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-                  <div class="grid-container-flow-rate-general-column3">{{emer_flow_rate}} Ml/d</div>
+                  <div class="grid-container-flow-rate-general-column3">{{variable.emer_flow_rate}} Ml/d</div>
                   <div class="grid-container-flow-rate-general-column1">Total Flow:</div>
-                  <div class="grid-container-flow-rate-general-column3">{{emer_total_flow}} Ml</div>
+                  <div class="grid-container-flow-rate-general-column3">{{variable.emer_total_flow}} Ml</div>
 
                 </div>
                 <table mat-elevation-z8 mat-table [dataSource]="generalfaulttabledatasource" matSort>
@@ -114,7 +114,9 @@
     </div>
     </form>
     </section>
-  <br>
+    <br>
+    <mat-progress-bar style="background-color: black" *ngIf="isLoading==true" style  mode="indeterminate"></mat-progress-bar>
+    <br>
   <div id="main" echarts  [options]="options" class="chart" ></div>
   <br>
   <br>

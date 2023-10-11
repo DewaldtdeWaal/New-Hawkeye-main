@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import {NooitgedachtRootComponent} from 'src/app/Service-Files/WTW/wtw.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
 
 @Component({
@@ -35,16 +36,22 @@ export class NooitgedachtComponent implements OnInit {
       "wtw_ngt_low_lift_fr",//1
       "wtw_ngt_high_lift_fr",//2
    ]
-  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,private nooit:NooitgedachtRootComponent,public recieve:Common  ) {
-    this.nooit.GetSiteValues()
-    .subscribe(rsp=> {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-      this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
-    })
+  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,private nooit:NooitgedachtRootComponent,public recieve:Common,private pm:pagePostMethod  ) {
+    // this.nooit.GetSiteValues()
+    // .subscribe(rsp=> {
+    //   this.data = rsp;
+    //   this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+    //   this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
+    // })
 
 
+    this.pm.findPageData("nmbm_ngt_wtw", "WTW_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
 
+    });
 
 
 
@@ -61,9 +68,13 @@ export class NooitgedachtComponent implements OnInit {
 
     this.intervalLoop = setInterval(() =>{
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+      this.pm.findPageData("nmbm_ngt_wtw", "WTW_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+       this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
 
-     this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
+      });
 },60000)
 
   }

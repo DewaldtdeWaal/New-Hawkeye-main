@@ -21,32 +21,34 @@ export interface PeriodicElement{
 })
 export class DriftsandsComponent implements OnInit {
  drift_r_alarm_armed:any;
- drift_r_room_alarm:any= {
+ drift_r_pepper_spray_armed:any;
+ faultVariable:any={
+ drift_r_room_alarm: {
   value: null,
 alarm:"Fault",
 description:"Room Alarm",
   alarmTrip: 1
-};;
-
- drift_r_solar_alarm:any= {
+},
+ drift_r_solar_alarm:{
   value: null,
 alarm:"Fault",
 description:"Solar Alarm",
   alarmTrip: 1
-};;
- drift_r_door_alarm:any= {
+},
+ drift_r_door_alarm: {
   value: null,
 alarm:"Fault",
 description:"Room Door Alarm",
   alarmTrip: 1
-};;
- drift_r_pepper_spray_armed:any;
- drift_r_pepper_spray_alarm:any = {
+},
+
+ drift_r_pepper_spray_alarm: {
   value: null,
 alarm:"Fault",
 description:"Pepper Spray Alarm",
   alarmTrip: 1
-};;
+},
+ }
  drift_r_pepper_spray_gas_left:any;
  drift_r_pepper_spray_battery_voltage:any;
  drift_r_reservoir_level:any;
@@ -64,7 +66,7 @@ description:"Pepper Spray Alarm",
   intervalLoop: any;
 
 
-   tagArr=[
+  tagArr:any=[
     'drift_r_ut',//0
    'drift_r_alarm_armed',//1
    'drift_r_room_alarm',//2
@@ -84,48 +86,50 @@ description:"Pepper Spray Alarm",
 
   ]
 
+  variable:any = {
+    drift_r_ut:null,
+    drift_r_alarm_armed:null,
+    drift_r_room_alarm:null,
+    drift_r_solar_alarm:null,
+    drift_r_door_alarm:null,
+    drift_r_pepper_spray_armed:null,
+    drift_r_pepper_spray_alarm:null,
+    drift_r_pepper_spray_gas_left:null,
+    drift_r_pepper_spray_battery_voltage:null,
+    drift_r_reservoir_level:null,
+    drift_r_flow_rate_1:null,
+    drift_r_flow_rate_2:null,
+    drift_r_total_flow_1:null,
+    drift_r_total_flow_2:null,
 
+
+  }
+
+  faultArr:any=[
+    "drift_r_room_alarm",
+"drift_r_solar_alarm",
+"drift_r_door_alarm",
+"drift_r_pepper_spray_alarm",
+  ]
 
   constructor(private ws: WebSocketService, public rs: ReportService, public us: UsersService,private authService: AuthService,private drift:driftSandsService,public recieve:Common ,private pm:pagePostMethod) {
 
-    this.drift.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-     this.drift_r_alarm_armed = this.data.routingArray[0].drift_r_alarm_armed
 
-     this.drift_r_ut = this.data.routingArray[0].drift_r_ut
-     this.comms = Common.getLastUpdate(this.drift_r_ut)
+    this.pm.findPageData("nmbm_drift_res", "R_CurrentVals").then((result) => {
+      this.data =  result;
 
-     this.drift_r_pepper_spray_armed = this.data.routingArray[0].drift_r_pepper_spray_armed
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-     this.drift_r_pepper_spray_gas_left = this.data.routingArray[0].drift_r_pepper_spray_gas_left
-     this.drift_r_pepper_spray_battery_voltage = this.data.routingArray[0].drift_r_pepper_spray_battery_voltage
-     this.drift_r_reservoir_level = this.data.routingArray[0].drift_r_reservoir_level
-     this.drift_r_flow_rate_1 = this.data.routingArray[0].drift_r_flow_rate_1
-     this.drift_r_flow_rate_2 = this.data.routingArray[0].drift_r_flow_rate_2
-     this.drift_r_total_flow_1 = this.data.routingArray[0].drift_r_total_flow_1
-     this.drift_r_total_flow_2 = this.data.routingArray[0].drift_r_total_flow_2
+     this.comms = Common.getLastUpdate(this.variable.drift_r_ut)
+     var alarm: any[] = [this.faultVariable.drift_r_door_alarm, this.faultVariable.drift_r_solar_alarm, this.faultVariable.drift_r_room_alarm,this.faultVariable.drift_r_pepper_spray_alarm  ]
 
+     this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm));
 
-     this.drift_r_door_alarm.value = this.data.routingArray[0].drift_r_door_alarm
-     this.drift_r_solar_alarm.value = this.data.routingArray[0].drift_r_solar_alarm
-     this.drift_r_room_alarm.value = this.data.routingArray[0].drift_r_room_alarm
-     this.drift_r_pepper_spray_alarm.value = this.data.routingArray[0].drift_r_pepper_spray_alarm
-    })
+    });
 
 
 
-    setTimeout(() => {
-
-      var alarm: any[] = [this.drift_r_door_alarm, this.drift_r_solar_alarm, this.drift_r_room_alarm,this.drift_r_pepper_spray_alarm  ]
-
-      this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm));
-
-
-
-
-
-    },6000)
    }
 
    recieveVals(tagArr: any[]){
@@ -171,42 +175,20 @@ description:"Pepper Spray Alarm",
 
     var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
-      console.log(tagVals)
-      updateTemp = tagVals[0];
-      if(updateTemp !== undefined){
 
-       this.drift_r_ut = tagVals[0]
+      this.pm.findPageData("nmbm_drift_res", "R_CurrentVals").then((result) => {
+        this.data =  result;
 
-       this.drift_r_alarm_armed = tagVals[1]
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
+       this.comms = Common.getLastUpdate(this.variable.drift_r_ut)
+       var alarm: any[] = [this.faultVariable.drift_r_door_alarm, this.faultVariable.drift_r_solar_alarm, this.faultVariable.drift_r_room_alarm,this.faultVariable.drift_r_pepper_spray_alarm  ]
 
+       this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm));
 
-       this.drift_r_pepper_spray_armed = tagVals[5]
+      });
 
-       this.drift_r_pepper_spray_gas_left = tagVals[7]
-       this.drift_r_pepper_spray_battery_voltage = tagVals[8]
-       this.drift_r_reservoir_level = tagVals[9]
-       this.drift_r_flow_rate_1  = tagVals[10]
-       this.drift_r_flow_rate_2  = tagVals[11]
-       this.drift_r_total_flow_1  = tagVals[12]
-       this.drift_r_total_flow_2  = tagVals[13]
-
-
-       this.drift_r_room_alarm.value = tagVals[2]
-         this.drift_r_solar_alarm.value = tagVals[3]
-          this.drift_r_door_alarm.value = tagVals[4]
-          this.drift_r_pepper_spray_alarm.value = tagVals[6]
-
-
-       var alarm: any[] = [this.drift_r_door_alarm, this.drift_r_solar_alarm, this.drift_r_room_alarm,this.drift_r_pepper_spray_alarm  ]
-
-        this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm));
-
-
-
-
-    }
-    this.comms = Common.getLastUpdate(this.drift_r_ut)
 
 },60000);
 

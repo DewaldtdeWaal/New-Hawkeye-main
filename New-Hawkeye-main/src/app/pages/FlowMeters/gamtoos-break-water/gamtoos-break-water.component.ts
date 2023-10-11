@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Common } from 'src/app/class/common';
 import {gamtoosBreakWaterFPT} from 'src/app/Service-Files/FPT/fpt.service';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 export interface PeriodicElement {
   alarm: string;
@@ -105,16 +106,21 @@ export class GamtoosBreakWaterComponent implements OnInit {
 
     }
 
-  constructor(private GBWFPT: gamtoosBreakWaterFPT, public recieve:Common ) {
-    this.GBWFPT.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-       this.faultVariable =   Common.getFaultRouteData(this.faultArr,this.faultVariable,this.data.routingArray)
+  constructor(private GBWFPT: gamtoosBreakWaterFPT, public recieve:Common,private pm:pagePostMethod ) {
+
+
+    this.pm.findPageData("nmbm_gbw_fpt", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
        this.variable.comms = Common.getLastUpdate(this.variable.gbw_ut)
        var alarm1: any [] = [this.faultVariable.gbw_fault_door_opened,this.faultVariable.gbw_fault_high_pressure_fault,this.faultVariable.gbw_fault_MAC_limit_read,this.faultVariable.gbw_surge_arrest_fault,this.faultVariable.gbw_valve_fault,this.faultVariable.gbw_volt_fault,this.faultVariable.gbw_gen_fault];
        this.dataSource= new MatTableDataSource(Common.getAlarmValue(alarm1))
-    })
+
+
+
+
+   })
    }
 
   ngOnInit() {
@@ -124,19 +130,18 @@ export class GamtoosBreakWaterComponent implements OnInit {
     errorVals = this.recieve.recieveNMBMVals(this.faultArr)
     this.intervalLoop = setInterval(() =>{
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.faultVariable.gbw_fault_door_opened.value = errorVals[0]
-      this.faultVariable.gbw_fault_high_pressure_fault.value = errorVals[1]
-      this.faultVariable.gbw_fault_MAC_limit_read.value = errorVals[2]
-      this.faultVariable.gbw_surge_arrest_fault.value = errorVals[3]
-      this.faultVariable.gbw_valve_fault.value = errorVals[4]
-      this.faultVariable.gbw_volt_fault.value = errorVals[5]
-      this.faultVariable.gbw_gen_fault.value = errorVals[6]
+      this.pm.findPageData("nmbm_gbw_fpt", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+         this.variable.comms = Common.getLastUpdate(this.variable.gbw_ut)
+         var alarm1: any [] = [this.faultVariable.gbw_fault_door_opened,this.faultVariable.gbw_fault_high_pressure_fault,this.faultVariable.gbw_fault_MAC_limit_read,this.faultVariable.gbw_surge_arrest_fault,this.faultVariable.gbw_valve_fault,this.faultVariable.gbw_volt_fault,this.faultVariable.gbw_gen_fault];
+         this.dataSource= new MatTableDataSource(Common.getAlarmValue(alarm1))
 
 
-      this.variable.comms = Common.getLastUpdate(this.variable.gbw_ut)
-      var alarm1: any [] = [this.faultVariable.gbw_fault_door_opened,this.faultVariable.gbw_fault_high_pressure_fault,this.faultVariable.gbw_fault_MAC_limit_read,this.faultVariable.gbw_surge_arrest_fault,this.faultVariable.gbw_valve_fault,this.faultVariable.gbw_volt_fault,this.faultVariable.gbw_gen_fault];
-      this.dataSource= new MatTableDataSource(Common.getAlarmValue(alarm1))
+
+
+     })
     },60000)
   }
 

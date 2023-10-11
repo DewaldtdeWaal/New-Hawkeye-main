@@ -57,6 +57,7 @@ export class AirportresComponent implements OnInit {
 
 
     this.intervalLoop = setInterval(() =>{
+
       this.pm.findPageData("air_prt", "R_CurrentVals").then((result) => {
         this.data =  result;
 

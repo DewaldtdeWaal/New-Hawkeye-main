@@ -15,6 +15,7 @@ import { SiteControlService } from 'src/app/Service-Files/site-control.service';
 import { standfordRoadComponent} from 'src/app/Service-Files/Pumpstation/pumpstation.service';
 import {StanOnOffService} from 'src/app/Service-Files/standfordpumponofstate.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
   alarm: string;
   description: string;
@@ -113,7 +114,7 @@ p4_btn:any= false
     dataSourceP4:any
 
 
-    theme:any;
+    theme:any = localStorage.getItem("theme");
   data: any=[];
   faultVariable:any={
   stan_p1_alarmstrip: {
@@ -188,8 +189,29 @@ p4_btn:any= false
     "stan_p4_alarmstrip",//32
   ]
 
-  constructor(private http: HttpClient, private su:ServerURLService, private ws: WebSocketService, private cl:ControlLogService, private as:AuthService, private ls:ListeningService, private site_Control: SiteControlService, private stan: standfordRoadComponent, private onOf: StanOnOffService,public recieve:Common ) {
+  constructor(private http: HttpClient, private su:ServerURLService, private cl:ControlLogService, private pm:pagePostMethod, private as:AuthService,  private site_Control: SiteControlService,  private onOf: StanOnOffService,public recieve:Common ) {
 
+
+    this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").then((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+
+     this.variable.comms = Common.getLastUpdate(this.variable.stan_ps_ut)
+
+     var alarm1: any [] = [this.faultVariable.stan_p1_alarmstrip]
+     var alarm2: any [] = [this.faultVariable.stan_p2_alarmstrip]
+     var alarm3: any [] = [this.faultVariable.stan_p3_alarmstrip]
+     var alarm4: any [] = [this.faultVariable.stan_p4_alarmstrip]
+
+     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+     this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+     this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+     this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
+
+
+    })
     this.onOf.GetSiteValues()
     .subscribe(rsp=>{
       this.data = rsp;
@@ -199,35 +221,13 @@ p4_btn:any= false
       this.pump4OnOff = this.data.routingArray[0].p4_run;
     })
 
-    this.stan.GetSiteValues()
-    .subscribe(rsp=> {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-      this.faultVariable =   Common.getFaultRouteData(this.faultArr,this.faultVariable,this.data.routingArray)
-      this.variable.comms = Common.getLastUpdate(this.variable.stan_ps_ut)
+
+    //   setTimeout(()=>{
 
 
 
-    })
 
-    this.theme = localStorage.getItem("theme");
-
-
-      setTimeout(()=>{
-
-
-        var alarm1: any [] = [this.faultVariable.stan_p1_alarmstrip]
-        var alarm2: any [] = [this.faultVariable.stan_p2_alarmstrip]
-        var alarm3: any [] = [this.faultVariable.stan_p3_alarmstrip]
-        var alarm4: any [] = [this.faultVariable.stan_p4_alarmstrip]
-
-        this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-        this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-        this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-
-
-    },1000)
+    // },1000)
 
     this.userSites = this.as.getUserSites();
     this.firstName = this.as.getFirstName();
@@ -271,10 +271,7 @@ p4_btn:any= false
       })
 
 
-      var tagVals:any =[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-    errorVals = this.recieve.recieveNMBMVals(this.faultArr)
+
 
 
 
@@ -282,27 +279,26 @@ p4_btn:any= false
     var updateTemp:any;
 
     this.intervalLoop = setInterval(() =>{
-      updateTemp=errorVals[0];
+      this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").then((result) => {
+        this.data =  result;
 
-      if(updateTemp !==  undefined){
-        this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-        Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
+       this.variable.comms = Common.getLastUpdate(this.variable.stan_ps_ut)
+
+       var alarm1: any [] = [this.faultVariable.stan_p1_alarmstrip]
+       var alarm2: any [] = [this.faultVariable.stan_p2_alarmstrip]
+       var alarm3: any [] = [this.faultVariable.stan_p3_alarmstrip]
+       var alarm4: any [] = [this.faultVariable.stan_p4_alarmstrip]
+
+       this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+       this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+       this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+       this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
 
 
-
-
-
-      var alarm1: any [] = [this.faultVariable.stan_p1_alarmstrip]
-      var alarm2: any [] = [this.faultVariable.stan_p2_alarmstrip]
-      var alarm3: any [] = [this.faultVariable.stan_p3_alarmstrip]
-      var alarm4: any [] = [this.faultVariable.stan_p4_alarmstrip]
-
-      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-      this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-      this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-    }   this.variable.comms = Common.getLastUpdate(this.variable.stan_ps_ut)
+      })
       },60000)
 
 

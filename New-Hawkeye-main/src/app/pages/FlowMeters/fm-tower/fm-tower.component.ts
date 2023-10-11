@@ -7,6 +7,8 @@ import * as echarts from 'echarts';
 import { UsersService } from 'src/app/Service-Files/users.service';
 import {FMT} from 'src/app/Service-Files/FPT/fmtower.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 type EChartsOption = echarts.EChartsOption;
 export interface PeriodicElement {
@@ -50,66 +52,79 @@ theme:any
   dataSourceALM:any;
   comms: string;
   data: any=[];
-
-  fmt_FM_CHAMBER_TAMP:any= {
+  faultVariable:any={
+  fmt_FM_CHAMBER_TAMP: {
     value: null,
   alarm:"Fault",
   description:"Chamber Tamper",
     alarmTrip: 1
-  };
-  fmt_FM_SOLAR_PANEL_TAMP:any= {
+  },
+  fmt_FM_SOLAR_PANEL_TAMP: {
     value: null,
   alarm:"ALARM",
   description:"Panel Tamper",
     alarmTrip: 1
-  };
-  fmt_FM_DOOR_OPENED:any= {
+  },
+  fmt_FM_DOOR_OPENED: {
     value: null,
   alarm:"Fault",
   description:"Door Opened",
     alarmTrip: 1
-  };
+  }
+}
+  variable:any = {
+    fmt_FM_UT:null,
+    fmt_FM_FR:null,
+    fmt_FM_GAS_L:null,
+    fmt_FM_BATTERY_V:null,
+    fmt_FM_TF:null,
+    fmt_FM_ALM_ARMD:null,
+    fmt_FM_CHAMBER_TAMP:null,
+    fmt_FM_DOOR_OPENED:null,
+    fmt_FM_LOW_B:null,
+    fmt_FM_PEPPER_S_ALM:null,
+    fmt_FM_PEPPER_S_ARMD:null,
+    fmt_FM_SOLAR_PANEL_TAMP:null,
+    fmt_FM_PRESS:null,
+}
 
 
-  constructor(private fmt:FMT, private webSocketService: WebSocketService,public rs: ReportService,private userService: UsersService, public recieve:Common ) {
-    this.fmt.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       this.fmt_FM_UT = this.data.routingArray[0].fmt_FM_UT
-       this.comms = Common.getLastUpdate(this.fmt_FM_UT)
-       this.fmt_FM_FR= this.data.routingArray[0].fmt_FM_FR
-       this.fmt_FM_GAS_L=this.data.routingArray[0].fmt_FM_GAS_L
-       this.fmt_FM_BATTERY_V=this.data.routingArray[0].fmt_FM_BATTERY_V
-       this.fmt_FM_TF=this.data.routingArray[0].fmt_FM_TF
-       this.fmt_FM_ALM_ARMD = this.data.routingArray[0].fmt_FM_ALM_ARMD
-       this.fmt_FM_CHAMBER_TAMP.value = this.data.routingArray[0].fmt_FM_CHAMBER_TAMP
-       this.fmt_FM_DOOR_OPENED.value = this.data.routingArray[0].fmt_FM_DOOR_OPENED
-       this.fmt_FM_LOW_B = this.data.routingArray[0].fmt_FM_LOW_B
-       this.fmt_FM_PEPPER_S_ALM = this.data.routingArray[0].fmt_FM_PEPPER_S_ALM
-       this.fmt_FM_PEPPER_S_ARMD = this.data.routingArray[0].fmt_FM_PEPPER_S_ARMD
-       this.fmt_FM_SOLAR_PANEL_TAMP.value = this.data.routingArray[0].fmt_FM_SOLAR_PANEL_TAMP
-       this.fmt_FM_PRESS = this.data.routingArray[0].fmt_FM_PRESS
+tagArr:any = [
+  "fmt_FM_UT",
+  "fmt_FM_FR",
+  "fmt_FM_GAS_L",
+  "fmt_FM_BATTERY_V",
+  "fmt_FM_TF",
+  "fmt_FM_ALM_ARMD",
+  "fmt_FM_LOW_B",
+  "fmt_FM_PEPPER_S_ALM",
+  "fmt_FM_PEPPER_S_ARMD",
+  "fmt_FM_PRESS",
 
-    })
+]
+faultArr:any=[
+  "fmt_FM_CHAMBER_TAMP",
+"fmt_FM_SOLAR_PANEL_TAMP",
+"fmt_FM_DOOR_OPENED",
+]
 
-
-    setTimeout(() => {
-
-
-
-
-      var alarm1: any [] = [this.fmt_FM_CHAMBER_TAMP,this.fmt_FM_SOLAR_PANEL_TAMP,this.fmt_FM_DOOR_OPENED]
+  constructor(private pt: PostTrend,public rs: ReportService, public recieve:Common,private pm:pagePostMethod ) {
+    this.isLoading = true;
+    this.pm.findPageData("nmbm_fmt_fm", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.comms = Common.getLastUpdate(this.variable.fmt_FM_UT)
+      var alarm1: any [] = [this.faultVariable.fmt_FM_CHAMBER_TAMP,this.faultVariable.fmt_FM_SOLAR_PANEL_TAMP,this.faultVariable.fmt_FM_DOOR_OPENED]
 
       this.dataSourceALM= new MatTableDataSource(Common.getAlarmValue(alarm1))
 
 
 
 
+   })
 
 
-
-
-    },2000)
 
   }
   range = new FormGroup({
@@ -117,10 +132,10 @@ theme:any
     end: new FormControl()
   });
 
-
+  isLoading: boolean = false;
   onDateFilter(){
 
-
+    this.isLoading = true;
 
 
 
@@ -129,76 +144,33 @@ theme:any
 
 var trend :any;
 
-this.rs.GetFMT_Total_Flow_Dates(newStart, newEnd).subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+
+
   trend=data
-
-        this.TotalFlowArr = trend.TotalFlowArr;
+        this.TotalFlowArr = trend.TotalFlowArr[0];
         this.DateArr = trend.DateArr;
-
-
-
         this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","FM Tower Total",this.TotalFlowArr)
 
-
-
+        this.isLoading = false;
       })
 }
-
+trendTag:any = ["totalflow"]
+collectionName:any ="FM_FMT_TF"
 
   ngOnInit() {
-
-
-
-    var tagVals:any=[]
-    var tagArr=[
-      "fmt_fm_ut",//0
-      "fmt_fm_gas_l",//1
-      "fmt_fm_battery_v",//2
-      "fmt_fm_fr",//3
-      "fmt_fm_tf",//4
-      "fmt_fm_low_b",//5
-      "fmt_fm_alm_armd",//6
-      "fmt_fm_chamber_tamp",//7
-      "fmt_fm_solar_panel_tamp",//8
-      "fmt_fm_door_opened",//9
-      "fmt_fm_pepper_s_armd",//10
-      "fmt_fm_pepper_s_alm",//11
-      "fmt_fm_press"
-    ]
-
-
-   tagVals = this.recieve.recieveNMBMVals(tagArr);
-
-
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
 
-      updateTemp=tagVals[0];
-      console.log(updateTemp)
-      if(updateTemp !== undefined){
-      this.fmt_FM_UT = tagVals[0]
+      this.pm.findPageData("nmbm_fmt_fm", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+        this.comms = Common.getLastUpdate(this.variable.fmt_FM_UT)
+        var alarm1: any [] = [this.faultVariable.fmt_FM_CHAMBER_TAMP,this.faultVariable.fmt_FM_SOLAR_PANEL_TAMP,this.faultVariable.fmt_FM_DOOR_OPENED]
 
-      this.fmt_FM_FR = tagVals[3]
-      this.fmt_FM_GAS_L = tagVals[1]
-      this.fmt_FM_BATTERY_V = tagVals[2]
-      this.fmt_FM_TF = tagVals[4]
-      this.fmt_FM_ALM_ARMD = tagVals[6]
-      this.fmt_FM_CHAMBER_TAMP.value = tagVals[7]
-      this.fmt_FM_DOOR_OPENED.value = tagVals[9]
-      this.fmt_FM_LOW_B = tagVals[5]
-      this.fmt_FM_PEPPER_S_ALM = tagVals[11]
-      this.fmt_FM_PEPPER_S_ARMD = tagVals[10]
-      this.fmt_FM_SOLAR_PANEL_TAMP.value = tagVals[8]
-      this.fmt_FM_PRESS = tagVals[12]
+        this.dataSourceALM= new MatTableDataSource(Common.getAlarmValue(alarm1))
 
-      }
-      this.comms = Common.getLastUpdate(this.fmt_FM_UT)
-
-
-
-      var alarm1: any [] = [this.fmt_FM_CHAMBER_TAMP,this.fmt_FM_SOLAR_PANEL_TAMP,this.fmt_FM_DOOR_OPENED]
-
-      this.dataSourceALM= new MatTableDataSource(Common.getAlarmValue(alarm1))
+     })
 
     },60000)
 
@@ -207,13 +179,18 @@ this.rs.GetFMT_Total_Flow_Dates(newStart, newEnd).subscribe(data => {
     var trend :any;
 
 
-    this.rs.GetFMT_Total_Flow().subscribe(data => {
+
+
+
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+
+
       trend=data
-            this.TotalFlowArr = trend.TotalFlowArr;
+            this.TotalFlowArr = trend.TotalFlowArr[0];
             this.DateArr = trend.DateArr;
 
             this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","FM Tower Total",this.TotalFlowArr)
-
+            this.isLoading = false;
           })
 
 }

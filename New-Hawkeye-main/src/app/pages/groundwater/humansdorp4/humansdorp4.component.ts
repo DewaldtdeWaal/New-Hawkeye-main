@@ -10,6 +10,7 @@ import {Common} from 'src/app/class/common';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -162,7 +163,10 @@ data:any = []
   },
 }
 
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp4Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ) {
+trendTag:any = ["total_flow_HD4"]
+collectionName:any ="KLM_HUP4_TF_TREND"
+
+  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp4Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
     this.theme = localStorage.getItem("theme");
 
     this.pm.findPageData("klm_hup4_gw", "GRDW_CurrentVals").then((result) => {
@@ -185,10 +189,10 @@ data:any = []
   userSites:string[];
   public authListenerSubs!: Subscription;
 
-
+  isLoading: boolean = false;
 
   ngOnInit() {
-
+    this.isLoading = true;
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
     .subscribe(() => {
@@ -218,13 +222,7 @@ data:any = []
       }
     }
 
-  var tagVals:any =[]
-  var errorVals:any=[]
-  tagVals = this.recieve.recieveNonMVals(this.tagArr);
 
-  var updateTemp:any;
-
-  errorVals = this.recieve.recieveNonMVals(this.faultArr)
   this.intervalLoop = setInterval(() =>{
 
 
@@ -245,16 +243,22 @@ data:any = []
 
 
 var trend: any = {};
-  this.rs.Get_HUP4_TotalFlows().subscribe(data => {
+//  this.rs.Get_HUP4_TotalFlows().subscribe(data => {
+
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+      trend=data
+
+
+
     trend=data
-    this.total_flow_HD4_array = trend.total_flow_HD4_array;
+    this.total_flow_HD4_array= trend.TotalFlowArr[0];
 
     this.DateArr = trend.DateArr;
       var theme:any
       var tooltipBackground:any
 
       this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD4 Total Flow",this.total_flow_HD4_array)
-
+      this.isLoading = false;
   }
   )
 
@@ -262,20 +266,26 @@ var trend: any = {};
 
 
   onDateFilter(){
+    this.isLoading = true;
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
     const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
   var trend :any;
 
-  this.rs.Get_HUP4_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-  trend=data
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+    trend=data
 
-  this.total_flow_HD4_array = trend.total_flow_HD4_array;
+
+
+  trend=data
+  this.total_flow_HD4_array= trend.TotalFlowArr[0];
   this.DateArr = trend.DateArr;
   var theme:any
   var tooltipBackground:any;
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD4 Total Flow",this.total_flow_HD4_array)
+
+  this.isLoading = false;
   })
 
 

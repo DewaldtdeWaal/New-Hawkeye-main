@@ -1429,7 +1429,7 @@ if (start!=null && end!=null){
     // this.rs.GetTrend_Sites(this.Sites.value,this.newStart,this.newEnd).subscribe(data => {
       console.log(this.Sites.value)
       console.log(this.selectedTags)
-      this.rs.GetTrend_Sites(this.Sites.value,this.newStart,this.newEnd).subscribe(data => {
+      this.rs.GetTrend_Sites(this.Sites.value,this.newStart,this.newEnd).then((data) => {
 
 
      trend= data

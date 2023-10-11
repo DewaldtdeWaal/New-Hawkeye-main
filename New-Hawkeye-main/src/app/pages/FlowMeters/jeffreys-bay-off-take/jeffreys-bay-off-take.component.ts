@@ -5,6 +5,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common'
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-jeffreys-bay-off-take',
   templateUrl: './jeffreys-bay-off-take.component.html',
@@ -19,7 +21,7 @@ export class JeffreysBayOffTakeComponent implements OnInit {
   jeff_bay_off_take_last_seen:null,
   comms:null,
   }
-
+  isLoading: boolean = false;
   options: EChartsOption;
 
   TotalFlowArr: any[]=[];
@@ -33,18 +35,21 @@ export class JeffreysBayOffTakeComponent implements OnInit {
     "jeff_bay_off_take_total_flow",
     "jeff_bay_off_take_last_seen",]
 
-  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common ) {
-    this.route.GetSiteValues()
-    .subscribe(rsp => {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod ,private pt: PostTrend) {
+    this.isLoading = true;
+
+    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
       this.variable.comms = Common.getLastUpdateBattery(this.variable.jeff_bay_off_take_last_update,this.variable.jeff_bay_off_take_last_seen)
 
 
+      this.isLoading = false;
 
-    })
+   })
 
    }
    range = new FormGroup({
@@ -52,9 +57,12 @@ export class JeffreysBayOffTakeComponent implements OnInit {
     end: new FormControl()
   });
 
-
+  collectionName: any = "JEFF_BAY_TAKE_OFF"
+  trendTag: any = ["jeff_bay_off_take_total_flow"]
 
   onDateFilter(){
+
+    this.isLoading = true;
     var start = this.range.value.start+'';
     var end = this.range.value.end+'';
 
@@ -152,10 +160,9 @@ var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
 
 var trend :any;
 
-this.rs.Post_JBOT_Trend_Sites(newStart, newEnd).subscribe(data => {
+this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
-
-        this.TotalFlowArr = trend.TotalFlowArr;
+        this.TotalFlowArr = trend.TotalFlowArr[0];
         this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any;
@@ -216,16 +223,26 @@ this.options = {
     this.intervalLoop = setInterval(() =>{
 
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.jeff_bay_off_take_last_update,this.variable.jeff_bay_off_take_last_seen)
+      this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+
+
+        this.variable.comms = Common.getLastUpdateBattery(this.variable.jeff_bay_off_take_last_update,this.variable.jeff_bay_off_take_last_seen)
+
+
+
+
+     })
     },60000)
 
     var trend :any;
 
 
-    this.rs.Get_JBOT_Trend_Sites().subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-            this.TotalFlowArr = trend.TotalFlowArr;
+            this.TotalFlowArr = trend.TotalFlowArr[0];
             this.DateArr = trend.DateArr;
 
             var theme:any
@@ -272,7 +289,7 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
                   color: "rgb(89, 105, 128)"
               }]
             };
-
+            this.isLoading = false;
           })
   }
   ngOnDestroy(){

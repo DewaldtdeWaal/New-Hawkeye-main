@@ -23,6 +23,8 @@ export interface PeriodicElement {
   templateUrl: './waplaastrends.component.html',
   styleUrls: ['./waplaastrends.component.css']
 })
+
+
 export class WaplaastrendsComponent implements OnInit {
   isLoading: boolean = false;
   options: any;
@@ -564,7 +566,7 @@ this.newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
     // this.rs.GetTrend_Sites(this.Sites.value,this.newStart,this.newEnd).subscribe(data => {
       console.log(this.Sites.value)
       console.log(this.selectedTags)
-      this.rs.GetWesTrend_Sites(this.Sites.value,this.newStart,this.newEnd).subscribe(data => {
+      this.rs.GetWesTrend_Sites(this.Sites.value,this.newStart,this.newEnd).then((data) => {
 
 
      trend= data

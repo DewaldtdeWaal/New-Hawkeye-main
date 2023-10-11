@@ -152,7 +152,7 @@ tooltipBackground = 'rgba(255, 255, 255, 1)'
       nameTextStyle: { color: theme},
       boundaryGap: [0.2, 0.2],
       min: 0,
-      axisLabel: {rotate: 90, color: theme},
+      axisLabel: {rotate: 0, color: theme},
     },
     series: [{
       name: lineName,

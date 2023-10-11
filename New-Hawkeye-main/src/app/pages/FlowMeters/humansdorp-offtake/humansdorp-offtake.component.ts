@@ -7,6 +7,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-humansdorp-offtake',
   templateUrl: './humansdorp-offtake.component.html',
@@ -38,16 +40,20 @@ data:any=[]
 
 ]
 
-  constructor(private route:jeffreysBay, private ws: WebSocketService,public rs: ReportService, public recieve:Common ) {
-    this.route.GetSiteValues()
-    .subscribe(rsp => {
-      this.data = rsp;
-      this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+  constructor(private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+    this.isLoading = true;
+    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
 
       this.variable.comms = Common.getLastUpdateBattery(this.variable.humansdorp_off_take_ut,this.variable.humansdorp_off_take_last_seen)
 
 
-    })
+
+
+   })
 
 
    }
@@ -59,6 +65,8 @@ data:any=[]
 
 
   onDateFilter(){
+
+    this.isLoading = true;
     var start = this.range.value.start+'';
     var end = this.range.value.end+'';
 
@@ -156,10 +164,14 @@ var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
 
 var trend :any;
 
-this.rs.Post_HumanDorpTrend_Sites(newStart, newEnd).subscribe(data => {
+//this.rs.Post_HumanDorpTrend_Sites(newStart, newEnd).subscribe(data => {
+
+
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+
   trend=data
 
-        this.TotalFlowArr = trend.TotalFlowArr;
+  this.TotalFlowArr = trend.TotalFlowArr[0];
         this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any;
@@ -205,10 +217,14 @@ this.options = {
       color: "rgb(89, 105, 128)"
   }]
 };
-
+this.isLoading = false;
       })
 }
 
+
+collectionName: any = "HUMANSDORP_OFF_TAKE_TF"
+trendTag: any = ["humansdorp_off_TF"]
+isLoading: boolean = false;
   ngOnInit() {
     var tagVals:any=[]
 
@@ -217,19 +233,30 @@ this.options = {
 
     this.intervalLoop = setInterval(() =>{
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.humansdorp_off_take_ut,this.variable.humansdorp_off_take_last_seen)
 
 
+      this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
+        this.data =  result;
+        console.log(this.data)
+        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+        this.variable.comms = Common.getLastUpdateBattery(this.variable.humansdorp_off_take_ut,this.variable.humansdorp_off_take_last_seen)
+
+
+
+
+     })
     },60000)
 
 
     var trend :any;
 
-
-    this.rs.GetHumanDorpTrend_Sites().subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-            this.TotalFlowArr = trend.TotalFlowArr;
+
+
+            this.TotalFlowArr = trend.TotalFlowArr[0];
             this.DateArr = trend.DateArr;
 
             var theme:any
@@ -276,7 +303,7 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
                   color: "rgb(89, 105, 128)"
               }]
             };
-
+            this.isLoading = false;
           })
   }
 

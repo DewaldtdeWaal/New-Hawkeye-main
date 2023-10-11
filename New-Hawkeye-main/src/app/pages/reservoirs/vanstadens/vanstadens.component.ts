@@ -19,35 +19,57 @@ export class VanstadensComponent implements OnInit {
   userSites:string[];
    intervalLoop: any
   showNavigationButton: string;
+  tagArr:any=["vs_R_LVL",
+    "vs_R_SURGE_ARRESTOR",
+    "vs_R_CHARGER_STATUS",
+    "vs_R_DOOR",
+    "vs_R_UT",]
+
+  variable:any ={
+    vs_R_LVL:null,
+vs_R_SURGE_ARRESTOR:null,
+vs_R_CHARGER_STATUS:null,
+vs_R_DOOR:null,
+vs_R_UT:null,
+  }
+
 
 
   constructor(private webSocketService: WebSocketService, private VSS: VanstadensReservoirService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
-    this.VSS.GetSiteValues()
-    .subscribe(rsp => {
-       this.data = rsp;
-       console.log(this.data)
-    this.vs_RL = this.data.routingArray[0].vs_R_LVL
-    this.vs_SA = this.data.routingArray[0].vs_R_SURGE_ARRESTOR
-    this.vs_CHS = this.data.routingArray[0].vs_R_CHARGER_STATUS
-    this.vs_D = this.data.routingArray[0].vs_R_DOOR
-    this.vs_UT = this.data.routingArray[0].vs_R_UT
-    this.res = this.data.routingArray[0].vs_R_LVL
+    // this.VSS.GetSiteValues()
+    // .subscribe(rsp => {
+    //    this.data = rsp;
+    //    console.log(this.data)
+    // this.vs_R_LVL = this.data.routingArray[0].vs_R_LVL
+    // this.vs_R_SURGE_ARRESTOR = this.data.routingArray[0].vs_R_SURGE_ARRESTOR
+    // this.vs_R_CHARGER_STATUS = this.data.routingArray[0].vs_R_CHARGER_STATUS
+    // this.vs_R_DOOR = this.data.routingArray[0].vs_R_DOOR
+    // this.vs_R_UT = this.data.routingArray[0].vs_R_UT
 
-    this.comms = Common.getLastUpdate(this.vs_UT)
+    // this.comms = Common.getLastUpdate(this.vs_R_UT)
 
-    })
+    // })
+
+
+    this.pm.findPageData("nmbm_vs_r", "R_CurrentVals").then((result) => {
+      this.data =  result;
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+     this.comms = Common.getLastUpdate(this.variable.vs_R_UT)
+
+    });
 
 
 
 
   }
 
-  vs_RL:any
-  vs_SA:any
-  vs_CHS:any
-  vs_D:any
-  vs_UT:any
-  res:any
+  vs_R_LVL:any
+  vs_R_SURGE_ARRESTOR:any
+  vs_R_CHARGER_STATUS:any
+  vs_R_DOOR:any
+  vs_R_UT:any
 comms:any;
 
 
@@ -101,14 +123,13 @@ recieveVals(tagArr: any[]){
     this.intervalLoop = setInterval(() =>{
       updateTemp = tagVals[0];
       if(updateTemp !== undefined){
-      this.vs_RL = tagVals[0];
-      this.vs_SA = tagVals[1];
-      this.vs_CHS = tagVals[2];
-      this.vs_D = tagVals[3];
-      this.vs_UT = tagVals[4];
-      this.res = tagVals[0];
+      this.vs_R_LVL = tagVals[0];
+      this.vs_R_SURGE_ARRESTOR = tagVals[1];
+      this.vs_R_CHARGER_STATUS = tagVals[2];
+      this.vs_R_DOOR = tagVals[3];
+      this.vs_R_UT = tagVals[4];
       }
-      this.comms = Common.getLastUpdate(this.vs_UT)
+      this.comms = Common.getLastUpdate(this.vs_R_UT)
 
     },60000);
 

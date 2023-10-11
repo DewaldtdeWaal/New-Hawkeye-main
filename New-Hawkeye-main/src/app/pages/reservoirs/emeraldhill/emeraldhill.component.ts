@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -18,7 +19,7 @@ export interface PeriodicElement{
 })
 export class EmeraldhillComponent implements OnInit {
 
-
+  isLoading: boolean = false;
   emer_lvl:any
   comms:any
   emer_ut:any
@@ -34,117 +35,105 @@ export class EmeraldhillComponent implements OnInit {
   generalfaulttabledatasource: any = new MatTableDataSource(this.generalfaulttable)
 
   options: EChartsOption;
-
-  bateryLow:any = {
+  faultVariable:any={
+  bateryLow: {
     value: null,
     alarm:"Fault",
     description:"Battery Low",
     alarmTrip: 1
- };
+ },
 
- chargerOk:any = {
+ chargerOk: {
   value: null,
   alarm:"Fault",
   description:"Charger Not OK",
   alarmTrip: 1
-};
+}}
 
+variable :any= {
+  emer_lvl:null,
+  emer_ut:null,
+  emer_flow_rate:null,
+  emer_total_flow:null,
+  emer_battery_low:null,
+  emer_charger_ok:null,
+}
+
+faultArr:any=[
+  "bateryLow",
+"chargerOk"
+]
+tagArr:any=[
+
+  "emer_lvl",
+  "emer_ut",
+  "emer_flow_rate",
+  "emer_total_flow",
+  "emer_battery_low",
+  "emer_charger_ok",
+  ]
 
 total_flow_1_array: any[]=[];
 DateArr: any[]=[];
 
-  constructor(private webSocketService: WebSocketService,private emer:emeraldHillService,public recieve:Common,public rs: ReportService,private pm:pagePostMethod ) {
-    this.emer.GetSiteValues()
-    .subscribe(rsp => {
-      this.data = rsp;
-      this.emer_lvl = this.data.routingArray[0].emer_lvl
-      this.emer_ut = this.data.routingArray[0].emer_ut
-      this.comms = Common.getLastUpdate(this.emer_ut)
-      this.emer_flow_rate = this.data.routingArray[0].emer_flow_rate
-      this.emer_total_flow = this.data.routingArray[0].emer_total_flow
-      this.bateryLow.value = this.data.routingArray[0].emer_battery_low
-      this.chargerOk.value = this.data.routingArray[0].emer_charger_ok
+
+  constructor(private emer:emeraldHillService,public recieve:Common,public rs: ReportService,private pm:pagePostMethod,private pt: PostTrend ) {
+    this.isLoading = true;
 
 
+    this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").then((result) => {
+      this.data =  result;
 
-    }
-    )
-    setTimeout(() => {
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-      var alarm: any [] =[this.bateryLow, this.chargerOk]
+     this.comms = Common.getLastUpdate(this.variable.emer_ut)
+       var alarm: any [] =[this.faultVariable.bateryLow, this.faultVariable.chargerOk]
 
       this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
 
-
-
-
-
-    },1000)
+    });
    }
 
-
+   collectionName: any = "NMB_EMER_H_TOTAL_RES_LVL"
+   trendTag: any = ["emer_total_flow"]
 
 
 
   ngOnInit() {
 
-    var tagVals:any=[]
-    var tagArr =[
-      'emer_ut',//0
-      'emer_lvl',//1
-      'emer_flow_rate',
-      'emer_total_flow',
-      'emer_battery_low',
-'emer_charger_ok'
-    ]
+    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
+      trend=data
+
+      console.log(trend)
+
+      this.total_flow_1_array = trend.TotalFlowArr[0];
+      this.DateArr = trend.DateArr;
+
+            this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Total Flow Ml",this.total_flow_1_array)
+            this.isLoading = false;
+          })
 
 
-
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
-
-    var updateTemp:any;
     this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      if(updateTemp !== undefined){
+      this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").then((result) => {
+        this.data =  result;
+
+        console.log(this.data)
+        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+
+       this.comms = Common.getLastUpdate(this.variable.emer_ut)
+         var alarm: any [] =[this.faultVariable.bateryLow, this.faultVariable.chargerOk]
+
+        this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
+
+      });
 
 
-
-        this.emer_ut =  tagVals[0];
-
-        this.emer_lvl =  tagVals[1];
-        this.emer_flow_rate = tagVals[2];
-        this.emer_total_flow = tagVals[3];
-        this.bateryLow.value =  tagVals[4];
-        this.chargerOk.value = tagVals[5];
-
-        setTimeout(() => {
-
-          var alarm: any [] =[this.bateryLow, this.chargerOk]
-
-          this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
-
-
-
-
-        },1000)
-
-
-      }
-      this.comms = Common.getLastUpdate(this.emer_ut)
     },60000);
     var trend :any;
 
-    this.rs.GetEmeraldHll().subscribe(data => {
-      trend=data
 
-      console.log(trend.total_flow_1_array)
-
-      this.total_flow_1_array = trend.total_flow_1_array;
-            this.DateArr = trend.DateArr;
-
-            this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Total Flow Ml",this.total_flow_1_array)
-
-          })
 
 
 
@@ -157,18 +146,17 @@ DateArr: any[]=[];
     end: new FormControl()
   });
   onDateFilter(){
-
+    this.isLoading = true;
     const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
     const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
 
     var trend :any;
 
-    this.rs.POST_EmeraldHill_Total_Flow_Dates(newStart, newEnd).subscribe(data => {
+    this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
       trend=data
 
-      console.log(trend.total_flow_1_array)
 
-            this.total_flow_1_array = trend.total_flow_1_array;
+      this.total_flow_1_array =trend.TotalFlowArr[0];
             this.DateArr = trend.DateArr;
 
 
@@ -176,7 +164,7 @@ DateArr: any[]=[];
             this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Total Flow Ml",this.total_flow_1_array)
 
 
-
+            this.isLoading = false;
           })
 
 
