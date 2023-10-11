@@ -157,7 +157,7 @@ faultArr:any=[
   theme:any= localStorage.getItem("theme");
   data: any=[];
 
-  constructor(private buff:motherwellComponent,private authService: AuthService,public recieve:Common, private pm:pagePostMethod )
+  constructor(private authService: AuthService,public recieve:Common, private pm:pagePostMethod )
   {
     this.pm.findPageData("nmbm_mw_ps", "PS_CurrentVals").then((result) => {
       this.data =  result;

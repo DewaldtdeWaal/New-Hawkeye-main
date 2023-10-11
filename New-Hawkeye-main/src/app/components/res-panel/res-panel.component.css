@@ -19,8 +19,8 @@
 
 h3{
   text-align: center;
-  /* padding-top: 5px; */
   margin-top: 5px;
   font-size: 20px;
   padding-top: 0;
 }
+/* SO I'm putting the css at the html component I want to use.  That way I don't have to go and scroll through an entire page. */

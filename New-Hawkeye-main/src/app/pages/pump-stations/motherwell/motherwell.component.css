@@ -122,26 +122,15 @@ padding-left:30px
 }
 
 
-table {
+/* table {
   padding-left: 14px;
   width: 96%;
 
   background-color: var(--form-background-color);
   color:  var(--form-text-color);
-  /* font-family: 'Rubik', sans-serif !important; */
-}
-td{
-  font-size:12px;
-  font-family: 'Rubik', sans-serif !important;
-color:  var(--ps-table-td-color);
-text-align: left;
-background-color: var( --ps-table-td-fault-color)
-}
+} */
 
-th{
-  font-weight:600;
-  color:  var(--ps-table-th-color);
-}
+
 
 
 

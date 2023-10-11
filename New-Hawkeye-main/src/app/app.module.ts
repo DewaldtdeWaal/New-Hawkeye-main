@@ -155,6 +155,7 @@ import { PumpPanelComponent } from './components/pump-panel/pump-panel.component
 import { CommsPanelComponent } from './components/comms-panel/comms-panel.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { TwoColumnComponent } from './components/grid/two-column/two-column.component';
+import { AlarmsComponent } from './components/alarms/alarms.component';
 
 const appRoutes: Routes = [
   { path: 'coegakop', component: CoegaKopComponent},
@@ -315,6 +316,7 @@ const appRoutes: Routes = [
     CommsPanelComponent,
     PanelComponent,
     TwoColumnComponent,
+    AlarmsComponent,
 
 
 
