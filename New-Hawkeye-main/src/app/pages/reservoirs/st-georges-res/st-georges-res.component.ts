@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { stGeorgesParkComponent } from 'src/app/Service-Files/WTW/wtw.service';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { UsersService } from 'src/app/Service-Files/users.service';
@@ -32,7 +31,7 @@ export class StGeorgesResComponent implements OnInit {
   ]
 
   intervalLoop: any
-  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,private route:stGeorgesParkComponent,public recieve:Common,private pm:pagePostMethod) {
+  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,public recieve:Common,private pm:pagePostMethod) {
 
 
     this.pm.findPageData("nmbm_st_georges_wtw", "WTW_CurrentVals").then((result) => {

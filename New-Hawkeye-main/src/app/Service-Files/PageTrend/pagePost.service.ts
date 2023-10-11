@@ -34,7 +34,7 @@ async getPostTrend(collectionName: any, collectionVariable:any = [],startDate: a
     EndDate:endDate,
   };
 
-  return  this.http.post(this.su.serverURL+"/post/fourTrend", site).toPromise().then(data =>{
+  return  this.http.post(this.su.trendURL+"/post/fourTrend", site).toPromise().then(data =>{
 
 
 

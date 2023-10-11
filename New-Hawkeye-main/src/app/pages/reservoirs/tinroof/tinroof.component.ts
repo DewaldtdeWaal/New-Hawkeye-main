@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { graafService } from 'src/app/Service-Files/Reservoir/reservoir.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import {Common} from 'src/app/class/common';
 @Component({
   selector: 'app-tinroof',
@@ -30,7 +28,7 @@ export class TinroofComponent implements OnInit {
 
   intervalLoop: any
   data:any=[]
-  constructor(private webSocketService: WebSocketService,private graf: graafService,public recieve:Common,private pm:pagePostMethod ) {
+  constructor(public recieve:Common,private pm:pagePostMethod ) {
 
 
 

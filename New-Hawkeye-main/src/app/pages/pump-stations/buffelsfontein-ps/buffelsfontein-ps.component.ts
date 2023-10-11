@@ -2,7 +2,6 @@ import {  Component, OnInit, ViewChild } from '@angular/core';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { UsersService } from 'src/app/Service-Files/users.service';
-import {BuffelsFonteinComponent} from 'src/app/Service-Files/Pumpstation/pumpstation.service'
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
@@ -196,7 +195,7 @@ theme:any = localStorage.getItem("theme")
 
   ]
 
-  constructor(private webSocketService: WebSocketService, private us: UsersService,private chat:BuffelsFonteinComponent,public recieve:Common,private pm:pagePostMethod, ) {
+  constructor(private webSocketService: WebSocketService, private us: UsersService,public recieve:Common,private pm:pagePostMethod, ) {
 
     this.pm.findPageData("nmbm_bf_ps", "PS_CurrentVals").then((result) => {
       this.data =  result;

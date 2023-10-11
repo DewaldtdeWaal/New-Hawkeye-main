@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReportService } from 'src/app/Service-Files/report.service';
-import { UsersService } from 'src/app/Service-Files/users.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { crownGardensComponent} from 'src/app/Service-Files/Pumpstation/pumpstation.service';
+
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
-import {kruisfonteinRouting} from 'src/app/Service-Files/GRDW/groundwater.service'
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 @Component({
@@ -42,7 +41,7 @@ export class KruisfonteinRComponent implements OnInit {
   showGW14:any
   userSites:string[];
   public authListenerSubs!: Subscription;
-  constructor(private authService: AuthService,private GWS:kruisfonteinRouting,public recieve:Common,private pm:pagePostMethod) {
+  constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod) {
 
 
 

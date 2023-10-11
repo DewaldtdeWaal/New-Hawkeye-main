@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {TheescombeService} from 'src/app/Service-Files/Reservoir/reservoir.service';
 import { Subscription } from 'rxjs';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
@@ -41,21 +38,7 @@ tc_RL:null,
 "tc_RL",
   ]
 
-  constructor(private webSocketService: WebSocketService, private THS:TheescombeService, private userService: UsersService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-    // this.THS.GetSiteValues()
-    // .subscribe(rsp => {
-    //    this.data = rsp;
-    //    console.log(this.data)
-    //    this.tc_R_LOW_FLOAT  = this.data.routingArray[0].tc_R_LOW_FLOAT
-    //    this.tc_R_HIGH_FLOAT = this.data.routingArray[0].tc_R_HIGH_FLOAT
-    //    this.tc_R_LVL = this.data.routingArray[0].tc_R_LVL
-    //    this.tc_R_UT = this.data.routingArray[0].tc_R_UT
-    //    this.tc_RL = this.data.routingArray[0].tc_RL
-
-    //    this.comms = Common.getLastUpdate(this.tc_R_UT)
-
-
-    // })
+  constructor( private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
 
     this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").then((result) => {
       this.data =  result;
@@ -68,16 +51,7 @@ tc_RL:null,
 
 
   }
-  // recieveVals(tagArr: any[]){
-  //   var tagVals:any = []
-  //   for(let i = 0; i<tagArr.length ;i++){
-  //     this.webSocketService.nmbm_listen(tagArr[i]).subscribe((data:any)=>{
-  //       tagVals[i] = data[tagArr[i]];
 
-  //     })
-  //   }
-  //   return tagVals
-  // }
 
   ngOnInit(){
 

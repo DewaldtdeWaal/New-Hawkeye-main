@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {graafService} from 'src/app/Service-Files/Reservoir/reservoir.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 @Component({
@@ -26,7 +24,7 @@ export class WolwasComponent implements OnInit {
 "wolwas_r_battery_level",//
 "wolwas_r_poll_ut",
   ]
-  constructor(private graf: graafService,public recieve:Common,private pm:pagePostMethod ) {
+  constructor(public recieve:Common,private pm:pagePostMethod ) {
 
 
 

@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import {MatTableDataSource} from '@angular/material/table';
 import {Common} from 'src/app/class/common';
-import {humerail6Service} from 'src/app/Service-Files/GRDW/groundwater.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement{
   alarm: string;
@@ -115,7 +114,7 @@ export class HumerailComponent implements OnInit {
 
 
 
-  constructor(private ws: WebSocketService,private hum: humerail6Service,public recieve:Common,private pm:pagePostMethod ) {
+  constructor(private ws: WebSocketService,public recieve:Common,private pm:pagePostMethod ) {
 
     this.theme = localStorage.getItem("theme");
 

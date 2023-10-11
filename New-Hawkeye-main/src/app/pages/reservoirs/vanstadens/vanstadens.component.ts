@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {VanstadensReservoirService} from 'src/app/Service-Files/Reservoir/reservoir.service';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
@@ -35,7 +34,7 @@ vs_R_UT:null,
 
 
 
-  constructor(private webSocketService: WebSocketService, private VSS: VanstadensReservoirService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(private webSocketService: WebSocketService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
     // this.VSS.GetSiteValues()
     // .subscribe(rsp => {
     //    this.data = rsp;

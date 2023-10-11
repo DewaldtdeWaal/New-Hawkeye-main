@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListeningService } from 'src/app/listening.service';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {VanRiebeekHoogteService} from 'src/app/Service-Files/Reservoir/reservoir.service';
+
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
@@ -34,7 +34,7 @@ export class VanriebeeckComponent implements OnInit {
   ]
 
 
-  constructor(private webSocketService: WebSocketService, private ls:ListeningService,private VHS:VanRiebeekHoogteService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(private webSocketService: WebSocketService, private ls:ListeningService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
     // this.VHS.GetSiteValues()
     // .subscribe(rsp => {
     //    this.data = rsp;
