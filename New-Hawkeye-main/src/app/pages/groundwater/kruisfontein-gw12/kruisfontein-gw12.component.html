@@ -76,23 +76,7 @@
 
       </div>
 
-      <!-- <table mat-elevation-z8 mat-table [dataSource]="generalfaultdatasource" matSort>
 
-        <ng-container matColumnDef="alarm" >
-          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description" >
-          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-
-        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      </table>
-<br> -->
     </div>
 
     </form>
@@ -112,10 +96,7 @@
 
             <div class="grid-container-pump">
 
-              <!-- First Column -->
 
-                <!-- Padding is within appropraite use because it is padding to a fixed item, meaning it won't change it's position when the website loads -->
-                <!-- <div class="grid-image"><img src="assets/img/Pump/Borehole Pump Black.png" style="width:30px; height:180px;"   ></div> -->
 
                  <div *ngIf="theme=='light-theme'"  class="grid-image">
                   <div class="grid-image"  *ngIf="variable.gw_klm_kruis12_status==undefined"><img   src="assets/img/Pump/Borehole Pump Grey.png"   style="width:30px; height:180px;"></div>
@@ -155,22 +136,7 @@
                 <div class="grid-container-pump-column4" >{{variable.gw_klm_kruis12_TF}} m³</div>
             </div>
 
-
-            <table mat-elevation-z8 mat-table [dataSource]="dataSourceP1" matSort>
-
-              <ng-container matColumnDef="alarm" >
-                <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-                <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="description" >
-                <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-                <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-              </ng-container>
-
-              <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+            <app-alarms [dataSource]="dataSourceP1"></app-alarms>
 
 
             <br>

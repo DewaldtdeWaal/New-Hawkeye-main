@@ -15,7 +15,7 @@ data: any=[];
 
 constructor(){
 
-  this.NUM = 2;
+  this.NUM = 0
 
   if (this.NUM==0){
     this.serverURL = "http://localhost:3000";
@@ -30,7 +30,7 @@ constructor(){
    this.wsURL= "ws://mac-creations.co.za";
    this.guardURL = "hawkeye";  //Cloud Server - hawkeye
  //  this.trendURL = "http://mac-creations.co.za:3000";
-   this.trendURL = "http://155.93.192.206:3500";
+   this.trendURL = "http://155.93.192.206:3000";
  }
 
 }

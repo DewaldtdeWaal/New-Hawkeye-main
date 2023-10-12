@@ -80,23 +80,9 @@
     <div  class="grid-container-general-column4">{{variable.che_ps_walk_drive_off_500_mm_total_flow}} Ml</div>
 
 </div>
+<app-alarms [dataSource]="dataSourceG"></app-alarms>
 
 
-<table mat-elevation-z8 mat-table [dataSource]="dataSourceG" matSort>
-
-  <ng-container matColumnDef="alarm" >
-    <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-    <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="description" >
-    <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-    <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-  </ng-container>
-
-  <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
 <br>
 </div>
 </form>
@@ -158,21 +144,7 @@
 
 
       </div>
-      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP1" matSort>
-
-        <ng-container matColumnDef="alarm" >
-          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description" >
-          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-
-        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+      <app-alarms [dataSource]="dataSourceP1"></app-alarms>
       <br>
       </div>
     </form>
@@ -230,21 +202,7 @@
 
 
       </div>
-      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP2" matSort>
-
-        <ng-container matColumnDef="alarm" >
-          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description" >
-          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-
-        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+      <app-alarms [dataSource]="dataSourceP2"></app-alarms>
       <br>
       </div>
     </form>
@@ -300,21 +258,8 @@
   <div class="grid-container-general-column4">{{variable.che_ps_pumpset_3_suct_pressure}} bar</div>
 
       </div>
-      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP3" matSort>
+      <app-alarms [dataSource]="dataSourceP3"></app-alarms>
 
-        <ng-container matColumnDef="alarm" >
-          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description" >
-          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-
-        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
       <br>
       </div>
     </form>
@@ -371,21 +316,8 @@
       <div class="grid-container-general-column4">{{variable.che_ps_pumpset_4_suct_pressure}} bar</div>
 
       </div>
-      <table mat-elevation-z8 mat-table [dataSource]="dataSourceP4" matSort>
+      <app-alarms [dataSource]="dataSourceP4"></app-alarms>
 
-        <ng-container matColumnDef="alarm" >
-          <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-          <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description" >
-          <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-          <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-
-        <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
       <br>
       </div>
     </form>

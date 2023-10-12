@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LevelComponent implements OnInit {
 
-
+  math = Math;
 
   @Input() level:any
   constructor() {

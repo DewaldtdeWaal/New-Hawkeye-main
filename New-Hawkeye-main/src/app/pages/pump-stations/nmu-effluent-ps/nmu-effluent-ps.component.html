@@ -116,21 +116,10 @@
     <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img3" ></div>
     <div class="grid-pumpstation-column3-left-align">{{variable.nmu_eff_p4_speed}} Hz</div>
         </div>
-        <table mat-elevation-z8 mat-table [dataSource]="dataSourceP4" matSort>
 
-          <ng-container matColumnDef="alarm" >
-            <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-            <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-          </ng-container>
 
-          <ng-container matColumnDef="description" >
-            <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-            <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-          </ng-container>
+        <app-alarms [dataSource]="dataSourceP4"></app-alarms>
 
-          <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
         <br>
         </div>
       </form>
@@ -177,21 +166,9 @@
     <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img3" ></div>
     <div class="grid-pumpstation-column3-left-align">{{variable.nmu_eff_p1_speed}} Hz</div>
         </div>
-        <table mat-elevation-z8 mat-table [dataSource]="dataSourceP1" matSort>
 
-          <ng-container matColumnDef="alarm" >
-            <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-            <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-          </ng-container>
+        <app-alarms [dataSource]="dataSourceP1"></app-alarms>
 
-          <ng-container matColumnDef="description" >
-            <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-            <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-          </ng-container>
-
-          <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
         <br>
         </div>
       </form>
@@ -236,21 +213,9 @@
     <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img3" ></div>
     <div class="grid-pumpstation-column3-left-align">{{variable.nmu_eff_p2_speed}} Hz</div>
         </div>
-        <table mat-elevation-z8 mat-table [dataSource]="dataSourceP2" matSort>
 
-          <ng-container matColumnDef="alarm" >
-            <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-            <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-          </ng-container>
+        <app-alarms [dataSource]="dataSourceP2"></app-alarms>
 
-          <ng-container matColumnDef="description" >
-            <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-            <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-          </ng-container>
-
-          <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
         <br>
         </div>
       </form>
@@ -296,21 +261,9 @@
     <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img3" ></div>
     <div class="grid-pumpstation-column3-left-align">{{variable.nmu_eff_p3_speed}} Hz</div>
         </div>
-        <table mat-elevation-z8 mat-table [dataSource]="dataSourceP3" matSort>
 
-          <ng-container matColumnDef="alarm" >
-            <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-            <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-          </ng-container>
+        <app-alarms [dataSource]="dataSourceP3"></app-alarms>
 
-          <ng-container matColumnDef="description" >
-            <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-            <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-          </ng-container>
-
-          <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
         <br>
         </div>
       </form>

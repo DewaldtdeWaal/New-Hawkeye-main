@@ -37,10 +37,7 @@ export class HumansdorpComponent implements OnInit {
   generalfaultdatasource :any = new MatTableDataSource(this.generalfaulttable);
   intervalLoop: any
   theme:any  = localStorage.getItem("theme");
-  pumpmode: any ;
-  pressure: any
-flowrate :any
-vsdfrequency: any
+
 
 data:any = []
 
@@ -231,13 +228,8 @@ show6:any
       }
     }
 
-  var tagVals:any =[]
-  var errorVals:any=[]
-  tagVals = this.recieve.recieveNonMVals(this.tagArr);
 
 
-
-  errorVals = this.recieve.recieveNonMVals(this.faultArr)
   this.intervalLoop = setInterval(() =>{
 
 
@@ -271,8 +263,6 @@ var trend: any = {};
   this.total_flow_HD1_array = trend.TotalFlowArr[0];
 
   this.DateArr = trend.DateArr;
-    var theme:any
-    var tooltipBackground:any
 
 
     this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_HD1_array);

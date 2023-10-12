@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-panel',
@@ -9,16 +9,9 @@ export class PanelComponent implements OnInit {
 
   constructor() { }
 
-  @Input() communicationStatus:any
-  @Input() array:any
-  @Input() level:any
   @Input() title:any
 
-
-
-
-
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

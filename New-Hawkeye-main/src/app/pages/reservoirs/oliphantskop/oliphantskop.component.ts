@@ -11,13 +11,7 @@ import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 @Component({
 
   selector: 'app-oliphantskop',
-  template: `<div style="background-color: var(--page-background-color);">
-             <div class="div-heading-title"><h1 style="padding-top: 8px; ">{{siteTitle}}</h1></div>
-            <div class="wrapper-grid">
-            <app-panel [array]="variables.commsMatrix" [communicationStatus]="variables.comms" [title]="title1"></app-panel>
-            <app-res-panel [level]="variables.level1" [title]="title"></app-res-panel>
-           </div>
-           </div>`,
+  templateUrl: './oliphantskop.component.html',
   styleUrls: ['./oliphantskop.component.css']
 })
 
@@ -49,11 +43,11 @@ export class OliphantskopComponent implements OnInit {
   variables:any = {}
   title:string = "Reservoir";
   title1:string = "Communication";
-  matrix:any = "This is the result"
 
   theme:any= localStorage.getItem("theme");
 
 
+  commsTitle = "Last Update"
   jsonFile:string;
 
   constructor(public recieve:Common,public pbm:pageBuilderMethod, public pb:pageBuilder,private pm:pagePostMethod ) {
@@ -64,10 +58,13 @@ export class OliphantskopComponent implements OnInit {
 
    async fillPage(){
 
-    pageBuilder.convertDate(this.variables)
+   // pageBuilder.convertDate(this.variables)
 
     this.pbm.getSiteData("WBLK_OLIF_RES_BTU01",this.testArr,this.variables).then((result) => {
       this.variables =  result;
+
+     this.variables.comms = pageBuilder.getLastUpdate(this.variables.lastupdate, this.variables.wakeupperiod)
+
     });
 
    }

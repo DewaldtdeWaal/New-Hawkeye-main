@@ -1,15 +1,16 @@
-<div class="grid-container-flow-meters-communication">
-  <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
-  <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
-  <div *ngIf="communicationStatus=='OK'"  class="grid-container-communicationStatus-column3-img" >
-  <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+
+  <div class="grid-container-communicationStatus">
+    <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+    <div *ngIf="communicationStatus=='OK'"  class="grid-container-communicationStatus-column3-img" >
+      <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px">
+      </div>
+      <div *ngIf="communicationStatus=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px" >
+       <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+       </div>
+       <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+      <!-- I'm using angular pipes to transform the date into the  -->
+       <div class="grid-container-flow-meters-general-column3">{{ lastUpdate | date:"MMM dd yyyy HH:mm" }}</div>
+
+
     </div>
-    <div *ngIf="communicationStatus=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
-     <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
-     </div>
 
-
-
-
-
-  </div>

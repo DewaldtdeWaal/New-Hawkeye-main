@@ -1,0 +1,22 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">{{siteTitle}}</h1></div>
+ <div class="wrapper-grid">
+
+
+  <app-panel [title] = commsTitle>
+
+
+<app-comms-panel [lastUpdate] =variables.lastupdate  [communicationStatus]=variables.comms></app-comms-panel>
+
+
+</app-panel>
+
+
+
+
+ <app-res-panel [level] = variables.level1  [title]=title>
+
+
+ </app-res-panel>
+</div>
+</div>

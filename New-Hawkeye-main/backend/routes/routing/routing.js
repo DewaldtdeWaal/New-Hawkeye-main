@@ -101,14 +101,9 @@ function getRoutingFunctions(path, ID, collection){
         routingArray
            });
 
-
-
     })
 
-
   })
-
-
 }
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { pageBuilder } from 'src/app/class/pageBulder';
 
 @Component({
   selector: 'app-comms-panel',
@@ -7,10 +8,10 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class CommsPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(public pb:pageBuilder,) { }
 
   @Input() communicationStatus:any
-  @Input() array:any
+  @Input() lastUpdate:any
 
 
 
@@ -18,6 +19,7 @@ export class CommsPanelComponent implements OnInit {
 
 
   ngOnInit() {
+
 
 
   }

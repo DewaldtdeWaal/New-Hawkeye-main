@@ -239,7 +239,7 @@ gw_klm_kruis14_res_ful:{
 
   var trend :any;
 
-  this.rs.Get_Kruis14_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
+  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
   this.total_flow_1_array =  trend.TotalFlowArr[0];

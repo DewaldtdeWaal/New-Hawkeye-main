@@ -30,11 +30,8 @@ export class Humansdorp2Component implements OnInit {
   generalfaulttable: PeriodicElement[] = [];
   generalfaultdatasource :any = new MatTableDataSource(this.generalfaulttable);
   intervalLoop: any
-  theme:any;
-  pumpmode: any ;
-  pressure: any
-flowrate :any
-vsdfrequency: any
+  theme:any = localStorage.getItem("theme");
+
 
 data:any = []
 
@@ -162,8 +159,8 @@ show6:any
 
 }
 
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp2Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ,private pt: PostTrend ) {
-    this.theme = localStorage.getItem("theme");
+  constructor(public rs: ReportService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ,private pt: PostTrend ) {
+
 
     this.pm.findPageData("klm_hup2_gw", "GRDW_CurrentVals").then((result) => {
       this.data =  result;

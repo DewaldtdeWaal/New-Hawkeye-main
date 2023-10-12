@@ -46,19 +46,21 @@ export class pageBuilder  {
 
   }
 
-  public static convertDate(date:any){
+  // public static convertDate(date:any){
 
 
-    var dt = new Date(date).toString();
-    var dt2 = dt.substr(4, dt.length-45);
+  //   var dt = new Date(date).toString();
+  //   var dt2 = dt.substr(4, dt.length-45);
 
 
 
-    return dt2;
+  //   return dt2;
 
-  }
+  // }
 
   public static getLastUpdate(updateTime:any,wakeupperiod:any ){
+
+
 
     var miliSeconds
     miliSeconds = pageBuilder.workOutMiliseconds(wakeupperiod)

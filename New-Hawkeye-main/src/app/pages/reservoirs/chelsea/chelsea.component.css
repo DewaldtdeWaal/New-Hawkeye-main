@@ -205,8 +205,10 @@ h4{
   grid-column: 3;
   grid-template-rows: 25px;
   text-align: left;
-  float: left;
   align-items: center;
+  /* margin: 0 auto; */
+  float: left;
+
   font-weight: bold;
   padding:2px;
 }
@@ -249,7 +251,6 @@ h4{
   display:grid;
   grid-column: 1/span 4;
   margin: 0 auto;
-  /* Margin: 0 Auto centers all divs in the middle vertically and horizontally auto refers to left and right and the 0 top and bottom */
   font-weight: 300;
   text-decoration: underline;
   grid-template-rows: 25px;
