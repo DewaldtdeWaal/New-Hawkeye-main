@@ -28,13 +28,7 @@ export class HoldingComponent implements OnInit {
 "hol_r_battery_level",
 "hol_r_poll_ut"
   ]
-  constructor(private webSocketService: WebSocketService,private graf: graafService,public recieve:Common ,private pm:pagePostMethod) {
-      // this.graf.GetSiteValues()
-      // .subscribe(rsp => {
-      //    this.data = rsp;
-      //    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-      //     this.variable.comms = Common.getLastUpdateBattery(this.variable.hol_r_ut, this.variable.hol_r_poll_ut)
-      // })
+  constructor(public recieve:Common ,private pm:pagePostMethod) {
 
       this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
         this.data =  result;

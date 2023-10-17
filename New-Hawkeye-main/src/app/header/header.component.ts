@@ -49,6 +49,7 @@ showNmbmPSMenu:boolean = false;
 showNmbmGWMenu:boolean=false;
 showNmbmFPTMenu:boolean=false;
 showNmbmWTWMenu:boolean=false;
+showNmbmZSMenu:boolean=false;
 
 showNmbmSubMenu:boolean=false;
 
@@ -74,6 +75,7 @@ subShowing = false;
   countDR:any
   countSubNmbm:any
   countTT:any
+  countZS:any
 
   countNmbm:any;
   countNonNmbm:any;
@@ -109,6 +111,7 @@ constructor(private authService: AuthService,private ls:ListeningService,  priva
   this.countFL=0
   this.countBM=0
   this.countSubNmbm=0
+  this.countZS=0;
   this.countDR=0
   this.countTT= 0;
   this.countNmbmRes=0
@@ -137,6 +140,7 @@ this.authListenerSubs = this.authService.getAuthStatusListener()
   this.countGW= 0
   this.countFL=0
   this.countSubNmbm=0
+  this.countZS=0
   this.countDR = 0;
   this.countTT= 0;
   this.countBM=0;
@@ -198,6 +202,10 @@ else{
 
     if(last2Char == "TT"){
       this.countTT++;
+    }
+
+    if(last2Char =="ZS"){
+      this.countZS++;
     }
   }
 }

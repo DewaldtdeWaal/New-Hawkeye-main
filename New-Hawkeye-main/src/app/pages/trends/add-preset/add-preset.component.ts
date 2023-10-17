@@ -221,6 +221,11 @@ gbwTagsSelected:boolean[]=[];
 kwanoListArr:string[]=[]
 kwanoSelected:boolean[]=[]
 
+LSDListArr:string[]=[]
+LSDSelected:boolean[]=[]
+
+MNTSListArr:string[]=[]
+MNTSSelected:boolean[]=[]
 
 onsParadysTagListArr:string[]=[]
 onsParadysSelected:boolean[]=[]
@@ -234,6 +239,7 @@ showWTW_Menu: boolean = false;
 showAdminMenu: boolean = false;
 showGWMenu: boolean = false;
 showAutoMenu: boolean = false;
+showZoneMenu: boolean = false;
 
 
 
@@ -243,7 +249,7 @@ showPS:any;
 showFPT: any;
 showGW:any;
 showWTW:any;
-
+showZones:any
 
 showPresetMenu:boolean =false
 isExpanded = true;
@@ -361,6 +367,9 @@ this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht "
 this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
 this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
+
+this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
+this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
 
 }, 500);
 
@@ -1072,6 +1081,29 @@ break;
 		      this.showWTW= true;
           break;
 
+          case "NMB_LSD_ZS":
+            if(count>=1){count = 0}
+            this.LSDListArr[count]="Pressure";
+            count++;
+            this.LSDListArr[count]="Total Flow";
+            count++;
+            this.LSDListArr[count]="Flow Rate";
+            count++;
+            this.showZones = true
+
+            break;
+
+
+
+            case "NMB_MNTS_ZS":
+              this.MNTSListArr[count]="Pressure";
+              count++;
+              this.MNTSListArr[count]="Total Flow";
+              count++;
+              this.MNTSListArr[count]="Flow Rate";
+              count++;
+              this.showZones = true
+              break;
     case "NMB_ELANDS_WTW":
       if(count>=1){count = 0}
       this.elandTagListArr[count]="Flow Rate"
@@ -1305,6 +1337,9 @@ this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail
     this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
     this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
 
+    this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
+this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+
     var rightAxisTags = this.Right.value
     if (rightAxisTags==null) {
       rightAxisTags=[]
@@ -1375,6 +1410,8 @@ this.stormsWTWTagSelected=[]
 this.oliTagSelected=[]
 this.elandTagSelected=[]
 this.klmWtwInletSelected=[]
+this.LSDSelected = []
+this.MNTSSelected = []
 this.driftTagsSelected=[];
 this.bushyPSSelected = []
 this.bushyFPTSelected = []

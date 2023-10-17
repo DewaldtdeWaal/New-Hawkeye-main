@@ -19,6 +19,13 @@ export interface PeriodicElement {
 }
 export const trendArray = [
 
+  "LSD_FLOW_RATE_arr",
+"LSD_TOTAL_FLOW_arr",
+"LSD_PRESSURE_arr",
+"McNougTown_FLOW_RATE_arr",
+"McNougTown_TOTAL_FLOW_arr",
+"McNougTown_PRESSURE_arr",
+
   "AIR_PRT_LVL_arr",
 
   "EMER_H_Level_arr",
@@ -271,6 +278,14 @@ export const trendArray = [
 
     "Airport Reservoir Level":"AIR_PRT_LVL_arr",
 
+    "Lee Samuals Drive Pressure":"LSD_PRESSURE_arr",
+    "Lee Samuals Drive Total Flow":"LSD_TOTAL_FLOW_arr",
+    "Lee Samuals Drive Flow Rate":"LSD_FLOW_RATE_arr",
+
+    "McNoughton Township South Pressure":"McNougTown_PRESSURE_arr",
+    "McNoughton Township South Total Flow":"McNougTown_TOTAL_FLOW_arr",
+    "McNoughton Township South Flow Rate":"McNougTown_FLOW_RATE_arr",
+
     "Schoemanshoek Pressure":"NMB_SCHOE_PRESSURE_array",
     "Schoemanshoek Level":"NMB_SCHOE_RES_LEVEL_array",
     "Schoemanshoek Actuator Position":"NMB_SCHOE_ACTUATOR_POSITION_array",
@@ -515,6 +530,16 @@ export const trendArray = [
     "Driftsands Total Flow 1":"drift_res_total_flow_1_axis",
     "Driftsands Total Flow 2":"drift_res_total_flow_2_axis",
     "Airport Reservoir Level":"AIR_PRT_LVL_axis",
+
+    "Lee Samuals Drive Pressure":"LSD_PRESSURE_axis",
+    "Lee Samuals Drive Total Flow":"LSD_TOTAL_FLOW_axis",
+    "Lee Samuals Drive Flow Rate":"LSD_FLOW_RATE_axis",
+
+    "McNoughton Township South Pressure":"McNougTown_PRESSURE_axis",
+    "McNoughton Township South Total Flow":"McNougTown_TOTAL_FLOW_axis",
+    "McNoughton Township South Flow Rate":"McNougTown_FLOW_RATE_axis",
+
+
     "Schoemanshoek Actuator Valve Feedback Signal":"nmb_schoe_r_actuator_valve_feedback_signal_error_axis",
     "Schoemanshoek Actuator Valve Command Signal":"nmb_schoe_r_actuator_valve_command_signal_error_axis",
     "Schoemanshoek Reservoir Level Signal Error":"nmb_schoe_r_reservoir_level_signal_error_axis",
@@ -746,6 +771,14 @@ export const trendArray = [
     drift_res_total_flow_1_axis:0,
     drift_res_total_flow_2_axis:0,
     AIR_PRT_LVL_axis:0,
+
+    LSD_PRESSURE_axis:0,
+LSD_TOTAL_FLOW_axis:0,
+LSD_FLOW_RATE_axis:0,
+McNougTown_PRESSURE_axis:0,
+McNougTown_TOTAL_FLOW_axis:0,
+McNougTown_FLOW_RATE_axis:0,
+
     nmb_schoe_r_actuator_valve_feedback_signal_error_axis :0,
     nmb_schoe_r_actuator_valve_command_signal_error_axis :0,
     nmb_schoe_r_reservoir_level_signal_error_axis :0,
@@ -1015,6 +1048,12 @@ export const variables:any = {
     ELA_P_arr:[],
     EMER_H_Level_arr: [],
     AIR_PRT_LVL_arr:[],
+    LSD_PRESSURE_arr:[],
+    LSD_TOTAL_FLOW_arr:[],
+    LSD_FLOW_RATE_arr:[],
+    McNougTown_PRESSURE_arr:[],
+    McNougTown_TOTAL_FLOW_arr:[],
+    McNougTown_FLOW_RATE_arr:[],
     EMER_H_Total_Flow_arr: [],
     EMER_H_Flow_Rate_arr: [],
     drift_R_reservoir_level_arr: [],

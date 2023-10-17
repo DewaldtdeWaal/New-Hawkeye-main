@@ -18,7 +18,7 @@ export class pageBuilderMethod {
   arrayData:any = []
   constructor(private http: HttpClient,private su: ServerURLService,private pb:pageBuilder) {}
 
-async getSiteData(siteName: any, testArr:any = [],variable:any){
+async getSiteData(siteName: any){
 
   var returnVariable
 
@@ -27,21 +27,19 @@ async getSiteData(siteName: any, testArr:any = [],variable:any){
     SiteName:siteName
   };
 
+
   returnVariable = this.http.post(this.su.serverURL+"/get-site-data", site).toPromise().then(data =>{
 
     this.arrayData = data;
 
-    variable = pageBuilder.populateVariable(testArr,variable);
-
-    variable = pageBuilder.getRouteData(testArr,variable,this.arrayData.routingArray[0])
 
 
 
 
-
-    return variable;
+    return this.arrayData.variables;
 
   });
+
 
 
   return returnVariable;
@@ -50,3 +48,4 @@ async getSiteData(siteName: any, testArr:any = [],variable:any){
 
 
 }
+

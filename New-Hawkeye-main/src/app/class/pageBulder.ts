@@ -17,34 +17,23 @@ export class pageBuilder  {
     end: new FormControl()
   });
 
+  miliSeconds:any
 
   constructor(){}
 
-  public static getRouteData(tagArr:any = [],variable:any,data:any){
+  // public static getRouteData(tagArr:any = [],variable:any,data:any){
 
-  //  console.log(data)
-
-
-
-    for(var i = 0; i < tagArr.length; i++) {
-       variable[tagArr[i]] = data[tagArr[i]]
-     }
-
-    return variable;
-
-  }
-
-  public static populateVariable(tagArr:any = [], variable:any){
+  // //  console.log(data)
 
 
 
-    for(var i = 0; i< tagArr.length;i++){
-        variable[tagArr[i]] = null;
-  }
+  //   for(var i = 0; i < tagArr.length; i++) {
+  //      variable[tagArr[i]] = data[tagArr[i]]
+  //    }
 
-  return variable
+  //   return variable;
 
-  }
+  // }
 
   // public static convertDate(date:any){
 
@@ -58,48 +47,60 @@ export class pageBuilder  {
 
   // }
 
-  public static getLastUpdate(updateTime:any,wakeupperiod:any ){
+  // public static getLastUpdate(updateTime:any,wakeupperiod:any ){
+
+  //   var miliSeconds
 
 
 
-    var miliSeconds
-    miliSeconds = pageBuilder.workOutMiliseconds(wakeupperiod)
-    if(updateTime != null || updateTime != undefined){
-    var comms:any
-
-    var updateTime = updateTime
-    var updateTimeMS =Date.parse(updateTime.toString())
-    var cuurentDateCorrectFormat = Date().slice(4,Date().length-41);
-    var  cuurentDateMS =Date.parse(cuurentDateCorrectFormat)
-    var dateMinusWorkout = cuurentDateMS - miliSeconds
-
-  if(updateTime.toString().length !=0)
-  {
-    if (updateTimeMS>dateMinusWorkout)
-    { comms = "OK" }
-    else{ comms = "NOT OK"}
-  }
-
-    return comms;
-
-  }
-
-  }
-
-  public static workOutMiliseconds(wakeupperiod:any ){
+  //   miliSeconds = pageBuilder.workOutMiliseconds(wakeupperiod)
 
 
-    var workOutMiliseconds
+  //   var comms:any
 
-    workOutMiliseconds = 3 * 60000 * wakeupperiod;
+  //   var updateTime = updateTime
+  //   var updateTimeMS =Date.parse(updateTime.toString())
+  //   var cuurentDateCorrectFormat = Date().slice(4,Date().length-41);
+  //   var  cuurentDateMS =Date.parse(cuurentDateCorrectFormat)
+  //   var dateMinusWorkout = cuurentDateMS - miliSeconds
+
+  // if(updateTime.toString().length !=0)
+  // {
+  //   if (updateTimeMS>dateMinusWorkout)
+  //   { comms = "OK" }
+  //   else{ comms = "NOT OK"}
+  // }
+
+  //   return comms;
 
 
-    return workOutMiliseconds;
-  }
+
+  // }
+
+  // public static workOutMiliseconds(wakeupperiod:any ){
 
 
-  public async buildArray(){
+  //   var workOutMiliseconds
+
+  //   workOutMiliseconds = 5 * 60000 * wakeupperiod;
 
 
-  }
+  //   return workOutMiliseconds;
+  // }
+
+
+  // public static addUnitToTag(tags:any, variables:any){
+
+  //   for (var i = 0; i < tags.length; i++){
+
+
+
+  //     variables[tags[i].TagName ] =  variables[tags[i].TagName ] + " " + tags[i].TagUnits
+
+  //     variables[tags[i].RateName ] =  variables[tags[i].RateName ] + " " + tags[i].RateUnits
+  //   }
+
+  //   console.log(variables)
+
+  // }
 }

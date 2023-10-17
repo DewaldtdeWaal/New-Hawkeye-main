@@ -156,6 +156,11 @@ import { CommsPanelComponent } from './components/comms-panel/comms-panel.compon
 import { TwoColumnComponent } from './components/grid/two-column/two-column.component';
 import { AlarmsComponent } from './components/alarms/alarms.component';
 import { PanelComponent } from './components/panel/panel.component';
+import { McNoughtontownshipsouthComponent } from './pages/zones/mc-noughtontownshipsouth/mc-noughtontownshipsouth.component';
+import { LeeSamualsDriveComponent } from './pages/zones/lee-samuals-drive/lee-samuals-drive.component';
+import { FlowRateLineComponent } from './components/flow-rate-line/flow-rate-line.component';
+import { PresureLineComponent } from './components/presure-line/presure-line.component';
+
 
 const appRoutes: Routes = [
   { path: 'coegakop', component: CoegaKopComponent},
@@ -317,6 +322,11 @@ const appRoutes: Routes = [
     TwoColumnComponent,
     AlarmsComponent,
     PanelComponent,
+    McNoughtontownshipsouthComponent,
+    LeeSamualsDriveComponent,
+    FlowRateLineComponent,
+    PresureLineComponent,
+
 
 
 

@@ -484,6 +484,15 @@ export class AuthGuard implements CanActivate {
                           break;
 
 
+                          case "/zones/lee-samuals-drive":
+                              url = "NMB_LSD_ZS"
+                            break;
+
+
+                            case "/zones/mc-noughtontownshipsouth":
+                                url = "NMB_MNTS_ZS"
+                              break;
+
 
 
                        ////////////////////

@@ -219,6 +219,12 @@ export class TagSelectorComponent implements OnInit {
   kwanoListArr:string[]=[]
   kwanoSelected:boolean[]=[]
 
+  LSDListArr:string[]=[]
+  LSDSelected:boolean[]=[]
+
+  MNTSListArr:string[]=[]
+  MNTSSelected:boolean[]=[]
+
 
 showAutoMenu: boolean = false
 showResMenu: boolean = false;
@@ -228,6 +234,7 @@ showFM_Menu: boolean = false;
 showWTW_Menu: boolean = false;
 showAdminMenu: boolean = false;
 showGWMenu: boolean = false;
+showZoneMenu: boolean = false;
 
 
 userIsAuthenticated =false;
@@ -238,6 +245,7 @@ showPS:any;
 showFPT: any;
 showGW:any;
 showWTW:any;
+showZones:any
 
 showPresetMenu:boolean =false
 isExpanded = true;
@@ -310,6 +318,10 @@ this.ReadSelectedValues(this.smTagListArr,this.smTagsSelected, "Summit ")
 this.ReadSelectedValues(this.schoeTagListArr,this.schoeTagsSelected, "Schoemanshoek ")
 this.ReadSelectedValues(this.thTagListArr,this.thTagsSelected, "Theescombe ")
 this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
+
+this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
+this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+
 this.ReadSelectedValues(this.vrhTagListArr,this.vrhTagsSelected, "Van Riebeeck Hoogte ")
 this.ReadSelectedValues(this.vsTagListArr,this.vsTagsSelected, "Van Stadens ")
 this.ReadSelectedValues(this.oliTagListArr,this.oliTagSelected,"Olifantskop ")
@@ -1012,6 +1024,33 @@ this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt 
 
                           this.showRes = true;
                         break;
+
+
+                        case "NMB_LSD_ZS":
+                          if(count>=1){count = 0}
+                          this.LSDListArr[count]="Pressure";
+                          count++;
+                          this.LSDListArr[count]="Total Flow";
+                          count++;
+                          this.LSDListArr[count]="Flow Rate";
+
+                          count++;
+                          this.showZones = true;
+                          break;
+
+
+
+                          case "NMB_MNTS_ZS":
+                            if(count>=1){count = 0}
+                            this.MNTSListArr[count]="Pressure";
+                            count++;
+                            this.MNTSListArr[count]="Total Flow";
+                            count++;
+                            this.MNTSListArr[count]="Flow Rate";
+
+                            count++;
+                            this.showZones = true;
+                            break;
 
 
                 case "NMB_UIT_FC_FPT":

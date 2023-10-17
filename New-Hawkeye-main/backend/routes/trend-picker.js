@@ -131,6 +131,15 @@ var BUSH_PUMP_TF_arr = []
    var EMER_H_Flow_Rate_arr = [];
    var EMER_H_Total_Flow_arr = [];
 
+  var LSD_FLOW_RATE_arr = [];
+  var LSD_PRESSURE_arr = []
+  var LSD_TOTAL_FLOW_arr = []
+
+
+  var McNougTown_FLOW_RATE_arr = [];
+  var McNougTown_PRESSURE_arr = []
+  var McNougTown_TOTAL_FLOW_arr = []
+
 
 var KWANO_R_RES_LVL_arr = []
 var KWANO_R_FLOW_RATE_1_arr = []
@@ -407,6 +416,38 @@ break;
       trendData(klm_kruis_res_lvl_arr, "level", "KLM_KRUIS_RES_LVL", query)
       count++;
       break;
+
+      case "Lee Samuals Drive Flow Rate":
+        trendData(LSD_FLOW_RATE_arr,"flowrate1","WDNR_LSAM_DMA_FLM01", query )
+        count++;
+        break;
+
+        case "Lee Samuals Drive Total Flow":
+          trendData(LSD_TOTAL_FLOW_arr,"totaliser1","WDNR_LSAM_DMA_FLM01", query)
+          count++;
+          break;
+
+          case "Lee Samuals Drive Pressure":
+            trendData(LSD_PRESSURE_arr,"pressure1","WDNR_LSAM_DMA_FLM01", query)
+            count++;
+          break;
+
+
+          case "McNoughton Township South Flow Rate":
+            trendData(McNougTown_FLOW_RATE_arr,"flowrate1","WDNR_MCNA_DMA_FLM01", query )
+            count++;
+            break;
+
+            case "McNoughton Township South Total Flow":
+              trendData(McNougTown_TOTAL_FLOW_arr,"totaliser1","WDNR_MCNA_DMA_FLM01", query)
+              count++;
+              break;
+
+              case "McNoughton Township South Pressure":
+                trendData(McNougTown_PRESSURE_arr,"pressure1","WDNR_MCNA_DMA_FLM01", query)
+                count++;
+              break;
+
 
 case "Greenbushes Flow Rate":
   trendData(GBFRarray, "gb_R_FR","BR_GB_RES_LVL",query)
@@ -1503,6 +1544,12 @@ setTimeout(function() {
      CGK_GRASSRIDGE_TOTAL_FLOW_array,
      CGK_COEGA_TOTAL_FLOW_array,
      klm_kruis_res_lvl_arr,
+     LSD_FLOW_RATE_arr,
+LSD_TOTAL_FLOW_arr,
+LSD_PRESSURE_arr,
+McNougTown_FLOW_RATE_arr,
+McNougTown_TOTAL_FLOW_arr,
+McNougTown_PRESSURE_arr,
      CHE_East_array,
      CHE_West_array,
      CHE_R_FR1200_arr,

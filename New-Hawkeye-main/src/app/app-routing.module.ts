@@ -139,7 +139,8 @@ import {IsuzuComponent} from './pages/automotive/isuzu/isuzu.component';
 
 import {TestPickerComponent} from './pages/trends/test-picker/test-picker.component';
 
-
+import {LeeSamualsDriveComponent} from './pages/zones/lee-samuals-drive/lee-samuals-drive.component';
+ import {McNoughtontownshipsouthComponent} from './pages/zones/mc-noughtontownshipsouth/mc-noughtontownshipsouth.component';
 
 
 
@@ -254,6 +255,9 @@ const routes: Routes = [
 {path: 'hawkeye/fptsites/bushypark-fpt', component:BushyparkFptComponent, canActivate:[AuthGuard]},
 
 
+//Zomes
+{path: 'hawkeye/zones/lee-samuals-drive', component:LeeSamualsDriveComponent, canActivate:[AuthGuard]},
+{path: 'hawkeye/zones/mc-noughtontownshipsouth', component:McNoughtontownshipsouthComponent, canActivate:[AuthGuard]},
 
 //GroundWater
 {path: 'hawkeye/groundwater/newtonparkpool',component: NewtonparkpoolComponent, canActivate:[AuthGuard]},

@@ -1,5 +1,6 @@
 
   <div class="grid-container-communicationStatus">
+
     <div class="grid-container-communicationStatus-column1">Communication Status:</div>
     <div *ngIf="communicationStatus=='OK'"  class="grid-container-communicationStatus-column3-img" >
       <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;padding-top: 5px">
@@ -12,5 +13,9 @@
        <div class="grid-container-flow-meters-general-column3">{{ lastUpdate | date:"MMM dd yyyy HH:mm" }}</div>
 
 
-    </div>
+        <div class="grid-container-flow-meters-general-column1">Battery Unit:</div>
+        <div class="grid-container-flow-meters-general-column3">{{batteryUnit}} %</div>
+        </div>
+
+
 

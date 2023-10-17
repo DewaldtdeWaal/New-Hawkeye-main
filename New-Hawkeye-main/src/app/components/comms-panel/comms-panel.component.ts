@@ -13,6 +13,8 @@ export class CommsPanelComponent implements OnInit {
   @Input() communicationStatus:any
   @Input() lastUpdate:any
 
+  @Input() batteryUnit:any
+
 
 
 

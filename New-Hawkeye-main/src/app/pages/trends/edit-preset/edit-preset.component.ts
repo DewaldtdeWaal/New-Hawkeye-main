@@ -40,7 +40,7 @@ showPS:any;
 showFPT: any;
 showGW:any;
 showWTW:any;
-
+showZones:any
 
 
 
@@ -52,6 +52,7 @@ showWTW_Menu: boolean = false;
 showAdminMenu: boolean = false;
 showGWMenu: boolean = false;
 showAutoMenu: boolean = false;
+showZoneMenu: boolean = false;
 
 
 showPresetMenu:boolean =false
@@ -271,6 +272,14 @@ intervalFunction:any
   kwanoListArr:string[]=[]
   kwanoSelected:boolean[]=[]
 
+
+  LSDListArr:string[]=[]
+  LSDSelected:boolean[]=[]
+
+  MNTSListArr:string[]=[]
+  MNTSSelected:boolean[]=[]
+
+
   constructor(private su: ServerURLService,private ts:TrendPickerService,private http: HttpClient, public rs: ReportService,private authService: AuthService, private userService: UsersService, private webSocketService: WebSocketService,
       private tps:TrendPickerService,private router: Router
   ) {
@@ -349,6 +358,9 @@ this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Hum
 this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
 this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
+
+this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
+this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
 
 }, 500);
 
@@ -1792,6 +1804,33 @@ if(this.selectedSites)
         case "Elandsjagt Flow Rate":
           this.elandTagSelected[0]=true
           break;
+
+
+          case "Lee Samuals Drive Pressure":
+            this.LSDSelected[0] = true;
+            break;
+
+          case "Lee Samuals Drive Total Flow":
+            this.LSDSelected[1] = true;
+            break;
+
+          case "Lee Samuals Drive Flow Rate":
+            this.LSDSelected[2] = true;
+            break;
+
+
+
+            case "McNoughton Township South Pressure":
+              this.MNTSSelected[0] = true;
+              break;
+
+            case "McNoughton Township South Total Flow":
+              this.MNTSSelected[1] = true;
+              break;
+
+            case "McNoughton Township South Flow Rate":
+              this.MNTSSelected[2] = true;
+              break;
         }
       }
 
@@ -1867,6 +1906,9 @@ this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Hum
     this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
     this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
     this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
+
+    this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
+    this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
 // Uitenhage
 
     this.http.post(this.su.serverURL+"/update-user-presets",

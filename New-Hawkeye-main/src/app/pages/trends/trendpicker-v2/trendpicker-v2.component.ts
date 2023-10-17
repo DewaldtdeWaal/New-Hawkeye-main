@@ -285,6 +285,11 @@ variable:any = variables;
     kwanoListArr:string[]=[]
     kwanoSelected:boolean[]=[]
 
+    LSDListArr:string[]=[]
+    LSDSelected:boolean[]=[]
+
+    MNTSListArr:string[]=[]
+    MNTSSelected:boolean[]=[]
 
 
 
@@ -1065,6 +1070,28 @@ break;
         break;
 
 
+        case "NMB_LSD_ZS":
+          if(count>=1){count = 0}
+          this.LSDListArr[count]="Pressure";
+          count++;
+          this.LSDListArr[count]="Total Flow";
+          count++;
+          this.LSDListArr[count]="Flow Rate";
+          count++;
+
+          break;
+
+
+
+          case "NMB_MNTS_ZS":
+            this.MNTSListArr[count]="Pressure";
+            count++;
+            this.MNTSListArr[count]="Total Flow";
+            count++;
+            this.MNTSListArr[count]="Flow Rate";
+            count++;
+            break;
+
         case "NMB_OLI_R":
           if(count>=1){count = 0}
           this.oliTagListArr[count]="Reservoir Level"
@@ -1529,6 +1556,61 @@ hoverAnimation: true,
 data: this.variable.klm_kruis14_total_flow_arr,
 smooth: true,
 yAxisIndex:axisValues.klm_kruis14_total_flow_axis,
+},
+
+{
+  name:"Lee Samuals Drive Pressure",
+type: 'line',
+showSymbol: false,
+hoverAnimation:  true,
+data:this.variable.LSD_PRESSURE_arr ,
+smooth: true,
+yAxisIndex:axisValues.LSD_PRESSURE_axis,
+},
+{
+  name: "Lee Samuals Drive Total Flow",
+type: 'line',
+showSymbol: false,
+hoverAnimation:  true,
+data:this.variable.LSD_TOTAL_FLOW_arr,
+smooth: true,
+yAxisIndex:axisValues.LSD_TOTAL_FLOW_axis,
+},
+{
+  name:"Lee Samuals Drive Flow Rate",
+type: 'line',
+showSymbol: false,
+hoverAnimation:  true,
+data:this.variable.LSD_FLOW_RATE_arr,
+smooth: true,
+yAxisIndex:axisValues.LSD_FLOW_RATE_axis,
+},
+{
+  name:"McNoughton Township South Pressure",
+  type: 'line',
+  showSymbol: false,
+  hoverAnimation:  true,
+data:this.variable.McNougTown_PRESSURE_arr,
+smooth: true,
+yAxisIndex:axisValues.McNougTown_PRESSURE_axis,
+},
+{
+  name:"McNoughton Township South Total Flow",
+  type: 'line',
+  showSymbol: false,
+  hoverAnimation:  true,
+  data:this.variable.McNougTown_TOTAL_FLOW_arr,
+smooth: true,
+yAxisIndex:axisValues.McNougTown_TOTAL_FLOW_axis,
+},
+{
+  name:"McNoughton Township South Flow Rate",
+  type: 'line',
+  showSymbol: false,
+  hoverAnimation:  true,
+  data:this.variable.McNougTown_FLOW_RATE_arr,
+  smooth: true,
+  yAxisIndex:axisValues.McNougTown_FLOW_RATE_axis,
 },
 
       {
@@ -4304,6 +4386,33 @@ case "Humansdorp Inlet Flow Rate":
       case "Kwanobuhle Reservoir Total Flow 2":
         this.kwanoSelected[4] = true;
         break;
+
+
+        case "Lee Samuals Drive Pressure":
+          this.LSDSelected[0] = true;
+          break;
+
+        case "Lee Samuals Drive Total Flow":
+          this.LSDSelected[1] = true;
+          break;
+
+        case "Lee Samuals Drive Flow Rate":
+          this.LSDSelected[2] = true;
+          break;
+
+
+
+          case "McNoughton Township South Pressure":
+            this.MNTSSelected[0] = true;
+            break;
+
+          case "McNoughton Township South Total Flow":
+            this.MNTSSelected[1] = true;
+            break;
+
+          case "McNoughton Township South Flow Rate":
+            this.MNTSSelected[2] = true;
+            break;
   }}
 
 
@@ -4387,6 +4496,10 @@ this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "St
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
 this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
 this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
+this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
+this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+
+
 console.log( this.selectedTags)
   }
 
@@ -4772,6 +4885,76 @@ console.log( this.selectedTags)
                                  }
 
                                      break;
+
+
+                        case "Lee Samuals Drive Pressure":
+                          if(this.variable.LSD_PRESSURE_arr.length == 0){break;}
+                          else{
+                            var arr = this.MinMaxAvg(m,this.variable.LSD_PRESSURE_arr)!
+                            minValues[m]= arr[0]
+                            maxValues[m]=arr[1]
+                            avgValues[m]=arr[2]
+                               }
+
+                          break;
+
+                          case "Lee Samuals Drive Total Flow":
+                            if(this.variable.LSD_TOTAL_FLOW_arr.length == 0){break;}
+                            else{
+                              var arr = this.MinMaxAvg(m,this.variable.LSD_TOTAL_FLOW_arr)!
+                              minValues[m]= arr[0]
+                              maxValues[m]=arr[1]
+                              avgValues[m]=arr[2]
+                                 }
+
+                            break;
+
+
+                            case "Lee Samuals Drive Flow Rate":
+                              if(this.variable.LSD_FLOW_RATE_arr.length == 0){break;}
+                              else{
+                                var arr = this.MinMaxAvg(m,this.variable.LSD_FLOW_RATE_arr)!
+                                minValues[m]= arr[0]
+                                maxValues[m]=arr[1]
+                                avgValues[m]=arr[2]
+                                   }
+
+                              break;
+
+
+                              case "McNoughton Township South Pressure":
+                                if(this.variable.McNougTown_PRESSURE_arr.length == 0){break;}
+                                else{
+                                  var arr = this.MinMaxAvg(m,this.variable.McNougTown_PRESSURE_arr)!
+                                  minValues[m]= arr[0]
+                                  maxValues[m]=arr[1]
+                                  avgValues[m]=arr[2]
+                                     }
+
+                                break;
+
+                                case "McNoughton Township South Total Flow":
+                                  if(this.variable.McNougTown_TOTAL_FLOW_arr.length == 0){break;}
+                                  else{
+                                    var arr = this.MinMaxAvg(m,this.variable.McNougTown_TOTAL_FLOW_arr)!
+                                    minValues[m]= arr[0]
+                                    maxValues[m]=arr[1]
+                                    avgValues[m]=arr[2]
+                                       }
+
+                                  break;
+
+
+                                  case "McNoughton Township South Flow Rate":
+                                    if(this.variable.McNougTown_FLOW_RATE_arr.length == 0){break;}
+                                    else{
+                                      var arr = this.MinMaxAvg(m,this.variable.McNougTown_FLOW_RATE_arr)!
+                                      minValues[m]= arr[0]
+                                      maxValues[m]=arr[1]
+                                      avgValues[m]=arr[2]
+                                         }
+
+                                    break;
 
 
 
@@ -7358,6 +7541,33 @@ RightAxisConfiguration(AxisValue:any){
     case"Kruisfontein Borhole 14 Total Flow":
     axisValues.klm_kruis14_total_flow_axis = 1
     break;
+
+    case"Lee Samuals Drive Pressure":
+    axisValues.LSD_PRESSURE_axis = 1
+    break;
+
+    case"Lee Samuals Drive Total Flow":
+    axisValues.LSD_TOTAL_FLOW_axis = 1
+    break;
+
+    case"Lee Samuals Drive Flow Rate":
+    axisValues.LSD_FLOW_RATE_axis = 1
+    break;
+
+    case"McNoughton Township South Pressure":
+    axisValues.McNougTown_PRESSURE_axis = 1
+    break;
+
+    case"McNoughton Township South Total Flow":
+    axisValues.McNougTown_TOTAL_FLOW_axis = 1
+    break;
+
+    case"McNoughton Township South Flow Rate":
+    axisValues.McNougTown_FLOW_RATE_axis = 1
+    break;
+
+
+
 
 
 

@@ -154,6 +154,16 @@
        </div>
 
 
+       <button *ngIf="countZS!=0"  (click)="showNmbmZSMenu = !showNmbmZSMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">open_with</mat-icon><b>Zones</b>
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmZSMenu}"*ngIf="subExpanded || subShowing" >expand_more</mat-icon></button>
+        <div class="submenu" [ngClass]="{'expanded' : showNmbmZSMenu}" *ngIf="showNmbmZSMenu==true" (click)="sidenav.toggle()" >
+          <div *ngFor="let i of userSites">
+            <button *ngIf="i=='NMB_LSD_ZS'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/zones/lee-samuals-drive">Lee Samuals Drive</button>
+            <button *ngIf="i=='NMB_MNTS_ZS'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/zones/mc-noughtontownshipsouth">McNoughton Township South</button>
+
+          </div>
+      </div>
+
      </div>
 
 
@@ -293,7 +303,7 @@
 
   <mat-sidenav-content>
     <mat-toolbar >
-      <button *ngIf="userIsAuthenticated"  style="text-align:center !important" mat-icon-button (click)="sidenav.toggle()" (click)="showAuto=false" (click)="showResMenu=false" (click)="showFLMenu=false" (click)="showDriveMenu=false"  (click)="showPSMenu=false" (click)="showTrendsMenu=false"(click)="showGWMenu=false" (click)="showWTW_Menu=false" (click)="showFM_Menu=false" (click)="showAdminMenu=false" (click)="showNonNmbmMenu=false" (click)="showNmbmSubMenu=false" (click)="showNmbmMenu=false" (click)="showNmbmResMenu=false" (click)="showNmbmPSMenu=false" (click)="showNmbmGWMenu=false" (click)="showNmbmFPTMenu=false" (click)="showNmbmWTWMenu=false" (click)="closeAllSnackBars()" >
+      <button *ngIf="userIsAuthenticated"  style="text-align:center !important" mat-icon-button (click)="sidenav.toggle()" (click)="showAuto=false" (click)="showResMenu=false" (click)="showFLMenu=false" (click)="showDriveMenu=false"  (click)="showPSMenu=false" (click)="showTrendsMenu=false"(click)="showGWMenu=false" (click)="showWTW_Menu=false" (click)="showFM_Menu=false" (click)="showAdminMenu=false" (click)="showNonNmbmMenu=false" (click)="showNmbmSubMenu=false" (click)="showNmbmZSMenu=false" (click)="showNmbmMenu=false" (click)="showNmbmResMenu=false" (click)="showNmbmPSMenu=false" (click)="showNmbmGWMenu=false" (click)="showNmbmFPTMenu=false" (click)="showNmbmWTWMenu=false" (click)="closeAllSnackBars()" >
         <mat-icon >apps</mat-icon>
       </button>
 

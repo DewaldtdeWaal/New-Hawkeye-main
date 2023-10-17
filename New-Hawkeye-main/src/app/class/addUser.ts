@@ -98,14 +98,16 @@ export const siteMap = {
   "KLM_KUI_R":"klm_KUI_R_CHECKED",
   "KLM_HUP_WTW": "klm_HUP_WTW_CHECKED",
 
-
-
+  "NMB_LSD_ZS": "nmb_LSD_ZS_CHECKED",
+  "NMB_MNTS_ZS": "nmb_MNTS_ZS_CHECKED",
 
 
 };
 
 export const sitesAvailable:any={
   klm_HUP_WTW_CHECKED:false,
+  nmb_LSD_ZS_CHECKED:false,
+nmb_MNTS_ZS_CHECKED:false,
   HWK_RO_CHECKED:false,
   klm_KUI_R_CHECKED:false,
   nmb_EMERALD_R_CHECKED:false,
@@ -506,6 +508,14 @@ export class addUser  {
     }
     if(form.value.NMB_BETH_FPT){
       userSites.push("NMB_BETH_FPT")
+    }
+
+    if(form.value.NMB_LSD_ZS){
+      userSites.push("NMB_LSD_ZS")
+    }
+
+    if(form.value.NMB_MNTS_ZS){
+      userSites.push("NMB_MNTS_ZS")
     }
 
     if(form.value.NMB_NGT_WTW){

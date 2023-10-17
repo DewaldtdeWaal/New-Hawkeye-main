@@ -1,0 +1,28 @@
+
+.grid-container-general-column1{
+  display: grid;
+  grid-column:1;
+  text-align: right;
+  float: right;
+  align-items: center;
+  overflow: none;
+  font-size: 12px;
+
+}
+.grid-container-general-column2{
+  display: grid;
+  grid-column:2;
+  text-align: right;
+  float: right;
+  align-items: center;
+  overflow: none;
+  margin: 0 auto;
+}
+.img3{
+  width:25px;
+  height: 25px;
+  z-index:1;
+  padding-bottom:0px;
+  margin: 0 auto;
+
+}

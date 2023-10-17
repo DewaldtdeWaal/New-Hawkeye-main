@@ -1002,6 +1002,46 @@
           <hr>
 </div>
 
+
+<div *ngIf="showZones==true">
+  <button  (click)="showZoneMenu = !showZoneMenu"  mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;" >Zones
+    <mat-icon class="menu-button" [ngClass]="{'rotated' : showZoneMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
+    <div *ngIf="showZoneMenu==true">
+        <div style="width: 90%; margin-left: 17px;">
+
+          <mat-expansion-panel *ngIf="LSDListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+            <mat-expansion-panel-header>
+            <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+              Lee Samuals Drive
+            </mat-panel-title>
+                <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                 </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngFor="let d of LSDListArr; index as i">
+              <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="LSDSelected[i]" >{{d}}</mat-checkbox>
+            </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel *ngIf="MNTSListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+              <mat-expansion-panel-header>
+              <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                McNoughton Township South
+              </mat-panel-title>
+                  <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                   </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngFor="let d of MNTSListArr; index as i">
+                <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="MNTSSelected[i]" >{{d}}</mat-checkbox>
+              </div>
+              </mat-expansion-panel>
+          </div>
+</div>
+<hr>
+</div>
+
 <div *ngIf="showWTW==true">
             <button  (click)="showWTW_Menu = !showWTW_Menu"  mat-raised-button style="color:white;background-color:rgb(89, 105, 128); margin-left:17px; width: 90%;" >Water Treatment Works
               <mat-icon class="menu-button" [ngClass]="{'rotated' : showWTW_Menu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
