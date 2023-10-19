@@ -275,17 +275,13 @@ export const trendArray = [
     "Emerald Hill Reservoir Level":"EMER_H_Level_arr",
     "Emerald Hill Flow Rate" :"EMER_H_Flow_Rate_arr",
     "Emerald Hill Total Flow" :"EMER_H_Total_Flow_arr",
-
     "Airport Reservoir Level":"AIR_PRT_LVL_arr",
-
     "Lee Samuals Drive Pressure":"LSD_PRESSURE_arr",
     "Lee Samuals Drive Total Flow":"LSD_TOTAL_FLOW_arr",
     "Lee Samuals Drive Flow Rate":"LSD_FLOW_RATE_arr",
-
     "McNoughton Township South Pressure":"McNougTown_PRESSURE_arr",
     "McNoughton Township South Total Flow":"McNougTown_TOTAL_FLOW_arr",
     "McNoughton Township South Flow Rate":"McNougTown_FLOW_RATE_arr",
-
     "Schoemanshoek Pressure":"NMB_SCHOE_PRESSURE_array",
     "Schoemanshoek Level":"NMB_SCHOE_RES_LEVEL_array",
     "Schoemanshoek Actuator Position":"NMB_SCHOE_ACTUATOR_POSITION_array",
@@ -489,8 +485,6 @@ export const trendArray = [
   "Kwanobuhle Reservoir Flow Rate 2":   "KWANO_R_FLOW_RATE_2_arr",
   "Kwanobuhle Reservoir Total Flow 1":  "KWANO_R_TOTAL_FLOW_1_arr",
   "Kwanobuhle Reservoir Total Flow 2":  "KWANO_R_TOTAL_FLOW_2_arr",
-
-
   "Isuzu Oven 1 VSD Speed":"isuzu_oven1_vsd_speed_arr",
   "Isuzu Oven 1 Heat Exchanger Temperature":"isuzu_oven1_heat_ecvh_temp_arr",
   "Isuzu Oven 1 Temperature 1":"isuzu_oven1_temp1_arr",
@@ -499,10 +493,6 @@ export const trendArray = [
   "Isuzu Oven 2 Heat Exchanger Temperature":"isuzu_oven2_heat_ecvh_temp_arr",
   "Isuzu Oven 2 Temperature 1":"isuzu_oven2_temp1_arr",
   "Isuzu Oven 2 Temperature 2":"isuzu_oven2_temp2_arr",
-
-
-
-
   }
 
   export const axisMap = {

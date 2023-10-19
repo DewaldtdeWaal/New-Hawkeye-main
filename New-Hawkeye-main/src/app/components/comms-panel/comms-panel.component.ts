@@ -15,12 +15,21 @@ export class CommsPanelComponent implements OnInit {
 
   @Input() batteryUnit:any
 
+  @Input() batteryUnitNames: any
 
+
+  variables:any = [{}]
 
 
 
 
   ngOnInit() {
+
+    this.variables = [{
+      value:this.batteryUnit,
+      tagName:this.batteryUnitNames
+    }]
+
 
 
 

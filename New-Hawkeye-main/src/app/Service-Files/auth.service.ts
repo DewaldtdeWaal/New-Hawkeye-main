@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { User } from "../models/user.model";
 import { Router } from "@angular/router";
 import { ServerURLService } from "./server-url.service";
-import { data } from "jquery";
+
 
 export interface Email {
   userEmail: string;
@@ -188,6 +188,7 @@ private clearAuthData(){
   localStorage.removeItem("secondName");
   localStorage.removeItem("userEmail")
  localStorage.removeItem("mode")
+ localStorage.removeItem("theme")
 
 }
 

@@ -250,7 +250,6 @@ th{
 
 .grid-container-pumpstation{
   display: grid;
-  /* overflow: hidden; */
   grid-template-columns: 1fr 1fr 2fr;
   grid-column-gap:5px;
   grid-auto-rows: 30px;

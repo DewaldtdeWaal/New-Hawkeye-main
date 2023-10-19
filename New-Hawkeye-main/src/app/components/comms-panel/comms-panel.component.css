@@ -19,7 +19,7 @@
 }
 
 
-.grid-container-communicationStatus-column1{
+.grid-two-collums-column1{
   display: grid;
   grid-column:1;
   text-align: right;
@@ -55,7 +55,7 @@
   align-items: center;
   padding:2px;
 }
-.grid-container-communicationStatus{
+.grid-two-collums{
   display: grid;
   overflow: hidden;
   grid-template-columns: 1fr 20px 1fr;
@@ -68,18 +68,13 @@
   padding-top: 15px;
 }
 
-.grid-container-communicationStatus-column3-img{
+.grid-two-collums-column3-img{
   display: grid;
   grid-column: 3;
-
   width:20px;
   height: 20px;
-
   justify-items: center;
   align-items: center;
-
-
-
 }
 
 .grid-container-flow-meters-general-column3{
@@ -93,3 +88,11 @@
   padding:2px;
 }
 /* SO I'm putting the css at the html component I want to use.  That way I don't have to go and scroll through an entire page. */
+.grid-span-3{
+  display:grid;
+  grid-column: 1/span -1;
+  margin: 0 auto;
+  font-weight: 300;
+  text-decoration: underline;
+  grid-template-rows: 25px;
+}

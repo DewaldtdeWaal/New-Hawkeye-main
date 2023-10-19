@@ -55,18 +55,7 @@ export class AuthGuard implements CanActivate {
               break;
 
 
-            // case "/sub-admin/nmbm-manage-accounts":
-            // url = "ADMIN_NMBM";
-            // break;
 
-            // case "/sub-admin/nmbm-add-user":
-            // url = "ADMIN_NMBM";
-            // break;
-
-
-            // case "/sub-admin/nmbm-manage-accounts/nmbm-edit-accounts":
-            // url = "ADMIN_NMBM";
-            // break;
 
 
       ///////////////////////////////// RESERVOIR OVERVIEWS

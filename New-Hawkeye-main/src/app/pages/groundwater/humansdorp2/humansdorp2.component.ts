@@ -1,5 +1,5 @@
 import {MatTableDataSource} from '@angular/material/table';
-import {  Component, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { Injectable } from "@angular/core";
 import { HumansDorp2Service } from 'src/app/Service-Files/GRDW/humansdorp2.service';
@@ -18,7 +18,8 @@ export interface PeriodicElement{
 @Component({
   selector: 'app-humansdorp2',
   templateUrl: './humansdorp2.component.html',
-  styleUrls: ['./humansdorp2.component.css']
+  styleUrls: ['./humansdorp2.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class Humansdorp2Component implements OnInit {
   range = new FormGroup({

@@ -13,14 +13,7 @@ export class McNoughtontownshipsouthComponent implements OnInit {
   siteTitle:any ="McNoughton Township South"
   commsTitle:any = "Communication"
   statusTitle:any = "Status";
-  testArr:any = [
-    "wakeupperiod",
-    "lastupdate",
-    "battery_status",
-    "pressure1",
-    "totaliser1",
-    "flowrate1",
-  ]
+
   intervalLoop:any
   constructor(public pbm:pageBuilderMethod,public pb:pageBuilder,) {
     this.pbm.getSiteData("WDNR_MCNA_DMA_FLM01").then((result) => {

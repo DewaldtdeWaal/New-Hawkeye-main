@@ -2,9 +2,6 @@ import { Component,  OnDestroy,  OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from "../../Service-Files/auth.service";
 import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {Directive, ElementRef} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ServerURLService } from 'src/app/Service-Files/server-url.service';
 
 @Component({
@@ -13,12 +10,12 @@ import { ServerURLService } from 'src/app/Service-Files/server-url.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-isLoading = false;
+  isLoading = false;
   userIsAuthenticated =false;
   private authListenerSubs: Subscription;
   data:any=[]
 
-  constructor(public SUS:ServerURLService,public authService: AuthService, private _snackBar: MatSnackBar,private http: HttpClient) {
+  constructor(public SUS:ServerURLService,public authService: AuthService) {
 
 
 

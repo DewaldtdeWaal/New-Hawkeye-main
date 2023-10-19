@@ -11,6 +11,8 @@ export class LeeSamualsDriveComponent implements OnInit {
   siteTitle:any ="Lee Samuals Drive"
   commsTitle:any = "Communication"
   statusTitle:any = "Status";
+
+  variablesMatric:any=[{}]
   testArr:any = [
     "wakeupperiod",
     "lastupdate",
@@ -26,12 +28,30 @@ export class LeeSamualsDriveComponent implements OnInit {
     this.pbm.getSiteData("WDNR_LSAM_DMA_FLM01").then((result) => {
       this.variables =  result;
 
-     // this.variables.comms = pageBuilder.getLastUpdate(this.variables.lastupdate, this.variables.wakeupperiod)
+
+
+  this.variablesMatric=[{
+    label:"Pressure",
+    value:this.variables.pressure1
+  },
+  {
+    label:"Flow Rate",
+    value:this.variables.flowrate1
+  },
+  {
+    label:"Total Flow",
+    value:this.variables.totaliser1
+  },]
+
 
 
      console.log(this.variables)
     })
+
+
+
   }
+  pumpStatus:any = "Running"
 
   ngOnInit() {
 

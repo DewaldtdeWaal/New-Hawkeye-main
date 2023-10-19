@@ -7,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LevelComponent implements OnInit {
 
+
+  //this is important as it allows us to truncate in the html
   math = Math;
 
   @Input() level:any

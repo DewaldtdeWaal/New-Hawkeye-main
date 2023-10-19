@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.scrollToTop();
+
   }
 
 
@@ -65,20 +65,5 @@ export class AppComponent implements OnInit, OnDestroy {
     this.unsubscriber.complete();
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-    this.showScroll = currentScroll > this.scrollThreshold;
-  }
 
-  scrollToTop() {
-    function smoothscroll() {
-      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      if (currentScroll > 0) {
-        window.requestAnimationFrame(smoothscroll);
-        window.scroll(0, currentScroll - currentScroll / 5);
-      }
-    }
-    smoothscroll();
-  }
 }
