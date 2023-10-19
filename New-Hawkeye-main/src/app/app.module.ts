@@ -19,6 +19,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import {MatTreeModule} from '@angular/material/tree';
 
+// import { InlineSVGModule } from 'ng-inline-svg';
+
 // import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { LoginComponent } from './auth/login/login.component';
@@ -192,6 +194,7 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    // InlineSVGModule,
     MatTreeModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
