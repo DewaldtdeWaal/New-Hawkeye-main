@@ -14,16 +14,26 @@ export class McNoughtontownshipsouthComponent implements OnInit {
   commsTitle:any = "Communication"
   statusTitle:any = "Status";
 
+  variablesMatric:any=[{}]
+
   intervalLoop:any
   constructor(public pbm:pageBuilderMethod,public pb:pageBuilder,) {
     this.pbm.getSiteData("WDNR_MCNA_DMA_FLM01").then((result) => {
       this.variables =  result;
 
 
-
-
-
-
+  this.variablesMatric=[{
+    label:"Pressure",
+    value:this.variables.pressure1
+  },
+  {
+    label:"Flow Rate",
+    value:this.variables.flowrate1
+  },
+  {
+    label:"Total Flow",
+    value:this.variables.totaliser1
+  },]
     })
   }
 
@@ -34,6 +44,18 @@ export class McNoughtontownshipsouthComponent implements OnInit {
         this.variables =  result;
 
 
+        this.variablesMatric=[{
+          label:"Pressure",
+          value:this.variables.pressure1
+        },
+        {
+          label:"Flow Rate",
+          value:this.variables.flowrate1
+        },
+        {
+          label:"Total Flow",
+          value:this.variables.totaliser1
+        },]
 
       })
 

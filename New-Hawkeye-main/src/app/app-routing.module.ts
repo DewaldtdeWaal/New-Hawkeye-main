@@ -141,13 +141,16 @@ import {TestPickerComponent} from './pages/trends/test-picker/test-picker.compon
 
 import {LeeSamualsDriveComponent} from './pages/zones/lee-samuals-drive/lee-samuals-drive.component';
  import {McNoughtontownshipsouthComponent} from './pages/zones/mc-noughtontownshipsouth/mc-noughtontownshipsouth.component';
-
+ import { RowallanParkExtensionComponent } from './pages/zones/rowallan-park-extension/rowallan-park-extension.component';
+ import { RosedaleComponent } from './pages/zones/rosedale/rosedale.component';
 
 
 const routes: Routes = [
 
   {path: '', redirectTo : '/hawkeye/home',pathMatch: 'full'},
   {path: 'hawkeye', redirectTo : '/hawkeye/home',pathMatch: 'full'},
+
+  // {path: '/hawkeye/home',component:HomeComponent,canActivate:[AuthGuard]},
   {path: 'hawkeye/login', component:LoginComponent},
 // ADMIN
 {path: 'hawkeye/add-user',component: AddUserComponent,canActivate:[AuthGuard]},
@@ -258,6 +261,8 @@ const routes: Routes = [
 //Zomes
 {path: 'hawkeye/zones/lee-samuals-drive', component:LeeSamualsDriveComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/zones/mc-noughtontownshipsouth', component:McNoughtontownshipsouthComponent, canActivate:[AuthGuard]},
+{path: 'hawkeye/zones/rowallan-park-extension', component:RowallanParkExtensionComponent, canActivate:[AuthGuard]},
+{path: 'hawkeye/zones/rosedale', component:RosedaleComponent, canActivate:[AuthGuard]},
 
 //GroundWater
 {path: 'hawkeye/groundwater/newtonparkpool',component: NewtonparkpoolComponent, canActivate:[AuthGuard]},

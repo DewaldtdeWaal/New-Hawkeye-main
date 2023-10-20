@@ -1,6 +1,5 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">{{siteTitle}}</h1></div>
- <div class="wrapper-grid">
+
+  <app-page-component [siteTitle] = siteTitle>
 
  <app-panel [title] = commsTitle>
 
@@ -13,17 +12,6 @@
 
 </app-panel>
 
-<app-panel [title] = statusTitle>
-
-  <div class="grid-container-flow-meters-general">
-
-    <div class="grid-container-general-column2"><img src="assets/img/Symbol/bar.png" class="img3"></div><div class="grid-pumpstation-column4-left-align">{{variables.pressure1}} </div>
-    <div class="grid-container-general-column2"><img src="assets/img/Symbol/FM.png" class="img3"></div><div class="grid-pumpstation-column4-left-align">{{variables.flowrate1}} </div>
-    <div style="grid-column: 1/span 2;"class="grid-container-flow-rate-general-column1-span2">Total Flow</div><div class="grid-pumpstation-column4-left-align">{{variables.totaliser1}} </div>
-  </div>
-
-
-</app-panel>
 
 
 <app-panel [title] = statusTitle>
@@ -38,5 +26,5 @@
 
 </app-panel>
 
-</div>
-</div>
+</app-page-component>
+

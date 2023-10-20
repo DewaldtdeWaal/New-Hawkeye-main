@@ -224,7 +224,7 @@ export class NewtonparkpoolComponent implements OnInit {
 
   this.pm.findPageData("npp", "GRDW_CurrentVals").then((result) => {
     this.data =  result;
-    this.theme = localStorage.getItem("theme");
+
     console.log(this.data)
    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
    this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)

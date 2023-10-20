@@ -162,6 +162,10 @@ import { McNoughtontownshipsouthComponent } from './pages/zones/mc-noughtontowns
 import { LeeSamualsDriveComponent } from './pages/zones/lee-samuals-drive/lee-samuals-drive.component';
 import { FlowRateLineComponent } from './components/flow-rate-line/flow-rate-line.component';
 import { PresureLineComponent } from './components/presure-line/presure-line.component';
+import { RowallanParkExtensionComponent } from './pages/zones/rowallan-park-extension/rowallan-park-extension.component';
+import { RosedaleComponent } from './pages/zones/rosedale/rosedale.component';
+import { TrendTagComponent } from './components/trend-tag/trend-tag.component';
+import { PageComponentComponent } from './components/page-component/page-component.component';
 
 
 const appRoutes: Routes = [
@@ -329,7 +333,10 @@ const appRoutes: Routes = [
     LeeSamualsDriveComponent,
     FlowRateLineComponent,
     PresureLineComponent,
-
+    RowallanParkExtensionComponent,
+    RosedaleComponent,
+    TrendTagComponent,
+    PageComponentComponent,
 
 
 

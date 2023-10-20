@@ -1025,34 +1025,68 @@
     <div *ngIf="showZoneMenu==true">
         <div style="width: 90%; margin-left: 17px;">
 
-          <mat-expansion-panel *ngIf="LSDListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
-            <mat-expansion-panel-header>
-            <mat-panel-title  style="color: var(--overview-table-filter-color);" >
-              Lee Samuals Drive
-            </mat-panel-title>
-                <mat-panel-description style="color: rgb(180, 41, 41);">
-
-                 </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div *ngFor="let d of LSDListArr; index as i">
-              <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="LSDSelected[i]" >{{d}}</mat-checkbox>
-            </div>
-            </mat-expansion-panel>
 
 
-            <mat-expansion-panel *ngIf="MNTSListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
-              <mat-expansion-panel-header>
-              <mat-panel-title  style="color: var(--overview-table-filter-color);" >
-                McNoughton Township South
-              </mat-panel-title>
-                  <mat-panel-description style="color: rgb(180, 41, 41);">
 
-                   </mat-panel-description>
-              </mat-expansion-panel-header>
-              <div *ngFor="let d of MNTSListArr; index as i">
-                <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="MNTSSelected[i]" >{{d}}</mat-checkbox>
-              </div>
-              </mat-expansion-panel>
+                    <mat-expansion-panel *ngIf="LSDListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                        Lee Samuals Drive
+                      </mat-panel-title>
+                          <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                           </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of LSDListArr; index as i">
+                        <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="LSDSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+
+                    <mat-expansion-panel *ngIf="MNTSListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                      <mat-expansion-panel-header>
+                      <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                        McNoughton Township South
+                      </mat-panel-title>
+                          <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                           </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div *ngFor="let d of MNTSListArr; index as i">
+                        <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="MNTSSelected[i]" >{{d}}</mat-checkbox>
+                      </div>
+                      </mat-expansion-panel>
+
+
+                      <mat-expansion-panel *ngIf="RPEListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                          Rosedale Reservoir
+                        </mat-panel-title>
+                            <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                             </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of RPEListArr; index as i">
+                          <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="RPESelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
+
+                         <mat-expansion-panel *ngIf="RRListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                          <mat-expansion-panel-header>
+                          <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                            Rowallan Park Extension
+                          </mat-panel-title>
+                              <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                               </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div *ngFor="let d of RRListArr; index as i">
+                            <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="RRSelected[i]" >{{d}}</mat-checkbox>
+                          </div>
+                          </mat-expansion-panel>
+
           </div>
 </div>
 <hr>

@@ -230,6 +230,11 @@ MNTSSelected:boolean[]=[]
 onsParadysTagListArr:string[]=[]
 onsParadysSelected:boolean[]=[]
 
+RPEListArr:string[]=[]
+RPESelected:boolean[]=[]
+
+RRListArr:string[]=[]
+RRSelected:boolean[]=[]
 
 showResMenu: boolean = false;
 showPSMenu: boolean = false;
@@ -370,6 +375,8 @@ this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Hum
 
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
+this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
 
 }, 500);
 
@@ -986,7 +993,30 @@ this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township 
             count++;
             this.onsParadysTagListArr[count]="Battery Level"
             count++;
+            this.showFPT = true;
             break;
+
+            case "NMB_RPE_ZS":
+              if (count>=1 ){count = 0}
+              this.RRListArr[count]="Pressure";
+              count++;
+              this.RRListArr[count]="Total Flow";
+              count++;
+              this.RRListArr[count]="Flow Rate";
+              count++;
+              this.showZones=true;
+            break;
+
+            case "NMB_RD_ZS":
+              if (count>=1 ){count = 0}
+              this.RPEListArr[count]="Total Flow";
+              count++;
+              this.RPEListArr[count]="Flow Rate";
+              count++;
+              this.showZones=true;
+              break;
+
+
         //Pump Stations
         case "NMB_STAN_R_PS":
           if (count>=1 ){count = 0}
@@ -1096,6 +1126,7 @@ break;
 
 
             case "NMB_MNTS_ZS":
+              if(count>=1){count = 0}
               this.MNTSListArr[count]="Pressure";
               count++;
               this.MNTSListArr[count]="Total Flow";
@@ -1104,6 +1135,8 @@ break;
               count++;
               this.showZones = true
               break;
+
+
     case "NMB_ELANDS_WTW":
       if(count>=1){count = 0}
       this.elandTagListArr[count]="Flow Rate"
@@ -1339,6 +1372,8 @@ this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail
 
     this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
+this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
 
     var rightAxisTags = this.Right.value
     if (rightAxisTags==null) {
@@ -1420,6 +1455,8 @@ this.humOffTakeSelected=[]
 this.jeffBayOffTakeSelected = []
 this.kougaMainLineSelected = []
 this.onsParadysSelected = []
+this.RRSelected = []
+this.RPESelected = []
 
 this.Right = new FormControl();
 

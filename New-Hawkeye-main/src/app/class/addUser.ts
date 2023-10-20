@@ -101,12 +101,17 @@ export const siteMap = {
   "NMB_LSD_ZS": "nmb_LSD_ZS_CHECKED",
   "NMB_MNTS_ZS": "nmb_MNTS_ZS_CHECKED",
 
+  "NMB_RD_ZS":"NMB_RD_ZS_CHECKED",
+  "NMB_RPE_ZS":"NMB_RPE_ZS_CHECKED"
+
 
 };
 
 export const sitesAvailable:any={
   klm_HUP_WTW_CHECKED:false,
   nmb_LSD_ZS_CHECKED:false,
+  NMB_RD_ZS_CHECKED:false,
+NMB_RPE_ZS_CHECKED:false,
 nmb_MNTS_ZS_CHECKED:false,
   HWK_RO_CHECKED:false,
   klm_KUI_R_CHECKED:false,
@@ -534,6 +539,13 @@ export class addUser  {
       userSites.push("NMB_PARA_BEA_ST_FRANCIS_FPT")
     }
 
+
+    if(form.value.NMB_RD_ZS){
+      userSites.push("NMB_RD_ZS")
+    }
+    if(form.value.NMB_RPE_ZS){
+      userSites.push("NMB_RPE_ZS")
+    }
 
 
     if(form.value.TSI_STORMS_WTW)

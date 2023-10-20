@@ -5,9 +5,9 @@ const gvar = require('../../variables');
 var MongoClient = require('mongodb').MongoClient;
 var url = gvar.standardConnectionString;
 var db
-MongoClient.connect(url, function(err, db) {
+MongoClient.connect(url, function(err, dbo) {
   if (err) throw err;
-    db = db.db("HawkEye");
+    db = dbo.db("HawkEye");
 
 })
 
@@ -88,7 +88,7 @@ function getRoutingFunctions(path, ID, collection){
 
     var query = {id: ID};
     var routingArray=[]
-    dbo.collection(collection).find(query).toArray(function(err,data){
+    db.collection(collection).find(query).toArray(function(err,data){
 
       if(err) throw err;
       var i=0;
@@ -107,14 +107,21 @@ function getRoutingFunctions(path, ID, collection){
 }
 
 
+
 router.post("/pageValues", async (req, res) => {
 
-  console.log(req.body.Collection)
-  var query = {id: req.body.Id};
-  db.collection(req.body.Collection).findOne(query, function(err, data){
-    if(err) throw err;
-    res.status(200).json(data);
-  })
+
+  console.log(req.body)
+  if(req.body.Collection =! undefined){
+   let Collection = req.body.Collection
+
+   var query = {id: req.body.Id};
+   db.collection( req.body.Collection).findOne(query, function(err, data){
+     if(err) throw err;
+     res.status(200).json(data);
+   })
+
+  }
 })
 
 

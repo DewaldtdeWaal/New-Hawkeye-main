@@ -43,6 +43,17 @@ var HOLDING_LVL_RES_LVL_arr = []
   var nmb_schoe_r_actuator_valve_timeout_arr = []
 
 
+
+
+  //WDNR_ROSE_RES_OUT01
+var WDNR_ROSE_TF_arr = []
+var WDNR_ROSE_FR_arr = []
+
+  //WDSR_ROWP_DMA_FLM01
+var WDSR_ROWP_BAR_arr = []
+var WDSR_ROWP_TF_arr = []
+var WDSR_ROWP_FR_arr = []
+
   var DRS_LH_RES_LVL_arr = []
 
   var BUSH_CHURCH_SOCO_FR_arr = []
@@ -1506,6 +1517,33 @@ case "Kwanobuhle Reservoir Level":
   trendData(KWANO_R_TOTAL_FLOW_2_arr, "kwano_r_total_flow_2" , "NMB_KWANO_R_TF", query)
   count++;
   break;
+
+
+
+  case "Rosedale Reservoir Total Flow":
+    trendData(WDNR_ROSE_TF_arr,"totaliser1","WDNR_ROSE_RES_OUT01", query)
+    count++;
+    break;
+
+  case "Rosedale Reservoir Flow Rate":
+    trendData(WDNR_ROSE_FR_arr,"flowrate1","WDNR_ROSE_RES_OUT01", query)
+    count++;
+    break;
+
+  case "Rowallan Park Extension Pressure":
+    trendData(WDSR_ROWP_BAR_arr,"pressure1","WDSR_ROWP_DMA_FLM01", query)
+    count++;
+    break;
+
+   case "Rowallan Park Extension Total Flow":
+    trendData(WDSR_ROWP_TF_arr,"totaliser1","WDSR_ROWP_DMA_FLM01", query)
+    count++;
+     break;
+
+    case "Rowallan Park Extension Flow Rate":
+      trendData(WDSR_ROWP_FR_arr,"flowrate1","WDSR_ROWP_DMA_FLM01", query)
+      count++;
+      break;
 }
 }
 
@@ -1622,6 +1660,12 @@ KWANO_R_FLOW_RATE_1_arr,
 KWANO_R_FLOW_RATE_2_arr,
 KWANO_R_TOTAL_FLOW_1_arr,
 KWANO_R_TOTAL_FLOW_2_arr,
+
+WDNR_ROSE_TF_arr,
+WDNR_ROSE_FR_arr,
+WDSR_ROWP_BAR_arr,
+WDSR_ROWP_TF_arr,
+WDSR_ROWP_FR_arr,
 
      BUSH_CHURCH_SOCO_FR_arr,
 BUSH_CHURCH_STEEL_FR_arr,

@@ -292,6 +292,12 @@ variable:any = variables;
     MNTSSelected:boolean[]=[]
 
 
+    RPEListArr:string[]=[]
+    RPESelected:boolean[]=[]
+
+    RRListArr:string[]=[]
+    RRSelected:boolean[]=[]
+
 
 
   constructor(private su: ServerURLService,private http: HttpClient,private tps:TrendPickerService,public dialog: MatDialog ,public rs: ReportService,public authService: AuthService, private renderer: Renderer2) {
@@ -1084,6 +1090,7 @@ break;
 
 
           case "NMB_MNTS_ZS":
+            if (count>=1 ){count = 0}
             this.MNTSListArr[count]="Pressure";
             count++;
             this.MNTSListArr[count]="Total Flow";
@@ -1091,6 +1098,24 @@ break;
             this.MNTSListArr[count]="Flow Rate";
             count++;
             break;
+
+            case "NMB_RD_ZS":
+              if (count>=1 ){count = 0}
+              this.RPEListArr[count]="Total Flow";
+              count++;
+              this.RPEListArr[count]="Flow Rate";
+              count++;
+              break;
+
+              case "NMB_RPE_ZS":
+                if (count>=1 ){count = 0}
+                this.RRListArr[count]="Pressure";
+                count++;
+                this.RRListArr[count]="Total Flow";
+                count++;
+                this.RRListArr[count]="Extension Flow Rate";
+                count++;
+              break;
 
         case "NMB_OLI_R":
           if(count>=1){count = 0}
@@ -3478,6 +3503,51 @@ yAxisIndex:axisValues.HUM_GW_FIN_WAT_TANK_LVL_axis,
       smooth: true,
       yAxisIndex:axisValues.KARK_K2_LVL_axis,
     },
+    {
+      name:  "Rosedale Reservoir Total Flow",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.WDNR_ROSE_TF_arr,
+      smooth: true,
+      yAxisIndex:axisValues.WDNR_ROSE_TF_axis,
+    },
+    {
+      name:  "Rosedale Reservoir Flow Rate",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.WDNR_ROSE_FR_arr,
+      smooth: true,
+      yAxisIndex:axisValues.WDNR_ROSE_FR_axis,
+    },
+    {
+      name:  "Rowallan Park Extension Pressure",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.WDSR_ROWP_BAR_arr,
+      smooth: true,
+      yAxisIndex:axisValues.WDSR_ROWP_BAR_axis,
+    },
+    {
+      name:  "Rowallan Park Extension Total Flow",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.WDSR_ROWP_TF_arr,
+      smooth: true,
+      yAxisIndex:axisValues.WDSR_ROWP_TF_axis,
+    },
+    {
+      name:  "Rowallan Park Extension Flow Rate",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.WDSR_ROWP_FR_arr,
+      smooth: true,
+      yAxisIndex:axisValues.WDSR_ROWP_FR_axis,
+    },
 
   ]
     };
@@ -4413,6 +4483,30 @@ case "Humansdorp Inlet Flow Rate":
           case "McNoughton Township South Flow Rate":
             this.MNTSSelected[2] = true;
             break;
+
+
+            case "Rosedale Reservoir Total Flow":
+              this.RPESelected[0] = true;
+              break;
+
+              case "Rosedale Reservoir Flow Rate":
+                this.RPESelected[1] = true;
+                break;
+
+
+
+                case "Rowallan Park Extension Pressure":
+                  this.RRSelected[0] = true;
+                  break;
+
+                  case "Rowallan Park Extension Total Flow":
+                    this.RRSelected[1] = true;
+                    break;
+
+
+                    case "Rowallan Park Extension Flow Rate":
+                    this.RRSelected[2] = true;
+                    break;
   }}
 
 
@@ -4499,7 +4593,9 @@ this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reser
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
 
+this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
 
+this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
 console.log( this.selectedTags)
   }
 
@@ -7337,7 +7433,65 @@ console.log( this.selectedTags)
                      avgValues[m]=arr[2]
                                         }
 
-                                            break;
+                        break;
+
+                        case    "Rosedale Reservoir Total Flow":
+                          if (this.variable.WDNR_ROSE_TF_arr.length==0){break;}
+                            else{
+                     var arr = this.MinMaxAvg(m,this.variable.WDNR_ROSE_TF_arr)!
+                     minValues[m]= arr[0]
+                     maxValues[m]=arr[1]
+                     avgValues[m]=arr[2]
+                        }
+                            break;
+
+
+                            case    "Rosedale Reservoir Flow Rate":
+                              if (this.variable.WDNR_ROSE_FR_arr.length==0){break;}
+                                else{
+                         var arr = this.MinMaxAvg(m,this.variable.WDNR_ROSE_FR_arr)!
+                         minValues[m]= arr[0]
+                         maxValues[m]=arr[1]
+                         avgValues[m]=arr[2]
+                            }
+                                break;
+
+
+
+
+                                case    "Rowallan Park Extension Pressure":
+                                  if (this.variable.WDSR_ROWP_BAR_arr.length==0){break;}
+                                    else{
+                             var arr = this.MinMaxAvg(m,this.variable.WDSR_ROWP_BAR_arr)!
+                             minValues[m]= arr[0]
+                             maxValues[m]=arr[1]
+                             avgValues[m]=arr[2]
+                                }
+                                    break;
+
+
+                                case    "Rowallan Park Extension Total Flow":
+                                  if (this.variable.WDSR_ROWP_TF_arr.length==0){break;}
+                                    else{
+                             var arr = this.MinMaxAvg(m,this.variable.WDSR_ROWP_TF_arr)!
+                             minValues[m]= arr[0]
+                             maxValues[m]=arr[1]
+                             avgValues[m]=arr[2]
+                                }
+                                    break;
+
+
+                                    case    "Rowallan Park Extension Flow Rate":
+                                      if (this.variable.WDSR_ROWP_FR_arr.length==0){break;}
+                                        else{
+                                 var arr = this.MinMaxAvg(m,this.variable.WDSR_ROWP_FR_arr)!
+                                 minValues[m]= arr[0]
+                                 maxValues[m]=arr[1]
+                                 avgValues[m]=arr[2]
+                                    }
+                                        break;
+
+
 
 
       }
@@ -8121,6 +8275,28 @@ RightAxisConfiguration(AxisValue:any){
              case "Chelsea Pumpstation 4 Actual Speed":
                axisValues.CHE_PS_P4_ACTUAL_SPEED_Axis = 1
                break;
+
+               case "Rosedale Reservoir Total Flow":
+                axisValues.WDNR_ROSE_TF_axis = 1;
+                break;
+
+                case "Rosedale Reservoir Flow Rate":
+                  axisValues.WDNR_ROSE_FR_axis = 1
+                  break;
+
+
+                  case "Rowallan Park Extension Pressure":
+                    axisValues.WDSR_ROWP_BAR_axis = 1
+                    break;
+
+
+                    case "Rowallan Park Extension Total Flow":
+                      axisValues.WDSR_ROWP_TF_axis = 1;
+                      break;
+
+                      case "Rowallan Park Extension Flow Rate":
+                        axisValues.WDSR_ROWP_FR_axis = 1
+                        break;
 
 
            case "Chelsea Pumpstation 4 Delivery Pressure":

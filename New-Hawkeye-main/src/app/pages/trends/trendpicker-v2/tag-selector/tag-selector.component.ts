@@ -225,6 +225,11 @@ export class TagSelectorComponent implements OnInit {
   MNTSListArr:string[]=[]
   MNTSSelected:boolean[]=[]
 
+  RPEListArr:string[]=[]
+  RPESelected:boolean[]=[]
+
+  RRListArr:string[]=[]
+  RRSelected:boolean[]=[]
 
 showAutoMenu: boolean = false
 showResMenu: boolean = false;
@@ -375,6 +380,8 @@ this.ReadSelectedValues(this.hup6TagListArr,this.hup6TagSelected, "HD6 ")
 this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
 this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
+this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
+this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
 
 }, 500);
 
@@ -1189,6 +1196,26 @@ this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt 
      count++
      this.showWTW= true;
       break;
+
+      case "NMB_RPE_ZS":
+        if (count>=1 ){count = 0}
+        this.RRListArr[count]="Pressure";
+        count++;
+        this.RRListArr[count]="Total Flow";
+        count++;
+        this.RRListArr[count]="Flow Rate";
+        count++;
+        this.showZones=true;
+      break;
+
+      case "NMB_RD_ZS":
+        if (count>=1 ){count = 0}
+        this.RPEListArr[count]="Total Flow";
+        count++;
+        this.RPEListArr[count]="Flow Rate";
+        count++;
+        this.showZones=true;
+        break;
 
         ///////////////////////////////Groundwater
         case "NMB_NPP_GW":

@@ -279,6 +279,12 @@ intervalFunction:any
   MNTSListArr:string[]=[]
   MNTSSelected:boolean[]=[]
 
+  RPEListArr:string[]=[]
+  RPESelected:boolean[]=[]
+
+  RRListArr:string[]=[]
+  RRSelected:boolean[]=[]
+
 
   constructor(private su: ServerURLService,private ts:TrendPickerService,private http: HttpClient, public rs: ReportService,private authService: AuthService, private userService: UsersService, private webSocketService: WebSocketService,
       private tps:TrendPickerService,private router: Router
@@ -361,6 +367,8 @@ this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt 
 
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
+this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
 
 }, 500);
 
@@ -434,6 +442,52 @@ for (let i = 0; i < this.userSites.length; i++) {
           count++
 		     this.showRes= true;
           break;
+
+
+      case "NMB_LSD_ZS":
+        if(count>=1){count = 0}
+        this.LSDListArr[count]="Pressure";
+        count++;
+        this.LSDListArr[count]="Total Flow";
+        count++;
+        this.LSDListArr[count]="Flow Rate";
+        count++;
+        this.showZones = true
+
+        break;
+
+
+
+        case "NMB_MNTS_ZS":
+          if(count>=1){count = 0}
+          this.MNTSListArr[count]="Pressure";
+          count++;
+          this.MNTSListArr[count]="Total Flow";
+          count++;
+          this.MNTSListArr[count]="Flow Rate";
+          count++;
+          this.showZones = true
+          break;
+
+          case "NMB_RPE_ZS":
+            if (count>=1 ){count = 0}
+            this.RRListArr[count]="Pressure";
+            count++;
+            this.RRListArr[count]="Total Flow";
+            count++;
+            this.RRListArr[count]="Flow Rate";
+            count++;
+            this.showZones=true;
+          break;
+
+          case "NMB_RD_ZS":
+            if (count>=1 ){count = 0}
+            this.RPEListArr[count]="Total Flow";
+            count++;
+            this.RPEListArr[count]="Flow Rate";
+            count++;
+            this.showZones=true;
+            break;
 
           case "GRF_BERGEN_R":
             if (count>=1 ){count = 0}
@@ -1831,6 +1885,30 @@ if(this.selectedSites)
             case "McNoughton Township South Flow Rate":
               this.MNTSSelected[2] = true;
               break;
+
+
+
+              case "Rosedale Reservoir Total Flow":
+                this.RPESelected[0] = true;
+                break;
+
+                case "Rosedale Reservoir Flow Rate":
+                  this.RPESelected[1] = true;
+                  break;
+
+
+
+                  case "Rowallan Park Extension Pressure":
+                    this.RRSelected[0] = true;
+                    break;
+
+                    case "Rowallan Park Extension Total Flow":
+                      this.RRSelected[1] = true;
+                      break;
+
+                      case "Rowallan Park Extension Flow Rate":
+                      this.RRSelected[2] = true;
+                      break;
         }
       }
 
@@ -1890,18 +1968,18 @@ var oldPresetDescription = this.presetDescription
     this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ")
     this.ReadSelectedValues(this.gbwTagListArr,this.gbwTagsSelected, "Gamtoos Break Water ")
     this.ReadSelectedValues(this.humOffTakeTagListArr,this.humOffTakeSelected,"Humansdorp ")
-this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ")
-this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ")
-this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ")
+    this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ")
+    this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ")
+    this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ")
     // Groundwater
     this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ")
     this.ReadSelectedValues(this.hup1TagListArr,this.hup1TagSelected, "HD1 ")
-this.ReadSelectedValues(this.hup2TagListArr,this.hup2TagSelected, "HD2C ")
-this.ReadSelectedValues(this.hup3TagListArr,this.hup3TagSelected, "HD3 ")
-this.ReadSelectedValues(this.hup4TagListArr,this.hup4TagSelected, "HD4 ")
-this.ReadSelectedValues(this.hup6TagListArr,this.hup6TagSelected, "HD6 ")
-this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail ")
-this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
+    this.ReadSelectedValues(this.hup2TagListArr,this.hup2TagSelected, "HD2C ")
+    this.ReadSelectedValues(this.hup3TagListArr,this.hup3TagSelected, "HD3 ")
+    this.ReadSelectedValues(this.hup4TagListArr,this.hup4TagSelected, "HD4 ")
+    this.ReadSelectedValues(this.hup6TagListArr,this.hup6TagSelected, "HD6 ")
+    this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail ")
+    this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
     //Water Treatment works
     this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
     this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
@@ -1909,6 +1987,8 @@ this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Hum
 
     this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
     this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+    this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
+    this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
 // Uitenhage
 
     this.http.post(this.su.serverURL+"/update-user-presets",

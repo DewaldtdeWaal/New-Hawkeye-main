@@ -20,6 +20,8 @@ const GW_Trend = require('./Database-Functions/grdw_trend')
 const FL_Trend = require('./Database-Functions/fl_trend')
 const AUTO_Trend = require('./Database-Functions/auto_trend')
 
+const oneBigVar = require('./Database-Functions/oneBigVar')
+
 
 
 const ws = require('./socket-io-server')

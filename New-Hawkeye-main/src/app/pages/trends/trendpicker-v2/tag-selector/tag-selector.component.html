@@ -1051,6 +1051,37 @@
                         <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="MNTSSelected[i]" >{{d}}</mat-checkbox>
                       </div>
                       </mat-expansion-panel>
+
+                      <mat-expansion-panel *ngIf="RPEListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                          Rosedale Reservoir
+                        </mat-panel-title>
+                            <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                             </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of RPEListArr; index as i">
+                          <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="RPESelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
+
+                        <mat-expansion-panel *ngIf="RRListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                          <mat-expansion-panel-header>
+                          <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                            Rowallan Park Extension
+                          </mat-panel-title>
+                              <mat-panel-description style="color: rgb(180, 41, 41);">
+
+                               </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div *ngFor="let d of RRListArr; index as i">
+                            <mat-checkbox   style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="RRSelected[i]" >{{d}}</mat-checkbox>
+                          </div>
+                          </mat-expansion-panel>
+
+
                   </div>
         </div>
         <hr>

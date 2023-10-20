@@ -52,14 +52,12 @@
   <br>
 
 
-  <div fxLayoutAlign="center " > <div class="circle1">
-    <div class="circle2-b"><div [ngStyle]="{'height.%' : 100- variable.air_prt_R_lvl }" class="fill"><div class="lvl-font">{{variable.air_prt_R_lvl}}%</div></div></div>
-  </div>
-  </div>
+
+  <app-level [level] ="variable.air_prt_R_lvl"></app-level>
 
   <br>
   <br>
-  <br>
+
 
   </div>
     </form>

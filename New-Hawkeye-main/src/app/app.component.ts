@@ -51,6 +51,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+
+
     fromEvent(window, 'popstate')
       .pipe(takeUntil(this.unsubscriber))
       .subscribe(() => {

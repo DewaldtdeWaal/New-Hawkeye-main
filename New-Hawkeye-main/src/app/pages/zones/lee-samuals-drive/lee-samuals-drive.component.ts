@@ -59,7 +59,19 @@ export class LeeSamualsDriveComponent implements OnInit {
       this.pbm.getSiteData("WDNR_LSAM_DMA_FLM01").then((result) => {
         this.variables =  result;
 
-       // this.variables.comms = pageBuilder.getLastUpdate(this.variables.lastupdate, this.variables.wakeupperiod)
+
+        this.variablesMatric=[{
+          label:"Pressure",
+          value:this.variables.pressure1
+        },
+        {
+          label:"Flow Rate",
+          value:this.variables.flowrate1
+        },
+        {
+          label:"Total Flow",
+          value:this.variables.totaliser1
+        },]
 
 
       })
