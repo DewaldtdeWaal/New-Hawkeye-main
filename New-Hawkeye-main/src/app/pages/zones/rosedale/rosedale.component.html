@@ -1,29 +1,30 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">{{siteTitle}}</h1></div>
- <div class="wrapper-grid">
 
- <app-panel [title] = commsTitle>
+<app-page-component [siteTitle] = siteTitle>
 
-
-<app-comms-panel [lastUpdate] =variables.lastupdate  [communicationStatus]=variables.comms [batteryUnit]=variables.battery_status>
+  <app-panel [title] = commsTitle>
 
 
-</app-comms-panel>
+ <app-comms-panel [lastUpdate] =variables.lastupdate  [communicationStatus]=variables.comms [batteryUnit]=variables.battery_status>
 
 
-</app-panel>
-
-<app-panel [title] = statusTitle>
-  <br>
+ </app-comms-panel>
 
 
-  <app-two-column [array]="variablesMatric" style="margin-bottom: 15px;"></app-two-column>
+ </app-panel>
 
 
-  <br>
+
+ <app-panel [title] = statusTitle>
+   <br>
 
 
-</app-panel>
+   <app-two-column [array]="variablesMatric" style="margin-bottom: 15px;"></app-two-column>
 
-</div>
-</div>
+
+   <br>
+
+
+ </app-panel>
+
+ </app-page-component>
+

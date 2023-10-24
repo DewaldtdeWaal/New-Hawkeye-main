@@ -225,10 +225,10 @@ gw_klm_kruis12_res_ful:{
       this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any
-
+        this.isLoading  = false;
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
-  this.isLoading  = false;
+
     }
     )
 

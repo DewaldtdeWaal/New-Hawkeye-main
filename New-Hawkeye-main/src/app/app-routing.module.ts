@@ -147,8 +147,8 @@ import {LeeSamualsDriveComponent} from './pages/zones/lee-samuals-drive/lee-samu
 
 const routes: Routes = [
 
-  {path: '', redirectTo : '/hawkeye/home',pathMatch: 'full'},
-  {path: 'hawkeye', redirectTo : '/hawkeye/home',pathMatch: 'full'},
+  {path: '', redirectTo : 'hawkeye/home',pathMatch: 'full'},
+  {path: 'hawkeye', redirectTo : 'hawkeye/home',pathMatch: 'full'},
 
   // {path: '/hawkeye/home',component:HomeComponent,canActivate:[AuthGuard]},
   {path: 'hawkeye/login', component:LoginComponent},
@@ -168,8 +168,6 @@ const routes: Routes = [
 {path: 'hawkeye/sub-admin/nmbm-manage-accounts',component: NmbmManageAccountsComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/sub-admin/nmbm-add-user',component: NmbmAddUserComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/sub-admin/nmbm-manage-accounts/nmbm-edit-accounts',component: NmbmEditAccountsComponent,canActivate:[AuthGuard]},
-
-//Demo
 
 
 //Automotive

@@ -232,7 +232,7 @@ isLoading: boolean = false;
       this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
         this.data =  result;
         console.log(this.data)
-        this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
+        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data.routingArray)
 
         this.variable.comms = Common.getLastUpdateBattery(this.variable.jb_PB_SFO_ut,this.variable.jb_PB_SFO_last_seen)
 

@@ -17,6 +17,8 @@ export class pagePostMethod{
 
   data:any=[]
 
+
+  //Change this promise into a observable
   async findPageData(id:any, collection:any){
 
     var returnVariable

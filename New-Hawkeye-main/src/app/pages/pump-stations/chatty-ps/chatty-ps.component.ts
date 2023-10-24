@@ -24,7 +24,7 @@ export class ChattyPSComponent  {
   userSites:string[];
   showNavigationButton: string;
   variable :any= {
-  cht_ut:null,
+
   cht_g_panel_surge_arrestor:null,
   cht_g_panel_voltage_okay:null,
   cht_g_ps_mode:null,
@@ -42,7 +42,9 @@ export class ChattyPSComponent  {
   cht_p2_status:null,
   cht_p2_mode:null,
   comms:null,
-  cht_p2_vsd_status:null
+  cht_p2_vsd_status:null,
+  cht_ut:null,
+
   }
 
 
@@ -99,7 +101,7 @@ theme: any = localStorage.getItem("theme");
   }
   }
    tagArr:any=[
-    "cht_ut",//0
+
     "cht_g_panel_surge_arrestor",//1
     "cht_g_panel_voltage_okay",//2
     "cht_g_ps_mode",//3
@@ -123,15 +125,18 @@ theme: any = localStorage.getItem("theme");
     "cht_p2_estop_fault",//21
     "cht_p2_circuit_breaker_fault",//22
     "cht_p2_vsd_status",//23
+    "cht_ut",//0
   ]
 
-  constructor(private ls:ListeningService, private ws: WebSocketService, private us:UsersService,private chat:ChattyService   ,private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
 
     this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
       this.data =  result;
 
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data.routingArray)
-      this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
+      console.log(this.data)
+
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
 
       var alarm1: any [] = [this.faultVariable.cht_p1_no_flow_fault,this.faultVariable.cht_p1_estop_fault,this.faultVariable.cht_p1_circuit_breaker_fault]
       var alarm2: any [] = [this.faultVariable.cht_p2_no_flow_fault,this.faultVariable.cht_p2_estop_fault,this.faultVariable.cht_p2_circuit_breaker_fault]
@@ -166,8 +171,8 @@ theme: any = localStorage.getItem("theme");
       this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
         this.data =  result;
 
-        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data.routingArray)
-        this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
+        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+        this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
 
         var alarm1: any [] = [this.faultVariable.cht_p1_no_flow_fault,this.faultVariable.cht_p1_estop_fault,this.faultVariable.cht_p1_circuit_breaker_fault]
         var alarm2: any [] = [this.faultVariable.cht_p2_no_flow_fault,this.faultVariable.cht_p2_estop_fault,this.faultVariable.cht_p2_circuit_breaker_fault]

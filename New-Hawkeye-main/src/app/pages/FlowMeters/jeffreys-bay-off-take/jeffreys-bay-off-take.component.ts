@@ -226,7 +226,7 @@ this.options = {
       this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
         this.data =  result;
         console.log(this.data)
-        this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data)
+        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
         this.variable.comms = Common.getLastUpdateBattery(this.variable.jeff_bay_off_take_last_update,this.variable.jeff_bay_off_take_last_seen)

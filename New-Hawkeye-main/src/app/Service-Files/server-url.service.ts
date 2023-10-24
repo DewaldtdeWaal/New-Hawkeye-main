@@ -6,11 +6,11 @@ export class ServerURLService {
 public NUM:Number;
 num:number;
 data: any=[];
-  public serverURL:any
-  public wsURL:any
+  public serverURL:any;
+  public wsURL:any;
   public wsNMBMURL:any
   public guardURL:any;
-  public trendURL:any
+  public trendURL:any;
 
 
 constructor(){
@@ -28,7 +28,7 @@ constructor(){
    this.serverURL = "http://mac-creations.co.za:3000";
    this.wsNMBMURL ="172.105.70.85";
    this.wsURL= "ws://mac-creations.co.za";
-   this.guardURL = "hawkeye";  //Cloud Server - hawkeye
+   this.guardURL = "hawkeye";
   this.trendURL = "http://mac-creations.co.za:3000";
  // this.trendURL = "http://155.93.192.206:3000";
  }

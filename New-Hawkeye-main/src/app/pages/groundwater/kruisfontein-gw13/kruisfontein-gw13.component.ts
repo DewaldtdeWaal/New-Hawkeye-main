@@ -250,7 +250,7 @@ gw_klm_kruis13_res_ful:{
 
 
 
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
+  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array);
   })
 
 
