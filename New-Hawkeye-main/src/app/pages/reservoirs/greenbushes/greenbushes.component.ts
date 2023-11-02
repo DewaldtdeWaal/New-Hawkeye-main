@@ -66,7 +66,7 @@ export class GreenbushesComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -84,17 +84,17 @@ export class GreenbushesComponent implements OnInit {
 
 
 
-    setInterval(() =>{
-      this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").then((result) => {
-        this.data =  result;
+    // setInterval(() =>{
+    //   this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").subscribe((result) => {
+    //     this.data =  result;
 
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    //     console.log(this.data)
+    //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-      this.comms = Common.getLastUpdate(this.variable.gb_R_UT)
-      });
-    },60000);
+    //   this.comms = Common.getLastUpdate(this.variable.gb_R_UT)
+    //   });
+    // },60000);
 
     var trend: any = {};
    // this.rs.Get_GB_TotalFlows().subscribe(data => {
@@ -322,9 +322,10 @@ export class GreenbushesComponent implements OnInit {
 
       }
 
-      ngOnDestroy(){
+      ngOnDestroy():void{
         if(this.intervalLoop){
-          clearInterval(this.intervalLoop)
+          this.intervalLoop.unsubscribe();
+
         }
       }
 

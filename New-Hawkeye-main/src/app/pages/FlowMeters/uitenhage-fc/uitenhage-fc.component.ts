@@ -130,7 +130,19 @@ trendTag: any = ["totalFlow"]
 
     this.isLoading = true;
 
-    this.pm.findPageData("nmbm_uit_fc_fpt", "FPT_CurrentVals").then((result) => {
+
+
+
+
+
+
+  }
+
+  ngOnInit(){
+
+
+
+    this.intervalLoop = this.pm.findPageData("nmbm_uit_fc_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -143,40 +155,6 @@ trendTag: any = ["totalFlow"]
     var alarm1: any [] = [this.faultVariable.fpt_uit_fc_surge_arrester_fault,this.faultVariable.fpt_uit_fc_charger_fault,this.faultVariable.fpt_uit_fc_remote_io_comms,this.faultVariable.fpt_uit_fc_pressure_analog_signal,this.faultVariable.fpt_uit_fc_flow_meter_comms]
     this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
     });
-
-
-
-
-
-  }
-
-  ngOnInit(){
-
-
-
-
-    this.intervalLoop = setInterval(() =>{
-
-
-
-      this.pm.findPageData("nmbm_uit_fc_fpt", "FPT_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-
-      this.variable.comms = Common.getLastUpdate(this.variable.fpt_uit_fc_ut)
-
-
-      var alarm1: any [] = [this.faultVariable.fpt_uit_fc_surge_arrester_fault,this.faultVariable.fpt_uit_fc_charger_fault,this.faultVariable.fpt_uit_fc_remote_io_comms,this.faultVariable.fpt_uit_fc_pressure_analog_signal,this.faultVariable.fpt_uit_fc_flow_meter_comms]
-      this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
-      });
-
-
-
-
-        },60000)
 
 
 
@@ -229,12 +207,12 @@ this.isLoading = false;
   }
 
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
-
 
 
 

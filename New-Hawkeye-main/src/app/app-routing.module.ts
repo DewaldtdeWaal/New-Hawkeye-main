@@ -123,7 +123,6 @@ import {BushyparkFptComponent} from './pages/FlowMeters/bushypark-fpt/bushypark-
 import {NooitgedachtComponent} from './pages/WTW/nooitgedacht/nooitgedacht.component';
 import {StormsriverWTWComponent} from './pages/WTW/stormsriver-wtw/stormsriver-wtw.component'
 import {ElandsjagtComponent} from './pages/WTW/elandsjagt/elandsjagt.component'
-import {BushyparkWtwComponent} from './pages/pump-stations/bushypark-wtw/bushypark-wtw.component';
 import {HumansdorpwtwComponent} from './pages/WTW/humansdorpwtw/humansdorpwtw.component'
 //Trends component
 //import { TrendPickerComponent } from './pages/trends/trendpicker/trend-picker.component';
@@ -282,7 +281,7 @@ const routes: Routes = [
 
 {path: 'hawkeye/wtw/stormsriver-wtw',component: StormsriverWTWComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/wtw/elandsjagt',component: ElandsjagtComponent,canActivate:[AuthGuard]},
-{path: 'hawkeye/pumpstations/bushypark-wtw',component: BushyparkWtwComponent,canActivate:[AuthGuard]},
+
 {path: 'hawkeye/wtw/humansdorpwtw', component:HumansdorpwtwComponent, canActivate:[AuthGuard]},
 //Trends:
 

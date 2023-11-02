@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {malibarService} from 'src/app/Service-Files/Reservoir/reservoir.service';
-import { AuthService } from 'src/app/Service-Files/auth.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { Common } from 'src/app/class/common';
 @Component({
@@ -25,10 +23,15 @@ export class MalibarComponent implements OnInit {
     ]
     data: any=[];
 
-  constructor( private mali: malibarService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod) {
+  constructor(public recieve:Common,private pm:pagePostMethod) {
 
 
-    this.pm.findPageData("nmbm_mali_r", "R_CurrentVals").then((result) => {
+
+  }
+
+  ngOnInit() {
+
+    this.intervalLoop = this.pm.findPageData("nmbm_mali_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -37,34 +40,14 @@ export class MalibarComponent implements OnInit {
 
     this.variable.comms = Common.getLastUpdate(this.variable.mali_ut)
     });
-  }
-
-  ngOnInit() {
-
-    // var tagVals:any=[]
-
-
-    // tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_mali_r", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-      this.variable.comms = Common.getLastUpdate(this.variable.mali_ut)
-      });
-    },60000);
 
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { AuthService } from 'src/app/Service-Files/auth.service';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { UsersService } from 'src/app/Service-Files/users.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {kwanobuhleService} from 'src/app/Service-Files/Reservoir/reservoir.service'
+
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
@@ -99,19 +97,12 @@ alarmTrip: 1
 
    }
 
-  constructor(private ws: WebSocketService, public rs: ReportService, public us: UsersService,private authService: AuthService,private kwano:kwanobuhleService,public recieve:Common ,private pm:pagePostMethod)
+  constructor(public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod)
   {
 
 
 
-    this.pm.findPageData("nmbm_kwano_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-      var alarm1: any [] = [this.faultVariable.kwano_r_solar_alarm,this.faultVariable.kwano_r_pepper_spray_alarm,this.faultVariable.kwano_r_door_alarm ]
-      this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.comms = Common.getLastUpdate(this.variable.kwano_r_ut)
-    });
+
    }
 
 
@@ -124,20 +115,21 @@ alarmTrip: 1
 
 
 
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_kwano_r", "R_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        var alarm1: any [] = [this.faultVariable.kwano_r_solar_alarm,this.faultVariable.kwano_r_pepper_spray_alarm,this.faultVariable.kwano_r_door_alarm ]
-        this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.comms = Common.getLastUpdate(this.variable.kwano_r_ut)
-      });
-},60000);
+    this.intervalLoop = this.pm.findPageData("nmbm_kwano_r", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      var alarm1: any [] = [this.faultVariable.kwano_r_solar_alarm,this.faultVariable.kwano_r_pepper_spray_alarm,this.faultVariable.kwano_r_door_alarm ]
+      this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
+      this.comms = Common.getLastUpdate(this.variable.kwano_r_ut)
+    });
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
+
+
 }

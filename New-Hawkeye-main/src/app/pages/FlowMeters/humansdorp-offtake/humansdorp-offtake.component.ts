@@ -40,20 +40,9 @@ data:any=[]
 
 ]
 
-  constructor(private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+  constructor(public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
     this.isLoading = true;
-    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.humansdorp_off_take_ut,this.variable.humansdorp_off_take_last_seen)
-
-
-
-
-   })
 
 
    }
@@ -226,28 +215,19 @@ collectionName: any = "HUMANSDORP_OFF_TAKE_TF"
 trendTag: any = ["humansdorp_off_TF"]
 isLoading: boolean = false;
   ngOnInit() {
-    var tagVals:any=[]
-
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-
-    this.intervalLoop = setInterval(() =>{
+    this.intervalLoop = this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-
-      this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-        this.variable.comms = Common.getLastUpdateBattery(this.variable.humansdorp_off_take_ut,this.variable.humansdorp_off_take_last_seen)
+      this.variable.comms = Common.getLastUpdateBattery(this.variable.humansdorp_off_take_ut,this.variable.humansdorp_off_take_last_seen)
 
 
 
 
-     })
-    },60000)
+   })
+
 
 
     var trend :any;
@@ -307,9 +287,10 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
           })
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

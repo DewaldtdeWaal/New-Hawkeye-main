@@ -101,20 +101,9 @@ export class LovemoreHeightsPSComponent implements OnInit {
     "lh_P1_NO_FLOW_FAULT",//6
   ]
 
-  constructor( private webSocketService: WebSocketService,private us: UsersService,private chat:LovemoreHeightsService,private userService: UsersService,private authService: AuthService, public recieve:Common, private pm:pagePostMethod ) {
+  constructor( private authService: AuthService, public recieve:Common, private pm:pagePostMethod ) {
 
 
-
-    this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-      this.comms = Common.getLastUpdate(this.variable.lh_UT)
-      var alarm1: any [] = [this.faultVariable.lh_P1_SOFT_S_FAULT,this.faultVariable.lh_P1_ESTOP_FAULT,this.faultVariable.lh_P1_NO_FLOW_FAULT ]
-      var alarm2: any [] = [this.faultVariable.lh_P2_SOFT_S_FAULT,this.faultVariable.lh_P2_ESTOP_FAULT,this.faultVariable.lh_P2_NO_FLOW_FAULT ]
-
-      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-    });
 
    }
 
@@ -137,28 +126,24 @@ export class LovemoreHeightsPSComponent implements OnInit {
     }
 
 
-      this.intervalLoop = setInterval(() =>{
-        this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").then((result) => {
-          this.data =  result;
 
+    this.intervalLoop = this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.comms = Common.getLastUpdate(this.variable.lh_UT)
+      var alarm1: any [] = [this.faultVariable.lh_P1_SOFT_S_FAULT,this.faultVariable.lh_P1_ESTOP_FAULT,this.faultVariable.lh_P1_NO_FLOW_FAULT ]
+      var alarm2: any [] = [this.faultVariable.lh_P2_SOFT_S_FAULT,this.faultVariable.lh_P2_ESTOP_FAULT,this.faultVariable.lh_P2_NO_FLOW_FAULT ]
 
+      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+    });
 
-
-          Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-          this.comms = Common.getLastUpdate(this.variable.lh_UT)
-          var alarm1: any [] = [this.faultVariable.lh_P1_SOFT_S_FAULT,this.faultVariable.lh_P1_ESTOP_FAULT,this.faultVariable.lh_P1_NO_FLOW_FAULT ]
-          var alarm2: any [] = [this.faultVariable.lh_P2_SOFT_S_FAULT,this.faultVariable.lh_P2_ESTOP_FAULT,this.faultVariable.lh_P2_NO_FLOW_FAULT ]
-
-          this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-          this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-        });
-   },60000 );
 
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
     }
   }
 }

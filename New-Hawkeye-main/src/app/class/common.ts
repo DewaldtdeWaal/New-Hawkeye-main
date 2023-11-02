@@ -27,6 +27,9 @@ export class Common  {
 
   public static getAlarmValue(alarmArray:any[]=[]){
 
+
+
+
     var tableData: PeriodicElement[]=[]
     var count = 0;
 
@@ -383,7 +386,7 @@ static getRouteDatas(tagArr:any = [],variable:any,data:any){
 
 static getRouteData(tagArr:any = [],variable:any,data:any){
 
-  console.log(data)
+
 
   for(var i = 0; i < tagArr.length; i++) {
     variable[tagArr[i]] = data[0][tagArr[i]]
@@ -404,6 +407,8 @@ public static getFaultRouteData(tagArr:any = [],variable:any,data:any){
 }
 
 public static getFaultRouteDatas(tagArr:any = [],variable:any,data:any){
+
+
 
   for(var i = 0; i < tagArr.length; i++) {
     variable[tagArr[i]].value = data[tagArr[i]]

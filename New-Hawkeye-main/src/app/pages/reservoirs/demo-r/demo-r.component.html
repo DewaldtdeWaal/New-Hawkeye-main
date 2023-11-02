@@ -1,247 +1,49 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px;">Demo Res</h1></div>
-  <div class="wrapper-grid">
+<app-page-component [siteTitle]=title>
 
-
-    <div class="vertical-form">
-    <section class="res-form" fxLayoutAlign="center ">
-      <form fxLayout="column">
-        <div style="margin-bottom: 8px"  class="div-form">
-          <h3 style="padding-top: 8px; ">Communication</h3></div>
-
-          <div class="div-form">
-            <div class="grid-container-flow-meters-communication">
-              <div class="grid-container-communication-general-column1">Communication Status:</div>
-              <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
-              <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
-              <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:2px"></div>
-                </div>
-                <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
-                 <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img" style="width:20px; height:20px; padding-top:2px">
-                 </div>
-
-              <div class="grid-container-communication-general-column1">Last Update:</div>
-              <div class="grid-container-communication-general-column3">{{last_update}}</div>
-
-              <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
-              <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
-
-              <div *ngIf="showNavigationButton == 'true'" class="grid-button" style=" background: grey; color:grey;">
-                <button class="button-color" a routerLink="/hawkeye/pumpstations/demo-ps"  >Pumpstation</button></div>
-
-              </div>
-
-          </div>
-
-
-
-
-
-
-      </form>
-
-
-    </section>
-
-    <section class="res-form" fxLayoutAlign="center">
-      <form fxLayout="column">
-        <div style="margin-bottom: 8px"  class="div-form">
-          <h3 style="padding-top: 8px; ">Alarms</h3></div>
-          <div class="div-form">
-
-            <table mat-elevation-z8 mat-table [dataSource]="generalfaulttabledatasource" matSort>
-
-              <ng-container matColumnDef="alarm" >
-                <th style=" width:40px"mat-header-cell *matHeaderCellDef mat-sort-header > INCIDENT </th>
-                <td style=" width:40px"mat-cell *matCellDef="let element"> {{element.alarm}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="description" >
-                <th style=" padding-left: 30px;"mat-header-cell *matHeaderCellDef mat-sort-header > DESCRIPTION </th>
-                <td style=" padding-left: 30px;"mat-cell *matCellDef="let element"> {{element.description}} </td>
-              </ng-container>
-
-              <tr style="width:20px" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-            </table>
-            <br>
-          </div>
-            <br>
-            <br>
-
-      </form>
-      <br>
-      <br>
-
-    </section>
-  </div>
-
-    <section class="res-form" fxLayoutAlign="center ">
-      <form fxLayout="column">
-        <div style="margin-bottom: 8px"  class="div-form">
-          <h3 style="padding-top: 8px; ">Reservoir</h3>
-        </div>
-
-        <div class="div-form">
-          <br>
-
-            <div fxLayoutAlign="center" > <div class="circle1">
-           <div  class="circle2-b"><div [ngStyle]="{'height.%' : 100-res_levels }" class="fill"><div class="lvl-font">{{res_levels}}%</div></div></div>
-          </div>
-          </div>
-          <div class="grid-container-flow-meters-general">
-
-
-          </div>
-          </div>
-
-      </form>
-
-      </section>
-
-
-      <section class="res-form" fxLayoutAlign="center ">
-
-        <form fxLayout="column">
-          <div style="margin-bottom: 8px"  class="div-form">
-            <h3 style="padding-top: 8px; ">Inlet Flow</h3>
-          </div>
-
-          <div class="div-form">
-            <div class="grid-container-flow-meters-general">
-              <div class="grid-span-four">Endor</div>
-              <div class="grid-container-flow-meters-general-column1"><img src="assets/img/Symbol/bar.png" class="img3"></div>
-              <div class="grid-container-flow-meters-general-column3">{{valve_chamber_pressure}} bar</div>
-              <div class="grid-container-flow-meters-general-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-              <div class="grid-container-flow-meters-general-column3">{{grassridge_inlet_flow_rate}} Ml/d</div>
-              <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
-              <div class="grid-container-flow-meters-general-column3">{{grassridge_inlet_total_flow}} Ml</div>
-              <div class="grid-container-flow-meters-general-column1"></div>&nbsp;<div class="grid-container-flow-meters-general-column3"></div>
-
-              <div class="grid-container-flow-meters-general-column1">Control Mode:</div>
-              <div class="grid-container-flow-meters-general-column3">{{mode}}</div>
-
-              <div *ngIf="theme=='light-theme'" class="grid-container-flow-meters-general-column1-img">
-                <div class="img2" *ngIf="statuses=='Opening'"><img class="img2" src="assets/img/Valves/CV B Moving.png"></div>
-                <div class="img2" *ngIf="statuses=='Open'"><img class="img2" src="assets/img/Valves/CV B Opened.png"></div>
-                <div class="img2" *ngIf="statuses=='Closing'"><img class="img2" src="assets/img/Valves/CV B Moving.png"></div>
-                <div class="img2" *ngIf="statuses=='Closed'"><img class="img2" src="assets/img/Valves/CV B Closed.png"></div>
-                <div class="img2" *ngIf="statuses=='Fault Active'"><img class="img2" src="assets/img/Valves/CV Fault.png"></div>
-               </div>
-               <div *ngIf="theme=='dark-theme'" class="grid-container-flow-meters-general-column1-img">
-                <div  *ngIf="statuses=='Opening'"><img class="img2" src="assets/img/Valves/CV W Moving.png"></div>
-                <div  *ngIf="statuses=='Open'"><img  class="img2"src="assets/img/Valves/CV W Opened.png"></div>
-                <div  *ngIf="statuses=='Closing'"><img class="img2" src="assets/img/Valves/CV W Moving.png"></div>
-                <div  *ngIf="statuses=='Closed'"><img class="img2"src="assets/img/Valves/CV W Closed.png"></div>
-                <div  *ngIf="statuses=='Fault Active'"><img class="img2" src="assets/img/Valves/CV Fault.png"></div>
-               </div>
-
-              <div class="grid-container-flow-meters-general-column1">Actuator Valve:</div>
-              <div class="grid-container-flow-meters-general-column3">{{actuator_status}}</div>
-
-              <div class="grid-container-flow-meters-general-column1-img">
-                <div *ngIf="theme=='light-theme'" >
-
-                  <div class="img2" *ngIf="control_valve_one=='Open'"><img class="img2" src="assets/img/Valves/CV B Opened.png"></div>
-                <div class="img2" *ngIf="control_valve_one=='Closed'"><img class="img2" src="assets/img/Valves/CV B Closed.png"></div>
-                </div>
-
-
-
-             <div *ngIf="theme=='dark-theme'" >
-              <div class="img2" *ngIf="control_valve_one=='Open'"><img  class="img2"src="assets/img/Valves/CV W Opened.png"></div>
-               <div class="img2" *ngIf="control_valve_one=='Closed'"><img class="img2"src="assets/img/Valves/CV W Closed.png"></div>
-             </div>
-
-
-              </div>
-
-              <div class="grid-container-flow-meters-general-column1">Solenoid Valve 1</div><div class="grid-container-flow-meters-general-column3">{{control_valve_one}}</div>
-
-              <div class="grid-container-flow-meters-general-column1-img">
-              <div *ngIf="theme=='light-theme'">
-
-                <div class="img2" *ngIf="control_valve_two=='Open'"><img class="img2" src="assets/img/Valves/CV B Opened.png"></div>
-              <div class="img2" *ngIf="control_valve_two=='Closed'"><img class="img2" src="assets/img/Valves/CV B Closed.png"></div>
-              </div>
-
-
-
-           <div *ngIf="theme=='dark-theme'">
-            <div class="img2" *ngIf="control_valve_two=='Open'"><img  class="img2"src="assets/img/Valves/CV W Opened.png"></div>
-             <div class="img2" *ngIf="control_valve_two=='Closed'"><img class="img2"src="assets/img/Valves/CV W Closed.png"></div>
-           </div>
-
-
-            </div>
-
-            <div class="grid-container-flow-meters-general-column1">Solenoid Valve 2</div><div class="grid-container-flow-meters-general-column3">{{control_valve_two}}</div>
-
-
-
-
-              </div>
-              </div>
-              </form>
-              </section>
-
-
-  <section class="res-form" fxLayoutAlign="center">
+  <section class="ground-form" fxLayoutAlign="center">
 
     <form fxLayout="column">
+
       <div style="margin-bottom: 8px"  class="div-form">
-        <h3 style="padding-top: 8px; ">Outlet Flow</h3>
+        <h3 style="padding-top: 8px; ">Communication</h3>
       </div>
 
-      <div class="div-form">
-        <div class="grid-container-flow-meters-general">
-          <div class="grid-span-four">Alderaan</div>
-          <div class="grid-container-flow-meters-general-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-          <div class="grid-container-flow-meters-general-column3">{{motherwell_outlet_flow_rate}} Ml/d</div>
-          <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
-          <div class="grid-container-flow-meters-general-column3">{{motherwell_outlet_total_flow}} Ml</div>
-         <div class="grid-container-flow-meters-general-column1"> &nbsp;</div><div class="grid-container-flow-meters-general-column3"  ></div>
-          <div class="grid-span-four">Kashyyyk</div>
-          <div class="grid-container-flow-meters-general-column1"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-          <div class="grid-container-flow-meters-general-column3">{{coega_idz_outlet_flow_rate}} Ml/d</div>
-          <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
-          <div class="grid-container-flow-meters-general-column3">{{coega_idz_outlet_total_flow}} Ml</div>
+  <div class="div-form">
+    <div class="grid-container-flow-meters-communication">
 
-      </div>
-      </div>
+      <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+      <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+        <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 0px;">
+        </div>
+        <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;" >
+         <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"style="grid-column: 3; padding-top: 0px;">
+         </div>
+
+      <div class="grid-container-communicationStatus-column1">Last Update:</div>
+      <div class="grid-container-communicationStatus-column3">{{variable.mw_g_p_new_ut}}</div>
+
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
+
+      <div *ngIf="showNavigationButton == 'true'" class="grid-button">
+          <button class="button-color"   a routerLink="/hawkeye/reservoirs/motherwellres"  >Reservoir</button></div>
+</div>
+
+</div>
+</form>
+</section>
 
 
-    </form>
 
-
-
-
-  </section>
-  </div>
-
-
-  <div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
-    <h3 style="padding-top: 10px; color: var(--form-text-color); ">Total Flow Trend</h3>
-  </div>
-
-  <section class="ps-form" fxLayoutAlign="center " >
-    <form fxLayout="column" #f="ngForm" (click)="onDateFilter()">
-    <div style="margin-bottom: 1px"  class="div-form">
-  <mat-form-field style="padding-left: 10px;">
-      <mat-label >Enter a date range</mat-label>
-      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-        <input style="color:  var(--form-text-color);" matStartDate formControlName="start" placeholder="Start date">
-        <input matEndDate formControlName="end" placeholder="End date">
-      </mat-date-range-input>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-   <button style="margin-left: 20px;" mat-raised-button >SEARCH</button>
-    </div>
-    </form>
-    </section>
+<app-panel [title]="titleG">
   <br>
-  <div id="main" echarts  [options]="options" class="chart" ></div>
+  <app-two-column [array]=variablesMatricG></app-two-column>
   <br>
-  <br>
+</app-panel>
+
+  <app-ground-water [title]=pump1 [array]=variablesMatric1 [generalfaultdatasource]=dataSourceP1 [pumpColor]=pumpColor1 [pumpType]=Pump></app-ground-water>
+  <app-ground-water [title]=pump2 [array]=variablesMatric2 [generalfaultdatasource]=dataSourceP2 [pumpColor]=pumpColor2 [pumpType]=Pump></app-ground-water>
+  <app-ground-water [title]=pump3 [array]=variablesMatric3 [generalfaultdatasource]=dataSourceP3 [pumpColor]=pumpColor3 [pumpType]=Pump></app-ground-water>
+  <app-ground-water [title]=pump4 [array]=variablesMatric4 [generalfaultdatasource]=dataSourceP4 [pumpColor]=pumpColor4 [pumpType]=Pump></app-ground-water>
+
+</app-page-component>

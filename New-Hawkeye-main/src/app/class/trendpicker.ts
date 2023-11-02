@@ -216,7 +216,14 @@ export const trendArray = [
   "MW_BPS_DeliveryPressure_Arr",
   "MW_BPS_FlowRate_Arr",
   "MW_BPS_SuctionPressure_Arr",
-  "MW_LVL_array",
+  "MW_NORTH_LVL_array",
+  "MW_SOUTH_LVL_array",
+  "MW_P_TF_arr",
+  "MW_P1_PUMP_RPM_arr",
+  "MW_P2_PUMP_RPM_arr",
+  "MW_P3_PUMP_RPM_arr",
+  "MW_P4_PUMP_RPM_arr",
+
   "WTW_NGT_FM_HIGH_FR_Arr",
   "WTW_NGT_FM_LOW_FR_Arr",
   "st_georges_wtw_gw_FR_arr",
@@ -461,7 +468,18 @@ export const trendArray = [
 "Motherwell Delivery Pressure":"MW_BPS_DeliveryPressure_Arr",
   "Motherwell Flow Rate":"MW_BPS_FlowRate_Arr",
   "Motherwell Suction Pressure":"MW_BPS_SuctionPressure_Arr",
-  "Motherwell Reservoir Level":"MW_LVL_array",
+  "Motherwell Reservoir North Chamber Level":"MW_NORTH_LVL_array",
+  "Motherwell Reservoir South Chamber Level":"MW_SOUTH_LVL_array",
+
+
+
+
+  "Motherwell Total Flow":"MW_P_TF_arr",
+  "Motherwell Pump 1 Speed":"MW_P1_PUMP_RPM_arr",
+  "Motherwell Pump 2 Speed":"MW_P2_PUMP_RPM_arr",
+  "Motherwell Pump 3 Speed":"MW_P3_PUMP_RPM_arr",
+  "Motherwell Pump 4 Speed":"MW_P4_PUMP_RPM_arr",
+
   "Nooitgedacht High Level Flow Rate":"WTW_NGT_FM_HIGH_FR_Arr",
   "Nooitgedacht Low Level Flow Rate":"WTW_NGT_FM_LOW_FR_Arr",
   "St Georges Borehole Flow Rate":"st_georges_wtw_gw_FR_arr",
@@ -702,7 +720,17 @@ export const trendArray = [
 "Motherwell Delivery Pressure":"MW_BPS_DeliveryPressure_axis",
   "Motherwell Flow Rate":"MW_BPS_FlowRate_axis",
   "Motherwell Suction Pressure":"MW_BPS_SuctionPressure_axis",
-  "Motherwell Reservoir Level":"MW_LVL_axis",
+"  Motherwell Reservoir North Chamber Level":"MW_NORTH_LVL_axis",
+"  Motherwell Reservoir South Chamber Level":"MW_SOUTH_LVL_axis",
+
+
+  "Motherwell Total Flow":"MW_P_TF_axis",
+  "Motherwell Pump 1 Speed":"MW_P1_PUMP_RPM_axis",
+  "Motherwell Pump 2 Speed":"MW_P2_PUMP_RPM_axis",
+  "Motherwell Pump 3 Speed":"MW_P3_PUMP_RPM_axis",
+  "Motherwell Pump 4 Speed":"MW_P4_PUMP_RPM_axis",
+
+
   "Nooitgedacht High Level Flow Rate":"WTW_NGT_FM_HIGH_FR_axis",
   "Nooitgedacht Low Level Flow Rate":"WTW_NGT_FM_LOW_FR_axis",
   "St Georges Borehole Flow Rate":"",
@@ -952,7 +980,16 @@ McNougTown_FLOW_RATE_axis:0,
     STAN_BPS_P4_FREQ_axis :0,
     MW_BPS_FlowRate_axis:0,
     MW_BPS_DeliveryPressure_axis:0,
-    MW_LVL_axis :0,
+
+    MW_NORTH_LVL_axis:0,
+    MW_SOUTH_LVL_axis:0,
+
+
+    MW_P_TF_axis:0,
+    MW_P1_PUMP_RPM_axis:0,
+    MW_P2_PUMP_RPM_axis:0,
+    MW_P3_PUMP_RPM_axis:0,
+    MW_P4_PUMP_RPM_axis:0,
     MW_BPS_SuctionPressure_axis :0,
     WTW_NGT_FM_LOW_FR_axis:0,
     WTW_NGT_FM_HIGH_FR_axis:0,
@@ -1186,7 +1223,14 @@ export const variables:any = {
     MW_BPS_FlowRate_Arr: [],
     MW_BPS_SuctionPressure_Arr: [],
     MW_BPS_DeliveryPressure_Arr: [],
-    MW_LVL_array:[],
+    MW_NORTH_LVL_array:[],
+    MW_SOUTH_LVL_array:[],
+
+    MW_P_TF_arr:[],
+MW_P1_PUMP_RPM_arr:[],
+MW_P2_PUMP_RPM_arr:[],
+MW_P3_PUMP_RPM_arr:[],
+MW_P4_PUMP_RPM_arr:[],
     WTW_NGT_FM_HIGH_FR_Arr: [],
     WTW_NGT_FM_LOW_FR_Arr: [],
     GR_R_INLET_Arr:[],

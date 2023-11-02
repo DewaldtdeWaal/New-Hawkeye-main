@@ -50,20 +50,7 @@ trendTag: any = ["ons_para_TF"]
   constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
     this.isLoading = true;
 
-    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-
-      this.variable.ons_comms = Common.getLastUpdateBattery(this.variable.ons_para_ut,this.variable.ons_para_last_seen)
-
-      this.variable.kou_comms = Common.getLastUpdateBattery(this.variable.kou_main_line_ut,this.variable.kou_main_line_last_seen)
-
-
-
-
-   })
 
    }
 
@@ -95,23 +82,17 @@ this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((d
   }
   isLoading: boolean = false;
   ngOnInit() {
-    var tagVals:any=[]
+    this.intervalLoop = this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-
-    this.intervalLoop = setInterval(() =>{
-		  console.log(tagVals)
-
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
       this.variable.ons_comms = Common.getLastUpdateBattery(this.variable.ons_para_ut,this.variable.ons_para_last_seen)
 
       this.variable.kou_comms = Common.getLastUpdateBattery(this.variable.kou_main_line_ut,this.variable.kou_main_line_last_seen)
 
-
-
-    },60000)
+   })
 
     var trend :any;
 
@@ -131,7 +112,7 @@ this.isLoading = false;
   }
   ngOnDestroy(){
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
     }
   }
 

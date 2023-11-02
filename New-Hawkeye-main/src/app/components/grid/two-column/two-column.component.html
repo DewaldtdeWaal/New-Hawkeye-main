@@ -1,22 +1,9 @@
 <div *ngFor="let item of array" class="grid-container-flow-meters-communications">
   <div class="grid-container-flow-meters-general-column1">
-   <div *ngIf="item.label =='Pressure'">
-    <img src="assets/img/Symbol/bar.png" class="img3"></div>
-    <div *ngIf="item.label =='Flow Rate'">
-      <img src="assets/img/Symbol/FM.png" class="img3"></div>
-
-
-      <div *ngIf="item.label !='Pressure' &&item.label !='Flow Rate'">
+      <div>
         <div>{{item.label}}:</div>
         </div>
-                       </div>
-
-
-
-
-
-
-
+      </div>
   <!-- <div class="grid-container-flow-meters-general-column1">{{item.label}}:</div> -->
   <div class="grid-container-flow-meters-general-column4">{{item.value}}</div>
 </div>

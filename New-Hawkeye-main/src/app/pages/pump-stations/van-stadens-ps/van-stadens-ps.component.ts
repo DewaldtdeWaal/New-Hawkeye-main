@@ -195,23 +195,7 @@ theme:any  = localStorage.getItem("theme");
   constructor(private authService:AuthService,public ls: ListeningService, public us:UsersService,public recieve:Common, private pm:pagePostMethod ) {
 
 
-    this.pm.findPageData("nmbm_vs_ps", "PS_CurrentVals").then((result) => {
-      this.data =  result;
 
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-     this.comms = Common.getLastUpdate(this.variable.vs_PS_UT)
-
-     var alarm1: any [] = [this.faultVariable.vs_P1_LSP,this.faultVariable.vs_P1_HDP,this.faultVariable.vs_P1_STARTER_FAULT,this.faultVariable.vs_P1_STARTUP_FAULT, this.faultVariable.vs_P1_LDP]
-     var alarm2: any [] = [this.faultVariable.vs_P2_LSP,this.faultVariable.vs_P2_HDP,this.faultVariable.vs_P2_STARTER_FAULT,this.faultVariable.vs_P2_STARTUP_FAULT, this.faultVariable.vs_P2_LDP]
-     var alarmG: any [] = [this.faultVariable.vs_G_PUMPS_F,this.faultVariable.vs_G_COMMS]
-     this.dataSourceG= new MatTableDataSource(Common.getAlarmValue(alarmG))
-     this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
-     this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
-
-
-    })
 
 
 
@@ -235,31 +219,28 @@ theme:any  = localStorage.getItem("theme");
       }
     }
 
+    this.intervalLoop = this.pm.findPageData("nmbm_vs_ps", "PS_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-      var updateTemp:any;
-      this.intervalLoop = setInterval(() =>{
-        this.pm.findPageData("nmbm_vs_ps", "PS_CurrentVals").then((result) => {
-          this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-          console.log(this.data)
-          Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+     this.comms = Common.getLastUpdate(this.variable.vs_PS_UT)
 
-         this.comms = Common.getLastUpdate(this.variable.vs_PS_UT)
-
-         var alarm1: any [] = [this.faultVariable.vs_P1_LSP,this.faultVariable.vs_P1_HDP,this.faultVariable.vs_P1_STARTER_FAULT,this.faultVariable.vs_P1_STARTUP_FAULT, this.faultVariable.vs_P1_LDP]
-         var alarm2: any [] = [this.faultVariable.vs_P2_LSP,this.faultVariable.vs_P2_HDP,this.faultVariable.vs_P2_STARTER_FAULT,this.faultVariable.vs_P2_STARTUP_FAULT, this.faultVariable.vs_P2_LDP]
-         var alarmG: any [] = [this.faultVariable.vs_G_PUMPS_F,this.faultVariable.vs_G_COMMS]
-         this.dataSourceG= new MatTableDataSource(Common.getAlarmValue(alarmG))
-         this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
-         this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
+     var alarm1: any [] = [this.faultVariable.vs_P1_LSP,this.faultVariable.vs_P1_HDP,this.faultVariable.vs_P1_STARTER_FAULT,this.faultVariable.vs_P1_STARTUP_FAULT, this.faultVariable.vs_P1_LDP]
+     var alarm2: any [] = [this.faultVariable.vs_P2_LSP,this.faultVariable.vs_P2_HDP,this.faultVariable.vs_P2_STARTER_FAULT,this.faultVariable.vs_P2_STARTUP_FAULT, this.faultVariable.vs_P2_LDP]
+     var alarmG: any [] = [this.faultVariable.vs_G_PUMPS_F,this.faultVariable.vs_G_COMMS]
+     this.dataSourceG= new MatTableDataSource(Common.getAlarmValue(alarmG))
+     this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
+     this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
 
 
-        })
-   },60000 );
+    })
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

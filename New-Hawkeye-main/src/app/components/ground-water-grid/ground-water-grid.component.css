@@ -1,0 +1,61 @@
+.grid-container-text{
+  display: grid;
+  grid-template-columns: 0.8fr 0.2fr 20px 1fr;
+  grid-auto-rows: 30px;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content:center;
+  /* padding-bottom: 15px;
+  padding-top: 15px; */
+}
+.grid-container-text-column1{
+  display: grid;
+  grid-column:1/ span 2;
+  grid-template-rows: 25px;
+  text-align: right;
+  float: right;
+  align-items: center;
+  padding:2px;
+}
+
+.grid-container-text-column2{
+  display: grid;
+  grid-column:2;
+  grid-template-rows: 25px;
+  text-align: right;
+  float: right;
+  align-items: center;
+  padding:2px;
+}
+.grid-container-text-column4{
+  display: grid;
+  grid-column: 4;
+  grid-template-rows: 25px;
+  text-align: left;
+  float: left;
+  align-items: center;
+  font-weight: bold;
+  padding:2px;
+}
+
+.grid-container-text-column2{
+  display: grid;
+  grid-column: 2;
+  grid-template-rows: 25px;
+  text-align: left;
+  float: left;
+  align-items: center;
+  font-weight: bold;
+  padding:2px;
+}
+/* SO I'm putting the css at the html component I want to use.  That way I don't have to go and scroll through an entire page. */
+.img3{
+  width:25px;
+  height: 25px;
+  z-index:1;
+  padding-top:6px;
+  margin: 0 auto;
+
+}
+
+

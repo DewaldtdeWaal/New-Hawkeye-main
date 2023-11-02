@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
   Name: string;
   communication_status: any;
@@ -71,25 +72,8 @@ export class PsOverviewComponent implements OnInit {
   hb_R_comms:any
 
 
-   tagArr:any =[
-    "stan_ps_ut",
-    "bf_PS_UT",
-    "vs_PS_UT",
-    "hb_R_UT",
-    "cht_ut",
-    "mw_g_ut",
-    "cg_G_UT",
-    "bush_UT",
-    "che_r_ut",
-    "bhb_PS_UT",
-    "vrh_ut",
-    "ps_storm_UT",
-    "lh_UT",
-    "nmu_eff_ps_ut",
-    "tc_R_UT",
 
-    ]
-  constructor(private route:resOverviewRouteComponent,private authService: AuthService, private ws:WebSocketService ,private router: Router ,public recieve:Common ) {
+  constructor(private route:resOverviewRouteComponent,private authService: AuthService, private ws:WebSocketService ,private router: Router ,public recieve:Common,private pm:pagePostMethod ) {
 
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
@@ -99,39 +83,11 @@ export class PsOverviewComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-    this.getRouteInformation(this.variable).then((response) => {
-      this.responseData = response
-
-
-      this.renderPage(this.responseData)
-    })
-
-
 
 
   }
 
-  recieveVals(tagArr: any[]){
-    var tagVals:any = []
-    for(let i = 0; i<tagArr.length ;i++){
-      this.ws.nmbm_listen(tagArr[i]).subscribe((data:any)=>{
-        tagVals[i] = data[tagArr[i]];
 
-      })
-    }
-    return tagVals
-  }
-
-  recieveVals_non_nmbm(tagArr: any[]){
-    var tagVals:any = []
-    for(let i = 0; i<tagArr.length ;i++){
-      this.ws.listen(tagArr[i]).subscribe((data:any)=>{
-        tagVals[i] = data[tagArr[i]];
-
-      })
-    }
-    return tagVals
-  }
 
   ngOnInit() {
 
@@ -140,20 +96,13 @@ export class PsOverviewComponent implements OnInit {
 
 
 
+    this.intervalLoop = this.pm.findPageData("PS_OVERVIEW", "PUMP_CurrentVals").subscribe((result) => {
+
+      this.variable = result
 
 
-    this.resOverviewInterval = setInterval(() =>{
-
-      this.getRouteInformation(this.variable).then((response) => {
-        this.responseData = response
-
-
-        this.renderPage(this.responseData)
-      })
-
-
-
-    },60000)
+      this.renderPage(this.variable)
+    });
 
 
 
@@ -208,33 +157,15 @@ navigateToSite(element:any){
   this.router.navigate([route]);
 
 }
+intervalLoop:any
+ngOnDestroy():void{
+  if(this.intervalLoop){
+    this.intervalLoop.unsubscribe();
 
-ngOnDestroy(){
-  if(this.resOverviewInterval){
-    clearInterval(this.resOverviewInterval)
   }
 }
 
-async getRouteInformation(variable:any): Promise<any> {
 
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = await this.route.GetSiteValues();
-
-      this.data = response;
-
-      variable = await this.recieve.recieveRouteData(this.tagArr,variable, this.data.routingArray);
-
-      console.log(variable)
-      resolve(variable);
-    } catch (error) {
-
-      console.error(error);
-      reject(error);
-    }
-  });
-}
 
 
 async renderPage(variable:any){
@@ -246,13 +177,7 @@ async renderPage(variable:any){
     for (var i = 0; i < this.userSites.length; i++){
       switch (this.userSites[i]) {
 
-        case "NMB_BUSH_PS":
-          if(this.variable.bush_UT != null || this.variable.bush_UT != undefined){
-            this.bush_comms = this.getCommunicationStatus(this.variable.bush_UT, this.bush_comms)
-            this.listening("Bushy Park", this.bush_comms, count,"/hawkeye/pumpstations/bushypark-wtw")
-            count++;
-          }
-          break;
+
         case "NMB_BHB_PS":
           if(this.variable.bhb_PS_UT  != null || this.variable.bhb_PS_UT  != undefined){
           this.bhb_PS_comms =  this.getCommunicationStatus(this.variable.bhb_PS_UT, this.bhb_PS_comms)

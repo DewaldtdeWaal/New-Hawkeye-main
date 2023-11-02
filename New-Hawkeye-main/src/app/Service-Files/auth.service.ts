@@ -76,6 +76,8 @@ login(firstName: string, secondName: string, contactNumber: number, supervisorEm
  const token = response.token;
  this.token =token;
 
+ console.log()
+
  if (token){
     const expiresInDuration = response.expiresIn;
       this.setAuthTimer(expiresInDuration);

@@ -1,8 +1,5 @@
 import {  Component, OnInit, ViewChild } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import {MatTableDataSource} from '@angular/material/table';
-import { UsersService } from 'src/app/Service-Files/users.service';
-import {blueHorizonBayComponent} from 'src/app/Service-Files/Pumpstation/pumpstation.service'
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 
@@ -130,44 +127,22 @@ faultArr:any=[
 "bhb_P2_STARTUP_FAULT",
 "bhb_P2_NO_FLOW",
 ]
-  constructor( private pm:pagePostMethod,private webSocketService: WebSocketService, private us: UsersService, private buff:blueHorizonBayComponent ,private userService: UsersService,private authService: AuthService,public recieve:Common  ) {
-
-
-
-    this.pm.findPageData("nmbm_bh_ps", "PS_CurrentVals").then((result) => {
-      this.data =  result;
-
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-     this.comms = Common.getLastUpdate(this.variable.bhb_PS_UT)
-     var alarm1: any [] = [this.faultVariable.bhb_P1_SOFT_S_FAULT,this.faultVariable.bhb_P1_STARTUP_FAULT,this.faultVariable.bhb_P1_NO_FLOW]
-     var alarm2: any [] = [this.faultVariable.bhb_P2_SOFT_S_FAULT,this.faultVariable.bhb_P2_STARTUP_FAULT,this.faultVariable.bhb_P2_NO_FLOW]
+  constructor( private pm:pagePostMethod,private authService: AuthService,public recieve:Common  ) {
 
 
 
 
-     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-     this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-
-
-    })
 
 
 
-    this.dataSourceG = new MatTableDataSource(this.ELEMENT_DATA_G);}
 
 
 
-    recieveVals(tagArr: any[]){
-      var tagVals:any = []
-      for(let i = 0; i<tagArr.length ;i++){
-        this.webSocketService.nmbm_listen(tagArr[i]).subscribe((data:any)=>{
-          tagVals[i] = data[tagArr[i]];
-        })
-      }
-      return tagVals
-    }
+  }
+
+
+
+
   ngOnInit(){
     this.showNavigationButton = "false";
     this.userSites = this.authService.getUserSites();
@@ -186,10 +161,7 @@ faultArr:any=[
 
 
 
-    this.intervalLoop = setInterval(() =>{
-
-
-      this.pm.findPageData("nmbm_bh_ps", "PS_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("nmbm_bh_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -212,17 +184,12 @@ faultArr:any=[
 
 
 
- },60000 )
-
-
-
-
-
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

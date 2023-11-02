@@ -177,8 +177,8 @@ export class TagSelectorComponent implements OnInit {
   stormsWTWTagListArr:string[]=[]
   stormsWTWTagSelected:boolean[]=[]
 
-  bushyPSTagListArr:string[]=[];
-  bushyPSSelected:boolean[]=[];
+  // bushyPSTagListArr:string[]=[];
+  // bushyPSSelected:boolean[]=[];
 
   bushyFPTTagListArr:string[]=[];
   bushyFPTSelected:boolean[]=[];
@@ -346,7 +346,7 @@ this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail
 // Pump Stations
 this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
 this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")
-this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell ")
+this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ")
 this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ")
 this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ")
 this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ")
@@ -363,7 +363,7 @@ this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelecte
 this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ")
 this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ")
 this.ReadSelectedValues(this.gbwTagListArr,this.gbwTagsSelected, "Gamtoos Break Water ")
-this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
+// this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
 this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ")
 this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
 this.ReadSelectedValues(this.kruis12GWTagListArr, this.kruis12GWSelected, "Kruisfontein Borhole 12 ")
@@ -1090,38 +1090,50 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
 
             case "NMB_MW_PS":
               if (count>=1 ){count = 0}
-                  this.mwTagListArr[count]="Flow Rate"
-            count++
-                  this.mwTagListArr[count]="Delivery Pressure"
-            count++
-            this.mwTagListArr[count]="Suction Pressure"
-            count++
+              this.mwTagListArr[count]="Flow Rate"
+              count++
+              this.mwTagListArr[count]="Delivery Pressure"
+              count++
+              this.mwTagListArr[count]="Suction Pressure"
+              count++
+              this.mwTagListArr[count]="Total Flow"
+              count++
+              this.mwTagListArr[count]="Pump 1 Speed"
+              count++
+              this.mwTagListArr[count]="Pump 2 Speed"
+              count++
+              this.mwTagListArr[count]="Pump 3 Speed"
+              count++
+              this.mwTagListArr[count]="Pump 4 Speed"
+              count++
             this.showPS = true;
                   break;
 
                   case "NMB_MW_R":
                     if (count>=1 ){count = 0}
-                    this.mwrTagListArr[count]="Reservoir Level"
-                    count++
+                    this.mwrTagListArr[count]="North Chamber Level";
+                    count++;
+                    this.mwrTagListArr[count]="South Chamber Level";
+                    count++;
                     this.showRes = true;
                     break;
 
-                    case "NMB_BUSH_PS":
-                      if(count>=1){count = 0}
-                      this.bushyPSTagListArr[count]="Soccoman Flow Rate"
-                      count++
-                      this.bushyPSTagListArr[count]="Soccoman Pressure"
-                      count++
-                      this.bushyPSTagListArr[count]="Soccoman Total Flow"
-                      count++
-                      this.bushyPSTagListArr[count]="Steel Flow Rate"
-                      count++
-                      this.bushyPSTagListArr[count]="Steel Pressure"
-                      count++
-                      this.bushyPSTagListArr[count]="Steel Total Flow"
-                      count++
-                      this.showPS = true;
-                      break;
+                    // case "NMB_BUSH_PS":
+                    //   if(count>=1){count = 0}
+                    //   this.bushyPSTagListArr[count]="Soccoman Flow Rate"
+                    //   count++
+                    //   this.bushyPSTagListArr[count]="Soccoman Pressure"
+                    //   count++
+                    //   this.bushyPSTagListArr[count]="Soccoman Total Flow"
+                    //   count++
+                    //   this.bushyPSTagListArr[count]="Steel Flow Rate"
+                    //   count++
+                    //   this.bushyPSTagListArr[count]="Steel Pressure"
+                    //   count++
+                    //   this.bushyPSTagListArr[count]="Steel Total Flow"
+                    //   count++
+                    //   this.showPS = true;
+                    //   break;
 
                       case "NMB_BUSH_FPT":
                         if(count>=1){count = 0}
@@ -1135,6 +1147,19 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
                         count++;
                         this.bushyFPTTagListArr[count]="Holding Tank Level";
                         count++;
+
+                        this.bushyFPTTagListArr[count]="Soccoman Flow Rate"
+                        count++
+                        this.bushyFPTTagListArr[count]="Soccoman Pressure"
+                        count++
+                        this.bushyFPTTagListArr[count]="Soccoman Total Flow"
+                        count++
+                        this.bushyFPTTagListArr[count]="Steel Flow Rate"
+                        count++
+                        this.bushyFPTTagListArr[count]="Steel Pressure"
+                        count++
+                        this.bushyFPTTagListArr[count]="Steel Total Flow"
+                        count++
                         this.showFPT = true
                         break;
             case "RW_CG_PS":

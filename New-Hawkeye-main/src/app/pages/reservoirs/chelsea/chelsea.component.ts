@@ -57,15 +57,7 @@ DateArr: any;
     this.isLoading = true;
 
 
-   this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
-    this.data =  result;
 
-    console.log(this.data)
-   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-  this.variable.comms = Common.getLastUpdate(this.variable.che_r_ut)
-  });
 
     this.showNavigationButton = "false";
     this.userSites = this.authService.getUserSites();
@@ -96,23 +88,15 @@ DateArr: any;
   ngOnInit() {
 
 
-    this.intervalLoop = setInterval(() =>{
+    this.intervalLoop = this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-      this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-      this.variable.comms = Common.getLastUpdate(this.variable.che_r_ut)
-
-
-      });
-
-
-
- },60000)
+    this.variable.comms = Common.getLastUpdate(this.variable.che_r_ut)
+    });
 
 
 
@@ -349,7 +333,7 @@ DateArr: any;
   }
   ngOnDestroy(){
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
     }
   }
 

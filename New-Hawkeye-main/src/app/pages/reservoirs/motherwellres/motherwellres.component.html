@@ -21,7 +21,7 @@
                </div>
 
             <div class="grid-container-flow-meters-general-column1">Last Update:</div>
-            <div class="grid-container-flow-meters-general-column3">{{variable.mw_g_ut}}</div>
+            <div class="grid-container-flow-meters-general-column3">{{variable.lastUpdate}}</div>
 
             <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
             <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
@@ -39,33 +39,43 @@
 
             </form>
             </section>
-  <section class="res-form" fxLayoutAlign="center center">
 
-    <form fxLayout="column">
 
-      <div style="margin-bottom: 8px"  class="div-form">
-        <h3 style="padding-top: 8px; ">Reservoir</h3>
+    <app-panel [title]=titleG>
+      <div class="grid-container-valve-general">
+        <div class="grid-container-communication-general-column2">Valve 1 Mode:</div>      <div class="grid-container-communication-general-column4">{{variable.mw_r_valve_1_mode}}</div>
+        <div class="img2">    <svg xmlns="http://www.w3.org/2000/svg" class="img2" width="100%" height="50px" viewBox="0 0 300 240" version="1.1"><path [attr.d]=valveImage1 stroke="none" [attr.fill]=valveColor1 fill-rule="evenodd"/></svg></div>     <div class="grid-container-communication-general-column2">Valve 1 Status:</div>       <div class="grid-container-communication-general-column4">{{variable.mw_r_valve_1_status_word}}</div>
+        <div class="grid-container-communication-general-column2">Valve 1 Position:</div>       <div class="grid-container-communication-general-column4">{{variable.mw_r_valve_1_position}} %</div>
+
+
+        <div class="grid-container-communication-general-column2">Valve 2 Mode:</div>       <div class="grid-container-communication-general-column4">{{variable.mw_r_valve_2_mode}}</div>
+        <div class="img2">    <svg xmlns="http://www.w3.org/2000/svg" class="img2" width="100%" height="50px" viewBox="0 0 300 240" version="1.1"><path [attr.d]=valveImage2 stroke="none" [attr.fill]=valveColor2 fill-rule="evenodd"/></svg></div>     <div class="grid-container-communication-general-column2">Valve 2 Status:</div>       <div class="grid-container-communication-general-column4">{{variable.mw_r_valve_2_status_word}}</div>
+        <div class="grid-container-communication-general-column2">Valve 2 Position:</div><div class="grid-container-communication-general-column4">{{variable.mw_r_valve_2_position}} %</div>
+
       </div>
 
-
-  <div class="div-form">
-
-
-  <br>
-  <br>
+    </app-panel>
 
 
-  <div fxLayoutAlign="center " > <div class="circle1">
-    <div class="circle2-b"><div [ngStyle]="{'height.%' : 100- variable.mw_g_res_level }" class="fill"><div class="lvl-font">{{variable.mw_g_res_level}}%</div></div></div>
-  </div>
-  </div>
+ <app-panel [title]=title1>
+  <div class="grid-container-valve-general">
+    <div class="grid-span-four">North Chamber</div>
 
-  <br>
-  <br>
-  <br>
 
   </div>
-    </form>
-    </section>
+
+  <app-level [level] = variable.mw_r_north_cham_res_lvl></app-level>
+  <div class="grid-container-valve-general">
+    <div class="grid-span-four">South Chamber</div>
+
+
+  </div>
+
+  <app-level [level] = variable.mw_r_south_cham_res_lvl></app-level>
+
+
+
+ </app-panel>
+
   </div>
   </div>

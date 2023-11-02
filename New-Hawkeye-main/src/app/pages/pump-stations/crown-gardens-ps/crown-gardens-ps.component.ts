@@ -396,7 +396,12 @@ cg_P3_POWER:null,
   constructor( private pm:pagePostMethod ) {
 
 
-    this.pm.findPageData("rw_cg_ps", "PS_CurrentVals").then((result) => {
+
+
+   }
+
+  ngOnInit() {
+    this.intervalLoop = this.pm.findPageData("rw_cg_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
       console.log(this.data)
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
@@ -416,38 +421,11 @@ cg_P3_POWER:null,
       this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
       this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
     });
-
-   }
-
-  ngOnInit() {
-      this.intervalLoop = setInterval(() =>{
-        this.pm.findPageData("rw_cg_ps", "PS_CurrentVals").then((result) => {
-          this.data =  result;
-          console.log(this.data)
-          Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-          this.comms = Common.getLastUpdate(this.variable.cg_G_UT)
-
-          this.visualS =  100-((this.variable.cg_G_SUMP_LVL/4)*100)
-          this.visualT1=100-((this.variable.cg_T1_LVL/6)*100)
-          this.visualT2= 100-((this.variable.cg_T2_LVL/6)*100)
-          var alarmG: any [] = [this.faultVariable.cg_G_M_CB_STAT,this.faultVariable.cg_G_SP_FAIL,this.faultVariable.cg_G_EARTH_FAULT,this.faultVariable.cg_G_PS_FLOOD_ALM]
-          var alarm1: any [] = [this.faultVariable.cg_P1_TRIP_STAT,this.faultVariable.cg_p1_EX_FAULT_STAT,this.faultVariable.cg_P1_E_STOP_STAT,this.faultVariable.cg_P1_CB_ON_STAT,this.faultVariable.cg_P1_LOCKOUT,this.faultVariable.cg_P1_S_U_P,this.faultVariable.cg_P1_D_O_P,this.faultVariable.cg_P1_S_P_S,this.faultVariable.cg_P1_D_P_S,this.faultVariable.cg_P1_B_T,this.faultVariable.cg_P1_V_C_T,this.faultVariable.cg_P1_M_W_T,]
-          var alarm2: any [] = [this.faultVariable.cg_P2_TRIP_STAT,this.faultVariable.cg_p2_EX_FAULT_STAT,this.faultVariable.cg_P2_E_STOP_STAT,this.faultVariable.cg_P2_CB_ON_STAT,this.faultVariable.cg_P2_LOCKOUT,this.faultVariable.cg_P2_S_U_P,this.faultVariable.cg_P2_D_O_P,this.faultVariable.cg_P2_S_P_S,this.faultVariable.cg_P2_D_P_S,this.faultVariable.cg_P2_B_T,this.faultVariable.cg_P2_V_C_T,this.faultVariable.cg_P2_M_W_T]
-          var alarm3: any [] = [this.faultVariable.cg_P3_TRIP_STAT,this.faultVariable.cg_p3_EX_FAULT_STAT,this.faultVariable.cg_P3_E_STOP_STAT,this.faultVariable.cg_P3_CB_ON_STAT,this.faultVariable.cg_P3_LOCKOUT,this.faultVariable.cg_P3_S_U_P,this.faultVariable.cg_P3_D_O_P,this.faultVariable.cg_P3_S_P_S,this.faultVariable.cg_P3_D_P_S,this.faultVariable.cg_P3_B_T,this.faultVariable.cg_P3_V_C_T,this.faultVariable.cg_P3_M_W_T]
-
-
-          this.dataSourceG =  new MatTableDataSource(Common.getAlarmValue(alarmG))
-          this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-          this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-          this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-
-        });
-   },60000 )
-
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

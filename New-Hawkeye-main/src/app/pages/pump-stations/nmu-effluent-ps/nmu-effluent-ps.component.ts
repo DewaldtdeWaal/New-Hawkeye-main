@@ -118,56 +118,39 @@ export class NmuEffluentPsComponent implements OnInit {
     constructor(public recieve:Common, private pm:pagePostMethod ) {
 
 
-      this.pm.findPageData("nmbm_nmu_eff_ps", "PS_CurrentVals").then((result) => {
-        this.data =  result;
 
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-       this.variable.comms = Common.getLastUpdate(this.variable.nmu_eff_ps_ut)
-       var alarm1: any [] = [this.faultVariable.nmu_eff_p1_fault]
-       var alarm2: any [] = [this.faultVariable.nmu_eff_p2_fault]
-       var alarm3: any [] = [this.faultVariable.nmu_eff_p3_fault]
-       var alarm4: any [] = [this.faultVariable.nmu_eff_p4_fault]
-
-     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-     this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-     this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-     this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-      });
     }
 
   ngOnInit() {
 
-    var tagVals:any =[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
-    errorVals = this.recieve.recieveNonMVals(this.faultArr);
+    // var tagVals:any =[]
+    // var errorVals:any=[]
+    // tagVals = this.recieve.recieveNonMVals(this.tagArr);
+    // errorVals = this.recieve.recieveNonMVals(this.faultArr);
 
-      this.intervalLoop = setInterval(() =>{
-          this.pm.findPageData("nmbm_nmu_eff_ps", "PS_CurrentVals").then((result) => {
-        this.data =  result;
+    this.intervalLoop = this.pm.findPageData("nmbm_nmu_eff_ps", "PS_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-       this.variable.comms = Common.getLastUpdate(this.variable.nmu_eff_ps_ut)
-       var alarm1: any [] = [this.faultVariable.nmu_eff_p1_fault]
-       var alarm2: any [] = [this.faultVariable.nmu_eff_p2_fault]
-       var alarm3: any [] = [this.faultVariable.nmu_eff_p3_fault]
-       var alarm4: any [] = [this.faultVariable.nmu_eff_p4_fault]
+     this.variable.comms = Common.getLastUpdate(this.variable.nmu_eff_ps_ut)
+     var alarm1: any [] = [this.faultVariable.nmu_eff_p1_fault]
+     var alarm2: any [] = [this.faultVariable.nmu_eff_p2_fault]
+     var alarm3: any [] = [this.faultVariable.nmu_eff_p3_fault]
+     var alarm4: any [] = [this.faultVariable.nmu_eff_p4_fault]
 
-     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-     this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-     this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-     this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-      });
-   },60000 );
+   this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+   this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+   this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+   this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
+    });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

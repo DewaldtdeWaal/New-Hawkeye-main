@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {jeffreysBay} from 'src/app/Service-Files/FPT/fpt.service';
 import { ReportService } from 'src/app/Service-Files/report.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common'
@@ -37,20 +35,11 @@ export class ParadiseBeachStFrancisOfftakeComponent implements OnInit {
   "jb_PB_SFO_last_seen"
 
 ]
-  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+  constructor(public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
 
 
 
-    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.jb_PB_SFO_ut,this.variable.jb_PB_SFO_last_seen)
-
-
-
-   })
   }
 
      range = new FormGroup({
@@ -225,22 +214,16 @@ isLoading: boolean = false;
 
     tagVals = this.recieve.recieveNonMVals(this.tagArr);
 
-    var updateTemp:any;
-    this.intervalLoop = setInterval(() =>{
+    this.intervalLoop = this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-
-      this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data.routingArray)
-
-        this.variable.comms = Common.getLastUpdateBattery(this.variable.jb_PB_SFO_ut,this.variable.jb_PB_SFO_last_seen)
+      this.variable.comms = Common.getLastUpdateBattery(this.variable.jb_PB_SFO_ut,this.variable.jb_PB_SFO_last_seen)
 
 
 
-     })
-
-    },60000)
+   })
     var trend :any;
 
 
@@ -306,9 +289,10 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
           })
 
 }
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 }

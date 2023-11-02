@@ -137,7 +137,6 @@ import { FairviewComponent } from './pages/groundwater/fairview/fairview.compone
 import { GlendinningvaleComponent } from './pages/groundwater/glendinningvale/glendinningvale.component';
 import { FortnottinghamComponent } from './pages/groundwater/fortnottingham/fortnottingham.component';
 import { BushyparkFptComponent } from './pages/FlowMeters/bushypark-fpt/bushypark-fpt.component';
-import { BushyparkWtwComponent } from './pages/pump-stations/bushypark-wtw/bushypark-wtw.component';
 import { MalibarComponent } from './pages/reservoirs/malibar/malibar.component';
 // import { StGeorgesComponent } from './pages/WTW/st-georges/st-georges.component';
 import { StGeorgesResComponent } from './pages/reservoirs/st-georges-res/st-georges-res.component';
@@ -153,7 +152,6 @@ import { DriverManageComponent } from './pages/drivers/driver-manage/driver-mana
 import { LevelComponent } from './components/level/level.component';
 
 import { ResPanelComponent } from './components/res-panel/res-panel.component';
-import { PumpPanelComponent } from './components/pump-panel/pump-panel.component';
 import { CommsPanelComponent } from './components/comms-panel/comms-panel.component';
 import { TwoColumnComponent } from './components/grid/two-column/two-column.component';
 import { AlarmsComponent } from './components/alarms/alarms.component';
@@ -161,11 +159,14 @@ import { PanelComponent } from './components/panel/panel.component';
 import { McNoughtontownshipsouthComponent } from './pages/zones/mc-noughtontownshipsouth/mc-noughtontownshipsouth.component';
 import { LeeSamualsDriveComponent } from './pages/zones/lee-samuals-drive/lee-samuals-drive.component';
 import { FlowRateLineComponent } from './components/flow-rate-line/flow-rate-line.component';
-import { PresureLineComponent } from './components/presure-line/presure-line.component';
+// import { PresureLineComponent } from './components/presure-line/presure-line.component';
 import { RowallanParkExtensionComponent } from './pages/zones/rowallan-park-extension/rowallan-park-extension.component';
 import { RosedaleComponent } from './pages/zones/rosedale/rosedale.component';
 import { TrendTagComponent } from './components/trend-tag/trend-tag.component';
 import { PageComponentComponent } from './components/page-component/page-component.component';
+import { GroundWaterComponent } from './components/ground-water/ground-water.component';
+import { GroundWaterGridComponent } from './components/ground-water-grid/ground-water-grid.component';
+import {BoreholePumpComponent} from './components/borehole-pump/borehole-pump.component';
 
 
 const appRoutes: Routes = [
@@ -310,7 +311,6 @@ const appRoutes: Routes = [
     GlendinningvaleComponent,
     FortnottinghamComponent,
     BushyparkFptComponent,
-    BushyparkWtwComponent,
     MalibarComponent,
     StGeorgesResComponent,
     StGeorgesPSComponent,
@@ -324,7 +324,6 @@ const appRoutes: Routes = [
     AirportresComponent,
     LevelComponent,
     ResPanelComponent,
-    PumpPanelComponent,
     CommsPanelComponent,
     TwoColumnComponent,
     AlarmsComponent,
@@ -332,11 +331,14 @@ const appRoutes: Routes = [
     McNoughtontownshipsouthComponent,
     LeeSamualsDriveComponent,
     FlowRateLineComponent,
-    PresureLineComponent,
+    // PresureLineComponent,
     RowallanParkExtensionComponent,
     RosedaleComponent,
     TrendTagComponent,
     PageComponentComponent,
+    GroundWaterComponent,
+    GroundWaterGridComponent,
+    BoreholePumpComponent,
 
 
 

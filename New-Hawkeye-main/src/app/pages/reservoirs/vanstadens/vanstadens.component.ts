@@ -35,29 +35,9 @@ vs_R_UT:null,
 
 
   constructor(private webSocketService: WebSocketService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
-    // this.VSS.GetSiteValues()
-    // .subscribe(rsp => {
-    //    this.data = rsp;
-    //    console.log(this.data)
-    // this.vs_R_LVL = this.data.routingArray[0].vs_R_LVL
-    // this.vs_R_SURGE_ARRESTOR = this.data.routingArray[0].vs_R_SURGE_ARRESTOR
-    // this.vs_R_CHARGER_STATUS = this.data.routingArray[0].vs_R_CHARGER_STATUS
-    // this.vs_R_DOOR = this.data.routingArray[0].vs_R_DOOR
-    // this.vs_R_UT = this.data.routingArray[0].vs_R_UT
-
-    // this.comms = Common.getLastUpdate(this.vs_R_UT)
-
-    // })
 
 
-    this.pm.findPageData("nmbm_vs_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-     this.comms = Common.getLastUpdate(this.variable.vs_R_UT)
-
-    });
 
 
 
@@ -104,38 +84,21 @@ recieveVals(tagArr: any[]){
     }
 
 
-    var tagVals:any=[]
-    var tagArr =[
-      "vs_rl",//0
-      "vs_sa",//1
-      "vs_chs",//2
-      "vs_d",//3
-      "vs_ut",//4
-      "vs_res",//5
 
+    this.intervalLoop = this.pm.findPageData("nmbm_vs_r", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-    ]
+     this.comms = Common.getLastUpdate(this.variable.vs_R_UT)
 
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
-
-    var updateTemp:any;
-    this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      if(updateTemp !== undefined){
-      this.vs_R_LVL = tagVals[0];
-      this.vs_R_SURGE_ARRESTOR = tagVals[1];
-      this.vs_R_CHARGER_STATUS = tagVals[2];
-      this.vs_R_DOOR = tagVals[3];
-      this.vs_R_UT = tagVals[4];
-      }
-      this.comms = Common.getLastUpdate(this.vs_R_UT)
-
-    },60000);
+    });
 
 }
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 

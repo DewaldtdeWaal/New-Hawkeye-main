@@ -3,9 +3,9 @@
   height:200px;
   border:5px solid var(--res-level-C1-border);
   border-radius: 105px;
- /* overflow:hidden; */
+ overflow:hidden;
  position:relative;
-  /* background-color:var(--res-level-C1-background-color); */
+  background-color:var(--res-level-C1-background-color);
   z-index: 1;
 }
 .circle2-b {
@@ -48,3 +48,5 @@
   }
 }
 /* SO I'm putting the css at the html component I want to use.  That way I don't have to go and scroll through an entire page. */
+
+

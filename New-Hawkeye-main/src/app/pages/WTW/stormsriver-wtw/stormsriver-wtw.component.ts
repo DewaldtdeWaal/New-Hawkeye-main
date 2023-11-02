@@ -98,7 +98,7 @@ export class StormsriverWTWComponent implements OnInit {
 
   // })
 
-  this.pm.findPageData("storms_wtw", "WTW_CurrentVals").then((result) => {
+  this.intervalLoop = this.pm.findPageData("storms_wtw", "WTW_CurrentVals").subscribe((result) => {
     this.data =  result;
     this.theme = localStorage.getItem("theme");
     console.log(this.data)
@@ -129,29 +129,30 @@ export class StormsriverWTWComponent implements OnInit {
     }
 
 
-    var tagVals:any = []
+//     var tagVals:any = []
 
 
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
+//     tagVals = this.recieve.recieveNonMVals(this.tagArr);
 
-   this.intervalLoop = setInterval(() =>{
+//    this.intervalLoop = setInterval(() =>{
 
-    this.pm.findPageData("storms_wtw", "WTW_CurrentVals").then((result) => {
-      this.data =  result;
-      this.theme = localStorage.getItem("theme");
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-     this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
+//     this.pm.findPageData("storms_wtw", "WTW_CurrentVals").subscribe((result) => {
+//       this.data =  result;
+//       this.theme = localStorage.getItem("theme");
+//       console.log(this.data)
+//      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+//      this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
 
-    });
-},60000)
+//     });
+// },60000)
 
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

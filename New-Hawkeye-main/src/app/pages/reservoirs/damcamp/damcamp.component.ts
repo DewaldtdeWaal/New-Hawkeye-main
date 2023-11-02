@@ -25,7 +25,7 @@ export class DamcampComponent implements OnInit {
   ]
   constructor(private webSocketService: WebSocketService,private graf: graafService,public recieve:Common ,private pm:pagePostMethod) {
 
-    this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -43,22 +43,27 @@ export class DamcampComponent implements OnInit {
    ngOnInit() {
 
 
-    this.intervalLoop = setInterval(() =>{
+  //   this.intervalLoop = setInterval(() =>{
 
 
-      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
-        this.data =  result;
+  //     this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
+  //       this.data =  result;
 
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-      this.variable.comms = Common.getLastUpdate(this.variable.damp_r_ut)
-      });
+  //       console.log(this.data)
+  //      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-  },60000)
+  //     this.variable.comms = Common.getLastUpdate(this.variable.damp_r_ut)
+  //     });
+
+
+  // },60000)
 
   }
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
 
+    }
+  }
 }

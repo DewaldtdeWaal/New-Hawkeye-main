@@ -40,10 +40,10 @@ tc_RL:null,
 
   constructor( private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
 
-    this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
+    this.intervalLoop = this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").subscribe((result) => {
+      this.variable =  result;
       console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+   //  this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
      this.comms = Common.getLastUpdate(this.variable.tc_R_UT)
 
@@ -75,21 +75,22 @@ tc_RL:null,
 
 
 
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    // this.intervalLoop = setInterval(() =>{
+    //   this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").subscribe((result) => {
+    //     this.data =  result;
+    //     console.log(this.data)
+    //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-       this.comms = Common.getLastUpdate(this.variable.tc_R_UT)
+    //    this.comms = Common.getLastUpdate(this.variable.tc_R_UT)
 
-      });
-    },60000);
+    //   });
+    // },60000);
 }
 
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 

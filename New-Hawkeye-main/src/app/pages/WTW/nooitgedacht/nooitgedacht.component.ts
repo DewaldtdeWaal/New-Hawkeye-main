@@ -37,21 +37,6 @@ export class NooitgedachtComponent implements OnInit {
       "wtw_ngt_high_lift_fr",//2
    ]
   constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,private nooit:NooitgedachtRootComponent,public recieve:Common,private pm:pagePostMethod  ) {
-    // this.nooit.GetSiteValues()
-    // .subscribe(rsp=> {
-    //   this.data = rsp;
-    //   this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-    //   this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
-    // })
-
-
-    this.pm.findPageData("nmbm_ngt_wtw", "WTW_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-     this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
-
-    });
 
 
 
@@ -62,26 +47,21 @@ export class NooitgedachtComponent implements OnInit {
 
 
   ngOnInit(){
-    var tagVals:any = []
+    this.intervalLoop = this.pm.findPageData("nmbm_ngt_wtw", "WTW_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
 
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
+    });
 
-    this.intervalLoop = setInterval(() =>{
-
-      this.pm.findPageData("nmbm_ngt_wtw", "WTW_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-       this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
-
-      });
-},60000)
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

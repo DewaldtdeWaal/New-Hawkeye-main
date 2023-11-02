@@ -45,7 +45,7 @@ export class KruisfonteinRComponent implements OnInit {
 
 
 
-    this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -82,26 +82,31 @@ export class KruisfonteinRComponent implements OnInit {
     }
 
 
-    var tagVals:any =[]
+  //   var tagVals:any =[]
 
-    console.log(this.tagArr)
+  //   console.log(this.tagArr)
 
-   tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-
+  //  tagVals = this.recieve.recieveNonMVals(this.tagArr);
 
 
 
-   this.intervalLoop = setInterval(() => {
-    this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
-      this.data =  result;
 
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-    // this.comms = Common.getLastUpdate(this.variable.klm_kruisR_ut)
-    });
 
-    }, 60000);
+  //  this.intervalLoop = setInterval(() => {
+  //   this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
+  //     this.data =  result;
+
+  //     console.log(this.data)
+  //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+  //   // this.comms = Common.getLastUpdate(this.variable.klm_kruisR_ut)
+  //   });
+
+  //   }, 60000);
   }
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
 
+    }
+  }
 }

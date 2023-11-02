@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { motherwellComponent } from 'src/app/Service-Files/Pumpstation/pumpstation.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import {svgImage} from'src/app/Service-Files/SVGImage/svgImage.service';
 @Component({
   selector: 'app-motherwellres',
   templateUrl: './motherwellres.component.html',
@@ -29,32 +28,22 @@ export class MotherwellresComponent implements OnInit
 
   intervalLoop: any;
   data: any=[];
-    constructor( private buff:motherwellComponent, private ws:WebSocketService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-      // this.buff.GetSiteValues()
-      // .subscribe(rsp => {
-      //    this.data = rsp;
-      //    console.log(this.data);
-      //    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-
-      //    this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
-      // })
 
 
-      this.pm.findPageData("nmbm_mw_ps", "PS_CurrentVals").then((result) => {
-        this.data =  result;
+  valveImage:any
 
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-      this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
-      });
+  valveImage1:any
+  valveColor1:any
 
 
+  valveImage2:any
+  valveColor2:any
+    constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod, private svg:svgImage  ) {}
+     title1:any ="Reservoir"
+     title2:any ="South Chamber"
 
-     }
-
-
+     titleG:any="General"
+     variablesMatricG:any = {}
     ngOnInit() {
 
       this.showNavigationButton = "false";
@@ -72,17 +61,22 @@ export class MotherwellresComponent implements OnInit
         }
       }
 
-      var tagVals:any=[]
-
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-
-    this.intervalLoop = setInterval(() =>{
+      this.intervalLoop = this.pm.findPageDataForNewSites("nmbm_mwr_r_new", "R_CurrentVals").subscribe((result) => {
+        this.variable =  result;
 
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-      this.variable.comms = Common.getLastUpdate(this.variable.mw_g_ut)
-    },60000);
+        this.valveImage1 = this.svg.returnValveImage(this.variable.mw_r_valve_1_status_word)
+        this.valveImage2 = this.svg.returnValveImage(this.variable.mw_r_valve_2_status_word)
+
+        this.valveColor1 = this.svg.returnValveColor(this.variable.mw_r_valve_1_status_word)
+        this.valveColor2 = this.svg.returnValveColor(this.variable.mw_r_valve_2_status_word)
+
+
+
+
+
+
+      });
 
 
 
@@ -90,9 +84,10 @@ export class MotherwellresComponent implements OnInit
 
     }
 
-    ngOnDestroy(){
+    ngOnDestroy():void{
       if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
+        this.intervalLoop.unsubscribe();
+
       }
     }
 

@@ -180,23 +180,8 @@ theme:any = localStorage.getItem("theme");
   }
 }
 
-  constructor(private webSocketService: WebSocketService, private us:UsersService, private chat:heatherBankComponent,private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod ) {
+  constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod ) {
 
-      this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
-        var alarm1: any [] = [this.faultVariable.hb_P1_NO_FLOW_FAULT,this.faultVariable.hb_P1_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P1_STARTUP_FAULT,this.faultVariable.hb_P1_ESTOP_FAULT ]
-        var alarm2: any [] = [this.faultVariable.hb_P2_NO_FLOW_FAULT,this.faultVariable.hb_P2_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P2_STARTUP_FAULT,this.faultVariable.hb_P2_ESTOP_FAULT ]
-        var alarm3: any [] = [this.faultVariable.hb_P3_NO_FLOW_FAULT,this.faultVariable.hb_P3_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P3_STARTUP_FAULT,this.faultVariable.hb_P3_ESTOP_FAULT ]
-
-
-        this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-        this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-
-      });
 
 
 
@@ -222,29 +207,29 @@ theme:any = localStorage.getItem("theme");
       }
     }
 
-      this.intervalLoop = setInterval(() =>{
-        this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").then((result) => {
-          this.data =  result;
-          console.log(this.data)
-          Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-          this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
-          var alarm1: any [] = [this.faultVariable.hb_P1_NO_FLOW_FAULT,this.faultVariable.hb_P1_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P1_STARTUP_FAULT,this.faultVariable.hb_P1_ESTOP_FAULT ]
-          var alarm2: any [] = [this.faultVariable.hb_P2_NO_FLOW_FAULT,this.faultVariable.hb_P2_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P2_STARTUP_FAULT,this.faultVariable.hb_P2_ESTOP_FAULT ]
-          var alarm3: any [] = [this.faultVariable.hb_P3_NO_FLOW_FAULT,this.faultVariable.hb_P3_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P3_STARTUP_FAULT,this.faultVariable.hb_P3_ESTOP_FAULT ]
+    this.intervalLoop = this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
+      var alarm1: any [] = [this.faultVariable.hb_P1_NO_FLOW_FAULT,this.faultVariable.hb_P1_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P1_STARTUP_FAULT,this.faultVariable.hb_P1_ESTOP_FAULT ]
+      var alarm2: any [] = [this.faultVariable.hb_P2_NO_FLOW_FAULT,this.faultVariable.hb_P2_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P2_STARTUP_FAULT,this.faultVariable.hb_P2_ESTOP_FAULT ]
+      var alarm3: any [] = [this.faultVariable.hb_P3_NO_FLOW_FAULT,this.faultVariable.hb_P3_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P3_STARTUP_FAULT,this.faultVariable.hb_P3_ESTOP_FAULT ]
 
 
-          this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-          this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-          this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+      this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
 
-        });
-    },60000 )
+    });
+
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

@@ -38,18 +38,7 @@ export class JeffreysBayOffTakeComponent implements OnInit {
   constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod ,private pt: PostTrend) {
     this.isLoading = true;
 
-    this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.jeff_bay_off_take_last_update,this.variable.jeff_bay_off_take_last_seen)
-
-
-      this.isLoading = false;
-
-   })
 
    }
    range = new FormGroup({
@@ -213,29 +202,20 @@ this.options = {
 }
 
   ngOnInit() {
-    var tagVals:any=[]
+    this.intervalLoop = this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-
-      tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-    var updateTemp:any;
-    this.intervalLoop = setInterval(() =>{
+      this.variable.comms = Common.getLastUpdateBattery(this.variable.jeff_bay_off_take_last_update,this.variable.jeff_bay_off_take_last_seen)
 
 
-      this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      this.isLoading = false;
+
+   })
 
 
-        this.variable.comms = Common.getLastUpdateBattery(this.variable.jeff_bay_off_take_last_update,this.variable.jeff_bay_off_take_last_seen)
-
-
-
-
-     })
-    },60000)
 
     var trend :any;
 
@@ -292,9 +272,10 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
             this.isLoading = false;
           })
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

@@ -1,8 +1,6 @@
 import {MatTableDataSource} from '@angular/material/table';
 import {  Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { Injectable } from "@angular/core";
-import { HumansDorp2Service } from 'src/app/Service-Files/GRDW/humansdorp2.service';
+
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -19,7 +17,7 @@ export interface PeriodicElement{
   selector: 'app-humansdorp2',
   templateUrl: './humansdorp2.component.html',
   styleUrls: ['./humansdorp2.component.css'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class Humansdorp2Component implements OnInit {
   range = new FormGroup({
@@ -161,24 +159,6 @@ show6:any
 }
 
   constructor(public rs: ReportService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ,private pt: PostTrend ) {
-
-
-    this.pm.findPageData("klm_hup2_gw", "GRDW_CurrentVals").then((result) => {
-      this.data =  result;
-
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-      this.variable.comms = Common.getLastUpdate(this.variable.hup2_ut)
-
-     var alarmG:any []=[this.faultVariable.hup2_voltage,this.faultVariable.hup2_pump_general_fault,this.faultVariable.hup2_borehole_level_pr_fault,this.faultVariable.hup2_battery,this.faultVariable.hup2_charge,this.faultVariable.hup2_trip_fault,this.faultVariable.hup2_no_flow_fault,this.faultVariable.hup2_24_timer,this.faultVariable.hup2_stop_level,this.faultVariable.hup2_fault,this.faultVariable.hup2_estop_active,this.faultVariable.hup2_pump_suf]
-
-     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-    });
-
-
-
-
-
   }
 
   userSites:string[];
@@ -217,18 +197,10 @@ show6:any
       }
     }
 
-  var tagVals:any =[]
-  var errorVals:any=[]
-  tagVals = this.recieve.recieveNonMVals(this.tagArr);
 
-  var updateTemp:any;
-
-  errorVals = this.recieve.recieveNonMVals(this.faultArr)
-  this.intervalLoop = setInterval(() =>{
-
-
-    this.pm.findPageData("klm_hup2_gw", "GRDW_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("klm_hup2_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
+
       console.log(this.data)
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.variable.comms = Common.getLastUpdate(this.variable.hup2_ut)
@@ -237,11 +209,6 @@ show6:any
 
      this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
     });
-
-
-
-
-},60000)
 
 
 
@@ -286,9 +253,10 @@ this.isLoading = false;
 }
 
 
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 

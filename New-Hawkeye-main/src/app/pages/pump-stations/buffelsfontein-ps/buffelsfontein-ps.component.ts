@@ -1,7 +1,5 @@
 import {  Component, OnInit, ViewChild } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import {MatTableDataSource} from '@angular/material/table';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
@@ -195,9 +193,15 @@ theme:any = localStorage.getItem("theme")
 
   ]
 
-  constructor(private webSocketService: WebSocketService, private us: UsersService,public recieve:Common,private pm:pagePostMethod, ) {
+  constructor(public recieve:Common,private pm:pagePostMethod, ) {
 
-    this.pm.findPageData("nmbm_bf_ps", "PS_CurrentVals").then((result) => {
+
+   }
+
+
+  ngOnInit(){
+
+    this.intervalLoop = this.pm.findPageData("nmbm_bf_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -219,41 +223,11 @@ theme:any = localStorage.getItem("theme")
 
 
     })
-   }
-
-
-  ngOnInit(){
-
-    this.intervalLoop = setInterval(() =>{
-
-      this.pm.findPageData("nmbm_bf_ps", "PS_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-       this.comms = Common.getLastUpdate(this.variable.bf_PS_UT)
-
-       var alarmG: any [] = [this.faultVariable.bf_G_MCC_ESTOP]
-        var alarm1: any [] = [this.faultVariable.bf_P1_PUMP_TRIP_FAULT,this.faultVariable.bf_P1_ESTOP_FAULT,this.faultVariable.bf_P1_NO_FLOW_FAULT]
-        var alarm2: any [] = [this.faultVariable.bf_P2_PUMP_TRIP_FAULT,this.faultVariable.bf_P2_ESTOP_FAULT,this.faultVariable.bf_P2_NO_FLOW_FAULT]
-        var alarm3: any [] = [this.faultVariable.bf_P3_PUMP_TRIP_FAULT,this.faultVariable.bf_P3_ESTOP_FAULT,this.faultVariable.bf_P3_NO_FLOW_FAULT]
-        var alarm4: any [] = [this.faultVariable.bf_P4_PUMP_TRIP_FAULT,this.faultVariable.bf_P4_ESTOP_FAULT,this.faultVariable.bf_P4_NO_FLOW_FAULT]
-
-        this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
-        this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-        this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-        this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-
-
-      })
-
-    },60000)
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

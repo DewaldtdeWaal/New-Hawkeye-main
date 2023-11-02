@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
+
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
@@ -31,15 +31,9 @@ export class AirportresComponent implements OnInit {
        intervalLoop: any
        data:any=[]
        pageVariable:any
-     constructor(private webSocketService: WebSocketService,public recieve:Common, private pm:pagePostMethod ) {
+     constructor(public recieve:Common, private pm:pagePostMethod ) {
 
-      this.pm.findPageData("air_prt", "R_CurrentVals").then((result) => {
-        this.data =  result;
 
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.air_prt_R_comms_UT, this.variable.air_prt_R_battery_unit_UT)
-      });
 
 
 
@@ -48,31 +42,18 @@ export class AirportresComponent implements OnInit {
    }
 
    ngOnInit() {
-    var tagVals:any =[]
+    this.intervalLoop = this.pm.findPageData("air_prt", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-
-
-
-
-    this.intervalLoop = setInterval(() =>{
-
-      this.pm.findPageData("air_prt", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.air_prt_R_comms_UT, this.variable.air_prt_R_battery_unit_UT)
-      });
-
-
-  },60000)
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    this.variable.comms = Common.getLastUpdateBattery(this.variable.air_prt_R_comms_UT, this.variable.air_prt_R_battery_unit_UT)
+    });
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
     }
   }
 }

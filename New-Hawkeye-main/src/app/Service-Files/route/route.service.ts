@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subject } from "rxjs";
+import { Observable, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 
@@ -12,32 +13,35 @@ interface pagePostInterface{
   Collection:string;
 }
 @Injectable({ providedIn: "root" })
-export class pagePostMethod{
-  constructor(private http: HttpClient,private su: ServerURLService) {}
+export class pagePostMethod {
+  constructor(private http: HttpClient, private su: ServerURLService) {}
 
-  data:any=[]
+  data: any = [];
 
-
-  //Change this promise into a observable
-  async findPageData(id:any, collection:any){
-
-    var returnVariable
-    console.log(collection)
-    const page: pagePostInterface = {
-      Id:id,
-      Collection:collection,
-    };
-    returnVariable =  this.http.post(this.su.serverURL + "/pageValues", page).toPromise().then(DATA =>{
-
-      this.data = DATA
+  findPageData(id: any, collection: any): Observable<any> {
+    return timer(0, 60000).pipe(
+      switchMap(() => {
+        const page: pagePostInterface = {
+          Id: id,
+          Collection: collection,
+        };
+        return this.http.post(this.su.serverURL + "/pageValues", page);
+      })
+    );
+  }
 
 
-      return this.data;
-
-    })
-
-    return returnVariable
 
 
+  findPageDataForNewSites(id: any, collection: any): Observable<any> {
+    return timer(0, 60000).pipe(
+      switchMap(() => {
+        const page: pagePostInterface = {
+          Id: id,
+          Collection: collection,
+        };
+        return this.http.post(this.su.serverURL + "/newPageValue", page);
+      })
+    );
   }
 }

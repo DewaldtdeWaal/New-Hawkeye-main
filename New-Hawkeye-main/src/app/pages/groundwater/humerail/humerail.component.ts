@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import {MatTableDataSource} from '@angular/material/table';
@@ -22,16 +21,13 @@ export class HumerailComponent implements OnInit {
   });
   options: EChartsOption;
 
-
-
-
   displayedColumns :string[]= ['alarm', 'description'];
   generalfaulttable: PeriodicElement[] = [];
   generalfaultdatasource :any = new MatTableDataSource(this.generalfaulttable);
 
   comms:any
 
-  theme: any
+  theme: any= localStorage.getItem("theme");
 
   variable:any = {
   hum_gw_last_update:null,
@@ -110,17 +106,12 @@ export class HumerailComponent implements OnInit {
   },
 };
 
+  constructor(public recieve:Common,private pm:pagePostMethod ) {  }
 
 
+  ngOnInit() {
 
-
-  constructor(private ws: WebSocketService,public recieve:Common,private pm:pagePostMethod ) {
-
-    this.theme = localStorage.getItem("theme");
-
-
-
-    this.pm.findPageData("nmbm_hum_gw", "GRDW_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("nmbm_hum_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -131,42 +122,11 @@ export class HumerailComponent implements OnInit {
 
       this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
     });
-
-
   }
-
-
-  ngOnInit() {
-
-    var tagVals:any =[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-
-    var updateTemp:any;
-
-    errorVals = this.recieve.recieveNMBMVals(this.faultArr)
-    this.intervalLoop = setInterval(() =>{
-
-      this.pm.findPageData("nmbm_hum_gw", "GRDW_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        this.comms = Common.getLastUpdate(this.variable.hum_gw_last_update)
-
-        var alarmG:any []=[this.faultVariable.hum_gw_voltage_ok,this.faultVariable.hum_gw_VSD_Fault,  this.faultVariable.hum_gw_borehole_low_level_fault,  this.faultVariable.hum_gw_raw_water_tank_low_level_fault,this.faultVariable.hum_gw_final_water_tank_low_level_fault]
-
-        this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-      });
-
-
-
-
-    },60000)
-  }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

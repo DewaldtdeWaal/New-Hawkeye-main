@@ -31,26 +31,10 @@ export class HeatherbankComponent implements OnInit {
     hb_R_LVL:null,
 hb_R_UT:null,
   }
-  constructor(private  hbs:HeatherBankService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
 
 
-    // this.hbs.GetSiteValues()
-    // .subscribe(rsp => {
-    //    this.data = rsp;
-    //    this.hb_RL = this.data.routingArray[0].hb_R_LVL
-    //    this.hb_UT = this.data.routingArray[0].hb_R_UT
-    //    this.comms = Common.getLastUpdate(this.hb_UT)
-    // })
 
-    this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").then((result) => {
-      this.data =  result;
-
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-     this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
-    });
 
 
 
@@ -76,24 +60,23 @@ hb_R_UT:null,
     }
 
 
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").then((result) => {
-        this.data =  result;
+    this.intervalLoop = this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-       this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
-      });
-    },60000);
+     this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
+    });
 
 
 }
 
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 }

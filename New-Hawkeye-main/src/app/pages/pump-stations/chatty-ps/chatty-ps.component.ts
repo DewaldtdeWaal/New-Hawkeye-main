@@ -130,20 +130,6 @@ theme: any = localStorage.getItem("theme");
 
   constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
 
-    this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
-      this.data =  result;
-
-      console.log(this.data)
-
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-     this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
-
-      var alarm1: any [] = [this.faultVariable.cht_p1_no_flow_fault,this.faultVariable.cht_p1_estop_fault,this.faultVariable.cht_p1_circuit_breaker_fault]
-      var alarm2: any [] = [this.faultVariable.cht_p2_no_flow_fault,this.faultVariable.cht_p2_estop_fault,this.faultVariable.cht_p2_circuit_breaker_fault]
-
-      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-    });
 
 
    }
@@ -167,26 +153,27 @@ theme: any = localStorage.getItem("theme");
     }
 
 
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
-        this.data =  result;
 
-        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-        this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
+    this.intervalLoop = this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-        var alarm1: any [] = [this.faultVariable.cht_p1_no_flow_fault,this.faultVariable.cht_p1_estop_fault,this.faultVariable.cht_p1_circuit_breaker_fault]
-        var alarm2: any [] = [this.faultVariable.cht_p2_no_flow_fault,this.faultVariable.cht_p2_estop_fault,this.faultVariable.cht_p2_circuit_breaker_fault]
+      console.log(this.data)
 
-        this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-        this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-      });
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
 
-    },60000 )
+      var alarm1: any [] = [this.faultVariable.cht_p1_no_flow_fault,this.faultVariable.cht_p1_estop_fault,this.faultVariable.cht_p1_circuit_breaker_fault]
+      var alarm2: any [] = [this.faultVariable.cht_p2_no_flow_fault,this.faultVariable.cht_p2_estop_fault,this.faultVariable.cht_p2_circuit_breaker_fault]
+
+      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+      this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+    });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

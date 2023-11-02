@@ -6,10 +6,12 @@ import { Component, OnInit ,Input} from '@angular/core';
   styleUrls: ['./two-column.component.css']
 })
 export class TwoColumnComponent implements OnInit {
-
+  value:any
   constructor() { }
   @Input() array:any
   ngOnInit() {
   }
-
+  setTwoNumberDecimal(event:any) {
+    this.value = parseFloat(this.value).toFixed(2);
+}
 }

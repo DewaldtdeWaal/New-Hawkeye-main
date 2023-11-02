@@ -26,10 +26,10 @@ export class KroonvaleComponent implements OnInit {
 "kroon_r_battery_level",//
 "kroon_r_poll_ut",
   ]
-  constructor(private webSocketService: WebSocketService, private graf: graafService,public recieve:Common,private pm:pagePostMethod ) {
+  constructor(public recieve:Common,private pm:pagePostMethod ) {
 
 
-    this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -41,32 +41,26 @@ export class KroonvaleComponent implements OnInit {
   }
   ngOnInit() {
 
-    var tagVals:any =[]
-    var tagArr=[
-      "kroon_r_ut",//0,
-"kroon_r_level",
-"kroon_r_battery_level",//
-"kroon_r_poll_ut",
-    ]
-    tagVals = this.recieve.recieveNonMVals(tagArr);
 
 
-    this.intervalLoop = setInterval(() => {
 
-      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
-        this.data =  result;
+    // this.intervalLoop = setInterval(() => {
 
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-       this.variable.comms = Common.getLastUpdate(this.variable.kroon_r_ut)
-      });
+    //   this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
+    //     this.data =  result;
 
-      }, 60000);
+    //     console.log(this.data)
+    //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    //    this.variable.comms = Common.getLastUpdate(this.variable.kroon_r_ut)
+    //   });
+
+    //   }, 60000);
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

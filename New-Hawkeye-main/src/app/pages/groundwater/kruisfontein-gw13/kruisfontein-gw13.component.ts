@@ -158,7 +158,11 @@ gw_klm_kruis13_res_ful:{
   constructor(public rs: ReportService,public recieve:Common,private authService: AuthService,private GWS:kruisfonteinRouting,private pm:pagePostMethod ,private pt: PostTrend)  {
     this.isLoading  = true;
 
-    this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
+   }
+
+  ngOnInit() {
+
+    this.intervalLoop = this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -169,11 +173,6 @@ gw_klm_kruis13_res_ful:{
      var alarm1: any [] = [this.faultVariable.gw_klm_kruis13_bar_fault,this.faultVariable.gw_klm_kruis13_lvl_fault,this.faultVariable.gw_klm_kruis13_flow_fault,this.faultVariable.gw_klm_kruis13_voltage_not_okay,this.faultVariable.gw_klm_kruis13_emergency_stop,this.faultVariable.gw_klm_kruis13_vsd_fault,this.faultVariable.gw_klm_kruis13_res_communication_fault,this.faultVariable.gw_klm_kruis13_res_ful,]
     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
     });
-
-
-   }
-
-  ngOnInit() {
 
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
@@ -200,23 +199,9 @@ gw_klm_kruis13_res_ful:{
     }
 
 
-    var tagVals:any =[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
-    errorVals = this.recieve.recieveNonMVals(this.faultArr)
 
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("Kuis", "GRDW_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-       this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
 
-       this.variable.comms = Common.getLastUpdate(this.variable.gw_klm_kruis13_UT)
-       var alarm1: any [] = [this.faultVariable.gw_klm_kruis13_bar_fault,this.faultVariable.gw_klm_kruis13_lvl_fault,this.faultVariable.gw_klm_kruis13_flow_fault,this.faultVariable.gw_klm_kruis13_voltage_not_okay,this.faultVariable.gw_klm_kruis13_emergency_stop,this.faultVariable.gw_klm_kruis13_vsd_fault,this.faultVariable.gw_klm_kruis13_res_communication_fault,this.faultVariable.gw_klm_kruis13_res_ful,]
-      this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      });
-    },60000 )
+
     var trend: any = {};
 
     this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
@@ -257,10 +242,11 @@ gw_klm_kruis13_res_ful:{
   }
 
 
-ngOnDestroy(){
-  if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
+
+    }
   }
-}
 
 }

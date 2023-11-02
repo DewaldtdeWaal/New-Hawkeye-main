@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import {graafService} from 'src/app/Service-Files/Reservoir/reservoir.service';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
@@ -29,42 +28,25 @@ tagArr:any=[
   constructor(private graf: graafService,public recieve:Common,private pm:pagePostMethod ) {
 
 
-      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
-        this.data =  result;
 
-        console.log(this.data)
-             this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-          this.variable.comms = Common.getLastUpdateBattery(this.variable.bergen_r_ut, this.variable.bergen_r_poll_ut)
-      });
 }
 
 
 
 
   ngOnInit() {
-    var tagVals:any =[]
+    this.intervalLoop = this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-
-
-
-    this.intervalLoop = setInterval(() =>{
-
-
-      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-             this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-          this.variable.comms = Common.getLastUpdateBattery(this.variable.bergen_r_ut, this.variable.bergen_r_poll_ut)
-      });
-
-
-  },60000)
-
+      console.log(this.data)
+           this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+        this.variable.comms = Common.getLastUpdateBattery(this.variable.bergen_r_ut, this.variable.bergen_r_poll_ut)
+    });
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

@@ -35,27 +35,10 @@ export class VanriebeeckComponent implements OnInit {
 
 
   constructor(private webSocketService: WebSocketService, private ls:ListeningService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
-    // this.VHS.GetSiteValues()
-    // .subscribe(rsp => {
-    //    this.data = rsp;
-    //    console.log(this.data)
-    //    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-
-    // this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
-
-    // })
-
-
-    this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
-
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
 
-     this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
-    });
+
 
 
 
@@ -79,30 +62,23 @@ export class VanriebeeckComponent implements OnInit {
       }
     }
 
-    var tagVals:any=[]
+    this.intervalLoop = this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
 
-       this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
-      });
-    },60000)
+     this.variable.comms = Common.getLastUpdate(this.variable.vrh_ut)
+    });
 
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

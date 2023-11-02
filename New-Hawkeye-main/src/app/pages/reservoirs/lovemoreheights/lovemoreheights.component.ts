@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {LovemoreHeightsService} from 'src/app/Service-Files/Reservoir/lovemoreheigths.service';
 import { Subscription } from 'rxjs';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
@@ -35,26 +32,9 @@ export class LovemoreheightsComponent implements OnInit {
   ]
 
 
-  constructor(private webSocketService: WebSocketService, private LHS: LovemoreHeightsService, private userService: UsersService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
-    // this.LHS.GetSiteValues()
-    // .subscribe(rsp => {
-    //    this.data = rsp;
-    //    this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-
-    //    this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
-
-    // })
+  constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
 
 
-    this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
-
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-    this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
-    });
 
   }
 
@@ -74,28 +54,21 @@ export class LovemoreheightsComponent implements OnInit {
           break;
       }
     }
-    var tagVals:any=[]
+
+    this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
+    this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
+    });
 
-
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-      this.variable.comms = Common.getLastUpdate(this.variable.lh_UT)
-      });
-
-    },60000);
 }
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
   }
 }
 

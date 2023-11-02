@@ -46,7 +46,7 @@ export class NewtonparkpoolComponent implements OnInit {
 
   data:any = []
 
-  theme:any;
+  theme:any= localStorage.getItem("theme")
   comms:string;
 
   intervalLoop: any
@@ -214,59 +214,27 @@ export class NewtonparkpoolComponent implements OnInit {
 
   constructor( public rs: ReportService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend )  {
     this.isLoading = true;
-
-
-
-
-  this.theme = localStorage.getItem("theme")
-
-
-
-  this.pm.findPageData("npp", "GRDW_CurrentVals").then((result) => {
-    this.data =  result;
-
-    console.log(this.data)
-   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-   this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
-
-   this.comms = Common.getLastUpdate(this.variable.last_update)
-
-   var generalAlarmArray: any []=[this.faultVariable.faultactive,this.faultVariable.emergencystop,this.faultVariable.doorfault,this.faultVariable.chargerfault,this.faultVariable.abstractionreached,this.faultVariable.voltageOk]
-   var pumpAlarmArray:any []=[this.faultVariable.vsdfault,this.faultVariable.noflow,this.faultVariable.lowlevel,this.faultVariable.flowcomsfail,this.faultVariable.lowlevelwarning]
-
-   this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(generalAlarmArray))
-   this.pumpfaultdatasource = new MatTableDataSource(Common.getAlarmValue(pumpAlarmArray))
-  });
-
   }
   collectionName: any = "NPP_TF_Trend"
   trendTag: any = ["totalflow"]
   ngOnInit() {
 
 
-   this.intervalLoop = setInterval(() =>{
+    this.intervalLoop = this.pm.findPageData("npp", "GRDW_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
 
+     this.comms = Common.getLastUpdate(this.variable.last_update)
 
-  this.pm.findPageData("npp", "GRDW_CurrentVals").then((result) => {
-    this.data =  result;
-    this.theme = localStorage.getItem("theme");
-    console.log(this.data)
-   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-   this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
+     var generalAlarmArray: any []=[this.faultVariable.faultactive,this.faultVariable.emergencystop,this.faultVariable.doorfault,this.faultVariable.chargerfault,this.faultVariable.abstractionreached,this.faultVariable.voltageOk]
+     var pumpAlarmArray:any []=[this.faultVariable.vsdfault,this.faultVariable.noflow,this.faultVariable.lowlevel,this.faultVariable.flowcomsfail,this.faultVariable.lowlevelwarning]
 
-   this.comms = Common.getLastUpdate(this.variable.last_update)
-
-   var generalAlarmArray: any []=[this.faultVariable.faultactive,this.faultVariable.emergencystop,this.faultVariable.doorfault,this.faultVariable.chargerfault,this.faultVariable.abstractionreached,this.faultVariable.voltageOk]
-   var pumpAlarmArray:any []=[this.faultVariable.vsdfault,this.faultVariable.noflow,this.faultVariable.lowlevel,this.faultVariable.flowcomsfail,this.faultVariable.lowlevelwarning]
-
-   this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(generalAlarmArray))
-   this.pumpfaultdatasource = new MatTableDataSource(Common.getAlarmValue(pumpAlarmArray))
-  });
-
-
-
-  },60000)
+     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(generalAlarmArray))
+     this.pumpfaultdatasource = new MatTableDataSource(Common.getAlarmValue(pumpAlarmArray))
+    });
 
 
 
@@ -390,9 +358,10 @@ export class NewtonparkpoolComponent implements OnInit {
 
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

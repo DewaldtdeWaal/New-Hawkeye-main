@@ -1,10 +1,8 @@
 import {MatTableDataSource} from '@angular/material/table';
 import {  Component, OnInit, ViewChild } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
+
 import { Injectable } from "@angular/core";
-import { HumansDorp1Service } from 'src/app/Service-Files/GRDW/humansdorp1.service';
-import { IpService } from 'src/app/Service-Files/ip.service';
-import { HttpClient } from '@angular/common/http';
+
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
@@ -13,7 +11,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
-
+import {svgImage} from "src/app/Service-Files/SVGImage/svgImage.service"
 //HumansDorp1Servicea
 export interface PeriodicElement{
   alarm: string;
@@ -67,7 +65,12 @@ data:any = []
 "hup1_pump_suf", //10
 "hup1_pump_general_fault" //11
   ]
-//how do i add arrays in this object
+
+
+  Ground:any = "Ground";
+  Pump:any = "Pump";
+
+  //how do i add arrays in this object
   variable:any ={
     hup1_ut:null,
     hup1_pump_mode:null,
@@ -168,27 +171,14 @@ show6:any
   },
 }
 
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp1Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
+  pumpTitle:any = "Pump"
+
+  variablesMatric:any=[{}]
+  constructor( public rs: ReportService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
     this.isLoading = true;
-
-
-
-    this.pm.findPageData("klm_hup_gw", "GRDW_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-      this.variable.comms = Common.getLastUpdate(this.variable.hup1_ut)
-
-     var alarmG:any []=[this.faultVariable.hup1_voltage,this.faultVariable.hup1_pump_general_fault,this.faultVariable.hup1_borehole_level_pr_fault,this.faultVariable.hup1_battery,this.faultVariable.hup1_charge,this.faultVariable.hup1_trip_fault,this.faultVariable.hup1_no_flow_fault,this.faultVariable.hup1_24_timer,this.faultVariable.hup1_stop_level,this.faultVariable.hup1_fault,this.faultVariable.hup1_estop_active,this.faultVariable.hup1_pump_suf]
-
-     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-
-
-    });
-
-
-
   }
+
+  pumpColor:any
   isLoading: boolean = false;
   userSites:string[];
   public authListenerSubs!: Subscription;
@@ -228,13 +218,7 @@ show6:any
       }
     }
 
-
-
-  this.intervalLoop = setInterval(() =>{
-
-
-
-    this.pm.findPageData("klm_hup_gw", "GRDW_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("klm_hup_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
       console.log(this.data)
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
@@ -243,12 +227,55 @@ show6:any
      var alarmG:any []=[this.faultVariable.hup1_voltage,this.faultVariable.hup1_pump_general_fault,this.faultVariable.hup1_borehole_level_pr_fault,this.faultVariable.hup1_battery,this.faultVariable.hup1_charge,this.faultVariable.hup1_trip_fault,this.faultVariable.hup1_no_flow_fault,this.faultVariable.hup1_24_timer,this.faultVariable.hup1_stop_level,this.faultVariable.hup1_fault,this.faultVariable.hup1_estop_active,this.faultVariable.hup1_pump_suf]
 
      this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+
+     this.pumpColor =svgImage.getSVGColor(this.variable.hup1_pump_mode)
+
+     this.variablesMatric=[{
+      rowType:"TextRow",
+      label:"Mode",
+      value:this.variable.hup1_mode
+     },{
+      rowType:"TextRow",
+      label:"Status",
+      value:this.variable.hup1_pump_mode
+     },{
+      rowType:"Level",
+      label:"Level",
+      value:this.variable.hup1_borehole_lvl + " m"
+     },
+     {
+      rowType:"Flow Rate",
+      label:"Flow Rate",
+      value:this.variable.hup1_flow_rate + " l/s"
+     },
+     {
+      rowType:"TextRow",
+      label:"Total Flow",
+      value:this.variable.hup1_total_flow + " m³"
+     },
+     {
+      rowType:"TextRow",
+      label:"Timer Status",
+      value:this.variable.hup1_pump_timer
+     },
+     {
+      rowType:"TextRow",
+      label:"Run Hours",
+      value:this.variable.hup1_run_hours + " h"
+     },
+     {
+      rowType:"TextRow",
+      label:"Number of Stops",
+      value:this.variable.klm_hup1_num_o_stops
+     },
+]
+
+
+
+console.log(this.pumpColor)
+
+
     });
-
-
-
-
-},60000)
 
 
 var trend: any = {};
@@ -298,9 +325,10 @@ this.isLoading = false;
 
 
 }
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 }

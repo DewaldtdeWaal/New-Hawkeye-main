@@ -232,7 +232,7 @@ quarrypump2faulttabledatasource:any;
 
 
 
-    this.pm.findPageData("storms_ps", "PS_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("storms_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
       this.theme = localStorage.getItem("theme");
       console.log(this.data)
@@ -272,41 +272,14 @@ quarrypump2faulttabledatasource:any;
       }
     }
 
-    var tagVals:any = []
-    var errorVals:any=[]
 
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
-    errorVals = this.recieve.recieveNonMVals(this.faultArr)
-    var updateTemp:any;
-
-    this.intervalLoop = setInterval(() =>{
-      updateTemp=tagVals[0];
-
-      if(updateTemp !==  undefined){
-        this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
-        Common.setFaultValues(errorVals,this.faultVariable,this.faultArr);
-
-
-      var alarmG: any [] = [this.faultVariable.ps_storms_emergency_stop,   this.faultVariable.ps_storms_charger_fault,this.faultVariable.ps_storms_flood_warning    ,this.faultVariable.ps_storms_voltage_ok,this.faultVariable.ps_storms_wtw_comms]
-      var alarm1: any [] = [this.faultVariable.ps_storms_gp1_fault_general,this.faultVariable.ps_storms_gp1_vsd_fault,this.faultVariable.ps_storms_gp1_startup_fault,this.faultVariable.ps_storms_gp1_no_flow_fault]
-      var alarm2: any [] = [this.faultVariable.ps_storms_gp2_fault_general,this.faultVariable.ps_storms_gp2_vsd_fault,this.faultVariable.ps_storms_gp2_startup_fault,this.faultVariable.ps_storms_gp2_no_flow_fault]
-      var alarm3: any [] = [this.faultVariable.ps_storms_qp1_fault_general,this.faultVariable.ps_storms_qp1_vsd_fault,this.faultVariable.ps_storms_qp1_startup_fault,this.faultVariable.ps_storms_qp1_no_flow_fault]
-      var alarm4: any [] = [this.faultVariable.ps_storms_qp2_fault_general,this.faultVariable.ps_storms_qp2_vsd_fault,this.faultVariable.ps_storms_qp2_no_flow_fault,this.faultVariable.ps_storms_qp2_startup_fault]
-
-      this.generalfaulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarmG))
-      this.gorgepump1faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
-      this.gorgepump2faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm2))
-      this.quarrypump1faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm3))
-      this.quarrypump2faulttabledatasource= new MatTableDataSource(Common.getAlarmValue(alarm4))
-
-    }      this.variable.comms = Common.getLastUpdate(this.variable.ps_storm_UT)
-       },60000)
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

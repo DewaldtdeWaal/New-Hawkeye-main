@@ -29,7 +29,7 @@ export class CoegaKopComponent implements OnInit {
     end: new FormControl()
   });
   options: EChartsOption;
-
+  theme:any = localStorage.getItem("theme");
   generalfaulttable: PeriodicElement[] = [];
   displayedColumns :string[]= ['alarm', 'description'];
 
@@ -40,7 +40,7 @@ export class CoegaKopComponent implements OnInit {
   TotalFlow_Motherwell_Arr: any[];
   TotalFlow_CoegaIDZ_Arr: any[];
   intervalLoop: any
-  theme:any = localStorage.getItem("theme");
+
   comms: any;
   NCcomms:any;
   grassridgecomms: any;
@@ -195,30 +195,11 @@ variable:any ={
   coe_kop_r_battery_poll_ut:null,
 }
 
-  constructor(private ls: ListeningService, private ws: WebSocketService, private cgks: CoegaKopService, public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend,) {
+  constructor(public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend,) {
 
     this.isLoading = true;
 
-    this.pm.findPageData("cgk", "R_CurrentVals").then((result) => {
-      this.data =  result;
 
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-
-      var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.nmb_cgk_r_mother_outlet_flow_meter_analog_signal]
-
-      var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.reservoir_warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.motherwell_outlet_flow_meter_analog_signal,
-      ]
-
-
-      console.log(this.faultVariable)
-
-      this.comms = Common.getLastUpdate(this.variable.last_update)
-      this.NCcomms = Common.getLastUpdateBattery(this.variable.coe_kop_cloud_r_ut,this.variable.coe_kop_r_battery_poll_ut)
-    //   console.log(alarm1)
-
-      this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
-    });
 
 
 
@@ -226,35 +207,16 @@ variable:any ={
   isLoading: boolean = false;
   ngOnInit() {
 
+    this.intervalLoop = this.pm.findPageData("cgk", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-
-
-
-     this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("cgk", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-
-        var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.nmb_cgk_r_mother_outlet_flow_meter_analog_signal]
-
-        var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.reservoir_warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.motherwell_outlet_flow_meter_analog_signal,
-        ]
-
-
-        console.log(this.faultVariable)
-
-        this.comms = Common.getLastUpdate(this.variable.last_update)
-        this.NCcomms = Common.getLastUpdateBattery(this.variable.coe_kop_cloud_r_ut,this.variable.coe_kop_r_battery_poll_ut)
-      //   console.log(alarm1)
-
-        this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
-      });
-
-      },60000)
-
-
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.nmb_cgk_r_mother_outlet_flow_meter_analog_signal]
+      var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.reservoir_warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.motherwell_outlet_flow_meter_analog_signal]
+      this.comms = Common.getLastUpdate(this.variable.last_update)
+      this.NCcomms = Common.getLastUpdateBattery(this.variable.coe_kop_cloud_r_ut,this.variable.coe_kop_r_battery_poll_ut)
+      this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
+    });
 
     var trend: any = {};
 
@@ -501,11 +463,12 @@ this.isLoading = true;
 
   }
 
-    ngOnDestroy(){
-      if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
-      }
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
+
     }
+  }
 
 
 }

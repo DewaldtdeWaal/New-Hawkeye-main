@@ -169,20 +169,10 @@ displayedColumns :string[]= ['alarm', 'description'];
   total_flow_KARK_K1_array:any;
 
 
-  constructor(private GWS:GroundwaterService, public rs: ReportService,private ws: WebSocketService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+  constructor( public rs: ReportService,private authService: AuthService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
 
     this.isLoading = true;
-    this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
 
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-      this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT);
-
-       var alarmG:any []=[this.faultVariable.gw_kark_k1_estop, this.faultVariable.gw_kark_k1_vsd_fault, this.faultVariable.gw_kark_k1_voltage_ok, this.faultVariable.gw_kark_k1_panel_door_open,this.faultVariable.gw_kark_k1_low_flow_fault,this.faultVariable.gw_kark_k1_charger_ok,this.faultVariable.gw_kark_k1_borehol_low_level_fault,this.faultVariable.gw_kark_k1_surge_arrester_ok,this.faultVariable.gw_kark_k1_warning_level,this.faultVariable.gw_kark_k1_room_alarm]
-
-     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-    });
 
 
 
@@ -195,6 +185,19 @@ displayedColumns :string[]= ['alarm', 'description'];
   trendTag:any = ["gw_kark_k1_total_flow"]
 
   ngOnInit(){
+
+    this.intervalLoop = this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT);
+
+       var alarmG:any []=[this.faultVariable.gw_kark_k1_estop, this.faultVariable.gw_kark_k1_vsd_fault, this.faultVariable.gw_kark_k1_voltage_ok, this.faultVariable.gw_kark_k1_panel_door_open,this.faultVariable.gw_kark_k1_low_flow_fault,this.faultVariable.gw_kark_k1_charger_ok,this.faultVariable.gw_kark_k1_borehol_low_level_fault,this.faultVariable.gw_kark_k1_surge_arrester_ok,this.faultVariable.gw_kark_k1_warning_level,this.faultVariable.gw_kark_k1_room_alarm]
+
+     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+    });
+
 
     this.showKark1 = "false";
     this.showKark2 = "false";
@@ -221,20 +224,6 @@ displayedColumns :string[]= ['alarm', 'description'];
 
 
 
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT);
-
-         var alarmG:any []=[this.faultVariable.gw_kark_k1_estop, this.faultVariable.gw_kark_k1_vsd_fault, this.faultVariable.gw_kark_k1_voltage_ok, this.faultVariable.gw_kark_k1_panel_door_open,this.faultVariable.gw_kark_k1_low_flow_fault,this.faultVariable.gw_kark_k1_charger_ok,this.faultVariable.gw_kark_k1_borehol_low_level_fault,this.faultVariable.gw_kark_k1_surge_arrester_ok,this.faultVariable.gw_kark_k1_warning_level,this.faultVariable.gw_kark_k1_room_alarm]
-
-       this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-      });
-
-},60000)
 
 var trend: any = {};
 //this.rs.Get_KARK_K1_TotalFlows().subscribe(data => {
@@ -277,9 +266,10 @@ var trend: any = {};
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

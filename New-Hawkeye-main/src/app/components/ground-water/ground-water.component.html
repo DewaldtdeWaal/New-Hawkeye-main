@@ -1,0 +1,74 @@
+<app-panel [title]=title>
+
+
+  <div *ngIf="pumpType=='Ground'">
+  <div class="grid-container-ground" >
+
+
+
+    <div class="grid-image" >
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="200px" viewBox="0 0 100 600" version="1.1"><path [attr.d]=groundImage stroke="none" [attr.fill]=pumpColor fill-rule="evenodd"/></svg>
+
+
+    </div>
+
+    <div class = "grid-text">
+      <app-ground-water-grid [array]=array></app-ground-water-grid>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<div *ngIf="generalfaultdatasource!= null || generalfaultdatasource!= undefined ">
+
+<app-alarms [dataSource]="generalfaultdatasource"></app-alarms>
+
+</div>
+
+</div>
+
+<div *ngIf="pumpType=='Pump'">
+  <div class="grid-container-pump" >
+
+
+
+    <div class="grid-image" >
+
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="72px" height="100%" viewBox="0 0 1100 800" version="1.1"><path [attr.d]=pumpImage stroke="none" [attr.fill]=pumpColor fill-rule="evenodd"/></svg>
+
+    </div>
+
+    <div class = "grid-text">
+      <app-ground-water-grid [array]=array></app-ground-water-grid>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<div *ngIf="generalfaultdatasource!= null || generalfaultdatasource!= undefined ">
+
+<app-alarms [dataSource]="generalfaultdatasource"></app-alarms>
+
+</div>
+
+</div>
+          <br>
+
+
+        </app-panel>
+
+

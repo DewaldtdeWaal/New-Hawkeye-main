@@ -69,43 +69,29 @@ export class GamtoosBridgeComponent implements OnInit {
     this.isLoading = true;
 
 
-    this.pm.findPageData("nmbm_gt_brg_fpt", "FPT_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-      this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
 
-
-
-
-   })
 
   }
 
   collectionName: any = "FPT_GT_BRG_TFs"
   trendTag: any = ["steel_pipe_TF", "socoman_pipe_TF"]
   ngOnInit(){
-    var tagVals:any=[]
-
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-
-
-    this.intervalLoop = setInterval(() =>{
-
-
-      this.pm.findPageData("nmbm_gt_brg_fpt", "FPT_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-        this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
+    var tagVals:any=[];
 
 
 
 
-     })
+    this.intervalLoop = this.pm.findPageData("nmbm_gt_brg_fpt", "FPT_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
 
-      },60000)
+   })
+
+
+
+
 
     var trend :any;
   //  this.rs.Get_GT_BRG_Total_Flows().subscribe(data => {
@@ -334,9 +320,10 @@ this.isLoading = false;
       })
 }
 
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 

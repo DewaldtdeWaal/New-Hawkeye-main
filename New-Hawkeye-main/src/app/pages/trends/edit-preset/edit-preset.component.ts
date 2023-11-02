@@ -212,8 +212,8 @@ intervalFunction:any
   vsTagListArr:string[]=[];
   vsTagsSelected:boolean[]=[];
 
-  bushyPSTagListArr:string[]=[];
-  bushyPSSelected:boolean[]=[];
+  // bushyPSTagListArr:string[]=[];
+  // bushyPSSelected:boolean[]=[];
 
   bushyFPTTagListArr:string[]=[];
   bushyFPTSelected:boolean[]=[];
@@ -333,7 +333,7 @@ this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reser
 // Pump Stations
 this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
 this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")
-this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell ")
+this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ")
 this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ")
 this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ")
 this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ")
@@ -348,7 +348,7 @@ this.ReadSelectedValues(this.humOffTakeTagListArr,this.humOffTakeSelected,"Human
 this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ")
 this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ")
 this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ")
-this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
+// this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
 this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ")
 // Groundwater
 this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ")
@@ -852,22 +852,6 @@ for (let i = 0; i < this.userSites.length; i++) {
             break;
 
 
-            case "NMB_BUSH_PS":
-              if(count>=1){count = 0}
-              this.bushyPSTagListArr[count]="Soccoman Flow Rate"
-              count++
-              this.bushyPSTagListArr[count]="Soccoman Pressure"
-              count++
-              this.bushyPSTagListArr[count]="Soccoman Total Flow"
-              count++
-              this.bushyPSTagListArr[count]="Steel Flow Rate"
-              count++
-              this.bushyPSTagListArr[count]="Steel Pressure"
-              count++
-              this.bushyPSTagListArr[count]="Steel Total Flow"
-              count++
-              this.showPS = true;
-              break;
 
 
             case "NMB_BUSH_FPT":
@@ -882,8 +866,22 @@ for (let i = 0; i < this.userSites.length; i++) {
               count++;
               this.bushyFPTTagListArr[count]="Holding Tank Level";
               count++;
-               this.showFPT = true
+
+              this.bushyFPTTagListArr[count]="Soccoman Flow Rate"
+              count++
+              this.bushyFPTTagListArr[count]="Soccoman Pressure"
+              count++
+              this.bushyFPTTagListArr[count]="Soccoman Total Flow"
+              count++
+              this.bushyFPTTagListArr[count]="Steel Flow Rate"
+              count++
+              this.bushyFPTTagListArr[count]="Steel Pressure"
+              count++
+              this.bushyFPTTagListArr[count]="Steel Total Flow"
+              count++
+              this.showFPT = true
               break;
+
         //FPT Sites
         case "NMB_BETH_FPT":
           if (count>=1 ){count = 0}
@@ -961,22 +959,34 @@ for (let i = 0; i < this.userSites.length; i++) {
 
         case "NMB_MW_PS":
           if (count>=1 ){count = 0}
-              this.mwTagListArr[count]="Flow Rate"
-        count++
-              this.mwTagListArr[count]="Delivery Pressure"
-        count++
-              this.mwTagListArr[count]="Suction Pressure"
-        count++
+          this.mwTagListArr[count]="Flow Rate"
+          count++
+          this.mwTagListArr[count]="Delivery Pressure"
+          count++
+          this.mwTagListArr[count]="Suction Pressure"
+          count++
+          this.mwTagListArr[count]="Total Flow"
+          count++
+          this.mwTagListArr[count]="Pump 1 Speed"
+          count++
+          this.mwTagListArr[count]="Pump 2 Speed"
+          count++
+          this.mwTagListArr[count]="Pump 3 Speed"
+          count++
+          this.mwTagListArr[count]="Pump 4 Speed"
+          count++
                this.showPS = true;
               break;
 
 
               case "NMB_MW_R":
-               if (count>=1 ){count = 0}
-                 this.mwrTagListArr[count]="Reservoir Level"
-                  count++
-                  this.showRes = true;
-                   break;
+                if (count>=1 ){count = 0}
+                this.mwrTagListArr[count]="North Chamber Level";
+                count++;
+                this.mwrTagListArr[count]="South Chamber Level";
+                count++;
+                this.showRes = true;
+                break;
 
                 case "RW_CG_PS":
               if (count>=1 ){count = 0}
@@ -1452,30 +1462,30 @@ if(this.selectedSites)
           this.isuzuSelected[7] = true;
           break;
 
-          case "Bushy Park Soccoman Flow Rate":
-            this.bushyPSSelected[0] = true;
-            break;
+          // case "Bushy Park Soccoman Flow Rate":
+          //   this.bushyPSSelected[0] = true;
+          //   break;
 
-           case  "Bushy Park Soccoman Pressure":
-             this.bushyPSSelected[1] = true;
-             break;
+          //  case  "Bushy Park Soccoman Pressure":
+          //    this.bushyPSSelected[1] = true;
+          //    break;
 
-           case "Bushy Park Soccoman Total Flow":
-             this.bushyPSSelected[2] = true;
-             break;
+          //  case "Bushy Park Soccoman Total Flow":
+          //    this.bushyPSSelected[2] = true;
+          //    break;
 
-             case "Bushy Park Steel Flow Rate":
-              this.bushyPSSelected[3] = true;
-              break;
+          //    case "Bushy Park Steel Flow Rate":
+          //     this.bushyPSSelected[3] = true;
+          //     break;
 
-          case "Bushy Park Steel Pressure":
-          this.bushyPSSelected[4] = true;
-          break;
+          // case "Bushy Park Steel Pressure":
+          // this.bushyPSSelected[4] = true;
+          // break;
 
 
-          case "Bushy Park Steel Total Flow":
-            this.bushyPSSelected[5] = true;
-            break;
+          // case "Bushy Park Steel Total Flow":
+          //   this.bushyPSSelected[5] = true;
+          //   break;
 
 
 
@@ -1498,6 +1508,32 @@ if(this.selectedSites)
           case "Bushy Park Holding Tank Level":
             this.bushyFPTSelected[4] = true;
             break;
+
+
+            case "Bushy Park Soccoman Flow Rate":
+              this.bushyFPTSelected[5] = true;
+              break;
+
+             case  "Bushy Park Soccoman Pressure":
+               this.bushyFPTSelected[6] = true;
+               break;
+
+             case "Bushy Park Soccoman Total Flow":
+               this.bushyFPTSelected[7] = true;
+               break;
+
+               case "Bushy Park Steel Flow Rate":
+                this.bushyFPTSelected[8] = true;
+                break;
+
+            case "Bushy Park Steel Pressure":
+            this.bushyFPTSelected[9] = true;
+            break;
+
+
+            case "Bushy Park Steel Total Flow":
+              this.bushyFPTSelected[10] = true;
+              break;
 
                 case "Emerald Hill Reservoir Level":
                   this.emerTagsSelected[0]=true;
@@ -1696,6 +1732,14 @@ if(this.selectedSites)
             this.kwanoSelected[4] = true;
             break;
 
+            case "Motherwell Reservoir North Chamber Level":
+              this.mwrTagsSelected[0] = true;
+          break;
+
+          case "Motherwell Reservoir South Chamber Level":
+                this.mwrTagsSelected[1] = true;
+          break;
+
         case "Motherwell Flow Rate":
           this.mwTagsSelected[0]=true
           break;
@@ -1705,6 +1749,27 @@ if(this.selectedSites)
           case "Motherwell Suction Pressure":
             this.mwTagsSelected[2]=true
         break;
+
+        case "Motherwell Total Flow":
+          this.mwTagsSelected[3]=true;
+          break;
+
+          case "Motherwell Pump 1 Speed":
+            this.mwTagsSelected[4]=true;
+          break;
+
+          case "Motherwell Pump 2 Speed":
+             this.mwTagsSelected[5]=true;
+          break;
+
+          case "Motherwell Pump 3 Speed":
+             this.mwTagsSelected[6]=true;
+            break;
+
+            case "Motherwell Pump 4 Speed":
+               this.mwTagsSelected[7]=true;
+            break;
+
 
 
         // Stanford Road
@@ -1953,7 +2018,7 @@ var oldPresetDescription = this.presetDescription
     // Pump Stations
     this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
     this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")
-    this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell ")
+    this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ")
     this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ")
     this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ")
     this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ")
@@ -1964,7 +2029,7 @@ var oldPresetDescription = this.presetDescription
     this.ReadSelectedValues(this.gamtoosTagListArr,this.gamtoosTagsSelected, "Gamtoos Bridge ")
     this.ReadSelectedValues(this.uitTagListArr,this.uitTagsSelected, "Uitenhage Flow Chamber ")
     this.ReadSelectedValues(this.bethTagListArr,this.bethTagSelected, "Bethelsdorp ")
-    this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
+    // this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
     this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ")
     this.ReadSelectedValues(this.gbwTagListArr,this.gbwTagsSelected, "Gamtoos Break Water ")
     this.ReadSelectedValues(this.humOffTakeTagListArr,this.humOffTakeSelected,"Humansdorp ")

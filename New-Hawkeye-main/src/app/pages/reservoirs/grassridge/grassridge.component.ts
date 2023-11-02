@@ -37,19 +37,11 @@ gr_R_UT:null,
 "gr_R_UT",
     ]
 
-  constructor(private webSocketService: WebSocketService, private grs: GrassRidgeService,public recieve:Common,private pm:pagePostMethod ) {
+  constructor(public recieve:Common,private pm:pagePostMethod ) {
 
 
 
 
-    this.pm.findPageData("nmbm_gr_wtw_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-     this.comms = Common.getLastUpdate(this.variable.gr_R_UT)
-
-    });
 
 }
 
@@ -58,9 +50,7 @@ gr_R_UT:null,
   ngOnInit(){
 
 
-    this.intervalLoop = setInterval(() =>{
-
-    this.pm.findPageData("nmbm_gr_wtw_r", "R_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("nmbm_gr_wtw_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
       console.log(this.data)
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
@@ -68,14 +58,13 @@ gr_R_UT:null,
      this.comms = Common.getLastUpdate(this.variable.gr_R_UT)
 
     });
- },60000)
 
   }
 
-  ngOnDestroy(){
-    if(this.intervalLoop)
-    {
-      clearInterval(this.intervalLoop)
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

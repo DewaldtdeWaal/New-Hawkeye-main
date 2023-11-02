@@ -266,3 +266,59 @@ h4{
   justify-content: center;
   align-items: top;
 }
+
+
+
+
+/* Valve */
+.grid-container-valve-general{
+  display: grid;
+  grid-template-columns: 60px 1fr 20px 1.8fr;
+  grid-auto-rows: 30px;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content:center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.grid-container-communication-general-column2{
+  display: grid;
+  grid-column:2;
+  grid-template-rows: 25px;
+  text-align: right;
+  float: right;
+  align-items: center;
+  padding:2px;
+}
+.grid-container-communication-general-column4{
+  display: grid;
+  grid-column: 4;
+  grid-template-rows: 25px;
+  text-align: left;
+  float: left;
+  align-items: center;
+  font-weight: bold;
+  padding:2px;
+}
+.img2{
+
+  grid-column:1 ;
+  width:25px;
+  height: 20px;
+
+  align-items: center;
+  margin: auto;
+  overflow: none;
+}
+
+.grid-span-four{
+  display:grid;
+  grid-column: 1/span 4;
+  margin: 0 auto;
+  /* Margin: 0 Auto centers all divs in the middle vertically and horizontally auto refers to left and right and the 0 top and bottom */
+  font-weight: 300;
+  text-decoration: underline;
+  grid-template-rows: 25px;
+
+}

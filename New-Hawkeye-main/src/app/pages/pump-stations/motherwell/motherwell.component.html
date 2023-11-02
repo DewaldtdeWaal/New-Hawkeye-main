@@ -1,65 +1,32 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Motherwell</h1></div>
-  <div class="wrapper-grid">
+<app-page-component [siteTitle]=title>
 
-      <section class="ground-form" fxLayoutAlign="center">
+  <section class="ground-form" fxLayoutAlign="center">
 
-      <form fxLayout="column">
+    <form fxLayout="column">
 
-        <div style="margin-bottom: 8px"  class="div-form">
-          <h3 style="padding-top: 8px; ">Communication</h3>
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Communication</h3>
+      </div>
+
+  <div class="div-form">
+    <div class="grid-container-flow-meters-communication">
+
+      <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+      <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+        <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 0px;">
         </div>
+        <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;" >
+         <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"style="grid-column: 3; padding-top: 0px;">
+         </div>
 
-    <div class="div-form">
-      <div class="grid-container-flow-meters-communication">
+      <div class="grid-container-communicationStatus-column1">Last Update:</div>
+      <div class="grid-container-communicationStatus-column3">{{variable.lastUpdate}}</div>
 
-        <div class="grid-container-communicationStatus-column1">Communication Status:</div>
-        <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
-          <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 0px;">
-          </div>
-          <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;" >
-           <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"style="grid-column: 3; padding-top: 0px;">
-           </div>
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
+      <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
 
-        <div class="grid-container-communicationStatus-column1">Last Update:</div>
-        <div class="grid-container-communicationStatus-column3">{{variable.mw_g_ut}}</div>
-
-        <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
-        <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
-
-        <div *ngIf="showNavigationButton == 'true'" class="grid-button">
-            <button class="button-color"   a routerLink="/hawkeye/reservoirs/motherwellres"  >Reservoir</button></div>
-  </div>
-
-  </div>
-  </form>
-  </section>
-
-
-
-<section class="ground-form" fxLayoutAlign="center">
-
-  <form fxLayout="column">
-
-    <div style="margin-bottom: 8px"  class="div-form">
-      <h3 style="padding-top: 8px; ">General</h3>
-    </div>
-
-<div class="div-form">
-  <div class="grid-container-flow-meters-general">
-
-
-    <div class="grid-container-general-column1">Suction</div><div class="grid-container-general-column2"> <img src="assets/img/Symbol/bar.png" class="img3" ></div>
-    <div class="grid-container-general-column4">{{variable.mw_g_common_suction_pressure}} bar</div>
-    <div class="grid-container-general-column1">Delivery</div><div class="grid-container-general-column2"> <img src="assets/img/Symbol/bar.png" class="img3" ></div>
-    <div class="grid-container-general-column4">{{variable.mw_g_common_delivery_pressure}} bar</div>
-    <div class="grid-container-general-column2"><img src="assets/img/Symbol/FM.png" class="img3"></div>
-    <div class="grid-container-general-column4">{{variable.mw_g_flowrate}} Ml/d</div>
-    <div class="grid-container-general-column1-span-2-columns">Speed Set Point:</div>
-    <div class="grid-container-general-column4">{{variable.mw_g_speed_setpoint}} rpm</div>
-    <div class="grid-container-general-column1-span-2-columns">Pumps Required:</div>
-    <div class="grid-container-general-column4">{{variable.mw_g_pumps_required}}</div>
-
+      <div *ngIf="showNavigationButton == 'true'" class="grid-button">
+          <button class="button-color"   a routerLink="/hawkeye/reservoirs/motherwellres"  >Reservoir</button></div>
 </div>
 
 </div>
@@ -68,160 +35,15 @@
 
 
 
-    <!--Pump 1-->
+<app-panel [title]="titleG">
+  <br>
+  <app-two-column [array]=variablesMatricG></app-two-column>
+  <br>
+</app-panel>
 
-    <section class="ground-form" fxLayoutAlign="center ">
-      <form fxLayout="column" >
+  <app-ground-water [title]=pump1 [array]=variablesMatric1 [generalfaultdatasource]=dataSourceP1 [pumpColor]=pumpColor1 [pumpType]=Pump></app-ground-water>
+  <app-ground-water [title]=pump2 [array]=variablesMatric2 [generalfaultdatasource]=dataSourceP2 [pumpColor]=pumpColor2 [pumpType]=Pump></app-ground-water>
+  <app-ground-water [title]=pump3 [array]=variablesMatric3 [generalfaultdatasource]=dataSourceP3 [pumpColor]=pumpColor3 [pumpType]=Pump></app-ground-water>
+  <app-ground-water [title]=pump4 [array]=variablesMatric4 [generalfaultdatasource]=dataSourceP4 [pumpColor]=pumpColor4 [pumpType]=Pump></app-ground-water>
 
-        <div style="margin-bottom: 8px"  class="div-form">
-          <h3 style="padding-top: 8px; ">Pump 1</h3>
-        </div>
-        <div class="div-form">
-          <div class="grid-container-pumpstation">
-
-              <div class="grid-column-one">
-            <div *ngIf="theme=='light-theme'">
-              <div  *ngIf="variable.mw_p1_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-              <div  *ngIf="variable.mw_p1_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-              <div  *ngIf="variable.mw_p1_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-              <div  *ngIf="variable.mw_p1_status=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
-              <div  *ngIf="variable.mw_p1_status=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
-            </div>
-
-            <div *ngIf="theme=='dark-theme'">
-              <div *ngIf="variable.mw_p1_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-              <div *ngIf="variable.mw_p1_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-              <div *ngIf="variable.mw_p1_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-              <div *ngIf="variable.mw_p1_status=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
-              <div *ngIf="variable.mw_p1_status=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
-            </div>
-
-          </div>
-      <div class="grid-pumpstation-column2-right-align">Mode:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p1_mode}}</div>
-      <div class="grid-pumpstation-column2-right-align">Status:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p1_status}}</div>
-      <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p1_runtime}} h</div>
-      <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img3" ></div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p1_actual_speed}} rpm</div>
-      <div class="grid-pumpstation-column2-right-align">Number of Start:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p1_number_of_starts}}</div>
-
-          </div>
-
-          <app-alarms [dataSource]="dataSourceP1"></app-alarms>
-
-
-          <br>
-          </div>
-        </form>
-
-
-
-    </section>
-    <!-- Pump 2 -->
-
-    <section class="ground-form" fxLayoutAlign="center ">
-      <form fxLayout="column" >
-
-        <div style="margin-bottom: 8px"  class="div-form">
-          <h3 style="padding-top: 8px; ">Pump 2</h3>
-        </div>
-        <div class="div-form">
-          <div class="grid-container-pumpstation">
-
-              <div class="grid-column-one">
-            <div *ngIf="theme=='light-theme'">
-              <div  *ngIf="variable.mw_p2_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-              <div  *ngIf="variable.mw_p2_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-              <div  *ngIf="variable.mw_p2_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-              <div  *ngIf="variable.mw_p2_status=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
-              <div  *ngIf="variable.mw_p2_status=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
-            </div>
-
-            <div *ngIf="theme=='dark-theme'">
-              <div *ngIf="variable.mw_p2_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-              <div *ngIf="variable.mw_p2_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-              <div *ngIf="variable.mw_p2_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-              <div *ngIf="variable.mw_p2_status=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
-              <div *ngIf="variable.mw_p2_status=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
-            </div>
-
-          </div>
-      <div class="grid-pumpstation-column2-right-align">Mode:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p2_mode}}</div>
-      <div class="grid-pumpstation-column2-right-align">Status:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p2_status}}</div>
-      <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p2_runtime}} h</div>
-      <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img3" ></div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p2_actual_speed}} rpm</div>
-      <div class="grid-pumpstation-column2-right-align">Number of Start:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p2_number_of_starts}}</div>
-
-          </div>
-
-          <app-alarms [dataSource]="dataSourceP2"></app-alarms>
-
-          <br>
-          </div>
-        </form>
-
-
-
-    </section>
-    <!-- Pump 3 -->
-
-    <section class="ground-form" fxLayoutAlign="center ">
-      <form fxLayout="column" >
-
-        <div style="margin-bottom: 8px"  class="div-form">
-          <h3 style="padding-top: 8px; ">Pump 3</h3>
-        </div>
-        <div class="div-form">
-          <div class="grid-container-pumpstation">
-
-              <div class="grid-column-one">
-            <div *ngIf="theme=='light-theme'">
-              <div  *ngIf="variable.mw_p3_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-              <div  *ngIf="variable.mw_p3_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-              <div  *ngIf="variable.mw_p3_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-              <div  *ngIf="variable.mw_p3_status=='Available'" ><img class="pump1" src="assets/img/P_B.png" ></div>
-              <div  *ngIf="variable.mw_p3_status=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
-            </div>
-
-            <div *ngIf="theme=='dark-theme'">
-              <div *ngIf="variable.mw_p3_status==undefined"><img class="pump1"  src="assets/img/P_Grey.png" ></div>
-              <div *ngIf="variable.mw_p3_status=='Running'" ><img class="pump1" src="assets/img/P_G.png" ></div>
-              <div *ngIf="variable.mw_p3_status=='Fault Active'" ><img class="pump1" src="assets/img/P_R.png" ></div>
-              <div *ngIf="variable.mw_p3_status=='Available'" ><img class="pump1" src="assets/img/P_W.png" ></div>
-              <div *ngIf="variable.mw_p3_status=='Not Available'" ><img class="pump1" src="assets/img/P_Grey.png" ></div>
-            </div>
-
-          </div>
-      <div class="grid-pumpstation-column2-right-align">Mode:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p3_mode}}</div>
-      <div class="grid-pumpstation-column2-right-align">Status:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p3_status}}</div>
-      <div class="grid-pumpstation-column2-right-align">Run Hours:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p3_runtime}} h</div>
-      <div class="grid-pumpstation-column2-right-align"><img src="assets/img/Symbol/rpm-hz.png" class="img3" ></div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p3_actual_speed}} rpm</div>
-      <div class="grid-pumpstation-column2-right-align">Number of Start:</div>
-      <div class="grid-pumpstation-column3-left-align">{{variable.mw_p3_number_of_starts}}</div>
-
-          </div>
-
-          <app-alarms [dataSource]="dataSourceP3"></app-alarms>
-
-          <br>
-          </div>
-        </form>
-
-
-
-    </section>
-    </div>
-    </div>
-
+</app-page-component>

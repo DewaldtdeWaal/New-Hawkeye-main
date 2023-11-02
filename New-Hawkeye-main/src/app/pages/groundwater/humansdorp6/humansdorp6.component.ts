@@ -1,8 +1,5 @@
 import {MatTableDataSource} from '@angular/material/table';
 import {  Component, OnInit, ViewChild } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { Injectable } from "@angular/core";
-import { HumansDorp6Service } from 'src/app/Service-Files/GRDW/humansdorp6.service';
 import { EChartsOption } from 'echarts';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from 'src/app/Service-Files/report.service';
@@ -30,7 +27,7 @@ export class Humansdorp6Component implements OnInit {
   generalfaulttable: PeriodicElement[] = [];
   generalfaultdatasource :any = new MatTableDataSource(this.generalfaulttable);
   intervalLoop: any
-  theme:any;
+  theme:any  = localStorage.getItem("theme");
   pumpmode: any ;
   pressure: any
 flowrate :any
@@ -161,22 +158,11 @@ show1:any
   },
 }
 isLoading: boolean = false;
-  constructor(private ws: WebSocketService, public rs: ReportService, private hum: HumansDorp6Service,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
+  constructor( public rs: ReportService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
 
     this.isLoading = true;
-    this.theme = localStorage.getItem("theme");
 
-    this.pm.findPageData("klm_hup6_gw", "GRDW_CurrentVals").then((result) => {
-      this.data =  result;
 
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-      this.variable.comms = Common.getLastUpdate(this.variable.hup6_ut)
-
-     var alarmG:any []=[this.faultVariable.hup6_voltage,this.faultVariable.hup6_pump_general_fault,this.faultVariable.hup6_borehole_level_pr_fault,this.faultVariable.hup6_battery,this.faultVariable.hup6_charge,this.faultVariable.hup6_trip_fault,this.faultVariable.hup6_no_flow_fault,this.faultVariable.hup6_24_timer,this.faultVariable.hup6_stop_level,this.faultVariable.hup6_fault,this.faultVariable.hup6_estop_active,this.faultVariable.hup6_pump_suf]
-
-     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
-    });
 
 
 
@@ -224,20 +210,9 @@ collectionName:any ="KLM_HUP6_TF_TREND"
       }
     }
 
-  var tagVals:any =[]
-  var errorVals:any=[]
-  tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-
-  var updateTemp:any;
-
-  errorVals = this.recieve.recieveNonMVals(this.faultArr)
-  this.intervalLoop = setInterval(() =>{
-
-
-
-    this.pm.findPageData("klm_hup6_gw", "GRDW_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("klm_hup6_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
+
       console.log(this.data)
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.variable.comms = Common.getLastUpdate(this.variable.hup6_ut)
@@ -248,17 +223,13 @@ collectionName:any ="KLM_HUP6_TF_TREND"
     });
 
 
-},60000)
-
-
 var trend: any = {};
 this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
   trend=data
     this.total_flow_HD6_array = trend.TotalFlowArr[0];
 
     this.DateArr = trend.DateArr;
-      var theme:any
-      var tooltipBackground:any
+
 
       this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD6 Total Flow",this.total_flow_HD6_array);
 
@@ -297,9 +268,10 @@ this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) =
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

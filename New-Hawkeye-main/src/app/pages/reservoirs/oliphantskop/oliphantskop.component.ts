@@ -1,74 +1,78 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
+import {OliphantskopService}from 'src/app/Service-Files/Reservoir/reservoir.service';
 import {Common} from 'src/app/class/common';
-import {pageBuilderMethod} from "src/app/Service-Files/pageBuilder/pageBuilder.service";
-import { pageBuilder} from "src/app/class/pageBulder";
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
-
-
-
-
 @Component({
-
   selector: 'app-oliphantskop',
   templateUrl: './oliphantskop.component.html',
   styleUrls: ['./oliphantskop.component.css']
 })
-
 export class OliphantskopComponent implements OnInit {
-  data: any=[];
-  intervalLoop: any;
-
-   tagArr:any =[
-    "oli_ut",
-    "oli_lvl",
-    "batteryUnitUpdate"
-  ]
-
-  siteTitle:string = "Olifantskop";
 
 
 
-  testArr:any = [
-    "wakeupperiod",
-    "lastupdate",
-    "battery_status",
-    "level1",
-    "comms",
-    "commsMatrix"
-  ]
-
-  lastUpdate:any
-   jsonFormData:any;
-  variables:any = {}
-  title:string = "Reservoir";
-  title1:string = "Communication";
-
-  theme:any= localStorage.getItem("theme");
-
-
-  commsTitle = "Last Update"
-  jsonFile:string;
-
-  constructor(public recieve:Common,public pbm:pageBuilderMethod, public pb:pageBuilder,private pm:pagePostMethod ) {
-
-    //this.fillPage()
-
+  variable :any= {
+    oli_ut:null,
+    oli_lvl:null,
+    batteryUnitUpdate:null,
+    comms:null
   }
 
-  //  async fillPage(){
+  tagArr:any =[
+    "oli_ut",
+    "oli_lvl",
+    "batteryUnitUpdate",
+
+  ]
+
+
+   intervalLoop: any
+
+
+  data: any=[];
+
+  constructor(public recieve:Common,private pm:pagePostMethod ) {
 
 
 
-  //   this.pbm.getSiteData("WBLK_OLIF_RES_BTU01",this.testArr,this.variables).then((result) => {
-  //     this.variables =  result;
 
-  //    this.variables.comms = pageBuilder.getLastUpdate(this.variables.lastupdate, this.variables.wakeupperiod)
 
-  //   });
 
-  //  }
 
-  ngOnInit() {}
-  ngOnDestroy(){}
+   }
+
+
+   reservoirTitle:any ="Reservoir"
+
+
+  ngOnInit() {
+
+
+
+
+    this.intervalLoop = this.pm.findPageData("nmbm_olip_r", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
+
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+
+
+    this.variable.comms = Common.getLastUpdate(this.variable.oli_ut)
+    });
+
+
+
+
+
+
+  }
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
+
+    }
+  }
+
+
 }
-

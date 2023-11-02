@@ -40,34 +40,20 @@ export class HumansdorpwtwComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.pm.findPageData("klm_hup_wtw", "WTW_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-     this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
 
-    });
 
   }
   collectionName: any = "Humansdrop_wtw_tf"
   trendTag: any = ["klm_hup_wtw_TF"]
   ngOnInit() {
 
-    var tagVals:any = []
+    this.pm.findPageData("klm_hup_wtw", "WTW_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+     this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
 
-     tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-    this.intervalLoop = setInterval(() =>{
-
-
-      this.pm.findPageData("klm_hup_wtw", "WTW_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-       this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
-
-      });
-    },60000);
+    });
 
 
     var trend: any = {};
@@ -110,9 +96,10 @@ export class HumansdorpwtwComponent implements OnInit {
 
 
     }
-   ngOnDestroy(){
+    ngOnDestroy():void{
       if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
+        this.intervalLoop.unsubscribe();
+
       }
     }
 

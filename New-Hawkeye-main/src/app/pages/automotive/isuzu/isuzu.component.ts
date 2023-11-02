@@ -4,7 +4,7 @@ import { Common } from 'src/app/class/common';
 import {IsuzuService} from 'src/app/Service-Files/Automotive/automotive.service'
 import {ReportService} from 'src/app/Service-Files/report.service'
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
+
 
 @Component({
   selector: 'app-isuzu',
@@ -29,15 +29,7 @@ data:any = []
 
  ISUZU_OVEN1_HEAT_ECVH_TEMP_arr:any[]=[]
 ISUZU_OVEN2_HEAT_ECVH_TEMP_arr: any[]=[]
-  isuzu_ut: any;
-  isuzu_oven2_temp2: any;
-  isuzu_oven2_temp1: any;
-  isuzu_oven2_heat_ecvh_temp: any;
-  isuzu_oven2_vsd_speed: any;
-  isuzu_oven1_temp2: any;
-  isuzu_oven1_temp1: any;
-  isuzu_oven1_heat_ecvh_temp: any;
-  isuzu_oven1_vsd_speed: any;
+
   intervalLoop: any;
   updateloop:any
 
@@ -64,14 +56,8 @@ isuzu_oven2_temp2:null,
 "isuzu_oven2_temp2",
     ]
 
-  constructor(private ws: WebSocketService,public rs:ReportService, public is:IsuzuService,public recieve:Common , private pm:pagePostMethod ) {
-   this.pm.findPageData("isuzu_auto", "AUTO_CurrentVals").then((result) => {
-    this.data =  result;
+  constructor(public rs:ReportService, public is:IsuzuService,public recieve:Common , private pm:pagePostMethod ) {
 
-    console.log(this.data)
-   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-   this.comms = Common.getLastUpdate(this.variable.isuzu_ut)
-  });
 
 
 
@@ -80,6 +66,16 @@ isuzu_oven2_temp2:null,
 
 
 Event0(){
+
+
+  this.intervalLoop = this.pm.findPageData("isuzu_auto", "AUTO_CurrentVals").subscribe((result) => {
+    this.data =  result;
+
+    console.log(this.data)
+   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+   this.comms = Common.getLastUpdate(this.variable.isuzu_ut)
+  });
+
 
   var trend :any;
   var array = ['isuzu_oven1_temp1','isuzu_oven1_temp2','isuzu_oven2_temp1','isuzu_oven2_temp2',"isuzu_oven1_heat_ecvh_temp","isuzu_oven2_heat_ecvh_temp", "isuzu_oven1_vsd_speed", "isuzu_oven2_vsd_speed"]
@@ -227,55 +223,19 @@ if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme")
 
 };
 
-  ngOnInit() {
+  ngOnInit() {  }
 
-
-
-    var tagVals:any =[]
-    var tagArr=[
-      "isuzu_ut",
-      "isuzu_oven1_vsd_speed",
-      "isuzu_oven1_heat_ecvh_temp",
-      "isuzu_oven1_temp1",
-      "isuzu_oven1_temp2",
-      "isuzu_oven2_vsd_speed",
-      "isuzu_oven2_heat_ecvh_temp",
-      "isuzu_oven2_temp1",
-      "isuzu_oven2_temp2",
-    ]
-
-    tagVals = this.recieve.recieveNonMVals(tagArr);
-    var updateTemp:any;
-
-    this.intervalLoop = setInterval(() =>{
-
-
-   this.pm.findPageData("isuzu_auto", "AUTO_CurrentVals").then((result) => {
-    this.data =  result;
-
-    console.log(this.data)
-   this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-   this.comms = Common.getLastUpdate(this.variable.isuzu_ut)
-  });
-    },60000)
-
-
-    this.updateloop = setInterval(() =>{
-
-
-      this.Event0();
-    },600000)
-
-  }
-
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
     }
+
 
     if(this.updateloop){
       clearInterval(this.updateloop);
     }
   }
+
+
 
 }

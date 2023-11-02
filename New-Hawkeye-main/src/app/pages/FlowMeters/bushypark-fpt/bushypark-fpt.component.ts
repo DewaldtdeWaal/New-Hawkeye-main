@@ -41,21 +41,21 @@ tagArr:any = [
   "bush_gw_comb_flow_rate",
   "bush_tank_lvl",
 "bush_church_steel_TF",
-"bush_church_soco_TF"
+"bush_church_soco_TF",
+"bush_ps_TF",
+"bush_gw_TF",
 ];
 
 public authListenerSubs!: Subscription;
-constructor(private bush: bushyService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod ) {
+constructor(public recieve:Common,private authService: AuthService,private pm:pagePostMethod ) {
 
-  // this.bush.GetSiteValues()
-  // .subscribe(rsp => {
-  //    this.data = rsp;
 
-  //  this.variable = Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-  //    this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
-  // })
 
-  this.pm.findPageData("nmbm_bush_r", "R_CurrentVals").then((result) => {
+}
+
+ngOnInit() {
+
+  this.intervalLoop = this.pm.findPageData("nmbm_bush_r", "R_CurrentVals").subscribe((result) => {
     this.data =  result;
     console.log(this.data)
     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
@@ -63,46 +63,13 @@ constructor(private bush: bushyService,public recieve:Common,private authService
 
  })
 
-}
-
-ngOnInit() {
-
-
-
-  this.showNavigationButton = "false";
-  this.userSites = this.authService.getUserSites();
-  this.authListenerSubs = this.authService.getAuthStatusListener()
-  .subscribe(() => {
-    this.userSites = this.authService.getUserSites();
-  })
-  for (let i = 0; i < this.userSites.length; i++) {
-
-    switch (this.userSites[i]) {
-      case "NMB_BUSH_PS":
-        this.showNavigationButton = "true";
-        break;
-    }
-
-  var tagVals:any =[]
-
-
- tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-  setInterval(() => {
-    this.pm.findPageData("nmbm_bush_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-      this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
-
-   })
-
-  }, 60000);
-
 
 
 }
+ngOnDestroy():void{
+  if(this.intervalLoop){
+    this.intervalLoop.unsubscribe();
 
+  }
 }
-
 }

@@ -34,7 +34,12 @@ export class StGeorgesResComponent implements OnInit {
   constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,public recieve:Common,private pm:pagePostMethod) {
 
 
-    this.pm.findPageData("nmbm_st_georges_wtw", "WTW_CurrentVals").then((result) => {
+
+   }
+
+  ngOnInit() {
+
+    this.intervalLoop = this.pm.findPageData("nmbm_st_georges_wtw", "WTW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -44,27 +49,10 @@ export class StGeorgesResComponent implements OnInit {
     this.variable.comms = Common.getLastUpdate(this.variable.st_georges_wtw_ut)
     });
 
-
-   }
-
-  ngOnInit() {
-    var tagVals:any = []
-
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-    this.intervalLoop = setInterval(() =>{
-
-      this.pm.findPageData("nmbm_st_georges_wtw", "WTW_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-      this.variable.comms = Common.getLastUpdate(this.variable.st_georges_wtw_ut)
-      });
-
-    },60000)
   }
-
+  ngOnDestroy(){
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
+    }
+  }
 }

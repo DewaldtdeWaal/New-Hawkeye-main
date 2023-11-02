@@ -192,7 +192,7 @@ p4_btn:any= false
   constructor(private http: HttpClient, private su:ServerURLService, private cl:ControlLogService, private pm:pagePostMethod, private as:AuthService,  private site_Control: SiteControlService,  private onOf: StanOnOffService,public recieve:Common ) {
 
 
-    this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -276,30 +276,6 @@ p4_btn:any= false
 
 
 
-    var updateTemp:any;
-
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-       this.variable.comms = Common.getLastUpdate(this.variable.stan_ps_ut)
-
-       var alarm1: any [] = [this.faultVariable.stan_p1_alarmstrip]
-       var alarm2: any [] = [this.faultVariable.stan_p2_alarmstrip]
-       var alarm3: any [] = [this.faultVariable.stan_p3_alarmstrip]
-       var alarm4: any [] = [this.faultVariable.stan_p4_alarmstrip]
-
-       this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-       this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-       this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-       this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-
-
-      })
-      },60000)
 
 
 
@@ -536,9 +512,10 @@ setTimeout(() => {
 
 }
 
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 

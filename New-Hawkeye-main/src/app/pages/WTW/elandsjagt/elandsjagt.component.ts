@@ -23,14 +23,13 @@ export class ElandsjagtComponent implements OnInit {
       'wtw_elands_P'
      ]
   constructor(private ws: WebSocketService, private ej: ElandsJagtRootComponent,public recieve:Common ,private pm:pagePostMethod) {
-    // this.ej.GetSiteValues()
-    // .subscribe(rsp=> {
-    //   this.data = rsp;
-    //   this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-    //   this.variable.comms = Common.getLastUpdate(this.variable.wtw_elands_ut)
-    // })
 
-    this.pm.findPageData("nmbm_elands_wtw", "WTW_CurrentVals").then((result) => {
+
+  }
+
+  ngOnInit() {
+
+    this.intervalLoop = this.pm.findPageData("nmbm_elands_wtw", "WTW_CurrentVals").subscribe((result) => {
       this.data =  result;
       console.log(this.data)
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
@@ -39,29 +38,10 @@ export class ElandsjagtComponent implements OnInit {
     });
 
   }
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
 
-  ngOnInit() {
-
-    var tagVals:any = []
-
-     tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-
-    this.intervalLoop = setInterval(() =>{
-
-      this.pm.findPageData("nmbm_elands_wtw", "WTW_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-       this.variable.comms = Common.getLastUpdate(this.variable.wtw_elands_ut)
-
-      });
-    },60000);
-
-  }
-   ngOnDestroy(){
-      if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
-      }
     }
-
+  }
 }

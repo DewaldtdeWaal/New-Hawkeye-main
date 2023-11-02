@@ -1,11 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { ListeningService } from 'src/app/listening.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { ChattyService} from 'src/app/Service-Files/Reservoir/chatty.service';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import {Common} from 'src/app/class/common';
@@ -67,7 +63,16 @@ export class ChattyComponent implements OnInit {
 
   constructor(public rs: ReportService, private authService: AuthService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
     this.isLoading = true;
-    this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
+
+
+
+
+  }
+  isLoading: boolean = false;
+  ngOnInit() {
+
+
+    this.intervalLoop = this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -78,11 +83,6 @@ export class ChattyComponent implements OnInit {
     });
 
 
-
-
-  }
-  isLoading: boolean = false;
-  ngOnInit() {
     this.showNavigationButton = "false";
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
@@ -104,21 +104,21 @@ export class ChattyComponent implements OnInit {
 
 
 
-    var updateTemp:any;
-    this.intervalLoop = setInterval(() =>{
+    // var updateTemp:any;
+    // this.intervalLoop = setInterval(() =>{
 
 
 
-      this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").then((result) => {
-        this.data =  result;
+    //   this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").subscribe((result) => {
+    //     this.data =  result;
 
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+    //     console.log(this.data)
+    //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-      this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
-      });
-     },60000)
+    //   this.variable.comms = Common.getLastUpdate(this.variable.cht_ut)
+    //   });
+    //  },60000)
 
 
 
@@ -338,9 +338,10 @@ export class ChattyComponent implements OnInit {
 
 
    }
-   ngOnDestroy(){
+   ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

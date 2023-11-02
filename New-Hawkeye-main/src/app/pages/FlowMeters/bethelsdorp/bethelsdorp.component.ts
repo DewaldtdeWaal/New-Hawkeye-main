@@ -54,16 +54,7 @@ export class BethelsdorpComponent implements OnInit {
   constructor(public rs: ReportService, public us: UsersService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend  ) {
 
 
-    this.pm.findPageData("nmbm_beth_fpt", "FPT_CurrentVals").then((result) => {
-      this.data =  result;
 
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-     this.variable.comms = Common.getLastUpdate(this.variable.beth_ut)
-
-    });
 
    }
 
@@ -73,21 +64,16 @@ export class BethelsdorpComponent implements OnInit {
 
 
 
-    this.intervalLoop = setInterval(() =>{
+    this.intervalLoop = this.pm.findPageData("nmbm_beth_fpt", "FPT_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-      this.pm.findPageData("nmbm_beth_fpt", "FPT_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-       this.variable.comms = Common.getLastUpdate(this.variable.beth_ut)
+     this.variable.comms = Common.getLastUpdate(this.variable.beth_ut)
 
-      });
-
-
-       },60000)
+    });
 
 
 
@@ -251,9 +237,10 @@ export class BethelsdorpComponent implements OnInit {
 
 
     }
-    ngOnDestroy(){
+    ngOnDestroy():void{
       if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
+        this.intervalLoop.unsubscribe();
+
       }
     }
 

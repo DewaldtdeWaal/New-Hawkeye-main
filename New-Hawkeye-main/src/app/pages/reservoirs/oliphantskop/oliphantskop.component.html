@@ -1,22 +1,40 @@
 <div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">{{siteTitle}}</h1></div>
- <div class="wrapper-grid">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Olifantskop</h1></div>
+  <div class="wrapper-grid">
 
 
-  <app-panel [title] = commsTitle>
+  <section class="res-form" fxLayoutAlign="center ">
+    <form fxLayout="column">
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Communication </h3></div>
 
 
-<app-comms-panel [lastUpdate] =variables.lastupdate  [communicationStatus]=variables.comms></app-comms-panel>
+        <div class="div-form">
+          <div class="grid-container-flow-meters-communication">
+            <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+            <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+            <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+            <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+              </div>
+              <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+               <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+               </div>
+
+            <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+            <div class="grid-container-flow-meters-general-column3">{{variable.oli_ut}}</div>
+            <div class="grid-container-flow-meters-general-column1">Battery Unit Last Update:</div>
+            <div class="grid-container-flow-meters-general-column3">{{variable.batteryUnitUpdate}}</div>
 
 
-</app-panel>
+
+            </div>
+            </div>
+
+            </form>
+            </section>
 
 
+            <app-res-panel [level]="variable.oli_lvl" [title]="reservoirTitle"></app-res-panel>
 
-
- <app-res-panel [level] = variables.level1  [title]=title>
-
-
- </app-res-panel>
-</div>
-</div>
+  </div>
+  </div>

@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {BlueHorizonBayService} from 'src/app/Service-Files/Reservoir/bluehorizonbay.service';
-import { HttpClient } from '@angular/common/http';
-import {BlueHorizonBayPSComponent} from 'src/app/pages/pump-stations/blue-horizon-bay-ps/blue-horizon-bay-ps.component';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Common } from 'src/app/class/common';
@@ -19,15 +14,15 @@ export class BluehorizonComponent implements OnInit {
   public authListenerSubs!: Subscription;
   userSites:string[];
 
-bh_R_LVL:any
-bh_R_START_FLOAT:any
-bh_R_STOP_FLOAT:any
-  bh_R_UT:any
-  bh_R_DOOR:any
-  bh_R_SURGE_ARRESTOR:any
-  bh_R_CHARGER_STATUS:any
-  res:any
-comms:any;
+// bh_R_LVL:any
+// bh_R_START_FLOAT:any
+// bh_R_STOP_FLOAT:any
+//   bh_R_UT:any
+//   bh_R_DOOR:any
+//   bh_R_SURGE_ARRESTOR:any
+//   bh_R_CHARGER_STATUS:any
+//   res:any
+ comms:any;
   showNavigationButton: string;
   intervalLoop: any
 
@@ -53,23 +48,27 @@ comms:any;
 
         }
 
-  constructor( private webSocketService: WebSocketService, private bhs: BlueHorizonBayService, private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
+  constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
 
 
 
 
-    this.pm.findPageData("nmbm_bh_r", "R_CurrentVals").then((result) => {
+
+}
+
+
+
+  ngOnInit() {
+
+
+    this.intervalLoop = this.pm.findPageData("nmbm_bh_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
            this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
           this.comms = Common.getLastUpdate(this.variable.bh_R_UT)
     });
-}
 
-
-
-  ngOnInit() {
     this.showNavigationButton = "false";
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
@@ -85,20 +84,15 @@ comms:any;
       }
     }
 
-    this.pm.findPageData("nmbm_bh_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
 
-      console.log(this.data)
-           this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-          this.comms = Common.getLastUpdate(this.variable.bh_R_UT)
-    });
 
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 }

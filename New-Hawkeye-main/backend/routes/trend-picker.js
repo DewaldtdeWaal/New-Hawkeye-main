@@ -250,8 +250,15 @@ var KWANO_R_TOTAL_FLOW_2_arr = []
   var MW_BPS_FlowRate_Arr =[];
   var MW_BPS_DeliveryPressure_Arr =[];
   var MW_BPS_SuctionPressure_Arr =[];
-  var MW_LVL_array =[];
+  var MW_NORTH_LVL_array =[];
+  var MW_SOUTH_LVL_array =[];
 
+  var MW_P1_PUMP_RPM_arr = [];
+  var MW_P2_PUMP_RPM_arr = [];
+  var MW_P3_PUMP_RPM_arr = [];
+  var MW_P4_PUMP_RPM_arr = [];
+
+  var MW_P_TF_arr = [];
 
   //Ground Water
   var NMBM_NPP_GW_PRESSURE_Arr = [];
@@ -552,8 +559,14 @@ case "Van Riebeeck Hoogte Suction Level":
    count++;
 break;
 
-case "Motherwell Reservoir Level":
-  trendData(MW_LVL_array,"level", "NMB_MW_RES_LVL", query  )
+case "Motherwell Reservoir North Chamber Level":
+  trendData(MW_NORTH_LVL_array,"level", "NMB_MW_RES_LVL", query  )
+  count++;
+break;
+
+
+case "Motherwell Reservoir South Chamber Level":
+  trendData(MW_SOUTH_LVL_array,"south_level", "NMB_MW_RES_LVL", query  )
   count++;
 break;
 
@@ -921,10 +934,32 @@ trendData(MW_BPS_SuctionPressure_Arr, "suction_pressure","NMBM_MW_PS_Trend",quer
 count++;
 break;
 
-case "Motherwell Suction Pressure":
-trendData(MW_BPS_SuctionPressure_Arr, "suction_pressure","NMBM_MW_PS_Trend",query)
+
+
+case "Motherwell Total Flow":
+  trendData(MW_P_TF_arr,"mw_g_p_tf","NMBM_MW_PS_Trend_TF",query)
 count++;
-break;
+  break;
+
+case "Motherwell Pump 1 Speed":
+  trendData(MW_P1_PUMP_RPM_arr,"mw_p_p1_pump_speed","NMBM_MW_PS_Trend",query)
+count++;
+  break;
+
+case "Motherwell Pump 2 Speed":
+  trendData(MW_P2_PUMP_RPM_arr,"mw_p_p2_pump_speed","NMBM_MW_PS_Trend",query)
+count++;
+  break;
+
+  case "Motherwell Pump 3 Speed":
+    trendData(MW_P3_PUMP_RPM_arr,"mw_p_p3_pump_speed","NMBM_MW_PS_Trend",query)
+  count++;
+    break;
+
+  case "Motherwell Pump 4 Speed":
+    trendData(MW_P4_PUMP_RPM_arr,"mw_p_p4_pump_speed","NMBM_MW_PS_Trend",query)
+  count++;
+    break;
 
 case "Chelsea Pumpstation 1 Actual Speed":
   trendData(CHE_PS_P1_ACTUAL_SPEED_Arr,"che_ps_pumpset_1_vsd_actual_speed","CHELSEA_PS_TREND", query)
@@ -1792,7 +1827,13 @@ JEFF_OFF_TAKE_BAT_arr,
     MW_BPS_FlowRate_Arr,
     MW_BPS_DeliveryPressure_Arr,
     MW_BPS_SuctionPressure_Arr,
-    MW_LVL_array,
+    MW_NORTH_LVL_array,
+    MW_SOUTH_LVL_array,
+    MW_P_TF_arr,
+    MW_P1_PUMP_RPM_arr,
+    MW_P2_PUMP_RPM_arr,
+    MW_P3_PUMP_RPM_arr,
+    MW_P4_PUMP_RPM_arr,
          //Groundwater
     NMBM_NPP_GW_PRESSURE_Arr,
     NMBM_NPP_GW_FLOW_RATE_Arr,

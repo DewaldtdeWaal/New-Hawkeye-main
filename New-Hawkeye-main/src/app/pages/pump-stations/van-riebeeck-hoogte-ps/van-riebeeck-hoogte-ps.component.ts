@@ -162,21 +162,7 @@ faultArr:any=[
   constructor(private ls:ListeningService, private ws: WebSocketService, private us:UsersService, private chat: VanRiebeekHoogteService,private userService: UsersService,private authService: AuthService,public recieve:Common , private pm:pagePostMethod) {
 
 
-    this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").then((result) => {
-      this.data =  result;
 
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-     this.comms = Common.getLastUpdate(this.variable.vrh_ut)
-     var alarm1: any [] = [this.faultVariable.vrh_p1_estop_fault,this.faultVariable.vrh_p1_cb_pump_trip_fault]
-     var alarm2: any [] = [this.faultVariable.vrh_p2_estop_fault,this.faultVariable.vrh_p2_cb_pump_trip_fault]
-     var alarm3: any [] = [this.faultVariable.vrh_p3_estop_fault,this.faultVariable.vrh_p3_cb_pump_trip_fault]
-
-     this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
-     this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
-     this.dataSourceP3= new MatTableDataSource(Common.getAlarmValue(alarm3))
-    });
   }
 
   ngOnInit() {
@@ -195,34 +181,28 @@ faultArr:any=[
       }
     }
 
-    var tagVals:any =[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-    errorVals = this.recieve.recieveNMBMVals(this.faultArr)
-      var updateTemp:any;
-      this.intervalLoop = setInterval(() =>{
-        this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").then((result) => {
-          this.data =  result;
+    this.intervalLoop = this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-          console.log(this.data)
-          Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-         this.comms = Common.getLastUpdate(this.variable.vrh_ut)
-         var alarm1: any [] = [this.faultVariable.vrh_p1_estop_fault,this.faultVariable.vrh_p1_cb_pump_trip_fault]
-         var alarm2: any [] = [this.faultVariable.vrh_p2_estop_fault,this.faultVariable.vrh_p2_cb_pump_trip_fault]
-         var alarm3: any [] = [this.faultVariable.vrh_p3_estop_fault,this.faultVariable.vrh_p3_cb_pump_trip_fault]
+     this.comms = Common.getLastUpdate(this.variable.vrh_ut)
+     var alarm1: any [] = [this.faultVariable.vrh_p1_estop_fault,this.faultVariable.vrh_p1_cb_pump_trip_fault]
+     var alarm2: any [] = [this.faultVariable.vrh_p2_estop_fault,this.faultVariable.vrh_p2_cb_pump_trip_fault]
+     var alarm3: any [] = [this.faultVariable.vrh_p3_estop_fault,this.faultVariable.vrh_p3_cb_pump_trip_fault]
 
-         this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
-         this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
-         this.dataSourceP3= new MatTableDataSource(Common.getAlarmValue(alarm3))
-        });
-   },60000 )
+     this.dataSourceP1= new MatTableDataSource(Common.getAlarmValue(alarm1))
+     this.dataSourceP2= new MatTableDataSource(Common.getAlarmValue(alarm2))
+     this.dataSourceP3= new MatTableDataSource(Common.getAlarmValue(alarm3))
+    });
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

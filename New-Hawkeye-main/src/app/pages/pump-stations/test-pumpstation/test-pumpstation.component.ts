@@ -571,9 +571,9 @@ export class TestPumpstationComponent implements OnInit {
 
   }
   ngOnDestroy(){
-      if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
-      }
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
+    }
     }
 
 

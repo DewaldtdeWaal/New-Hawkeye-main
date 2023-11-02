@@ -111,11 +111,22 @@ export class CoegaIDZTComponent implements OnInit {
     'fpt_cidzt_surge_arrester_fault',//1
 
   ]
-  constructor(private CIDZT:CoegaIDZT ,private ls:ListeningService, private ws: WebSocketService, private us:UsersService,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
+  constructor(public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
     this.isLoading = true;
 
 
-    this.pm.findPageData("nmbm_cidzt_fpt", "FPT_CurrentVals").then((result) => {
+
+
+
+  }
+
+  collectionName:any ="FPT_IDZT_TFs"
+trendTag:any =["motherwell_TF","idz_TF"]
+
+isLoading: boolean = false;
+  ngOnInit(){
+
+    this.intervalLoop = this.pm.findPageData("nmbm_cidzt_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
       console.log(this.data)
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
@@ -130,39 +141,9 @@ export class CoegaIDZTComponent implements OnInit {
    })
 
 
-  }
-
-  collectionName:any ="FPT_IDZT_TFs"
-trendTag:any =["motherwell_TF","idz_TF"]
-
-isLoading: boolean = false;
-  ngOnInit(){
     var trend :any;
 
 
-
-
-    var updateTemp:any;
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_cidzt_fpt", "FPT_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        this.comms = Common.getLastUpdate(this.variable.fpt_cidzt_ut)
-
-         var alarm1: any [] = [this.faultVariable.fpt_cidzt_surge_arrester_fault,this.faultVariable.fpt_cidzt_charger_fault]
-
-         this.generalfaultdatasource= new MatTableDataSource(Common.getAlarmValue(alarm1))
-
-
-
-     })
-
-    },60000)
-
-
-
-    //this.rs.Get_IDZT_Total_Flows().subscribe(data => {
 
       this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
 
@@ -395,9 +376,10 @@ this.options = {
 this.isLoading = false;
       })
 }
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 

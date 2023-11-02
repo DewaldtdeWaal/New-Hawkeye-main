@@ -266,8 +266,8 @@ variable:any = variables;
     oliTagListArr:string[]=[]
     oliTagSelected:boolean[]=[]
 
-    bushyPSTagListArr:string[]=[];
-    bushyPSSelected:boolean[]=[];
+    // bushyPSTagListArr:string[]=[];
+    // bushyPSSelected:boolean[]=[];
 
     bushyFPTTagListArr:string[]=[];
     bushyFPTSelected:boolean[]=[];
@@ -922,12 +922,24 @@ break;
           count++
           this.mwTagListArr[count]="Suction Pressure"
           count++
+          this.mwTagListArr[count]="Total Flow"
+          count++
+          this.mwTagListArr[count]="Pump 1 Speed"
+          count++
+          this.mwTagListArr[count]="Pump 2 Speed"
+          count++
+          this.mwTagListArr[count]="Pump 3 Speed"
+          count++
+          this.mwTagListArr[count]="Pump 4 Speed"
+          count++
                 break;
 
                 case "NMB_MW_R":
                   if (count>=1 ){count = 0}
-                  this.mwrTagListArr[count]="Reservoir Level"
-                  count++
+                  this.mwrTagListArr[count]="North Chamber Level";
+                  count++;
+                  this.mwrTagListArr[count]="South Chamber Level";
+                  count++;
                   break;
 
 
@@ -1123,21 +1135,6 @@ break;
           count++
           break;
 
-          case "NMB_BUSH_PS":
-            if(count>=1){count = 0}
-            this.bushyPSTagListArr[count]="Soccoman Flow Rate"
-            count++
-            this.bushyPSTagListArr[count]="Soccoman Pressure"
-            count++
-            this.bushyPSTagListArr[count]="Soccoman Total Flow"
-            count++
-            this.bushyPSTagListArr[count]="Steel Flow Rate"
-            count++
-            this.bushyPSTagListArr[count]="Steel Pressure"
-            count++
-            this.bushyPSTagListArr[count]="Steel Total Flow"
-            count++
-            break;
 
 
             case "NMB_BUSH_FPT":
@@ -1152,6 +1149,19 @@ break;
               count++;
               this.bushyFPTTagListArr[count]="Holding Tank Level";
               count++;
+
+              this.bushyFPTTagListArr[count]="Soccoman Flow Rate"
+              count++
+              this.bushyFPTTagListArr[count]="Soccoman Pressure"
+              count++
+              this.bushyFPTTagListArr[count]="Soccoman Total Flow"
+              count++
+              this.bushyFPTTagListArr[count]="Steel Flow Rate"
+              count++
+              this.bushyFPTTagListArr[count]="Steel Pressure"
+              count++
+              this.bushyFPTTagListArr[count]="Steel Total Flow"
+              count++
               break;
 
 
@@ -3206,13 +3216,22 @@ yAxisIndex:axisValues.HUM_GW_FIN_WAT_TANK_LVL_axis,
       yAxisIndex:axisValues.MW_BPS_DeliveryPressure_axis,
     },
     {
-      name: "Motherwell Reservoir Level",
+      name: "Motherwell Reservoir North Chamber Level",
       type:'line',
       showSymbol: false,
       hoverAnimation: true,
-      data:this.variable.MW_LVL_array,
+      data:this.variable.MW_NORTH_LVL_array,
       smooth: true,
-      yAxisIndex:axisValues.MW_LVL_axis
+      yAxisIndex:axisValues.MW_NORTH_LVL_axis
+    },
+    {
+      name: "Motherwell Reservoir South Chamber Level",
+      type:'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data:this.variable.MW_SOUTH_LVL_array,
+      smooth: true,
+      yAxisIndex:axisValues.MW_SOUTH_LVL_axis
     },
     {
       name: 'Motherwell Suction Pressure',
@@ -3222,6 +3241,52 @@ yAxisIndex:axisValues.HUM_GW_FIN_WAT_TANK_LVL_axis,
       data:this.variable.MW_BPS_SuctionPressure_Arr,
       smooth: true,
       yAxisIndex:axisValues.MW_BPS_SuctionPressure_axis,
+    },
+
+    {
+      name: "Motherwell Total Flow",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data:this.variable.MW_P_TF_arr,
+      smooth: true,
+      yAxisIndex:axisValues.MW_P_TF_axis
+    },
+    {
+      name: "Motherwell Pump 1 Speed",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data:this.variable.MW_P1_PUMP_RPM_arr  ,
+      smooth: true,
+      yAxisIndex:axisValues.MW_P1_PUMP_RPM_axis
+    },
+    {
+      name: "Motherwell Pump 2 Speed",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data:this.variable.MW_P2_PUMP_RPM_arr  ,
+      smooth: true,
+      yAxisIndex:axisValues.MW_P2_PUMP_RPM_axis
+    },
+    {
+      name: "Motherwell Pump 3 Speed",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data:this.variable.MW_P3_PUMP_RPM_arr  ,
+      smooth: true,
+      yAxisIndex:axisValues.MW_P3_PUMP_RPM_axis
+    },
+    {
+      name: "Motherwell Pump 4 Speed",
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data:this.variable.MW_P4_PUMP_RPM_arr  ,
+      smooth: true,
+      yAxisIndex:axisValues.MW_P4_PUMP_RPM_axis
     },
 {
     //Ground Water
@@ -3574,7 +3639,7 @@ onPresetSelect(resp:any){
   this.gamtoosTagsSelected=[];
   this.grTagsSelected=[];
   this.oliTagSelected=[];
-  this.bushyPSSelected = [];
+  // this.bushyPSSelected = [];
   this.bushyFPTSelected = [];
   this.gbTagsSelected=[];
   this.hbTagsSelected=[];
@@ -3753,30 +3818,30 @@ for (let m = 0; m < this.selectedSites[i].length; m++) {
 
 
 
-    case "Bushy Park Soccoman Flow Rate":
-              this.bushyPSSelected[0] = true;
-              break;
+    // case "Bushy Park Soccoman Flow Rate":
+    //           this.bushyPSSelected[0] = true;
+    //           break;
 
-             case  "Bushy Park Soccoman Pressure":
-               this.bushyPSSelected[1] = true;
-               break;
+    //          case  "Bushy Park Soccoman Pressure":
+    //            this.bushyPSSelected[1] = true;
+    //            break;
 
-             case "Bushy Park Soccoman Total Flow":
-               this.bushyPSSelected[2] = true;
-               break;
+    //          case "Bushy Park Soccoman Total Flow":
+    //            this.bushyPSSelected[2] = true;
+    //            break;
 
-               case "Bushy Park Steel Flow Rate":
-                this.bushyPSSelected[3] = true;
-                break;
+    //            case "Bushy Park Steel Flow Rate":
+    //             this.bushyPSSelected[3] = true;
+    //             break;
 
-            case "Bushy Park Steel Pressure":
-            this.bushyPSSelected[4] = true;
-            break;
+    //         case "Bushy Park Steel Pressure":
+    //         this.bushyPSSelected[4] = true;
+    //         break;
 
 
-            case "Bushy Park Steel Total Flow":
-              this.bushyPSSelected[5] = true;
-              break;
+    //         case "Bushy Park Steel Total Flow":
+    //           this.bushyPSSelected[5] = true;
+    //           break;
 
 
 
@@ -3799,6 +3864,34 @@ for (let m = 0; m < this.selectedSites[i].length; m++) {
             case "Bushy Park Holding Tank Level":
               this.bushyFPTSelected[4] = true;
               break;
+
+
+              case "Bushy Park Soccoman Flow Rate":
+              this.bushyFPTSelected[5] = true;
+              break;
+
+             case  "Bushy Park Soccoman Pressure":
+               this.bushyFPTSelected[6] = true;
+               break;
+
+             case "Bushy Park Soccoman Total Flow":
+               this.bushyFPTSelected[7] = true;
+               break;
+
+               case "Bushy Park Steel Flow Rate":
+                this.bushyFPTSelected[8] = true;
+                break;
+
+            case "Bushy Park Steel Pressure":
+            this.bushyFPTSelected[9] = true;
+            break;
+
+
+            case "Bushy Park Steel Total Flow":
+              this.bushyFPTSelected[10] = true;
+              break;
+
+
 
 case "Olifantskop Reservoir Level":
   this.oliTagSelected[0]=true
@@ -4317,13 +4410,39 @@ this.cgTagsSelected[0]=true
       this.mwTagsSelected[1]=true
     break;
     case "Motherwell Suction Pressure":
-      this.mwTagsSelected[2]=true
+      this.mwTagsSelected[2]=true;
   break;
 
-
-  case "Motherwell Reservoir Level":
-    this.mwrTagsSelected[0] = true;
+  case "Motherwell Total Flow":
+    this.mwTagsSelected[3]=true;
     break;
+
+    case "Motherwell Pump 1 Speed":
+      this.mwTagsSelected[4]=true;
+    break;
+
+    case "Motherwell Pump 2 Speed":
+       this.mwTagsSelected[5]=true;
+    break;
+
+    case "Motherwell Pump 3 Speed":
+       this.mwTagsSelected[6]=true;
+      break;
+
+      case "Motherwell Pump 4 Speed":
+         this.mwTagsSelected[7]=true;
+      break;
+
+
+
+
+    case "Motherwell Reservoir North Chamber Level":
+          this.mwrTagsSelected[0] = true;
+      break;
+
+      case "Motherwell Reservoir South Chamber Level":
+            this.mwrTagsSelected[1] = true;
+      break;
 
 
   // Stanford Road
@@ -4540,7 +4659,6 @@ this.ReadSelectedValues(this.cheTagListArr,this.cheTagsSelected, "Chelsea ")
 this.ReadSelectedValues(this.cgkTagListArr,this.cgkTagsSelected, "Coega Kop ")
 this.ReadSelectedValues(this.grTagListArr,this.grTagsSelected, "Grassridge ")
 this.ReadSelectedValues(this.oliTagListArr,this.oliTagSelected,"Olifantskop ")
-this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
 this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ")
 this.ReadSelectedValues(this.gbTagListArr,this.gbTagsSelected, "Greenbushes ")
 this.ReadSelectedValues(this.hbTagListArr,this.hbTagsSelected, "Heatherbank ")
@@ -4562,7 +4680,7 @@ this.ReadSelectedValues(this.damcampTagListArr,this.damcampTagsSelected, "Damcam
 this.ReadSelectedValues(this.tinroofTagListArr,this.tinroofTagsSelected, "Tin Roof ")
 this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
 this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")
-this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell ")
+this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ")
 this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ")
 this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ")
 this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ")
@@ -6840,18 +6958,92 @@ console.log( this.selectedTags)
                                                     avgValues[m]=arr[2]
                                                   }
                                                   break;
-                                                  case "Motherwell Reservoir Level":
-                                                    if (this.variable.MW_LVL_array.length == 0){
-                                                      break;
-                                                    }
-                                                    else{
-                                                      var arr = this.MinMaxAvg(m,this.variable.MW_LVL_array)
-                                                      minValues[m]= arr[0]
-                                                      maxValues[m]= arr[1]
-                                                      avgValues[m]=arr[2]
-                                                    }
-                                                    break;
 
+
+                                                    case "Motherwell Reservoir North Chamber Level":
+                                                      if (this.variable.MW_NORTH_LVL_array.length == 0){
+                                                        break;
+                                                      }
+                                                      else{
+                                                        var arr = this.MinMaxAvg(m,this.variable.MW_NORTH_LVL_array)
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]= arr[1]
+                                                        avgValues[m]=arr[2]
+                                                      }
+                                                      break;
+
+
+                                                      case "Motherwell Reservoir South Chamber Level":
+                                                        if (this.variable.MW_SOUTH_LVL_array.length == 0){
+                                                          break;
+                                                        }
+                                                        else{
+                                                          var arr = this.MinMaxAvg(m,this.variable.MW_SOUTH_LVL_array)
+                                                          minValues[m]= arr[0]
+                                                          maxValues[m]= arr[1]
+                                                          avgValues[m]=arr[2]
+                                                        }
+                                                        break;
+
+                                                    case "Motherwell Total Flow":
+                                                      if(this.variable.MW_P_TF_arr == 0){
+                                                        break;
+                                                      }
+                                                      else {
+                                                        var arr = this.MinMaxAvg(m, this.variable.MW_P_TF_arr);
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]= arr[1]
+                                                        avgValues[m]=arr[2]
+                                                      }
+                                                      break;
+
+                                                      case "Motherwell Pump 1 Speed":
+                                                          if(this.variable.MW_P1_PUMP_RPM_arr == 0){
+                                                        break;
+                                                      }
+                                                      else {
+                                                        var arr = this.MinMaxAvg(m, this.variable.MW_P1_PUMP_RPM_arr);
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]= arr[1]
+                                                        avgValues[m]=arr[2]
+                                                      }
+                                                        break;
+
+                                                        case "Motherwell Pump 2 Speed":
+                                                            if(this.variable.MW_P2_PUMP_RPM_arr == 0){
+                                                        break;
+                                                      }
+                                                      else {
+                                                        var arr = this.MinMaxAvg(m, this.variable.MW_P2_PUMP_RPM_arr);
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]= arr[1]
+                                                        avgValues[m]=arr[2]
+                                                      }
+                                                      break;
+
+                                                      case "Motherwell Pump 3 Speed":
+                                                          if(this.variable.MW_P3_PUMP_RPM_arr == 0){
+                                                        break;
+                                                      }
+                                                      else {
+                                                        var arr = this.MinMaxAvg(m, this.variable.MW_P3_PUMP_RPM_arr);
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]= arr[1]
+                                                        avgValues[m]=arr[2]
+                                                      }
+                                                        break;
+
+                                                        case "Motherwell Pump 4 Speed":
+                                                            if(this.variable.MW_P4_PUMP_RPM_arr == 0){
+                                                        break;
+                                                      }
+                                                      else {
+                                                        var arr = this.MinMaxAvg(m, this.variable.MW_P4_PUMP_RPM_arr);
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]= arr[1]
+                                                        avgValues[m]=arr[2]
+                                                      }
+                                                      break;
                                             //Ground Water
                                             case "Newton Park Pool Pressure":
                                               if(this.variable.NMBM_NPP_GW_PRESSURE_Arr.length ==0){
@@ -8329,10 +8521,36 @@ RightAxisConfiguration(AxisValue:any){
                               axisValues.MW_BPS_SuctionPressure_axis = 1
                               break;
 
-                            case "Motherwell Reservoir Level":
-                              axisValues.MW_LVL_axis = 1;
-                              break;
 
+
+                              case "Motherwell Reservoir North Chamber Level":
+                                axisValues.MW_NORTH_LVL_axis = 1
+                                break;
+
+
+                                case "Motherwell Reservoir South Chamber Level":
+                                  axisValues.MW_SOUTH_LVL_axis = 1
+                                break;
+
+                              case "Motherwell Pump 1 Speed":
+                                axisValues.MW_P1_PUMP_RPM_axis = 1;
+                                break;
+
+                                case "Motherwell Pump 2 Speed":
+                                  axisValues.MW_P2_PUMP_RPM_axis = 1
+                                break;
+
+                                case "Motherwell Pump 3 Speed":
+                                  axisValues.MW_P3_PUMP_RPM_axis = 1;
+                                break;
+
+                                case "Motherwell Pump 4 Speed":
+                                  axisValues.MW_P4_PUMP_RPM_axis = 1
+                                break;
+
+                                case "Motherwell Total Flow":
+                                  axisValues.MW_P_TF_axis = 1;
+                                break;
                               case "Storms River Quarry Level":
                                 axisValues.STORMS_GORGE_LEVEL_axis = 1
                                 break;

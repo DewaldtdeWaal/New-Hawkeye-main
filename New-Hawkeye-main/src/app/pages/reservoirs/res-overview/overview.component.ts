@@ -1,15 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
-import {ResoverviewV2RoutingComponent} from 'src/app/Service-Files/Reservoir/resoverview2.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {MatTableModule} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Contact } from 'src/app/models/contact';
-import { ServerURLService } from 'src/app/Service-Files/server-url.service';
+
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
 
 export interface PeriodicElement {
@@ -46,152 +43,8 @@ export class OverviewComponent implements OnInit{
   resOverviewInterval: any;
 
 
-  variable = {
-  mw_g_res_level:null,
-  mw_g_ut:null,
-  oli_batteryUnitUpdate:null,
-  drift_r_reservoir_level: null,
-  drift_r_ut: null,
-  nmb_schoe_r_res_level: null,
-  nmb_schoe_r_ut: null,
-  kwano_r_ut: null,
-  kwano_r_reservoir_level: null,
-  bergen_r_ut: null,
-  bergen_r_level: null,
-  bergen_r_poll_ut: null,
-  kroon_r_level: null,
-  kroon_r_ut: null,
-  kroon_r_poll_ut: null,
-  uma_r_poll_ut: null,
-  uma_r_level: null,
-  uma_r_ut: null,
-  wolwas_r_ut: null,
-  wolwas_r_poll_ut: null,
-  wolwas_r_level: null,
-  damp_r_ut:null,
-  damp_r_level:null,
-  hol_r_ut:null,
-  hol_r_level:null,
-  tin_r_ut:null,
-  tin_r_level:null,
-  tin_r_poll_ut: null,
-  hol_r_poll_ut: null,
-  mali_ut:null,
-  mali_lvl:null,
-  emer_lvl:null,
-  emer_ut:null,
-  bh_R_UT: null,
-  cht_oh_rl: null,
-  bh_R_LVL: null,
-  nmb_cgk_r_reservoir_level:null,
-  nmb_cgk_r_ut: null,
-  che_r_lvl_East: null,
-  che_r_ut: null,
-  cht_ut: null,
-  gb_R_LVL: null,
-  gb_R_UT: null,
-  cht_nc_rl: null,
-  cht_sc_rl: null,
-  gr_R_EAST_LVL: null,
-  gr_R_UT: null,
-  gr_R_WEST_LVL: null,
-  hb_R_LVL: null,
-  hb_R_UT: null,
-  lh_R_OVER_LVL: null,
-  lh_UT: null,
-  rd_r_lvl: null,
-  rd_r_ut: null,
-  sm_r_lvl: null,
-  sum_UT: null,
-  tc_R_LVL: null,
-  tc_R_UT: null,
-  vs_R_LVL: null,
-  vs_R_UT: null,
-  vrh_del_rl: null,
-  vrh_sc_rl: null,
-  vrh_ut: null,
-  che_r_lvl: null,
-  oli_lvl: null,
-  oli_ut: null,
+  variable = {  }
 
-  air_prt_R_comms_UT:null,
-  air_prt_R_battery_unit_UT:null,
-  air_prt_R_lvl:null
-  }
-
-  tagArr:any =[
-    "mw_g_res_level",
-    "mw_g_ut",
-    "oli_batteryUnitUpdate",
-    "drift_r_reservoir_level",
-    "drift_r_ut",
-    "nmb_schoe_r_res_level",
-    "nmb_schoe_r_ut",
-    "kwano_r_ut",
-    "kwano_r_reservoir_level",
-    "bergen_r_ut",
-    "bergen_r_level",
-    "bergen_r_poll_ut",
-    "kroon_r_level",
-    "kroon_r_ut",
-    "kroon_r_poll_ut",
-    "uma_r_poll_ut",
-    "uma_r_level",
-    "uma_r_ut",
-    "wolwas_r_ut",
-    "wolwas_r_poll_ut",
-    "wolwas_r_level",
-    "damp_r_ut",
-    "damp_r_level",
-    "hol_r_ut",
-    "hol_r_level",
-    "tin_r_ut",
-    "tin_r_level",
-    "tin_r_poll_ut",
-    "hol_r_poll_ut",
-    "mali_ut",
-    "mali_lvl",
-    "emer_lvl",
-    "emer_ut",
-    "bh_R_UT",
-    "cht_oh_rl",
-    "bh_R_LVL",
-    "nmb_cgk_r_reservoir_level",
-    "nmb_cgk_r_ut",
-    "che_r_lvl_East",
-    "che_r_ut",
-    "cht_ut",
-    "gb_R_LVL",
-    "gb_R_UT",
-    "cht_nc_rl",
-    "cht_sc_rl",
-    "gr_R_EAST_LVL",
-    "gr_R_UT",
-    "gr_R_WEST_LVL",
-    "hb_R_LVL",
-    "hb_R_UT",
-    "lh_R_OVER_LVL",
-    "lh_UT",
-    "rd_r_lvl",
-    "rd_r_ut",
-    "sm_r_lvl",
-    "sum_UT",
-    "tc_R_LVL",
-    "tc_R_UT",
-    "vs_R_LVL",
-    "vs_R_UT",
-    "vrh_del_rl",
-    "vrh_sc_rl",
-    "vrh_ut",
-    "che_r_lvl",
-    "oli_lvl",
-    "oli_ut",
-
-    "air_prt_R_comms_UT",
-"air_prt_R_battery_unit_UT",
-"air_prt_R_lvl"
-
-  ]
 
   emer_comms:any;
   rd_comms: any;
@@ -224,8 +77,8 @@ export class OverviewComponent implements OnInit{
 
   air_prt_comms:string;
 
-
-  constructor(private webSocketService: WebSocketService,private route:ResoverviewV2RoutingComponent, private ws:WebSocketService,private authService: AuthService, private router: Router ,public recieve:Common )
+  intervalLoop: any
+  constructor(private authService: AuthService, private router: Router ,public recieve:Common,private pm:pagePostMethod )
   {
 
     this.userSites = this.authService.getUserSites();
@@ -234,31 +87,7 @@ export class OverviewComponent implements OnInit{
       this.userSites = this.authService.getUserSites();
     })
 
-
-
-
-
-
-  this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-
-
-  this.getRouteInformation(this.variable).then((response) => {
-    this.responseData = response
-
-
-    this.renderPage(this.responseData)
-  })
-
-
-
-
-
-
-
-
-
-
-
+  // this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   }
 
 
@@ -269,140 +98,27 @@ export class OverviewComponent implements OnInit{
 
 
 
-  recieveVals(tagArr: any[]){
-    var tagVals:any = []
-    for(let i = 0; i<tagArr.length ;i++){
-      this.ws.listen(tagArr[i]).subscribe((data:any)=>{
-        tagVals[i] = data[tagArr[i]];
-
-      })
-    }
-    return tagVals
-  }
-
-
-  recieveVals_nmbm(tagArr: any[]){
-    var tagVals:any = []
-    for(let i = 0; i<tagArr.length ;i++){
-      this.webSocketService.nmbm_listen(tagArr[i]).subscribe((data:any)=>{
-        tagVals[i] = data[tagArr[i]];
-
-      })
-    }
-    return tagVals
-  }
-
-
 
   ngOnInit() {
+    this.intervalLoop = this.pm.findPageData("res_overview", "Res_CurrentVals").subscribe((result) => {
+
+      this.variable = result
 
 
-    var tagVals:any=[]
-    var tagValsNMBM:any=[]
-    var tagArr =[
-      "bh_ut",//0
-      "bh_rl",//1
-      "cht_ut",//2
-      "cht_nc_rl",//3
-      "cht_sc_rl",//4
-      "cht_oh_rl",//5
-      "nmb_cgk_r_reservoir_level",//6
-      "nmb_cgk_r_ut",//7
-      "che_r_lvl",//8
-      "che_r_lvl_East",//9
-      "che_r_ut",//10
-      "gb_rl",//11
-      "gb_ut",//12
-      "gr_east_rl",//13
-      "gr_ut",//14
-      "gr_west_rl",//15
-      "hb_rl",//16
-      "hb_ut",//17
-      "lh_R_OVER_LVL",//18
-      "lh_UT",//19
-      "oli_ut",//20
-      "oli_lvl",//21
-      "sm_r_lvl",//22
-      "sum_UT",//23
-      "tc_rl",//24
-      "tc_ut",//25
-      "vrh_del_rl",//26
-      "vrh_sc_rl",//27
-      "vrh_ut",//28
-      "vs_rl",//29
-      "vs_ut",//30
-      "rd_r_lvl",//31
-      "rd_r_ut",//32
-      "emer_lvl",//33
-      "emer_ut",//34
-      "batteryUnitUpdate",//35
-      "drift_r_ut",//36
-      "drift_r_reservoir_level",//37
-      "nmb_schoe_r_ut",//38
-      "nmb_schoe_r_res_level",//39
-      "kwano_r_ut",//40
-      "kwano_r_reservoir_level",//41
-      "bergen_r_ut",//42
-      "bergen_r_level",//43
-      "bergen_r_poll_ut",//44
-      "kroon_r_ut",//45
-      "kroon_r_level",//46
-      "kroon_r_poll_ut",//47
-      "uma_r_ut",//48
-      "uma_r_level",//49
-      "uma_r_poll_ut",//50
-      "wolwas_r_ut",//51
-      "wolwas_r_level",//52
-      "wolwas_r_poll_ut",//53
-      "damp_r_ut",//54
-      "damp_r_level",//55
-      "hol_r_ut",//56
-      "hol_r_level",//57
-      "hol_r_poll_ut",//58
-      "tin_r_ut",//59
-      "tin_r_level",//60
-      "tin_r_poll_ut",//61
-      "mw_g_res_level",//62
-      "mw_g_ut",//63
-      "mali_ut",//64
-      "mali_lvl",//65
-
-      "air_prt_R_comms_UT",
-      "air_prt_R_battery_unit_UT",
-      "air_prt_R_lvl"
-
-
-    ]
-
-    tagVals = this.recieveVals(tagArr)
-    tagValsNMBM = this.recieveVals_nmbm(tagArr)
-
-
-
-
-    this.resOverviewInterval = setInterval(() =>{
-
-
-      this.getRouteInformation(this.variable).then((response) => {
-        this.responseData = response
-
-
-        this.renderPage(this.responseData)
-      })
-
-    },60000)
+      this.renderPage(this.variable)
+    });
 
 
 
     }
 
 
-    ngOnDestroy(){
-      if(this.resOverviewInterval){
-        clearInterval(this.resOverviewInterval)
+    ngOnDestroy():void{
+      if(this.intervalLoop){
+        this.intervalLoop.unsubscribe();
+
       }
     }
-
     navigateToSite(element:any){
       let route = element;
       this.router.navigate([route]);
@@ -490,33 +206,10 @@ while (lastUpdate != undefined) {
 
   }
 
-  async getRouteInformation(variable:any): Promise<any> {
 
-
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await this.route.GetSiteValues();
-
-        this.data = response;
-
-        variable = await this.recieve.recieveRouteData(this.tagArr,variable, this.data.routingArray);
-
-        console.log(variable)
-        resolve(variable);
-      } catch (error) {
-
-        console.error(error);
-        reject(error);
-      }
-    });
-  };
 
 
   async renderPage(variable:any){
-
-    console.log(variable);
-
-
       var count=0;
       for (var i = 0; i < this.userSites.length; i++){
         switch (this.userSites[i]) {
@@ -763,10 +456,5 @@ while (lastUpdate != undefined) {
                   break;
         }
         }
-
-
   };
-
-
-
 }

@@ -87,7 +87,6 @@ export const siteMap = {
   "V2_PICKER_TRENDS":"all_V2_PICKER_TRENDS_CHECKED",
   "CSV_DOWNLOAD":"all_CSV_DOWNLOAD_CHECKED",
   "NMB_BUSH_FPT":"nmb_BUSH_FPT_CHECKED",
-  "NMB_BUSH_PS":"NMB_BUSH_PS_CHECKED",
   "ADMIN_NMBM":"admin_NMBM_CHECKED",
   "USER_NMBM":"user_NMBM_CHECKED",
   "NMB_STG_R":"nmb_STG_R_CHECKED",
@@ -200,7 +199,6 @@ nmb_MNTS_ZS_CHECKED:false,
   rw_CG_TRENDS_CHECKED:false,
   nmb_FMT_FPT_TRENDS_CHECKED:false,
   nmb_BUSH_FPT_CHECKED:false,
-NMB_BUSH_PS_CHECKED:false,
 admin_NMBM_CHECKED:false,
 user_NMBM_CHECKED:false,
 nmb_STG_R_CHECKED:false,
@@ -584,9 +582,7 @@ export class addUser  {
       userSites.push("NMB_BUSH_FPT")
     }
 
-    if(form.value.NMB_BUSH_PS){
-      userSites.push("NMB_BUSH_PS")
-    }
+
 
     if(form.value.ADMIN_NMBM){
       userSites.push("ADMIN_NMBM")

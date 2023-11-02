@@ -110,19 +110,7 @@ faultArr:any=[
 
   constructor(private pt: PostTrend,public rs: ReportService, public recieve:Common,private pm:pagePostMethod ) {
     this.isLoading = true;
-    this.pm.findPageData("nmbm_fmt_fm", "FPT_CurrentVals").then((result) => {
-      this.data =  result;
-      console.log(this.data)
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-      this.comms = Common.getLastUpdate(this.variable.fmt_FM_UT)
-      var alarm1: any [] = [this.faultVariable.fmt_FM_CHAMBER_TAMP,this.faultVariable.fmt_FM_SOLAR_PANEL_TAMP,this.faultVariable.fmt_FM_DOOR_OPENED]
 
-      this.dataSourceALM= new MatTableDataSource(Common.getAlarmValue(alarm1))
-
-
-
-
-   })
 
 
 
@@ -159,20 +147,17 @@ trendTag:any = ["totalflow"]
 collectionName:any ="FM_FMT_TF"
 
   ngOnInit() {
-    this.intervalLoop = setInterval(() =>{
 
-      this.pm.findPageData("nmbm_fmt_fm", "FPT_CurrentVals").then((result) => {
-        this.data =  result;
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        this.comms = Common.getLastUpdate(this.variable.fmt_FM_UT)
-        var alarm1: any [] = [this.faultVariable.fmt_FM_CHAMBER_TAMP,this.faultVariable.fmt_FM_SOLAR_PANEL_TAMP,this.faultVariable.fmt_FM_DOOR_OPENED]
+    this.intervalLoop = this.pm.findPageData("nmbm_fmt_fm", "FPT_CurrentVals").subscribe((result) => {
+      this.data =  result;
+      console.log(this.data)
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.comms = Common.getLastUpdate(this.variable.fmt_FM_UT)
+      var alarm1: any [] = [this.faultVariable.fmt_FM_CHAMBER_TAMP,this.faultVariable.fmt_FM_SOLAR_PANEL_TAMP,this.faultVariable.fmt_FM_DOOR_OPENED]
 
-        this.dataSourceALM= new MatTableDataSource(Common.getAlarmValue(alarm1))
+      this.dataSourceALM= new MatTableDataSource(Common.getAlarmValue(alarm1))
 
-     })
-
-    },60000)
+   })
 
 
 
@@ -194,9 +179,10 @@ collectionName:any ="FM_FMT_TF"
           })
 
 }
-ngOnDestroy(){
+ngOnDestroy():void{
   if(this.intervalLoop){
-    clearInterval(this.intervalLoop)
+    this.intervalLoop.unsubscribe();
+
   }
 }
 }

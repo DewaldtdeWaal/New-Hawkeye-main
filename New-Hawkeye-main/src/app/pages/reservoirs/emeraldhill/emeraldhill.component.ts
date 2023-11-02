@@ -81,7 +81,7 @@ DateArr: any[]=[];
     this.isLoading = true;
 
 
-    this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -115,22 +115,22 @@ DateArr: any[]=[];
           })
 
 
-    this.intervalLoop = setInterval(() =>{
-      this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").then((result) => {
-        this.data =  result;
+    // this.intervalLoop = setInterval(() =>{
+    //   this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").subscribe((result) => {
+    //     this.data =  result;
 
-        console.log(this.data)
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+    //     console.log(this.data)
+    //     Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-       this.comms = Common.getLastUpdate(this.variable.emer_ut)
-         var alarm: any [] =[this.faultVariable.bateryLow, this.faultVariable.chargerOk]
+    //    this.comms = Common.getLastUpdate(this.variable.emer_ut)
+    //      var alarm: any [] =[this.faultVariable.bateryLow, this.faultVariable.chargerOk]
 
-        this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
+    //     this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
 
-      });
+    //   });
 
 
-    },60000);
+    // },60000);
     var trend :any;
 
 
@@ -170,9 +170,10 @@ DateArr: any[]=[];
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

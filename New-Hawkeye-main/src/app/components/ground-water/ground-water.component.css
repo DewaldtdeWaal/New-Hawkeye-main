@@ -1,0 +1,48 @@
+.ground-form {
+  padding-top: 10px;
+  flex-wrap: wrap;
+  color:  var(--form-text-color);
+  background-color: var(--page-background-color);
+}
+.grid-container-ground{
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 17% 83%;
+  grid-auto-rows: 100%;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+}
+
+.grid-container-pump{
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 22% 78%;
+  grid-auto-rows: 100%;
+  column-gap: 0px;
+  font-size: 12px;
+  justify-content: center;
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+}
+
+.grid-image{
+  display: grid;
+  grid-column: 1;
+  grid-row:1;
+justify-items: center;
+  align-items: center;
+
+}
+
+.grid-text{
+  display: grid;
+  grid-column: 2;
+  overflow: none;
+
+}

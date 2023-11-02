@@ -30,15 +30,6 @@ export class HoldingComponent implements OnInit {
   ]
   constructor(public recieve:Common ,private pm:pagePostMethod) {
 
-      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-       this.variable.comms = Common.getLastUpdateBattery(this.variable.hol_r_ut, this.variable.hol_r_poll_ut)
-      });
 
 
    }
@@ -47,25 +38,22 @@ export class HoldingComponent implements OnInit {
 
    ngOnInit() {
 
+    this.intervalLoop = this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-    this.intervalLoop = setInterval(() =>{
-
-      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-       this.variable.comms = Common.getLastUpdateBattery(this.variable.hol_r_ut, this.variable.hol_r_poll_ut)
-      });
+     this.variable.comms = Common.getLastUpdateBattery(this.variable.hol_r_ut, this.variable.hol_r_poll_ut)
+    });
 
-  },60000)
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

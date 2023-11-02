@@ -388,23 +388,7 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
 
 
 
-      this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
-        this.data =  result;
 
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
-         var alarmG: any [] = [this.faultVariable.che_ps_flood_alarm,this.faultVariable.che_ps_pumpset_g_control_voltage_loss]
-         var alarm1: any [] = [this.faultVariable.che_ps_pumpset_1_no_flow_fault,this.faultVariable.che_ps_pumpset_1_ESTOP,this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_1_drive_fault ,this.faultVariable.che_ps_pumpset_1_pres_fault,this.faultVariable.che_ps_pumpset_1_temp_fault,this.faultVariable.che_ps_pumpset_1_vib_fault]
-         var alarm2: any [] = [this.faultVariable.che_ps_pumpset_2_no_flow_fault,this.faultVariable.che_ps_pumpset_2_ESTOP,this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_2_drive_fault ,this.faultVariable.che_ps_pumpset_2_pres_fault,this.faultVariable.che_ps_pumpset_2_temp_fault,this.faultVariable.che_ps_pumpset_2_vib_fault]
-         var alarm3: any [] = [this.faultVariable.che_ps_pumpset_3_no_flow_fault,this.faultVariable.che_ps_pumpset_3_ESTOP,this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_3_drive_fault ,this.faultVariable.che_ps_pumpset_3_pres_fault,this.faultVariable.che_ps_pumpset_3_temp_fault,this.faultVariable.che_ps_pumpset_3_vib_fault]
-         var alarm4: any [] = [this.faultVariable.che_ps_pumpset_4_no_flow_fault,this.faultVariable.che_ps_pumpset_4_ESTOP,this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_4_drive_fault ,this.faultVariable.che_ps_pumpset_4_pres_fault,this.faultVariable.che_ps_pumpset_4_temp_fault,this.faultVariable.che_ps_pumpset_4_vib_fault]
-
-         this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
-         this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-         this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-         this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-         this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-      });
 
      }
 
@@ -430,33 +414,23 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
 
 
 
-    var tagVals:any =[]
-    var errorVals:any=[]
-    tagVals = this.recieve.recieveNMBMVals(this.tagArr);
-    errorVals = this.recieve.recieveNMBMVals(this.faultArr)
+    this.intervalLoop = this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-    this.intervalLoop = setInterval(() =>{
+      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
+      this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
+       var alarmG: any [] = [this.faultVariable.che_ps_flood_alarm,this.faultVariable.che_ps_pumpset_g_control_voltage_loss]
+       var alarm1: any [] = [this.faultVariable.che_ps_pumpset_1_no_flow_fault,this.faultVariable.che_ps_pumpset_1_ESTOP,this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_1_drive_fault ,this.faultVariable.che_ps_pumpset_1_pres_fault,this.faultVariable.che_ps_pumpset_1_temp_fault,this.faultVariable.che_ps_pumpset_1_vib_fault]
+       var alarm2: any [] = [this.faultVariable.che_ps_pumpset_2_no_flow_fault,this.faultVariable.che_ps_pumpset_2_ESTOP,this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_2_drive_fault ,this.faultVariable.che_ps_pumpset_2_pres_fault,this.faultVariable.che_ps_pumpset_2_temp_fault,this.faultVariable.che_ps_pumpset_2_vib_fault]
+       var alarm3: any [] = [this.faultVariable.che_ps_pumpset_3_no_flow_fault,this.faultVariable.che_ps_pumpset_3_ESTOP,this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_3_drive_fault ,this.faultVariable.che_ps_pumpset_3_pres_fault,this.faultVariable.che_ps_pumpset_3_temp_fault,this.faultVariable.che_ps_pumpset_3_vib_fault]
+       var alarm4: any [] = [this.faultVariable.che_ps_pumpset_4_no_flow_fault,this.faultVariable.che_ps_pumpset_4_ESTOP,this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_4_drive_fault ,this.faultVariable.che_ps_pumpset_4_pres_fault,this.faultVariable.che_ps_pumpset_4_temp_fault,this.faultVariable.che_ps_pumpset_4_vib_fault]
 
-
-      this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-        this.variable.comms = Common.getLastUpdate(this.variable.che_ps_ut)
-         var alarmG: any [] = [this.faultVariable.che_ps_flood_alarm,this.faultVariable.che_ps_pumpset_g_control_voltage_loss]
-         var alarm1: any [] = [this.faultVariable.che_ps_pumpset_1_no_flow_fault,this.faultVariable.che_ps_pumpset_1_ESTOP,this.faultVariable.che_ps_pumpset_1_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_1_drive_fault ,this.faultVariable.che_ps_pumpset_1_pres_fault,this.faultVariable.che_ps_pumpset_1_temp_fault,this.faultVariable.che_ps_pumpset_1_vib_fault]
-         var alarm2: any [] = [this.faultVariable.che_ps_pumpset_2_no_flow_fault,this.faultVariable.che_ps_pumpset_2_ESTOP,this.faultVariable.che_ps_pumpset_2_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_2_drive_fault ,this.faultVariable.che_ps_pumpset_2_pres_fault,this.faultVariable.che_ps_pumpset_2_temp_fault,this.faultVariable.che_ps_pumpset_2_vib_fault]
-         var alarm3: any [] = [this.faultVariable.che_ps_pumpset_3_no_flow_fault,this.faultVariable.che_ps_pumpset_3_ESTOP,this.faultVariable.che_ps_pumpset_3_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_3_drive_fault ,this.faultVariable.che_ps_pumpset_3_pres_fault,this.faultVariable.che_ps_pumpset_3_temp_fault,this.faultVariable.che_ps_pumpset_3_vib_fault]
-         var alarm4: any [] = [this.faultVariable.che_ps_pumpset_4_no_flow_fault,this.faultVariable.che_ps_pumpset_4_ESTOP,this.faultVariable.che_ps_pumpset_4_circuit_breaker_trip,this.faultVariable.che_ps_pumpset_4_drive_fault ,this.faultVariable.che_ps_pumpset_4_pres_fault,this.faultVariable.che_ps_pumpset_4_temp_fault,this.faultVariable.che_ps_pumpset_4_vib_fault]
-
-         this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
-         this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-         this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-         this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-         this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-      });
-
-    }, 60000)
+       this.dataSourceG = new MatTableDataSource(Common.getAlarmValue(alarmG))
+       this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+       this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+       this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+       this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
+    });
 
     var trend: any = {};
 
@@ -788,116 +762,14 @@ this.isLoading = false;
 
 
 
-NewDateFilter(){
-
-  var start = this.range.value.start+'';
-  var end = this.range.value.end+'';
-
- var startARR = start.toString().split(" ")
- var endARR = end.toString().split(" ")
 
 
- switch (startARR[1]) {
-  case "Jan":
-    startARR[1] = "1"
-      break;
-      case "Feb":
-        startARR[1] = "2"
-          break;
-          case "Mar":
-            startARR[1] = "3"
-              break;
-              case "Apr":
-                startARR[1] = "4"
-                  break;
-                  case "May":
-                    startARR[1] = "5"
-                      break;
-                      case "Jun":
-                        startARR[1] = "6"
-                          break;
-                          case "Jul":
-                            startARR[1] = "7"
-                              break;
-                              case "Aug":
-                                startARR[1] = "8"
-                                  break;
-                                  case "Sep":
-                                    startARR[1] = "9"
-                                      break;
-                                      case "Oct":
-                                        startARR[1] = "10"
-                                          break;
-                                          case "Nov":
-                                            startARR[1] = "11"
-                                              break;
-                                              case "Dec":
-                                                startARR[1] = "12"
-                                                  break;
-                                                }
-switch (endARR[1]) {
-  case "Jan":
-    endARR[1] = "1"
-      break;
-      case "Feb":
-        endARR[1] = "2"
-          break;
-          case "Mar":
-            endARR[1] = "3"
-              break;
-              case "Apr":
-                endARR[1] = "4"
-                  break;
-                  case "May":
-                    endARR[1] = "5"
-                      break;
-                      case "Jun":
-                        endARR[1] = "6"
-                          break;
-                          case "Jul":
-                            endARR[1] = "7"
-                              break;
-                              case "Aug":
-                                endARR[1] = "8"
-                                  break;
-                                  case "Sep":
-                                    endARR[1] = "9"
-                                      break;
-                                      case "Oct":
-                                        endARR[1] = "10"
-                                          break;
-                                          case "Nov":
-                                            endARR[1] = "11"
-                                              break;
-                                              case "Dec":
-                                                endARR[1] = "12"
-                                                  break;
-                                                }
+ngOnDestroy():void{
+  if(this.intervalLoop){
+    this.intervalLoop.unsubscribe();
 
-if (startARR[1].length==1){
-startARR[1] = "0" + startARR[1]
+  }
 }
-
-if (endARR[1].length==1){
-endARR[1] = "0" + endARR[1]
-}
-
-
-var newStart = startARR[3] +"-"+startARR[1]+"-"+startARR[2]
-var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
-
-var trend :any;
-
-//this.pt.getPostTrend4()
-
-}
-
-  ngOnDestroy(){
-      if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
-      }
-    }
-
 
 
 

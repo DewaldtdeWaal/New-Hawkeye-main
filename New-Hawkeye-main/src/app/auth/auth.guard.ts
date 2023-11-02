@@ -338,9 +338,6 @@ export class AuthGuard implements CanActivate {
                 url = "NMB_MW_PS"
                 break;
 
-                case "/pumpstations/bushypark-wtw":
-                  url="NMB_BUSH_PS"
-                  break;
 
 
               case "/pumpstations/stormsriver":

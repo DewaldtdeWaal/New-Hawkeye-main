@@ -40,15 +40,6 @@ export class KareedouwkresComponent implements OnInit {
 
 
 
-    this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
-      this.data =  result;
-
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-     this.variable.comms = Common.getLastUpdateBattery(this.variable.kark_R_comms_UT, this.variable.kark_R_battery_unit_UT)
-    });
    }
 
   ngOnInit() {
@@ -81,8 +72,7 @@ export class KareedouwkresComponent implements OnInit {
 
 
 
-   this.intervalLoop = setInterval(() => {
-    this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
       console.log(this.data)
@@ -92,10 +82,12 @@ export class KareedouwkresComponent implements OnInit {
      this.variable.comms = Common.getLastUpdateBattery(this.variable.kark_R_comms_UT, this.variable.kark_R_battery_unit_UT)
     });
 
-    }, 60000);
-
-
 
   }
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
 
+    }
+  }
 }

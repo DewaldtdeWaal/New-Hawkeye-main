@@ -218,12 +218,7 @@ variable :any= {
     this.Event0();
 
 
-    this.pm.findPageData("wes1_fl", "FL_CurrentVals").then((result) => {
-      this.data =  result;
 
-    Common.getRouteDatas(this.tagArr,this.variable,this.data)
-    this.comms = Common.getLastUpdate(this.variable.wes1_fl_ut)
-    })
   }
 
 
@@ -807,96 +802,24 @@ variable :any= {
 
 
   ngOnInit(){
-    this.Event0();
 
-    var tagVals:any =[]
-    var tagArr=[
-      "wes1_fl_ut",//0
-      "wes1_fl_p1_feed_A",//1
-      "wes1_fl_p1_feed_B",//2
-      "wes1_fl_p1_feed_C",//3
-      "wes1_fl_p2_feed_A",//4
-      "wes1_fl_p2_feed_B",//5
-      "wes1_fl_p2_feed_C",//6
-      "wes1_fl_p3_feed_A",//7
-      "wes1_fl_p3_feed_B",//8
-      "wes1_fl_p3_feed_C",//9
-      "wes1_fl_p4_feed_A",//10
-      "wes1_fl_p4_feed_B",//11
-      "wes1_fl_p4_feed_C",//12
-      "wes1_fl_p5_feed_A",//13
-      "wes1_fl_p5_feed_B",//14
-      "wes1_fl_p5_feed_C",//15
-      "wes1_fl_p6_feed_A",//16
-      "wes1_fl_p6_feed_B",//17
-      "wes1_fl_p6_feed_C",//18
-      "wes1_fl_p7_feed_A",//19
-      "wes1_fl_p7_feed_B",//20
-      "wes1_fl_p7_feed_C",//21
-      "wes1_fl_p8_feed_A",//22
-      "wes1_fl_p8_feed_B",//23
-      "wes1_fl_p8_feed_C",//24
-      "wes1_fl_p9_feed_A",//25
-      "wes1_fl_p9_feed_B",//26
-      "wes1_fl_p9_feed_C",//27
-      "wes1_fl_p10_feed_A",//28
-      "wes1_fl_p10_feed_B",//29
-      "wes1_fl_p10_feed_C",//30
-      "wes1_fl_p11_feed_A",//31
-      "wes1_fl_p11_feed_B",//32
-      "wes1_fl_p11_feed_C",//33
-      "wes1_fl_p12_feed_A",//34
-      "wes1_fl_p12_feed_B",//35
-      "wes1_fl_p12_feed_C",//36
-      "wes1_f1_feed_A_total",//37
-      "wes1_f1_feed_B_total",//38
-      "wes1_f1_feed_C_total",//39
-      "wes2_fl_p1_lambs",//40
-      "wes2_fl_p2_lambs",//41
-      "wes2_fl_p3_lambs",//42
-      "wes2_fl_p4_lambs",//43
-      "wes2_fl_p5_lambs",//44
-      "wes2_fl_p6_lambs",//45
-      "wes2_fl_p7_lambs",//46
-      "wes2_fl_p8_lambs",//47
-      "wes2_fl_p9_lambs",//48
-      "wes2_fl_p10_lambs",//49
-      "wes2_fl_p11_lambs",//50
-      "wes2_fl_p12_lambs",//51
-      "wes_fl_saft",//52
-      "wes_fl_sbft",//53
-      "wes_fl_scft",//54
-      "wes2_fl_pen1_feed_type",//55
-      "wes2_fl_pen2_feed_type",//56
-      "wes2_fl_pen3_feed_type",//57
-      "wes2_fl_pen4_feed_type",//58
-      "wes2_fl_pen5_feed_type",//59
-      "wes2_fl_pen6_feed_type",//60
-      "wes2_fl_pen7_feed_type",//61
-      "wes2_fl_pen8_feed_type",//62
-      "wes2_fl_pen9_feed_type",//63
-      "wes2_fl_pen10_feed_type",//64
-      "wes2_fl_pen11_feed_type",//65
-      "wes2_fl_pen12_feed_type",//66
-      "wes2_fl_sa_silo_levels",//67
-      "wes2_fl_sb_silo_levels",//68
-      "wes2_fl_sc_silo_levels",//69
-    ]
-    tagVals = this.recieve.recieveNonMVals(tagArr);
-    var updateTemp:any;
-   this.intervalLoop = setInterval(() =>{
-
-    this.pm.findPageData("wes1_fl", "FL_CurrentVals").then((result) => {
+    this.intervalLoop = this.pm.findPageData("wes1_fl", "FL_CurrentVals").subscribe((result) => {
       this.data =  result;
 
     Common.getRouteDatas(this.tagArr,this.variable,this.data)
     this.comms = Common.getLastUpdate(this.variable.wes1_fl_ut)
     })
- },60000)
+
+
+    this.Event0();
+
+
   }
-  ngOnDestroy(){
-      if(this.intervalLoop){
-        clearInterval(this.intervalLoop)
-      }
+  ngOnDestroy():void{
+    if(this.intervalLoop){
+      this.intervalLoop.unsubscribe();
+
     }
+  }
+
 }

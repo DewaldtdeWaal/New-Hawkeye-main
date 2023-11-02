@@ -28,15 +28,6 @@ export class UmasizakheComponent implements OnInit {
 
 
 
-      this.pm.findPageData("graaf", "R_CurrentVals").then((result) => {
-        this.data =  result;
-
-        console.log(this.data)
-       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-      this.variable.comms = Common.getLastUpdateBattery(this.variable.tin_r_ut, this.variable.tin_r_poll_ut)
-      });
 
 
 
@@ -46,24 +37,22 @@ export class UmasizakheComponent implements OnInit {
 
   ngOnInit() {
 
-    var tagVals:any =[]
+    this.intervalLoop = this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
+      this.data =  result;
 
-    tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-
-    this.intervalLoop = setInterval(() =>{
-
+      console.log(this.data)
+     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
-      this.variable = this.recieve.NMBMAPI(tagVals, this.tagArr, this.variable);
     this.variable.comms = Common.getLastUpdateBattery(this.variable.uma_r_ut, this.variable.uma_r_poll_ut)
+    });
 
-  },60000)
 
   }
-  ngOnDestroy(){
+  ngOnDestroy():void{
     if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
+      this.intervalLoop.unsubscribe();
+
     }
   }
 

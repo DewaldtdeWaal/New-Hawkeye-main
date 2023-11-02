@@ -175,86 +175,87 @@ export class SchoemanshoekComponent implements OnInit {
   ngOnInit() {
 
 
-    var tagVals:any=[]
-    var tagArr =[
-      'nmb_schoe_r_ut',
-      'nmb_schoe_r_voltage_monitor',
-      'nmb_schoe_r_actuator_valve_feedback_signal_error',
-      'nmb_schoe_r_actuator_valve_command_signal_error',
-      'nmb_schoe_r_reservoir_level_signal_error',
-      'nmb_schoe_r_actuator_mode',
-      'nmb_schoe_r_actuator_valve_fault',
-      'nmb_schoe_r_actuator_valve_status',
-      'nmb_schoe_r_actuator_valve_torque_fail_close',
-      'nmb_schoe_r_actuator_valve_torque_fail_open',
-      'nbm_schoe_r_plc_mode',
-      'nmb_schoe_r_general_fault',
-      'nmb_schoe_r_actuator_general_fault',
-      'nmb_schoe_r_actuator_valve_timeout',
-      'nmb_schoe_r_res_level',
-      'nmb_schoe_r_pressure',
-'nmb_schoe_r_actuator_set_point',
-'nmb_schoe_r_actuator_position'
+//     var tagVals:any=[]
+//     var tagArr =[
+//       'nmb_schoe_r_ut',
+//       'nmb_schoe_r_voltage_monitor',
+//       'nmb_schoe_r_actuator_valve_feedback_signal_error',
+//       'nmb_schoe_r_actuator_valve_command_signal_error',
+//       'nmb_schoe_r_reservoir_level_signal_error',
+//       'nmb_schoe_r_actuator_mode',
+//       'nmb_schoe_r_actuator_valve_fault',
+//       'nmb_schoe_r_actuator_valve_status',
+//       'nmb_schoe_r_actuator_valve_torque_fail_close',
+//       'nmb_schoe_r_actuator_valve_torque_fail_open',
+//       'nbm_schoe_r_plc_mode',
+//       'nmb_schoe_r_general_fault',
+//       'nmb_schoe_r_actuator_general_fault',
+//       'nmb_schoe_r_actuator_valve_timeout',
+//       'nmb_schoe_r_res_level',
+//       'nmb_schoe_r_pressure',
+// 'nmb_schoe_r_actuator_set_point',
+// 'nmb_schoe_r_actuator_position'
 
 
-    ]
-    tagVals = this.recieve.recieveNonMVals(tagArr);
+//     ]
+//     tagVals = this.recieve.recieveNonMVals(tagArr);
 
 
-    var updateTemp:any;
-    this.intervalLoop = setInterval(() =>{
-      updateTemp = tagVals[0];
-      if(updateTemp !== undefined){
+//     var updateTemp:any;
+//     this.intervalLoop = setInterval(() =>{
+//       updateTemp = tagVals[0];
+//       if(updateTemp !== undefined){
 
-      this.nmb_schoe_r_ut = tagVals[0];
+//       this.nmb_schoe_r_ut = tagVals[0];
 
-      this.nmb_schoe_r_voltage_monitor = tagVals[1];
-      this.nmb_schoe_r_actuator_mode = tagVals[5];
-      this.nmb_schoe_r_actuator_valve_status = tagVals[7];
-      this.nbm_schoe_r_plc_mode = tagVals[10];
-
-
-
-      this.nmb_schoe_r_res_level = tagVals[14];
-      this.nmb_schoe_r_pressure = tagVals[15]
-      this.nmb_schoe_r_actuator_set_point = tagVals[16]
-      this.nmb_schoe_r_actuator_position = tagVals[17]
-
-
-      this.nmb_schoe_r_actuator_general_fault.value = tagVals[12];
-      this.nmb_schoe_r_actuator_valve_timeout.value = tagVals[13]
-      this.nmb_schoe_r_actuator_valve_feedback_signal_error.value = tagVals[2]
-      this.nmb_schoe_r_reservoir_level_signal_error.value   = tagVals[4]
-      this.nmb_schoe_r_actuator_valve_command_signal_error.value = tagVals[3]
-      this.nmb_schoe_r_actuator_valve_fault.value = tagVals[6]
-      this.nmb_schoe_r_actuator_valve_torque_fail_close.value = tagVals[8]
-      this.nmb_schoe_r_actuator_valve_torque_fail_open.value = tagVals[9]
-      this.nmb_schoe_r_general_fault.value = tagVals[11]
+//       this.nmb_schoe_r_voltage_monitor = tagVals[1];
+//       this.nmb_schoe_r_actuator_mode = tagVals[5];
+//       this.nmb_schoe_r_actuator_valve_status = tagVals[7];
+//       this.nbm_schoe_r_plc_mode = tagVals[10];
 
 
 
-      }
-
-      this.comms = Common.getLastUpdate(this.nmb_schoe_r_ut)
-
-
-    setTimeout(()=>{
-      var alarm:any [] = [this.nmb_schoe_r_actuator_valve_feedback_signal_error, this.nmb_schoe_r_reservoir_level_signal_error, this.nmb_schoe_r_actuator_valve_command_signal_error, this.nmb_schoe_r_actuator_valve_fault, this.nmb_schoe_r_actuator_valve_torque_fail_close, this.nmb_schoe_r_actuator_valve_torque_fail_open, this.nmb_schoe_r_general_fault, this.nmb_schoe_r_actuator_general_fault, this.nmb_schoe_r_actuator_valve_timeout]
+//       this.nmb_schoe_r_res_level = tagVals[14];
+//       this.nmb_schoe_r_pressure = tagVals[15]
+//       this.nmb_schoe_r_actuator_set_point = tagVals[16]
+//       this.nmb_schoe_r_actuator_position = tagVals[17]
 
 
-      this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
+//       this.nmb_schoe_r_actuator_general_fault.value = tagVals[12];
+//       this.nmb_schoe_r_actuator_valve_timeout.value = tagVals[13]
+//       this.nmb_schoe_r_actuator_valve_feedback_signal_error.value = tagVals[2]
+//       this.nmb_schoe_r_reservoir_level_signal_error.value   = tagVals[4]
+//       this.nmb_schoe_r_actuator_valve_command_signal_error.value = tagVals[3]
+//       this.nmb_schoe_r_actuator_valve_fault.value = tagVals[6]
+//       this.nmb_schoe_r_actuator_valve_torque_fail_close.value = tagVals[8]
+//       this.nmb_schoe_r_actuator_valve_torque_fail_open.value = tagVals[9]
+//       this.nmb_schoe_r_general_fault.value = tagVals[11]
 
 
-    },1000)
 
-  },60000)
+//       }
+
+//       this.comms = Common.getLastUpdate(this.nmb_schoe_r_ut)
+
+
+//     setTimeout(()=>{
+//       var alarm:any [] = [this.nmb_schoe_r_actuator_valve_feedback_signal_error, this.nmb_schoe_r_reservoir_level_signal_error, this.nmb_schoe_r_actuator_valve_command_signal_error, this.nmb_schoe_r_actuator_valve_fault, this.nmb_schoe_r_actuator_valve_torque_fail_close, this.nmb_schoe_r_actuator_valve_torque_fail_open, this.nmb_schoe_r_general_fault, this.nmb_schoe_r_actuator_general_fault, this.nmb_schoe_r_actuator_valve_timeout]
+
+
+//       this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
+
+
+//     },1000)
+
+//   },60000)
   }
 
 
-  ngOnDestroy(){
-    if(this.intervalLoop){
-      clearInterval(this.intervalLoop)
-    }
-  }
+  // ngOnDestroy():void{
+  //   if(this.intervalLoop){
+  //     this.intervalLoop.unsubscribe();
+
+  //   }
+  // }
 
 }
