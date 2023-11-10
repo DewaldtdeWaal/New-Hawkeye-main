@@ -136,7 +136,8 @@ this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((d
 
 
   trend=data
-        this.TotalFlowArr = trend.TotalFlowArr[0];
+        this.TotalFlowArr = trend.TotalFlowArr[0].differences;
+        console.log(this.TotalFlowArr)
         this.DateArr = trend.DateArr;
         this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","FM Tower Total",this.TotalFlowArr)
 
@@ -171,8 +172,10 @@ collectionName:any ="FM_FMT_TF"
 
 
       trend=data
-            this.TotalFlowArr = trend.TotalFlowArr[0];
+            this.TotalFlowArr = trend.TotalFlowArr[0].differences;
             this.DateArr = trend.DateArr;
+
+            console.log(trend.TotalFlowArr)
 
             this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","FM Tower Total",this.TotalFlowArr)
             this.isLoading = false;

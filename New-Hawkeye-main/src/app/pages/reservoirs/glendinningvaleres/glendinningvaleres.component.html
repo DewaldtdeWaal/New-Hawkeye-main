@@ -1,0 +1,64 @@
+<app-page-with-trend [siteTitle]="siteTitle" [options]="options" (messageEvent)="recieveDate($event)" [isLoading]=isLoading>
+
+
+
+        <section class="res-form" fxLayoutAlign="center ">
+            <form fxLayout="column">
+              <div style="margin-bottom: 8px"  class="div-form">
+                <h3 style="padding-top: 8px; ">Communication </h3></div>
+      
+      
+                <div class="div-form">
+                  <div class="grid-container-flow-meters-communication">
+                    <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+                    <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+                    <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+                    <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+                      </div>
+                      <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                       <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+                       </div>
+      
+                    <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+                    <div class="grid-container-flow-meters-general-column3">{{variable.lastUpdate}}</div>
+       
+                    </div>
+
+                    <section class="basic-grid" style="margin:auto;">
+                      <div *ngIf="showNavigationButton1 == true" class="grid-button">
+                        <button class="button-color" a routerLink="/hawkeye/fptsites/glendinningvaleftp" style="height: 28px;" >FPT</button></div>
+              
+              
+        
+                        <div *ngIf="showNavigationButton2 == true" class="grid-button">
+                          <button class="button-color" a routerLink="/hawkeye/wtw/glendinningvalewtw" style="height: 28px;"  >WTW</button></div>
+              
+           
+              
+                        </section>
+              
+                        <br>
+                    </div>
+      
+                    </form>
+                    </section>
+
+
+                    <app-res-panel [level]=variable.glen_r_res_lvl [title]=resTitle></app-res-panel>
+
+
+
+                    <app-panel [title]=titleG>
+                      <div class="grid-container-valve-general">
+                        <div class="img2">    <svg xmlns="http://www.w3.org/2000/svg" class="img2" width="100%" height="50px" viewBox="0 0 300 240" version="1.1"><path [attr.d]=valveImage1 stroke="none" [attr.fill]=valveColor1 fill-rule="evenodd"/></svg></div> <div class="grid-container-communication-general-column2">Valve Mode:</div>      <div class="grid-container-communication-general-column4">{{variable.glen_r_mode}}</div>
+                        <div class="grid-container-communication-general-column2">Valve Status:</div>       <div class="grid-container-communication-general-column4">{{variable.glen_r_status}}</div>
+                        <div class="grid-container-communication-general-column2">Valve 1 Position:</div>       <div class="grid-container-communication-general-column4">{{variable.glen_r_position}} %</div>
+                
+                
+                      </div>
+                
+                    </app-panel>
+
+                         
+        
+</app-page-with-trend>

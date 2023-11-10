@@ -9,7 +9,7 @@ export class PageComponentComponent implements OnInit {
 
   constructor() { }
   @Input() siteTitle:any
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

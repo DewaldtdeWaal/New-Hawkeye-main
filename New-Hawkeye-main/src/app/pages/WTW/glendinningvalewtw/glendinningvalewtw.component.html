@@ -1,0 +1,65 @@
+<div style="background-color: var(--page-background-color);">
+    <div class="div-heading-title"><h1 style="padding-top: 8px; ">Glendinningvale</h1></div>
+    <div class="wrapper-grid">
+
+        <section class="res-form" fxLayoutAlign="center ">
+            <form fxLayout="column">
+              <div style="margin-bottom: 8px"  class="div-form">
+                <h3 style="padding-top: 8px; ">Communication </h3></div>
+      
+      
+                <div class="div-form">
+                  <div class="grid-container-flow-meters-communication">
+                    <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+                    <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+                    <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+                    <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+                      </div>
+                      <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                       <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+                       </div>
+      
+                    <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+                    <div class="grid-container-flow-meters-general-column3">{{variable.lastUpdate}}</div>
+      
+      
+      
+                    </div>
+                    <section class="basic-grid" style="margin:auto;">
+                      <div *ngIf="showNavigationButton1 == true" class="grid-button">
+                        <button class="button-color" a routerLink="/hawkeye/fptsites/glendinningvaleftp" style="height: 28px;" >FPT</button></div>
+              
+              
+        
+                        <div *ngIf="showNavigationButton2 == true" class="grid-button">
+                          <button class="button-color" a routerLink="/hawkeye/reservoirs/glendinningvaleres" style="height: 28px;"  >Reservoir</button></div>
+              
+           
+              
+                      
+                        </section>
+                        <br>
+                    </div>
+      
+                    </form>
+                    </section>
+
+
+                     <app-panel [title]=title1>
+                   <div   class="grid-container-flow-meters-communication">
+                    <div class="grid-container-flow-meters-general-column1">Potential of Hydrogen:</div>
+                    <div class="grid-container-flow-meters-general-column3">{{variable.glen_FTP_WTW_ph}} pH</div>
+                    <div class="grid-container-flow-meters-general-column1">Oxidation reduction potential:</div>
+                    <div class="grid-container-flow-meters-general-column3">{{variable.glen_FTP_WTW_orp}} mV</div>
+                   </div>
+                     </app-panel>
+
+
+                    <app-ground-water [title]=pumpTitle1 [array]=variablesMatric1  [pumpType]=Pump [pumpColor]=pumpColor></app-ground-water>
+
+                    <app-ground-water [title]=pumpTitle2 [array]=variablesMatric2  [pumpType]=Pump [pumpColor]=pumpColor></app-ground-water>
+    
+
+        </div>
+
+        </div>

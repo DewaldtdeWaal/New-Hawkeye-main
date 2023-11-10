@@ -78,10 +78,21 @@ export const siteMap = {
   "NMB_PARA_BEA_ST_FRANCIS_FPT":"nmb_PARA_BEA_ST_FRANCIS_FPT_CHECKED",
   "NMB_KOU_MAIN_LINE_FPT":"nmb_KOU_MAIN_LINE_FPT_CHECKED",
   "NMB_HUP_OFF_TAKE_FPT":"nmb_HUP_OFF_TAKE_FPT_CHECKED",
+  "NMB_GLEN_R":"NMB_GLEN_R_CHECKED",
+
+
+  "NMB_GLEN_FPT":"NMB_GLEN_FPT_CHECKED",
+  
+  
+  "NMB_GLEN_WTW":"NMB_GLEN_WTW_CHECKED",
+
+
+
   "NMB_BETH_FPT":"nmb_BETH_FPT_CHECKED",
   "NMB_NGT_WTW":"nmb_NGT_WTW_CHECKED",
   "TSI_STORMS_WTW":"TSI_STORMS_WTW_CHECKED",
   "NMB_ELANDS_WTW":"nmb_ELANDS_WTW_CHECKED",
+  "NMB_LIN_WTW":"NMB_LIN_WTW_CHECKED",
   "WES_FL":"wes_FL_CHECKED",
   // "PICKER_TRENDS":"all_PICKER_TRENDS_CHECKED",
   "V2_PICKER_TRENDS":"all_V2_PICKER_TRENDS_CHECKED",
@@ -90,6 +101,7 @@ export const siteMap = {
   "ADMIN_NMBM":"admin_NMBM_CHECKED",
   "USER_NMBM":"user_NMBM_CHECKED",
   "NMB_STG_R":"nmb_STG_R_CHECKED",
+  "NMB_LIN_R":"NMB_LIN_R_CHECKED",
   "NMB_STG_PS":"nmb_STG_PS_CHECKED",
   "KLM_KUI_12_GW":"klm_KUI_12_GW_CHECKED",
   "KLM_KUI_13_GW":"klm_KUI_13_GW_CHECKED",
@@ -188,10 +200,14 @@ nmb_MNTS_ZS_CHECKED:false,
   nmb_PARA_BEA_ST_FRANCIS_FPT_CHECKED:false,
   nmb_KOU_MAIN_LINE_FPT_CHECKED:false,
   nmb_HUP_OFF_TAKE_FPT_CHECKED:false,
+  NMB_GLEN_R_CHECKED:false,
+  NMB_GLEN_FPT_CHECKED:false,
+  NMB_GLEN_WTW_CHECKED:false,
   nmb_BETH_FPT_CHECKED:false,
   nmb_NGT_WTW_CHECKED:false,
   TSI_STORMS_WTW_CHECKED:false,
   nmb_ELANDS_WTW_CHECKED:false,
+  NMB_LIN_WTW_CHECKED:false,
   wes_FL_CHECKED:false,
   all_RES_TRENDS_CHECKED:false,
   all_V2_PICKER_TRENDS_CHECKED:false,
@@ -202,6 +218,7 @@ nmb_MNTS_ZS_CHECKED:false,
 admin_NMBM_CHECKED:false,
 user_NMBM_CHECKED:false,
 nmb_STG_R_CHECKED:false,
+NMB_LIN_R_CHECKED:false,
 nmb_STG_PS_CHECKED:false,
 klm_KUI_12_GW_CHECKED:false,
 klm_KUI_13_GW_CHECKED:false,
@@ -239,6 +256,11 @@ export class addUser  {
 
     if(form.value.NMB_STG_R){
       userSites.push("NMB_STG_R")
+    }
+
+
+    if(form.value.NMB_LIN_R){
+      userSites.push("NMB_LIN_R")
     }
 
     if(form.value.NMB_STG_PS){
@@ -533,6 +555,10 @@ export class addUser  {
       userSites.push("NMB_ELANDS_WTW")
     }
 
+    if(form.value.NMB_LIN_WTW){
+      userSites.push("NMB_LIN_WTW")
+    }
+
     if(form.value.NMB_PARA_BEA_ST_FRANCIS_FPT){
       userSites.push("NMB_PARA_BEA_ST_FRANCIS_FPT")
     }
@@ -632,6 +658,19 @@ export class addUser  {
 
     if(form.value.NMB_HUP_OFF_TAKE_FPT){
       userSites.push("NMB_HUP_OFF_TAKE_FPT")
+    }
+
+
+    if(form.value.NMB_GLEN_R){
+      userSites.push("NMB_GLEN_R")
+    }
+
+    if(form.value.NMB_GLEN_FPT){
+      userSites.push("NMB_GLEN_FPT")
+    }
+
+    if(form.value.NMB_GLEN_WTW){
+      userSites.push("NMB_GLEN_WTW")
     }
 
 

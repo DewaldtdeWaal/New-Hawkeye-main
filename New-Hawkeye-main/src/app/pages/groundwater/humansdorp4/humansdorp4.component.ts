@@ -225,7 +225,7 @@ var trend: any = {};
 
 
     trend=data
-    this.total_flow_HD4_array= trend.TotalFlowArr[0];
+    this.total_flow_HD4_array= trend.TotalFlowArr[0].differences;
 
     this.DateArr = trend.DateArr;
 
@@ -251,7 +251,7 @@ var trend: any = {};
 
 
   trend=data
-  this.total_flow_HD4_array= trend.TotalFlowArr[0];
+  this.total_flow_HD4_array= trend.TotalFlowArr[0].differences;
   this.DateArr = trend.DateArr;
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD4 Total Flow",this.total_flow_HD4_array)

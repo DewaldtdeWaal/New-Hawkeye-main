@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from "./auth/login/login.component";
@@ -58,6 +58,8 @@ import {WolwasComponent} from './pages/reservoirs/wolwas/wolwas.component';
 import {KareedouwkresComponent} from './pages/reservoirs/kareedouwkres/kareedouwkres.component';
 import {StGeorgesResComponent} from './pages/reservoirs/st-georges-res/st-georges-res.component'
 import {KruisfonteinRComponent} from './pages/reservoirs/kruisfontein-r/kruisfontein-r.component'
+import { GlendinningvaleresComponent } from './pages/reservoirs/glendinningvaleres/glendinningvaleres.component';
+import { LintonresComponent } from './pages/reservoirs/lintonres/lintonres.component';
 
 
 import {FairviewComponent} from './pages/groundwater/fairview/fairview.component';
@@ -118,12 +120,14 @@ import {KougaMainLineComponent} from './pages/FlowMeters/kouga-main-line/kouga-m
 import {ParadiseBeachStFrancisOfftakeComponent} from './pages/FlowMeters/paradise-beach-st-francis-offtake/paradise-beach-st-francis-offtake.component';
 import {FptOverviewComponent} from './pages/FlowMeters/fpt-overview/fpt-overview.component';
 import {BushyparkFptComponent} from './pages/FlowMeters/bushypark-fpt/bushypark-fpt.component';
-
+import { GlendinningvaleftpComponent } from './pages/FlowMeters/glendinningvaleftp/glendinningvaleftp.component';
 //WTW
 import {NooitgedachtComponent} from './pages/WTW/nooitgedacht/nooitgedacht.component';
 import {StormsriverWTWComponent} from './pages/WTW/stormsriver-wtw/stormsriver-wtw.component'
 import {ElandsjagtComponent} from './pages/WTW/elandsjagt/elandsjagt.component'
-import {HumansdorpwtwComponent} from './pages/WTW/humansdorpwtw/humansdorpwtw.component'
+import {HumansdorpwtwComponent} from './pages/WTW/humansdorpwtw/humansdorpwtw.component';
+import { LintonComponent } from './pages/WTW/linton/linton.component';
+import { GlendinningvalewtwComponent } from './pages/WTW/glendinningvalewtw/glendinningvalewtw.component';
 //Trends component
 //import { TrendPickerComponent } from './pages/trends/trendpicker/trend-picker.component';
 import { TrendpickerV2Component } from './pages/trends/trendpicker-v2/trendpicker-v2.component';
@@ -192,7 +196,7 @@ const routes: Routes = [
 {path: 'hawkeye/reservoirs/summit',component: SummitComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/coegakop', component: CoegaKopComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/coegakopdownload', component: CoegakopdownloadComponent, canActivate:[AuthGuard]},
-
+{path: 'hawkeye/reservoirs/glendinningvaleres', component: GlendinningvaleresComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/oliphantskop', component:OliphantskopComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/emeraldhill', component:EmeraldhillComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/schoemanshoek', component: SchoemanshoekComponent, canActivate:[AuthGuard]},
@@ -209,7 +213,7 @@ const routes: Routes = [
 {path: 'hawkeye/reservoirs/st-georges-res',component:StGeorgesResComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/kruisfontein-r', component:KruisfonteinRComponent, canActivate:[AuthGuard]},
 
-
+{path: 'hawkeye/reservoirs/linton', component:LintonresComponent,canActivate:[AuthGuard]},
 
 
 {path: 'hawkeye/groundwater/fairview', component:FairviewComponent, canActivate:[AuthGuard]},
@@ -254,7 +258,7 @@ const routes: Routes = [
 {path: 'hawkeye/fptsites/fpt-overview', component:FptOverviewComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/fptsites/bushypark-fpt', component:BushyparkFptComponent, canActivate:[AuthGuard]},
 
-
+{path: 'hawkeye/fptsites/glendinningvaleftp', component: GlendinningvaleftpComponent, canActivate:[AuthGuard]},
 //Zomes
 {path: 'hawkeye/zones/lee-samuals-drive', component:LeeSamualsDriveComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/zones/mc-noughtontownshipsouth', component:McNoughtontownshipsouthComponent, canActivate:[AuthGuard]},
@@ -281,8 +285,9 @@ const routes: Routes = [
 
 {path: 'hawkeye/wtw/stormsriver-wtw',component: StormsriverWTWComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/wtw/elandsjagt',component: ElandsjagtComponent,canActivate:[AuthGuard]},
-
+{path: 'hawkeye/wtw/linton', component: LintonComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/wtw/humansdorpwtw', component:HumansdorpwtwComponent, canActivate:[AuthGuard]},
+{path: 'hawkeye/wtw/glendinningvalewtw', component: GlendinningvalewtwComponent, canActivate:[AuthGuard]},
 //Trends:
 
 {path: 'hawkeye/trends/trendpickerV2',component: TrendpickerV2Component,canActivate:[AuthGuard]},

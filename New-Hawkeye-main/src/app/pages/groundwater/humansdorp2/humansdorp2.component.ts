@@ -217,7 +217,7 @@ show6:any
 var trend: any = {};
 this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
   trend=data
-this.total_flow_HD2_array = trend.TotalFlowArr[0];
+this.total_flow_HD2_array = trend.TotalFlowArr[0].differences;
 
 
 
@@ -241,7 +241,7 @@ var trend :any;
 
 this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
-this.total_flow_HD2_array = trend.TotalFlowArr[0];
+this.total_flow_HD2_array = trend.TotalFlowArr[0].differences;
 this.DateArr = trend.DateArr;
 
 

@@ -1,3 +1,77 @@
+
+:host ::ng-deep.mat-form-field-label {
+  color: var(--overview-table-filter-color) !important;
+
+ }
+
+ :host ::ng-deep.mat-form-field-underline {
+  background-color: var(--overview-table-filter-color) !important;
+
+}
+:host mat-datepicker-toggle {
+  color: var(--overview-table-filter-color) !important;
+ }
+
+
+.ps-form {
+  padding-top: 10px;
+  color:  var(--form-text-color);
+}
+h3{
+  text-align: center;
+  margin-top: 5px;
+  font-size: 20px;
+  padding-top: 0;
+}
+
+.div-form{
+  height: auto;
+  width: 350px;
+  max-width: auto;
+  min-width: auto;
+
+  background-color: var(--form-background-color);
+  box-shadow:5px 5px 5px var(--form-box-shadows);
+  border-radius: 5px;
+}
+
+
+
+
+
+
+@media screen and (min-height : 500px)
+{
+  .chart { margin-left: auto;
+    margin-right: auto;
+    background-color: var(--form-background-color);
+    height: 500px;
+    width: 94%;
+    box-shadow:5px 5px 5px  var(--form-box-shadows);
+    color: var(--form-text-color2);
+    border-radius: 7px;
+  }
+}
+
+@media screen and (max-height : 500px)
+{
+  .chart {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--form-background-color);
+    height: 500px;
+    width: 92%;
+    box-shadow:5px 5px 5px  var(--form-box-shadows);
+    color: var(--form-text-color2);
+    border-radius: 7px;
+  }
+}
+button{
+  background-color: rgb(89, 105, 128);
+  color: white;
+}
+
+
 .wrapper-grid{
   display:grid;
   grid-template-columns: auto;
@@ -75,7 +149,7 @@
   padding-top: 6px;
   margin-left: auto;
   margin-right: auto;
-  width:fit-content;
+  width:60%;
   text-align: center;
   position: sticky;
   top: 0;
@@ -86,7 +160,7 @@
   h1{
     text-align: center;
     color: var( --h1-heading-title);
-    font-size: 1.3em;
+    font-size: 1.5em;
 
   }
 h3{

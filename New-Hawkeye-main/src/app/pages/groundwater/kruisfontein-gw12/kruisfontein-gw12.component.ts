@@ -215,7 +215,7 @@ gw_klm_kruis12_res_ful:{
     var trend: any = {};
     this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.total_flow_1_array =  trend.TotalFlowArr[0];
+      this.total_flow_1_array =  trend.TotalFlowArr[0].differences[0];
 
       this.DateArr = trend.DateArr;
         var theme:any
@@ -242,7 +242,7 @@ gw_klm_kruis12_res_ful:{
   this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-  this.total_flow_1_array =  trend.TotalFlowArr[0];
+  this.total_flow_1_array =  trend.TotalFlowArr[0].differences[0];
   this.DateArr = trend.DateArr;
 
   this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array);

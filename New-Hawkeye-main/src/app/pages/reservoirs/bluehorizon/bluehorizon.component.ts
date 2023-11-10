@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
+import { EChartsOption } from 'echarts';
 @Component({
   selector: 'app-bluehorizon',
   templateUrl: './bluehorizon.component.html',
@@ -48,7 +50,35 @@ export class BluehorizonComponent implements OnInit {
 
         }
 
-  constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
+
+        siteTitle:any = "Blue Horizon Bay";
+        trendTag:any = ["level"]
+        collectionName:any ="DRS_BHB_RES_LVL"
+        levelArr: any[]=[];
+        range:any
+        options: EChartsOption;
+        isLoading:boolean = false;
+
+        recieveDate($event: any){
+         this.isLoading = true;
+         var trend :any;
+         this.range = $event;
+   
+         const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+ 
+         this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+           trend=data
+    
+           this.levelArr = trend.LevelArr[0];
+    
+           this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
+           this.isLoading = false;
+         })
+    
+         
+       }
+
+  constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod, private pt: PostTrend  ) {
 
 
 

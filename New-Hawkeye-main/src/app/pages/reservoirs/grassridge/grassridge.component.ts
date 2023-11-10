@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {GrassRidgeService} from 'src/app/Service-Files/Reservoir/grassridge.service';
+import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 @Component({
   selector: 'app-grassridge',
@@ -37,14 +37,9 @@ gr_R_UT:null,
 "gr_R_UT",
     ]
 
-  constructor(public recieve:Common,private pm:pagePostMethod ) {
+  constructor(public recieve:Common,private pm:pagePostMethod, private pt: PostTrend  ) {}
 
-
-
-
-
-}
-
+  
 
 
   ngOnInit(){
@@ -67,5 +62,45 @@ gr_R_UT:null,
 
     }
   }
+
+  
+  siteTitle:any = "Grassridge";
+  trendTag1:any = ["level"]
+  collectionName1:any ="BR_GR_EC_RES_LVL"
+  levelArr1: any[]=[];
+
+  collectionName2:any ="BR_GR_WC_RES_LVL"
+  levelArr2: any[]=[];
+
+  range:any
+  options: EChartsOption;
+  isLoading:boolean = false;
+
+  recieveDate($event: any){
+   this.isLoading = true;
+   var trend :any;
+   this.range = $event;
+
+   const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+   this.pt.getLevel(this.collectionName1, this.trendTag1,start,end).then((data) => {
+     trend=data
+     this.levelArr1 = trend.LevelArr[0];
+
+     this.pt.getLevel(this.collectionName2, this.trendTag1,start,end).then((data) => {
+      trend=data
+
+      this.levelArr2 = trend.LevelArr[0];
+
+
+      this.options = this.recieve.getOptionsFor2Line("%","East Chamber %",this.levelArr1,"West Chamber %",this.levelArr2)
+
+
+     })
+
+
+     this.isLoading = false;
+   })
+ }
 
 }

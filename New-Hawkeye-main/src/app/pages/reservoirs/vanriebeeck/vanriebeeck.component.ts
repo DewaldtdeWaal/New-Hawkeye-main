@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ListeningService } from 'src/app/listening.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-
 import { Subscription } from 'rxjs';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-vanriebeeck',
   templateUrl: './vanriebeeck.component.html',
@@ -34,7 +32,7 @@ export class VanriebeeckComponent implements OnInit {
   ]
 
 
-  constructor(private webSocketService: WebSocketService, private ls:ListeningService, private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend) {
 
 
 
@@ -80,5 +78,48 @@ export class VanriebeeckComponent implements OnInit {
       this.intervalLoop.unsubscribe();
 
     }
+  
   }
+
+
+  siteTitle:any = "Van Riebeeck Hoogte"
+  trendTag:any = ["level"]
+  collectionName:any ="DRN_VRH_DL_RES_LVL"
+  collectionName1:any ="DRN_VRH_SL_RES_LVL"
+  levelArr: any[]=[];
+  range:any
+  options: EChartsOption;
+
+
+  
+  isLoading:boolean = false;
+
+  recieveDate($event: any){
+   this.isLoading = true;
+   var trend1 :any;
+   var trend2:any;
+   this.range = $event;
+
+   const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+   this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+     trend1=data
+
+     console.log(trend1)
+
+     this.pt.getLevel(this.collectionName1, this.trendTag,start,end).then((data) => {
+      trend2=data
+
+      this.options = this.recieve.getOptionsFor2Line("%","East Chamber %",trend1.LevelArr[0],"West Chamber %",trend2.LevelArr[0])
+     })
+
+
+
+
+     this.isLoading = false;
+   })
+ }
+
+
+
 }

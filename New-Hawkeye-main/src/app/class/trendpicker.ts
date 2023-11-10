@@ -266,14 +266,50 @@ export const trendArray = [
 "WDNR_ROSE_FR_arr",
 "WDSR_ROWP_BAR_arr",
 "WDSR_ROWP_TF_arr",
-"WDSR_ROWP_FR_arr"
+"WDSR_ROWP_FR_arr",
 
+"lint_wtw_back_wash_FR_ARR",
+"lint_wtw_back_wash_TF_ARR",
+"lint_wtw_raw_water_FR_ARR",
+"lint_wtw_raw_water_TF_ARR",
+"lint_wtw_final_water_FR_ARR",
+"lint_wtw_final_water_TF_ARR",
+"lint_res_lvl_ARR",
+
+"glen_r_res_lvl_arr",
+"glen_FTP_WTW_Inlet_Flow_Rate_arr",
+"glen_FTP_WTW_Inlet_Total_Flow_arr",
+"glen_FTP_WTW_Inlet_bar_arr",
+"glen_FTP_WTW_borehole_Flow_Rate_arr",
+"glen_FTP_WTW_borehole_Total_Flow_arr",
+
+"glen_FTP_WTW_P1_rtm_arr",
+"glen_FTP_WTW_P2_rtm_arr",
+"glen_FTP_WTW_P1_stn_arr",
+"glen_FTP_WTW_P2_stn_arr",
+"glen_FTP_WTW_ph_arr",
+"glen_FTP_WTW_orp_arr",
 
   ]
 
 
   //make this axis map a hash map
   export const siteVariableMap = {
+    "Glendinningvale Pump 1 Run Time":"glen_FTP_WTW_P1_rtm_arr",
+    "Glendinningvale Pump 2 Run Time":"glen_FTP_WTW_P2_rtm_arr",
+    "Glendinningvale Pump 1 Number Of Starts":"glen_FTP_WTW_P1_stn_arr",
+    "Glendinningvale Pump 2 Number Of Starts":"glen_FTP_WTW_P2_stn_arr",
+    "Glendinningvale Potential of Hydrogen":"glen_FTP_WTW_ph_arr",
+    "Glendinningvale Oxidation Reduction Potential":"glen_FTP_WTW_orp_arr",
+
+    "Glendinningvale Inlet Flow Rate":"glen_FTP_WTW_Inlet_Flow_Rate_arr",
+    "Glendinningvale Inlet Total Flow":"glen_FTP_WTW_Inlet_Total_Flow_arr",
+    "Glendinningvale Inlet Pressure":"glen_FTP_WTW_Inlet_bar_arr",
+    "Glendinningvale Borehole Flow Rate":"glen_FTP_WTW_borehole_Flow_Rate_arr",
+    "Glendinningvale Borehole Total Flow":"glen_FTP_WTW_borehole_Total_Flow_arr",
+    "Glendinningvale Reservoir Level":"glen_r_res_lvl_arr",
+
+
     "Kareedouw K1 Total Flow":"KARK_K1_TF_arr",
     "Kareedouw K1 Flow Rate":"KARK_K1_FR_arr",
     "Kareedouw K1 Current":"KARK_K1_CUR_arr",
@@ -523,10 +559,35 @@ export const trendArray = [
   "Rowallan Park Extension Pressure":"WDSR_ROWP_BAR_arr",
   "Rowallan Park Extension Total Flow":"WDSR_ROWP_TF_arr",
   "Rowallan Park Extension Flow Rate":"WDSR_ROWP_FR_arr",
+
+
+
+  "Linton Back Wash Flow Rate":"lint_wtw_back_wash_FR_ARR",
+  "Linton Back Wash Total Flow":"lint_wtw_back_wash_TF_ARR",
+  "Linton Raw Water Flow Rate":"lint_wtw_raw_water_FR_ARR",
+  "Linton Raw Water Total Flow":"lint_wtw_raw_water_TF_ARR",
+  "Linton Final Water Flow Rate":"lint_wtw_final_water_FR_ARR",
+  "Linton Final Water Total Flow":"lint_wtw_final_water_TF_ARR",
+  "Linton Reservoir Level":"lint_res_lvl_ARR",
+
+
   }
 
   export const axisMap = {
 
+    "Glendinningvale Pump 1 Run Time":"glen_FTP_WTW_P1_rtm_axis",
+    "Glendinningvale Pump 2 Run Time":"glen_FTP_WTW_P2_rtm_axis",
+    "Glendinningvale Pump 1 Number Of Starts":"glen_FTP_WTW_P1_stn_axis",
+    "Glendinningvale Pump 2 Number Of Starts":"glen_FTP_WTW_P2_stn_axis",
+    "Glendinningvale Potential of Hydrogen":"glen_FTP_WTW_ph_axis",
+    "Glendinningvale Oxidation Reduction Potential":"glen_FTP_WTW_orp_axis",
+
+    "Glendinningvale Inlet Flow Rate":"glen_FTP_WTW_Inlet_Flow_Rate_axis",
+    "Glendinningvale Inlet Total Flow":"glen_FTP_WTW_Inlet_Total_Flow_axis",
+    "Glendinningvale Inlet Pressure":"glen_FTP_WTW_Inlet_bar_axis",
+    "Glendinningvale Borehole Flow Rate":"glen_FTP_WTW_borehole_Flow_Rate_axis",
+    "Glendinningvale Borehole Total Flow":"glen_FTP_WTW_borehole_Total_Flow_axis",
+    "Glendinningvale Reservoir Level":"glen_r_res_lvl_axis",
     "Kareedouw K1 Total Flow":"KARK_K1_TF_axis",
     "Kareedouw K1 Flow Rate":"KARK_K1_FR_axis",
     "Kareedouw K1 Current":"KARK_K1_CUR_axis",
@@ -775,12 +836,32 @@ export const trendArray = [
     "Rowallan Park Extension Total Flow":"WDSR_ROWP_TF_axis",
     "Rowallan Park Extension Flow Rate":"WDSR_ROWP_FR_axis",
 
+    "Linton Back Wash Flow Rate":"lint_wtw_back_wash_FR_Axis",
+    "Linton Back Wash Total Flow":"lint_wtw_back_wash_TF_Axis",
+    "Linton Raw Water Flow Rate":"lint_wtw_raw_water_FR_Axis",
+    "Linton Raw Water Total Flow":"lint_wtw_raw_water_TF_Axis",
+    "Linton Final Water Flow Rate":"lint_wtw_final_water_FR_Axis",
+    "Linton Final Water Total Flow":"lint_wtw_final_water_TF_Axis",
+    "Linton Reservoir Level":"lint_res_lvl_Axis",
 
   }
 
 
   export const axisValues={
 
+
+    glen_FTP_WTW_P1_rtm_axis:0,
+    glen_FTP_WTW_P2_rtm_axis:0,
+    glen_FTP_WTW_P1_stn_axis:0,
+    glen_FTP_WTW_P2_stn_axis:0,
+    glen_FTP_WTW_ph_axis:0,
+    glen_FTP_WTW_orp_axis:0,
+    glen_FTP_WTW_Inlet_Flow_Rate_axis:0,
+    glen_FTP_WTW_Inlet_Total_Flow_axis:0,
+    glen_FTP_WTW_Inlet_bar_axis:0,
+    glen_FTP_WTW_borehole_Flow_Rate_axis:0,
+    glen_FTP_WTW_borehole_Total_Flow_axis:0,
+    glen_r_res_lvl_axis:0,
     KWANO_R_RES_LVL_axis:0,
     KWANO_R_FLOW_RATE_1_axis:0,
     KWANO_R_FLOW_RATE_2_axis:0,
@@ -1030,6 +1111,14 @@ WDSR_ROWP_BAR_axis:0,
 WDSR_ROWP_TF_axis:0,
 WDSR_ROWP_FR_axis:0,
 
+lint_wtw_back_wash_FR_Axis:0,
+lint_wtw_back_wash_TF_Axis:0,
+lint_wtw_raw_water_FR_Axis:0,
+lint_wtw_raw_water_TF_Axis:0,
+lint_wtw_final_water_FR_Axis:0,
+lint_wtw_final_water_TF_Axis:0,
+lint_res_lvl_Axis:0,
+
   }
 
 
@@ -1107,6 +1196,12 @@ export const variables:any = {
     nmb_schoe_r_actuator_general_fault_arr:[],
     nmb_schoe_r_actuator_valve_timeout_arr:[],
     KARK_K1_TF_arr:[],
+    glen_r_res_lvl_arr:[],
+    glen_FTP_WTW_Inlet_Flow_Rate_arr:[],
+    glen_FTP_WTW_Inlet_Total_Flow_arr:[],
+    glen_FTP_WTW_Inlet_bar_arr:[],
+    glen_FTP_WTW_borehole_Flow_Rate_arr:[],
+    glen_FTP_WTW_borehole_Total_Flow_arr:[],
     KARK_K1_FR_arr:[],
     KARK_K1_CUR_arr:[],
     KARK_K1_LVL_arr:[],
@@ -1279,6 +1374,13 @@ MW_P4_PUMP_RPM_arr:[],
     WDSR_ROWP_BAR_arr:[],
     WDSR_ROWP_TF_arr:[],
     WDSR_ROWP_FR_arr:[],
+    lint_wtw_back_wash_FR_ARR:[],
+    lint_wtw_back_wash_TF_ARR:[],
+    lint_wtw_raw_water_FR_ARR:[],
+    lint_wtw_raw_water_TF_ARR:[],
+    lint_wtw_final_water_FR_ARR:[],
+    lint_wtw_final_water_TF_ARR:[],
+    lint_res_lvl_ARR:[],
   }
 
 

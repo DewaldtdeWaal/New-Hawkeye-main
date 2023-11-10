@@ -1,0 +1,81 @@
+<div style="background-color: var(--page-background-color);">
+  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Glendinningvale</h1></div>
+  <div class="wrapper-grid">
+
+      <section class="res-form" fxLayoutAlign="center ">
+          <form fxLayout="column">
+            <div style="margin-bottom: 8px"  class="div-form">
+              <h3 style="padding-top: 8px; ">Communication </h3></div>
+    
+    
+              <div class="div-form">
+                <div class="grid-container-flow-meters-communication">
+                  <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+                  <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+                  <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+                  <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+                    </div>
+                    <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                     <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+                     </div>
+    
+                  <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+                  <div class="grid-container-flow-meters-general-column3">{{variable.lastUpdate}}</div>
+    
+    
+    
+                  </div>
+                  <section class="basic-grid" style="margin:auto;">
+                    <div *ngIf="showNavigationButton1 == true" class="grid-button">
+                      <button class="button-color" a routerLink="/hawkeye/wtw/glendinningvalewtw" style="height: 28px;" >WTW</button></div>
+            
+            
+      
+                      <div *ngIf="showNavigationButton2 == true" class="grid-button">
+                        <button class="button-color" a routerLink="/hawkeye/reservoirs/glendinningvaleres" style="height: 28px;"  >Reservoir</button></div>
+            
+         
+            
+                    
+                      </section>
+                      <br>
+                  </div>
+    
+                  </form>
+                  </section>
+
+
+                  <section class="res-form" fxLayoutAlign="center ">
+                    <form fxLayout="column">
+                      <div style="margin-bottom: 8px"  class="div-form">
+                        <h3 style="padding-top: 8px; ">Flow Rate</h3></div>
+          
+                        <div class="div-form">
+          
+                          <div class="grid-container-flow-meters-flowrate">
+                            <div class="grid-span-four">Inlet </div>
+                            <div class="grid-container-flow-rate-general-column1">Flow Rate:</div>
+                            <div class="grid-container-flow-rate-general-column3">{{ variable.glen_FTP_WTW_Inlet_Flow_Rate }} Ml/d</div>
+                            <div class="grid-container-flow-rate-general-column1">Total Flow:</div>
+                            <div class="grid-container-flow-rate-general-column3">{{ variable.glen_FTP_WTW_Inlet_Total_Flow }}  m³</div>
+                            <div class="grid-container-flow-rate-general-column1">Pressure:</div>
+                            <div class="grid-container-flow-rate-general-column3">{{ variable.glen_FTP_WTW_Inlet_bar }} bar</div>
+                            <div class="grid-container-flow-rate-general-column1">&nbsp;</div>
+                            <div class="grid-container-flow-rate-general-column3">&nbsp;</div>
+                            <div class="grid-span-four">Borehole </div>
+                            <div class="grid-container-flow-rate-general-column1">Flow Rate:</div>
+                            <div class="grid-container-flow-rate-general-column3">{{ variable.glen_FTP_WTW_borehole_Flow_Rate }} Ml/d</div>
+                            <div class="grid-container-flow-rate-general-column1">Total Flow:</div>
+                            <div class="grid-container-flow-rate-general-column3">{{ variable.glen_FTP_WTW_borehole_Total_Flow }} m³</div>
+         
+          
+                          </div>
+               
+          
+                          </div>
+                          </form>
+                          </section>
+
+      </div>
+
+      </div>

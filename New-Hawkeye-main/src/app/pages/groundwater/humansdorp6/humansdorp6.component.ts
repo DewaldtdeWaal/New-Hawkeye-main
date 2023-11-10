@@ -226,7 +226,7 @@ collectionName:any ="KLM_HUP6_TF_TREND"
 var trend: any = {};
 this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
   trend=data
-    this.total_flow_HD6_array = trend.TotalFlowArr[0];
+    this.total_flow_HD6_array = trend.TotalFlowArr[0].differences
 
     this.DateArr = trend.DateArr;
 
@@ -255,7 +255,7 @@ this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) =
 
   this.pt.getPostTrend(this.collectionName, this.trendTag,start,end).then((data) => {
     trend=data
-      this.total_flow_HD6_array = trend.TotalFlowArr[0];
+      this.total_flow_HD6_array = trend.TotalFlowArr[0].differences
   this.DateArr = trend.DateArr;
 
 

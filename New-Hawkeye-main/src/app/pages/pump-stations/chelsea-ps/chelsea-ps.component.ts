@@ -439,10 +439,10 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
       trend=data;
 
 
-      this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0]
-      this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1]
-      this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2]
-      this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3]
+      this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0].differences
+      this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1].differences
+      this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2].differences
+      this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3].differences
       this.DateArr = trend.DateArr;
 
       var theme:any
@@ -690,10 +690,10 @@ var trend :any;
 
 trend=data
 
-this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0]
-this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1]
-this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2]
-this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3]
+this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0].differences
+this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1].differences
+this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2].differences
+this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3].differences
 this.DateArr = trend.DateArr;
 var theme:any
 var tooltipBackground:any;

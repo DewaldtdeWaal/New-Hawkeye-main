@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-theescombe',
   templateUrl: './theescombe.component.html',
@@ -38,7 +40,7 @@ tc_RL:null,
 "tc_RL",
   ]
 
-  constructor( private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
+  constructor( private authService: AuthService,public recieve:Common,private pm:pagePostMethod, private pt: PostTrend ) {
 
     this.intervalLoop = this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").subscribe((result) => {
       this.variable =  result;
@@ -75,16 +77,7 @@ tc_RL:null,
 
 
 
-    // this.intervalLoop = setInterval(() =>{
-    //   this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").subscribe((result) => {
-    //     this.data =  result;
-    //     console.log(this.data)
-    //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
-    //    this.comms = Common.getLastUpdate(this.variable.tc_R_UT)
-
-    //   });
-    // },60000);
 }
 
 ngOnDestroy():void{
@@ -92,6 +85,31 @@ ngOnDestroy():void{
     this.intervalLoop.unsubscribe();
 
   }
+}
+
+siteTitle:any = "Theescombe";
+trendTag:any = ["level"]
+collectionName:any ="DRS_TC_RES_LVL"
+levelArr: any[]=[];
+range:any
+options: EChartsOption;
+isLoading:boolean = false;
+
+recieveDate($event: any){
+ this.isLoading = true;
+ var trend :any;
+ this.range = $event;
+
+ const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+ this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+   trend=data
+
+   this.levelArr = trend.LevelArr[0];
+
+   this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
+   this.isLoading = false;
+ })
 }
 
 }

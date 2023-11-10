@@ -84,7 +84,7 @@ export class BethelsdorpComponent implements OnInit {
       this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
         this.isLoading = true;
         trend=data
-      this.TotalFlow_BETH_Arr = trend.TotalFlowArr[0];
+      this.TotalFlow_BETH_Arr = trend.TotalFlowArr[0].differences;
 
 
         this.DateArr = trend.DateArr;
@@ -214,7 +214,7 @@ export class BethelsdorpComponent implements OnInit {
     this.isLoading = true;
 
     trend=data
-  this.TotalFlow_BETH_Arr = trend.TotalFlowArr[0];
+  this.TotalFlow_BETH_Arr = trend.TotalFlowArr[0].differences;
     this.DateArr = trend.DateArr;
     console.log(this.TotalFlow_BETH_Arr)
 

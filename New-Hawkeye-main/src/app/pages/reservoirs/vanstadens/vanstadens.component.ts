@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { Subscription } from 'rxjs';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ vs_R_UT:null,
 
 
 
-  constructor(private webSocketService: WebSocketService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod, private pt: PostTrend) {
 
 
 
@@ -51,20 +52,6 @@ vs_R_UT:null,
   vs_R_UT:any
 comms:any;
 
-
-
-
-
-recieveVals(tagArr: any[]){
-  var tagVals:any = []
-  for(let i = 0; i<tagArr.length ;i++){
-    this.webSocketService.nmbm_listen(tagArr[i]).subscribe((data:any)=>{
-      tagVals[i] = data[tagArr[i]];
-
-    })
-  }
-  return tagVals
-}
 
   ngOnInit() {
 
@@ -101,7 +88,30 @@ ngOnDestroy():void{
 
   }
 }
+siteTitle:any = "Van Stadens";
+trendTag:any = ["level"]
+collectionName:any ="BR_VS_RES_LVL"
+levelArr: any[]=[];
+range:any
+options: EChartsOption;
+isLoading:boolean = false;
 
+recieveDate($event: any){
+ this.isLoading = true;
+ var trend :any;
+ this.range = $event;
+
+ const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+ this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+   trend=data
+
+   this.levelArr = trend.LevelArr[0];
+
+   this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
+   this.isLoading = false;
+ })
+}
 }
 
 

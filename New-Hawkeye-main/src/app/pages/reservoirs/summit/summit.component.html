@@ -1,6 +1,4 @@
-<div style="background-color: var(--page-background-color);">
-<div class="div-heading-title"><h1 style="padding-top: 8px; ">Summit</h1></div>
-<div class="wrapper-grid">
+<app-page-with-trend [siteTitle]="siteTitle" [options]="options" (messageEvent)="recieveDate($event)" [isLoading]=isLoading>
 
   <div class="vertical-form">
 <section class="res-form" fxLayoutAlign="center ">
@@ -107,6 +105,4 @@
 
       </div>
 
-</div>
-
-</div>
+</app-page-with-trend>

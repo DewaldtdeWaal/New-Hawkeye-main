@@ -150,9 +150,10 @@ isLoading: boolean = false;
 
       trend=data
 
+      console.log(data)
 
-            this.TotalFlowMWArr =  trend.TotalFlowArr[0];
-            this.TotalFlowIDZArr =  trend.TotalFlowArr[1];
+            this.TotalFlowMWArr =  trend.TotalFlowArr[0].differences;
+            this.TotalFlowIDZArr =  trend.TotalFlowArr[1].differences;
             this.DateArr = trend.DateArr;
             var theme:any
             var tooltipBackground:any;
@@ -319,8 +320,8 @@ var trend :any;
 this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-  this.TotalFlowMWArr =  trend.TotalFlowArr[0];
-  this.TotalFlowIDZArr =  trend.TotalFlowArr[1];
+  this.TotalFlowMWArr =  trend.TotalFlowArr[0].differences;
+  this.TotalFlowIDZArr =  trend.TotalFlowArr[1].differences;
         this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any;

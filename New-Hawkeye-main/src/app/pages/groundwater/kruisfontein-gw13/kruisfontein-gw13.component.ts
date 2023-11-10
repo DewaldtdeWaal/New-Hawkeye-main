@@ -206,7 +206,7 @@ gw_klm_kruis13_res_ful:{
 
     this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.total_flow_1_array =  trend.TotalFlowArr[0];
+      this.total_flow_1_array =  trend.TotalFlowArr[0].differences;
 
       this.DateArr = trend.DateArr;
 
@@ -230,7 +230,7 @@ gw_klm_kruis13_res_ful:{
   this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-  this.total_flow_1_array =  trend.TotalFlowArr[0];
+  this.total_flow_1_array =  trend.TotalFlowArr[0].differences;
   this.DateArr = trend.DateArr;
 
 

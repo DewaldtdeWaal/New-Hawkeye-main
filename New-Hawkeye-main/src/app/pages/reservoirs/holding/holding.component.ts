@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 import { graafService } from 'src/app/Service-Files/Reservoir/reservoir.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
@@ -28,12 +30,37 @@ export class HoldingComponent implements OnInit {
 "hol_r_battery_level",
 "hol_r_poll_ut"
   ]
-  constructor(public recieve:Common ,private pm:pagePostMethod) {
+  constructor(public recieve:Common ,private pm:pagePostMethod, private pt: PostTrend) {
 
 
 
    }
 
+   
+  siteTitle:any = "Holding";
+  trendTag:any = ["level"]
+  collectionName:any ="HOL_GRAAF_RES_LVL"
+  levelArr: any[]=[];
+  range:any
+  options: EChartsOption;
+  isLoading:boolean = false;
+
+  recieveDate($event: any){
+   this.isLoading = true;
+   var trend :any;
+   this.range = $event;
+
+   const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+   this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+     trend=data
+
+     this.levelArr = trend.LevelArr[0];
+
+     this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
+     this.isLoading = false;
+   })
+ }
 
 
    ngOnInit() {

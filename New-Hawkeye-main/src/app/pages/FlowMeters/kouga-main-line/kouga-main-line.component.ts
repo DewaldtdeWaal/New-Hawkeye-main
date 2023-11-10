@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {jeffreysBay} from 'src/app/Service-Files/FPT/fpt.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ReportService } from 'src/app/Service-Files/report.service';
 import { EChartsOption } from 'echarts';
-import { Common } from 'src/app/class/common';
-import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
+import { pageBuilderMethod } from 'src/app/Service-Files/pageBuilder/pageBuilder.service';
+import { Common } from 'src/app/class/common';
+import { pageBuilder } from 'src/app/class/pageBulder';
+import { variable } from '@angular/compiler/src/output/output_ast';
+import { variables } from '../../../class/trendpicker';
+import { concat } from 'rxjs';
+
 @Component({
   selector: 'app-kouga-main-line',
   templateUrl: './kouga-main-line.component.html',
@@ -14,106 +15,90 @@ import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 })
 export class KougaMainLineComponent implements OnInit {
 
-  variable:any = {
-  comms:null,
-  ons_para_ut:null,
-  ons_para_battery_level:null,
-  ons_para_TF:null,
-  ons_para_last_seen:null,
-  kou_main_line_ut:null,
-    kou_main_line_battery_level:null,
-    kou_main_line_pressure:null,
-    kou_main_line_last_seen:null,
-    kou_comms:null,
-    ons_comms:null,
-  }
+  constructor(public pbm:pageBuilderMethod,public pb:pageBuilder,private pt: PostTrend, public recieve:Common, ) {  }
+  variablesMatric:any=[{}]
+  variablesMatric2:any=[{}]
+  variables:any = {}
+  variables2:any = {}
+  commsTitle:any = "Flow Communication";
+  commsTitle2:any = "Pressure Communication";
+  statusTitle:any = "General";
+  statusTitle2:any = "Pressure Information";
 
-    data:any=[]
-    intervalLoop:any
-    options: EChartsOption;
- TotalFlowArr: any[]=[];
- DateArr: any[]=[];
+  siteTitle:any ="Kouga Main Line"
+  intervalLoop:any 
+  intervalLoop2:any
+  ngOnInit() {
+    this.intervalLoop =  this.pbm.findPageData("WBLK_KOUG_FMU_BTU02").subscribe((result) => {
+      this.variables =  result.variables;
 
-  tagArr:any=[
-  "ons_para_ut",
-  "ons_para_battery_level",
-  "ons_para_TF",
-  "ons_para_last_seen",
-  "kou_main_line_ut",
-  "kou_main_line_battery_level",
-  "kou_main_line_pressure",
-  "kou_main_line_last_seen",
-]
-
-collectionName: any = "ONS_PARA_TOTAL_FLOW"
-trendTag: any = ["ons_para_TF"]
-  constructor(private ws: WebSocketService,private route:jeffreysBay,public rs: ReportService, public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
-    this.isLoading = true;
+      this.variablesMatric=[
+        {
+          label:"Flow Rate",
+          value:this.variables.flowrate1 + "  Ml/d"
+        },{
+        label:"Total Flow",
+        value:this.variables.flowtotal1+ " m³"
+      },
+      ]
+    })
 
 
+    this.intervalLoop2 =  this.pbm.findPageData("WBLK_KOUG_FMU_BTU03").subscribe((result) => {
+      this.variables2 =  result.variables;
 
-   }
+      console.log(this.variables2)
 
-   range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+      this.variablesMatric2=[{
+        label:"Pressure",
+        value:this.variables2.pressure1 + " bar"
+      }]
+
+      this.variablesMatric = this.variablesMatric.concat(this.variablesMatric2)
+
+   
+    })
+
+}
 
 
 
-  onDateFilter(){
-    this.isLoading = true;
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
+flowTags:any = ["flowrate1"];
+totalFlowTags:any=["flowtotal1"];
+totalFlowCollectionName:any ="WBLK_KOUG_FMU_BTU02";
 
-var trend :any;
 
-this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+flowRate1:any = []
+flowRate2:any = []
+
+flowtotal1:any = []
+flowtotal2:any = []
+
+range:any
+options: EChartsOption;
+isLoading:boolean = false;
+
+recieveDate($event: any){
+ this.isLoading = true;
+ var trend :any;
+ this.range = $event;
+
+ const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+ this.pt.getTotalFlowAndFlowRate(this.totalFlowCollectionName, this.totalFlowTags,this.flowTags,start,end).then((data) => {
   trend=data
 
-        this.TotalFlowArr = trend.TotalFlowArr[0];
-        this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any;
-        this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","",this.TotalFlowArr);
-        this.isLoading = false;
-})
+
+  this.options = Common.getOptionsBarAndLine(this.options, "Flow Rate l/s",  trend.flowRateArr[0], "Total Flow m³", trend.TotalFlowArr[0] )
+  this.isLoading = false
+
+ })
+
+}
+ngOnDestroy():void{
+  if(this.intervalLoop){
+    this.intervalLoop.unsubscribe();
 
   }
-  isLoading: boolean = false;
-  ngOnInit() {
-    this.intervalLoop = this.pm.findPageData("jeffreys_bay", "FPT_CurrentVals").subscribe((result) => {
-      this.data =  result;
-      console.log(this.data)
-      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-      this.variable.ons_comms = Common.getLastUpdateBattery(this.variable.ons_para_ut,this.variable.ons_para_last_seen)
-
-      this.variable.kou_comms = Common.getLastUpdateBattery(this.variable.kou_main_line_ut,this.variable.kou_main_line_last_seen)
-
-   })
-
-    var trend :any;
-
-
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-
-            this.TotalFlowArr = trend.TotalFlowArr[0];
-            this.DateArr = trend.DateArr;
-
-
-
-//console.log(this.userService.theme)
-this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","",this.TotalFlowArr)
-this.isLoading = false;
-          })
-  }
-  ngOnDestroy(){
-    if(this.intervalLoop){
-      this.intervalLoop.unsubscribe();
-    }
-  }
-
+}
 }

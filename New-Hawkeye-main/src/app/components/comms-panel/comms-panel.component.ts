@@ -18,6 +18,8 @@ export class CommsPanelComponent implements OnInit {
   @Input() batteryUnitNames: any
 
 
+
+
   variables:any = [{}]
 
 

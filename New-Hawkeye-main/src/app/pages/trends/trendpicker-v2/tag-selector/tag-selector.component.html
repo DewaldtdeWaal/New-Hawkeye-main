@@ -195,6 +195,21 @@
                       </div>
                       </mat-expansion-panel>
 
+
+                      <mat-expansion-panel *ngIf="GlenResListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title style="color: var(--overview-table-filter-color);"  >
+                          Glendinningvale
+                        </mat-panel-title>
+                            <mat-panel-description style="color: blue;">
+  
+                </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of GlenResListArr; index as i">
+                          <mat-checkbox style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="GlenResSelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
                     <mat-expansion-panel *ngIf="grTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
                       <mat-expansion-panel-header>
                       <mat-panel-title style="color: var(--overview-table-filter-color);"  >
@@ -337,6 +352,20 @@
                               <mat-checkbox    style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="lhTagsSelected[i]" >{{d}}</mat-checkbox>
                             </div>
                             </mat-expansion-panel>
+
+                            <mat-expansion-panel *ngIf="LINTRESListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                              <mat-expansion-panel-header>
+                              <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                       Linton
+                              </mat-panel-title>
+                                  <mat-panel-description style="color: rgb(170, 185, 34);">
+      
+                                   </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div *ngFor="let d of LINTRESListArr; index as i">
+                                <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="LINTRESSelected[i]" >{{d}}</mat-checkbox>
+                              </div>
+                              </mat-expansion-panel>
 
 
                             <mat-expansion-panel *ngIf="maliTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
@@ -743,6 +772,22 @@
                   </mat-expansion-panel>
 
 
+                  <mat-expansion-panel *ngIf="GlenFPTListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                    <mat-expansion-panel-header>
+                    <mat-panel-title  style="color: var(--overview-table-filter-color);" >
+                      Glendinningvale
+                    </mat-panel-title>
+                        <mat-panel-description style="color: rgb(132, 0, 255);">
+  
+                         </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of GlenFPTListArr; index as i">
+                      <mat-checkbox  style="color: var(--overview-table-filter-color);"  color="primary" [(ngModel)]="GlenFPTSelected[i]" >{{d}}</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+
+
                 <mat-expansion-panel *ngIf="gamtoosTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
                   <mat-expansion-panel-header>
                   <mat-panel-title style="color: var(--overview-table-filter-color);"  >
@@ -1109,6 +1154,21 @@
                       </mat-expansion-panel>
 
 
+                      <mat-expansion-panel *ngIf="GlenWTWListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                        <mat-expansion-panel-header>
+                        <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                 Glendinningvale
+                        </mat-panel-title>
+                            <mat-panel-description style="color: rgb(170, 185, 34);">
+  
+                             </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let d of GlenWTWListArr; index as i">
+                          <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="GlenWTWSelected[i]" >{{d}}</mat-checkbox>
+                        </div>
+                        </mat-expansion-panel>
+
+
                       <mat-expansion-panel *ngIf="klmWtwInletListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
                         <mat-expansion-panel-header>
                         <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
@@ -1122,6 +1182,21 @@
                           <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="klmWtwInletSelected[i]" >{{d}}</mat-checkbox>
                         </div>
                         </mat-expansion-panel>
+
+
+                        <mat-expansion-panel *ngIf="LINTWTWListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                          <mat-expansion-panel-header>
+                          <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                   Linton
+                          </mat-panel-title>
+                              <mat-panel-description style="color: rgb(170, 185, 34);">
+  
+                               </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div *ngFor="let d of LINTWTWListArr; index as i">
+                            <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="LINTWTWSelected[i]" >{{d}}</mat-checkbox>
+                          </div>
+                          </mat-expansion-panel>
 
 
                       <mat-expansion-panel *ngIf="ngtTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >

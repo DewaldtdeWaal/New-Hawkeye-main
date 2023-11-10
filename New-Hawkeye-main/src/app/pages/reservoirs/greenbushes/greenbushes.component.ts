@@ -83,26 +83,13 @@ export class GreenbushesComponent implements OnInit {
   ngOnInit() {
 
 
-
-    // setInterval(() =>{
-    //   this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").subscribe((result) => {
-    //     this.data =  result;
-
-    //     console.log(this.data)
-    //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-    //   this.comms = Common.getLastUpdate(this.variable.gb_R_UT)
-    //   });
-    // },60000);
-
     var trend: any = {};
    // this.rs.Get_GB_TotalFlows().subscribe(data => {
 
       this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0];
-      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1];
+      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0].differences;
+      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1].differences;
 
 
       this.DateArr = trend.DateArr;
@@ -261,8 +248,8 @@ export class GreenbushesComponent implements OnInit {
 
     this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
       trend=data
-      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0];
-      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1];
+      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0].differences;
+      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1].differences;
       this.DateArr = trend.DateArr;
       var theme:any
       var tooltipBackground:any;

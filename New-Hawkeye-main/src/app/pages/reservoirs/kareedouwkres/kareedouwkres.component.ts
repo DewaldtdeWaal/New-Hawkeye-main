@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import {GroundwaterService} from 'src/app/Service-Files/GRDW/groundwater.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-kareedouwkres',
   templateUrl: './kareedouwkres.component.html',
@@ -35,12 +37,38 @@ export class KareedouwkresComponent implements OnInit {
   userSites:string[];
 
 
-  constructor(private authService: AuthService,private GWS:GroundwaterService,public recieve:Common,private pm:pagePostMethod) {
+  constructor(private authService: AuthService,private GWS:GroundwaterService,public recieve:Common,private pm:pagePostMethod, private pt: PostTrend) {
 
 
 
 
    }
+
+      
+  siteTitle:any = "Kruisfontein";
+  trendTag:any = ["level"]
+  collectionName:any ="KLM_KRUIS_RES_LVL"
+  levelArr: any[]=[];
+  range:any
+  options: EChartsOption;
+  isLoading:boolean = false;
+
+  recieveDate($event: any){
+   this.isLoading = true;
+   var trend :any;
+   this.range = $event;
+
+   const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+   this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+     trend=data
+
+     this.levelArr = trend.LevelArr[0];
+
+     this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
+     this.isLoading = false;
+   })
+ }
 
   ngOnInit() {
     this.showKark1 = "false";

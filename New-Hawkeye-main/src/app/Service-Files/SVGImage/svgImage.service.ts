@@ -92,10 +92,10 @@ static returnMotherwellWord(num:any){
 
   if(num == 0){word = "OFF"}
   else if(num == 1){word = "PANEL - MANUAL"}
-  else if(num == 2){word = "PANEL - MANUAL"}
-  else if(num == 3){word = "HMI - MANUAL"}
+  else if(num == 2){word = "HMI - MANUAL"}
+  else if(num == 3){word = "HMI - AUTO"}
   else if(num == 4){word = "HMI - MAINTENANCE"}
-  else if(num == 5){word = "HMI - MANUAL"}
+  else if(num == 5){word = "Local - MANUAL"}
   else if(num == 6){word = "LOCAL - AUTO"}
   else if(num == 7){word = "LOCAL - MAINTENANCE"}
   else if(num == 8){word = "REMOTE MANUAL"}

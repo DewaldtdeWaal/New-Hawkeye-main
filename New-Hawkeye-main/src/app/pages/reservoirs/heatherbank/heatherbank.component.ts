@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {HeatherBankService} from 'src/app/Service-Files/Reservoir/reservoir.service';
-import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Subscription } from 'rxjs';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-heatherbank',
   templateUrl: './heatherbank.component.html',
@@ -31,7 +30,7 @@ export class HeatherbankComponent implements OnInit {
     hb_R_LVL:null,
 hb_R_UT:null,
   }
-  constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(private authService: AuthService,public recieve:Common ,private pm:pagePostMethod, private pt: PostTrend) {
 
 
 
@@ -40,6 +39,30 @@ hb_R_UT:null,
 
   }
 
+  siteTitle:any = "Heatherbank";
+  trendTag:any = ["level"]
+  collectionName:any ="DRS_HB_RES_LVL"
+  levelArr: any[]=[];
+  range:any
+  options: EChartsOption;
+  isLoading:boolean = false;
+
+  recieveDate($event: any){
+   this.isLoading = true;
+   var trend :any;
+   this.range = $event;
+
+   const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+   this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+     trend=data
+
+     this.levelArr = trend.LevelArr[0];
+
+     this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
+     this.isLoading = false;
+   })
+ }
 
   ngOnInit() {
 

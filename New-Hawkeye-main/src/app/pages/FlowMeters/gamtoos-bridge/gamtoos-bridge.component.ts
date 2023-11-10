@@ -98,8 +98,8 @@ export class GamtoosBridgeComponent implements OnInit {
 
       this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.TotalFlow_STL_Arr = trend.TotalFlowArr[0];
-        this.TotalFlow_SOCO_Arr = trend.TotalFlowArr[1];
+      this.TotalFlow_STL_Arr = trend.TotalFlowArr[0].differences;
+        this.TotalFlow_SOCO_Arr = trend.TotalFlowArr[1].differences;
         this.DateArr = trend.DateArr;
             var theme:any
             var tooltipBackground:any;
@@ -260,8 +260,8 @@ var trend :any;
 this.pt.getPostTrend(this.collectionName, this.trendTag,newEnd,newStart).then((data) => {
   trend=data
 
-        this.TotalFlow_STL_Arr = trend.TotalFlow_STL_Arr;
-        this.TotalFlow_SOCO_Arr = trend.TotalFlow_SOCO_Arr;
+        this.TotalFlow_STL_Arr = trend.TotalFlow_STL_Arr[0].differences;
+        this.TotalFlow_SOCO_Arr = trend.TotalFlow_SOCO_Arr[1].differences;
         this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any;

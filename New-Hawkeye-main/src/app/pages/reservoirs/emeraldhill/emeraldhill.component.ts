@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import {emeraldHillService} from 'src/app/Service-Files/Reservoir/reservoir.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { Common } from 'src/app/class/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
@@ -77,7 +75,7 @@ total_flow_1_array: any[]=[];
 DateArr: any[]=[];
 
 
-  constructor(private emer:emeraldHillService,public recieve:Common,public rs: ReportService,private pm:pagePostMethod,private pt: PostTrend ) {
+  constructor(public recieve:Common,public rs: ReportService,private pm:pagePostMethod,private pt: PostTrend ) {
     this.isLoading = true;
 
 
@@ -107,7 +105,7 @@ DateArr: any[]=[];
 
       console.log(trend)
 
-      this.total_flow_1_array = trend.TotalFlowArr[0];
+      this.total_flow_1_array = trend.TotalFlowArr[0].differences
       this.DateArr = trend.DateArr;
 
             this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Total Flow Ml",this.total_flow_1_array)
@@ -115,22 +113,7 @@ DateArr: any[]=[];
           })
 
 
-    // this.intervalLoop = setInterval(() =>{
-    //   this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").subscribe((result) => {
-    //     this.data =  result;
-
-    //     console.log(this.data)
-    //     Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-    //    this.comms = Common.getLastUpdate(this.variable.emer_ut)
-    //      var alarm: any [] =[this.faultVariable.bateryLow, this.faultVariable.chargerOk]
-
-    //     this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm))
-
-    //   });
-
-
-    // },60000);
+   
     var trend :any;
 
 
@@ -156,7 +139,7 @@ DateArr: any[]=[];
       trend=data
 
 
-      this.total_flow_1_array =trend.TotalFlowArr[0];
+      this.total_flow_1_array =trend.TotalFlowArr[0].differences;
             this.DateArr = trend.DateArr;
 
 

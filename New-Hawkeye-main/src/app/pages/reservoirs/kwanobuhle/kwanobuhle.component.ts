@@ -5,6 +5,8 @@ import { UsersService } from 'src/app/Service-Files/users.service';
 
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 export interface PeriodicElement{
   alarm: string;
@@ -97,7 +99,7 @@ alarmTrip: 1
 
    }
 
-  constructor(public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod)
+  constructor(public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod, private pt: PostTrend)
   {
 
 
@@ -107,7 +109,30 @@ alarmTrip: 1
 
 
 
-
+   siteTitle:any = "Kwanobuhle";
+   trendTag:any = ["kwano_r_reservoir_level"]
+   collectionName:any ="NMB_KWANO_R"
+   levelArr: any[]=[];
+   range:any
+   options: EChartsOption;
+   isLoading:boolean = false;
+ 
+   recieveDate($event: any){
+    this.isLoading = true;
+    var trend :any;
+    this.range = $event;
+ 
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+ 
+    this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+      trend=data
+ 
+      this.levelArr = trend.LevelArr[0];
+ 
+      this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
+      this.isLoading = false;
+    })
+  }
 
 
 

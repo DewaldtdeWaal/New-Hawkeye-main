@@ -127,7 +127,7 @@ export class ChattyComponent implements OnInit {
      var trend: any = {};
      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-       this.chattyTF =  trend.TotalFlowArr[0];
+       this.chattyTF =  trend.TotalFlowArr[0].differences;
 
        this.DateArr = trend.DateArr;
          var theme:any
@@ -283,7 +283,7 @@ export class ChattyComponent implements OnInit {
 
  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
-   this.chattyTF =  trend.TotalFlowArr[0];
+   this.chattyTF =  trend.TotalFlowArr[0].differences;
    this.DateArr = trend.DateArr;
    var theme:any
    var tooltipBackground:any;

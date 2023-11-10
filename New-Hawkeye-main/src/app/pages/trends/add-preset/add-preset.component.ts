@@ -236,6 +236,21 @@ RPESelected:boolean[]=[]
 RRListArr:string[]=[]
 RRSelected:boolean[]=[]
 
+LINTWTWListArr:string[]=[]
+LINTWTWSelected:boolean[]=[]
+
+LINTRESListArr:string[]=[]
+LINTRESSelected:boolean[]=[]
+
+GlenResListArr:string[]=[]
+GlenResSelected:boolean[]=[]
+
+GlenFPTListArr:string[]=[]
+GlenFPTSelected:boolean[]=[];
+
+GlenWTWListArr:string[]=[]
+GlenWTWSelected:boolean[]=[]
+
 showResMenu: boolean = false;
 showPSMenu: boolean = false;
 showTrendsMenu: boolean = false;
@@ -333,6 +348,11 @@ this.ReadSelectedValues(this.kroonTagListArr,this.kroonTagsSelected, "Kroonvale 
 this.ReadSelectedValues(this.holdingTagListArr,this.holdingTagsSelected, "Holding ")
 this.ReadSelectedValues(this.damcampTagListArr,this.damcampTagsSelected, "Damcamp ")
 this.ReadSelectedValues(this.tinroofTagListArr,this.tinroofTagsSelected, "Tin Roof ")
+this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " );
+this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
+this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
+this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
+
 this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
 this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
 this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
@@ -372,6 +392,7 @@ this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht "
 this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
 this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
+this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
 
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
@@ -502,7 +523,52 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
                this.showRes= true;
                 break;
 
+                case "NMB_LIN_R":
+                  if(count>=1){count = 0}
+                  this.LINTRESListArr[count]="Level"
+                  count++
+                    this.showRes = true;
+                  break;
 
+                  case "NMB_GLEN_R":
+                    if(count>=1){count = 0}
+                    this.GlenResListArr[count]="Level"
+                    count++;
+                    this.showRes = true;
+                    break;
+                
+            
+                    case "NMB_GLEN_FPT":
+                      if(count>=1){count = 0}
+                      this.GlenFPTListArr[count]="Inlet Pressure"
+                      count++
+                      this.GlenFPTListArr[count]="Inlet Flow Rate"
+                      count++
+                      this.GlenFPTListArr[count]="Inlet Total Flow"
+                      count++
+                      this.GlenFPTListArr[count]="Borehole Flow Rate"
+                      count++
+                      this.GlenFPTListArr[count]="Borehole Total Flow"
+                      count++;
+                      this.showFPT = true;
+                      break;
+            
+                      case "NMB_GLEN_WTW":
+                        if(count>=1){count = 0}
+                        this.GlenWTWListArr[count]="Pump 1 Run Time";
+                        count++;
+                        this.GlenWTWListArr[count]="Pump 2 Run Time";
+                        count++;
+                        this.GlenWTWListArr[count]="Pump 1 Number Of Starts";
+                        count++;
+                        this.GlenWTWListArr[count]="Pump 2 Number Of Starts";
+                        count++;
+                        this.GlenWTWListArr[count]="Potential of Hydrogen";
+                        count++;
+                        this.GlenWTWListArr[count]="Oxidation Reduction Potential";
+                        count++;
+                        this.showWTW = true;
+                        break;
 
         // case "NMB_BUSH_PS":
         //   if(count>=1){count = 0}
@@ -847,6 +913,25 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
            count++
            this.showWTW= true;
                 break;
+
+                case "NMB_LIN_WTW":
+                  if(count>=1){count = 0}
+                  this.LINTWTWListArr[count]="Back Wash Flow Rate"
+                  count++;
+                  this.LINTWTWListArr[count]="Back Wash Total Flow"
+                  count++;
+                  this.LINTWTWListArr[count]="Raw Water Flow Rate"
+                  count++;
+                  this.LINTWTWListArr[count]="Raw Water Total Flow"
+                  count++;
+                  this.LINTWTWListArr[count]="Final Water Flow Rate"
+                  count++;
+                  this.LINTWTWListArr[count]="Final Water Total Flow"
+                  count++;
+                this.showWTW= true;
+                  break;
+
+
       case "NMB_VRH_R":
         if (count>=1 ){count = 0}
         this.vrhTagListArr[count]="Delivery Level"
@@ -1357,6 +1442,10 @@ break;
     this.ReadSelectedValues(this.driftTagListArr,this.driftTagsSelected,"Driftsands ")
     this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
     this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
+    this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " )
+    this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
+this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
+this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
     this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
     // Pump Stations
     this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
@@ -1394,6 +1483,7 @@ this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail
     this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
     this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
     this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
+    this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
 
     this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
@@ -1450,6 +1540,10 @@ this.mwrTagsSelected=[]
 this.npTagsSelected=[];
 this.effTagsSelected=[];
 this.kruisRSelected=[]
+this.LINTRESSelected=[];
+this.GlenResSelected=[]
+this.GlenFPTSelected=[]
+this.GlenWTWSelected=[]
 this.ngtTagsSelected=[];
 this.rdTagsSelected=[];
 this.stanTagsSelected=[];
@@ -1470,6 +1564,7 @@ this.stormsWTWTagSelected=[]
 this.oliTagSelected=[]
 this.elandTagSelected=[]
 this.klmWtwInletSelected=[]
+this.LINTWTWSelected=[]
 this.LSDSelected = []
 this.MNTSSelected = []
 this.driftTagsSelected=[];

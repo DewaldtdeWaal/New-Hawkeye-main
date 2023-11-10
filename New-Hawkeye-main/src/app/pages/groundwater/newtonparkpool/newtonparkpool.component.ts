@@ -241,7 +241,7 @@ export class NewtonparkpoolComponent implements OnInit {
   var trend: any = {};
   this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
     trend=data
-    this.totalflow_array = trend.TotalFlowArr[0];
+    this.totalflow_array = trend.TotalFlowArr[0].differences;
 
     this.DateArr = trend.DateArr;
       var theme:any
@@ -304,7 +304,7 @@ export class NewtonparkpoolComponent implements OnInit {
 
   this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
     trend=data
-    this.totalflow_array = trend.TotalFlowArr[0];
+    this.totalflow_array = trend.TotalFlowArr[0].differences;
   this.DateArr = trend.DateArr;
   var theme:any
   var tooltipBackground:any;

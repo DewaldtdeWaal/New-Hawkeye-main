@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-lovemoreheights',
   templateUrl: './lovemoreheights.component.html',
@@ -32,7 +34,7 @@ export class LovemoreheightsComponent implements OnInit {
   ]
 
 
-  constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod ) {
+  constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod , private pt: PostTrend ) {
 
 
 
@@ -70,6 +72,31 @@ ngOnDestroy():void{
   if(this.intervalLoop){
     this.intervalLoop.unsubscribe();
   }
+}
+
+
+siteTitle:any = "Lovemore Heights";
+trendTag:any = ["level","lh_Res_lvl"]
+collectionName:any ="DRS_LH_RES_LVL"
+levelArr: any[]=[];
+range:any
+options: EChartsOption;
+isLoading:boolean = false;
+
+recieveDate($event: any){
+ this.isLoading = true;
+ var trend :any;
+ this.range = $event;
+
+ const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+ this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+   trend=data
+
+
+   this.options = this.recieve.getOptionsFor2Line("%","Overhead Tank %",trend.LevelArr[0],"Reservoir Tank %",trend.LevelArr[1])
+   this.isLoading = false;
+ })
 }
 
 }

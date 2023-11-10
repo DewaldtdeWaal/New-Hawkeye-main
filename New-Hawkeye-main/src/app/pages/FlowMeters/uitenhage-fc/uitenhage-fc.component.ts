@@ -161,7 +161,7 @@ trendTag: any = ["totalFlow"]
     var trend: any = {};
     this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
       trend=data
-      this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0];
+      this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0].differences;
       this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any
@@ -193,7 +193,7 @@ var trend :any;
 
 this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
-  this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0];
+  this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0].differences;
   this.DateArr = trend.DateArr;
 
 

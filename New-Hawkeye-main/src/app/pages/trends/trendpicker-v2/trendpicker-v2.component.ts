@@ -299,6 +299,23 @@ variable:any = variables;
     RRSelected:boolean[]=[]
 
 
+    LINTWTWListArr:string[]=[]
+    LINTWTWSelected:boolean[]=[]
+
+    LINTRESListArr:string[]=[]
+    LINTRESSelected:boolean[]=[]
+
+
+    GlenResListArr:string[]=[]
+    GlenResSelected:boolean[]=[]
+    
+    GlenFPTListArr:string[]=[]
+    GlenFPTSelected:boolean[]=[]
+
+    GlenWTWListArr:string[]=[]
+    GlenWTWSelected:boolean[]=[]
+
+
 
   constructor(private su: ServerURLService,private http: HttpClient,private tps:TrendPickerService,public dialog: MatDialog ,public rs: ReportService,public authService: AuthService, private renderer: Renderer2) {
 
@@ -1164,9 +1181,67 @@ break;
               count++
               break;
 
+              case "NMB_LIN_WTW":
+                if(count>=1){count = 0}
+                this.LINTWTWListArr[count]="Back Wash Flow Rate"
+                count++;
+                this.LINTWTWListArr[count]="Back Wash Total Flow"
+                count++;
+                this.LINTWTWListArr[count]="Raw Water Flow Rate"
+                count++;
+                this.LINTWTWListArr[count]="Raw Water Total Flow"
+                count++;
+                this.LINTWTWListArr[count]="Final Water Flow Rate"
+                count++;
+                this.LINTWTWListArr[count]="Final Water Total Flow"
+                count++;
+
+                break;
 
 
 
+                case "NMB_LIN_R":
+                  if(count>=1){count = 0}
+                  this.LINTRESListArr[count]="Level"
+                  count++
+  
+                  break;
+
+                  case "NMB_GLEN_R":
+                    if(count>=1){count = 0}
+                    this.GlenResListArr[count]="Level"
+                    count++
+                    break;
+
+                    case "NMB_GLEN_FPT":
+                      if(count>=1){count = 0}
+                      this.GlenFPTListArr[count]="Inlet Pressure"
+                      count++
+                      this.GlenFPTListArr[count]="Inlet Flow Rate"
+                      count++
+                      this.GlenFPTListArr[count]="Inlet Total Flow"
+                      count++
+                      this.GlenFPTListArr[count]="Borehole Flow Rate"
+                      count++
+                      this.GlenFPTListArr[count]="Borehole Total Flow"
+                      count++
+                      break;
+
+                      case "NMB_GLEN_WTW":
+                        if(count>=1){count = 0}
+                        this.GlenWTWListArr[count]="Pump 1 Run Time";
+                        count++;
+                        this.GlenWTWListArr[count]="Pump 2 Run Time";
+                        count++;
+                        this.GlenWTWListArr[count]="Pump 1 Number Of Starts";
+                        count++;
+                        this.GlenWTWListArr[count]="Pump 2 Number Of Starts";
+                        count++;
+                        this.GlenWTWListArr[count]="Potential of Hydrogen";
+                        count++;
+                        this.GlenWTWListArr[count]="Oxidation Reduction Potential";
+                        count++;
+                        break;
     }
       }
   }
@@ -1305,6 +1380,114 @@ console.log(this.selectedTags)
     //reservoir
     series: [
       {
+        name: 'Glendinningvale Pump 1 Run Time',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_P1_rtm_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_P1_rtm_axis,
+      },
+      {
+        name: 'Glendinningvale Pump 2 Run Time',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_P2_rtm_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_P2_rtm_axis,
+      },
+      {
+        name: 'Glendinningvale Pump 1 Number Of Starts',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_P1_stn_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_P1_stn_axis,
+      },
+      {
+        name: 'Glendinningvale Pump 2 Number Of Starts',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_P2_stn_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_P2_stn_axis,
+      },
+      {
+        name: 'Glendinningvale Potential of Hydrogen',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_ph_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_ph_axis,
+      },
+      {
+        name: 'Glendinningvale Oxidation Reduction Potential',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_orp_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_orp_axis,
+      },
+      {
+        name: 'Glendinningvale Inlet Pressure',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_Inlet_bar_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_Inlet_bar_axis,
+      },
+      {
+        name: 'Glendinningvale Inlet Flow Rate',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_Inlet_Flow_Rate_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_Inlet_Flow_Rate_axis,
+      },
+      {
+        name: 'Glendinningvale Inlet Total Flow',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_Inlet_Total_Flow_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_Inlet_Total_Flow_axis,
+      },
+      {
+        name: 'Glendinningvale Borehole Flow Rate',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_borehole_Flow_Rate_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_borehole_Flow_Rate_axis,
+      },
+      {
+        name: 'Glendinningvale Borehole Total Flow',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_FTP_WTW_borehole_Total_Flow_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_FTP_WTW_borehole_Total_Flow_axis,
+      },
+      {
+        name: 'Glendinningvale Reservoir Level',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.glen_r_res_lvl_arr,
+        smooth: true,
+        yAxisIndex:axisValues.glen_r_res_lvl_axis,
+        },
+      {
         name: 'Isuzu Oven 1 VSD Speed',
         type: 'line',
         showSymbol: false,
@@ -1417,8 +1600,8 @@ console.log(this.selectedTags)
         showSymbol: false,
         hoverAnimation: true,
         data: this.variable.KWANO_R_TOTAL_FLOW_1_arr,
-        smooth: true,
-        yAxisIndex:axisValues.KWANO_R_TOTAL_FLOW_1_axis,
+        smooth: true,     
+       yAxisIndex:axisValues.KWANO_R_TOTAL_FLOW_1_axis,
       },
       {
         name: "Kwanobuhle Reservoir Total Flow 2",
@@ -3613,6 +3796,69 @@ yAxisIndex:axisValues.HUM_GW_FIN_WAT_TANK_LVL_axis,
       smooth: true,
       yAxisIndex:axisValues.WDSR_ROWP_FR_axis,
     },
+    {
+      name:"Linton Back Wash Flow Rate",
+      type:'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.lint_wtw_back_wash_FR_ARR ,
+      smooth: true,
+      yAxisIndex:axisValues.lint_wtw_back_wash_FR_Axis
+    },
+    {
+      name:"Linton Back Wash Total Flow",
+      type:'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.lint_wtw_back_wash_TF_ARR ,
+      smooth: true,
+      yAxisIndex:axisValues.lint_wtw_back_wash_TF_Axis
+    },
+    {
+      name:"Linton Raw Water Flow Rate",
+      type:'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.lint_wtw_raw_water_FR_ARR ,
+      smooth: true,
+      yAxisIndex:axisValues.lint_wtw_raw_water_FR_Axis
+    },
+    {
+      name:"Linton Raw Water Total Flow",
+      type:'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.lint_wtw_raw_water_TF_ARR ,
+      smooth: true,
+      yAxisIndex:axisValues.lint_wtw_raw_water_TF_Axis
+    },
+    {name:"Linton Final Water Flow Rate",
+    type:'line',
+    showSymbol: false,
+    hoverAnimation: true,
+    data: this.variable.lint_wtw_final_water_FR_ARR ,
+    smooth: true,
+    yAxisIndex:axisValues.lint_wtw_final_water_FR_Axis
+  },
+    {
+      name:"Linton Final Water Total Flow",
+      type:'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.lint_wtw_final_water_TF_ARR ,
+      smooth: true,
+      yAxisIndex:axisValues.lint_wtw_final_water_TF_Axis
+    },
+    {
+      name:"Linton Reservoir Level",
+      type:'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.lint_res_lvl_ARR ,
+      smooth: true,
+      yAxisIndex:axisValues.lint_res_lvl_Axis
+    },
+
 
   ]
     };
@@ -4626,6 +4872,88 @@ case "Humansdorp Inlet Flow Rate":
                     case "Rowallan Park Extension Flow Rate":
                     this.RRSelected[2] = true;
                     break;
+
+                    case "Linton Back Wash Flow Rate":
+                      this.LINTWTWSelected[0]=true;
+                      break;
+
+                      case "Linton Back Wash Total Flow":
+                        this.LINTWTWSelected[1]=true;
+                      break;
+
+                      case "Linton Raw Water Flow Rate":
+                        this.LINTWTWSelected[2]=true;
+                      break;
+
+                      case "Linton Raw Water Total Flow":
+                        this.LINTWTWSelected[3]=true;
+                      break;
+
+                      case "Linton Final Water Flow Rate":
+                        this.LINTWTWSelected[4]=true;
+                      break;
+
+                      case "Linton Final Water Total Flow":
+                        this.LINTWTWSelected[5]=true;
+                      break;
+
+
+                      case "Linton Reservoir Level":
+                        this.LINTRESSelected[0]=true;
+                        break;
+
+
+                        case "Glendinningvale Reservoir Level":
+                          this.GlenResSelected[0]=true;
+                          break;
+
+
+                          case "Glendinningvale Inlet Pressure":
+                            this.GlenFPTSelected[0]=true;
+                            break;
+
+                            case "Glendinningvale Inlet Flow Rate":
+                            this.GlenFPTSelected[1]=true;
+                            break;
+
+
+                            case "Glendinningvale Inlet Total Flow":
+                            this.GlenFPTSelected[2]=true;
+                            break;
+
+                            case "Glendinningvale Borehole Flow Rate":
+                            this.GlenFPTSelected[3]=true;
+                            break;
+   
+                            case "Glendinningvale Borehole Total Flow":
+                            this.GlenFPTSelected[4]=true;
+                            break;
+
+
+                            case "Glendinningvale Pump 1 Run Time":
+                            this.GlenWTWSelected[0]=true;
+                            break;
+
+                            case "Glendinningvale Pump 2 Run Time":
+                            this.GlenWTWSelected[1]=true;
+                            break;
+
+                            case "Glendinningvale Pump 1 Number Of Starts":
+                            this.GlenWTWSelected[2]=true;
+                            break;
+
+                            case "Glendinningvale Pump 2 Number Of Starts":
+                            this.GlenWTWSelected[3]=true;
+                            break;
+
+                            case "Glendinningvale Potential of Hydrogen":
+                            this.GlenWTWSelected[4]=true;
+                            break;
+
+                            case "Glendinningvale Oxidation Reduction Potential":
+                            this.GlenWTWSelected[5]=true;
+                            break;
+
   }}
 
 
@@ -4709,6 +5037,18 @@ this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt 
 this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
 this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
+
+
+this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " )
+
+this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
+
+this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
+
+this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " )
+
+this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
+
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
 
 this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
@@ -4728,6 +5068,143 @@ console.log( this.selectedTags)
       switch (sitesChosen[m]) {
         // Reservoirs
 
+        case "Glendinningvale Pump 1 Run Time":
+          if(this.variable.glen_FTP_WTW_P1_rtm_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_P1_rtm_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+        case "Glendinningvale Pump 2 Run Time":
+          if(this.variable.glen_FTP_WTW_P2_rtm_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_P2_rtm_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+        case "Glendinningvale Pump 1 Number Of Starts":
+          if(this.variable.glen_FTP_WTW_P1_stn_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_P1_stn_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+        case "Glendinningvale Pump 2 Number Of Starts":
+          if(this.variable.glen_FTP_WTW_P2_stn_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_P2_stn_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+
+
+        case "Glendinningvale Potential of Hydrogen":
+          if(this.variable.glen_FTP_WTW_ph_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_ph_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+        case "Glendinningvale Oxidation Reduction Potential":
+          if(this.variable.glen_FTP_WTW_orp_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_orp_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+        case "Glendinningvale Inlet Pressure":
+          if(this.variable.glen_FTP_WTW_Inlet_bar_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_Inlet_bar_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+        
+         case "Glendinningvale Inlet Flow Rate":
+          if(this.variable.glen_FTP_WTW_Inlet_Flow_Rate_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_Inlet_Flow_Rate_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+        
+                             break;
+        
+        case "Glendinningvale Inlet Total Flow":
+          if(this.variable.glen_FTP_WTW_Inlet_Total_Flow_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_Inlet_Total_Flow_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+      
+       case "Glendinningvale Borehole Flow Rate":
+        if(this.variable.glen_FTP_WTW_borehole_Flow_Rate_arr.length == 0){break;}
+        else{
+          var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_borehole_Flow_Rate_arr)!
+          minValues[m]= arr[0]
+          maxValues[m]=arr[1]
+          avgValues[m]=arr[2]
+             }
+      
+                 break;
+
+       case "Glendinningvale Borehole Total Flow":
+        if(this.variable.glen_FTP_WTW_borehole_Total_Flow_arr.length == 0){break;}
+        else{
+          var arr = this.MinMaxAvg(m,this.variable.glen_FTP_WTW_borehole_Total_Flow_arr)!
+          minValues[m]= arr[0]
+          maxValues[m]=arr[1]
+          avgValues[m]=arr[2]
+             }
+    
+                 break;
+
+        case "Glendinningvale Reservoir Level":
+          if(this.variable.glen_r_res_lvl_arr.length == 0){break;}
+          else{
+            var arr = this.MinMaxAvg(m,this.variable.glen_r_res_lvl_arr)!
+            minValues[m]= arr[0]
+            maxValues[m]=arr[1]
+            avgValues[m]=arr[2]
+               }
+
+                   break;
+
+
         case "Isuzu Oven 1 VSD Speed":
           if(this.variable.isuzu_oven1_vsd_speed_arr.length == 0){break;}
           else{
@@ -4738,6 +5215,9 @@ console.log( this.selectedTags)
                }
 
                    break;
+
+
+               
 
             case "Isuzu Oven 1 Heat Exchanger Temperature":
              if(this.variable.isuzu_oven1_heat_ecvh_temp_arr.length == 0){break;}
@@ -7684,7 +8164,83 @@ console.log( this.selectedTags)
                                         break;
 
 
+                                        case    "Linton Back Wash Flow Rate":
+                                          if (this.variable.lint_wtw_back_wash_FR_ARR.length==0){break;}
+                                            else{
+                                     var arr = this.MinMaxAvg(m,this.variable.lint_wtw_back_wash_FR_ARR)!
+                                     minValues[m]= arr[0]
+                                     maxValues[m]=arr[1]
+                                     avgValues[m]=arr[2]
+                                        }
+                                            break;
 
+
+                                            case    "Linton Back Wash Total Flow":
+                                              if (this.variable.lint_wtw_back_wash_TF_ARR.length==0){break;}
+                                                else{
+                                         var arr = this.MinMaxAvg(m,this.variable.lint_wtw_back_wash_TF_ARR)!
+                                         minValues[m]= arr[0]
+                                         maxValues[m]=arr[1]
+                                         avgValues[m]=arr[2]
+                                            }
+                                                break;
+
+
+                                                case    "Linton Raw Water Flow Rate":
+                                                  if (this.variable.lint_wtw_raw_water_FR_ARR.length==0){break;}
+                                                    else{
+                                             var arr = this.MinMaxAvg(m,this.variable.lint_wtw_raw_water_FR_ARR)!
+                                             minValues[m]= arr[0]
+                                             maxValues[m]=arr[1]
+                                             avgValues[m]=arr[2]
+                                                }
+                                                    break;
+        
+        
+                                                    case    "Linton Raw Water Total Flow":
+                                                      if (this.variable.lint_wtw_raw_water_TF_ARR.length==0){break;}
+                                                        else{
+                                                 var arr = this.MinMaxAvg(m,this.variable.lint_wtw_raw_water_TF_ARR)!
+                                                 minValues[m]= arr[0]
+                                                 maxValues[m]=arr[1]
+                                                 avgValues[m]=arr[2]
+                                                    }
+                                                        break;
+
+                                                        case    "Linton Final Water Flow Rate":
+                                                          if (this.variable.lint_wtw_final_water_FR_ARR.length==0){break;}
+                                                            else{
+                                                     var arr = this.MinMaxAvg(m,this.variable.lint_wtw_final_water_FR_ARR)!
+                                                     minValues[m]= arr[0]
+                                                     maxValues[m]=arr[1]
+                                                     avgValues[m]=arr[2]
+                                                        }
+                                                            break;
+                
+                
+                                                            case    "Linton Final Water Total Flow":
+                                                              if (this.variable.lint_wtw_final_water_TF_ARR.length==0){break;}
+                                                                else{
+                                                         var arr = this.MinMaxAvg(m,this.variable.lint_wtw_final_water_TF_ARR)!
+                                                         minValues[m]= arr[0]
+                                                         maxValues[m]=arr[1]
+                                                         avgValues[m]=arr[2]
+                                                            }
+                                                                break;
+                
+                
+                                                                case    "Linton Reservoir Level":
+                                                                  if (this.variable.lint_res_lvl_ARR.length==0){break;}
+                                                                    else{
+                                                             var arr = this.MinMaxAvg(m,this.variable.lint_res_lvl_ARR)!
+                                                             minValues[m]= arr[0]
+                                                             maxValues[m]=arr[1]
+                                                             avgValues[m]=arr[2]
+                                                                }
+                                                                    break;
+                        
+                        
+                                                              
 
       }
 
@@ -8684,6 +9240,41 @@ RightAxisConfiguration(AxisValue:any){
                                       case "Elandsjagt Pressure":
                                       axisValues.ELA_P_axis = 1
                                       break;
+
+
+                                      case "Linton Back Wash Flow Rate":
+                                        axisValues.lint_wtw_back_wash_FR_Axis = 1;
+                                        break;
+
+                                        case "Linton Back Wash Total Flow":
+                                          axisValues.lint_wtw_back_wash_TF_Axis = 1;
+                                          break;
+
+                                          case "Linton Raw Water Flow Rate":
+                                            axisValues.lint_wtw_raw_water_FR_Axis = 1;
+                                            break;
+
+                                            case "Linton Raw Water Total Flow":
+                                              axisValues.lint_wtw_raw_water_TF_Axis = 1;
+                                              break;
+
+                                              case "Linton Final Water Flow Rate":
+                                                axisValues.lint_wtw_final_water_FR_Axis = 1;
+                                                break;
+
+                                                case "Linton Final Water Total Flow":
+                                                  axisValues.lint_wtw_final_water_TF_Axis = 1;
+                                                  break;
+
+
+                                                    case "Linton Reservoir Level":
+                                                  axisValues.lint_res_lvl_Axis = 1;
+                                                  break;
+
+
+
+
+
     }
 
 

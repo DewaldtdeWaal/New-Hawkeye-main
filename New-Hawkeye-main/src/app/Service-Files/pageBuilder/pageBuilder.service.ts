@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ServerURLService } from "../server-url.service";
 import { pageBuilder} from "src/app/class/pageBulder";
+import { Observable, timer } from "rxjs";
+import { switchMap } from "rxjs/operators";
 
 export interface SiteName{
   SiteName: string;
@@ -37,6 +39,17 @@ async getSiteData(siteName: any){
 
 
 
+}
+
+findPageData(siteName: any): Observable<any> {
+  return timer(0, 60000).pipe(
+    switchMap(() => {
+      const site:SiteName = {
+        SiteName:siteName
+      };
+      return this.http.post(this.su.serverURL + "/get-site-data", site);
+    })
+  );
 }
 
 

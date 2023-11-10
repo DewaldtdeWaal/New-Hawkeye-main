@@ -53,7 +53,7 @@ DateArr: any;
     "che_r_tf600"
 
   ]
-  constructor(public rs: ReportService,private ws: WebSocketService,private ls:ListeningService,private che: ChelseaService,private userService: UsersService,private authService: AuthService,public recieve:Common,private pt: PostTrend ,private pm:pagePostMethod) {
+  constructor(public rs: ReportService,private authService: AuthService,public recieve:Common,private pt: PostTrend ,private pm:pagePostMethod) {
     this.isLoading = true;
 
 
@@ -105,8 +105,8 @@ DateArr: any;
 
   this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
    trend=data
-   this.CHE_R_TF1100_arr = trend.TotalFlowArr[0]
-   this.CHE_R_TF600_arr = trend.TotalFlowArr[1]
+   this.CHE_R_TF1100_arr = trend.TotalFlowArr[0].differences
+   this.CHE_R_TF600_arr = trend.TotalFlowArr[1].differences
 
 
    this.DateArr = trend.DateArr;
@@ -272,8 +272,8 @@ DateArr: any;
   this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
   trend=data
 
-  this.CHE_R_TF1100_arr = trend.TotalFlowArr[0]
-  this.CHE_R_TF600_arr = trend.TotalFlowArr[1]
+  this.CHE_R_TF1100_arr = trend.TotalFlowArr[0].differences
+  this.CHE_R_TF600_arr = trend.TotalFlowArr[1].differences
   this.DateArr = trend.DateArr;
   var theme:any
   var tooltipBackground:any;

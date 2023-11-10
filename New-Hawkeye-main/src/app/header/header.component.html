@@ -72,6 +72,10 @@
         <button *ngIf="i=='NMB_MALI_R'" mat-menu-item class="item" routerLink="/hawkeye/reservoirs/malibar">Malabar</button>
         <button *ngIf="i=='NMB_STG_R'" mat-menu-item class="item" routerLink = "hawkeye/reservoirs/st-georges-res">St Georges</button>
 
+        <button *ngIf="i=='NMB_LIN_R'" mat-menu-item class = "item" routerLink="/hawkeye/reservoirs/linton">Linton</button>
+
+        <button *ngIf="i=='NMB_GLEN_R'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/reservoirs/glendinningvaleres">Glendinningvale</button>
+
       </div>
 </div>
 
@@ -136,7 +140,7 @@
     <button *ngIf="i=='NMB_PARA_BEA_ST_FRANCIS_FPT'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/fptsites/paradise-beach-st-francis-offtake">Paradise/St Francis</button>
     <button *ngIf="i=='NMB_KOU_MAIN_LINE_FPT'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/fptsites/kouga-main-line">Kouga Main Line</button>
     <button *ngIf="i=='NMB_HUP_OFF_TAKE_FPT'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/fptsites/humansdorp-offtake">Humansdorp Offtake</button>
-
+    <button *ngIf="i=='NMB_GLEN_FPT'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/fptsites/glendinningvaleftp">Glendinningvale</button>
   </div>
 
 </div>
@@ -149,7 +153,8 @@
           <div  *ngFor="let i of userSites">
             <button *ngIf="i=='NMB_ELANDS_WTW'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/wtw/elandsjagt">Elandsjagt</button>
             <button *ngIf="i=='NMB_NGT_WTW'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/wtw/nooitgedacht">Nooitgedacht</button>
-
+            <button *ngIf="i=='NMB_LIN_WTW'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/wtw/linton">Linton</button>
+            <button *ngIf="i=='NMB_GLEN_WTW'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/wtw/glendinningvalewtw">Glendinningvale</button>
           </div>
        </div>
 
@@ -207,6 +212,7 @@
         <button *ngIf="i=='GRF_WOL_R'" mat-menu-item class="item" routerLink="/hawkeye/reservoirs/wolwas">Wolwas</button>
         <button *ngIf="i=='KLM_KUI_R'" mat-menu-item class = "item" routerLink="/hawkeye/reservoirs/kruisfontein-r">Kruisfontein</button>
 
+  
       </div>
     </div>
 

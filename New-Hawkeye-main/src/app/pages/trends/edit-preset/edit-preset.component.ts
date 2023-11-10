@@ -285,6 +285,20 @@ intervalFunction:any
   RRListArr:string[]=[]
   RRSelected:boolean[]=[]
 
+  LINTWTWListArr:string[]=[]
+LINTWTWSelected:boolean[]=[]
+
+LINTRESListArr:string[]=[]
+LINTRESSelected:boolean[]=[]
+
+GlenResListArr:string[]=[]
+GlenResSelected:boolean[]=[]
+
+GlenFPTListArr:string[]=[]
+GlenFPTSelected:boolean[]=[];
+
+GlenWTWListArr:string[]=[]
+GlenWTWSelected:boolean[]=[]
 
   constructor(private su: ServerURLService,private ts:TrendPickerService,private http: HttpClient, public rs: ReportService,private authService: AuthService, private userService: UsersService, private webSocketService: WebSocketService,
       private tps:TrendPickerService,private router: Router
@@ -364,7 +378,11 @@ this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Hum
 this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
 this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
-
+this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
+this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " )
+this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
+this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
+this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
 this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
@@ -456,7 +474,70 @@ for (let i = 0; i < this.userSites.length; i++) {
 
         break;
 
+        case "NMB_LIN_WTW":
+          if(count>=1){count = 0}
+          this.LINTWTWListArr[count]="Back Wash Flow Rate"
+          count++;
+          this.LINTWTWListArr[count]="Back Wash Total Flow"
+          count++;
+          this.LINTWTWListArr[count]="Raw Water Flow Rate"
+          count++;
+          this.LINTWTWListArr[count]="Raw Water Total Flow"
+          count++;
+          this.LINTWTWListArr[count]="Final Water Flow Rate"
+          count++;
+          this.LINTWTWListArr[count]="Final Water Total Flow"
+          count++;
+this.showWTW= true;
+          break;
 
+
+          case "NMB_LIN_R":
+            if(count>=1){count = 0}
+            this.LINTRESListArr[count]="Level"
+            count++
+              this.showRes = true;
+            break;
+
+            case "NMB_GLEN_R":
+              if(count>=1){count = 0}
+              this.GlenResListArr[count]="Level"
+              count++;
+              this.showRes = true;
+              break;
+          
+      
+              case "NMB_GLEN_FPT":
+                if(count>=1){count = 0}
+                this.GlenFPTListArr[count]="Inlet Pressure"
+                count++
+                this.GlenFPTListArr[count]="Inlet Flow Rate"
+                count++
+                this.GlenFPTListArr[count]="Inlet Total Flow"
+                count++
+                this.GlenFPTListArr[count]="Borehole Flow Rate"
+                count++
+                this.GlenFPTListArr[count]="Borehole Total Flow"
+                count++;
+                this.showFPT = true;
+                break;
+      
+                case "NMB_GLEN_WTW":
+                  if(count>=1){count = 0}
+                  this.GlenWTWListArr[count]="Pump 1 Run Time";
+                  count++;
+                  this.GlenWTWListArr[count]="Pump 2 Run Time";
+                  count++;
+                  this.GlenWTWListArr[count]="Pump 1 Number Of Starts";
+                  count++;
+                  this.GlenWTWListArr[count]="Pump 2 Number Of Starts";
+                  count++;
+                  this.GlenWTWListArr[count]="Potential of Hydrogen";
+                  count++;
+                  this.GlenWTWListArr[count]="Oxidation Reduction Potential";
+                  count++;
+                  this.showWTW = true;
+                  break;
 
         case "NMB_MNTS_ZS":
           if(count>=1){count = 0}
@@ -1961,7 +2042,86 @@ if(this.selectedSites)
                   this.RPESelected[1] = true;
                   break;
 
+                  case "Linton Reservoir Level":
+                    this.LINTRESSelected[0]=true;
+                    break;
 
+
+                    case "Glendinningvale Reservoir Level":
+                      this.GlenResSelected[0]=true;
+                      break;
+
+
+                      case "Glendinningvale Inlet Pressure":
+                        this.GlenFPTSelected[0]=true;
+                        break;
+
+                        case "Glendinningvale Inlet Flow Rate":
+                        this.GlenFPTSelected[1]=true;
+                        break;
+
+
+                        case "Glendinningvale Inlet Total Flow":
+                        this.GlenFPTSelected[2]=true;
+                        break;
+
+                        case "Glendinningvale Borehole Flow Rate":
+                        this.GlenFPTSelected[3]=true;
+                        break;
+
+                        case "Glendinningvale Borehole Total Flow":
+                        this.GlenFPTSelected[4]=true;
+                        break;
+
+
+                        case "Glendinningvale Pump 1 Run Time":
+                        this.GlenWTWSelected[0]=true;
+                        break;
+
+                        case "Glendinningvale Pump 2 Run Time":
+                        this.GlenWTWSelected[1]=true;
+                        break;
+
+                        case "Glendinningvale Pump 1 Number Of Starts":
+                        this.GlenWTWSelected[2]=true;
+                        break;
+
+                        case "Glendinningvale Pump 2 Number Of Starts":
+                        this.GlenWTWSelected[3]=true;
+                        break;
+
+                        case "Glendinningvale Potential of Hydrogen":
+                        this.GlenWTWSelected[4]=true;
+                        break;
+
+                        case "Glendinningvale Oxidation Reduction Potential":
+                        this.GlenWTWSelected[5]=true;
+                        break;
+
+
+                  case "Linton Back Wash Flow Rate":
+                      this.LINTWTWSelected[0]=true;
+                      break;
+
+                      case "Linton Back Wash Total Flow":
+                        this.LINTWTWSelected[1]=true;
+                      break;
+
+                      case "Linton Raw Water Flow Rate":
+                        this.LINTWTWSelected[2]=true;
+                      break;
+
+                      case "Linton Raw Water Total Flow":
+                        this.LINTWTWSelected[3]=true;
+                      break;
+
+                      case "Linton Final Water Flow Rate":
+                        this.LINTWTWSelected[4]=true;
+                      break;
+
+                      case "Linton Final Water Total Flow":
+                        this.LINTWTWSelected[5]=true;
+                      break;
 
                   case "Rowallan Park Extension Pressure":
                     this.RRSelected[0] = true;
@@ -2049,6 +2209,7 @@ var oldPresetDescription = this.presetDescription
     this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
     this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
     this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
+    this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
 
     this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
     this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")

@@ -11,7 +11,7 @@ export interface PeriodicElement{
 @Injectable({  providedIn: 'root'})
 export class Common  {
 
-
+ options:EChartsOption
 
   range = new FormGroup({
     start: new FormControl(),
@@ -57,11 +57,6 @@ export class Common  {
   }
 
 
-  public options(){
-   var options: EChartsOption;
-
-
-  }
 
 
 
@@ -118,19 +113,8 @@ var comms:any
 
 public static getOptions(options:any,DateArr:any,flowTrendName:any,lineName:any, dataArr:any){
 
-  var theme:any
-  var tooltipBackground:any;
-
-
-if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-{
-theme = '#FFFFFF'
-tooltipBackground = 'rgba(50,50,50,0.7)'
-}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-{
-theme = '#797979'
-tooltipBackground = 'rgba(255, 255, 255, 1)'
-}
+  console.log(DateArr)
+  const {theme, tooltipBackground} = this.getTheme();
 
   options = {
     tooltip: {
@@ -171,21 +155,613 @@ tooltipBackground = 'rgba(255, 255, 255, 1)'
   return options;
 }
 
-public static getOptions2(options:any,DateArr:any,flowTrendName:any,lineName1:any, dataArr1:any,lineName2:any, dataArr2:any){
-
-  var theme:any
-  var tooltipBackground:any;
 
 
-if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-{
-theme = '#FFFFFF'
-tooltipBackground = 'rgba(50,50,50,0.7)'
-}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-{
-theme = '#797979'
-tooltipBackground = 'rgba(255, 255, 255, 1)'
+public static getOptionsForLine(options:any,flowTrendName:any, dataArr:any){
+
+  
+  const {theme, tooltipBackground} = this.getTheme();
+
+  options = {
+    grid: {
+      left: '6%',
+      right: '7%',
+      top:'10%',
+      bottom: '10%',
+      containLabel: true
+  },
+  toolbox:{
+    feature: {
+    feature: {
+      saveAsImage: {}
+    }
+
+    }},
+    dataZoom:[{
+
+      type: 'slider',
+      start: 0,
+      end: 100,
+      paddingTop:'10px',
+      handleSize: 8
+  
+      },
+      { start: 0,
+       end:100}
+      ],
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+        axisPointer: {
+          type: 'cross'
+        },
+         trigger: 'axis',
+         position: ['10%', '10%']
+  
+       },     legend:{
+        top:'auto',
+        type:'scroll',
+        textStyle: {color:theme },
+           },
+     axisPointer:{
+         color: {color: theme}
+       },
+           xAxis: {
+            type: 'time'  ,
+            axisLabel: {color: theme},
+            splitLine: {
+              show: true
+            },
+          },
+          yAxis: [
+            {
+              nameTextStyle: { color: theme},
+            type:'value',
+            name:flowTrendName,
+          
+            min:0,
+            axisLabel:{
+              formatter:'{value} ',
+              color:theme,
+            }
+            },
+            {
+              type:'value',
+              name:flowTrendName,
+              nameTextStyle: { color: theme},
+              min:0,
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+            {
+              axisLabel: {color: theme},
+            type: 'value',
+            boundaryGap: [0, 0.05],
+            }
+    
+        ],
+
+  series: [
+  {
+    name: flowTrendName,
+    data: dataArr,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  }]
+    
+         }
+  
+
+
+
+
+  return options;
 }
+public  getOptionsFor2Line(symbol:any,flowTrendName1:any, dataArr1:any,flowTrendName2:any, dataArr2:any){
+
+  
+  const {theme, tooltipBackground} = Common.getTheme();
+
+  this.options = {
+    grid: {
+      left: '6%',
+      right: '7%',
+      top:'10%',
+      bottom: '10%',
+      containLabel: true
+  },
+  toolbox:{
+    feature: {
+    feature: {
+      saveAsImage: {}
+    }
+
+    }},
+    dataZoom:[{
+
+      type: 'slider',
+      start: 0,
+      end: 100,
+      handleSize: 8
+  
+      },
+      { start: 0,
+       end:100}
+      ],
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+        axisPointer: {
+          type: 'cross'
+        },
+         trigger: 'axis',
+         position: ['10%', '10%']
+  
+       },     legend:{
+        top:'auto',
+        type:'scroll',
+        textStyle: {color:theme },
+           },
+     axisPointer:{
+        //  color: {color: theme},
+       },
+           xAxis: {
+            type: 'time'  ,
+            axisLabel: {color: theme},
+            splitLine: {
+              show: true
+            },
+          },
+          yAxis: [
+            {
+              nameTextStyle: { color: theme},
+            type:'value',
+            name:symbol,
+          
+            min:0,
+            axisLabel:{
+              formatter:'{value} ',
+              color:theme,
+            }
+            },
+            {
+              type:'value',
+              name:symbol,
+              nameTextStyle: { color: theme},
+              min:0,
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+            {
+              axisLabel: {color: theme},
+            type: 'value',
+            boundaryGap: [0, 0.05],
+            }
+    
+        ],
+
+  series: [
+  {
+    name: flowTrendName1,
+    data: dataArr1,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+  {
+    name: flowTrendName2,
+    data: dataArr2,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+
+]
+    
+         }
+  
+
+
+
+
+  return this.options;
+}
+
+public static getOptionsBarAndLine(options:any,flowTrendName:any, flowTrendData:any,totalFlowName:any ,totalFlowData:any){
+  // var theme:any
+  // var tooltipBackground:any;
+  
+  const {theme, tooltipBackground} = this.getTheme();
+
+  options = {
+   
+    grid: {
+      left: '6%',
+      right: '7%',
+      top:'10%',
+      bottom: '10%',
+      containLabel: true
+  },
+  toolbox:{
+    feature: {
+    feature: {
+      saveAsImage: {}
+    }
+
+    }},
+    dataZoom:[{
+
+      type: 'slider',
+      start: 0,
+      end: 100,
+      paddingTop:'10px',
+      handleSize: 8
+  
+      },
+      { start: 0,
+       end:100}
+      ],
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+        axisPointer: {
+          type: 'cross'
+        },
+         trigger: 'axis',
+  
+         position: ['10%', '10%']
+  
+       },      
+       legend:{
+          top:'auto',
+          type:'scroll',
+          textStyle: {color:theme },
+             },
+       axisPointer:{
+           color: {color: theme}
+         },
+             xAxis: {
+              type: 'time'  ,
+              axisLabel: {color: theme},
+              splitLine: {
+                show: true
+              },
+            },
+            yAxis: [
+              {
+                nameTextStyle: { color: theme},
+              type:'value',
+              name:totalFlowName,
+            
+              min:0,
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+              {
+                type:'value',
+                name:flowTrendName,
+                nameTextStyle: { color: theme},
+                min:0,
+                axisLabel:{
+                  formatter:'{value} ',
+                  color:theme,
+                }
+                },
+              {
+                axisLabel: {color: theme},
+              type: 'value',
+              boundaryGap: [0, 0.05],
+              }
+      
+          ],
+
+    series: [
+      {
+      name: totalFlowName,
+        data: totalFlowData,
+        type: 'bar',
+        yAxisValue:0,
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 5,
+    },
+    {
+      name: flowTrendName,
+      data: flowTrendData,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    }]
+
+  }
+
+  return options;
+}
+
+
+public  getOptionsBarAndLine2(lineName:any, lineData:any,lineName2:any, lineData2:any,barName:any ,barData:any,barName2:any ,barData2:any, leftAxisName:any,rightAxisName:any ){
+  // var theme:any
+  // var tooltipBackground:any;
+  
+  const {theme, tooltipBackground} = Common.getTheme();
+
+  this.options = {
+   
+    grid: {
+      left: '6%',
+      right: '7%',
+      top:'10%',
+      bottom: '10%',
+      containLabel: true
+  },
+  toolbox:{
+    feature: {
+    feature: {
+      saveAsImage: {}
+    }
+
+    }},
+    dataZoom:[{
+
+      type: 'slider',
+      start: 0,
+      end: 100,
+      handleSize: 8
+  
+      },
+      { start: 0,
+       end:100}
+      ],
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+        axisPointer: {
+          type: 'cross'
+        },
+         trigger: 'axis',
+  
+         position: ['10%', '10%']
+  
+       },      
+       legend:{
+          top:'auto',
+          type:'scroll',
+          textStyle: {color:theme },
+             },
+       axisPointer:{
+         },
+             xAxis: {
+              type: 'time'  ,
+              axisLabel: {color: theme},
+              splitLine: {
+                show: true
+              },
+            },
+            yAxis: [
+              {
+                nameTextStyle: { color: theme},
+              type:'value',
+              name:rightAxisName,
+            
+              min:0,
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+              {
+                type:'value',
+                name:leftAxisName,
+                nameTextStyle: { color: theme},
+                min:0,
+                axisLabel:{
+                  formatter:'{value} ',
+                  color:theme,
+                }
+                },
+              {
+                axisLabel: {color: theme},
+              type: 'value',
+              boundaryGap: [0, 0.05],
+              }
+      
+          ],
+
+    series: [
+      {
+      name: barName,
+        data: barData,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: barName2,
+        data: barData2,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: lineName,
+      data: lineData,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },
+    {
+      name: lineName2,
+      data: lineData2,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    }]
+
+  }
+
+  return this.options;
+}
+
+public  getOptionsBarAndLine3(lineName:any, lineData:any,lineName2:any, lineData2:any,lineName3:any, lineData3:any,barName:any ,barData:any,barName2:any ,barData2:any,barName3:any ,barData3:any, leftAxisName?:any,rightAxisName?:any ){
+  // var theme:any
+  // var tooltipBackground:any;
+  
+  const {theme, tooltipBackground} = Common.getTheme();
+
+  this.options = {
+   
+    grid: {
+      left: '6%',
+      right: '7%',
+      top:'10%',
+      bottom: '10%',
+      containLabel: true
+  },
+  toolbox:{
+    feature: {
+    feature: {
+      saveAsImage: {}
+    }
+
+    }},
+    dataZoom:[{
+
+      type: 'slider',
+      start: 0,
+      end: 100,
+      handleSize: 8
+  
+      },
+      { start: 0,
+       end:100}
+      ],
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+        axisPointer: {
+          type: 'cross'
+        },
+         trigger: 'axis',
+  
+         position: ['10%', '10%']
+  
+       },      
+       legend:{
+          top:'auto',
+          type:'scroll',
+          textStyle: {color:theme },
+             },
+       axisPointer:{
+         },
+             xAxis: {
+              type: 'time'  ,
+              axisLabel: {color: theme},
+              splitLine: {
+                show: true
+              },
+            },
+            yAxis: [
+              {
+                nameTextStyle: { color: theme},
+              type:'value',
+              name:rightAxisName,
+            
+              min:0,
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+              {
+                type:'value',
+                name:leftAxisName,
+                nameTextStyle: { color: theme},
+                min:0,
+                axisLabel:{
+                  formatter:'{value} ',
+                  color:theme,
+                }
+                },
+              {
+                axisLabel: {color: theme},
+              type: 'value',
+              boundaryGap: [0, 0.05],
+              }
+      
+          ],
+
+    series: [
+      {
+      name: barName,
+        data: barData,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: barName2,
+        data: barData2,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: barName3,
+        data: barData3,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: lineName,
+      data: lineData,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },
+    {
+      name: lineName2,
+      data: lineData2,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },
+    {
+      name: lineName3,
+      data: lineData3,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },]
+
+  }
+
+  return this.options;
+}
+
+public static getOptions2(options:any,DateArr:any,flowTrendName:any,lineName1:any, dataArr1:any,lineName2:any, dataArr2:any){
+  const {theme, tooltipBackground} = this.getTheme();
 
   options = {
     tooltip: {
@@ -443,6 +1019,46 @@ public NMBMAPI(tagVals:any = [],tagArr:any = [], variable:any, commsArr:any = []
 
 
 
+public static getTheme(){
+var theme
+var tooltipBackground
+  if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
+{
+theme = '#FFFFFF'
+tooltipBackground = 'rgba(50,50,50,0.7)'
+}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
+{
+theme = '#797979'
+tooltipBackground = 'rgba(255, 255, 255, 1)'
+}
+
+return {theme, tooltipBackground}
+
+}
+
+
+public static getStartEnd(Start:any, End:any){
+
+  var start;
+  var end;
+
+    if(Start != null){
+      start = new Date(Start).toISOString().slice(0, 10);
+    }
+    else{
+    start = null;
+    }
+
+    if (End != null){
+      end =  new Date(End).toISOString().slice(0, 10);
+    }
+    else{
+      end = null
+    }
+
+
+    return {start, end}
+}
 
 
 

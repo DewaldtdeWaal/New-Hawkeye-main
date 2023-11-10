@@ -1,6 +1,4 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px;">Driftsands</h1></div>
-  <div class="wrapper-grid">
+<app-page-with-trend [siteTitle]="siteTitle" [options]="options" (messageEvent)="recieveDate($event)" [isLoading]=isLoading>
 
 
 
@@ -143,14 +141,4 @@
 
 
 
-
-
-     </div>
-
-     </div>
-
-
-
-
-
-
+</app-page-with-trend>

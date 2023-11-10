@@ -13,6 +13,15 @@ export interface SiteName{
   EndDate:string,
 
 }
+
+export interface totalFlowAndFlowRate{
+  CollectionName:any,
+  TotalFlowVariable:any [],
+  FlowRateVariable:any [],
+  StartDate:string,
+  EndDate:string,
+
+}
 @Injectable({ providedIn: "root" })
 
 
@@ -22,9 +31,31 @@ export class PostTrend {
   arrayData:any = []
   constructor(private http: HttpClient,private su: ServerURLService,private pb:pageBuilder) {}
 
+
+async getLevel(collectionName: any, collectionVariable:any = [],startDate: any, endDate:any){
+
+  const site:SiteName = {
+    CollectionName:collectionName,
+    CollectionVariable:collectionVariable,
+    StartDate:startDate,
+    EndDate:endDate,
+  };
+
+  return  this.http.post(this.su.serverURL+"/post/getLevels", site).toPromise().then(data =>{
+
+
+   
+
+
+
+    return data
+  });
+
+}
+
 async getPostTrend(collectionName: any, collectionVariable:any = [],startDate: any, endDate:any){
 
-  var returnVariable
+
 
 
   const site:SiteName = {
@@ -34,9 +65,10 @@ async getPostTrend(collectionName: any, collectionVariable:any = [],startDate: a
     EndDate:endDate,
   };
 
-  return  this.http.post(this.su.serverURL+"/post/fourTrend", site).toPromise().then(data =>{
+  return  this.http.post(this.su.serverURL+"/post/fourTrend/data", site).toPromise().then(data =>{
 
 
+   
 
 
     return data
@@ -46,6 +78,30 @@ async getPostTrend(collectionName: any, collectionVariable:any = [],startDate: a
 
 
 }
+async getTotalFlowAndFlowRate(collectionName: any, totalFlowVariable:any = [],flowRateVariable:any = [],startDate: any, endDate:any){
 
+
+
+  const site:totalFlowAndFlowRate = {
+    CollectionName:collectionName,
+    TotalFlowVariable:totalFlowVariable,
+    FlowRateVariable:flowRateVariable,
+    StartDate:startDate,
+    EndDate:endDate,
+  };
+
+  return  this.http.post(this.su.serverURL+"/post/fourTrend23", site).toPromise().then(data =>{
+
+
+    console.log(data)
+
+
+    return data
+  });
+
+
+
+
+}
 
 }

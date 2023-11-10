@@ -1,0 +1,79 @@
+<app-page-with-trend [siteTitle]="siteTitle" [options]="options" (messageEvent)="recieveDate($event)" [isLoading]=isLoading>
+  
+      <section class="res-form" fxLayoutAlign="center ">
+        <form fxLayout="column">
+          <div style="margin-bottom: 8px"  class="div-form">
+            <h3 style="padding-top: 8px; ">Communication </h3></div>
+    
+    
+            <div class="div-form">
+              <div class="grid-container-flow-meters-communication">
+                <div class="grid-container-flow-meters-general-column1">Communication Status:</div>
+                <!-- <div class="grid-container-flow-meters-general-column3" style=""> -->
+                <div *ngIf="variable.comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+                <div class="grid-container-communicationStatus-column3-img"><img  src="assets/img/General/Green Circle Tick.png" style="width:20px; height:20px; padding-top:5px;"></div>
+                  </div>
+                  <div *ngIf="variable.comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" >
+                   <img class="pump"src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img"  style="width:20px; height:20px; padding-top:5px;">
+                   </div>
+    
+                <div class="grid-container-flow-meters-general-column1">Last Update:</div>
+                <div class="grid-container-flow-meters-general-column3">{{variable.lastUpdate}}</div>
+    
+                <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column1"></div>
+                <div *ngIf="showNavigationButton == 'true'"  class="grid-container-flow-meters-general-column3"></div>
+    
+                <div *ngIf="showNavigationButton == 'true'" class="grid-button">
+                  <button class="button-color" a routerLink="/hawkeye/reservoirs/linton"  >Reservoir</button></div>
+        </div>
+    
+    
+                </div>
+
+                </form>
+                </section>
+
+
+        <section class="res-form" fxLayoutAlign="center">
+
+            <form fxLayout="column">
+    
+              <div style="margin-bottom: 8px"  class="div-form">
+                <h3 style="padding-top: 8px; ">Flow Rate</h3>
+              </div>
+          <div class="div-form">
+            <div class="grid-container-pump">
+
+              <div class="grid-span-four">Back Wash</div>
+
+                <div class="grid-container-flow-meters-general-column1">Flow Rate:</div>
+                <div class="grid-container-flow-meters-general-column3">{{variable.lin_wtw_back_wash_FR}} Ml/d</div>
+                <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
+                <div class="grid-container-flow-meters-general-column3">{{variable.lin_wtw_back_wash_TF}} m³</div>
+                <div class="grid-span-four">Raw Water</div>
+                <div class="grid-container-flow-meters-general-column1">Flow Rate:</div>
+                <div class="grid-container-flow-meters-general-column3">{{variable.lin_wtw_raw_water_FR}} Ml/d</div>
+                <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
+                <div class="grid-container-flow-meters-general-column3">{{variable.lin_wtw_raw_water_TF}} m³</div>
+                <div class="grid-span-four">Final Water</div>
+                <div class="grid-container-flow-meters-general-column1">Flow Rate:</div>
+                <div class="grid-container-flow-meters-general-column3">{{variable.lin_wtw_final_water_tf}} Ml/d</div>
+                <div class="grid-container-flow-meters-general-column1">Total Flow:</div>
+                <div class="grid-container-flow-meters-general-column3">{{variable.lin_wtw_final_water_fr}} m³</div>
+
+
+
+
+                </div>
+
+                </div>
+
+                </form>
+
+                </section>
+
+                
+
+
+
+</app-page-with-trend>

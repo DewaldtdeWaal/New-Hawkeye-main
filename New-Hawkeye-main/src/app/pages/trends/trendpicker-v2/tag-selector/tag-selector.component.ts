@@ -177,8 +177,7 @@ export class TagSelectorComponent implements OnInit {
   stormsWTWTagListArr:string[]=[]
   stormsWTWTagSelected:boolean[]=[]
 
-  // bushyPSTagListArr:string[]=[];
-  // bushyPSSelected:boolean[]=[];
+
 
   bushyFPTTagListArr:string[]=[];
   bushyFPTSelected:boolean[]=[];
@@ -230,6 +229,21 @@ export class TagSelectorComponent implements OnInit {
 
   RRListArr:string[]=[]
   RRSelected:boolean[]=[]
+
+  LINTWTWListArr:string[]=[]
+  LINTWTWSelected:boolean[]=[]
+
+  LINTRESListArr:string[]=[]
+  LINTRESSelected:boolean[]=[]
+
+  GlenResListArr:string[]=[]
+  GlenResSelected:boolean[]=[]
+
+  GlenFPTListArr:string[]=[]
+  GlenFPTSelected:boolean[]=[];
+
+  GlenWTWListArr:string[]=[]
+  GlenWTWSelected:boolean[]=[]
 
 showAutoMenu: boolean = false
 showResMenu: boolean = false;
@@ -336,6 +350,11 @@ this.ReadSelectedValues(this.umiTagListArr,this.umiTagsSelected, "Umasizakhe ")
 this.ReadSelectedValues(this.kroonTagListArr,this.kroonTagsSelected, "Kroonvale ")
 this.ReadSelectedValues(this.karkTagListArr, this.karkTagSelected,"Kareedouw ")
 
+this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " )
+this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
+this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
+this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
+this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
 
 this.ReadSelectedValues(this.holdingTagListArr,this.holdingTagsSelected, "Holding ")
 this.ReadSelectedValues(this.damcampTagListArr,this.damcampTagsSelected, "Damcamp ")
@@ -795,6 +814,55 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
                 this.showGW = true;
                   break;
 
+
+                  
+    case "NMB_LIN_R":
+      if(count>=1){count = 0}
+      this.LINTRESListArr[count]="Level"
+      count++
+        this.showRes = true;
+      break;
+
+      case "NMB_GLEN_R":
+        if(count>=1){count = 0}
+        this.GlenResListArr[count]="Level"
+        count++;
+        this.showRes = true;
+        break;
+    
+
+        case "NMB_GLEN_FPT":
+          if(count>=1){count = 0}
+          this.GlenFPTListArr[count]="Inlet Pressure"
+          count++
+          this.GlenFPTListArr[count]="Inlet Flow Rate"
+          count++
+          this.GlenFPTListArr[count]="Inlet Total Flow"
+          count++
+          this.GlenFPTListArr[count]="Borehole Flow Rate"
+          count++
+          this.GlenFPTListArr[count]="Borehole Total Flow"
+          count++;
+          this.showFPT = true;
+          break;
+
+          case "NMB_GLEN_WTW":
+            if(count>=1){count = 0}
+            this.GlenWTWListArr[count]="Pump 1 Run Time";
+            count++;
+            this.GlenWTWListArr[count]="Pump 2 Run Time";
+            count++;
+            this.GlenWTWListArr[count]="Pump 1 Number Of Starts";
+            count++;
+            this.GlenWTWListArr[count]="Pump 2 Number Of Starts";
+            count++;
+            this.GlenWTWListArr[count]="Potential of Hydrogen";
+            count++;
+            this.GlenWTWListArr[count]="Oxidation Reduction Potential";
+            count++;
+            this.showWTW = true;
+            break;
+
                   case "KOU_KARK2_GW":
                     if (count >=4)
                     {
@@ -989,6 +1057,23 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
                         this.showWTW = true;
 
                         break;
+
+                        case "NMB_LIN_WTW":
+                          if(count>=1){count = 0}
+                          this.LINTWTWListArr[count]="Back Wash Flow Rate"
+                          count++;
+                          this.LINTWTWListArr[count]="Back Wash Total Flow"
+                          count++;
+                          this.LINTWTWListArr[count]="Raw Water Flow Rate"
+                          count++;
+                          this.LINTWTWListArr[count]="Raw Water Total Flow"
+                          count++;
+                          this.LINTWTWListArr[count]="Final Water Flow Rate"
+                          count++;
+                          this.LINTWTWListArr[count]="Final Water Total Flow"
+                          count++;
+                          this.showWTW = true;
+                          break;
 
                       case "GRF_DAMP_R":
                         if (count>=1 ){count = 0}

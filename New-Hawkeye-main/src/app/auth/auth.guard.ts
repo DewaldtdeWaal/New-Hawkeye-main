@@ -390,6 +390,24 @@ export class AuthGuard implements CanActivate {
                     break;
 
 
+                    case "/reservoirs/linton":
+                      url="NMB_LIN_R"
+                      break;
+
+
+                      case "/reservoirs/glendinningvaleres":
+                        url="NMB_GLEN_R"
+                        break;
+
+                        case "/wtw/glendinningvalewtw":
+                          url="NMB_GLEN_WTW"
+                          break;
+
+                          case "/fptsites/glendinningvaleftp":
+                            url="NMB_GLEN_FPT"
+                            break;
+
+
                   case "/groundwater/humerail":
                     url="HUM_HUM_GW"
                     break;
@@ -469,6 +487,9 @@ export class AuthGuard implements CanActivate {
                           url = "NMB_ELANDS_WTW"
                           break;
 
+                          case "/wtw/linton":
+                            url = "NMB_LIN_WTW"
+                            break;
 
                           case "/zones/lee-samuals-drive":
                               url = "NMB_LSD_ZS"

@@ -1,6 +1,4 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Kruisfontein</h1></div>
-  <div class="wrapper-grid">
+<app-page-with-trend [siteTitle]="siteTitle" [options]="options" (messageEvent)="recieveDate($event)" [isLoading]=isLoading>
 
     <section class="res-form" fxLayoutAlign="center ">
       <form fxLayout="column">
@@ -103,5 +101,4 @@
       </section>
 
 
-  </div>
-  </div>
+</app-page-with-trend>

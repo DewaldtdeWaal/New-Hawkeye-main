@@ -162,11 +162,17 @@ import { FlowRateLineComponent } from './components/flow-rate-line/flow-rate-lin
 // import { PresureLineComponent } from './components/presure-line/presure-line.component';
 import { RowallanParkExtensionComponent } from './pages/zones/rowallan-park-extension/rowallan-park-extension.component';
 import { RosedaleComponent } from './pages/zones/rosedale/rosedale.component';
-import { TrendTagComponent } from './components/trend-tag/trend-tag.component';
 import { PageComponentComponent } from './components/page-component/page-component.component';
 import { GroundWaterComponent } from './components/ground-water/ground-water.component';
 import { GroundWaterGridComponent } from './components/ground-water-grid/ground-water-grid.component';
 import {BoreholePumpComponent} from './components/borehole-pump/borehole-pump.component';
+import { LintonComponent } from './pages/WTW/linton/linton.component';
+import { LintonresComponent } from './pages/reservoirs/lintonres/lintonres.component';
+import { CommunicationComponent } from './components/communication/communication.component';
+import { PageWithTrendComponent } from './components/page-with-trend/page-with-trend.component';
+import { GlendinningvaleresComponent } from './pages/reservoirs/glendinningvaleres/glendinningvaleres.component';
+import { GlendinningvalewtwComponent } from './pages/WTW/glendinningvalewtw/glendinningvalewtw.component';
+import { GlendinningvaleftpComponent } from './pages/FlowMeters/glendinningvaleftp/glendinningvaleftp.component';
 
 
 const appRoutes: Routes = [
@@ -334,11 +340,17 @@ const appRoutes: Routes = [
     // PresureLineComponent,
     RowallanParkExtensionComponent,
     RosedaleComponent,
-    TrendTagComponent,
     PageComponentComponent,
     GroundWaterComponent,
     GroundWaterGridComponent,
     BoreholePumpComponent,
+    LintonComponent,
+    LintonresComponent,
+    CommunicationComponent,
+    PageWithTrendComponent,
+    GlendinningvaleresComponent,
+    GlendinningvalewtwComponent,
+    GlendinningvaleftpComponent,
 
 
 

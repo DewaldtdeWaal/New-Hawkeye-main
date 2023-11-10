@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/Service-Files/auth.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import {svgImage} from'src/app/Service-Files/SVGImage/svgImage.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-motherwellres',
   templateUrl: './motherwellres.component.html',
@@ -38,7 +40,7 @@ export class MotherwellresComponent implements OnInit
 
   valveImage2:any
   valveColor2:any
-    constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod, private svg:svgImage  ) {}
+    constructor(private authService: AuthService,public recieve:Common,private pm:pagePostMethod, private svg:svgImage , private pt: PostTrend  ) {}
      title1:any ="Reservoir"
      title2:any ="South Chamber"
 
@@ -79,10 +81,37 @@ export class MotherwellresComponent implements OnInit
       });
 
 
+      
 
 
 
     }
+
+
+    siteTitle:any = "Motherwell";
+    trendTag:any = ["level","south_level"]
+    collectionName:any ="NMB_MW_RES_LVL"
+    levelArr: any[]=[];
+    range:any
+    options: EChartsOption;
+    isLoading:boolean = false;
+  
+    recieveDate($event: any){
+     this.isLoading = true;
+     var trend :any;
+     this.range = $event;
+  
+     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+  
+     this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+      trend=data
+   
+   
+      this.options = this.recieve.getOptionsFor2Line("%","North Chamber %",trend.LevelArr[0],"South Chamber %",trend.LevelArr[1])
+      this.isLoading = false;
+    })
+   }
+
 
     ngOnDestroy():void{
       if(this.intervalLoop){

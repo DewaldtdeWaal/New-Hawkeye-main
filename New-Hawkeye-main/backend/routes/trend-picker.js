@@ -43,6 +43,14 @@ var HOLDING_LVL_RES_LVL_arr = []
   var nmb_schoe_r_actuator_valve_timeout_arr = []
 
 
+  var lint_res_lvl_ARR = []
+  var lint_wtw_back_wash_FR_ARR = []
+  var  lint_wtw_back_wash_TF_ARR= []
+  var lint_wtw_raw_water_FR_ARR= []
+  var lint_wtw_raw_water_TF_ARR= []
+  var lint_wtw_final_water_FR_ARR= []
+  var lint_wtw_final_water_TF_ARR= []
+
 
 
   //WDNR_ROSE_RES_OUT01
@@ -306,6 +314,21 @@ var KWANO_R_TOTAL_FLOW_2_arr = []
   var  klm_kruis14_flow_rate_arr=[];
   var  klm_kruis14_total_flow_arr=[];
 
+  //Glendinningvale
+  var glen_r_res_lvl_arr = []
+  var glen_FTP_WTW_Inlet_Flow_Rate_arr = []
+  var glen_FTP_WTW_Inlet_Total_Flow_arr = []
+  var glen_FTP_WTW_Inlet_bar_arr = []
+  var glen_FTP_WTW_borehole_Flow_Rate_arr = []
+  var glen_FTP_WTW_borehole_Total_Flow_arr = []
+
+  var glen_FTP_WTW_P1_rtm_arr = []
+  var glen_FTP_WTW_P2_rtm_arr = []
+  var glen_FTP_WTW_P1_stn_arr = []
+  var glen_FTP_WTW_P2_stn_arr = []
+  var glen_FTP_WTW_orp_arr = []
+  var glen_FTP_WTW_ph_arr = []
+
 
   var mala_lvl_arr = [];
 
@@ -347,8 +370,75 @@ for ( i = 0; i < sitesChosen.length; i++) {
 switch(sitesChosen[i]){
   //Resiovar
 
+  case "Glendinningvale Reservoir Level":
+    trendData(glen_r_res_lvl_arr,"glen_r_res_lvl","NMBM_GLEN_Flow_trend",query)
+    count++;
+    break;
 
 
+    case "Glendinningvale Inlet Flow Rate":
+      trendData(glen_FTP_WTW_Inlet_Flow_Rate_arr,"glen_FTP_WTW_Inlet_Flow_Rate","NMBM_GLEN_Flow_trend",query)
+      count++;
+      break;
+
+
+      case "Glendinningvale Inlet Total Flow":
+        trendData(glen_FTP_WTW_Inlet_Total_Flow_arr,"glen_FTP_WTW_Inlet_Total_Flow","NMBM_GLEN_TF_trend",query)
+        count++;
+        break;
+
+        case "Glendinningvale Inlet Pressure":
+          trendData(glen_FTP_WTW_Inlet_bar_arr,"glen_FTP_WTW_Inlet_bar","NMBM_GLEN_Flow_trend",query)
+          count++;
+          break;
+
+
+          case "Glendinningvale Borehole Flow Rate":
+            trendData(glen_FTP_WTW_borehole_Flow_Rate_arr,"glen_FTP_WTW_borehole_Flow_Rate","NMBM_GLEN_Flow_trend",query)
+            count++;
+            break;
+
+
+            case "Glendinningvale Borehole Total Flow":
+              trendData(glen_FTP_WTW_borehole_Total_Flow_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_borehole_Total_Flow",query)
+              count++;
+              break;
+
+
+              case "Glendinningvale Pump 1 Run Time":
+                trendData(glen_FTP_WTW_P1_rtm_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P1_rtm",query)
+                count++;
+                break;
+
+              case "Glendinningvale Pump 2 Run Time":
+                trendData(glen_FTP_WTW_P2_rtm_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P2_rtm",query)
+                count++;
+                break;
+
+              case "Glendinningvale Pump 1 Number Of Starts":
+                trendData(glen_FTP_WTW_P1_stn_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P1_stn",query)
+                count++;
+                break;
+
+              case "Glendinningvale Pump 2 Number Of Starts":
+                trendData(glen_FTP_WTW_P2_stn_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P2_stn",query)
+                count++;
+                break;
+
+              case "Glendinningvale Potential of Hydrogen":
+                trendData(glen_FTP_WTW_ph_arr,"NMBM_GLEN_Flow_trend","glen_FTP_WTW_ph",query)
+                count++;
+                break;
+
+              case "Glendinningvale Oxidation Reduction Potential":
+                trendData(glen_FTP_WTW_orp_arr,"NMBM_GLEN_Flow_trend","glen_FTP_WTW_orp",query)
+                count++;
+                break;
+
+  case "Isuzu Oven 1 VSD Speed":
+  trendData(isuzu_oven1_vsd_speed_arr,"isuzu_oven1_vsd_speed","ISUZU_TREND",query)
+  count++;
+  break;
 
 
   case "Isuzu Oven 1 VSD Speed":
@@ -1112,6 +1202,49 @@ count++;
       count++;
       break;
 
+
+      case "Linton Reservoir Level":
+        trendData(lint_res_lvl_ARR,"level","LIN_R_LVL", query)
+        count++;
+        break;
+
+
+        case "Linton Back Wash Flow Rate":
+          trendData(lint_wtw_back_wash_FR_ARR,"lin_wtw_back_wash_FR","NMBM_LIN_FLOW", query)
+        count++;
+        break;
+
+      case "Linton Back Wash Total Flow":
+        trendData(lint_wtw_back_wash_TF_ARR,"lin_wtw_back_wash_TF","NMBM_LIN_TF",query)
+        count++;
+        break;
+
+      case "Linton Raw Water Flow Rate":
+        trendData(lint_wtw_raw_water_FR_ARR,"lin_wtw_raw_water_FR","NMBM_LIN_FLOW", query)
+        count++;
+        break;
+
+
+        
+      case "Linton Raw Water Total Flow":
+        trendData(lint_wtw_raw_water_TF_ARR,"lin_wtw_raw_water_TF","NMBM_LIN_TF",query)
+        count++;
+        break;
+
+
+        case "Linton Final Water Flow Rate":
+          trendData(lint_wtw_final_water_FR_ARR,"lin_wtw_final_water_fr","NMBM_LIN_FLOW", query)
+        count++;
+        break;
+
+      case "Linton Final Water Total Flow":
+        trendData(lint_wtw_final_water_TF_ARR,"lin_wtw_final_water_tf","NMBM_LIN_TF",query)
+        count++;
+        break;
+
+     
+
+
     case "Schoemanshoek General Fault":
       trendData(nmb_schoe_r_general_fault_arr,"nmb_schoe_r_general_fault","NMB_SCHOE_FAULT",query)
       count++;
@@ -1681,6 +1814,26 @@ klm_hup_wtw_tf_arr,
      nmb_schoe_r_general_fault_arr,
      nmb_schoe_r_actuator_general_fault_arr,
      nmb_schoe_r_actuator_valve_timeout_arr,
+     glen_r_res_lvl_arr,
+     
+glen_FTP_WTW_Inlet_Flow_Rate_arr,
+glen_FTP_WTW_Inlet_Total_Flow_arr,
+glen_FTP_WTW_Inlet_bar_arr,
+glen_FTP_WTW_borehole_Flow_Rate_arr,
+glen_FTP_WTW_borehole_Total_Flow_arr,
+glen_FTP_WTW_P1_rtm_arr,
+glen_FTP_WTW_P2_rtm_arr,
+glen_FTP_WTW_P1_stn_arr,
+glen_FTP_WTW_P2_stn_arr,
+glen_FTP_WTW_orp_arr,
+glen_FTP_WTW_ph_arr,
+     lint_res_lvl_ARR,
+lint_wtw_back_wash_FR_ARR,
+lint_wtw_back_wash_TF_ARR,
+lint_wtw_raw_water_FR_ARR,
+lint_wtw_raw_water_TF_ARR,
+lint_wtw_final_water_FR_ARR,
+lint_wtw_final_water_TF_ARR,
      ONS_PARA_TF_arr,
      KARK_K1_TF_arr,
      KARK_K1_FR_arr,

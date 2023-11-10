@@ -224,10 +224,10 @@ variable:any ={
       this.pt.getPostTrend("NMBM_CGK_R_TotalFlow", this.trendTag,null,null).then((data) => {
         trend=data;
       trend=data
-      this.TotalFlow_Motherwell_Arr = trend.TotalFlowArr[0];
-      this.TotalFlow_GrassRidge_Arr = trend.TotalFlowArr[1];
+      this.TotalFlow_Motherwell_Arr = trend.TotalFlowArr[0].differences;
+      this.TotalFlow_GrassRidge_Arr = trend.TotalFlowArr[1].differences;
 
-      this.TotalFlow_CoegaIDZ_Arr = trend.TotalFlowArr[2];
+      this.TotalFlow_CoegaIDZ_Arr = trend.TotalFlowArr[2].differences;
       this.DateArr = trend.DateArr;
         var theme:any
         var tooltipBackground:any
@@ -394,10 +394,10 @@ var trend :any;
 this.pt.getPostTrend("NMBM_CGK_R_TotalFlow", this.trendTag,newStart,newEnd).then((data) => {
   trend=data;
 trend=data
-this.TotalFlow_Motherwell_Arr = trend.TotalFlowArr[0];
-this.TotalFlow_GrassRidge_Arr = trend.TotalFlowArr[1];
+this.TotalFlow_Motherwell_Arr = trend.TotalFlowArr[0].differences;
+this.TotalFlow_GrassRidge_Arr = trend.TotalFlowArr[1].differences;
 
-this.TotalFlow_CoegaIDZ_Arr = trend.TotalFlowArr[2];
+this.TotalFlow_CoegaIDZ_Arr = trend.TotalFlowArr[2].differences;
 
   this.DateArr = trend.DateArr;
   var theme:any
