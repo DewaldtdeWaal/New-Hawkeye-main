@@ -114,28 +114,33 @@ description:"Pepper Spray Alarm",
 
 
   siteTitle:any = "Driftsands";
-  trendTag:any = ["drift_r_reservoir_level"]
+  trendTag:any = ["drift_r_reservoir_level","drift_r_flow_rate_1", "drift_r_flow_rate_2"]
+  tfTrendTag:any = ["drift_r_total_flow_1","drift_r_total_flow_2"]
   collectionName:any ="NMB_DRIFT_RES_LVL"
+  tfCollectionName:any ="NMB_DRIFT_TOTAL_FLOW"
   levelArr: any[]=[];
   range:any
   options: EChartsOption;
+  options2:EChartsOption;
   isLoading:boolean = false;
 
   recieveDate($event: any){
-   this.isLoading = true;
+   this.isLoading = false;
    var trend :any;
    this.range = $event;
 
    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
 
-   this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
-     trend=data
+  this.pt.getFlowAndTotalFlowCollection(this.tfCollectionName, this.collectionName , this.tfTrendTag, this.trendTag, start, end ).then((data) => {
 
-     this.levelArr = trend.LevelArr[0];
+    trend = data;
 
-     this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
-     this.isLoading = false;
-   })
+    console.log(data)
+
+    this.options = this.recieve.getOptionsBarAndLine2("Flow Rate 1", trend.FlowRateArr[1],"Flow Rate 2", trend.FlowRateArr[2],"Total Flow 1", trend.TotalFlowArr[0],"Total Flow 2", trend.TotalFlowArr[1],"Ml","l/s")
+    this.options2 = Common.getOptionsForLine(this.options2,"Level %", trend.FlowRateArr[0])
+  })
+
  }
 
 

@@ -47,9 +47,9 @@
 
                      <app-panel [title]=title1>
                    <div   class="grid-container-flow-meters-communication">
-                    <div class="grid-container-flow-meters-general-column1">Potential of Hydrogen:</div>
-                    <div class="grid-container-flow-meters-general-column3">{{variable.glen_FTP_WTW_ph}} pH</div>
-                    <div class="grid-container-flow-meters-general-column1">Oxidation reduction potential:</div>
+                    <div class="grid-container-flow-meters-general-column1">pH:</div>
+                    <div class="grid-container-flow-meters-general-column3">{{variable.glen_FTP_WTW_ph}} </div>
+                    <div class="grid-container-flow-meters-general-column1">ORP:</div>
                     <div class="grid-container-flow-meters-general-column3">{{variable.glen_FTP_WTW_orp}} mV</div>
                    </div>
                      </app-panel>
@@ -57,7 +57,7 @@
 
                     <app-ground-water [title]=pumpTitle1 [array]=variablesMatric1  [pumpType]=Pump [pumpColor]=pumpColor></app-ground-water>
 
-                    <app-ground-water [title]=pumpTitle2 [array]=variablesMatric2  [pumpType]=Pump [pumpColor]=pumpColor></app-ground-water>
+                    <app-ground-water [title]=pumpTitle2 [array]=variablesMatric2  [pumpType]=Pump [pumpColor]=pumpColor2></app-ground-water>
     
 
         </div>

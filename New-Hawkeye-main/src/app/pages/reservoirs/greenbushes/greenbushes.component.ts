@@ -19,19 +19,12 @@ export class GreenbushesComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  options: EChartsOption;
-  theme:any;
-  DateArr: any;
-    gb_R_FR:any
-    gb_RL:any
+ 
+
+  DateArr: unknown;
+
     intervalLoop: any
-    gb_R_FRF:any
-    gb_R_FRR:any
-    gb_R_SURGE_ARRESTOR:any
-    gb_R_CHARGER_STATUS:any
-    gb_R_DOOR:any
-    gb_R_UT:any
-    gb_R_LVL:any
+
   comms: string;
   data:any=[]
   TotalFlow_GB_FRR_Arr: any[];
@@ -77,236 +70,39 @@ export class GreenbushesComponent implements OnInit {
     });
 
    }
-   trendTag:any =["gb_R_FRR","gb_R_FRF"]
-   collectionName:any = "BR_GB_RES_LVL_TF"
-   isLoading: boolean = false;
-  ngOnInit() {
-
-
-    var trend: any = {};
-   // this.rs.Get_GB_TotalFlows().subscribe(data => {
-
-      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0].differences;
-      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1].differences;
-
-
-      this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any
-
-        if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-        {
-          theme = '#FFFFFF'
-          tooltipBackground = 'rgba(50,50,50,0.7)'
-        }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-        {
-        theme = '#797979'
-        tooltipBackground = 'rgba(255, 255, 255, 1)'
-        }
-        this.options = {
-          tooltip: {
-            backgroundColor: tooltipBackground,
-            textStyle:{ color: theme,},
-             trigger: 'axis',
-             position: ['10%', '10%']
-           },
-          grid: {
-            bottom:"18%"
-          },
-          xAxis: {
-              type: 'category',
-              data: this.DateArr,
-              axisLabel: { interval: 0, rotate: 90, color: theme },
-          },
-          yAxis:   {
-            type: 'value',
-            scale: true,
-            name: 'Total Flow Ml',
-            nameTextStyle: { color: theme},
-            boundaryGap: [0.2, 0.2],
-            min: 0,
-            axisLabel: { rotate: 90, color: theme},
-        },
-          series: [
-
-          {
-            name: 'Greenbushes Reverse Flow Rate',
-              data: this.TotalFlow_GB_FRR_Arr,
-              type: 'bar',
-          },
-          {
-            name: 'Greenbushes Forward Flow Rate',
-              data: this.TotalFlow_GB_FRF_Arr,
-              type: 'bar',
-          }
-        ]
-        };
-        this.isLoading = false;
-    })
-      };
-      onDateFilter(){
-        this.isLoading = true;
-        var start = this.range.value.start+'';
-        var end = this.range.value.end+'';
-
-       var startARR = start.toString().split(" ")
-       var endARR = end.toString().split(" ")
-
-
-       switch (startARR[1]) {
-        case "Jan":
-          startARR[1] = "1"
-            break;
-            case "Feb":
-              startARR[1] = "2"
-                break;
-                case "Mar":
-                  startARR[1] = "3"
-                    break;
-                    case "Apr":
-                      startARR[1] = "4"
-                        break;
-                        case "May":
-                          startARR[1] = "5"
-                            break;
-                            case "Jun":
-                              startARR[1] = "6"
-                                break;
-                                case "Jul":
-                                  startARR[1] = "7"
-                                    break;
-                                    case "Aug":
-                                      startARR[1] = "8"
-                                        break;
-                                        case "Sep":
-                                          startARR[1] = "9"
-                                            break;
-                                            case "Oct":
-                                              startARR[1] = "10"
-                                                break;
-                                                case "Nov":
-                                                  startARR[1] = "11"
-                                                    break;
-                                                    case "Dec":
-                                                      startARR[1] = "12"
-                                                        break;
-                                                      }
-    switch (endARR[1]) {
-        case "Jan":
-          endARR[1] = "1"
-            break;
-            case "Feb":
-              endARR[1] = "2"
-                break;
-                case "Mar":
-                  endARR[1] = "3"
-                    break;
-                    case "Apr":
-                      endARR[1] = "4"
-                        break;
-                        case "May":
-                          endARR[1] = "5"
-                            break;
-                            case "Jun":
-                              endARR[1] = "6"
-                                break;
-                                case "Jul":
-                                  endARR[1] = "7"
-                                    break;
-                                    case "Aug":
-                                      endARR[1] = "8"
-                                        break;
-                                        case "Sep":
-                                          endARR[1] = "9"
-                                            break;
-                                            case "Oct":
-                                              endARR[1] = "10"
-                                                break;
-                                                case "Nov":
-                                                  endARR[1] = "11"
-                                                    break;
-                                                    case "Dec":
-                                                      endARR[1] = "12"
-                                                        break;
-                                                      }
-
-    if (startARR[1].length==1){
-      startARR[1] = "0" + startARR[1]
-    }
-
-    if (endARR[1].length==1){
-      endARR[1] = "0" + endARR[1]
-    }
-
-
-    var newStart = startARR[3] +"-"+startARR[1]+"-"+startARR[2]
-    var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
-
+   
+   totalFlowTags:any =["gb_R_FRR","gb_R_FRF"]
+   flowTags:unknown = ["gb_R_FR","level"] 
+   tfCollection:any = "BR_GB_RES_LVL_TF"
+   collection:any = "BR_GB_RES_LVL"
+   siteTitle:any="Greenbushes"
+   isLoading: boolean = true;
+   options1: EChartsOption;
+   options2: EChartsOption;
+   
+  recieveDate($event: any){
     var trend :any;
-
-    this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+    this.range = $event;
+ 
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+ 
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
       trend=data
-      this.TotalFlow_GB_FRR_Arr = trend.TotalFlowArr[0].differences;
-      this.TotalFlow_GB_FRF_Arr = trend.TotalFlowArr[1].differences;
-      this.DateArr = trend.DateArr;
-      var theme:any
-      var tooltipBackground:any;
 
-      if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-    {
-      theme = '#FFFFFF'
-      tooltipBackground = 'rgba(50,50,50,0.7)'
-    }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-    {
-    theme = '#797979'
-    tooltipBackground = 'rgba(255, 255, 255, 1)'
-    }
+   this.options1 = this.recieve.getOneLineTwoBarOptions("Ml","Ml/d","Flow Rate Ml/d", trend.FlowRateArr[0],"Total Flow Forward Ml", trend.TotalFlowArr[0],"Total Flow Reverse Ml", trend.TotalFlowArr[1])
+ 
+   this.options2 = Common.getOptionsForLine(this.options2,"Level %", trend.FlowRateArr[1])
 
-    this.options = {
-      tooltip: {
-        backgroundColor: tooltipBackground,
-        textStyle:{ color: theme,},
-         trigger: 'axis',
-         position: ['10%', '10%']
-       },
-      grid: {
-        bottom:"18%"
-      },
 
-      xAxis: {
-          type: 'category',
-          data: this.DateArr,
-          axisLabel: { interval: 0, rotate: 90, color: theme },
-      },
-      yAxis:   {
-        type: 'value',
-        scale: true,
-        name: 'Total Flow Ml',
-        nameTextStyle: { color: theme},
-        boundaryGap: [0.2, 0.2],
-        min: 0,
-        axisLabel: { rotate: 90, color: theme},
-    },
-    series: [
-
-      {
-        name: 'Greenbushes Reverse Flow Rate',
-          data: this.TotalFlow_GB_FRR_Arr,
-          type: 'bar',
-      },
-      {
-        name: 'Greenbushes Forward Flow Rate',
-          data: this.TotalFlow_GB_FRF_Arr,
-          type: 'bar',
-      }
-    ]
-    };
     this.isLoading = false;
-    })
+ 
+  })
 
 
+}
+ 
+
+  ngOnInit() {
       }
 
       ngOnDestroy():void{

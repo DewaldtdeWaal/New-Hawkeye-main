@@ -52,18 +52,19 @@ export class GlendinningvalewtwComponent implements OnInit {
       this.variable =  result;
     console.log(this.variable)
 
-    this.variablesMatric1=[{
+    this.variablesMatric1=[
+      {
+        rowType:"TextRow",
+        label:"Mode",
+        value:this.variable.glen_FTP_WTW_p1_mode
+       },{
       rowType:"TextRow",
       label:"Status",
       value:this.variable.glen_FTP_WTW_p1_status
      },{
       rowType:"TextRow",
-      label:"Mode",
-      value:this.variable.glen_FTP_WTW_p1_mode
-     },{
-      rowType:"TextRow",
       label:"Run Time",
-      value:this.variable.glen_FTP_WTW_P1_rtm + " H"
+      value:this.variable.glen_FTP_WTW_P1_rtm + " h"
      },
      {
       rowType:"TextRow",
@@ -71,31 +72,33 @@ export class GlendinningvalewtwComponent implements OnInit {
       value:this.variable.glen_FTP_WTW_P1_stn
      }]
 
-     this.variablesMatric2=[{
+     this.variablesMatric2=[
+      {
+        rowType:"TextRow",
+        label:"Mode",
+        value:this.variable.glen_FTP_WTW_p2_mode
+       },{
       rowType:"TextRow",
       label:"Status",
       value:this.variable.glen_FTP_WTW_p2_status
      },{
       rowType:"TextRow",
-      label:"Mode",
-      value:this.variable.glen_FTP_WTW_p2_mode
-     },{
-      rowType:"TextRow",
       label:"Run Time",
-      value:this.variable.glen_FTP_WTW_P2_rtm+ " H"
+      value:this.variable.glen_FTP_WTW_P2_rtm+ " h"
      },{
         rowType:"TextRow",
         label:"Number Of Starts",
         value:this.variable.glen_FTP_WTW_P2_stn
        }]
 
-     this.pumpColor =svgImage.getSVGColor(this.variable.hup1_pump_mode)
-
+     this.pumpColor =svgImage.getSVGColor(this.variable.glen_FTP_WTW_p1_status)
+     this.pumpColor2 =svgImage.getSVGColor(this.variable.glen_FTP_WTW_p2_status)
     })
 
 
   }
   pumpColor:any
+  pumpColor2:any
 
 }
 

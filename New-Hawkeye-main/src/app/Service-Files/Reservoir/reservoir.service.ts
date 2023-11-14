@@ -202,23 +202,7 @@ export class driftSandsService {
 }
 
 
-@Injectable({ providedIn: "root" })
-export class schoemansService {
 
-
-
-  constructor(private http: HttpClient, private router: Router,private su: ServerURLService,){
-
-
-
-  }
-  GetSiteValues():Observable<any[]>{//automated Number
-
-    return this.http.get<any[]>(this.su.serverURL+"/hawkeye/reservoirs/schoemanshoek")
-  }
-
-
-}
 
 
 @Injectable({ providedIn: "root" })

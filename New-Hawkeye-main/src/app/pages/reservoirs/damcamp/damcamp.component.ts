@@ -70,21 +70,7 @@ export class DamcampComponent implements OnInit {
    ngOnInit() {
 
 
-  //   this.intervalLoop = setInterval(() =>{
 
-
-  //     this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
-  //       this.data =  result;
-
-  //       console.log(this.data)
-  //      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-  //     this.variable.comms = Common.getLastUpdate(this.variable.damp_r_ut)
-  //     });
-
-
-  // },60000)
 
   }
   ngOnDestroy():void{

@@ -66,7 +66,6 @@ getRoutingFunctions("/vanstadens/res/values", "nmbm_vs_r", "R_CurrentVals");
 getRoutingFunctions("/hawkeye/reservoirs/bushypark", "nmbm_bush_r", "R_CurrentVals");
 getRoutingFunctions("/hawkeye/reservoirs/emeraldhill", "nmbm_emer_r", "R_CurrentVals");
 getRoutingFunctions("/hawkeye/reservoirs/driftsands", "nmbm_drift_res", "R_CurrentVals");
-getRoutingFunctions("/hawkeye/reservoirs/schoemanshoek", "nmbm_schoe_r", "R_CurrentVals");
 getRoutingFunctions("/hawkeye/reservoirs/kwanobuhle", "nmbm_kwano_r", "R_CurrentVals");
 getRoutingFunctions("/hawkeye/reservoirs/graaf", "graaf", "R_CurrentVals");
 getRoutingFunctions("/hawkeye/reservoirs/malibar", "nmbm_mali_r", "R_CurrentVals");

@@ -297,13 +297,6 @@ while (lastUpdate != undefined) {
 
           ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-          case "NMB_SCHOE_R":
-            if(variable.nmb_schoe_r_res_level != null ||variable.nmb_schoe_r_res_level != undefined ){
-            this.schoe_comms= this.getCommunicationStatus(variable.nmb_schoe_r_ut, this.schoe_comms)
-            this.listening("Schoemanshoek", variable.nmb_schoe_r_res_level,this.schoe_comms,count,"/hawkeye/reservoirs/schoemanshoek")
-            count++
-          }
-            break;
 
           case "NMB_KWANO_R":
             if(variable.kwano_r_reservoir_level  != null|| variable.kwano_r_reservoir_level  != undefined){

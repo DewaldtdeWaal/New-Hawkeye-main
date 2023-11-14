@@ -45,7 +45,6 @@ import { RosedaleResComponent } from './pages/reservoirs/rosedale-res/rosedale-r
 import { SummitComponent } from './pages/reservoirs/summit/summit.component';
 import {OliphantskopComponent} from './pages/reservoirs/oliphantskop/oliphantskop.component';
 import {EmeraldhillComponent} from './pages/reservoirs/emeraldhill/emeraldhill.component';
-import {SchoemanshoekComponent} from './pages/reservoirs/schoemanshoek/schoemanshoek.component';
 import {DriftsandsComponent} from './pages/reservoirs/driftsands/driftsands.component';
 import {KwanobuhleComponent} from './pages/reservoirs/kwanobuhle/kwanobuhle.component';
 import {BergendalComponent} from './pages/reservoirs/bergendal/bergendal.component';
@@ -199,7 +198,6 @@ const routes: Routes = [
 {path: 'hawkeye/reservoirs/glendinningvaleres', component: GlendinningvaleresComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/oliphantskop', component:OliphantskopComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/emeraldhill', component:EmeraldhillComponent,canActivate:[AuthGuard]},
-{path: 'hawkeye/reservoirs/schoemanshoek', component: SchoemanshoekComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/driftsands', component:DriftsandsComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/kwanobuhle', component:KwanobuhleComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/bergendal', component:BergendalComponent, canActivate:[AuthGuard]},

@@ -1,9 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { CoegaKopService } from 'src/app/Service-Files/coegakop.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { ListeningService} from 'src/app/listening.service';
-import { CoegakopdownloadComponent } from '../coegakopdownload/coegakopdownload.component';
 import { EChartsOption } from 'echarts';
 import * as echarts from 'echarts';
 import { UsersService } from 'src/app/Service-Files/users.service';
@@ -24,11 +20,9 @@ export interface PeriodicElement{
 })
 export class CoegaKopComponent implements OnInit {
 
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+
   options: EChartsOption;
+  options2: EChartsOption;
   theme:any = localStorage.getItem("theme");
   generalfaulttable: PeriodicElement[] = [];
   displayedColumns :string[]= ['alarm', 'description'];
@@ -47,44 +41,8 @@ export class CoegaKopComponent implements OnInit {
   motherwellcomms: any;
   coegacoms: any;
 
-  last_update:any;
-  communication_status:any;
-  reservoir_level:any;
-  actuator_status:any;
-  mode: any;
-  control_valve_one:any;
-  control_valve_two:any;
-
-
-  valve_chamber_pressure:any;
-
-  grassridge_inlet_flow_meter:any;
-  grassridge_inlet_flow_rate:any;
-  grassridge_inlet_total_flow:any;
-  coega_idz_outlet_flow_meter:any;
-  coega_idz_outlet_flow_rate:any;
-  coega_idz_outlet_total_flow:any;
-  mother_outlet_flow_meter_analog_signal:any;
-  motherwell_outlet_flow_rate:any;
-  motherwell_outlet_total_flow:any;
-
-
-  coe_kop_cloud_r_ut:any;
-  coe_kop_cloud_r_level:any
-  coe_kop_r_battery_level:any
-  coe_kop_r_battery_poll_ut:any
-
-
-  che_r_lvl:any;
-
   statuses: any;
-
-
-
-
   DateArr: any;
-  nmb_cgk_r_fault_status: any;
-  nmb_cgk_r_chargerstatus: any;
   valve_chamber_pressure_sensor:any;
   faultVariable:any={
   fault_status:  {
@@ -133,6 +91,8 @@ export class CoegaKopComponent implements OnInit {
   }
 }
 
+
+siteTitle:any ="Coega Kop"
 
 trendTag:any =["motherwelltotalflow","grassridgetotalflow","coegatotalflow"]
 
@@ -194,10 +154,49 @@ variable:any ={
   coe_kop_r_battery_level:null,
   coe_kop_r_battery_poll_ut:null,
 }
+range = new FormGroup({
+  start: new FormControl(),
+  end: new FormControl()
+});
+totalFlowTrendTag:any =["motherwelltotalflow","grassridgetotalflow","coegatotalflow"];
+flowTrendTag:any = ["nmb_cgk_r_motherwell_outlet_flow_rate","nmb_cgk_r_grassridge_inlet_flow_rate","nmb_cgk_r_coega_idz_outlet_flow_rate","coe_kop_cloud_r_level","level"]
+
+totalFlowCollection:any = "NMBM_CGK_R_TotalFlow";
+FlowCollection:any = "NMBM_CGK_R_Trend";
+
+motherWellTFArr: any[]=[];
+grassRidgeTFArr: any[]=[];
+CoegaIDZTTFArr: any[]=[];
+
+motherWellFRArr: any[]=[];
+grassRidgeFRArr: any[]=[];
+CoegaIDZTFRArr: any[]=[];
+
+recieveDate($event: any){
+  this.isLoading = false;
+  var trend :any;
+  this.range = $event;
+  var start;
+  var end
+
+
+  this.pt.getFlowAndTotalFlowCollection(this.totalFlowCollection,this.FlowCollection,this.totalFlowTrendTag,this.flowTrendTag,start,end).then((data) => {
+ 
+    trend = data;
+
+
+
+    this.options = this.recieve.getOptionsBarAndLine3("Motherwell Total Flow",trend.TotalFlowArr[0],"Grassridge Total Flow Ml",trend.TotalFlowArr[1],"Coega IDZ Total Flow Ml",trend.TotalFlowArr[2],"Motherwell Flow Rate Ml/d",trend.FlowRateArr[0],"Grassridge Flow Rate Ml/d",trend.FlowRateArr[1],"Coega IDZ Flow Rate Ml/d",trend.FlowRateArr[2],"Ml","Ml/d", );
+
+    this.options2 = this.recieve.getOptionsFor2Line("%","North Chamber 17 %",trend.FlowRateArr[3],"North Chamber 2 %",trend.FlowRateArr[4])
+  })
+
+
+}
 
   constructor(public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend,) {
 
-    this.isLoading = true;
+
 
 
 
@@ -221,248 +220,7 @@ variable:any ={
     var trend: any = {};
 
 
-      this.pt.getPostTrend("NMBM_CGK_R_TotalFlow", this.trendTag,null,null).then((data) => {
-        trend=data;
-      trend=data
-      this.TotalFlow_Motherwell_Arr = trend.TotalFlowArr[0].differences;
-      this.TotalFlow_GrassRidge_Arr = trend.TotalFlowArr[1].differences;
-
-      this.TotalFlow_CoegaIDZ_Arr = trend.TotalFlowArr[2].differences;
-      this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any
-
-        if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-        {
-          theme = '#FFFFFF'
-          tooltipBackground = 'rgba(50,50,50,0.7)'
-        }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-        {
-        theme = '#797979'
-        tooltipBackground = 'rgba(255, 255, 255, 1)'
-        }
-        this.options = {
-          tooltip: {
-            backgroundColor: tooltipBackground,
-            textStyle:{ color: theme,},
-             trigger: 'axis',
-             position: ['10%', '10%']
-           },
-          grid: {
-            bottom:"18%"
-          },
-          xAxis: {
-              type: 'category',
-              data: this.DateArr,
-              axisLabel: { interval: 0, rotate: 90, color: theme },
-          },
-          yAxis:   {
-            type: 'value',
-            scale: true,
-            name: 'Total Flow Ml',
-            nameTextStyle: { color: theme},
-            boundaryGap: [0.2, 0.2],
-            min: 0,
-            axisLabel: { rotate: 90, color: theme},
-        },
-          series: [
-            {
-            name: 'Grassridge Total Flow',
-              data: this.TotalFlow_GrassRidge_Arr,
-              type: 'bar',
-          },
-          {
-            name: 'Motherwell Total Flow',
-              data: this.TotalFlow_Motherwell_Arr,
-              type: 'bar',
-          },
-          {
-            name: 'Coega IDZ Total Flow',
-              data: this.TotalFlow_CoegaIDZ_Arr,
-              type: 'bar',
-          }
-        ]
-        };
-        this.isLoading = false;
-    }
-    )
-
-
   }
-
-  onDateFilter(){
-    this.isLoading = true;
-    var start = this.range.value.start+'';
-    var end = this.range.value.end+'';
-
-   var startARR = start.toString().split(" ")
-   var endARR = end.toString().split(" ")
-
-
-   switch (startARR[1]) {
-    case "Jan":
-      startARR[1] = "1"
-        break;
-        case "Feb":
-          startARR[1] = "2"
-            break;
-            case "Mar":
-              startARR[1] = "3"
-                break;
-                case "Apr":
-                  startARR[1] = "4"
-                    break;
-                    case "May":
-                      startARR[1] = "5"
-                        break;
-                        case "Jun":
-                          startARR[1] = "6"
-                            break;
-                            case "Jul":
-                              startARR[1] = "7"
-                                break;
-                                case "Aug":
-                                  startARR[1] = "8"
-                                    break;
-                                    case "Sep":
-                                      startARR[1] = "9"
-                                        break;
-                                        case "Oct":
-                                          startARR[1] = "10"
-                                            break;
-                                            case "Nov":
-                                              startARR[1] = "11"
-                                                break;
-                                                case "Dec":
-                                                  startARR[1] = "12"
-                                                    break;
-                                                  }
-switch (endARR[1]) {
-    case "Jan":
-      endARR[1] = "1"
-        break;
-        case "Feb":
-          endARR[1] = "2"
-            break;
-            case "Mar":
-              endARR[1] = "3"
-                break;
-                case "Apr":
-                  endARR[1] = "4"
-                    break;
-                    case "May":
-                      endARR[1] = "5"
-                        break;
-                        case "Jun":
-                          endARR[1] = "6"
-                            break;
-                            case "Jul":
-                              endARR[1] = "7"
-                                break;
-                                case "Aug":
-                                  endARR[1] = "8"
-                                    break;
-                                    case "Sep":
-                                      endARR[1] = "9"
-                                        break;
-                                        case "Oct":
-                                          endARR[1] = "10"
-                                            break;
-                                            case "Nov":
-                                              endARR[1] = "11"
-                                                break;
-                                                case "Dec":
-                                                  endARR[1] = "12"
-                                                    break;
-                                                  }
-
-if (startARR[1].length==1){
-  startARR[1] = "0" + startARR[1]
-}
-
-if (endARR[1].length==1){
-  endARR[1] = "0" + endARR[1]
-}
-
-
-var newStart = startARR[3] +"-"+startARR[1]+"-"+startARR[2]
-var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
-
-var trend :any;
-
-
-this.pt.getPostTrend("NMBM_CGK_R_TotalFlow", this.trendTag,newStart,newEnd).then((data) => {
-  trend=data;
-trend=data
-this.TotalFlow_Motherwell_Arr = trend.TotalFlowArr[0].differences;
-this.TotalFlow_GrassRidge_Arr = trend.TotalFlowArr[1].differences;
-
-this.TotalFlow_CoegaIDZ_Arr = trend.TotalFlowArr[2].differences;
-
-  this.DateArr = trend.DateArr;
-  var theme:any
-  var tooltipBackground:any;
-
-  if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-{
-  theme = '#FFFFFF'
-  tooltipBackground = 'rgba(50,50,50,0.7)'
-}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-{
-theme = '#797979'
-tooltipBackground = 'rgba(255, 255, 255, 1)'
-}
-
-this.options = {
-  tooltip: {
-    backgroundColor: tooltipBackground,
-    textStyle:{ color: theme,},
-     trigger: 'axis',
-     position: ['10%', '10%']
-   },
-  grid: {
-    bottom:"18%"
-  },
-
-  xAxis: {
-      type: 'category',
-      data: this.DateArr,
-      axisLabel: { interval: 0, rotate: 90, color: theme },
-  },
-  yAxis:   {
-    type: 'value',
-    scale: true,
-    name: 'Total Flow Ml',
-    nameTextStyle: { color: theme},
-    boundaryGap: [0.2, 0.2],
-    min: 0,
-    axisLabel: { rotate: 90, color: theme},
-},
-  series: [
-    {
-    name: 'Grassridge Total Flow',
-    data: this.TotalFlow_GrassRidge_Arr,
-    type: 'bar',
-},
-{
-  name: 'Motherwell Total Flow',
-    data: this.TotalFlow_Motherwell_Arr,
-    type: 'bar',
-},
-{
-  name: 'Coega IDZ Total Flow',
-    data: this.TotalFlow_CoegaIDZ_Arr,
-    type: 'bar',
-}
-]
-};
-
-this.isLoading = true;
-})
-
-
-  }
-
   ngOnDestroy():void{
     if(this.intervalLoop){
       this.intervalLoop.unsubscribe();

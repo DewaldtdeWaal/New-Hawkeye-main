@@ -110,27 +110,31 @@ alarmTrip: 1
 
 
    siteTitle:any = "Kwanobuhle";
-   trendTag:any = ["kwano_r_reservoir_level"]
-   collectionName:any ="NMB_KWANO_R"
+
    levelArr: any[]=[];
    range:any
-   options: EChartsOption;
-   isLoading:boolean = false;
- 
+   options1: EChartsOption;
+   options2: EChartsOption;
+   isLoading:boolean = true;
+   tfCollection:any = "NMB_KWANO_R_TF"
+   collection:any = "NMB_KWANO_R"
+   totalFlowTags:any =["kwano_r_total_flow_1","kwano_r_total_flow_2"]
+   flowTags:unknown = ["kwano_r_flow_rate_1","kwano_r_flow_rate_2","kwano_r_reservoir_level"] 
    recieveDate($event: any){
-    this.isLoading = true;
+
     var trend :any;
     this.range = $event;
  
     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
  
-    this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
-      trend=data
- 
-      this.levelArr = trend.LevelArr[0];
- 
-      this.options = Common.getOptionsForLine(this.options,"Level %",this.levelArr)
-      this.isLoading = false;
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+      trend = data;
+      
+   this.options1 = this.recieve.getOptionsBarAndLine2("Flow Rate 1 ", trend.FlowRateArr[0],"Flow Rate 2 ",trend.FlowRateArr[1],"Total Flow 1 Ml", trend.TotalFlowArr[0],"Total Flow 2 Ml", trend.TotalFlowArr[1],"Ml","")
+
+   this.options2 = Common.getOptionsForLine(this.options2,"Level %", trend.FlowRateArr[2])
+    this.isLoading = false;
+
     })
   }
 

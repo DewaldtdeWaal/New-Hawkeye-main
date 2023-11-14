@@ -38,7 +38,8 @@ static getSVGColor(status:any){
 
   var theme = localStorage.getItem("theme")
 
-  if(status == "Pump Fault" || status == "Fault Actice"  ){
+  if(status == "Pump Fault" || status == "Fault Actice" || status == "Interlocked"  ){
+    console.log("I'm working here")
     color = "#9C2020";
   }
   else if(status == "Pump Available" || status == "Available"){

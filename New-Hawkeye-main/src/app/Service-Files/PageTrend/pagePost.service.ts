@@ -6,7 +6,7 @@ import { AuthService } from "../auth.service";
 import { ServerURLService } from "../server-url.service";
 import { pageBuilder} from "src/app/class/pageBulder";
 
-export interface SiteName{
+interface SiteName{
   CollectionName:any,
   CollectionVariable:any [],
   StartDate:string,
@@ -14,14 +14,24 @@ export interface SiteName{
 
 }
 
-export interface totalFlowAndFlowRate{
+ interface totalFlowAndFlowRate{
   CollectionName:any,
+  TotalFlowVariable:any [],
+  FlowRateVariable:any [],
+  StartDate:string,
+  EndDate:string,
+}
+
+interface flowAndTotalFlowCollection{
+  FlowCollection:any,
+  TotalFlowCollection:any,
   TotalFlowVariable:any [],
   FlowRateVariable:any [],
   StartDate:string,
   EndDate:string,
 
 }
+ 
 @Injectable({ providedIn: "root" })
 
 
@@ -92,16 +102,36 @@ async getTotalFlowAndFlowRate(collectionName: any, totalFlowVariable:any = [],fl
 
   return  this.http.post(this.su.serverURL+"/post/fourTrend23", site).toPromise().then(data =>{
 
-
-    console.log(data)
-
-
     return data
   });
 
 
 
 
+}
+
+
+
+async getFlowAndTotalFlowCollection(totalFlowCollection:any,flowCollectionName:any,totalFlowVariable:any = [],flowRateVariable:any = [],startDate: any, endDate:any ){
+
+  const site:flowAndTotalFlowCollection = {
+    FlowCollection:flowCollectionName,
+    TotalFlowCollection:totalFlowCollection,
+    TotalFlowVariable:totalFlowVariable,
+    FlowRateVariable:flowRateVariable,
+    StartDate:startDate,
+    EndDate:endDate
+  };
+
+
+  return  this.http.post(this.su.serverURL+"/post/FlowAndCollectionTrend", site).toPromise().then(data =>{
+
+
+    console.log(data)
+
+
+    return data
+  });
 }
 
 }

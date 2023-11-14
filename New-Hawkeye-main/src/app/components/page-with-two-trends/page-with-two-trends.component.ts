@@ -1,14 +1,12 @@
 import { Component, Input, OnInit,Output,EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
-
-
 @Component({
-  selector: 'app-page-with-trend',
-  templateUrl: './page-with-trend.component.html',
-  styleUrls: ['./page-with-trend.component.css']
+  selector: 'app-page-with-two-trends',
+  templateUrl: './page-with-two-trends.component.html',
+  styleUrls: ['./page-with-two-trends.component.css']
 })
-export class PageWithTrendComponent implements OnInit {
+export class PageWithTwoTrendsComponent implements OnInit {
 
   constructor() { }
 
@@ -16,8 +14,12 @@ export class PageWithTrendComponent implements OnInit {
   @Input() isLoading:any;
   @Input() options: EChartsOption;
 
-  //This can be overwritten by the parent component
-  @Input() trendNameOne:any = "Trend";
+  @Input() options2:EChartsOption;
+
+//This can be overwritten by the parent component
+  @Input() trendNameOne:any = "Flow Data";
+  @Input() trendNameTwo:any=  "Level Data";
+
 
   @Output() messageEvent = new EventEmitter<string>()
 
@@ -35,12 +37,10 @@ export class PageWithTrendComponent implements OnInit {
 
   ngOnInit() {
     this.onDateOutPut();
+
   }
 
   onDateOutPut(){
-
-    
-
     this.messageEvent.emit(this.range)
   }
 

@@ -32,6 +32,18 @@
   <div id="main" echarts  [options]="options" class="chart" ></div>
   <br>
   <br>
+
+  
+<div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"  class="div-form">
+    <h3 style="padding-top: 10px; color: var(--form-text-color); ">{{trendNameTwo}}</h3>
+  </div>
+
+    <br> 
+    <mat-progress-bar style="background-color: black" *ngIf="isLoading==true" style  mode="indeterminate"></mat-progress-bar>
+    <br>
+  <div id="main" echarts  [options]="options2" class="chart" ></div>
+  <br>
+  <br>
   <div style="background-color: var(--page-background-color);"></div>
   
   

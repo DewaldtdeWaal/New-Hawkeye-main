@@ -104,7 +104,6 @@ import { Kareedouwk1Component } from './pages/groundwater/kareedouwk1/kareedouwk
 import { PsOverviewComponent } from './pages/pump-stations/ps-overview/ps-overview.component';
 import { EmeraldhillComponent } from './pages/reservoirs/emeraldhill/emeraldhill.component';
 import { TestPumpstationComponent } from './pages/pump-stations/test-pumpstation/test-pumpstation.component';
-import { SchoemanshoekComponent } from './pages/reservoirs/schoemanshoek/schoemanshoek.component';
 import { DriftsandsComponent } from './pages/reservoirs/driftsands/driftsands.component';
 import { KwanobuhleComponent } from './pages/reservoirs/kwanobuhle/kwanobuhle.component';
 import { UmasizakheComponent } from './pages/reservoirs/umasizakhe/umasizakhe.component';
@@ -173,6 +172,7 @@ import { PageWithTrendComponent } from './components/page-with-trend/page-with-t
 import { GlendinningvaleresComponent } from './pages/reservoirs/glendinningvaleres/glendinningvaleres.component';
 import { GlendinningvalewtwComponent } from './pages/WTW/glendinningvalewtw/glendinningvalewtw.component';
 import { GlendinningvaleftpComponent } from './pages/FlowMeters/glendinningvaleftp/glendinningvaleftp.component';
+import { PageWithTwoTrendsComponent } from './components/page-with-two-trends/page-with-two-trends.component';
 
 
 const appRoutes: Routes = [
@@ -285,7 +285,6 @@ const appRoutes: Routes = [
     PsOverviewComponent,
     EmeraldhillComponent,
     TestPumpstationComponent,
-    SchoemanshoekComponent,
     DriftsandsComponent,
     KwanobuhleComponent,
     UmasizakheComponent,
@@ -351,6 +350,7 @@ const appRoutes: Routes = [
     GlendinningvaleresComponent,
     GlendinningvalewtwComponent,
     GlendinningvaleftpComponent,
+    PageWithTwoTrendsComponent,
 
 
 

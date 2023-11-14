@@ -17,7 +17,7 @@ export interface PeriodicElement{
 })
 export class EmeraldhillComponent implements OnInit {
 
-  isLoading: boolean = false;
+
   emer_lvl:any
   comms:any
   emer_ut:any
@@ -32,7 +32,7 @@ export class EmeraldhillComponent implements OnInit {
   displayedColumns :string[]= ['alarm', 'description'];
   generalfaulttabledatasource: any = new MatTableDataSource(this.generalfaulttable)
 
-  options: EChartsOption;
+
   faultVariable:any={
   bateryLow: {
     value: null,
@@ -76,7 +76,7 @@ DateArr: any[]=[];
 
 
   constructor(public recieve:Common,public rs: ReportService,private pm:pagePostMethod,private pt: PostTrend ) {
-    this.isLoading = true;
+  
 
 
     this.intervalLoop = this.pm.findPageData("nmbm_emer_r", "R_CurrentVals").subscribe((result) => {
@@ -93,65 +93,14 @@ DateArr: any[]=[];
     });
    }
 
-   collectionName: any = "NMB_EMER_H_TOTAL_RES_LVL"
-   trendTag: any = ["emer_total_flow"]
 
 
 
   ngOnInit() {
 
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-
-      console.log(trend)
-
-      this.total_flow_1_array = trend.TotalFlowArr[0].differences
-      this.DateArr = trend.DateArr;
-
-            this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Total Flow Ml",this.total_flow_1_array)
-            this.isLoading = false;
-          })
-
-
-   
-    var trend :any;
-
-
-
-
-
 
 }
 
-
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
-  onDateFilter(){
-    this.isLoading = true;
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
-
-    var trend :any;
-
-    this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-      trend=data
-
-
-      this.total_flow_1_array =trend.TotalFlowArr[0].differences;
-            this.DateArr = trend.DateArr;
-
-
-
-            this.options = Common.getOptions(this.options,this.DateArr,"Total Flow Ml","Total Flow Ml",this.total_flow_1_array)
-
-
-            this.isLoading = false;
-          })
-
-
-  }
 
   ngOnDestroy():void{
     if(this.intervalLoop){
@@ -160,4 +109,34 @@ DateArr: any[]=[];
     }
   }
 
+
+  siteTitle:any = "Emerald Hill";
+  trendTag:any = ["level","emer_flow_rate"]
+  tfTrendTag:any = ["emer_total_flow"]
+  collectionName:any ="NMB_EMER_H_RES_LVL"
+  tfCollectionName:any ="NMB_EMER_H_TOTAL_RES_LVL"
+  levelArr: any[]=[];
+  range:any
+  options: EChartsOption;
+  options2:EChartsOption;
+  isLoading:boolean = false;
+
+  recieveDate($event: any){
+   this.isLoading = false;
+   var trend :any;
+   this.range = $event;
+
+   const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+  this.pt.getFlowAndTotalFlowCollection(this.tfCollectionName, this.collectionName , this.tfTrendTag, this.trendTag, start, end ).then((data) => {
+
+    trend = data;
+
+    this.options = Common.getOptionsBarAndLine(this.options,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml", trend.TotalFlowArr[0] )
+
+    this.options2 = Common.getOptionsForLine(this.options2,"Level %", trend.FlowRateArr[1])
+
+  })
+
+ }
 }

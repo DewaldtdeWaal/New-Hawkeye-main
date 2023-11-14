@@ -97,8 +97,6 @@
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_EMERALD_R" [(ngModel)]="checked.nmb_EMERALD_R_CHECKED">Emerald Hill </mat-checkbox>
               <br>
-              <mat-checkbox color="primary"ngModel name="NMB_FAIR_GW" [(ngModel)]="checked.NMB_FAIR_GW_CHECKED">Fairview </mat-checkbox>
-              <br>
               <mat-checkbox color="primary"ngModel name="NMB_FNGH_GW" [(ngModel)]="checked.NMB_FNGH_GW_CHECKED">Fort Nottingham </mat-checkbox>
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_GR_R"[(ngModel)]="checked.nmb_GR_R_CHECKED">Grassridge </mat-checkbox>
@@ -113,6 +111,8 @@
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_LIN_R" [(ngModel)]="checked.NMB_LIN_R_CHECKED">Linton </mat-checkbox>
               <br>
+              <mat-checkbox color="primary"ngModel name="NMB_MALI_R" [(ngModel)]="checked.nmb_MALI_R_CHECKED">Malibar </mat-checkbox>
+              <br>
               <mat-checkbox color="primary"ngModel name="NMB_MW_R" [(ngModel)]="checked.nmb_MW_R_CHECKED">Motherwell </mat-checkbox>
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_OLI_R" [(ngModel)]="checked.nmb_OLI_R_CHECKED">Olifantskop</mat-checkbox>
@@ -120,8 +120,6 @@
               <mat-checkbox color="primary"ngModel name="NMB_KWANO_R" [(ngModel)]="checked.nmb_KWANO_R_CHECKED">Kwanobuhle </mat-checkbox>
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_RD_R" [(ngModel)]="checked.nmb_RD_R_CHECKED">Rosedale </mat-checkbox>
-              <br>
-              <mat-checkbox color="primary"ngModel name="NMB_SCHOE_R" [(ngModel)]="checked.nmb_SCHOE_R_CHECKED">Schoemanshoek </mat-checkbox>
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_SM_R" [(ngModel)]="checked.nmb_SM_R_CHECKED">Summit </mat-checkbox>
               <br>
@@ -164,18 +162,16 @@
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_VS_PS" [(ngModel)]="checked.nmb_VS_PS_CHECKED">Van Stadens </mat-checkbox>
               <br>
-              <mat-checkbox color="primary"ngModel name="NMB_VW_PS" [(ngModel)]="checked.nmb_VW_PS_CHECKED">Verwoerd</mat-checkbox>
-              <br>
+           
 
               <hr>
               <h3>Ground Water </h3>
 
               <mat-checkbox color="primary"ngModel name="NMB_NPP_GW" [(ngModel)]="checked.nmb_NPP_GW_CHECKED">Newton Park Pool</mat-checkbox>
               <br/>
-              <mat-checkbox color="primary"ngModel name="HUM_HUM_GW" [(ngModel)]="checked.HUM_HUM_GW_CHECKED">Humerail</mat-checkbox>
-              <br/>
+    
               <hr />
-              <h3>Flow Meters:</h3>
+              <h3>Flow Meters</h3>
 
               <mat-checkbox color="primary"ngModel name="NMB_BETH_FPT" [(ngModel)]="checked.nmb_BETH_FPT_CHECKED">Bethelsdorp</mat-checkbox>
               <br>
@@ -192,6 +188,17 @@
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_GLEN_FPT" [(ngModel)]="checked.NMB_GLEN_FPT_CHECKED">Glendinningvale </mat-checkbox>
               <br>
+
+              <mat-checkbox color="primary"ngModel name="NMB_HUP_OFF_TAKE_FPT" [(ngModel)]="checked.nmb_HUP_OFF_TAKE_FPT_CHECKED">Humansdorp Offtake</mat-checkbox>
+              <br>
+              <mat-checkbox color="primary"ngModel name="NMB_JEFF_BAY_OFF_TAKE_FPT" [(ngModel)]="checked.nmb_JEFF_BAY_OFF_TAKE_FPT_CHECKED">Jeffreys Bay Off Take</mat-checkbox>
+              <br>
+              <mat-checkbox color="primary"ngModel name="NMB_KOU_MAIN_LINE_FPT" [(ngModel)]="checked.nmb_KOU_MAIN_LINE_FPT_CHECKED">Kouga Main Line</mat-checkbox>
+              <br>
+              <mat-checkbox color="primary"ngModel name="NMB_PARA_BEA_ST_FRANCIS_FPT" [(ngModel)]="checked.nmb_PARA_BEA_ST_FRANCIS_FPT_CHECKED">Paradise Beach / St Francis Offtake</mat-checkbox>
+              <br>
+              
+              
               <mat-checkbox color="primary"ngModel name="NMB_UIT_FC_FPT" [(ngModel)]="checked.nmb_UIT_FC_CHECKED">Uitenhage Flow Chamber</mat-checkbox>
               <br>
 
@@ -202,8 +209,10 @@
 
 
 
-              <h3> WTW:</h3>
+              <h3> Water Treatment Works</h3>
        
+              <mat-checkbox color="primary"ngModel name="NMB_ELANDS_WTW"  [(ngModel)]="checked.nmb_ELANDS_WTW_CHECKED">Elandsjagt</mat-checkbox>
+              <br>
               <mat-checkbox color="primary"ngModel name="NMB_NGT_WTW" [(ngModel)]="checked.nmb_NGT_WTW_CHECKED">Nooitgedagt</mat-checkbox>
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_ELANDS_WTW"  [(ngModel)]="checked.nmb_ELANDS_WTW_CHECKED">Elandsjagt</mat-checkbox>
@@ -211,6 +220,21 @@
               <mat-checkbox color="primary"ngModel name="NMB_GLEN_WTW" [(ngModel)]="checked.NMB_GLEN_WTW_CHECKED">Glendinningvale </mat-checkbox>
               <br>
               <mat-checkbox color="primary"ngModel name="NMB_LIN_WTW"  [(ngModel)]="checked.nmb_ELANDS_WTW_CHECKED">Linton</mat-checkbox>
+              <br>
+
+              <br>
+              <hr>
+
+              <h3>Zones:</h3>
+              <mat-checkbox color="primary"ngModel name="NMB_LSD_ZS" [(ngModel)]="checked.nmb_LSD_ZS_CHECKED">Lee Samuals Drive</mat-checkbox>
+              <br>
+              <mat-checkbox color="primary" ngModel name="NMB_MNTS_ZS" [(ngModel)]="checked.nmb_MNTS_ZS_CHECKED">McNoughton Township South</mat-checkbox>
+              <br>
+
+
+              <mat-checkbox color="primary"ngModel name="NMB_RD_ZS" [(ngModel)]="checked.NMB_RD_ZS_CHECKED">Rosedale</mat-checkbox>
+              <br>
+              <mat-checkbox color="primary" ngModel name="NMB_RPE_ZS" [(ngModel)]="checked.NMB_RPE_ZS_CHECKED">Rowallan Park Extension</mat-checkbox>
               <br>
 
               <br>
