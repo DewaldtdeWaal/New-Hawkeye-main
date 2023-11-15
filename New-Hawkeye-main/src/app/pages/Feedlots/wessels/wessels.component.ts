@@ -236,15 +236,17 @@ variable :any= {
     var trend: any = {};
 
     var array = ['wes1_f1_feed_A_total','wes1_f1_feed_B_total','wes1_f1_feed_C_total']
-    this.rs.Post_Wessels_Total_Feeds(array).then(data => {
+    this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then(data => {
       trend=data
-      this.TF24_wes1_fl_feed_A_arr = trend.TF24_wes1_fl_feed_A_arr;
-      this.TF24_wes1_fl_feed_B_arr = trend.TF24_wes1_fl_feed_B_arr;
-      this.TF24_wes1_fl_feed_C_arr = trend.TF24_wes1_fl_feed_C_arr;
 
-     this.TF31_wes1_fl_feed_A_arr = trend.TF31_wes1_fl_feed_A_arr
-     this.TF31_wes1_fl_feed_B_arr = trend.TF31_wes1_fl_feed_B_arr
-     this.TF31_wes1_fl_feed_C_arr = trend.TF31_wes1_fl_feed_C_arr
+      console.log(trend)
+      this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
+      this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
+      this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
+
+     this.TF31_wes1_fl_feed_A_arr = trend.totalFeedArr[0]
+     this.TF31_wes1_fl_feed_B_arr = trend.totalFeedArr[1]
+     this.TF31_wes1_fl_feed_C_arr = trend.totalFeedArr[2]
 
 
 
@@ -412,14 +414,14 @@ variable :any= {
 
 
 
-  this.rs.Post_Wessels_Total_Feeds(array).then((data) => {
+  this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then((data) => {
     trend=data
-    this.TF24_wes1_fl_feed_A_arr = trend.TF24_wes1_fl_feed_A_arr;
-    this.TF24_wes1_fl_feed_B_arr = trend.TF24_wes1_fl_feed_B_arr;
-    this.TF24_wes1_fl_feed_C_arr = trend.TF24_wes1_fl_feed_C_arr;
-    this.TF31_wes1_fl_feed_A_arr = trend.TF31_wes1_fl_feed_A_arr;
-    this.TF31_wes1_fl_feed_B_arr = trend.TF31_wes1_fl_feed_B_arr;
-    this.TF31_wes1_fl_feed_C_arr = trend.TF31_wes1_fl_feed_C_arr;
+    this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
+    this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
+    this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
+    this.TF31_wes1_fl_feed_A_arr = trend.totalFeedArr[0];
+    this.TF31_wes1_fl_feed_B_arr = trend.totalFeedArr[1];
+    this.TF31_wes1_fl_feed_C_arr = trend.totalFeedArr[2];
     this.L31_wes2_fl_lambs_arr = trend.L31_wes2_fl_lambs_arr;
     this.DateArr31 = trend.DateArr31;
 
@@ -579,7 +581,7 @@ variable :any= {
     this.showSilos=true;
 
 
-  array = ["wes2_fl_sa_silo_levels","wes2_fl_sb_silo_levels","wes2_fl_sc_silo_levels","wes2_fl_p1_lambs","wes_fl_saft","wes_fl_sbft","wes_fl_scft" ]//I'm Passing a field for Sheep.  The algoritm requires the 4th value be for sheep.
+  array = ["wes2_fl_sa_silo_levels","wes2_fl_sb_silo_levels","wes2_fl_sc_silo_levels","wes_fl_saft","wes_fl_sbft","wes_fl_scft" ]//I'm Passing a field for Sheep.  The algoritm requires the 4th value be for sheep.
   this.name24="24 Hour Trend Data"
   this.name32="31 Day Trend Data"
 
@@ -587,7 +589,7 @@ variable :any= {
 
 
 
-   this.rs.Post_Wessels_Total_Feeds(array).then((data: any) => {
+   this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then((data: any) => {
      trend=data
      this.TF24_wes1_fl_feed_A_arr = trend.TF24_wes1_fl_feed_A_arr;
      this.TF24_wes1_fl_feed_B_arr = trend.TF24_wes1_fl_feed_B_arr;

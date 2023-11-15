@@ -36,7 +36,7 @@ const mb_CGK_R= require("./MODBUS_COMMS/nmbm_cgk_r");
       mb_CGK_R.readVal_NMB_CGK_R();
 
 const mb_BH_R = require("./MODBUS_COMMS/nmbm_bh_r");
-      mb_BH_R.readVal_BH_R();
+      mb_BH_R.readVal_BH_R(); 
 
 const mb_BUSH_R = require("./MODBUS_COMMS/nmbm_bush_r")
 mb_BUSH_R.readVal_BUSH_R();
@@ -243,9 +243,11 @@ wes1_fl.readVal_wes1_fl();
 
 const wes2_fl = require("./MODBUS_COMMS/wes2_fl")
 wes2_fl.readVal_wes2_fl();
+ 
 
+const getnew = require("./Database-Functions/Coega-kop");
+const { default: mongoose } = require("mongoose");
 
-const getnew = require("./Database-Functions/Coega-kop")
 getnew.GetVal_NMB_CGK_R();
 //websockets(ws) functions
 ws.readVal_GB_R();

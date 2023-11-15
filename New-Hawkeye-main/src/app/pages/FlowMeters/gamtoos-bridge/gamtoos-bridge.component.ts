@@ -17,10 +17,7 @@ import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
   styleUrls: ['./gamtoos-bridge.component.css']
 })
 export class GamtoosBridgeComponent implements OnInit {
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+  
 
   variable:any = {
   fpt_gt_brg_ut:null,
@@ -66,21 +63,46 @@ export class GamtoosBridgeComponent implements OnInit {
   ]
   constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend) {
 
-    this.isLoading = true;
+
 
 
 
 
   }
 
-  collectionName: any = "FPT_GT_BRG_TFs"
-  trendTag: any = ["steel_pipe_TF", "socoman_pipe_TF"]
+
+
+
+  siteTitle:any = "Gamtoos Bridge"
+  range:any;
+  options1: EChartsOption;
+  tfCollection:any = "FPT_GT_BRG_TFs";
+  collection:any = "NMBM_GLEN_Flow_trend";
+  flowTags :any = ["",""];
+  totalFlowTags: any = ["fpt_gt_brg_soco_p_tf", "fpt_gt_brg_stl_p_tf"]
+  isLoading: boolean = false;
+  recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
+
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+
+      trend = data;
+
+      console.log(trend)
+
+      // this.options1 = this.recieve.getOptionsBarAndLine2("Reservoir Inlet Flow Rate Ml/d",trend.FlowRateArr[0],"Boreholes Combined Flow Rate Ml/d",trend.FlowRateArr[1],"Reservoir Inlet Total Flow Ml",trend.TotalFlowArr[0],"Boreholes Combined Total Flow m³",trend.TotalFlowArr[1],"Ml  m³","Ml/d")
+
+     
+
+    })
+
+  }
+
+
   ngOnInit(){
-    var tagVals:any=[];
-
-
-
-
     this.intervalLoop = this.pm.findPageData("nmbm_gt_brg_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
       console.log(this.data)
@@ -89,236 +111,7 @@ export class GamtoosBridgeComponent implements OnInit {
 
    })
 
-
-
-
-
-    var trend :any;
-  //  this.rs.Get_GT_BRG_Total_Flows().subscribe(data => {
-
-      this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-      this.TotalFlow_STL_Arr = trend.TotalFlowArr[0].differences;
-        this.TotalFlow_SOCO_Arr = trend.TotalFlowArr[1].differences;
-        this.DateArr = trend.DateArr;
-            var theme:any
-            var tooltipBackground:any;
-
-if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-            {
-              theme = '#FFFFFF'
-              tooltipBackground = 'rgba(50,50,50,0.7)'
-            }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-            {
-            theme = '#797979'
-            tooltipBackground = 'rgba(255, 255, 255, 1)'
-            }
-            this.options = {
-              tooltip: {
-                backgroundColor: tooltipBackground,
-                textStyle:{ color: theme,},
-                 trigger: 'axis',
-                 position: ['10%', '10%']
-               },
-              grid: {
-                bottom:"18%"
-              },
-              xAxis: {
-                  type: 'category',
-                  data: this.DateArr,
-                  axisLabel: { interval: 0, rotate: 90, color: theme },
-              },
-              yAxis:   {
-                type: 'value',
-                scale: true,
-                name: 'Total Flow ML',
-                nameTextStyle: { color: theme},
-                boundaryGap: [0.2, 0.2],
-                min: 0,
-                axisLabel: {  rotate: 90, color: theme},
-            },
-              series: [
-                {
-                name: 'Steel Pipe Total Flow',
-                  data: this.TotalFlow_STL_Arr,
-                  type: 'bar',
-              },
-              {
-                name: 'Socoman Pipe Total Flow',
-                  data: this.TotalFlow_SOCO_Arr,
-                  type: 'bar',
-              }
-            ]
-            };
-            this.isLoading = false;
-          })
-
-
-
-      }
-
-      isLoading: boolean = false;
-  onDateFilter(){
-    this.isLoading = true;
-    var start = this.range.value.start+'';
-    var end = this.range.value.end+'';
-
-   var startARR = start.toString().split(" ")
-   var endARR = end.toString().split(" ")
-
-
-
-   switch (startARR[1]) {
-    case "Jan":
-      startARR[1] = "1"
-        break;
-        case "Feb":
-          startARR[1] = "2"
-            break;
-            case "Mar":
-              startARR[1] = "3"
-                break;
-                case "Apr":
-                  startARR[1] = "4"
-                    break;
-                    case "May":
-                      startARR[1] = "5"
-                        break;
-                        case "Jun":
-                          startARR[1] = "6"
-                            break;
-                            case "Jul":
-                              startARR[1] = "7"
-                                break;
-                                case "Aug":
-                                  startARR[1] = "8"
-                                    break;
-                                    case "Sep":
-                                      startARR[1] = "9"
-                                        break;
-                                        case "Oct":
-                                          startARR[1] = "10"
-                                            break;
-                                            case "Nov":
-                                              startARR[1] = "11"
-                                                break;
-                                                case "Dec":
-                                                  startARR[1] = "12"
-                                                    break;
-                                                  }
-switch (endARR[1]) {
-    case "Jan":
-      endARR[1] = "1"
-        break;
-        case "Feb":
-          endARR[1] = "2"
-            break;
-            case "Mar":
-              endARR[1] = "3"
-                break;
-                case "Apr":
-                  endARR[1] = "4"
-                    break;
-                    case "May":
-                      endARR[1] = "5"
-                        break;
-                        case "Jun":
-                          endARR[1] = "6"
-                            break;
-                            case "Jul":
-                              endARR[1] = "7"
-                                break;
-                                case "Aug":
-                                  endARR[1] = "8"
-                                    break;
-                                    case "Sep":
-                                      endARR[1] = "9"
-                                        break;
-                                        case "Oct":
-                                          endARR[1] = "10"
-                                            break;
-                                            case "Nov":
-                                              endARR[1] = "11"
-                                                break;
-                                                case "Dec":
-                                                  endARR[1] = "12"
-                                                    break;
-                                                  }
-
-if (startARR[1].length==1){
-  startARR[1] = "0" + startARR[1]
-}
-
-if (endARR[1].length==1){
-  endARR[1] = "0" + endARR[1]
-}
-var newStart = startARR[3] +"-"+startARR[1]+"-"+startARR[2]
-var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
-
-var trend :any;
-
-this.pt.getPostTrend(this.collectionName, this.trendTag,newEnd,newStart).then((data) => {
-  trend=data
-
-        this.TotalFlow_STL_Arr = trend.TotalFlow_STL_Arr[0].differences;
-        this.TotalFlow_SOCO_Arr = trend.TotalFlow_SOCO_Arr[1].differences;
-        this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any;
-
-   if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-{
-  theme = '#FFFFFF'
-  tooltipBackground = 'rgba(50,50,50,0.7)'
-}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-{
-theme = '#797979'
-tooltipBackground = 'rgba(255, 255, 255, 1)'
-}
-
-this.options = {
-  tooltip: {
-    backgroundColor: tooltipBackground,
-    textStyle:{ color: theme,},
-     trigger: 'axis',
-     position: ['10%', '10%']
-   },
-  grid: {
-    bottom:"18%"
-  },
-
-  xAxis: {
-      type: 'category',
-      data: this.DateArr,
-      axisLabel: { interval: 0, rotate: 90, color: theme },
-  },
-  yAxis:   {
-    type: 'value',
-    scale: true,
-    name: 'Total Flow ML',
-    nameTextStyle: { color: theme},
-    boundaryGap: [0.2, 0.2],
-    min: 0,
-    axisLabel: {  rotate: 90, color: theme},
-},
-  series: [
-    {
-    name: 'Steel Pipe Total Flow',
-      data: this.TotalFlow_STL_Arr,
-      type: 'bar',
-
-  },
-  {
-    name: 'Socoman Pipe Total Flow',
-      data: this.TotalFlow_SOCO_Arr,
-      type: 'bar',
-
   }
-]
-};
-this.isLoading = false;
-      })
-}
 
 ngOnDestroy():void{
   if(this.intervalLoop){

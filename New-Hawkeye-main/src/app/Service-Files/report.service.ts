@@ -24,6 +24,8 @@ export interface testSites{
 
 export interface Wessels{
   sites: any[];
+  postType:boolean;
+  
 
 }
 
@@ -44,21 +46,24 @@ fmt_Trend_End_Date:string;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-async Post_Wessels_Total_Feeds(array:any[]){
+async Post_Wessels_Total_Feeds(array:any[], postType:any){
   try{
   var returnVariable
   var data;
   const obj: Wessels ={
-
-    sites:array// [TF_wes1_fl_p1_feed_A_arr,  TF_wes1_fl_p1_feed_B_arr, TF_wes1_fl_p1_feed_C_arr]
+    postType:postType,
+    sites:array
   }
-  //return this.http.post(this.su.serverURL+"/feedlots/wessels", obj )
 
-  returnVariable =  this.http.post(this.su.serverURL + "/feedlots/wessels", obj).toPromise().then(DATA =>{
+
+  returnVariable =  this.http.post(this.su.serverURL + "/feedlots/wessels/new", obj).toPromise().then(DATA =>{
 
     data = DATA
 
+    console.log("data")
+    console.log(data)
 
+    console.log("data")
     return data;
 
   })
@@ -134,7 +139,7 @@ async GetWesTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ){
 // ///////////////////////////////////////////////////////////////////////////////////////////////////
 GetIsuzuTrendData( sitesChosen: any[] ):Observable<any[]>{
   const obj: Wessels ={
-
+    postType:false,
     sites:sitesChosen
   }
   return this.http.post<any[]>(this.su.serverURL+"/trends/automotive/isuzu",obj)

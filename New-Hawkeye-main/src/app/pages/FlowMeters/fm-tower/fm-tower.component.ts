@@ -43,7 +43,7 @@ export class FMTowerComponent implements OnInit {
 B_STAT: any
 
 
-options: EChartsOption;
+
 
 myChart:any;
 theme:any
@@ -109,43 +109,37 @@ faultArr:any=[
 ]
 
   constructor(private pt: PostTrend,public rs: ReportService, public recieve:Common,private pm:pagePostMethod ) {
-    this.isLoading = true;
-
+  
 
 
 
   }
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
 
+  siteTitle:any = "FM Tower"
+  range:any;
+  options1: EChartsOption;
+  tfCollection:any = "FM_FMT_TF";
+  collection:any = "FM_FMT_TREND";
+  totalFlowTags :any = ["totalflow"]
+  flowTags :any = ["flowRate"]
   isLoading: boolean = false;
-  onDateFilter(){
+  recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
 
-    this.isLoading = true;
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
 
+      trend = data;
 
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
+      console.log(trend)
+      this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml",trend.TotalFlowArr[0]);
 
-var trend :any;
+    })
 
-this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
+  }
 
-
-  trend=data
-        this.TotalFlowArr = trend.TotalFlowArr[0].differences;
-        console.log(this.TotalFlowArr)
-        this.DateArr = trend.DateArr;
-        this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","FM Tower Total",this.TotalFlowArr)
-
-        this.isLoading = false;
-      })
-}
-trendTag:any = ["totalflow"]
-collectionName:any ="FM_FMT_TF"
 
   ngOnInit() {
 
@@ -162,24 +156,7 @@ collectionName:any ="FM_FMT_TF"
 
 
 
-    var trend :any;
 
-
-
-
-
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-
-
-      trend=data
-            this.TotalFlowArr = trend.TotalFlowArr[0].differences;
-            this.DateArr = trend.DateArr;
-
-            console.log(trend.TotalFlowArr)
-
-            this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","FM Tower Total",this.TotalFlowArr)
-            this.isLoading = false;
-          })
 
 }
 ngOnDestroy():void{

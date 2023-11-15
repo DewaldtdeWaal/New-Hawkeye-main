@@ -3,12 +3,12 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const path = require('path');
 const admin = require('./Database-Functions/create_admin')
-
+mongoose.set('strictQuery',false)
 const getDriverValues = require('./routes/getDriver/getDriverRoutes')
 
 const routing = require('./routes/routing/routing')
 
-
+ 
 const routeSiteMethod = require("./routes/routeSiteMethod");
 const pageTrend = require("./routes/PageTrend/PageTrend");
 
