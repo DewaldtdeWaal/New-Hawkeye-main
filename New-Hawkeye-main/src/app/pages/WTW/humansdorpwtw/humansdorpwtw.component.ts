@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {HumansdorpComponent} from 'src/app/Service-Files/WTW/wtw.service';
 import { Common } from 'src/app/class/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from 'src/app/Service-Files/report.service';
@@ -43,8 +41,7 @@ export class HumansdorpwtwComponent implements OnInit {
 
 
   }
-  collectionName: any = "Humansdrop_wtw_tf"
-  trendTag: any = ["klm_hup_wtw_TF"]
+
   ngOnInit() {
 
     this.pm.findPageData("klm_hup_wtw", "WTW_CurrentVals").subscribe((result) => {
@@ -56,51 +53,39 @@ export class HumansdorpwtwComponent implements OnInit {
     });
 
 
-    var trend: any = {};
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-      this.total_flow_1_array =  trend.TotalFlowArr[0].differences;
 
-      this.DateArr = trend.DateArr;
-
-
-
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
-
-  this.isLoading = false;
-    }
-    )
 
   }
 
-  isLoading: boolean = false;
-  onDateFilter(){
 
-    this.isLoading = true;
-
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
-
-    var trend :any;
-
-    this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-    trend=data
-
-    this.total_flow_1_array =  trend.TotalFlowArr[0].differences;
-    this.DateArr = trend.DateArr;
-
-
-    this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_1_array);
-    this.isLoading = false;
-    })
-
-
-    }
     ngOnDestroy():void{
       if(this.intervalLoop){
         this.intervalLoop.unsubscribe();
 
       }
     }
-
+    options1: EChartsOption;
+    
+  isLoading: boolean = false;
+    tfCollection:any = "Humansdrop_wtw_tf";
+    collectionName:any ="WTW_HUMANSDORP_FLOW"
+    totalFlowTags :any = ["klm_hup_wtw_TF"]
+    flowTags :any = ["klm_hup_wtw_FR"]
+    siteTitle:unknown = "Humansdorp Inlet"
+    recieveDate($event: any){
+      var trend :any;
+      this.range = $event;
+      this.isLoading = true;
+      const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+  
+      this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collectionName,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+  
+        trend = data;
+  
+        console.log(trend)
+        this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
+        this.isLoading = false;
+      })
+  
+    }
 }

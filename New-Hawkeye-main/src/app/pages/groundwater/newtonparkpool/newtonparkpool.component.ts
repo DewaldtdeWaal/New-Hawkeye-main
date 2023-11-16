@@ -30,10 +30,7 @@ export class NewtonparkpoolComponent implements OnInit {
 
 
 
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+
   options: EChartsOption;
 
   generalfaulttable: PeriodicElement[] = [];
@@ -213,10 +210,9 @@ export class NewtonparkpoolComponent implements OnInit {
 
 
   constructor( public rs: ReportService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend )  {
-    this.isLoading = true;
+
   }
-  collectionName: any = "NPP_TF_Trend"
-  trendTag: any = ["totalflow"]
+
   ngOnInit() {
 
 
@@ -238,131 +234,38 @@ export class NewtonparkpoolComponent implements OnInit {
 
 
 
-  var trend: any = {};
-  this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-    trend=data
-    this.totalflow_array = trend.TotalFlowArr[0].differences;
-
-    this.DateArr = trend.DateArr;
-      var theme:any
-      var tooltipBackground:any
-
-      if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-      {
-        theme = '#FFFFFF'
-        tooltipBackground = 'rgba(50,50,50,0.7)'
-      }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-      {
-      theme = '#797979'
-      tooltipBackground = 'rgba(255, 255, 255, 1)'
-      }
-      this.options = {
-        tooltip: {
-          backgroundColor: tooltipBackground,
-          textStyle:{ color: theme,},
-           trigger: 'axis',
-           position: ['10%', '10%']
-         },
-        grid: {
-          bottom:"18%"
-        },
-        xAxis: {
-            type: 'category',
-            data: this.DateArr,
-            axisLabel: { interval: 0, rotate: 90, color: theme },
-        },
-        yAxis:   {
-          type: 'value',
-          scale: true,
-          name: 'Total Flow',
-          nameTextStyle: { color: theme},
-          boundaryGap: [0.2, 0.2],
-          min: 0,
-          axisLabel: { rotate: 90, color: theme},
-      },
-        series: [
-          {
-            name: 'Newton Park Pool Total Flow',
-            data: this.totalflow_array,
-            type: 'bar',
-        }
-      ]
-      };
-      this.isLoading = false;
-  }
-  )
-
-  }
-
-  isLoading: boolean = false;
-  onDateFilter(){
-    this.isLoading = true;
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
-
-  var trend :any;
-
-  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-    trend=data
-    this.totalflow_array = trend.TotalFlowArr[0].differences;
-  this.DateArr = trend.DateArr;
-  var theme:any
-  var tooltipBackground:any;
-
-  if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-  {
-  theme = '#FFFFFF'
-  tooltipBackground = 'rgba(50,50,50,0.7)'
-  }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-  {
-  theme = '#797979'
-  tooltipBackground = 'rgba(255, 255, 255, 1)'
-  }
-
-  this.options = {
-  tooltip: {
-    backgroundColor: tooltipBackground,
-    textStyle:{ color: theme,},
-     trigger: 'axis',
-     position: ['10%', '10%']
-   },
-  grid: {
-    bottom:"18%"
-  },
-
-  xAxis: {
-      type: 'category',
-      data: this.DateArr,
-      axisLabel: { interval: 0, rotate: 90, color: theme },
-  },
-  yAxis:   {
-    type: 'value',
-    scale: true,
-    name: 'Total Flow',
-    nameTextStyle: { color: theme},
-    boundaryGap: [0.2, 0.2],
-    min: 0,
-    axisLabel: {  rotate: 90, color: theme},
-  },
-  series: [
-    {
-      name: 'Newton Park Pool Total Flow',
-        data: this.totalflow_array,
-        type: 'bar',
-    }
-  ]
-  };
-
-  this.isLoading = false;
-  })
-
-
   }
   ngOnDestroy():void{
     if(this.intervalLoop){
       this.intervalLoop.unsubscribe();
 
     }
+  }
+
+
+  isLoading:any
+  collectionName:any ="NMBM_NPP_GW_TREND"
+  range:any;
+  options1: EChartsOption;
+  tfCollection:any = "NPP_TF_Trend";
+  totalFlowTags :any = ["totalflow"]
+  flowTags :any = ["flowRate"]
+  siteTitle:unknown = "Newton Park Pool"
+  recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
+    this.isLoading = true;
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collectionName,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+
+      trend = data;
+
+      console.log(trend)
+      this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow kl",trend.TotalFlowArr[0]);
+      this.isLoading = false;
+    })
+
   }
 
 }

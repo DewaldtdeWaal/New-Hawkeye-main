@@ -77,13 +77,17 @@ export class GamtoosBridgeComponent implements OnInit {
   range:any;
   options1: EChartsOption;
   tfCollection:any = "FPT_GT_BRG_TFs";
-  collection:any = "NMBM_GLEN_Flow_trend";
-  flowTags :any = ["",""];
-  totalFlowTags: any = ["fpt_gt_brg_soco_p_tf", "fpt_gt_brg_stl_p_tf"]
-  isLoading: boolean = false;
+  collection:any = "FPT_GT_BRG_TREND";
+  flowTags :any = ["steel_pipe_FR","socoman_pipe_FR"];
+  totalFlowTags: any = ["steel_pipe_TF", "socoman_pipe_TF"]
+  isLoading: boolean = true;
   recieveDate($event: any){
     var trend :any;
+    this.isLoading = true
+
     this.range = $event;
+
+    console.log(this.range.value)
 
     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
@@ -93,10 +97,10 @@ export class GamtoosBridgeComponent implements OnInit {
 
       console.log(trend)
 
-      // this.options1 = this.recieve.getOptionsBarAndLine2("Reservoir Inlet Flow Rate Ml/d",trend.FlowRateArr[0],"Boreholes Combined Flow Rate Ml/d",trend.FlowRateArr[1],"Reservoir Inlet Total Flow Ml",trend.TotalFlowArr[0],"Boreholes Combined Total Flow m³",trend.TotalFlowArr[1],"Ml  m³","Ml/d")
+      this.options1 = this.recieve.getOptionsBarAndLine2("Reservoir Inlet Flow Rate Ml/d",trend.FlowRateArr[0],"Boreholes Combined Flow Rate Ml/d",trend.FlowRateArr[1],"Reservoir Inlet Total Flow Ml",trend.TotalFlowArr[0],"Boreholes Combined Total Flow m³",trend.TotalFlowArr[1],"Ml","Ml/d")
 
      
-
+      this.isLoading = false
     })
 
   }

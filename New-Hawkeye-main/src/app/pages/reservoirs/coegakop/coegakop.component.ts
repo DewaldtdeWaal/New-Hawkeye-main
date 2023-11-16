@@ -173,7 +173,7 @@ grassRidgeFRArr: any[]=[];
 CoegaIDZTFRArr: any[]=[];
 
 recieveDate($event: any){
-  this.isLoading = false;
+  this.isLoading = true
   var trend :any;
   this.range = $event;
   var start;
@@ -186,9 +186,11 @@ recieveDate($event: any){
 
 
 
-    this.options = this.recieve.getOptionsBarAndLine3("Motherwell Total Flow",trend.TotalFlowArr[0],"Grassridge Total Flow Ml",trend.TotalFlowArr[1],"Coega IDZ Total Flow Ml",trend.TotalFlowArr[2],"Motherwell Flow Rate Ml/d",trend.FlowRateArr[0],"Grassridge Flow Rate Ml/d",trend.FlowRateArr[1],"Coega IDZ Flow Rate Ml/d",trend.FlowRateArr[2],"Ml","Ml/d", );
+    this.options = this.recieve.getOptionsBarAndLine3("Motherwell Flow Rate Ml/d",trend.FlowRateArr[0],"Grassridge Flow Rate Ml/d",trend.FlowRateArr[1],"Coega IDZ Flow Rate Ml/d",trend.FlowRateArr[2],"Motherwell Total Flow",trend.TotalFlowArr[0],"Grassridge Total Flow Ml",trend.TotalFlowArr[1],"Coega IDZ Total Flow Ml",trend.TotalFlowArr[2],"Ml","Ml/d", );
 
-    this.options2 = this.recieve.getOptionsFor2Line("%","North Chamber 17 %",trend.FlowRateArr[3],"North Chamber 2 %",trend.FlowRateArr[4])
+    this.options2 = this.recieve.getOptionsFor2Line("%","North Chamber 17 %",trend.FlowRateArr[3],"North Chamber 2 %",trend.FlowRateArr[4]);
+
+    this.isLoading = false
   })
 
 
@@ -203,7 +205,7 @@ recieveDate($event: any){
 
 
   }
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   ngOnInit() {
 
     this.intervalLoop = this.pm.findPageData("cgk", "R_CurrentVals").subscribe((result) => {

@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ListeningService } from 'src/app/listening.service';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { UsersService } from 'src/app/Service-Files/users.service';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { EChartsOption } from 'echarts';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import {NooitgedachtRootComponent} from 'src/app/Service-Files/WTW/wtw.service';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 
 @Component({
@@ -36,7 +33,7 @@ export class NooitgedachtComponent implements OnInit {
       "wtw_ngt_low_lift_fr",//1
       "wtw_ngt_high_lift_fr",//2
    ]
-  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,private nooit:NooitgedachtRootComponent,public recieve:Common,private pm:pagePostMethod  ) {
+  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService,public recieve:Common,private pm:pagePostMethod,private pt: PostTrend  ) {
 
 
 
@@ -61,10 +58,33 @@ export class NooitgedachtComponent implements OnInit {
   ngOnDestroy():void{
     if(this.intervalLoop){
       this.intervalLoop.unsubscribe();
-
     }
   }
 
+  range:any;
+  siteTitle:any = "Nooitgedacht";
+  options: EChartsOption;
+  isLoading:boolean;
+  collectionName:any ="WTW_NGT_FM_TREND"
+  levelArr1: any[]=[];
+  levelArr2: any[]=[];
+trendTag:any =["low_level_flow_rate","high_level_flow_rate"]
+  recieveDate($event: any){
+    this.isLoading = true;
+    var trend :any;
+    this.range = $event;
+ 
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+
+    this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+      trend=data
+
+      this.options = this.recieve.getOptionsFor2Line("Ml/d","Low Lift Flow Meter",trend.LevelArr[0],"High Lift Flow Meter",trend.LevelArr[1]);
+
+      this.isLoading = false;
+    })
+
+  }
 
 
 }

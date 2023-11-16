@@ -24,7 +24,6 @@ export interface testSites{
 
 export interface Wessels{
   sites: any[];
-  postType:boolean;
   
 
 }
@@ -51,7 +50,7 @@ async Post_Wessels_Total_Feeds(array:any[], postType:any){
   var returnVariable
   var data;
   const obj: Wessels ={
-    postType:postType,
+
     sites:array
   }
 
@@ -139,7 +138,6 @@ async GetWesTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ){
 // ///////////////////////////////////////////////////////////////////////////////////////////////////
 GetIsuzuTrendData( sitesChosen: any[] ):Observable<any[]>{
   const obj: Wessels ={
-    postType:false,
     sites:sitesChosen
   }
   return this.http.post<any[]>(this.su.serverURL+"/trends/automotive/isuzu",obj)

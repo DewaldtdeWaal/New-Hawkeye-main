@@ -121,7 +121,7 @@ alarmTrip: 1
    totalFlowTags:any =["kwano_r_total_flow_1","kwano_r_total_flow_2"]
    flowTags:unknown = ["kwano_r_flow_rate_1","kwano_r_flow_rate_2","kwano_r_reservoir_level"] 
    recieveDate($event: any){
-
+    this.isLoading = true
     var trend :any;
     this.range = $event;
  

@@ -243,6 +243,7 @@ variable :any= {
       this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
       this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
       this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
+   
 
      this.TF31_wes1_fl_feed_A_arr = trend.totalFeedArr[0]
      this.TF31_wes1_fl_feed_B_arr = trend.totalFeedArr[1]
@@ -251,146 +252,9 @@ variable :any= {
 
 
 
-
-      this.DateArr31 = trend.DateArr31;
-
-      var theme:any
-      var tooltipBackground:any
-
-      if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-      {
-        theme = '#FFFFFF'
-        tooltipBackground = 'rgba(50,50,50,0.7)'
-      }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-      {
-      theme = '#797979'
-      tooltipBackground = 'rgba(255, 255, 255, 1)'
-      }
-
-
-      this.option = {
-        tooltip: {
-          backgroundColor: tooltipBackground,
-          textStyle:{ color: theme,},
-           trigger: 'axis',
-           position: ['10%', '10%']
-         },   legend: {
-          textStyle: {color:theme },
-         },
-        grid: {
-          bottom:"18%"
-        },
-        xAxis: {
-            type: 'time',
-          // data: this.DateArr,
-            splitLine: {
-              show: true,
-
-            },
-            axisLabel: {  color: theme },
-        },
-        yAxis: {
-          type: 'value',
-
-          axisLabel: {  rotate: 60, color: theme },
-
-
-        },
-        series: [
-          {
-          name: 'Feed A Total',
-            data: this.TF24_wes1_fl_feed_A_arr,
-            type: 'line',
-            color: 'rgb(56,91,172)',
-            smooth: true,
-            showSymbol: false,
-
-        },
-                {
-             name: 'Feed B Total',
-            data: this.TF24_wes1_fl_feed_B_arr,
-            type: 'line',
-            color: 'rgb(89,189,89)',
-            smooth: true,
-            showSymbol: false,
-
-
-        },
-        {
-          name: 'Feed C Total',
-            data: this.TF24_wes1_fl_feed_C_arr,
-            type: 'line',
-            color: 'rgb(221,169,47)',
-            smooth: true,
-            showSymbol: false,
-
-        },
-      ]
-      };
-      this.barOptions = {
-        tooltip: {
-          backgroundColor: tooltipBackground,
-          textStyle:{ color: theme,},
-           trigger: 'axis',
-           position: ['5%', '10%']
-         },
-        legend: {   textStyle: {color:theme },},
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: this.DateArr31,
-            axisLabel: {  color: theme },
-          },
-
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            axisLabel: {  rotate: 60, color: theme },
-
-          }
-        ],
-        series: [
-          {
-            name: 'Feed A Total',
-            type: 'bar',
-            stack: 'Ad',
-            color: 'rgb(56,91,172)',
-            emphasis: {
-              focus: 'series'
-            },
-            data: this.TF31_wes1_fl_feed_A_arr
-          },
-          {
-            name: 'Feed B Total',
-            type: 'bar',
-            stack: 'Ad',
-            color: 'rgb(89,189,89)',
-            emphasis: {
-              focus: 'series'
-            },
-            data: this.TF31_wes1_fl_feed_B_arr
-          },
-          {
-            name: 'Feed C Total',
-            type: 'bar',
-            stack: 'Ad',
-            color: 'rgb(221,169,47)',
-            emphasis: {
-              focus: 'series'
-            },
-            data: this.TF31_wes1_fl_feed_C_arr
-          },
-
-        ]
-      };
-      this.isLoading=false;
+   
+      this.getLine()
+      this.getTotalFeedAndDayFeed()
     })
 
 
@@ -411,168 +275,39 @@ variable :any= {
 
 
 
+ this.name1 = "Feed A Total";
+ this.name2 = "Feed B Total";
+ this.name3 = "Feed C Total";
+
+ this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then(data => {
+  trend=data
+
+  console.log(trend)
+  this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
+  this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
+  this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
+
+
+ this.TF31_wes1_fl_feed_A_arr = trend.totalFeedArr[0]
+ this.TF31_wes1_fl_feed_B_arr = trend.totalFeedArr[1]
+ this.TF31_wes1_fl_feed_C_arr = trend.totalFeedArr[2]
+ this.L31_wes2_fl_lambs_arr = trend.totalFeedArr[3]
 
 
 
-  this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then((data) => {
-    trend=data
-    this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
-    this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
-    this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
-    this.TF31_wes1_fl_feed_A_arr = trend.totalFeedArr[0];
-    this.TF31_wes1_fl_feed_B_arr = trend.totalFeedArr[1];
-    this.TF31_wes1_fl_feed_C_arr = trend.totalFeedArr[2];
-    this.L31_wes2_fl_lambs_arr = trend.L31_wes2_fl_lambs_arr;
-    this.DateArr31 = trend.DateArr31;
 
 
-    var theme:any
-    var tooltipBackground:any
+ this.getLine()
+  this.getLotFeedDayAndMonth()
+})
 
-    if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-    {
-      theme = '#FFFFFF'
-      tooltipBackground = 'rgba(50,50,50,0.7)'
-    }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-    {
-    theme = '#797979'
-    tooltipBackground = 'rgba(255, 255, 255, 1)'
-    }
-
-  this.option = {
-    tooltip: {
-      backgroundColor: tooltipBackground,
-      textStyle:{ color: theme,},
-       trigger: 'axis',
-       position: ['10%', '10%']
-     },   legend: {
-      textStyle: {color:theme },
-     },
-    grid: {
-      bottom:"18%"
-    },
-    xAxis: {
-        type: 'time',
-      // data: this.DateArr,
-        splitLine: {
-          show: true
-        },
-        axisLabel: {  color: theme },
-    },
-    yAxis: {
-      type: 'value',
-      axisLabel: {  rotate: 60, color: theme },
-
-    },
-    series: [
-      {
-      name: 'Feed A Total',
-        data: this.TF24_wes1_fl_feed_A_arr,
-        type: 'line',
-        color: 'rgb(56,91,172)',
-        smooth: true,
-        showSymbol: false,
-
-    },
-            {
-         name: 'Feed B Total',
-        data: this.TF24_wes1_fl_feed_B_arr,
-        type: 'line',
-        color: 'rgb(89,189,89)',
-        smooth: true,
-        showSymbol: false,
-
-
-    },
-    {
-      name: 'Feed C Total',
-        data: this.TF24_wes1_fl_feed_C_arr,
-        type: 'line',
-        color: 'rgb(221,169,47)',
-        smooth: true,
-        showSymbol: false,
-
-    },
-  ]
-  };
-  this.barOptions = {
-    tooltip: {
-      backgroundColor: tooltipBackground,
-      textStyle:{ color: theme,},
-       trigger: 'axis',
-       position: ['5%', '10%']
-     },
-    legend: {   textStyle: {color:theme },},
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data: this.DateArr31,
-        axisLabel: {  color: theme },
-      }
-    ],
-    yAxis: [
-      {
-        type: 'value',
-        axisLabel: {  rotate: 60, color: theme },
-
-      }
-    ],
-    series: [  {
-      name: 'Animal Count',
-      type: 'bar',
-      color: 'rgb(157,97,221)',
-      stack: 'Ad',
-      emphasis: {
-        focus: 'series'
-      },
-      data: this.L31_wes2_fl_lambs_arr
-    },
-      {
-        name: 'Feed A Total',
-        type: 'bar',
-        stack: 'Ad',
-        color: 'rgb(56,91,172)',
-        emphasis: {
-          focus: 'series'
-        },
-        data: this.TF31_wes1_fl_feed_A_arr
-      },
-      {
-        name: 'Feed B Total',
-        type: 'bar',
-        stack: 'Ad',
-        color: 'rgb(89,189,89)',
-        emphasis: {
-          focus: 'series'
-        },
-        data: this.TF31_wes1_fl_feed_B_arr
-      },
-      {
-        name: 'Feed C Total',
-        type: 'bar',
-        stack: 'Ad',
-        color: 'rgb(221,169,47)',
-        emphasis: {
-          focus: 'series'
-        },
-        data: this.TF31_wes1_fl_feed_C_arr
-      },
-
-    ]
-  };
-  this.isLoading=false;
- })
 
 
  }
 
-
+ name1:string;
+ name2:string;
+ name3:string;
   Event2(){
     this.isLoading=true;
     var i:any;
@@ -585,218 +320,38 @@ variable :any= {
   this.name24="24 Hour Trend Data"
   this.name32="31 Day Trend Data"
 
+    this.name1 = "Silo A Total";
+    this.name2 = "Silo B Total";
+    this.name3 = "Silo C Total";
+
+
+    this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then(data => {
+      trend=data
+
+      console.log(trend)
+      this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
+      this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
+      this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
+   
+
+     this.TF31_wes1_fl_feed_A_arr = trend.totalFeedArr[0]
+     this.TF31_wes1_fl_feed_B_arr = trend.totalFeedArr[1]
+     this.TF31_wes1_fl_feed_C_arr = trend.totalFeedArr[2]
+
+     this.Silo_A_arr = trend.siloArr[3]
+      this.Silo_B_arr = trend.siloArr[4]
+      this.Silo_C_arr = trend.siloArr[5]
 
 
 
+   
+      this.getLine()
+      this.getTotalFeedAndDayFeed()
 
-   this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then((data: any) => {
-     trend=data
-     this.TF24_wes1_fl_feed_A_arr = trend.TF24_wes1_fl_feed_A_arr;
-     this.TF24_wes1_fl_feed_B_arr = trend.TF24_wes1_fl_feed_B_arr;
-     this.TF24_wes1_fl_feed_C_arr = trend.TF24_wes1_fl_feed_C_arr;
-     this.TF31_wes1_fl_feed_A_arr = trend.TF31_wes1_fl_feed_A_arr;
-     this.TF31_wes1_fl_feed_B_arr = trend.TF31_wes1_fl_feed_B_arr;
-     this.TF31_wes1_fl_feed_C_arr = trend.TF31_wes1_fl_feed_C_arr;
-     this.Silo_A_arr=trend.Silo_A_arr;
-     this.Silo_B_arr=trend.Silo_B_arr;
-     this.Silo_C_arr=trend.Silo_C_arr;
-     this.DateArr31 = trend.DateArr31;
-     this.DateSilo = trend.DateSilo;
+      this.getSilo()
+    })
 
 
-
-     var theme:any;
-     var tooltipBackground:any;
-
-     if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-     {
-       theme = '#FFFFFF'
-       tooltipBackground = 'rgba(50,50,50,0.7)'
-     }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-     {
-     theme = '#797979'
-     tooltipBackground = 'rgba(255, 255, 255, 1)'
-     }
-
-   this.option = {
-     tooltip: {
-       backgroundColor: tooltipBackground,
-       textStyle:{ color: theme,},
-        trigger: 'axis',
-        position: ['10%', '10%']
-      },   legend: {
-       textStyle: {color:theme },
-      },
-     grid: {
-       bottom:"18%"
-     },
-     xAxis: {
-         type: 'time',
-       // data: this.DateArr,
-         splitLine: {
-           show: true
-         },
-         axisLabel: {  color: theme },
-     },
-     yAxis: {
-       type: 'value',
-       axisLabel: {  rotate: 60, color: theme },
-
-     },
-     series: [
-       {
-       name: 'Silo A Total',
-         data: this.TF24_wes1_fl_feed_A_arr,
-         type: 'line',
-         color: 'rgb(56,91,172)',
-         smooth: true,
-         showSymbol: false,
-
-     },
-             {
-          name: 'Silo B Total',
-         data: this.TF24_wes1_fl_feed_B_arr,
-         type: 'line',
-         color: 'rgb(89,189,89)',
-         smooth: true,
-         showSymbol: false,
-     },
-     {
-       name: 'Silo C Total',
-         data: this.TF24_wes1_fl_feed_C_arr,
-         type: 'line',
-         color: 'rgb(221,169,47)',
-         smooth: true,
-         showSymbol: false,
-     },
-   ]
-   };
-   this.barOptions = {
-     tooltip: {
-       backgroundColor: tooltipBackground,
-       textStyle:{ color: theme,},
-        trigger: 'axis',
-        position: ['5%', '10%']
-      },
-     legend: {   textStyle: {color:theme },},
-     grid: {
-       left: '3%',
-       right: '4%',
-       bottom: '3%',
-       containLabel: true
-     },
-     xAxis: [
-       {
-         type: 'category',
-         data: this.DateArr31,
-         axisLabel: {  color: theme },
-       }
-     ],
-     yAxis: [
-       {
-         type: 'value',
-         axisLabel: {  rotate: 60, color: theme },
-       }
-     ],
-     series: [
-       {
-         name: 'Silo A Total',
-         type: 'bar',
-         stack: 'Ad',
-         color: 'rgb(56,91,172)',
-         emphasis: {
-           focus: 'series'
-         },
-         data: this.TF31_wes1_fl_feed_A_arr
-       },
-       {
-         name: 'Silo B Total',
-         type: 'bar',
-         stack: 'Ad',
-         color: 'rgb(89,189,89)',
-         emphasis: {
-           focus: 'series'
-         },
-         data: this.TF31_wes1_fl_feed_B_arr
-       },
-       {
-         name: 'Silo C Total',
-         type: 'bar',
-         stack: 'Ad',
-         color: 'rgb(221,169,47)',
-         emphasis: {
-           focus: 'series'
-         },
-         data: this.TF31_wes1_fl_feed_C_arr
-       },
-
-     ]
-   };
-   this.siloOptions = {
-    tooltip: {
-      backgroundColor: tooltipBackground,
-      textStyle:{ color: theme,},
-       trigger: 'axis',
-       position: ['5%', '10%']
-     },
-    legend: {   textStyle: {color:theme },},
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data: this.DateSilo,
-        axisLabel: {  color: theme },
-      }
-    ],
-    yAxis: [
-      {
-        type: 'value',
-        axisLabel: {  rotate: 60, color: theme },
-
-      }
-    ],
-    series: [
-      {
-        name: 'Silo A Total',
-        type: 'bar',
-        stack: 'Ad',
-        color: 'rgb(56,91,172)',
-        emphasis: {
-          focus: 'series'
-        },
-        data: this.Silo_A_arr
-      },
-      {
-        name: 'Silo B Total',
-        type: 'bar',
-        stack: 'Ad',
-        color: 'rgb(89,189,89)',
-        emphasis: {
-          focus: 'series'
-        },
-        data: this.Silo_B_arr
-      },
-      {
-        name: 'Silo C Total',
-        type: 'bar',
-        stack: 'Ad',
-        color: 'rgb(221,169,47)',
-        emphasis: {
-          focus: 'series'
-        },
-        data: this.Silo_C_arr
-      },
-
-    ]
-  };
-
-  this.isLoading=false
-  })
 
 
   }
@@ -817,6 +372,452 @@ variable :any= {
 
 
   }
+
+
+
+  getTotalFeedAndDayFeed(){
+
+    const {theme, tooltipBackground} = Common.getTheme();
+
+
+
+
+this.barOptions = {
+  grid: {
+    left: '6%',
+    right: '7%',
+    top:'10%',
+    bottom: '10%',
+    containLabel: true
+},
+toolbox:{
+  feature: {
+  feature: {
+    saveAsImage: {}
+  }
+
+  }},
+  dataZoom:[{
+
+    type: 'slider',
+    start: 0,
+    end: 100,
+    handleSize: 8
+
+    },
+    { start: 0,
+     end:100}
+    ],
+    tooltip: {
+      backgroundColor: tooltipBackground,
+      textStyle:{ color: theme,},
+      axisPointer: {
+        type: 'cross'
+      },
+       trigger: 'axis',
+
+       position: ['10%', '10%']
+
+     },  
+     legend:{
+      top:'auto',
+      type:'scroll',
+      textStyle: {color:theme },
+         },
+         axisPointer:{
+        },        xAxis: {
+          type: 'time'  ,
+          axisLabel: {color: theme},
+          splitLine: {
+            show: true
+          },
+        }, 
+        yAxis: [
+          {
+            nameTextStyle: { color: theme},
+          type:'value',
+          name:"",//leftAxisName
+        
+          min:0,
+          axisLabel:{
+            formatter:'{value} ',
+            color:theme,
+          }
+          },
+          {
+            type:'value',
+            name:"",
+            nameTextStyle: { color: theme},
+            min:0,
+            axisLabel:{
+              formatter:'{value} ',
+              color:theme,
+            }
+            },
+          {
+            axisLabel: {color: theme},
+          type: 'value',
+          boundaryGap: [0, 0.05],
+          }
+  
+      ],
+  series: [
+    {
+      name: 'Silo A Total',
+      type: 'bar',
+      stack: 'Ad',
+      color: 'rgb(56,91,172)',
+      emphasis: {
+        focus: 'series'
+      },
+      data: this.TF31_wes1_fl_feed_A_arr
+    },
+    {
+      name: 'Silo B Total',
+      type: 'bar',
+      stack: 'Ad',
+      color: 'rgb(89,189,89)',
+      emphasis: {
+        focus: 'series'
+      },
+      data: this.TF31_wes1_fl_feed_B_arr
+    },
+    {
+      name: 'Silo C Total',
+      type: 'bar',
+      stack: 'Ad',
+      color: 'rgb(221,169,47)',
+      emphasis: {
+        focus: 'series'
+      },
+      data: this.TF31_wes1_fl_feed_C_arr
+    },
+
+  ]
+
+
+}
+
+this.isLoading=false;
+
+  }
+
+  getLine(){
+    const {theme, tooltipBackground} = Common.getTheme();
+
+
+    this.option ={
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+         trigger: 'axis',
+         position: ['10%', '10%']
+       },legend: {
+        textStyle: {color:theme },
+       },     grid: {
+        bottom:"18%"
+      }, xAxis: {
+        type: 'time',
+      // data: this.DateArr,
+        splitLine: {
+          show: true
+        },
+        axisLabel: {  color: theme },
+    }, yAxis: {
+      type: 'value',
+      axisLabel: {  rotate: 60, color: theme },
+
+    },
+    series: [
+      {
+      name: 'Silo A Total',
+        data: this.TF24_wes1_fl_feed_A_arr,
+        type: 'line',
+        color: 'rgb(56,91,172)',
+        smooth: true,
+        showSymbol: false,
+
+    },
+            {
+         name: 'Silo B Total',
+        data: this.TF24_wes1_fl_feed_B_arr,
+        type: 'line',
+        color: 'rgb(89,189,89)',
+        smooth: true,
+        showSymbol: false,
+    },
+    {
+      name: 'Silo C Total',
+        data: this.TF24_wes1_fl_feed_C_arr,
+        type: 'line',
+        color: 'rgb(221,169,47)',
+        smooth: true,
+        showSymbol: false,
+    },
+  ]
+
+
+}
+
+  }
+
+
+  getLotFeedDayAndMonth(){
+    const {theme, tooltipBackground} = Common.getTheme();
+ 
+
+this.barOptions = {
+  grid: {
+    left: '6%',
+    right: '7%',
+    top:'10%',
+    bottom: '10%',
+    containLabel: true
+},
+toolbox:{
+  feature: {
+  feature: {
+    saveAsImage: {}
+  }
+
+  }},
+  dataZoom:[{
+
+    type: 'slider',
+    start: 0,
+    end: 100,
+    handleSize: 8
+
+    },
+    { start: 0,
+     end:100}
+    ],
+    tooltip: {
+      backgroundColor: tooltipBackground,
+      textStyle:{ color: theme,},
+      axisPointer: {
+        type: 'cross'
+      },
+       trigger: 'axis',
+
+       position: ['10%', '10%']
+
+     },  
+     legend:{
+      top:'auto',
+      type:'scroll',
+      textStyle: {color:theme },
+         },
+         axisPointer:{
+        },        xAxis: {
+          type: 'time'  ,
+          axisLabel: {color: theme},
+          splitLine: {
+            show: true
+          },
+        }, 
+        yAxis: [
+          {
+            nameTextStyle: { color: theme},
+          type:'value',
+          name:"",//leftAxisName
+        
+          min:0,
+          axisLabel:{
+            formatter:'{value} ',
+            color:theme,
+          }
+          },
+          {
+            type:'value',
+            name:"",
+            nameTextStyle: { color: theme},
+            min:0,
+            axisLabel:{
+              formatter:'{value} ',
+              color:theme,
+            }
+            },
+          {
+            axisLabel: {color: theme},
+          type: 'value',
+          boundaryGap: [0, 0.05],
+          }
+  
+      ],
+  series: [
+    {
+      name: 'Animal Count',
+      type: 'bar',
+      stack: 'Ad',
+      color: 'rgb(157,97,221)',
+      emphasis: {
+        focus: 'series'
+      },
+      data: this.L31_wes2_fl_lambs_arr
+    },
+    {
+      name: 'Silo A Total',
+      type: 'bar',
+      stack: 'Ad',
+      color: 'rgb(56,91,172)',
+      emphasis: {
+        focus: 'series'
+      },
+      data: this.TF31_wes1_fl_feed_A_arr
+    },
+    {
+      name: 'Silo B Total',
+      type: 'bar',
+      stack: 'Ad',
+      color: 'rgb(89,189,89)',
+      emphasis: {
+        focus: 'series'
+      },
+      data: this.TF31_wes1_fl_feed_B_arr
+    },
+    {
+      name: 'Silo C Total',
+      type: 'bar',
+      stack: 'Ad',
+      color: 'rgb(221,169,47)',
+      emphasis: {
+        focus: 'series'
+      },
+      data: this.TF31_wes1_fl_feed_C_arr
+    },
+
+
+  ]
+
+
+}
+
+this.isLoading=false;
+  }
+
+
+  getSilo(){
+
+    const {theme, tooltipBackground} = Common.getTheme();
+
+    this.siloOptions = {
+      grid: {
+        left: '6%',
+        right: '7%',
+        top:'10%',
+        bottom: '10%',
+        containLabel: true
+    },
+    toolbox:{
+      feature: {
+      feature: {
+        saveAsImage: {}
+      }
+    
+      }},
+      dataZoom:[{
+    
+        type: 'slider',
+        start: 0,
+        end: 100,
+        handleSize: 8
+    
+        },
+        { start: 0,
+         end:100}
+        ],
+        tooltip: {
+          backgroundColor: tooltipBackground,
+          textStyle:{ color: theme,},
+          axisPointer: {
+            type: 'cross'
+          },
+           trigger: 'axis',
+    
+           position: ['10%', '10%']
+    
+         },  
+         legend:{
+          top:'auto',
+          type:'scroll',
+          textStyle: {color:theme },
+             },
+             axisPointer:{
+            },        xAxis: {
+              type: 'time'  ,
+              axisLabel: {color: theme},
+              splitLine: {
+                show: true
+              },
+            }, 
+            yAxis: [
+              {
+                nameTextStyle: { color: theme},
+              type:'value',
+              name:"",//leftAxisName
+            
+              min:0,
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+              {
+                type:'value',
+                name:"",
+                nameTextStyle: { color: theme},
+                min:0,
+                axisLabel:{
+                  formatter:'{value} ',
+                  color:theme,
+                }
+                },
+              {
+                axisLabel: {color: theme},
+              type: 'value',
+              boundaryGap: [0, 0.05],
+              }
+      
+          ],
+      series: [
+        {
+          name: this.name1,
+          type: 'bar',
+          stack: 'Ad',
+          color: 'rgb(56,91,172)',
+          emphasis: {
+            focus: 'series'
+          },
+          data: this.Silo_A_arr
+        },
+        {
+          name: this.name2,
+          type: 'bar',
+          stack: 'Ad',
+          color: 'rgb(89,189,89)',
+          emphasis: {
+            focus: 'series'
+          },
+          data: this.Silo_B_arr
+        },
+        {
+          name: 'Silo C Total',
+          type: 'bar',
+          stack: 'Ad',
+          color: 'rgb(221,169,47)',
+          emphasis: {
+            focus: 'series'
+          },
+          data: this.Silo_C_arr
+        },
+    
+      ]
+    
+    
+    }
+  }
+
   ngOnDestroy():void{
     if(this.intervalLoop){
       this.intervalLoop.unsubscribe();

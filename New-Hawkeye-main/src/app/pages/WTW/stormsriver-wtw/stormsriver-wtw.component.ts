@@ -1,13 +1,13 @@
 import {  Component, OnInit, ViewChild } from '@angular/core';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { Injectable } from "@angular/core";
 import {StormsriverComponent} from 'src/app/Service-Files/WTW/stormsrivier.service';
-import {MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/Service-Files/users.service';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 @Component({
   selector: 'app-stormsriver-wtw',
   templateUrl: './stormsriver-wtw.component.html',
@@ -87,16 +87,7 @@ export class StormsriverWTWComponent implements OnInit {
 
   theme: any
   data:any = []
-  constructor(private ws:WebSocketService,private storms:StormsriverComponent  ,private userService: UsersService,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
-
-  // this.storms.GetSiteValues()
-  // .subscribe(rsp=> {
-  //   this.data = rsp;
-
-  //   this.variable =   Common.getRouteData(this.tagArr,this.variable,this.data.routingArray)
-  //   this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
-
-  // })
+  constructor(private pt: PostTrend,private authService: AuthService,public recieve:Common ,private pm:pagePostMethod) {
 
   this.intervalLoop = this.pm.findPageData("storms_wtw", "WTW_CurrentVals").subscribe((result) => {
     this.data =  result;
@@ -127,26 +118,6 @@ export class StormsriverWTWComponent implements OnInit {
           break;
       }
     }
-
-
-//     var tagVals:any = []
-
-
-//     tagVals = this.recieve.recieveNonMVals(this.tagArr);
-
-//    this.intervalLoop = setInterval(() =>{
-
-//     this.pm.findPageData("storms_wtw", "WTW_CurrentVals").subscribe((result) => {
-//       this.data =  result;
-//       this.theme = localStorage.getItem("theme");
-//       console.log(this.data)
-//      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-//      this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
-
-//     });
-// },60000)
-
-
   }
 
   ngOnDestroy():void{
@@ -155,5 +126,28 @@ export class StormsriverWTWComponent implements OnInit {
 
     }
   }
+  range:any;
+  siteTitle:any = "Storms River";
+  options: EChartsOption;
+  isLoading:boolean;
+  collectionName:any ="STORMS_WTW_TREND"
+  levelArr1: any[]=[];
+  levelArr2: any[]=[];
+trendTag:any =["wtw_storms_holding_reservoir_level","wtw_storms_overhead_tank_level"]
+  recieveDate($event: any){
+    this.isLoading = true;
+    var trend :any;
+    this.range = $event;
+ 
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
 
+    this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+      trend=data
+
+      this.options = this.recieve.getOptionsFor2Line("%","East Chamber %",trend.LevelArr[0],"West Chamber %",trend.LevelArr[1]);
+
+      this.isLoading = false;
+    })
+
+  }
 }

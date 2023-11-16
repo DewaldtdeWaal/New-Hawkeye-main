@@ -91,14 +91,6 @@ recieveDate($event: any){
 
 
 
-
-  //  this.options = this.recieve.getOptionsBarAndLine2("Borehole",this.st_georges_wtw_gw_FR,"Emerald",this.st_georges_wtw_emer_hill_FR,"Borehole Total Flow",this.st_georges_wtw_gw_TF_arr,"Emerald Total Flow",this.st_georges_wtw_emer_hill_TF_arr,"Ml/d","m³" )
-
-
-
-
-
-
  })
 
 }

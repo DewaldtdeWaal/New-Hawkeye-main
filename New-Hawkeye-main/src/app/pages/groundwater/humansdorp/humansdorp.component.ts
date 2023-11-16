@@ -4,7 +4,6 @@ import {  Component, OnInit, ViewChild } from '@angular/core';
 import { Injectable } from "@angular/core";
 
 import { ReportService } from 'src/app/Service-Files/report.service';
-import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common';
 import { Subscription } from 'rxjs';
@@ -25,10 +24,7 @@ export interface PeriodicElement{
 })
 export class HumansdorpComponent implements OnInit {
 
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+  
   options: EChartsOption;
   displayedColumns :string[]= ['alarm', 'description'];
   generalfaulttable: PeriodicElement[] = [];
@@ -179,11 +175,32 @@ show6:any
   }
 
   pumpColor:any
-  isLoading: boolean = false;
+  isLoading: boolean;
   userSites:string[];
   public authListenerSubs!: Subscription;
-  trendTag:any = ["total_flow_HD1"]
-  collectionName:any ="KLM_HUP_TF_TREND"
+  collectionName:any ="KLM_HUP_GW_TREND"
+  range:any;
+  options1: EChartsOption;
+  tfCollection:any = "KLM_HUP_TF_TREND";
+  totalFlowTags :any = ["total_flow_HD1"]
+  flowTags :any = ["flowRate_HD1"]
+  siteTitle:unknown = "HD1"
+  recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
+    this.isLoading = true;
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collectionName,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+
+      trend = data;
+
+      console.log(trend)
+      this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
+      this.isLoading = false;
+    })
+
+  }
   ngOnInit() {
 
     this.userSites = this.authService.getUserSites();
@@ -270,61 +287,11 @@ show6:any
      },
 ]
 
-
-
-console.log(this.pumpColor)
-
-
     });
-
-
-var trend: any = {};
-
-
-
-
-
-
-  this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-    trend=data
-  this.total_flow_HD1_array = trend.TotalFlowArr[0].differences;
-
-  this.DateArr = trend.DateArr;
-
-
-    this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_HD1_array);
-    this.isLoading = false;
-
-}
-)
-
 }
 
 
-onDateFilter(){
-  this.isLoading = true;
 
-
-const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
-
-var trend :any;
-
-
-  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-    trend=data
-  this.total_flow_HD1_array = trend.TotalFlowArr[0].differences;
-
-this.DateArr = trend.DateArr;
-
-
-this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD1 Total Flow",this.total_flow_HD1_array);
-
-this.isLoading = false;
-})
-
-
-}
 ngOnDestroy():void{
   if(this.intervalLoop){
     this.intervalLoop.unsubscribe();

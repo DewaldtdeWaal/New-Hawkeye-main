@@ -87,7 +87,7 @@ export class AirportresComponent implements OnInit {
     trendTag:any = ["air_prt_R_lvl"]
 collectionName:any ="AIR_PRT_LVL"
 
-
+ 
    ngOnInit() {
 
   

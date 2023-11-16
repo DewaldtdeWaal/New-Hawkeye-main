@@ -42,9 +42,32 @@ export class UitenhageFCComponent implements OnInit {
   intervalLoop: any
 
 
+  siteTitle:any = "Uitenhage"
+  flowTags:any = ["flowRate"];
+  totalFlowTags:any=["totalFlow"];
+  totalFlowCollectionName:any ="FPT_UIT_FC_TF";
+  collection:any = "FM_FMT_TREND";
 
 
+  recieveDate($event: any){
 
+    this.isLoading = true
+
+
+    var trend :any;
+    this.range = $event;
+
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+    this.pt.getFlowAndTotalFlowCollection(this.totalFlowCollectionName,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+      trend = data;
+
+    this.options = Common.getOptionsBarAndLine(this.options,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml",trend.TotalFlowArr[0]);
+
+
+      this.isLoading = false
+    })
+  }
 
 
   variable :any= {
@@ -123,12 +146,12 @@ export class UitenhageFCComponent implements OnInit {
     }
 
   }
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   collectionName: any = "FPT_UIT_FC_TF"
 trendTag: any = ["totalFlow"]
   constructor(private uit:Uitenhage, private ws: WebSocketService,public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common,private pm:pagePostMethod ,private pt: PostTrend) {
 
-    this.isLoading = true;
+
 
 
 
@@ -156,52 +179,6 @@ trendTag: any = ["totalFlow"]
     this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
     });
 
-
-
-    var trend: any = {};
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-      this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0].differences;
-      this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any
-
-        if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-        {
-          theme = '#FFFFFF'
-          tooltipBackground = 'rgba(50,50,50,0.7)'
-        }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-        {
-        theme = '#797979'
-        tooltipBackground = 'rgba(255, 255, 255, 1)'
-        }
-
-
-        this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","Uitenhage Total Flow",this.TotalFlow_UIT_Arr)
-        this.isLoading = false;
-    })
-
-
-
-  }
-
-  onDateFilter(){
-    this.isLoading = true;
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
-var trend :any;
-
-this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-  trend=data
-  this.TotalFlow_UIT_Arr= trend.TotalFlowArr[0].differences;
-  this.DateArr = trend.DateArr;
-
-
-
-this.options = Common.getOptions(this.options,this.DateArr,"Total Flow ML","Uitenhage Total Flow",this.TotalFlow_UIT_Arr)
-
-this.isLoading = false;
-})
 
 
   }

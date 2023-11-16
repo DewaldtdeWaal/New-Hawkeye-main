@@ -45,7 +45,7 @@ export class KareedouwkresComponent implements OnInit {
    }
 
       
-  siteTitle:any = "Kruisfontein";
+  siteTitle:any = "Kareedouw";
   trendTag:any = ["level"]
   collectionName:any ="KLM_KRUIS_RES_LVL"
   levelArr: any[]=[];

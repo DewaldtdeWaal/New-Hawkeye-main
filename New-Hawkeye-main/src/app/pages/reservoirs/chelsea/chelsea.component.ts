@@ -54,7 +54,7 @@ DateArr: any;
 
   ]
   constructor(public rs: ReportService,private authService: AuthService,public recieve:Common,private pt: PostTrend ,private pm:pagePostMethod) {
-    this.isLoading = true;
+    
 
 
 
@@ -89,7 +89,7 @@ DateArr: any;
   flowTrendTag:any = ["che_r_fr1100","che_r_fr600","westChamber","eastChamber"]
   siteTitle:any = "Chelsea";
   recieveDate($event: any){
-    this.isLoading = false;
+    this.isLoading = true
     var trend :any;
     this.range = $event;
     var start;
@@ -104,7 +104,7 @@ DateArr: any;
       
       this.options2 = this.recieve.getOptionsFor2Line("%","East Chamber", trend.FlowRateArr[3],"West Chamber", trend.FlowRateArr[2])
   
-
+      this.isLoading = false;
     })
   
   
@@ -128,7 +128,7 @@ DateArr: any;
 
   }
 
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   ngOnDestroy(){
     if(this.intervalLoop){

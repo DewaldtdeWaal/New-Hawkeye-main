@@ -122,10 +122,10 @@ description:"Pepper Spray Alarm",
   range:any
   options: EChartsOption;
   options2:EChartsOption;
-  isLoading:boolean = false;
+  isLoading:boolean = true;
 
   recieveDate($event: any){
-   this.isLoading = false;
+    this.isLoading = true
    var trend :any;
    this.range = $event;
 
@@ -135,10 +135,11 @@ description:"Pepper Spray Alarm",
 
     trend = data;
 
-    console.log(data)
 
     this.options = this.recieve.getOptionsBarAndLine2("Flow Rate 1", trend.FlowRateArr[1],"Flow Rate 2", trend.FlowRateArr[2],"Total Flow 1", trend.TotalFlowArr[0],"Total Flow 2", trend.TotalFlowArr[1],"Ml","l/s")
     this.options2 = Common.getOptionsForLine(this.options2,"Level %", trend.FlowRateArr[0])
+
+    this.isLoading = false;
   })
 
  }

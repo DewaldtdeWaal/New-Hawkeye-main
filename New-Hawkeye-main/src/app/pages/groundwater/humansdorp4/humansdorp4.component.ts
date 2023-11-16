@@ -19,10 +19,7 @@ export interface PeriodicElement{
   styleUrls: ['./humansdorp4.component.css']
 })
 export class Humansdorp4Component implements OnInit {
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+
   options: EChartsOption;
   displayedColumns :string[]= ['alarm', 'description'];
   generalfaulttable: PeriodicElement[] = [];
@@ -161,8 +158,6 @@ data:any = []
   },
 }
 
-trendTag:any = ["total_flow_HD4"]
-collectionName:any ="KLM_HUP4_TF_TREND"
 
   constructor(public rs: ReportService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend ) {
 
@@ -216,51 +211,34 @@ collectionName:any ="KLM_HUP4_TF_TREND"
     });
 
 
-var trend: any = {};
-//  this.rs.Get_HUP4_TotalFlows().subscribe(data => {
 
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-
-
-
-    trend=data
-    this.total_flow_HD4_array= trend.TotalFlowArr[0].differences;
-
-    this.DateArr = trend.DateArr;
-
-
-      this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD4 Total Flow",this.total_flow_HD4_array)
-      this.isLoading = false;
-  }
-  )
 
   }
-
-
-  onDateFilter(){
+  collectionName:any ="KLM_HUP4_GW_TREND"
+  range:any;
+  options1: EChartsOption;
+  tfCollection:any = "KLM_HUP4_TF_TREND";
+  totalFlowTags :any = ["total_flow_HD4"]
+  flowTags :any = ["flowRate_HD4"]
+  siteTitle:unknown = "HD4"
+  recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
     this.isLoading = true;
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
-  var trend :any;
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collectionName,this.totalFlowTags,this.flowTags,start,end).then((data) => {
 
-  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-    trend=data
+      trend = data;
 
-
-
-  trend=data
-  this.total_flow_HD4_array= trend.TotalFlowArr[0].differences;
-  this.DateArr = trend.DateArr;
-
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","HD4 Total Flow",this.total_flow_HD4_array)
-
-  this.isLoading = false;
-  })
-
+      console.log(trend)
+      this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
+      this.isLoading = false;
+    })
 
   }
+
+
 
   ngOnDestroy():void{
     if(this.intervalLoop){

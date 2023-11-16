@@ -79,15 +79,8 @@ export const siteMap = {
   "NMB_KOU_MAIN_LINE_FPT":"nmb_KOU_MAIN_LINE_FPT_CHECKED",
   "NMB_HUP_OFF_TAKE_FPT":"nmb_HUP_OFF_TAKE_FPT_CHECKED",
   "NMB_GLEN_R":"NMB_GLEN_R_CHECKED",
-
-
   "NMB_GLEN_FPT":"NMB_GLEN_FPT_CHECKED",
-  
-  
   "NMB_GLEN_WTW":"NMB_GLEN_WTW_CHECKED",
-
-
-
   "NMB_BETH_FPT":"nmb_BETH_FPT_CHECKED",
   "NMB_NGT_WTW":"nmb_NGT_WTW_CHECKED",
   "TSI_STORMS_WTW":"TSI_STORMS_WTW_CHECKED",
@@ -108,17 +101,16 @@ export const siteMap = {
   "KLM_KUI_14_GW":"klm_KUI_14_GW_CHECKED",
   "KLM_KUI_R":"klm_KUI_R_CHECKED",
   "KLM_HUP_WTW": "klm_HUP_WTW_CHECKED",
-
   "NMB_LSD_ZS": "nmb_LSD_ZS_CHECKED",
   "NMB_MNTS_ZS": "nmb_MNTS_ZS_CHECKED",
-
   "NMB_RD_ZS":"NMB_RD_ZS_CHECKED",
-  "NMB_RPE_ZS":"NMB_RPE_ZS_CHECKED"
-
+  "NMB_RPE_ZS":"NMB_RPE_ZS_CHECKED",
+  "KOU_HANK_SEW_PS":"KOU_HANK_SEW_PS_CHECKED"
 
 };
 
 export const sitesAvailable:any={
+  KOU_HANK_SEW_PS_CHECKED:false,
   klm_HUP_WTW_CHECKED:false,
   nmb_LSD_ZS_CHECKED:false,
   NMB_RD_ZS_CHECKED:false,
@@ -234,6 +226,9 @@ export class addUser  {
 
     const userSites: string[]=[];
 
+    if(form.value.KOU_HANK_SEW_PS){
+      userSites.push("KOU_HANK_SEW_PS")
+    }
 
 
     if(form.value.KLM_KUI_12_GW)

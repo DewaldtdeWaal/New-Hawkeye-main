@@ -22,7 +22,7 @@ export class ElandsjagtComponent implements OnInit {
       'wtw_elands_FR',
       'wtw_elands_P'
      ]
-  constructor(private ws: WebSocketService, private ej: ElandsJagtRootComponent,public recieve:Common ,private pm:pagePostMethod) {
+  constructor(public recieve:Common ,private pm:pagePostMethod) {
 
 
   }

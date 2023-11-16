@@ -59,10 +59,9 @@ import {StGeorgesResComponent} from './pages/reservoirs/st-georges-res/st-george
 import {KruisfonteinRComponent} from './pages/reservoirs/kruisfontein-r/kruisfontein-r.component'
 import { GlendinningvaleresComponent } from './pages/reservoirs/glendinningvaleres/glendinningvaleres.component';
 import { LintonresComponent } from './pages/reservoirs/lintonres/lintonres.component';
+import { NmbOverviewComponent } from './pages/reservoirs/nmb-overview/nmb-overview.component';
 
 
-import {FairviewComponent} from './pages/groundwater/fairview/fairview.component';
-import {FortnottinghamComponent} from './pages/groundwater/fortnottingham/fortnottingham.component';
 import {GlendinningvaleComponent} from './pages/groundwater/glendinningvale/glendinningvale.component';
 
 
@@ -145,7 +144,7 @@ import {LeeSamualsDriveComponent} from './pages/zones/lee-samuals-drive/lee-samu
  import {McNoughtontownshipsouthComponent} from './pages/zones/mc-noughtontownshipsouth/mc-noughtontownshipsouth.component';
  import { RowallanParkExtensionComponent } from './pages/zones/rowallan-park-extension/rowallan-park-extension.component';
  import { RosedaleComponent } from './pages/zones/rosedale/rosedale.component';
-
+ import { HankeySewageComponent } from './pages/pump-stations/hankey-sewage/hankey-sewage.component';
 
 const routes: Routes = [
 
@@ -177,6 +176,7 @@ const routes: Routes = [
 //RESERVOIRS
 {path: 'hawkeye/reservoirs/airportres', component:AirportresComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/overview',component: OverviewComponent,canActivate:[AuthGuard]},
+{path: 'hawkeye/reservoirs/nmboverview',component: NmbOverviewComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/greenbushes',component: GreenbushesComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/vanstadens',component: VanstadensComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/reservoirs/motherwellres',component:MotherwellresComponent, canActivate:[AuthGuard]},
@@ -214,8 +214,7 @@ const routes: Routes = [
 {path: 'hawkeye/reservoirs/linton', component:LintonresComponent,canActivate:[AuthGuard]},
 
 
-{path: 'hawkeye/groundwater/fairview', component:FairviewComponent, canActivate:[AuthGuard]},
-{path: 'hawkeye/groundwater/fortnottingham', component:FortnottinghamComponent, canActivate:[AuthGuard]},
+
 {path: 'hawkeye/groundwater/glendinningvale', component:GlendinningvaleComponent, canActivate:[AuthGuard]},
 
 
@@ -241,7 +240,7 @@ const routes: Routes = [
 {path: 'hawkeye/pumpstations/motherwell', component: MotherwellComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/pumpstations/stormsriver', component:StormsriverComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/pumpstations/st-georges-ps', component:StGeorgesPSComponent, canActivate:[AuthGuard]},
-
+{path: 'hawkeye/pumpstations/hankey-sewage', component:HankeySewageComponent, canActivate:[AuthGuard]},
 //Flow Meters
 {path: 'hawkeye/fptsites/gamtoos-break-water',component:GamtoosBreakWaterComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/fptsites/fmtower',component: FMTowerComponent,canActivate:[AuthGuard]},

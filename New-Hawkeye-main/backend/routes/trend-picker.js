@@ -857,6 +857,12 @@ case "Gamtoos Bridge Steel Pipe Flow Rate":
       count++;
       break
 
+
+      case "Gamtoos Bridge Socoman Pipe Pressure":
+        trendData(GT_BRG_SOCO_PRESS_array, "socoman_pipe_PRESS", "FPT_GT_BRG_TREND", query);
+        count++;
+        break;
+
       case "Uitenhage Flow Chamber Flow Rate":
         trendData(UIT_FC_FR_array, "flow_rate", "FPT_UIT_FC_TREND", query);
         count++;
@@ -882,10 +888,7 @@ case "Gamtoos Bridge Steel Pipe Flow Rate":
           count++;
           break;
 
-  case "Gamtoos Bridge Socoman Pipe Pressure":
-    trendData(GT_BRG_SOCO_PRESS_array, "socoman_pipe_PRESS", "FPT_GT_BRG_TREND", query);
-    count++;
-    break;
+
 
 case "Driftsands Reservoir Level":
   trendData(drift_R_reservoir_level_arr,'drift_r_reservoir_level',"NMB_DRIFT_RES_LVL",query)

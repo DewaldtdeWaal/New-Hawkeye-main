@@ -146,8 +146,10 @@ export class CoegaIDZTComponent implements OnInit {
   totalFlowTags :any = ["motherwell_TF","idz_TF"]
   flowTags :any = ["motherwell_FR","idz_FR"]
   range:any
-  isLoading: boolean = true;
+  isLoading: boolean;
   recieveDate($event: any){
+
+    this.isLoading = false;
     var trend :any;
     this.range = $event;
     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
@@ -159,9 +161,9 @@ export class CoegaIDZTComponent implements OnInit {
       this.options1 = this.recieve.getOptionsBarAndLine2("Soccomon Pipe Flow Rate Ml/d",trend.FlowRateArr[0],"Steel Pipe Flow Rate Ml/d",trend.FlowRateArr[1],"Soccomon Pipe Total Flow Ml",trend.TotalFlowArr[0],"Steel Pipe Total Flow Ml",trend.TotalFlowArr[1],"Ml","Ml/d")
 
 
+      this.isLoading = false;
     })
 
-    this.isLoading = false;
   }
 
 

@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { WebSocketService } from "../Service-Files/web-socket.service";
 import { FormControl, FormGroup } from "@angular/forms";
 import { EChartsOption } from "echarts";
-import { totalFlowTrend } from './pageTrending';
 
 export interface PeriodicElement{
 
@@ -772,7 +771,6 @@ public static getOptionsBarAndLine(options:any,flowTrendName:any, flowTrendData:
                 type:'value',
                 name:flowTrendName,
                 nameTextStyle: { color: theme},
-                min:0,
                 axisLabel:{
                   formatter:'{value} ',
                   color:theme,
@@ -890,7 +888,6 @@ public  getOptionsBarAndLine2(lineName:any, lineData:any,lineName2:any, lineData
                 type:'value',
                 name:rightAxisName,
                 nameTextStyle: { color: theme},
-                min:0,
                 axisLabel:{
                   formatter:'{value} ',
                   color:theme,
@@ -1017,7 +1014,6 @@ public  getOptionsBarAndLine3(lineName:any, lineData:any,lineName2:any, lineData
                 type:'value',
                 name:leftAxisName,
                 nameTextStyle: { color: theme},
-                min:0,
                 axisLabel:{
                   formatter:'{value} ',
                   color:theme,

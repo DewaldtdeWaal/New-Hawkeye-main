@@ -63,6 +63,11 @@ export class AuthGuard implements CanActivate {
         url = "HWK_RO"
         break;
 
+        case "/reservoirs/nmboverview":
+          url = "HWK_RO"
+          break;
+  
+
         case "/fptsites/fpt-overview":
           url="HWK_FO"
           break;
@@ -343,6 +348,11 @@ export class AuthGuard implements CanActivate {
               case "/pumpstations/stormsriver":
                 url="TSI_STORMS_PS"
                 break;
+
+
+                case "/pumpstations/hankey-sewage":
+                  url = "KOU_HANK_SEW_PS"
+                  break;
 
                 case "/pumpstations/st-georges":
                   url="NMB_STG_PS"

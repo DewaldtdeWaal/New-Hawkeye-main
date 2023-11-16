@@ -13,7 +13,7 @@ export class PageWithTrendComponent implements OnInit {
   constructor() { }
 
   @Input() siteTitle:any = "siteTitle";
-  @Input() isLoading:any;
+  @Input() isLoading:any = true;
   @Input() options: EChartsOption;
 
   //This can be overwritten by the parent component
@@ -39,9 +39,10 @@ export class PageWithTrendComponent implements OnInit {
 
   onDateOutPut(){
 
-    
+  
 
-    this.messageEvent.emit(this.range)
+    
+    this.messageEvent.emit(this.range);
   }
 
 

@@ -122,11 +122,11 @@ faultArr:any=[
   collection:any = "FM_FMT_TREND";
   totalFlowTags :any = ["totalflow"]
   flowTags :any = ["flowRate"]
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   recieveDate($event: any){
     var trend :any;
     this.range = $event;
-
+    this.isLoading = true;
     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
     this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
@@ -135,7 +135,7 @@ faultArr:any=[
 
       console.log(trend)
       this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml",trend.TotalFlowArr[0]);
-
+      this.isLoading = false;
     })
 
   }

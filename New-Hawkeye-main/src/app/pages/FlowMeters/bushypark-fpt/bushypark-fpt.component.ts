@@ -91,6 +91,7 @@ options2: EChartsOption;
 trendNameOne:string = "Churchill Flows";
 trendNameTwo:string = "Bushy Park Flows"
 recieveDate($event: any){
+  this.isLoading = true
  var trend :any;
  this.range = $event;
 
@@ -100,7 +101,7 @@ recieveDate($event: any){
    trend=data
 
    console.log(trend)
-   this.options1 = this.recieve.getOptionsBarAndLine2("Soccomon Pipe Flow Rate Ml/d",trend.FlowRateArr[0],"Steel Pipe Flow Rate Ml/d",trend.FlowRateArr[1],"Soccomon Pipe Total Flow Ml",trend.TotalFlowArr[0],"Steel Pipe Total Flow Ml",trend.TotalFlowArr[1],"Ml","Ml/d")
+   this.options1 = this.recieve.getOptionsBarAndLine2("Soccomon Pipe Flow Rate Ml/d",trend.FlowRateArr[0],"Steel Pipe Flow Rate Ml/d",trend.FlowRateArr[1],"Soccomon Pipe Total Flow Ml",trend.TotalFlowArr[0],"Steel Pipe Total Flow Ml",trend.TotalFlowArr[1],"m³","Ml/d")
 
    this.options2 = this.recieve.getOptionsBarAndLine2("Borehole Combined Flow Rate Ml/d", trend.FlowRateArr[2],"Pumpstation Flow Rate Ml/d", trend.FlowRateArr[3],"Borehole Combined Total Flow Ml", trend.TotalFlowArr[2],"Pumpstation Total Flow Ml", trend.TotalFlowArr[3],"Ml","Ml/d")
 

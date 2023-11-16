@@ -19,10 +19,7 @@ export interface PeriodicElement{
   styleUrls: ['./kruisfontein-gw14.component.css']
 })
 export class KruisfonteinGW14Component implements OnInit {
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+
   options: EChartsOption;
   total_flow_1_array:any
   generalfaultdatasource :any
@@ -153,8 +150,7 @@ gw_klm_kruis14_res_ful:{
 
 
    }
-   collectionName:any ="KLM_KRUIS14_TF"
-   trendTag:any = ["gw_klm_kruis14_TF"]
+
   ngOnInit() {
 
     this.intervalLoop = this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
@@ -194,43 +190,12 @@ gw_klm_kruis14_res_ful:{
 
 
 
-    var trend: any = {};
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-      this.total_flow_1_array =  trend.TotalFlowArr[0].differences;
-
-      this.DateArr = trend.DateArr;
-
-
-
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
-
-    }
-    )
 
   }
 
 
-  isLoading: boolean = false;
-
-  onDateFilter(){
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
-
-  var trend :any;
-
-  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-  trend=data
-
-  this.total_flow_1_array =  trend.TotalFlowArr[0].differences;
-  this.DateArr = trend.DateArr;
 
 
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
-  })
-
-
-  }
 
 
   ngOnDestroy():void{
@@ -240,4 +205,33 @@ gw_klm_kruis14_res_ful:{
     }
   }
 
+  
+  isLoading: boolean = false;
+
+  collectionName:any ="KLM_KRUIS14_FLOW"
+  range:any;
+  options1: EChartsOption;
+  tfCollection:any = "KLM_KRUIS14_TF";
+  totalFlowTags :any = ["gw_klm_kruis14_TF"]
+  flowTags :any = ["gw_klm_kruis14_flow_rate"]
+  siteTitle:unknown = "Kruisfontein Borehole 14"
+  recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
+    this.isLoading = true;
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collectionName,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+
+      trend = data;
+
+      console.log(trend)
+      this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
+      this.isLoading = false;
+    })
+
+  }
+
 }
+
+

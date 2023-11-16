@@ -65,11 +65,11 @@ export class GlendinningvaleftpComponent implements OnInit {
   collection:any = "NMBM_GLEN_Flow_trend";
   totalFlowTags :any = ["glen_FTP_WTW_Inlet_Total_Flow","glen_FTP_WTW_borehole_Total_Flow"];
   flowTags :any = ["glen_FTP_WTW_Inlet_Flow_Rate","glen_FTP_WTW_borehole_Flow_Rate"];
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   recieveDate($event: any){
     var trend :any;
     this.range = $event;
-
+    this.isLoading = true;
     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
     this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
@@ -81,7 +81,7 @@ export class GlendinningvaleftpComponent implements OnInit {
       this.options1 = this.recieve.getOptionsBarAndLine2("Reservoir Inlet Flow Rate Ml/d",trend.FlowRateArr[0],"Boreholes Combined Flow Rate Ml/d",trend.FlowRateArr[1],"Reservoir Inlet Total Flow Ml",trend.TotalFlowArr[0],"Boreholes Combined Total Flow m³",trend.TotalFlowArr[1],"Ml  m³","Ml/d")
 
      
-
+      this.isLoading = false;
     })
 
   }

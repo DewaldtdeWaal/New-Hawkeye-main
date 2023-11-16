@@ -1,17 +1,11 @@
-import {  Component, OnInit, ViewChild } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import { Injectable } from "@angular/core";
+import {  Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import {MatTableDataSource} from '@angular/material/table';
-import { UsersService } from 'src/app/Service-Files/users.service';
-import { ListeningService} from 'src/app/listening.service';
-import { NewtonParkPoolService } from 'src/app/Service-Files/newtonparkpool.service';
 import { ReportService } from 'src/app/Service-Files/report.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common';
 import { Subscription } from 'rxjs';
-import {kruisfonteinRouting} from 'src/app/Service-Files/GRDW/groundwater.service'
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement{
@@ -26,10 +20,7 @@ export interface PeriodicElement{
 
 
 export class KruisfonteinGW12Component implements OnInit {
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+
   options: EChartsOption;
   total_flow_1_array:any
   generalfaultdatasource :any
@@ -155,11 +146,7 @@ gw_klm_kruis12_res_ful:{
   dataSourceP1:any = new MatTableDataSource(this.tableDataPump1);
   public authListenerSubs!: Subscription;
   constructor(  public rs: ReportService,public recieve:Common,private authService: AuthService,private pm:pagePostMethod,private pt: PostTrend )  {
-    this.isLoading  = true;
-    this.theme = localStorage.getItem("theme");
-   }
-   collectionName:any ="KLM_KRUIS12_TF"
-   trendTag:any = ["gw_klm_kruis12_TF"]
+  }
   ngOnInit() {
 
     this.intervalLoop = this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
@@ -196,67 +183,39 @@ gw_klm_kruis12_res_ful:{
 
       }
     }
-
-
-
-
-    // this.intervalLoop = setInterval(() =>{
-    //   this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
-    //     this.data =  result;
-    //     console.log(this.data)
-    //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-    //    this.faultVariable =   Common.getFaultRouteDatas(this.faultArr,this.faultVariable,this.data)
-
-    //    this.variable.comms = Common.getLastUpdate(this.variable.gw_klm_kruis12_UT)
-    //    var alarm1: any [] = [this.faultVariable.gw_klm_kruis12_bar_fault,this.faultVariable.gw_klm_kruis12_lvl_fault,this.faultVariable.gw_klm_kruis12_flow_fault,this.faultVariable.gw_klm_kruis12_voltage_not_okay,this.faultVariable.gw_klm_kruis12_emergency_stop,this.faultVariable.gw_klm_kruis12_vsd_fault,this.faultVariable.gw_klm_kruis12_res_communication_fault,this.faultVariable.gw_klm_kruis12_res_ful,]
-    //   this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-    //   });
-    // },60000 )
-    var trend: any = {};
-    this.pt.getPostTrend(this.collectionName, this.trendTag,null,null).then((data) => {
-      trend=data
-      this.total_flow_1_array =  trend.TotalFlowArr[0].differences[0];
-
-      this.DateArr = trend.DateArr;
-        var theme:any
-        var tooltipBackground:any
-        this.isLoading  = false;
-
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array)
-
     }
-    )
-
-  }
-
-  isLoading: boolean = false;
-
-
-  onDateFilter(){
-    this.isLoading  = true;
-    const newStart = new Date(this.range.value.start).toISOString().slice(0, 10);
-    const newEnd = new Date(this.range.value.end).toISOString().slice(0, 10);
-
-  var trend :any;
-
-  this.pt.getPostTrend(this.collectionName, this.trendTag,newStart,newEnd).then((data) => {
-  trend=data
-
-  this.total_flow_1_array =  trend.TotalFlowArr[0].differences[0];
-  this.DateArr = trend.DateArr;
-
-  this.options = Common.getOptions(this.options,this.DateArr,"Total Flow m³","Total Flow",this.total_flow_1_array);
-  })
-
-  this.isLoading  = false;
-  }
-
-
-  ngOnDestroy():void{
-    if(this.intervalLoop){
-      this.intervalLoop.unsubscribe();
-
+    
+    isLoading:boolean
+    ngOnDestroy():void{
+      if(this.intervalLoop){
+        this.intervalLoop.unsubscribe();
+  
+      }
+    }
+  
+  
+    collectionName:any ="KLM_KRUIS12_FLOW"
+    range:any;
+    options1: EChartsOption;
+    tfCollection:any = "KLM_KRUIS12_TF";
+    totalFlowTags :any = ["gw_klm_kruis12_TF"]
+    flowTags :any = ["gw_klm_kruis12_flow_rate"]
+    siteTitle:unknown = "Kruisfontein Borehole 12"
+    recieveDate($event: any){
+      var trend :any;
+      this.range = $event;
+      this.isLoading = true;
+      const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+  
+      this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collectionName,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+  
+        trend = data;
+  
+        console.log(trend)
+        this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
+        this.isLoading = false;
+      })
+  
     }
   }
 
-}

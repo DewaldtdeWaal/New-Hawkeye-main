@@ -119,10 +119,10 @@ DateArr: any[]=[];
   range:any
   options: EChartsOption;
   options2:EChartsOption;
-  isLoading:boolean = false;
+  isLoading:boolean = true;
 
   recieveDate($event: any){
-   this.isLoading = false;
+    this.isLoading = true
    var trend :any;
    this.range = $event;
 
@@ -132,10 +132,10 @@ DateArr: any[]=[];
 
     trend = data;
 
-    this.options = Common.getOptionsBarAndLine(this.options,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml", trend.TotalFlowArr[0] )
+    this.options = Common.getOptionsBarAndLine(this.options,"Flow Rate Ml/d",trend.FlowRateArr[1],"Total Flow Ml", trend.TotalFlowArr[0] )
 
-    this.options2 = Common.getOptionsForLine(this.options2,"Level %", trend.FlowRateArr[1])
-
+    this.options2 = Common.getOptionsForLine(this.options2,"Level %", trend.FlowRateArr[0])
+    this.isLoading = false;
   })
 
  }
