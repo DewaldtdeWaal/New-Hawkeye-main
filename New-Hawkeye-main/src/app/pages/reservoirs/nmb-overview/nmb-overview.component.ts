@@ -47,22 +47,14 @@ export class NmbOverviewComponent implements OnInit {
 
   emer_comms:any;
   rd_comms: any;
-  demo_comms: any;
   drift_comms: any;
   kwano_comms: any;
-  schoe_comms: any;
-  damp_comms: any;
-  hol_comms: any;
   tin_comms: any;
   moth_comms: any;
   mali_comms:any
   bh_comms: string;
   cht_comms: string;
   oli_comms: string;
-  berg_comms:any
-  kroon_comms:any
-  uma_comms:any
-  wol_comms:any
   che_comms: string;
   cgk_comms: string;
   gr_comms: string;
@@ -73,7 +65,6 @@ export class NmbOverviewComponent implements OnInit {
   tc_comms: string;
   vrh_comms: string;
   vs_comms: string;
-
   air_prt_comms:string;
 
   intervalLoop: any
@@ -228,16 +219,16 @@ while (lastUpdate != undefined) {
 
           case "NMB_MW_R":
             if(variable.mw_r_north_cham_res_lvl  != null || variable.mw_r_north_cham_res_lvl  != undefined){
-            this.moth_comms=  this.getCommunicationStatus(variable.mw_g_p_new_ut,this.moth_comms )
+            this.moth_comms=  this.getCommunicationStatus(variable.mw_g_r_new_ut,this.moth_comms )
             this.listening("Motherwell",variable.mw_r_north_cham_res_lvl, this.moth_comms,count,"/hawkeye/reservoirs/motherwellres")
 
-            this.cgk_comms=  this.getCommunicationStatusBattery(variable.nmb_cgk_r_ut,this.cgk_comms, variable.coe_kop_cloud_r_level)
+    
             const cgkData = [
               { name: "Motherwell North Chamber", level: variable.mw_r_north_cham_res_lvl},
               { name: "Motherwell South Chamber",level:variable.mw_r_south_cham_res_lvl}
             ]
             cgkData.forEach(data => {
-              this.listening(data.name, data.level, this.cht_comms, count, "/hawkeye/reservoirs/motherwellres");
+              this.listening(data.name, data.level, this.moth_comms, count, "/hawkeye/reservoirs/motherwellres");
               count++;
             });
           }

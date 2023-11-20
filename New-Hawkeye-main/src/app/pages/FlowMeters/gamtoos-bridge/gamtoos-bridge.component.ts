@@ -72,13 +72,14 @@ export class GamtoosBridgeComponent implements OnInit {
 
 
 
-
+  trendNameTwo:any = "Pressure data"
   siteTitle:any = "Gamtoos Bridge"
   range:any;
   options1: EChartsOption;
+  options2: EChartsOption;
   tfCollection:any = "FPT_GT_BRG_TFs";
   collection:any = "FPT_GT_BRG_TREND";
-  flowTags :any = ["steel_pipe_FR","socoman_pipe_FR"];
+  flowTags :any = ["steel_pipe_FR","socoman_pipe_FR","steel_pipe_PRESS","socoman_pipe_PRESS"];
   totalFlowTags: any = ["steel_pipe_TF", "socoman_pipe_TF"]
   isLoading: boolean = true;
   recieveDate($event: any){
@@ -95,10 +96,10 @@ export class GamtoosBridgeComponent implements OnInit {
 
       trend = data;
 
-      console.log(trend)
+   
 
       this.options1 = this.recieve.getOptionsBarAndLine2("Reservoir Inlet Flow Rate Ml/d",trend.FlowRateArr[0],"Boreholes Combined Flow Rate Ml/d",trend.FlowRateArr[1],"Reservoir Inlet Total Flow Ml",trend.TotalFlowArr[0],"Boreholes Combined Total Flow m³",trend.TotalFlowArr[1],"Ml","Ml/d")
-
+      this.options2 = this.recieve.getOptionsFor2Line("Bar", "Steel Pipe Pressure",trend.FlowRateArr[2],"Socoman  Pipe Pressure",trend.FlowRateArr[3],)
      
       this.isLoading = false
     })

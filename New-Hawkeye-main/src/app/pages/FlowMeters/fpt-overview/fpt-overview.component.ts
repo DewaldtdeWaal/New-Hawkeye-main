@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
-import {fptCurrentVals} from 'src/app/Service-Files/FPT/fpt.service'
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { Common } from 'src/app/class/common';
+import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
   Name: string;
   communication_status: any;
@@ -44,45 +43,12 @@ export class FptOverviewComponent implements OnInit {
   bush_comms:any
   gbw_comms:any
   fpt_uit_fc_comms:any
-
-  variable = {
-  bush_UT:null,
-  gbw_ut:null,
-  fpt_uit_fc_ut:null,
-  beth_ut:null,
-  fpt_gt_brg_ut:null,
-  fpt_cidzt_ut:null,
-  fmt_FM_UT:null,
-  jb_PB_SFO_ut:null,
-  jeff_bay_off_take_last_update:null,
-  ons_para_ut:null,
-  kou_main_line_ut:null,
-  humansdorp_off_take_ut:null,
-  jeff_bay_off_take_last_seen:null,
-
-  }
-
-
-  tagArr:any=[
-    "bush_UT",
-    "gbw_ut",
-    "fpt_uit_fc_ut",
-    "beth_ut",
-    "fpt_gt_brg_ut",
-    "fpt_cidzt_ut",
-    "fmt_FM_UT",
-    "jb_PB_SFO_ut",
-    "jeff_bay_off_take_last_update",
-    "ons_para_ut",
-    "kou_main_line_ut",
-    "humansdorp_off_take_ut",
-    "jeff_bay_off_take_last_seen",
+  intervalLoop: any
+  variable = {  }
 
 
 
-
-  ]
-  constructor(private route:fptCurrentVals,private authService: AuthService, private ws:WebSocketService ,private router: Router,public recieve:Common ) {
+  constructor(private authService: AuthService ,private router: Router,public recieve:Common ,private pm:pagePostMethod ) {
 
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
@@ -91,71 +57,21 @@ export class FptOverviewComponent implements OnInit {
     })
 
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.getRouteInformation(this.variable).then((response) => {
-      this.responseData = response
-
-
-      this.renderPage(this.responseData)
-    })
-
-
 
 }
 
-
-
-
   ngOnInit() {
 
-    var tagVals:any=[]
-    var non_nmbm_tagVals:any=[]
-    var tagArr =[
-      "beth_ut",
-      "fpt_cidzt_ut",
-      "fmt_fm_ut",
-      "fpt_gt_brg_ut",
-      "humansdorp_off_take_ut",
-      "jeff_bay_off_take_last_update",
-      "kou_main_line_ut",
-      "ons_para_ut",
-      "jb_PB_SFO_ut",
-      "bush_UT",
-      "gbw_ut",
-      "fpt_uit_fc_ut"
+   
+    this.intervalLoop = this.pm.findPageData("fpt_currentvals", "F_CurrentVals").subscribe((result) => {
 
-
-    ]
-
-    tagVals = this.recieve.recieveNMBMVals(tagArr);
-
-    non_nmbm_tagVals =this.recieve.recieveNonMVals(tagArr);
-
-
-    this.resOverviewInterval = setInterval(() =>{
-
-      this.getRouteInformation(this.variable).then((response) => {
-        this.responseData = response
-
-
-        this.renderPage(this.responseData)
-      })
-
-
+      this.variable = result
 
       console.log(this.variable)
 
 
-
-
-
-
-
-
-    },180000)
-
-
-
-
+      this.renderPage(this.variable)
+    });
 
   }
 
@@ -193,9 +109,6 @@ export class FptOverviewComponent implements OnInit {
 
 
   }
-
-
-
 
   listening(name:any, Communication_status:any,  Count:any,URL:any  ){
 
@@ -246,26 +159,7 @@ while (updateTime != undefined) {
   }
 }
 
-async getRouteInformation(variable:any): Promise<any> {
 
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = await this.route.GetSiteValues();
-
-      this.data = response;
-
-      variable = await this.recieve.recieveRouteData(this.tagArr,variable, this.data.routingArray);
-
-      console.log(variable)
-      resolve(variable);
-    } catch (error) {
-
-      console.error(error);
-      reject(error);
-    }
-  });
-};
 
 
 async renderPage(variable:any){
@@ -275,8 +169,8 @@ async renderPage(variable:any){
     switch (this.userSites[i]) {
 
       case "NMB_UIT_FC_FPT":
-        if(this.variable.fpt_uit_fc_ut  != null || this.variable.fpt_uit_fc_ut  != undefined){
-        this.fpt_uit_fc_comms =  this.getCommunicationStatus(this.variable.fpt_uit_fc_ut, this.fpt_uit_fc_comms)
+        if(variable.fpt_uit_fc_ut){
+        this.fpt_uit_fc_comms =  this.getCommunicationStatus(variable.fpt_uit_fc_ut, this.fpt_uit_fc_comms)
         this.listening("Uitenhage Flow Chamber", this.fpt_uit_fc_comms, count, "/hawkeye/fptsites/uitenhage-flow-chamber")
         count++;
         }
@@ -284,24 +178,24 @@ async renderPage(variable:any){
 
 
       case "NMB_GBW_FPT":
-        if(this.variable.gbw_ut  != null || this.variable.gbw_ut  != undefined){
-        this.gbw_comms =  this.getCommunicationStatus(this.variable.gbw_ut, this.gbw_comms)
+        if(variable.gbw_ut){
+        this.gbw_comms =  this.getCommunicationStatus(variable.gbw_ut, this.gbw_comms)
         this.listening("Gamtoos Break Water", this.gbw_comms, count, "/hawkeye/fptsites//gamtoos-break-water")
         count++;
         }
         break;
 
       case "NMB_BUSH_FPT":
-        if(this.variable.bush_UT  != null || this.variable.bush_UT  != undefined){
-        this.bush_comms =  this.getCommunicationStatus(this.variable.bush_UT, this.bush_comms)
+        if(variable.bush_UT){
+        this.bush_comms =  this.getCommunicationStatus(variable.bush_UT, this.bush_comms)
         this.listening("Bushy Park", this.bush_comms, count, "/hawkeye/fptsites/bushypark-fpt")
         count++;
         }
         break;
 
       case "NMB_BETH_FPT":
-        if(this.variable.beth_ut  != null || this.variable.beth_ut  != undefined){
-        this.beth_comms =  this.getCommunicationStatus(this.variable.beth_ut, this.beth_comms)
+        if(variable.beth_ut){
+        this.beth_comms =  this.getCommunicationStatus(variable.beth_ut, this.beth_comms)
         this.listening("Bethelsdorp", this.beth_comms, count, "/hawkeye/fptsites/bethelsdorp")
         count++;
         }
@@ -309,8 +203,8 @@ async renderPage(variable:any){
 
 
       case "NMB_CIDZT_FPT":
-        if(this.variable.fpt_cidzt_ut  != null || this.variable.fpt_cidzt_ut  != undefined){
-        this.cidzt_comms =  this.getCommunicationStatus(this.variable.fpt_cidzt_ut, this.cidzt_comms)
+        if(variable.fpt_cidzt_ut){
+        this.cidzt_comms =  this.getCommunicationStatus(variable.fpt_cidzt_ut, this.cidzt_comms)
         this.listening("Coega IDZT", this.cidzt_comms, count, "/hawkeye/fptsites/coegaidzt")
         count++;
         }
@@ -318,24 +212,24 @@ async renderPage(variable:any){
 
 
       case "NMB_FMT_FPT":
-        if(this.variable.fmt_FM_UT  != null || this.variable.fmt_FM_UT  != undefined){
-        this.fm_comms =  this.getCommunicationStatus(this.variable.fmt_FM_UT, this.fm_comms)
+        if(variable.fmt_FM_UT){
+        this.fm_comms =  this.getCommunicationStatus(variable.fmt_FM_UT, this.fm_comms)
         this.listening("FM Tower", this.fm_comms, count, "/hawkeye/fptsites/fmtower")
         count++;
         }
         break;
 
       case "NMB_GT_BRG_FPT":
-        if(this.variable.fpt_gt_brg_ut  != null || this.variable.fpt_gt_brg_ut  != undefined){
-        this.gt_comms =  this.getCommunicationStatus(this.variable.fpt_gt_brg_ut, this.gt_comms)
+        if(variable.fpt_gt_brg_ut){
+        this.gt_comms =  this.getCommunicationStatus(variable.fpt_gt_brg_ut, this.gt_comms)
         this.listening("Gamtoos Bridge", this.gt_comms, count, "/hawkeye/fptsites/gamtoos-bridge")
         count++;
         }
         break;
 
       case "NMB_HUP_OFF_TAKE_FPT":
-        if(this.variable.humansdorp_off_take_ut  != null || this.variable.humansdorp_off_take_ut  != undefined){
-        this.hum_comms =  this.getCommunicationStatus(this.variable.humansdorp_off_take_ut, this.hum_comms)
+        if(variable.humansdorp_off_take_ut){
+        this.hum_comms =  this.getCommunicationStatus(variable.humansdorp_off_take_ut, this.hum_comms)
         this.listening("Humansdorp Off-Take", this.hum_comms, count, "/hawkeye/fptsites/humansdorp-offtake")
         count++;
         }
@@ -345,8 +239,8 @@ async renderPage(variable:any){
 
 
          case "NMB_JEFF_BAY_OFF_TAKE_FPT":
-         if(this.variable.jeff_bay_off_take_last_update  != null || this.variable.jeff_bay_off_take_last_update  != undefined){
-          this.jeff_comms =  this.getCommunicationStatusBattery(this.variable.jeff_bay_off_take_last_update,this.jeff_comms,this.variable.jeff_bay_off_take_last_seen )
+         if(variable.jeff_bay_off_take_last_update){
+          this.jeff_comms =  this.getCommunicationStatusBattery(variable.jeff_bay_off_take_last_update,this.jeff_comms,variable.jeff_bay_off_take_last_seen )
          this.listening("Jeffreys Bay Off-Take", this.jeff_comms, count, "/hawkeye/fptsites/jeffreys-bay-off-take")
          count++;
          }
@@ -354,8 +248,8 @@ async renderPage(variable:any){
 
 
          case "NMB_KOU_MAIN_LINE_FPT":
-          if(this.variable.kou_main_line_ut  != null || this.variable.kou_main_line_ut  != undefined){
-          this.kou_comms =  this.getCommunicationStatus(this.variable.kou_main_line_ut, this.kou_comms)
+          if(variable.kou_main_line_ut){
+          this.kou_comms =  this.getCommunicationStatus(variable.kou_main_line_ut, this.kou_comms)
           this.listening("Kouga Main Line", this.kou_comms, count, "/hawkeye/fptsites/kouga-main-line")
           count++;
           }
@@ -366,12 +260,23 @@ async renderPage(variable:any){
 
 
             case "NMB_PARA_BEA_ST_FRANCIS_FPT":
-              if(this.variable.kou_main_line_ut  != null || this.variable.kou_main_line_ut  != undefined){
-              this.kou_main_line_comms =  this.getCommunicationStatus(this.variable.kou_main_line_ut, this.kou_main_line_comms)
+              if(variable.kou_main_line_ut){
+              this.kou_main_line_comms =  this.getCommunicationStatus(variable.kou_main_line_ut, this.kou_main_line_comms)
               this.listening("Paradise/St Francis", this.kou_main_line_comms, count, "/hawkeye/fptsites/paradise-beach-st-francis-offtake")
               count++;
               }
               break;
+
+
+
+            
+            case "NMB_GLEN_FPT":
+              if(variable.glen_ftp_wtw_ut){
+                var comms =  this.getCommunicationStatus(variable.glen_ftp_wtw_ut, comms)
+                this.listening("Glendinningvale", comms, count, "/hawkeye/fptsites/glendinningvaleftp")
+                count++;
+                }
+                break;
       }
 
 

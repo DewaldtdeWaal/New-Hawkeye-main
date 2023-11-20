@@ -62,7 +62,7 @@ import { LintonresComponent } from './pages/reservoirs/lintonres/lintonres.compo
 import { NmbOverviewComponent } from './pages/reservoirs/nmb-overview/nmb-overview.component';
 
 
-import {GlendinningvaleComponent} from './pages/groundwater/glendinningvale/glendinningvale.component';
+// import {GlendinningvaleComponent} from './pages/groundwater/glendinningvale/glendinningvale.component';
 
 
 
@@ -102,6 +102,7 @@ import { NmuEffluentPsComponent } from './pages/pump-stations/nmu-effluent-ps/nm
 import {MotherwellComponent} from './pages/pump-stations/motherwell/motherwell.component';
 import {StormsriverComponent} from './pages/pump-stations/stormsriver/stormsriver.component';
 import { PsOverviewComponent } from './pages/pump-stations/ps-overview/ps-overview.component';
+import { NmbPsOverviewComponent } from './pages/pump-stations/nmb-ps-overview/nmb-ps-overview.component';
 import {StGeorgesPSComponent} from './pages/pump-stations/st-georges-ps/st-georges-ps.component'
 //FPT
 import {BethelsdorpComponent} from './pages/FlowMeters/bethelsdorp/bethelsdorp.component'
@@ -215,12 +216,13 @@ const routes: Routes = [
 
 
 
-{path: 'hawkeye/groundwater/glendinningvale', component:GlendinningvaleComponent, canActivate:[AuthGuard]},
+// {path: 'hawkeye/groundwater/glendinningvale', component:GlendinningvaleComponent, canActivate:[AuthGuard]},
 
 
 //PUMP STATION
 {path: 'hawkeye/pumpstations/test-pumpstation', component:TestPumpstationComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/pumpstations/ps-overview',component: PsOverviewComponent,canActivate:[AuthGuard]},
+{path: 'hawkeye/pumpstations/nmb-ps-overview',component: NmbPsOverviewComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/pumpstations/control-log-viewer',component: ControlLogViewerComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/pumpstations/chelsea-ps',component: ChelseaPSComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/pumpstations/vanstadens',component: VanStadensPSComponent,canActivate:[AuthGuard]},

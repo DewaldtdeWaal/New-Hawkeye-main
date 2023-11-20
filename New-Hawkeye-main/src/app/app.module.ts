@@ -132,7 +132,7 @@ import { TestPickerComponent } from './pages/trends/test-picker/test-picker.comp
 import { NmbmAddUserComponent } from './pages/sub-admin/nmbm-add-user/nmbm-add-user.component';
 import { NmbmEditAccountsComponent } from './pages/sub-admin/nmbm-edit-accounts/nmbm-edit-accounts.component';
 import { NmbmManageAccountsComponent } from './pages/sub-admin/nmbm-manage-accounts/nmbm-manage-accounts.component';
-import { GlendinningvaleComponent } from './pages/groundwater/glendinningvale/glendinningvale.component';
+// import { GlendinningvaleComponent } from './pages/groundwater/glendinningvale/glendinningvale.component';
 import { BushyparkFptComponent } from './pages/FlowMeters/bushypark-fpt/bushypark-fpt.component';
 import { MalibarComponent } from './pages/reservoirs/malibar/malibar.component';
 // import { StGeorgesComponent } from './pages/WTW/st-georges/st-georges.component';
@@ -173,6 +173,8 @@ import { GlendinningvaleftpComponent } from './pages/FlowMeters/glendinningvalef
 import { PageWithTwoTrendsComponent } from './components/page-with-two-trends/page-with-two-trends.component';
 import { HankeySewageComponent } from './pages/pump-stations/hankey-sewage/hankey-sewage.component';
 import { NmbOverviewComponent } from './pages/reservoirs/nmb-overview/nmb-overview.component';
+import { NmbPsOverviewComponent } from './pages/pump-stations/nmb-ps-overview/nmb-ps-overview.component';
+import { PageWithThreeTrendsComponent } from './components/page-with-three-trends/page-with-three-trends.component';
 
 
 const appRoutes: Routes = [
@@ -312,7 +314,7 @@ const appRoutes: Routes = [
     NmbmAddUserComponent,
     NmbmManageAccountsComponent,
     NmbmEditAccountsComponent,
-    GlendinningvaleComponent,
+    // GlendinningvaleComponent,
     BushyparkFptComponent,
     MalibarComponent,
     StGeorgesResComponent,
@@ -351,6 +353,8 @@ const appRoutes: Routes = [
     PageWithTwoTrendsComponent,
     HankeySewageComponent,
     NmbOverviewComponent,
+    NmbPsOverviewComponent,
+    PageWithThreeTrendsComponent,
 
 
 

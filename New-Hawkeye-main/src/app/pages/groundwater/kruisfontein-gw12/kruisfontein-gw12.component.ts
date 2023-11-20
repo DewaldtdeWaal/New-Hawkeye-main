@@ -197,10 +197,12 @@ gw_klm_kruis12_res_ful:{
     collectionName:any ="KLM_KRUIS12_FLOW"
     range:any;
     options1: EChartsOption;
+    options2: EChartsOption
     tfCollection:any = "KLM_KRUIS12_TF";
     totalFlowTags :any = ["gw_klm_kruis12_TF"]
-    flowTags :any = ["gw_klm_kruis12_flow_rate"]
-    siteTitle:unknown = "Kruisfontein Borehole 12"
+    flowTags :any = ["gw_klm_kruis12_flow_rate", "gw_klm_kruis12_bar"]
+    siteTitle:unknown = "Kruisfontein Borehole 12";
+    options2Name:unknown = "Pressure Data";
     recieveDate($event: any){
       var trend :any;
       this.range = $event;
@@ -213,6 +215,7 @@ gw_klm_kruis12_res_ful:{
   
         console.log(trend)
         this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
+        this.options2 = Common.getOptionsForLine(this.options2,"Pressure Bar", trend.FlowRateArr[1])
         this.isLoading = false;
       })
   

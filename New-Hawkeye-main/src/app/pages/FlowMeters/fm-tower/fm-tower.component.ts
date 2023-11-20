@@ -118,11 +118,14 @@ faultArr:any=[
   siteTitle:any = "FM Tower"
   range:any;
   options1: EChartsOption;
+  options2:EChartsOption;
   tfCollection:any = "FM_FMT_TF";
   collection:any = "FM_FMT_TREND";
   totalFlowTags :any = ["totalflow"]
-  flowTags :any = ["flowRate"]
+  flowTags :any = ["flowRate", "pressure"]
   isLoading: boolean = true;
+
+  options2Name:string = "Pressure Data"
   recieveDate($event: any){
     var trend :any;
     this.range = $event;
@@ -135,7 +138,11 @@ faultArr:any=[
 
       console.log(trend)
       this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml",trend.TotalFlowArr[0]);
+
+      this.options2 = Common.getOptionsForLine(this.options2,"Pressure Bar",trend.FlowRateArr[1])
       this.isLoading = false;
+
+      console.log(trend.FlowRateArr[1])
     })
 
   }

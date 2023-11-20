@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { EChartsOption } from 'echarts';
 import { Common } from 'src/app/class/common';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
   alarm: string;
@@ -104,7 +106,7 @@ export class GamtoosBreakWaterComponent implements OnInit {
 
     }
 
-  constructor( public recieve:Common,private pm:pagePostMethod ) {
+  constructor( public recieve:Common,private pm:pagePostMethod , private pt: PostTrend ) {
 
 
 
@@ -131,4 +133,33 @@ export class GamtoosBreakWaterComponent implements OnInit {
 
     }
   }
+  siteTitle:any = "Gamtoos Break Water";
+  range:any;
+  options1: EChartsOption;
+  options2:EChartsOption;
+  trendTag:any = ["gbw_actual_pressure","gbw_flow_rate"]
+    collectionName:any ="NMNM_GWB_BAR_FLOW";
+    options2Name:unknown = "Pressure Data"
+    levelArr: any[]=[];
+    isLoading:boolean = false;
+  
+    recieveDate($event: any){
+     this.isLoading = true;
+     var trend :any;
+     this.range = $event;
+  
+     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end)
+  
+     this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+      trend=data
+
+      console.log(trend)
+      this.isLoading = false;
+
+      this.options1 = Common.getOptionsForLine(this.options1,"Flow Rate Ml/d",trend.LevelArr[0])
+      this.options2 = Common.getOptionsForLine(this.options2,"Pressure bar",trend.LevelArr[1])
+
+
+    })
+   }
 }

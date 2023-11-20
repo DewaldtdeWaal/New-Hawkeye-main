@@ -13,28 +13,7 @@ export interface PeriodicElement {
   styleUrls: ['./buffelsfontein-ps.component.css']
 })
 export class BuffelsfonteinPSComponent implements OnInit {
-  bf_PS_UT:any
-  bf_G_SP:any
-  bf_G_FR:any
 
-  bf_P1_MODE:any
-  bf_P1_STATUS:any
-  bf_P1_RH:any
-
-
-  bf_P2_MODE:any
-  bf_P2_STATUS:any
-  bf_P2_RH:any
-
-
-  bf_P3_MODE:any
-  bf_P3_STATUS:any
-  bf_P3_RH:any
-
-
-  bf_P4_MODE:any
-  bf_P4_STATUS:any
-  bf_P4_RH:any
 
 
   ELEMENT_DATA_P1: PeriodicElement[] = [];
@@ -193,6 +172,8 @@ theme:any = localStorage.getItem("theme")
 
   ]
 
+
+  
   constructor(public recieve:Common,private pm:pagePostMethod, ) {
 
 

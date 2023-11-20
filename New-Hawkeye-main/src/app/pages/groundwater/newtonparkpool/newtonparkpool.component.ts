@@ -247,10 +247,12 @@ export class NewtonparkpoolComponent implements OnInit {
   collectionName:any ="NMBM_NPP_GW_TREND"
   range:any;
   options1: EChartsOption;
+  options2: EChartsOption;
   tfCollection:any = "NPP_TF_Trend";
   totalFlowTags :any = ["totalflow"]
-  flowTags :any = ["flowRate"]
+  flowTags :any = ["flowRate","delivery_pressure"]
   siteTitle:unknown = "Newton Park Pool"
+  options2Name:unknown = "Pressure Data"
   recieveDate($event: any){
     var trend :any;
     this.range = $event;
@@ -263,6 +265,7 @@ export class NewtonparkpoolComponent implements OnInit {
 
       console.log(trend)
       this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow kl",trend.TotalFlowArr[0]);
+      this.options2 = Common.getOptionsForLine(this.options2, "Pressure Bar",trend.FlowRateArr[1])
       this.isLoading = false;
     })
 

@@ -1,6 +1,4 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Elandsjagt</h1></div>
-  <div class="wrapper-grid">
+<app-page-with-two-trends [siteTitle]="siteTitle" [options]="options1" [options2]=options2 (messageEvent)="recieveDate($event)" [isLoading]=isLoading [trendNameTwo]="options2Name">
     <section class="ground-form" fxLayoutAlign="center">
 
       <form fxLayout="column">
@@ -53,6 +51,4 @@
 </section>
 
 
-
-</div>
-
+</app-page-with-two-trends>

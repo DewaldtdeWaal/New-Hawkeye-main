@@ -14,13 +14,12 @@ export interface PeriodicElement {
   url:any;
 }
 
-
 @Component({
-  selector: 'app-ps-overview',
-  templateUrl: './ps-overview.component.html',
-  styleUrls: ['./ps-overview.component.css']
+  selector: 'app-nmb-ps-overview',
+  templateUrl: './nmb-ps-overview.component.html',
+  styleUrls: ['./nmb-ps-overview.component.css']
 })
-export class PsOverviewComponent implements OnInit {
+export class NmbPsOverviewComponent implements OnInit {
 
   displayedColumns :string[]= ['Name', 'communication_status'];
   userSites:string[];
@@ -177,41 +176,106 @@ async renderPage(variable:any){
       switch (this.userSites[i]) {
 
 
-        case "NMU_NMU_EFF":
-          if(this.variable.nmu_eff_ps_ut != null || this.variable.nmu_eff_ps_ut  != undefined){
-          this.nmu_eff_ps_comms = this.getCommunicationStatus(this.variable.nmu_eff_ps_ut, this.nmu_eff_ps_comms)
-          this.listening("NMU Effluent", this.nmu_eff_ps_comms, count, "/hawkeye/pumpstations/nmu-effluent")
+        case "NMB_BHB_PS":
+          if(this.variable.bhb_PS_UT  != null || this.variable.bhb_PS_UT  != undefined){
+          this.bhb_PS_comms =  this.getCommunicationStatus(this.variable.bhb_PS_UT, this.bhb_PS_comms)
+          this.listening("Blue Horizon Bay", this.bhb_PS_comms, count, "/hawkeye/pumpstations/bluehorizonbay")
           count++;
         }
           break;
-      
-      
-      
-            case "RW_CG_PS":
-          if(this.variable.cg_G_UT  != null || this.variable.cg_G_UT  != undefined){
-          this.cg_G_comms = this.getCommunicationStatus(this.variable.cg_G_UT, this.cg_G_comms)
-          this.listening("Crown Gardens", this.cg_G_comms, count, "/hawkeye/pumpstations/crowngardens")
+        case "NMB_BFT_PS":
+          if(this.variable.bf_PS_UT  != null || this.variable.bf_PS_UT  != undefined){
+          this.bf_PS_comms = this.getCommunicationStatus(this.variable.bf_PS_UT,this.bf_PS_comms)
+          this.listening("Buffelsfontein",this.bf_PS_comms, count,"/hawkeye/pumpstations/buffelsfontein" )
           count++;
         }
           break;
-      
-      
-      
-              case "TSI_STORMS_PS":
-            if(this.variable.ps_storm_UT  != null || this.variable.ps_storm_UT  != undefined){
-            this.ps_storm_comms = this.getCommunicationStatus(this.variable.ps_storm_UT, this.ps_storm_comms)
-            this.listening("Storms River", this.ps_storm_comms, count, "/hawkeye/pumpstations/stormsriver")
-            count++;
-          }
-            break;
+
+        case "NMB_STAN_R_PS":
+          if(this.variable.stan_ps_ut  != null || this.variable.stan_ps_ut  != undefined){
+          this.stan_ps_comms = this.getCommunicationStatus(this.variable.stan_ps_ut,this.stan_ps_comms )
+          this.listening("Standford Road",this.stan_ps_comms,count, "/hawkeye/pumpstations/stanford-road")
+          count++;
+        }
+          break;
+
      
 
+        case "NMB_VRH_PS":
+          if(this.variable.vrh_ut  != null || this.variable.vrh_ut  != undefined){
+          this.vrh_comms = this.getCommunicationStatus(this.variable.vrh_ut, this.vrh_comms)
+          this.listening("Van Riebeeck Hoogte", this.vrh_comms, count, "/hawkeye/pumpstations/vanriebeekhoogte")
+          count++;
+          }
+          break;
 
+
+       case "NMB_VS_PS":
+        if(this.variable.vs_PS_UT != null || this.variable.vs_PS_UT  != undefined){
+         this.vs_PS_comms = this.getCommunicationStatus(this.variable.vs_PS_UT, this.vs_PS_comms)
+         this.listening("Van Stadens", this.vs_PS_comms, count, "/hawkeye/pumpstations/vanstadens")
+         count++;
+        }
+         break;
+
+
+
+
+
+      case "NMB_HB_PS":
+        if(this.variable.hb_R_UT  != null || this.variable.hb_R_UT  != undefined){
+        this.hb_R_comms = this.getCommunicationStatus(this.variable.hb_R_UT, this.hb_R_comms)
+        this.listening("Heatherbank", this.hb_R_comms, count, "/hawkeye/pumpstations/heatherbank")
+        count++;
+      }
+        break;
+
+      case "NMB_CHT_PS":
+        if(this.variable.cht_ut  != null || this.variable.cht_ut  != undefined){
+        this.cht_comms = this.getCommunicationStatus(this.variable.cht_ut, this.cht_comms)
+        this.listening("Chatty", this.cht_comms, count, "/hawkeye/pumpstations/chatty")
+        count++;
+      }
+        break;
+
+      case "NMB_MW_PS":
+        if(this.variable.mw_g_ut  != null || this.variable.mw_g_ut  != undefined){
+        this.mw_g_comms = this.getCommunicationStatus(this.variable.mw_g_ut, this.mw_g_comms)
+        this.listening("Motherwell", this.mw_g_comms, count, "/hawkeye/pumpstations/motherwell")
+        count++;
+      }
+        break;
+
+
+      case "NMB_CHE_PS":
+        if(this.variable.che_r_ut  != null || this.variable.che_r_ut  != undefined){
+        this.che_r_comms = this.getCommunicationStatus(this.variable.che_r_ut, this.che_r_comms)
+        this.listening("Chelsea", this.che_r_comms, count, "/hawkeye/pumpstations/chelsea-ps")
+        count++;
+        }
+        break;
+
+   
+
+      case "NMB_LH_PS":
+        if(this.variable.lh_UT != null || this.variable.lh_UT  != undefined){
+        this.lh_comms = this.getCommunicationStatus(this.variable.lh_UT, this.lh_comms)
+        this.listening("Lovemore Heights", this.lh_comms, count,"/hawkeye/pumpstations/lovemoreheights")
+        count++;
+        }
+        break;
+
+      case "NMB_TC_PS":
+        if(this.variable.tc_R_UT  != null || this.variable.tc_R_UT  != undefined){
+        this.tc_R_comms = this.getCommunicationStatus(this.variable.tc_R_UT, this.tc_R_comms)
+        this.listening("Theescombe", this.tc_R_comms, count,"/hawkeye/pumpstations/theescombe")
+        count++;
+      }
+        break;
       }
       }
 
 
 }
-
 
 }

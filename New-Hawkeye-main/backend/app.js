@@ -27,7 +27,7 @@ const westrends = require('./routes/wessels-trends')
 const UsersRoutes = require("./routes/users")
 const TrendPicker = require("./routes/trend-picker")
 const reservoir = require("./routes/reservoir-trends")
-const  FlowMeterRoutes= require("./routes/flow-meter-trends")
+
 const FeedLotsRoutes = require("./routes/feed-lots-trends")
 const crowngardensRoutes = require("./routes/crown-gardens-trends")
 const adminRoutes = require("./routes/admin")
@@ -165,7 +165,7 @@ app.use(UsersRoutes);
 app.use(TrendPicker);
 app.use(adminRoutes);
 app.use(FeedLotsRoutes);
-app.use(FlowMeterRoutes);
+
 app.use(controlLogRoutes);
 app.use(SiteControl);
 

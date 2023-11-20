@@ -72,8 +72,13 @@ gr_R_UT:null,
   collectionName2:any ="BR_GR_WC_RES_LVL"
   levelArr2: any[]=[];
 
+  flowCollections:any = "GRASS_RIDGE_RES_FLOW_RATES";
+  flowTags = ["gr_R_INLET_FLOWS","gr_R_OUTLET_FLOW"]
+
+
   range:any
   options: EChartsOption;
+  options2: EChartsOption
   isLoading:boolean = false;
 
   recieveDate($event: any){
@@ -95,11 +100,20 @@ gr_R_UT:null,
 
       this.options = this.recieve.getOptionsFor2Line("%","East Chamber %",this.levelArr1,"West Chamber %",this.levelArr2)
 
-
+      this.isLoading = false;
      })
 
 
-     this.isLoading = false;
+    
+   })
+
+
+   this.pt.getLevel(this.flowCollections, this.flowTags,start,end).then((data) => {
+    trend = data;
+
+    console.log(trend)
+
+    this.options2 = this.recieve.getOptionsFor2Line("Ml/d","Inlet Flow",trend.LevelArr[0],"Outlet Flow",trend.LevelArr[1])
    })
  }
 

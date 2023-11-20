@@ -37,13 +37,13 @@ export class UitenhageFCComponent implements OnInit {
   });
   TotalFlow_UIT_Arr:any[];
   options: EChartsOption;
-
+  options2:EChartsOption
 
   intervalLoop: any
 
 
   siteTitle:any = "Uitenhage"
-  flowTags:any = ["flowRate"];
+  flowTags:any = ["flowRate","pressure"];
   totalFlowTags:any=["totalFlow"];
   totalFlowCollectionName:any ="FPT_UIT_FC_TF";
   collection:any = "FM_FMT_TREND";
@@ -63,7 +63,7 @@ export class UitenhageFCComponent implements OnInit {
       trend = data;
 
     this.options = Common.getOptionsBarAndLine(this.options,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml",trend.TotalFlowArr[0]);
-
+    this.options2 = Common.getOptionsForLine(this.options2,"Pressure Bar",trend.FlowRateArr[1])
 
       this.isLoading = false
     })
@@ -149,17 +149,8 @@ export class UitenhageFCComponent implements OnInit {
   isLoading: boolean = true;
   collectionName: any = "FPT_UIT_FC_TF"
 trendTag: any = ["totalFlow"]
-  constructor(private uit:Uitenhage, private ws: WebSocketService,public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common,private pm:pagePostMethod ,private pt: PostTrend) {
-
-
-
-
-
-
-
-
-
-  }
+trendNameTwo:any = "Pressure Data"
+  constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common,private pm:pagePostMethod ,private pt: PostTrend) {  }
 
   ngOnInit(){
 

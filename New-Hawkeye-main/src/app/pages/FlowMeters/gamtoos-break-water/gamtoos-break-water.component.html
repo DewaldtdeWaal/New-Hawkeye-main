@@ -1,6 +1,4 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Gamtoos Break Water</h1></div>
-  <div class="wrapper-grid">
+<app-page-with-two-trends [siteTitle]="siteTitle"  (messageEvent)="recieveDate($event)" [isLoading]=isLoading [options]="options1" [options2]="options2" [trendNameTwo]="options2Name">
 
 
     <section class="ground-form" fxLayoutAlign="center">
@@ -157,10 +155,7 @@
                           </section>
 
 
-        </div>
-
-        </div>
-
+</app-page-with-two-trends>
 
 
 

@@ -72,7 +72,7 @@ variables:any
   }
 
 
-  flowTags:any = ["flowrate1"];
+  flowTags:any = ["flowrate1","pressure1"];
 totalFlowTags:any=["flowtotal1"];
 totalFlowCollectionName:any ="WBLK_KOUG_FMU_BTU04";
 
@@ -82,9 +82,9 @@ flowRate2:any = []
 
 flowtotal1:any = []
 flowtotal2:any = []
-
+options2:EChartsOption;
 range:any
-
+trendNameTwo:any= "Pressure Data" 
 
 recieveDate($event: any){
  this.isLoading = true;
@@ -96,8 +96,10 @@ recieveDate($event: any){
  this.pt.getTotalFlowAndFlowRate(this.totalFlowCollectionName, this.totalFlowTags,this.flowTags,start,end).then((data) => {
   trend=data
 
+  console.log(trend.flowRateArr)
 
   this.options = Common.getOptionsBarAndLine(this.options, "Flow Rate l/s",  trend.flowRateArr[0], "Total Flow m³", trend.TotalFlowArr[0] )
+  this.options2 = Common.getOptionsForLine(this.options2,"Pressure Bar", trend.flowRateArr[1])
   this.isLoading = false
 
  })

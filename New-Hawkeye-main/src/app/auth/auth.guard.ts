@@ -271,6 +271,9 @@ export class AuthGuard implements CanActivate {
         url="HWK_PO"
         break;
 
+        case "/pumpstations/nmb-ps-overview":
+          url="HWK_PO"
+        break;
 
       case "/reservoirs/schoemanshoek":
         url="NMB_SCHOE_R";

@@ -1,4 +1,4 @@
-<app-page-with-trend [siteTitle]="siteTitle"  (messageEvent)="recieveDate($event)" [isLoading]=isLoading [options]="options1">
+<app-page-with-two-trends [siteTitle]="siteTitle"  (messageEvent)="recieveDate($event)" [isLoading]=isLoading [options]="options1" [options2]="options2" [trendNameTwo]="trendNameTwo">
 
       <section class="res-form" fxLayoutAlign="center ">
           <form fxLayout="column">
@@ -74,4 +74,4 @@
                           </form>
                           </section>
 
-</app-page-with-trend>
+</app-page-with-two-trends>

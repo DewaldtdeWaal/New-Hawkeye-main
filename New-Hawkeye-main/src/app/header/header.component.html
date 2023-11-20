@@ -85,7 +85,7 @@
 <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmPSMenu}"*ngIf="subExpanded || subShowing" >expand_more</mat-icon></button>
 <div class="submenu" [ngClass]="{'expanded' : showNmbmPSMenu}" *ngIf="showNmbmPSMenu==true" (click)="sidenav.toggle()" >
   <div *ngFor="let i of userSites">
-          <button *ngIf="i=='HWK_PO'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/ps-overview">Pumpstation Overview</button>
+          <button *ngIf="i=='HWK_PO'" mat-menu-item class="item" routerLink="hawkeye/pumpstations/nmb-ps-overview">Pumpstation Overview</button>
           <button *ngIf="i=='NMB_BHB_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/bluehorizonbay">Blue Horizon Bay</button>
 
           <button *ngIf="i=='NMB_VS_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/vanstadens">Van Stadens</button>
@@ -265,14 +265,14 @@
 
 
 
-      <button *ngIf="countFPT!=0" (click)="showFM_Menu = !showFM_Menu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">arrow_right_alt</mat-icon><b>FPT</b>
+      <!-- <button *ngIf="countFPT!=0" (click)="showFM_Menu = !showFM_Menu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">arrow_right_alt</mat-icon><b>FPT</b>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showFM_Menu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
         <div class="submenu" [ngClass]="{'expanded' : showFM_Menu}" *ngIf="showFM_Menu==true" (click)="sidenav.toggle()" >
 
                   <div  *ngFor="let i of userSites">
                     <button *ngIf="i=='HWK_FO'" style="width: 100%;" mat-button class="item"  routerLink="hawkeye/fptsites/fpt-overview">FPT Overview</button>
                   </div>
-                </div>
+                </div> -->
 
 
 
