@@ -1,4 +1,4 @@
-<app-page-component [siteTitle]=title>
+<app-page-with-trend [siteTitle]="siteTitle"  (messageEvent)="recieveDate($event)" [isLoading]=isLoading [options]="options1"  [trendNameOne]="trendNameOne">
 
   <section class="ground-form" fxLayoutAlign="center">
 
@@ -46,4 +46,4 @@
   <app-ground-water [title]=pump3 [array]=variablesMatric3 [generalfaultdatasource]=dataSourceP3 [pumpColor]=pumpColor3 [pumpType]=Pump></app-ground-water>
   <app-ground-water [title]=pump4 [array]=variablesMatric4 [generalfaultdatasource]=dataSourceP4 [pumpColor]=pumpColor4 [pumpType]=Pump></app-ground-water>
 
-</app-page-component>
+</app-page-with-trend>

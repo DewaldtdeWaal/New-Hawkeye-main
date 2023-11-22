@@ -338,6 +338,15 @@ var WTW_NGT_FM_HIGH_FR_Arr = [];
 var ELA_FR_arr = [];
 var ELA_P_arr = [];
 
+var hank_ps_g_total_flow_1_arr = []
+var hank_ps_g_total_flow_2_arr = []
+var hank_ps_g_sump_level_arr = []
+var hank_ps_g_flow_rate_1_arr = []
+var hank_ps_g_flow_rate_2_arr = []
+var hank_ps_p1_speed_arr = []
+var hank_ps_p2_speed_arr = []
+var hank_ps_p3_speed_arr = []
+
 //#endregion
 
 
@@ -400,40 +409,84 @@ switch(sitesChosen[i]){
 
 
             case "Glendinningvale Borehole Total Flow":
-              trendData(glen_FTP_WTW_borehole_Total_Flow_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_borehole_Total_Flow",query)
+              trendData(glen_FTP_WTW_borehole_Total_Flow_arr,"glen_FTP_WTW_borehole_Total_Flow","NMBM_GLEN_TF_trend",query)
               count++;
               break;
 
 
               case "Glendinningvale Pump 1 Run Time":
-                trendData(glen_FTP_WTW_P1_rtm_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P1_rtm",query)
+                console.log("Glendinning isn")
+                trendData(glen_FTP_WTW_P1_rtm_arr,"glen_FTP_WTW_P1_rtm","NMBM_GLEN_TF_trend",query)
                 count++;
                 break;
 
               case "Glendinningvale Pump 2 Run Time":
-                trendData(glen_FTP_WTW_P2_rtm_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P2_rtm",query)
+                trendData(glen_FTP_WTW_P2_rtm_arr,"glen_FTP_WTW_P2_rtm","NMBM_GLEN_TF_trend",query)
                 count++;
                 break;
 
               case "Glendinningvale Pump 1 Number Of Starts":
-                trendData(glen_FTP_WTW_P1_stn_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P1_stn",query)
+                trendData(glen_FTP_WTW_P1_stn_arr,"glen_FTP_WTW_P1_stn","NMBM_GLEN_TF_trend",query)
                 count++;
                 break;
 
               case "Glendinningvale Pump 2 Number Of Starts":
-                trendData(glen_FTP_WTW_P2_stn_arr,"NMBM_GLEN_TF_trend","glen_FTP_WTW_P2_stn",query)
+                trendData(glen_FTP_WTW_P2_stn_arr,"glen_FTP_WTW_P2_stn","NMBM_GLEN_TF_trend",query)
                 count++;
                 break;
 
               case "Glendinningvale Potential of Hydrogen":
-                trendData(glen_FTP_WTW_ph_arr,"NMBM_GLEN_Flow_trend","glen_FTP_WTW_ph",query)
+                trendData(glen_FTP_WTW_ph_arr,"glen_FTP_WTW_ph","NMBM_GLEN_Flow_trend",query)
                 count++;
                 break;
 
               case "Glendinningvale Oxidation Reduction Potential":
-                trendData(glen_FTP_WTW_orp_arr,"NMBM_GLEN_Flow_trend","glen_FTP_WTW_orp",query)
+                trendData(glen_FTP_WTW_orp_arr,"glen_FTP_WTW_orp","NMBM_GLEN_Flow_trend",query)
                 count++;
                 break;
+
+
+    case "Hankey Sewage Pumpstation 1 Total Flow":
+      trendData(hank_ps_g_total_flow_1_arr,"hank_ps_g_total_flow_1","NMBM_HANK_TOTAL_FLOW_TREND"  , query)
+      count++;
+      break;
+
+    case "Hankey Sewage Pumpstation 2 Total Flow":
+      trendData(hank_ps_g_total_flow_2_arr,"hank_ps_g_total_flow_2","NMBM_HANK_TOTAL_FLOW_TREND" , query)
+      count++;  
+      break;
+
+    case "Hankey Sewage Pumpstation SUMP Level":
+      trendData(hank_ps_g_sump_level_arr, "hank_ps_g_sump_level","HANK_FLOW_TREND" , query)
+      count++;
+      break;
+
+
+      case "Hankey Sewage Pumpstation 1 Flow Rate":
+        trendData(hank_ps_g_flow_rate_1_arr,"hank_ps_g_flow_rate_1","HANK_FLOW_TREND", query)
+        count++;
+        break;
+  
+      case "Hankey Sewage Pumpstation 2 Flow Rate":
+        trendData(hank_ps_g_flow_rate_2_arr, "hank_ps_g_flow_rate_2", "HANK_FLOW_TREND", query)
+        count++;
+        break;
+  
+      case "Hankey Sewage Pumpstation 1 Speed":
+        trendData(hank_ps_p1_speed_arr,"hank_ps_p1_speed" ,"HANK_FLOW_TREND" , query)
+        count++;
+        break;
+
+        case "Hankey Sewage Pumpstation 2 Speed":
+          trendData(hank_ps_p2_speed_arr, "hank_ps_p2_speed", "HANK_FLOW_TREND", query)
+          count++;
+          break;
+    
+        case "Hankey Sewage Pumpstation 3 Speed":
+          trendData(hank_ps_p3_speed_arr,"hank_ps_p3_speed" ,"HANK_FLOW_TREND" , query)
+          count++;
+          break;
+    
 
   case "Isuzu Oven 1 VSD Speed":
   trendData(isuzu_oven1_vsd_speed_arr,"isuzu_oven1_vsd_speed","ISUZU_TREND",query)

@@ -251,6 +251,9 @@ GlenFPTSelected:boolean[]=[];
 GlenWTWListArr:string[]=[]
 GlenWTWSelected:boolean[]=[]
 
+HankSewagePSListArr:string[]=[]
+HankSewagePSSelected:boolean[]=[]
+
 showResMenu: boolean = false;
 showPSMenu: boolean = false;
 showTrendsMenu: boolean = false;
@@ -352,6 +355,8 @@ this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservo
 this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
 this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
 this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
+this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " )
+
 
 this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
 this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
@@ -569,6 +574,28 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
                         count++;
                         this.showWTW = true;
                         break;
+
+
+                        case "KOU_HANK_SEW_PS":
+                          if (count>=1 ){count = 0}
+                          this.HankSewagePSListArr[count]="1 Total Flow"
+                          count++;
+                          this.HankSewagePSListArr[count]="2 Total Flow"
+                          count++;
+                          this.HankSewagePSListArr[count]="SUMP Level"
+                          count++;
+                          this.HankSewagePSListArr[count]="1 Flow Rate"
+                          count++;
+                          this.HankSewagePSListArr[count]="2 Flow Rate"
+                          count++;
+                          this.HankSewagePSListArr[count]="1 Speed"
+                          count++;
+                          this.HankSewagePSListArr[count]="2 Speed"
+                          count++;
+                          this.HankSewagePSListArr[count]="3 Speed"
+                          count++;
+                    this.showPS = true;
+                          break;
 
         // case "NMB_BUSH_PS":
         //   if(count>=1){count = 0}
@@ -1454,6 +1481,8 @@ this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningval
     this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ")
     this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ")
     this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ")
+    this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " )
+	
     // FPT
     this.ReadSelectedValues(this.cgkIDZTagListArr,this.cgkIDZTagsSelected, "Coega ")
     this.ReadSelectedValues(this.fmtTagListArr,this.fmtTagsSelected, "FM Tower ")

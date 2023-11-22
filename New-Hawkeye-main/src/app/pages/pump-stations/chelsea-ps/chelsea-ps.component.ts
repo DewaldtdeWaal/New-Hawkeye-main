@@ -381,7 +381,7 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
   constructor( public rs: ReportService,private pt: PostTrend,private authService: AuthService,public recieve:Common,private pm:pagePostMethod  ) {
 
 
-    this.isLoading = true;
+    this.isLoading = false;
 
 
 
@@ -432,333 +432,8 @@ che_ps_walk_drive_off_500_mm_total_flow:null,
        this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
     });
 
-    var trend: any = {};
-
-    this.pt.getPostTrend("CHEL_TF_TREND", this.chelseaTrendTag,null,null).then((data) => {
-
-      trend=data;
-
-
-      this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0].differences
-      this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1].differences
-      this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2].differences
-      this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3].differences
-      this.DateArr = trend.DateArr;
-
-      var theme:any
-      var tooltipBackground:any
-
-      if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-      {
-        theme = '#FFFFFF'
-        tooltipBackground = 'rgba(50,50,50,0.7)'
-      }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-      {
-      theme = '#797979'
-      tooltipBackground = 'rgba(255, 255, 255, 1)'
-      }
-      this.options = {
-        tooltip: {
-          backgroundColor: tooltipBackground,
-          textStyle:{ color: theme,},
-           trigger: 'axis',
-           position: ['10%', '10%']
-         },
-        grid: {
-          bottom:"18%"
-        },
-        xAxis: {
-            type: 'category',
-            data: this.DateArr,
-            axisLabel: { interval: 0, rotate: 90, color: theme },
-        },
-        yAxis:   {
-          type: 'value',
-          scale: true,
-          name: 'Total Flow Ml',
-          nameTextStyle: { color: theme},
-          boundaryGap: [0.2, 0.2],
-          min: 0,
-          axisLabel: { rotate: 90, color: theme},
-      },
-      series: [ {
-      name: 'Pumpstation Total Flow',
-      data: this.CHE_PS_700_TF_arr,
-      type: 'bar',
-  },
-  {
-    name: 'Motherwell 760 mm Total Flow',
-      data: this.CHE_PS_760_MM_TF_arr,
-      type: 'bar',
-  },
-  {
-    name: 'Motherwell 900 mm Total Flow',
-      data: this.CHE_PS_900_MM_TF_arr,
-      type: 'bar',
-  },{
-    name: 'Motherwell Walker Drive Offtake 500 mm',
-    data: this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr,
-    type: 'bar',
-  }]
-
-
-
-
-    }
-
-    this.isLoading = false;
-    })
-  //   this.rs.GET_CHEL_TotalFlow().subscribe(data => {
-  //     trend=data
-  //     this.CHE_PS_700_TF_arr = trend.CHE_PS_700_TF_arr
-  //     this.CHE_PS_760_MM_TF_arr = trend.CHE_PS_760_MM_TF_arr
-  //     this.CHE_PS_900_MM_TF_arr = trend.CHE_PS_900_MM_TF_arr
-  //     this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr = trend.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr
-  //     this.DateArr = trend.DateArr;
-  //     var theme:any
-  //     var tooltipBackground:any
-
-  //     if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-  //     {
-  //       theme = '#FFFFFF'
-  //       tooltipBackground = 'rgba(50,50,50,0.7)'
-  //     }else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-  //     {
-  //     theme = '#797979'
-  //     tooltipBackground = 'rgba(255, 255, 255, 1)'
-  //     }
-  //     this.options = {
-  //       tooltip: {
-  //         backgroundColor: tooltipBackground,
-  //         textStyle:{ color: theme,},
-  //          trigger: 'axis',
-  //          position: ['10%', '10%']
-  //        },
-  //       grid: {
-  //         bottom:"18%"
-  //       },
-  //       xAxis: {
-  //           type: 'category',
-  //           data: this.DateArr,
-  //           axisLabel: { interval: 0, rotate: 90, color: theme },
-  //       },
-  //       yAxis:   {
-  //         type: 'value',
-  //         scale: true,
-  //         name: 'Total Flow Ml',
-  //         nameTextStyle: { color: theme},
-  //         boundaryGap: [0.2, 0.2],
-  //         min: 0,
-  //         axisLabel: { rotate: 90, color: theme},
-  //     },
-  //     series: [ {
-  //     name: 'Pumpstation Total Flow',
-  //     data: this.CHE_PS_700_TF_arr,
-  //     type: 'bar',
-  // },
-  // {
-  //   name: 'Motherwell 760 mm Total Flow',
-  //     data: this.CHE_PS_760_MM_TF_arr,
-  //     type: 'bar',
-  // },
-  // {
-  //   name: 'Motherwell 900 mm Total Flow',
-  //     data: this.CHE_PS_900_MM_TF_arr,
-  //     type: 'bar',
-  // },{
-  //   name: 'Motherwell Walker Drive Offtake 500 mm',
-  //   data: this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr,
-  //   type: 'bar',
-  // }]
-
-
-
-
-  //   }
-
-
-
-  // })
-}
-onDateFilter(){
-  this.isLoading = true;
-  var start = this.range.value.start+'';
-  var end = this.range.value.end+'';
-
- var startARR = start.toString().split(" ")
- var endARR = end.toString().split(" ")
-
-
- switch (startARR[1]) {
-  case "Jan":
-    startARR[1] = "1"
-      break;
-      case "Feb":
-        startARR[1] = "2"
-          break;
-          case "Mar":
-            startARR[1] = "3"
-              break;
-              case "Apr":
-                startARR[1] = "4"
-                  break;
-                  case "May":
-                    startARR[1] = "5"
-                      break;
-                      case "Jun":
-                        startARR[1] = "6"
-                          break;
-                          case "Jul":
-                            startARR[1] = "7"
-                              break;
-                              case "Aug":
-                                startARR[1] = "8"
-                                  break;
-                                  case "Sep":
-                                    startARR[1] = "9"
-                                      break;
-                                      case "Oct":
-                                        startARR[1] = "10"
-                                          break;
-                                          case "Nov":
-                                            startARR[1] = "11"
-                                              break;
-                                              case "Dec":
-                                                startARR[1] = "12"
-                                                  break;
-                                                }
-switch (endARR[1]) {
-  case "Jan":
-    endARR[1] = "1"
-      break;
-      case "Feb":
-        endARR[1] = "2"
-          break;
-          case "Mar":
-            endARR[1] = "3"
-              break;
-              case "Apr":
-                endARR[1] = "4"
-                  break;
-                  case "May":
-                    endARR[1] = "5"
-                      break;
-                      case "Jun":
-                        endARR[1] = "6"
-                          break;
-                          case "Jul":
-                            endARR[1] = "7"
-                              break;
-                              case "Aug":
-                                endARR[1] = "8"
-                                  break;
-                                  case "Sep":
-                                    endARR[1] = "9"
-                                      break;
-                                      case "Oct":
-                                        endARR[1] = "10"
-                                          break;
-                                          case "Nov":
-                                            endARR[1] = "11"
-                                              break;
-                                              case "Dec":
-                                                endARR[1] = "12"
-                                                  break;
-                                                }
-
-if (startARR[1].length==1){
-startARR[1] = "0" + startARR[1]
 }
 
-if (endARR[1].length==1){
-endARR[1] = "0" + endARR[1]
-}
-
-
-var newStart = startARR[3] +"-"+startARR[1]+"-"+startARR[2]
-var newEnd = endARR[3] +"-"+endARR[1]+"-"+endARR[2]
-
-console.log(newStart)
-console.log(newEnd)
-
-var trend :any;
-
-//this.rs.GET_CHEL_Total_Flows_Dates(newStart, newEnd).subscribe(data => {
-
-  this.pt.getPostTrend("CHEL_TF_TREND", this.chelseaTrendTag,newStart,newEnd).then((data) => {
-
-
-trend=data
-
-this.CHE_PS_700_TF_arr = trend.TotalFlowArr[0].differences
-this.CHE_PS_760_MM_TF_arr = trend.TotalFlowArr[1].differences
-this.CHE_PS_900_MM_TF_arr = trend.TotalFlowArr[2].differences
-this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr =  trend.TotalFlowArr[3].differences
-this.DateArr = trend.DateArr;
-var theme:any
-var tooltipBackground:any;
-
-if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
-{
-theme = '#FFFFFF'
-tooltipBackground = 'rgba(50,50,50,0.7)'
-}else  if (localStorage.getItem("theme") == "light-theme"||localStorage.getItem("theme") == "light-theme")
-{
-theme = '#797979'
-tooltipBackground = 'rgba(255, 255, 255, 1)'
-}
-
-this.options = {
-tooltip: {
-  backgroundColor: tooltipBackground,
-  textStyle:{ color: theme,},
-   trigger: 'axis',
-   position: ['10%', '10%']
- },
-grid: {
-  bottom:"18%"
-},
-
-xAxis: {
-    type: 'category',
-    data: this.DateArr,
-    axisLabel: { interval: 0, rotate: 90, color: theme },
-},
-yAxis:   {
-  type: 'value',
-  scale: true,
-  name: 'Total Flow Ml',
-  nameTextStyle: { color: theme},
-  boundaryGap: [0.2, 0.2],
-  min: 0,
-  axisLabel: { rotate: 90, color: theme},
-},
-series: [ {
-  name: 'Pumpstation Total Flow',
-  data: this.CHE_PS_700_TF_arr,
-  type: 'bar',
-},
-{
-name: 'Motherwell 760 mm Total Flow',
-  data: this.CHE_PS_760_MM_TF_arr,
-  type: 'bar',
-},
-{
-name: 'Motherwell 900 mm Total Flow',
-  data: this.CHE_PS_900_MM_TF_arr,
-  type: 'bar',
-},{
-name: 'Motherwell Walker Drive Offtake 500 mm',
-data: this.CHE_PS_WALK_DRIVE_OFF_500_MM_TF_arr,
-type: 'bar',
-}]
-};
-
-this.isLoading = false;
-})
-
-
-}
 
 
 
@@ -770,7 +445,38 @@ ngOnDestroy():void{
 
   }
 }
+totalFlowTags:any = ["che_ps_700_total_flow","che_ps_moth_760_mm_total_flow","che_ps_moth_900_mm_total_flow","che_ps_walk_drive_off_500_mm_total_flow"];
+tfCollection:any = "CHEL_TF_TREND";
+collection:string = "NMBM_CHEL_FLOW";
+flowTags:any = ["che_ps_700_flow_rate","che_ps_moth_760_mm","che_ps_moth_900_mm","che_ps_walk_drive_off_500_mm"]
+PumpTags:any = ["che_ps_pumpset_1_suct_pressure","che_ps_pumpset_1_del_pressure","che_ps_pumpset_2_suct_pressure","che_ps_pumpset_2_del_pressure","che_ps_pumpset_3_suct_pressure","che_ps_pumpset_3_del_pressure","che_ps_pumpset_4_suct_pressure","che_ps_pumpset_4_del_pressure"]
+siteTitle:any = "Chelsea";
+options1: EChartsOption;
+options2:EChartsOption;
+options2Name:any = "Pump Data" 
+recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
+    this.isLoading = true;
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
+    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+      trend = data;
+
+     this.options1 = this.recieve.getOptionsBarAndLine4("Ml", "Ml/d","700 Flow Rate", trend.FlowRateArr[0],"760 Flow Rate",trend.FlowRateArr[1],"Motherwell 900 mm Flow Rate",trend.FlowRateArr[2], "Walker Drive Flow Rate",trend.FlowRateArr[3],"700 Total Flow", trend.TotalFlowArr[0],"760 Total Flow",trend.TotalFlowArr[1],"Motherwell 900 mm Total Flow",trend.TotalFlowArr[2], "Walker Drive Total Flow",trend.TotalFlowArr[3]);
+    
+    })
+
+    this.pt.getLevel("CHELSEA_PS_TREND",this.PumpTags,start, end).then((data) => {
+      var trend2:any = data;
+
+      console.log(trend2.LevelArr[0])
+
+      this.options2 = this.recieve.getOptionsForLine8("bar","Pump 1 Sucction Pressure",trend2.LevelArr[0],"Pump 1 Delivery Pressure",trend2.LevelArr[1],"Pump 2 Sucction Pressure",trend2.LevelArr[2],"Pump 2 Delivery Pressure",trend2.LevelArr[3],"Pump 3 Sucction Pressure",trend2.LevelArr[4],"Pump 3 Delivery Pressure",trend2.LevelArr[5],"Pump 4 Sucction Pressure",trend2.LevelArr[6],"Pump 4 Delivery Pressure",trend2.LevelArr[7],)
+      this.isLoading = false;
+    })
+
+}
 
 
 }

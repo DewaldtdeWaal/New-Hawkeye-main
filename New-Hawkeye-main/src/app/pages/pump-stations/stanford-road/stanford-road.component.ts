@@ -16,6 +16,8 @@ import { standfordRoadComponent} from 'src/app/Service-Files/Pumpstation/pumpsta
 import {StanOnOffService} from 'src/app/Service-Files/standfordpumponofstate.service';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement {
   alarm: string;
   description: string;
@@ -189,7 +191,7 @@ p4_btn:any= false
     "stan_p4_alarmstrip",//32
   ]
 
-  constructor(private http: HttpClient, private su:ServerURLService, private cl:ControlLogService, private pm:pagePostMethod, private as:AuthService,  private site_Control: SiteControlService,  private onOf: StanOnOffService,public recieve:Common ) {
+  constructor(private http: HttpClient,private pt: PostTrend, private su:ServerURLService, private cl:ControlLogService, private pm:pagePostMethod, private as:AuthService,  private site_Control: SiteControlService,  private onOf: StanOnOffService,public recieve:Common ) {
 
 
     this.intervalLoop = this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").subscribe((result) => {
@@ -528,5 +530,33 @@ getCurrentDate(){
   var min = now.getMinutes();
   var date = year + '-' + month + '-' + day +" "+ hour +":" + min;
   return date;
+}
+
+
+
+siteTitle:any = "Standford Road";
+isLoading:boolean ;
+options1:EChartsOption;
+options2:EChartsOption;
+range:any;
+trendTag:any = ["suction_pressure","delivery_pressure","flowRate"];
+
+trendNameOne:string = "Pressure Data";
+trendNameTwo:string = "Flow Data";
+
+recieveDate($event: any){
+  var trend :any;
+  this.range = $event;
+  this.isLoading = true;
+  const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+  this.pt.getLevel("NMBM_STAN_BPS_TREND", this.trendTag,start,end).then((data) => {
+    trend = data;
+
+    this.options1 = this.recieve.getOptionsForLine2("Bar", "Suction Pressure", trend.LevelArr[0], "Delivery Pressure", trend.LevelArr[1]);
+
+    this.options2 = Common.getOptionsForLine(this.options2,"Flow Rate Ml", trend.LevelArr[2]);
+    this.isLoading = false;
+  })
 }
 }

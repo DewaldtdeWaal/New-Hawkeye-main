@@ -1,10 +1,11 @@
 import {  Component, OnInit, ViewChild } from '@angular/core';
-import {StormsrivierComponent} from 'src/app/Service-Files/Pumpstation/stormsrivier.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/Service-Files/auth.service';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -228,9 +229,7 @@ quarrypump2faulttabledatasource:any;
     "ps_storms_voltage_ok",//31
 
   ]
-  constructor(private storms:StormsrivierComponent,private authService: AuthService,public recieve:Common , private pm:pagePostMethod) {
-
-
+  constructor(private authService: AuthService,public recieve:Common , private pm:pagePostMethod, private pt: PostTrend ) {
 
     this.intervalLoop = this.pm.findPageData("storms_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
@@ -254,8 +253,6 @@ quarrypump2faulttabledatasource:any;
 
   }
 
-
-
   ngOnInit() {
     this.showNavigationButton = "false";
     this.userSites = this.authService.getUserSites();
@@ -271,9 +268,6 @@ quarrypump2faulttabledatasource:any;
           break;
       }
     }
-
-
-
   }
 
   ngOnDestroy():void{
@@ -281,5 +275,29 @@ quarrypump2faulttabledatasource:any;
       this.intervalLoop.unsubscribe();
 
     }
+  }
+
+  isLoading:boolean;
+  siteTitle:string = "Storms River";
+  options:EChartsOption;
+  range:any
+  collectionName:unknown = "STORMS_PS_TREND";
+  trendTag: any = ["ps_storms_quarry_level", "ps_storms_gorge_level"]
+  trendNameOne:unknown = "Level Data"
+    recieveDate($event: any){
+    this.isLoading = true;
+    var trend :any;
+    this.range = $event;
+    
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+    this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+      trend=data
+
+      this.options = this.recieve.getOptionsForLine2("m", "Quarry Level", trend.LevelArr[0], "Storms Level", trend.LevelArr[1] )
+
+    this.isLoading = false;
+
+    })
   }
 }

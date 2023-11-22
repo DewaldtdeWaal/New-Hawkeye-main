@@ -1,5 +1,4 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Storms River</h1></div>
+<app-page-with-trend-no-wrapper [siteTitle]="siteTitle" [options]="options" (messageEvent)="recieveDate($event)" [isLoading]=isLoading [trendNameOne]="trendNameOne">
   <div class="wrapper-grid">
 
 
@@ -360,6 +359,4 @@
 
 
 
-</div>
-
-
+</app-page-with-trend-no-wrapper>

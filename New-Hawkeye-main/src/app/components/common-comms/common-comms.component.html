@@ -1,0 +1,27 @@
+<section class="ground-form" fxLayoutAlign="center">
+
+    <form fxLayout="column">
+
+      <div style="margin-bottom: 8px"  class="div-form">
+        <h3 style="padding-top: 8px; ">Communication</h3>
+      </div>
+
+  <div class="div-form">
+    <div class="grid-container-flow-meters-communication">
+
+      <div class="grid-container-communicationStatus-column1">Communication Status:</div>
+      <div *ngIf="comms=='OK'"  class="grid-container-communicationStatus-column3-img" >
+        <img  src="assets/img/General/Green Circle Tick.png" class="grid-container-communicationStatus-column3-img" style="grid-column: 3; padding-top: 5px;">
+        </div>
+        <div *ngIf="comms=='NOT OK'" class="grid-container-communicationStatus-column3-img" style="grid-column: 3;  padding-top: 5px;">
+         <img src="assets/img/General/Red Circle Cross.png" class="grid-container-communicationStatus-column3-img">
+         </div>
+
+      <div class="grid-container-communicationStatus-column1">Last Update:</div>
+      <div class="grid-container-communicationStatus-column3">{{lastUpdate}}</div>
+
+</div>
+
+</div>
+</form>
+</section>

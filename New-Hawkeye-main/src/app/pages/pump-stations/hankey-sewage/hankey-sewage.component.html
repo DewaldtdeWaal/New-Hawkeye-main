@@ -1,1 +1,61 @@
-<p>hankey-sewage works!</p>
+<app-page-with-two-trends [siteTitle]="siteTitle"  (messageEvent)="recieveDate($event)" [isLoading]=isLoading [options]="options1" [options2]="options2" >
+
+    <app-common-comms [comms]="comms" [lastUpdate]="lastUpdate"></app-common-comms>
+
+
+    <app-panel [title]="General">
+        <div class = "grid-container-flow-meters-communication">
+        <div class="grid-container-communicationStatus-column1">Flow Rate 1:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_flow_rate_1}}</div>
+        <div class="grid-container-communicationStatus-column1">Total Flow 1:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_total_flow_1}}</div>
+        <div class="grid-container-communicationStatus-column1">Flow Rate 2:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_flow_rate_2}}</div>
+        <div class="grid-container-communicationStatus-column1">Total Flow 2:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_total_flow_2}}</div>
+        <div class="grid-container-communicationStatus-column1">Average Line Voltage:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_average_line_voltage}}</div>
+        <div class="grid-container-communicationStatus-column1">Average Phase Voltage:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_average_phase_voltage}}</div>
+        <div class="grid-container-communicationStatus-column1">Average Current:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_average_current}}</div>
+        <div class="grid-container-communicationStatus-column1">Average Power:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_average_power}}</div>
+        <div class="grid-container-communicationStatus-column1">Total Energy:</div>
+        <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_total_energy}}</div>
+    </div>
+    </app-panel>
+
+    <section class="ground-form" fxLayoutAlign="center">
+
+        <form fxLayout="column">
+    
+          <div style="margin-bottom: 8px"  class="div-form">
+            <h3 style="padding-top: 8px; ">Sump</h3>
+          </div>
+    
+    
+      <div class="div-form">
+    
+        <br>
+        <div fxLayoutAlign="center " > <div class="circle1">
+            
+            <div class="circle2-b"><div [ngStyle]="{'height.%' : sump }" class="fill"><div class="lvl-font">{{ 100 }}%</div></div></div>
+          </div>
+          </div>
+    
+
+      <br>
+    
+
+    
+    
+      </div>
+        </form>
+        </section>
+    
+        <app-ground-water [title]=pump1 [array]=variablesMatric1 [generalfaultdatasource]=dataSourceP1 [pumpColor]=pumpColor1 [pumpType]=Pump></app-ground-water>
+        <app-ground-water [title]=pump2 [array]=variablesMatric2 [generalfaultdatasource]=dataSourceP2 [pumpColor]=pumpColor2 [pumpType]=Pump></app-ground-water>
+        <app-ground-water [title]=pump3 [array]=variablesMatric3 [generalfaultdatasource]=dataSourceP3 [pumpColor]=pumpColor3 [pumpType]=Pump></app-ground-water>
+
+</app-page-with-two-trends>

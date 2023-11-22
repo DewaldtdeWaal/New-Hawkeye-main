@@ -290,11 +290,31 @@ export const trendArray = [
 "glen_FTP_WTW_ph_arr",
 "glen_FTP_WTW_orp_arr",
 
+"hank_ps_g_total_flow_1_arr",
+"hank_ps_g_total_flow_2_arr",
+"hank_ps_g_sump_level_arr",
+"hank_ps_g_flow_rate_1_arr",
+"hank_ps_g_flow_rate_2_arr",
+"hank_ps_p1_speed_arr",
+"hank_ps_p2_speed_arr",
+"hank_ps_p3_speed_arr",
   ]
 
 
   //make this axis map a hash map
   export const siteVariableMap = {
+
+    "Hankey Sewage Pumpstation 1 Total Flow":"hank_ps_g_total_flow_1_arr",
+    "Hankey Sewage Pumpstation 2 Total Flow":"hank_ps_g_total_flow_2_arr",
+    "Hankey Sewage Pumpstation SUMP Level":"hank_ps_g_sump_level_arr",
+    "Hankey Sewage Pumpstation 1 Flow Rate":"hank_ps_g_flow_rate_1_arr",
+    "Hankey Sewage Pumpstation 2 Flow Rate":"hank_ps_g_flow_rate_2_arr",
+    "Hankey Sewage Pumpstation 1 Speed":"hank_ps_p1_speed_arr",
+    "Hankey Sewage Pumpstation 2 Speed":"hank_ps_p2_speed_arr",
+    "Hankey Sewage Pumpstation 3 Speed":"hank_ps_p3_speed_arr",
+
+
+
     "Glendinningvale Pump 1 Run Time":"glen_FTP_WTW_P1_rtm_arr",
     "Glendinningvale Pump 2 Run Time":"glen_FTP_WTW_P2_rtm_arr",
     "Glendinningvale Pump 1 Number Of Starts":"glen_FTP_WTW_P1_stn_arr",
@@ -575,6 +595,15 @@ export const trendArray = [
 
   export const axisMap = {
 
+    "Hankey Sewage Pumpstation 1 Total Flow":"hank_ps_g_total_flow_1_axis",
+    "Hankey Sewage Pumpstation 2 Total Flow":"hank_ps_g_total_flow_2_axis",
+    "Hankey Sewage Pumpstation SUMP Level":"hank_ps_g_sump_level_axis",
+    "Hankey Sewage Pumpstation 1 Flow Rate":"hank_ps_g_flow_rate_1_axis",
+    "Hankey Sewage Pumpstation 2 Flow Rate":"hank_ps_g_flow_rate_2_axis",
+    "Hankey Sewage Pumpstation 1 Speed":"hank_ps_p1_speed_axis",
+    "Hankey Sewage Pumpstation 2 Speed":"hank_ps_p2_speed_axis",
+    "Hankey Sewage Pumpstation 3 Speed":"hank_ps_p3_speed_axis",
+
     "Glendinningvale Pump 1 Run Time":"glen_FTP_WTW_P1_rtm_axis",
     "Glendinningvale Pump 2 Run Time":"glen_FTP_WTW_P2_rtm_axis",
     "Glendinningvale Pump 1 Number Of Starts":"glen_FTP_WTW_P1_stn_axis",
@@ -848,6 +877,16 @@ export const trendArray = [
 
 
   export const axisValues={
+
+
+    hank_ps_g_total_flow_1_axis:0,
+    hank_ps_g_total_flow_2_axis:0,
+    hank_ps_g_sump_level_axis:0,
+    hank_ps_g_flow_rate_1_axis:0,
+    hank_ps_g_flow_rate_2_axis:0,
+    hank_ps_p1_speed_axis:0,
+    hank_ps_p2_speed_axis:0,
+    hank_ps_p3_speed_axis:0,
 
 
     glen_FTP_WTW_P1_rtm_axis:0,

@@ -102,7 +102,7 @@ DateArr: any;
   
       this.options = this.recieve.getOptionsBarAndLine2("Summit 1200 mm Flow Rate Ml",trend.FlowRateArr[0],"Greenbushes 600m Flow Rate Ml/d",trend.FlowRateArr[1],"Summit 1200 mm Total Flow Ml",trend.TotalFlowArr[0],"Greenbushes 600m  Total Flow Ml/d",trend.TotalFlowArr[1],"Ml","Ml/d")
       
-      this.options2 = this.recieve.getOptionsFor2Line("%","East Chamber", trend.FlowRateArr[3],"West Chamber", trend.FlowRateArr[2])
+      this.options2 = this.recieve.getOptionsForLine2("%","East Chamber", trend.FlowRateArr[3],"West Chamber", trend.FlowRateArr[2])
   
       this.isLoading = false;
     })

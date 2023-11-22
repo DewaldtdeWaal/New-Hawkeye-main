@@ -175,6 +175,9 @@ import { HankeySewageComponent } from './pages/pump-stations/hankey-sewage/hanke
 import { NmbOverviewComponent } from './pages/reservoirs/nmb-overview/nmb-overview.component';
 import { NmbPsOverviewComponent } from './pages/pump-stations/nmb-ps-overview/nmb-ps-overview.component';
 import { PageWithThreeTrendsComponent } from './components/page-with-three-trends/page-with-three-trends.component';
+import { PageWithTwoTrendsNoWrapperComponent } from './components/page-with-two-trends-no-wrapper/page-with-two-trends-no-wrapper.component';
+import { PageWithTrendNoWrapperComponent } from './components/page-with-trend-no-wrapper/page-with-trend-no-wrapper.component';
+import { CommonCommsComponent } from './components/common-comms/common-comms.component';
 
 
 const appRoutes: Routes = [
@@ -355,6 +358,9 @@ const appRoutes: Routes = [
     NmbOverviewComponent,
     NmbPsOverviewComponent,
     PageWithThreeTrendsComponent,
+    PageWithTwoTrendsNoWrapperComponent,
+    PageWithTrendNoWrapperComponent,
+    CommonCommsComponent,
 
 
 

@@ -1,9 +1,6 @@
-<div style="background-color: var(--page-background-color);">
-  <div class="div-heading-title"><h1 style="padding-top: 8px; ">Buffelsfontein</h1></div>
+<app-page-with-two-trends-no-wrapper [siteTitle]="siteTitle"  (messageEvent)="recieveDate($event)" [isLoading]=isLoading [options]="options1" [options2]="options2" [trendNameTwo]="options2Name">
+
   <div class="wrapper-grid">
-
-
-
     <section class="ground-form" fxLayoutAlign="center">
 
       <form fxLayout="column">
@@ -57,7 +54,7 @@
   </form>
   </section>
 
-  </div>
+</div>
   <div class="wrapper-grid">
 
   <!-- //////////////////////////////////////////////////////////////////////////////////////////////// PUMP 1-->
@@ -244,5 +241,6 @@
 
 
   </section>
-  </div>
-  </div>
+</div>
+
+</app-page-with-two-trends-no-wrapper>

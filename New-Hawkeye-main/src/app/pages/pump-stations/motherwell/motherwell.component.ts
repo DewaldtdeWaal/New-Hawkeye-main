@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import {svgImage} from "src/app/Service-Files/SVGImage/svgImage.service"
+import { EChartsOption } from 'echarts';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 
 export interface PeriodicElement{
   alarm: string;
@@ -52,7 +54,7 @@ export class MotherwellComponent implements OnInit {
     mw_p_p4_pump_speed:null,
   }
 
-  title="Motherwell"
+  siteTitle="Motherwell"
   pump1="Pump 1"
   pump2="Pump 2"
   pump3="Pump 3"
@@ -180,7 +182,7 @@ export class MotherwellComponent implements OnInit {
       value: null,
       alarm:"Fault",
       description:"Main PLC Communication Fault",
-      alarmTrip: 1
+      alarmTrip: 1,
     },
     mw_p_p2_old_inlet_values_open:{
       value: null,
@@ -431,7 +433,7 @@ pump3Status:any
 pump4Status:any
 
 
-  constructor(private authService: AuthService,public recieve:Common, private pm:pagePostMethod,private svg: svgImage )
+  constructor(private authService: AuthService,public recieve:Common, private pm:pagePostMethod,private svg: svgImage,private pt: PostTrend, )
   {
 
     }
@@ -627,7 +629,30 @@ this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
 ngOnDestroy():void{
   if(this.intervalLoop){
     this.intervalLoop.unsubscribe();
-
   }
+}
+
+isLoading:boolean;
+options1:EChartsOption;
+options2:EChartsOption
+range:any
+tfCollection:any = "NMBM_MW_PS_Trend_TF";
+collection:any = "NMBM_MW_PS_Trend";
+flowTags:any =["flowRate"]
+totalFlowTags:any =["mw_g_p_tf"]
+trendNameOne:any = "General Flow Data"
+recieveDate($event: any){
+  var trend :any;
+  this.range = $event;
+  this.isLoading = true;
+  const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+  this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+    trend = data;
+    console.log(trend);
+
+    this.options1 = Common.getOptionsBarAndLine(this.options1, "Flow Rate Ml/d",trend.FlowRateArr[0], "Total Flow Ml", trend.TotalFlowArr[0])
+    this.isLoading = false;
+  })
 }
 }

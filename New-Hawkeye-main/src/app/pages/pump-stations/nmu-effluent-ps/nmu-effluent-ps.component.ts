@@ -122,12 +122,6 @@ export class NmuEffluentPsComponent implements OnInit {
     }
 
   ngOnInit() {
-
-    // var tagVals:any =[]
-    // var errorVals:any=[]
-    // tagVals = this.recieve.recieveNonMVals(this.tagArr);
-    // errorVals = this.recieve.recieveNonMVals(this.faultArr);
-
     this.intervalLoop = this.pm.findPageData("nmbm_nmu_eff_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
@@ -150,7 +144,6 @@ export class NmuEffluentPsComponent implements OnInit {
   ngOnDestroy():void{
     if(this.intervalLoop){
       this.intervalLoop.unsubscribe();
-
     }
   }
 

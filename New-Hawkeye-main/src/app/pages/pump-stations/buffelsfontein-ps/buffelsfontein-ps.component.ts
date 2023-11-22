@@ -1,6 +1,8 @@
 import {  Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
+import { EChartsOption } from 'echarts';
 import {Common} from 'src/app/class/common';
+import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export interface PeriodicElement {
   alarm: string;
@@ -173,8 +175,8 @@ theme:any = localStorage.getItem("theme")
   ]
 
 
-  
-  constructor(public recieve:Common,private pm:pagePostMethod, ) {
+
+  constructor(public recieve:Common,private pm:pagePostMethod,private pt: PostTrend ) {
 
 
    }
@@ -212,4 +214,27 @@ theme:any = localStorage.getItem("theme")
     }
   }
 
+  siteTitle:any = "Buffelsfontein";
+  isLoading:boolean = false;
+  options1:EChartsOption
+  options2:EChartsOption;
+  options2Name:string = "Pressure Data"
+  range:any;
+  trendTag:any = ["bf_G_FR","bf_G_SP"]
+  collectionName:any ="BUFF_TREND"
+  recieveDate($event: any){
+    var trend :any;
+    this.range = $event;
+    this.isLoading = true;
+    const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
+
+    this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
+      trend=data
+
+      this.options1 = Common.getOptionsForLine(this.options1,"Flow Rate Ml/d",trend.LevelArr[0]);
+      this.options2 = Common.getOptionsForLine(this.options2,"Suction Pressure bar",trend.LevelArr[1]);
+      this.isLoading = false;
+    })
+
+  }
 }

@@ -98,7 +98,7 @@ gr_R_UT:null,
       this.levelArr2 = trend.LevelArr[0];
 
 
-      this.options = this.recieve.getOptionsFor2Line("%","East Chamber %",this.levelArr1,"West Chamber %",this.levelArr2)
+      this.options = this.recieve.getOptionsForLine2("%","East Chamber %",this.levelArr1,"West Chamber %",this.levelArr2)
 
       this.isLoading = false;
      })
@@ -113,7 +113,7 @@ gr_R_UT:null,
 
     console.log(trend)
 
-    this.options2 = this.recieve.getOptionsFor2Line("Ml/d","Inlet Flow",trend.LevelArr[0],"Outlet Flow",trend.LevelArr[1])
+    this.options2 = this.recieve.getOptionsForLine2("Ml/d","Inlet Flow",trend.LevelArr[0],"Outlet Flow",trend.LevelArr[1])
    })
  }
 

@@ -110,7 +110,7 @@ export class VanriebeeckComponent implements OnInit {
      this.pt.getLevel(this.collectionName1, this.trendTag,start,end).then((data) => {
       trend2=data
 
-      this.options = this.recieve.getOptionsFor2Line("%","East Chamber %",trend1.LevelArr[0],"West Chamber %",trend2.LevelArr[0])
+      this.options = this.recieve.getOptionsForLine2("%","East Chamber %",trend1.LevelArr[0],"West Chamber %",trend2.LevelArr[0])
      })
 
 

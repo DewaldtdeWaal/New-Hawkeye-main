@@ -1,14 +1,13 @@
-import { Component, Input, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EChartsOption } from 'echarts';
 
-
 @Component({
-  selector: 'app-page-with-trend',
-  templateUrl: './page-with-trend.component.html',
-  styleUrls: ['./page-with-trend.component.css']
+  selector: 'app-page-with-trend-no-wrapper',
+  templateUrl: './page-with-trend-no-wrapper.component.html',
+  styleUrls: ['./page-with-trend-no-wrapper.component.css']
 })
-export class PageWithTrendComponent implements OnInit {
+export class PageWithTrendNoWrapperComponent implements OnInit {
 
   constructor() { }
 
@@ -17,7 +16,7 @@ export class PageWithTrendComponent implements OnInit {
   @Input() options: EChartsOption;
 
   //This can be overwritten by the parent component
-  @Input() trendNameOne:any = "Trend Data";
+  @Input() trendNameOne:any = "Trend";
 
   @Output() messageEvent = new EventEmitter<string>()
 

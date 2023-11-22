@@ -107,7 +107,7 @@ export class MotherwellresComponent implements OnInit
       trend=data
    
    
-      this.options = this.recieve.getOptionsFor2Line("%","North Chamber %",trend.LevelArr[0],"South Chamber %",trend.LevelArr[1])
+      this.options = this.recieve.getOptionsForLine2("%","North Chamber %",trend.LevelArr[0],"South Chamber %",trend.LevelArr[1])
       this.isLoading = false;
     })
    }

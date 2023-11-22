@@ -144,7 +144,7 @@ trendTag:any =["wtw_storms_holding_reservoir_level","wtw_storms_overhead_tank_le
     this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
       trend=data
 
-      this.options = this.recieve.getOptionsFor2Line("%","East Chamber %",trend.LevelArr[0],"West Chamber %",trend.LevelArr[1]);
+      this.options = this.recieve.getOptionsForLine2("%","East Chamber %",trend.LevelArr[0],"West Chamber %",trend.LevelArr[1]);
 
       this.isLoading = false;
     })

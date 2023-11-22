@@ -245,6 +245,9 @@ export class TagSelectorComponent implements OnInit {
   GlenWTWListArr:string[]=[]
   GlenWTWSelected:boolean[]=[]
 
+  HankSewagePSListArr:string[]=[]
+  HankSewagePSSelected:boolean[]=[]
+
 showAutoMenu: boolean = false
 showResMenu: boolean = false;
 showPSMenu: boolean = false;
@@ -401,7 +404,7 @@ this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "St
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
 this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
 this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
-
+this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " )
 }, 500);
 
 
@@ -862,6 +865,27 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
             count++;
             this.showWTW = true;
             break;
+
+            case "KOU_HANK_SEW_PS":
+              if (count>=1 ){count = 0}
+              this.HankSewagePSListArr[count]="1 Total Flow"
+              count++;
+              this.HankSewagePSListArr[count]="2 Total Flow"
+              count++;
+              this.HankSewagePSListArr[count]="SUMP Level"
+              count++;
+              this.HankSewagePSListArr[count]="1 Flow Rate"
+              count++;
+              this.HankSewagePSListArr[count]="2 Flow Rate"
+              count++;
+              this.HankSewagePSListArr[count]="1 Speed"
+              count++;
+              this.HankSewagePSListArr[count]="2 Speed"
+              count++;
+              this.HankSewagePSListArr[count]="3 Speed"
+              count++;
+              this.showPS = true;
+              break;
 
                   case "KOU_KARK2_GW":
                     if (count >=4)

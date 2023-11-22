@@ -315,6 +315,9 @@ variable:any = variables;
     GlenWTWListArr:string[]=[]
     GlenWTWSelected:boolean[]=[]
 
+    HankSewagePSListArr:string[]=[]
+    HankSewagePSSelected:boolean[]=[]
+
 
 
   constructor(private su: ServerURLService,private http: HttpClient,private tps:TrendPickerService,public dialog: MatDialog ,public rs: ReportService,public authService: AuthService, private renderer: Renderer2) {
@@ -696,7 +699,25 @@ variable:any = variables;
       count++
             break;
 
-
+            case "KOU_HANK_SEW_PS":
+              if (count>=1 ){count = 0}
+              this.HankSewagePSListArr[count]="1 Total Flow"
+              count++;
+              this.HankSewagePSListArr[count]="2 Total Flow"
+              count++;
+              this.HankSewagePSListArr[count]="SUMP Level"
+              count++;
+              this.HankSewagePSListArr[count]="1 Flow Rate"
+              count++;
+              this.HankSewagePSListArr[count]="2 Flow Rate"
+              count++;
+              this.HankSewagePSListArr[count]="1 Speed"
+              count++;
+              this.HankSewagePSListArr[count]="2 Speed"
+              count++;
+              this.HankSewagePSListArr[count]="3 Speed"
+              count++;
+              break;
 
 
         case "NMB_CHT_R":
@@ -1562,10 +1583,85 @@ console.log(this.selectedTags)
                       },
 
 
+  {
+    name: 'Hankey Sewage Pumpstation 1 Total Flow',
+    type: 'line',
+    showSymbol: false,
+    hoverAnimation: true,
+    data: this.variable.hank_ps_g_total_flow_1_arr,
+    smooth: true,
+    yAxisIndex:axisValues.hank_ps_g_total_flow_1_axis,
+    },
+
+  {
+    name: 'Hankey Sewage Pumpstation 2 Total Flow',
+    type: 'line',
+    showSymbol: false,
+    hoverAnimation: true,
+    data: this.variable.hank_ps_g_total_flow_2_arr,
+    smooth: true,
+    yAxisIndex:axisValues.hank_ps_g_total_flow_2_axis,
+    },
+  {
+    name: 'Hankey Sewage Pumpstation SUMP Level',
+    type: 'line',
+    showSymbol: false,
+    hoverAnimation: true,
+    data: this.variable.hank_ps_g_sump_level_arr,
+    smooth: true,
+    yAxisIndex:axisValues.hank_ps_g_sump_level_axis,
+    },
+    
+{
+  name: 'Hankey Sewage Pumpstation 1 Flow Rate',
+  type: 'line',
+  showSymbol: false,
+  hoverAnimation: true,
+  data: this.variable.hank_ps_g_flow_rate_1_arr,
+  smooth: true,
+  yAxisIndex:axisValues.hank_ps_g_flow_rate_1_axis,
+  },
 
 
+  {
+    name: 'Hankey Sewage Pumpstation 2 Flow Rate',
+    type: 'line',
+    showSymbol: false,
+    hoverAnimation: true,
+    data: this.variable.hank_ps_g_flow_rate_2_arr,
+    smooth: true,
+    yAxisIndex:axisValues.hank_ps_g_flow_rate_2_axis,
+    },
+        
+    {
+      name: 'Hankey Sewage Pumpstation 1 Speed',
+      type: 'line',
+      showSymbol: false,
+      hoverAnimation: true,
+      data: this.variable.hank_ps_p1_speed_arr,
+      smooth: true,
+      yAxisIndex:axisValues.hank_ps_p1_speed_axis,
+      },
 
-
+      {
+        name: 'Hankey Sewage Pumpstation 2 Speed',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: true,
+        data: this.variable.hank_ps_p2_speed_arr,
+        smooth: true,
+        yAxisIndex:axisValues.hank_ps_p2_speed_axis,
+        },
+            
+        {
+          name: 'Hankey Sewage Pumpstation 3 Speed',
+          type: 'line',
+          showSymbol: false,
+          hoverAnimation: true,
+          data: this.variable.hank_ps_p3_speed_arr,
+          smooth: true,
+          yAxisIndex:axisValues.hank_ps_p3_speed_axis,
+          },
 
       {
         name: "Kwanobuhle Reservoir Level",
@@ -4954,6 +5050,40 @@ case "Humansdorp Inlet Flow Rate":
                             this.GlenWTWSelected[5]=true;
                             break;
 
+
+                            case "Hankey Sewage Pumpstation 1 Total Flow":
+                              this.HankSewagePSSelected[0] = true;
+                              break;
+                              
+                            case "Hankey Sewage Pumpstation 2 Total Flow":
+                              this.HankSewagePSSelected[1] = true;
+                              break;
+
+                              case "Hankey Sewage Pumpstation SUMP Level":
+                                this.HankSewagePSSelected[2] = true;
+                                break;
+                                
+                              case "Hankey Sewage Pumpstation 1 Flow Rate":
+                                this.HankSewagePSSelected[3] = true;
+                                break;
+
+
+                            case "Hankey Sewage Pumpstation 2 Flow Rate":
+                              this.HankSewagePSSelected[4] = true;
+                              break;
+                              
+                            case "Hankey Sewage Pumpstation 1 Speed":
+                              this.HankSewagePSSelected[5] = true;
+                              break;
+    
+                              case "Hankey Sewage Pumpstation 2 Speed":
+                                this.HankSewagePSSelected[6] = true;
+                                break;
+                                
+                              case "Hankey Sewage Pumpstation 3 Speed":
+                                this.HankSewagePSSelected[7] = true;
+                                break;
+
   }}
 
 
@@ -5037,23 +5167,17 @@ this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt 
 this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
 this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
-
-
 this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " )
-
 this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
-
 this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
-
 this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " )
-
 this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
-
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
-
 this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
-
 this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
+this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " )
+
+
 console.log( this.selectedTags)
   }
 
@@ -8239,8 +8363,109 @@ console.log( this.selectedTags)
                                                                 }
                                                                     break;
                         
+                                                                    
+                                                  case "Hankey Sewage Pumpstation 1 Total Flow":
+                                                    if (this.variable.hank_ps_g_total_flow_1_arr.length==0){
+                                                      break;
+                                                    }
+                                                      else{
+                                                        var arr = this.MinMaxAvg(m,this.variable.hank_ps_g_total_flow_1_arr)
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]=arr[1]
+                                                        avgValues[m]=arr[2]
+                                                          }
+                                                    break;
+
+
+                                                    case "Hankey Sewage Pumpstation 2 Total Flow":
+                                                      if (this.variable.hank_ps_g_total_flow_2_arr.length==0){
+                                                        break;
+                                                      }
+                                                        else{
+                                                          var arr = this.MinMaxAvg(m,this.variable.hank_ps_g_total_flow_2_arr)
+                                                          minValues[m]= arr[0]
+                                                          maxValues[m]=arr[1]
+                                                          avgValues[m]=arr[2]
+                                                            }
+                                                      break;
                         
-                                                              
+                                                      case "Hankey Sewage Pumpstation SUMP Level":
+                                                    if (this.variable.hank_ps_g_sump_level_arr.length==0){
+                                                      break;
+                                                    }
+                                                      else{
+                                                        var arr = this.MinMaxAvg(m,this.variable.hank_ps_g_sump_level_arr)
+                                                        minValues[m]= arr[0]
+                                                        maxValues[m]=arr[1]
+                                                        avgValues[m]=arr[2]
+                                                          }
+                                                    break;
+
+
+                                                    case "Hankey Sewage Pumpstation 1 Flow Rate":
+                                                      if (this.variable.hank_ps_g_flow_rate_1_arr.length==0){
+                                                        break;
+                                                      }
+                                                        else{
+                                                          var arr = this.MinMaxAvg(m,this.variable.hank_ps_g_flow_rate_1_arr)
+                                                          minValues[m]= arr[0]
+                                                          maxValues[m]=arr[1]
+                                                          avgValues[m]=arr[2]
+                                                            }
+                                                      break;
+                                                            
+                                                      
+                                                      case "Hankey Sewage Pumpstation 2 Flow Rate":
+                                                        if (this.variable.hank_ps_g_flow_rate_2_arr.length==0){
+                                                          break;
+                                                        }
+                                                          else{
+                                                            var arr = this.MinMaxAvg(m,this.variable.hank_ps_g_flow_rate_2_arr)
+                                                            minValues[m]= arr[0]
+                                                            maxValues[m]=arr[1]
+                                                            avgValues[m]=arr[2]
+                                                              }
+                                                        break;
+    
+    
+                                                        case "Hankey Sewage Pumpstation 1 Speed":
+                                                          if (this.variable.hank_ps_p1_speed_arr.length==0){
+                                                            break;
+                                                          }
+                                                            else{
+                                                              var arr = this.MinMaxAvg(m,this.variable.hank_ps_p1_speed_arr)
+                                                              minValues[m]= arr[0]
+                                                              maxValues[m]=arr[1]
+                                                              avgValues[m]=arr[2]
+                                                                }
+                                                          break;
+                            
+                                                          case "Hankey Sewage Pumpstation 2 Speed":
+                                                        if (this.variable.hank_ps_p2_speed_arr.length==0){
+                                                          break;
+                                                        }
+                                                          else{
+                                                            var arr = this.MinMaxAvg(m,this.variable.hank_ps_p2_speed_arr)
+                                                            minValues[m]= arr[0]
+                                                            maxValues[m]=arr[1]
+                                                            avgValues[m]=arr[2]
+                                                              }
+                                                        break;
+    
+    
+                                                        case "Hankey Sewage Pumpstation 3 Speed":
+                                                          if (this.variable.hank_ps_p3_speed_arr.length==0){
+                                                            break;
+                                                          }
+                                                            else{
+                                                              var arr = this.MinMaxAvg(m,this.variable.hank_ps_p3_speed_arr)
+                                                              minValues[m]= arr[0]
+                                                              maxValues[m]=arr[1]
+                                                              avgValues[m]=arr[2]
+                                                                }
+                                                          break;
+
+                                                       
 
       }
 
@@ -8297,85 +8522,85 @@ RightAxisConfiguration(AxisValue:any){
       // Reservoirs
 
       case "Isuzu Oven 1 VSD Speed":
-        axisvalues.isuzu_oven1_vsd_speed_axis = 1
+        axisValues.isuzu_oven1_vsd_speed_axis = 1
         break;
 
       case "Isuzu Oven 1 Heat Exchanger Temperature":
-        axisvalues.isuzu_oven1_heat_ecvh_temp_axis = 1
+        axisValues.isuzu_oven1_heat_ecvh_temp_axis = 1
         break;
 
       case "Isuzu Oven 1 Temperature 1":
-        axisvalues.isuzu_oven1_temp1_axis = 1
+        axisValues.isuzu_oven1_temp1_axis = 1
         break;
 
       case "Isuzu Oven 1 Temperature 2":
-        axisvalues.isuzu_oven1_temp2_axis = 1
+        axisValues.isuzu_oven1_temp2_axis = 1
         break;
 
         case "Isuzu Oven 2 VSD Speed":
-          axisvalues.isuzu_oven2_vsd_speed_axis = 1
+          axisValues.isuzu_oven2_vsd_speed_axis = 1
           break;
 
         case "Isuzu Oven 2 Heat Exchanger Temperature":
-          axisvalues.isuzu_oven2_heat_ecvh_temp_axis = 1
+          axisValues.isuzu_oven2_heat_ecvh_temp_axis = 1
           break;
 
         case "Isuzu Oven 2 Temperature 1":
-          axisvalues.isuzu_oven2_temp1_axis = 1
+          axisValues.isuzu_oven2_temp1_axis = 1
           break;
 
         case "Isuzu Oven 2 Temperature 2":
-          axisvalues.isuzu_oven2_temp2_axis = 1
+          axisValues.isuzu_oven2_temp2_axis = 1
           break;
 
 
 
       case "Kwanobuhle Reservoir Level":
-        axisvalues.KWANO_R_RES_LVL_axis = 1
+        axisValues.KWANO_R_RES_LVL_axis = 1
         break;
 
         case "Kwanobuhle Reservoir Flow Rate 1":
-        axisvalues.KWANO_R_FLOW_RATE_1_axis = 1
+          axisValues.KWANO_R_FLOW_RATE_1_axis = 1
         break;
 
       case "Kwanobuhle Reservoir Flow Rate 2":
-        axisvalues.KWANO_R_FLOW_RATE_2_axis = 1
+        axisValues.KWANO_R_FLOW_RATE_2_axis = 1
         break;
 
         case "Kwanobuhle Reservoir Total Flow 1":
-        axisvalues.KWANO_R_TOTAL_FLOW_1_axis = 1
+          axisValues.KWANO_R_TOTAL_FLOW_1_axis = 1
         break;
 
       case "Kwanobuhle Reservoir Total Flow 2":
-        axisvalues.KWANO_R_TOTAL_FLOW_2_axis = 1
+        axisValues.KWANO_R_TOTAL_FLOW_2_axis = 1
         break;
 
       case"Coega Kop Inlet Chamber 2 Ml":
-      axisvalues.CGK_LEVEL_axis =1
+      axisValues.CGK_LEVEL_axis =1
       break;
 
       case"Coega Kop Reservoir Pressure":
-      axisvalues.CGK_PRESSURE_axis=1
+      axisValues.CGK_PRESSURE_axis=1
       break;
 
       case"Olifantskop Reservoir Level":
-      axisvalues.OLI_LVL_axis=1
+      axisValues.OLI_LVL_axis=1
       break;
 
       case "Bushy Park Soccoman Flow Rate":
-     axisvalues.BUSH_CHURCH_SOCO_FR_axis = 1
+        axisValues.BUSH_CHURCH_SOCO_FR_axis = 1
      break;
 
     case "Bushy Park Steel Flow Rate":
-      axisvalues.BUSH_CHURCH_STEEL_FR_axis = 1
+      axisValues.BUSH_CHURCH_STEEL_FR_axis = 1
       break;
 
     case "Bushy Park Soccoman Pressure":
-      axisvalues.BUSH_CHURCH_SOCCO_BAR_axis = 1
+      axisValues.BUSH_CHURCH_SOCCO_BAR_axis = 1
       break;
 
       case  "Airport Reservoir Level":
-        axisvalues.AIR_PRT_LVL_axis = 1
+        axisValues.AIR_PRT_LVL_axis = 1
         break;
 
       case "Kruisfontein Reservoir Level":
@@ -8476,33 +8701,33 @@ RightAxisConfiguration(AxisValue:any){
 
 
     case "Bushy Park Steel Pressure":
-      axisvalues.BUSH_CHURCH_STEEL_BAR_axis = 1
+      axisValues.BUSH_CHURCH_STEEL_BAR_axis = 1
       break;
 
     case "Bushy Park Pumpstation Flow Rate":
-      axisvalues.BUSH_PUMP_FR_axis = 1
+      axisValues.BUSH_PUMP_FR_axis = 1
       break;
 
     case "Bushy Park Combined Borehole Flow Rate":
-      axisvalues.BUSH_GW_COMB_FLOW_RATE_axis = 1
+      axisValues.BUSH_GW_COMB_FLOW_RATE_axis = 1
       break;
 
     case "Bushy Park Holding Tank Level":
-      axisvalues.BUSH_TANK_LVL_axis = 1
+      axisValues.BUSH_TANK_LVL_axis = 1
       break;
 
       case "Emerald Hill Reservoir Level":
-        axisvalues.EMER_H_axis = 1
+        axisValues.EMER_H_axis = 1
         break;
 
 
 
          case "Humansdorp Off Take Total Flow":
-          axisvalues.HUM_OFF_TAKE_TF_axis=1
+          axisValues.HUM_OFF_TAKE_TF_axis=1
           break
 
           case "Humansdorp Off Take Pressure":
-            axisvalues.HUM_OFF_TAKE_BAR_axis =1
+            axisValues.HUM_OFF_TAKE_BAR_axis =1
             break
 
             case "Humansdorp Off Take Battery Level":
@@ -9270,8 +9495,41 @@ RightAxisConfiguration(AxisValue:any){
                                                     case "Linton Reservoir Level":
                                                   axisValues.lint_res_lvl_Axis = 1;
                                                   break;
+                                                 
+                                                 
+                                                  case "Hankey Sewage Pumpstation 1 Total Flow":
+                                                    axisValues.hank_ps_g_total_flow_1_axis = 1;
+                                                    break;
 
+                                                       case "Hankey Sewage Pumpstation 2 Total Flow":
+                                                    axisValues.hank_ps_g_total_flow_2_axis = 1;
+                                                    break;
 
+                                                    case "Hankey Sewage Pumpstation SUMP Level":
+                                                      axisValues.hank_ps_g_sump_level_axis = 1;
+                                                      break;
+  
+                                                         case "Hankey Sewage Pumpstation 1 Flow Rate":
+                                                      axisValues.hank_ps_g_flow_rate_1_axis = 1;
+                                                      break;
+
+                                                      case "Hankey Sewage Pumpstation 2 Flow Rate":
+                                                        axisValues.hank_ps_g_flow_rate_2_axis = 1;
+                                                        break;
+    
+                                                           case "Hankey Sewage Pumpstation 1 Speed":
+                                                        axisValues.hank_ps_p1_speed_axis = 1;
+                                                        break;
+
+                                                        case "Hankey Sewage Pumpstation 2 Speed":
+                                                          axisValues.hank_ps_p2_speed_axis = 1;
+                                                          break;
+      
+                                                             case "Hankey Sewage Pumpstation 3 Speed":
+                                                          axisValues.hank_ps_p3_speed_axis = 1;
+                                                          break;
+
+                                                      
 
 
 

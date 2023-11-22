@@ -94,7 +94,7 @@ recieveDate($event: any){
    trend=data
 
 
-   this.options = this.recieve.getOptionsFor2Line("%","Overhead Tank %",trend.LevelArr[0],"Reservoir Tank %",trend.LevelArr[1])
+   this.options = this.recieve.getOptionsForLine2("%","Overhead Tank %",trend.LevelArr[0],"Reservoir Tank %",trend.LevelArr[1])
    this.isLoading = false;
  })
 }

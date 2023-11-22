@@ -79,7 +79,7 @@ trendTag:any =["low_level_flow_rate","high_level_flow_rate"]
     this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
       trend=data
 
-      this.options = this.recieve.getOptionsFor2Line("Ml/d","Low Lift Flow Meter",trend.LevelArr[0],"High Lift Flow Meter",trend.LevelArr[1]);
+      this.options = this.recieve.getOptionsForLine2("Ml/d","Low Lift Flow Meter",trend.LevelArr[0],"High Lift Flow Meter",trend.LevelArr[1]);
 
       this.isLoading = false;
     })

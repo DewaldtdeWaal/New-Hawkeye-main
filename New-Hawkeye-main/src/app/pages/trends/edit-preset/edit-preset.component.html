@@ -608,6 +608,34 @@
               </mat-expansion-panel>
 
 
+              <mat-expansion-panel *ngIf="hbpTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+             Heatherbank
+                </mat-panel-title>
+                    <mat-panel-description  style="color: blue;">
+
+    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of hbpTagListArr; index as i">
+                  <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="bhpTagsSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
+              <mat-expansion-panel *ngIf="HankSewagePSListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                <mat-expansion-panel-header>
+                <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                  Hankey Sewage Pumpstation
+                </mat-panel-title>
+                    <mat-panel-description  style="color: blue;">
+
+    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let d of HankSewagePSListArr; index as i">
+                  <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="HankSewagePSSelected[i]" >{{d}}</mat-checkbox>
+                </div>
+                </mat-expansion-panel>
+
               <mat-expansion-panel  *ngIf="mwTagListArr[0]!=undefined" style="background-color: var(--form-background-color);" expanded='false' >
                 <mat-expansion-panel-header>
                 <mat-panel-title style="color: var(--overview-table-filter-color);" >

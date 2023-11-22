@@ -332,7 +332,121 @@ public getOptionsDataFor6DataPoints(leftAxisName:any,rightAxisName:any, options1
 
 
   //This options function is there for 2 line graphs
-public  getOptionsFor2Line(symbol:any,flowTrendName1:any, dataArr1:any,flowTrendName2:any, dataArr2:any){
+public  getOptionsForLine2(symbol:any,flowTrendName1:any, dataArr1:any,flowTrendName2:any, dataArr2:any){
+
+  
+  const {theme, tooltipBackground} = Common.getTheme();
+
+  this.options = {
+    grid: {
+      left: '6%',
+      right: '7%',
+      top:'10%',
+      bottom: '10%',
+      containLabel: true
+  },
+  toolbox:{
+    feature: {
+    feature: {
+      saveAsImage: {}
+    }
+
+    }},
+    dataZoom:[{
+
+      type: 'slider',
+      start: 0,
+      end: 100,
+      handleSize: 8
+  
+      },
+      { start: 0,
+       end:100}
+      ],
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+        axisPointer: {
+          type: 'cross'
+        },
+         trigger: 'axis',
+         position: ['10%', '10%']
+  
+       },     legend:{
+        top:'auto',
+        type:'scroll',
+        textStyle: {color:theme },
+           },
+     axisPointer:{
+        //  color: {color: theme},
+       },
+           xAxis: {
+            type: 'time'  ,
+            axisLabel: {color: theme},
+            splitLine: {
+              show: true
+            },
+          },
+          yAxis: [
+            {
+              nameTextStyle: { color: theme},
+            type:'value',
+            name:symbol,
+          
+       
+            axisLabel:{
+              formatter:'{value} ',
+              color:theme,
+            }
+            },
+            {
+              type:'value',
+              name:symbol,
+              nameTextStyle: { color: theme},
+            
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+            {
+              axisLabel: {color: theme},
+            type: 'value',
+            boundaryGap: [0, 0.05],
+            }
+    
+        ],
+
+  series: [
+  {
+    name: flowTrendName1,
+    data: dataArr1,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+  {
+    name: flowTrendName2,
+    data: dataArr2,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+
+]
+    
+         }
+  
+
+
+
+
+  return this.options;
+}
+
+public  getOptionsForLine8(symbol:any,flowTrendName1:any, dataArr1:any,flowTrendName2:any, dataArr2:any,flowTrendName3:any, dataArr3:any,flowTrendName4:any, dataArr4:any,flowTrendName5:any, dataArr5:any,flowTrendName6:any, dataArr6:any,flowTrendName7:any, dataArr7:any,flowTrendName8:any, dataArr8:any){
 
   
   const {theme, tooltipBackground} = Common.getTheme();
@@ -434,7 +548,54 @@ public  getOptionsFor2Line(symbol:any,flowTrendName1:any, dataArr1:any,flowTrend
     type: 'line',
     yAxisIndex: 0,
   },
-
+  {
+    name: flowTrendName3,
+    data: dataArr3,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+  {
+    name: flowTrendName4,
+    data: dataArr4,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+  {
+    name: flowTrendName5,
+    data: dataArr5,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+  {
+    name: flowTrendName6,
+    data: dataArr6,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+  {
+    name: flowTrendName7,
+    data: dataArr7,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
+  {
+    name: flowTrendName8,
+    data: dataArr8,
+    smooth:true,
+    showSymbol: false,
+    type: 'line',
+    yAxisIndex: 0,
+  },
 ]
     
          }
@@ -651,8 +812,6 @@ public static getOptionsForLine(options:any,flowTrendName:any, dataArr:any){
               nameTextStyle: { color: theme},
             type:'value',
             name:flowTrendName,
-          
-            min:0,
             axisLabel:{
               formatter:'{value} ',
               color:theme,
@@ -1083,6 +1242,161 @@ public  getOptionsBarAndLine3(lineName:any, lineData:any,lineName2:any, lineData
 }
 
 
+public getOptionsBarAndLine4(leftAxisName:any,rightAxisName:any, lineName:any, lineData:any,lineName2:any, lineData2:any,lineName3:any, lineData3:any,lineName4:any, lineData4:any,barName:any ,barData:any,barName2:any ,barData2:any,barName3:any ,barData3:any,barName4:any ,barData4:any){
+  const {theme, tooltipBackground} = Common.getTheme();
+
+  this.options = {
+   
+    grid: {
+      left: '6%',
+      right: '7%',
+      top:'10%',
+      bottom: '10%',
+      containLabel: true
+  },
+  toolbox:{
+    feature: {
+    feature: {
+      saveAsImage: {}
+    }
+
+    }},
+    dataZoom:[{
+
+      type: 'slider',
+      start: 0,
+      end: 100,
+      handleSize: 8
+  
+      },
+      { start: 0,
+       end:100}
+      ],
+      tooltip: {
+        backgroundColor: tooltipBackground,
+        textStyle:{ color: theme,},
+        axisPointer: {
+          type: 'cross'
+        },
+         trigger: 'axis',
+  
+         position: ['10%', '10%']
+  
+       },      
+       legend:{
+          top:'auto',
+          type:'scroll',
+          textStyle: {color:theme },
+             },
+       axisPointer:{
+         },
+             xAxis: {
+              type: 'time'  ,
+              axisLabel: {color: theme},
+              splitLine: {
+                show: true
+              },
+            },
+            yAxis: [
+              {
+                nameTextStyle: { color: theme},
+              type:'value',
+              name:rightAxisName,
+            
+              min:0,
+              axisLabel:{
+                formatter:'{value} ',
+                color:theme,
+              }
+              },
+              {
+                type:'value',
+                name:leftAxisName,
+                nameTextStyle: { color: theme},
+                axisLabel:{
+                  formatter:'{value} ',
+                  color:theme,
+                }
+                },
+              {
+                axisLabel: {color: theme},
+              type: 'value',
+              boundaryGap: [0, 0.05],
+              }
+      
+          ],
+
+    series: [
+      {
+      name: barName,
+        data: barData,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: barName2,
+        data: barData2,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: barName3,
+        data: barData3,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: barName4,
+        data: barData4,
+        type: 'bar',
+        barWidth: '50%',
+        barMaxWidth: 30,
+        barMinWidth: 10,
+    },
+    {
+      name: lineName,
+      data: lineData,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },
+    {
+      name: lineName2,
+      data: lineData2,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },
+    {
+      name: lineName3,
+      data: lineData3,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },    {
+      name: lineName4,
+      data: lineData4,
+      smooth:true,
+      showSymbol: false,
+      type: 'line',
+      yAxisIndex: 1,
+    },
+  
+  ]
+
+  }
+  return this.options;
+}
+
 
 //making it a static method becaus that's easier
 public static getLastUpdateBattery(update:any, updatelast5hours:any){
@@ -1261,12 +1575,12 @@ public static getFaultRouteData(tagArr:any = [],variable:any,data:any){
 
 }
 
-public static getFaultRouteDatas(tagArr:any = [],variable:any,data:any){
+public static getFaultRouteDatas(faultArr:any = [],variable:any,data:any){
 
 
 
-  for(var i = 0; i < tagArr.length; i++) {
-    variable[tagArr[i]].value = data[tagArr[i]]
+  for(var i = 0; i < faultArr.length; i++) {
+    variable[faultArr[i]].value = data[faultArr[i]]
   }
 
   return variable;

@@ -272,6 +272,8 @@ intervalFunction:any
   kwanoListArr:string[]=[]
   kwanoSelected:boolean[]=[]
 
+  hbpTagListArr:string[]=[];
+bhpTagsSelected:boolean[]=[];
 
   LSDListArr:string[]=[]
   LSDSelected:boolean[]=[]
@@ -299,6 +301,9 @@ GlenFPTSelected:boolean[]=[];
 
 GlenWTWListArr:string[]=[]
 GlenWTWSelected:boolean[]=[]
+
+HankSewagePSListArr:string[]=[]
+HankSewagePSSelected:boolean[]=[]
 
   constructor(private su: ServerURLService,private ts:TrendPickerService,private http: HttpClient, public rs: ReportService,private authService: AuthService, private userService: UsersService, private webSocketService: WebSocketService,
       private tps:TrendPickerService,private router: Router
@@ -385,9 +390,11 @@ this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningval
 this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
 this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
+this.ReadSelectedValues(this.hbpTagListArr,this.bhpTagsSelected, "Heatherbank Pumpstation ")
 this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
 this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
-
+this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " )
+	
 }, 500);
 
   }
@@ -538,6 +545,44 @@ this.showWTW= true;
                   count++;
                   this.showWTW = true;
                   break;
+
+                  case "KOU_HANK_SEW_PS":
+                    if (count>=1 ){count = 0}
+                    this.HankSewagePSListArr[count]="1 Total Flow"
+                    count++;
+                    this.HankSewagePSListArr[count]="2 Total Flow"
+                    count++;
+                    this.HankSewagePSListArr[count]="SUMP Level"
+                    count++;
+                    this.HankSewagePSListArr[count]="1 Flow Rate"
+                    count++;
+                    this.HankSewagePSListArr[count]="2 Flow Rate"
+                    count++;
+                    this.HankSewagePSListArr[count]="1 Speed"
+                    count++;
+                    this.HankSewagePSListArr[count]="2 Speed"
+                    count++;
+                    this.HankSewagePSListArr[count]="3 Speed"
+                    count++;
+              this.showPS = true;
+                    break;
+
+                    case "NMB_HB_PS":
+                      if (count>=1 ){count = 0}
+                      this.hbpTagListArr[count]="1 Current";
+                      count++;
+                      this.hbpTagListArr[count]="2 Current";
+                      count++;
+                      this.hbpTagListArr[count]="3 Current";
+                      count++;
+                      this.hbpTagListArr[count]="1 Run Hours";
+                      count++;
+                      this.hbpTagListArr[count]="2 Run Hours";
+                      count++;
+                      this.hbpTagListArr[count]="3 Run Hours";
+                      count++;
+                      this.showPS = true;
+                      break;
 
         case "NMB_MNTS_ZS":
           if(count>=1){count = 0}
@@ -2032,7 +2077,29 @@ if(this.selectedSites)
               this.MNTSSelected[2] = true;
               break;
 
-
+              case "Heatherbank Pumpstation 1 Current":
+                this.bhpTagsSelected[0]=true;
+                break;
+            
+                case "Heatherbank Pumpstation 2 Current":
+                  this.bhpTagsSelected[1]=true;
+                break;
+            
+                case "Heatherbank Pumpstation 3 Current":
+                  this.bhpTagsSelected[2]=true;
+                break;
+            
+                case "Heatherbank Pumpstation 1 Run Hours":
+                  this.bhpTagsSelected[3]=true;
+                  break;
+            
+                  case "Heatherbank Pumpstation 2 Run Hours":
+                    this.bhpTagsSelected[4]=true;
+                  break;
+            
+                  case "Heatherbank Pumpstation 3 Run Hours":
+                    this.bhpTagsSelected[5]=true;
+                  break;
 
               case "Rosedale Reservoir Total Flow":
                 this.RPESelected[0] = true;
@@ -2134,6 +2201,39 @@ if(this.selectedSites)
                       case "Rowallan Park Extension Flow Rate":
                       this.RRSelected[2] = true;
                       break;
+
+                      case "Hankey Sewage Pumpstation 1 Total Flow":
+                        this.HankSewagePSSelected[0] = true;
+                        break;
+                        
+                      case "Hankey Sewage Pumpstation 2 Total Flow":
+                        this.HankSewagePSSelected[1] = true;
+                        break;
+
+                        case "Hankey Sewage Pumpstation SUMP Level":
+                          this.HankSewagePSSelected[2] = true;
+                          break;
+                          
+                        case "Hankey Sewage Pumpstation 1 Flow Rate":
+                          this.HankSewagePSSelected[3] = true;
+                          break;
+
+
+                      case "Hankey Sewage Pumpstation 2 Flow Rate":
+                        this.HankSewagePSSelected[4] = true;
+                        break;
+                        
+                      case "Hankey Sewage Pumpstation 1 Speed":
+                        this.HankSewagePSSelected[5] = true;
+                        break;
+
+                        case "Hankey Sewage Pumpstation 2 Speed":
+                          this.HankSewagePSSelected[6] = true;
+                          break;
+                          
+                        case "Hankey Sewage Pumpstation 3 Speed":
+                          this.HankSewagePSSelected[7] = true;
+                          break;
         }
       }
 
@@ -2196,6 +2296,7 @@ var oldPresetDescription = this.presetDescription
     this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ")
     this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ")
     this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ")
+    this.ReadSelectedValues(this.hbpTagListArr,this.bhpTagsSelected, "Heatherbank Pumpstation ")
     // Groundwater
     this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ")
     this.ReadSelectedValues(this.hup1TagListArr,this.hup1TagSelected, "HD1 ")
