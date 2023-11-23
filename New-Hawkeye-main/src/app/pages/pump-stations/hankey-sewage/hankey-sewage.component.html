@@ -5,6 +5,7 @@
 
     <app-panel [title]="General">
         <div class = "grid-container-flow-meters-communication">
+          <div class="grid-span-three">Flows</div>
         <div class="grid-container-communicationStatus-column1">Flow Rate 1:</div>
         <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_flow_rate_1}}</div>
         <div class="grid-container-communicationStatus-column1">Total Flow 1:</div>
@@ -13,6 +14,7 @@
         <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_flow_rate_2}}</div>
         <div class="grid-container-communicationStatus-column1">Total Flow 2:</div>
         <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_total_flow_2}}</div>
+        <div class="grid-span-three">Voltage</div>
         <div class="grid-container-communicationStatus-column1">Average Line Voltage:</div>
         <div class="grid-container-communicationStatus-column3">{{variable.hank_ps_g_average_line_voltage}}</div>
         <div class="grid-container-communicationStatus-column1">Average Phase Voltage:</div>
@@ -46,6 +48,16 @@
     
 
       <br>
+      <div class = "grid-container-flow-meters-communication">
+        <div class="grid-container-communicationStatus-column1">High Float:</div>
+        <div class="grid-container-communicationStatus-column3">
+            <div class="led-box" [ngClass]="{'led-green': variable.hank_ps_g_high_float_reach == 1, 'led-grey': variable.hank_ps_g_high_float_reach == 0}"></div>
+        </div>
+        <div class="grid-container-communicationStatus-column1">Low Float:</div>
+        <div class="grid-container-communicationStatus-column3">
+            <div class="led-box" [ngClass]="{'led-green': variable.hank_ps_g_low_float_reach == 1, 'led-grey': variable.hank_ps_g_low_float_reach == 0}"></div>
+        </div>
+    </div>
     
 
     

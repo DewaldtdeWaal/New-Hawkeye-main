@@ -185,6 +185,7 @@ recieveDate($event: any){
     trend = data;
 
 
+    console.log(trend)
 
     this.options = this.recieve.getOptionsBarAndLine3("Motherwell Flow Rate Ml/d",trend.FlowRateArr[0],"Grassridge Flow Rate Ml/d",trend.FlowRateArr[1],"Coega IDZ Flow Rate Ml/d",trend.FlowRateArr[2],"Motherwell Total Flow",trend.TotalFlowArr[0],"Grassridge Total Flow Ml",trend.TotalFlowArr[1],"Coega IDZ Total Flow Ml",trend.TotalFlowArr[2],"Ml","Ml/d", );
 
@@ -219,7 +220,7 @@ recieveDate($event: any){
       this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
     });
 
-    var trend: any = {};
+
 
 
   }

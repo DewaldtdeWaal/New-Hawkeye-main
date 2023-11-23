@@ -22,14 +22,12 @@ export interface PeriodicElement {
   max: number;
   average: number;
 }
-
 @Component({
-  selector: 'app-trendpicker-v2',
-  templateUrl: './trendpicker-v2.component.html',
-  styleUrls: ['./trendpicker-v2.component.css']
+  selector: 'app-demo-trend',
+  templateUrl: './demo-trend.component.html',
+  styleUrls: ['./demo-trend.component.css']
 })
-
-export class TrendpickerV2Component implements OnInit {
+export class DemoTrendComponent implements OnInit {
 
   showDownloadButton:any
 
@@ -320,7 +318,6 @@ variable:any = variables;
 
     paraStFrancTagListArr:string[]=[]
     paraStFrancSelected:boolean[]=[]
-
 
 
 
@@ -8515,7 +8512,7 @@ console.log( this.selectedTags)
 RightAxisConfiguration(AxisValue:any){
 
 
-  var axisValues = AxisValue;
+  var axisvalues = AxisValue;
 
 
  if(this.tps.rightSelectedTags!=null){
@@ -8737,31 +8734,31 @@ RightAxisConfiguration(AxisValue:any){
             break
 
             case "Humansdorp Off Take Battery Level":
-              axisValues.HUM_OFF_TAKE_BAT_axis =1
+              axisvalues.HUM_OFF_TAKE_BAT_axis =1
               break
               case "Jeffreys Bay Off Take Total Flow":
-                axisValues.JEFF_OFF_TAKE_TF_axis =1
+                axisvalues.JEFF_OFF_TAKE_TF_axis =1
                 break
 
                 case "Jeffreys Bay Off Take Battery Level":
-                  axisValues.JEFF_OFF_TAKE_BAT_axis =1
+                  axisvalues.JEFF_OFF_TAKE_BAT_axis =1
                    break
 
           case "Kouga Main Line Battery Level":
-            axisValues.KOU_MAIN_LINE_BAT_axis =1;
+            axisvalues.KOU_MAIN_LINE_BAT_axis =1;
             break
 
           case "Kouga Main Line Pressure":
-            axisValues.KOU_MAIN_LINE_BAR_axis =1
+            axisvalues.KOU_MAIN_LINE_BAR_axis =1
             break;
 
 
             case "Ons Paradys Total Flow":
-              axisValues.ONS_PARA_TF_axis =1;
+              axisvalues.ONS_PARA_TF_axis =1;
               break
 
             case "Ons Paradys Battery Level":
-              axisValues.ONS_PARA_BAT_axis =1
+              axisvalues.ONS_PARA_BAT_axis =1
               break;
 
 
@@ -8769,137 +8766,137 @@ RightAxisConfiguration(AxisValue:any){
            
 
         case"Bergendal Reservoir Level":
-        axisValues.BERGEN_RES_R_LVL_axis=1
+        axisvalues.BERGEN_RES_R_LVL_axis=1
         break;
 
         case"Wolwas Reservoir Level":
-        axisValues.WOLWAS_RES_R_LVL_axis=1
+        axisvalues.WOLWAS_RES_R_LVL_axis=1
         break;
 
 
 
         case"Humerail Borehol Level":
-        axisValues.HUM_GW_BOR_LVL_axis = 1
+        axisvalues.HUM_GW_BOR_LVL_axis = 1
         break;
 
         case"Humerail Raw Water Tank Level":
-        axisValues.HUM_GW_RAW_WATER_TANK_LVL_axis = 1
+        axisvalues.HUM_GW_RAW_WATER_TANK_LVL_axis = 1
         break;
 
         case"Humerail Final Water Tank Level":
-        axisValues.HUM_GW_FIN_WAT_TANK_LVL_axis = 1
+        axisvalues.HUM_GW_FIN_WAT_TANK_LVL_axis = 1
         break;
 
         case"Umasizakhe Reservoir Level":
-        axisValues.UMI_RES_R_LVL_axis=1
+        axisvalues.UMI_RES_R_LVL_axis=1
         break;
 
         case"Kroonvale Reservoir Level":
-        axisValues.KROON_RES_R_LVL_axis=1
+        axisvalues.KROON_RES_R_LVL_axis=1
         break;
 
         case"Holding Reservoir Level":
-        axisValues.HOLDING_LVL_RES_LVL_axis=1
+        axisvalues.HOLDING_LVL_RES_LVL_axis=1
         break;
 
         case"Damcamp Reservoir Level":
-        axisValues.DAMCAMP_LVL_RES_LVL_axis=1
+        axisvalues.DAMCAMP_LVL_RES_LVL_axis=1
         break;
 
         case"Tin Roof Reservoir Level":
-        axisValues.TINROOF_LVL_RES_LVL_axis=1
+        axisvalues.TINROOF_LVL_RES_LVL_axis=1
         break;
 
 
 
         case "Schoemanshoek Pressure":
-       axisValues.NMB_SCHOE_PRESSURE_axis = 1
+       axisvalues.NMB_SCHOE_PRESSURE_axis = 1
          break;
 
       case "Schoemanshoek Level":
-        axisValues.NMB_SCHOE_RES_LEVEL_axis = 1
+        axisvalues.NMB_SCHOE_RES_LEVEL_axis = 1
           break;
 
 
      case "Schoemanshoek Actuator Position":
-       axisValues.NMB_SCHOE_ACTUATOR_POSITION_axis = 1
+       axisvalues.NMB_SCHOE_ACTUATOR_POSITION_axis = 1
          break;
 
       case "Schoemanshoek Actuator Set Point":
-        axisValues.NMB_SCHOE_ACTUATOR_SET_POINT_axis = 1
+        axisvalues.NMB_SCHOE_ACTUATOR_SET_POINT_axis = 1
           break;
 
 
        case "Schoemanshoek Actuator Valve Feedback Signal":
-         axisValues.nmb_schoe_r_actuator_valve_feedback_signal_error_axis = 1
+         axisvalues.nmb_schoe_r_actuator_valve_feedback_signal_error_axis = 1
            break;
 
        case "Schoemanshoek Actuator Valve Command Signal":
-         axisValues.nmb_schoe_r_actuator_valve_command_signal_error_axis = 1
+         axisvalues.nmb_schoe_r_actuator_valve_command_signal_error_axis = 1
            break;
 
        case "Schoemanshoek Reservoir Level Signal Error":
-         axisValues.nmb_schoe_r_reservoir_level_signal_error_axis = 1
+         axisvalues.nmb_schoe_r_reservoir_level_signal_error_axis = 1
            break;
 
        case "Schoemanshoek Actuator Valve Fault":
-           axisValues.nmb_schoe_r_actuator_valve_fault_axis = 1
+           axisvalues.nmb_schoe_r_actuator_valve_fault_axis = 1
                break;
 
         case "Schoemanshoek Actuator Valve Torque Fail Close":
-          axisValues.nmb_schoe_r_actuator_valve_torque_fail_close_axis = 1
+          axisvalues.nmb_schoe_r_actuator_valve_torque_fail_close_axis = 1
           break;
 
          case "Schoemanshoek Actuator Valve Torque Fail Open":
-           axisValues.nmb_schoe_r_actuator_valve_torque_fail_open_axis = 1
+           axisvalues.nmb_schoe_r_actuator_valve_torque_fail_open_axis = 1
              break;
 
          case "Schoemanshoek General Fault":
-           axisValues.nmb_schoe_r_general_fault_axis = 1
+           axisvalues.nmb_schoe_r_general_fault_axis = 1
              break;
 
           case "Schoemanshoek Actuator General Fault":
-            axisValues.nmb_schoe_r_actuator_general_fault_axis = 1
+            axisvalues.nmb_schoe_r_actuator_general_fault_axis = 1
               break;
 
           case "Schoemanshoek Actuator Valve Timeout":
-          axisValues.nmb_schoe_r_actuator_valve_timeout_axis = 1
+          axisvalues.nmb_schoe_r_actuator_valve_timeout_axis = 1
             break;
 
 
 
 
       case"Coega Kop to Coega IDZ Flow Rate":
-      axisValues.CGK_COEGA_FLOW_RATE_axis = 1
+      axisvalues.CGK_COEGA_FLOW_RATE_axis = 1
       break;
 
       case"Coega Kop to Motherwell Flow Rate":
-      axisValues.CGK_MOTHERWELL_TOTAL_FLOW_axis=1
+      axisvalues.CGK_MOTHERWELL_TOTAL_FLOW_axis=1
       break;
       case"Coega Kop North Chamber 17 Ml":
-      axisValues.CGK_KOP_NC_17_ML_axis =1
+      axisvalues.CGK_KOP_NC_17_ML_axis =1
       break;
       case"Coega Kop from Grassridge Total Flow":
-      axisValues.CGK_GRASSRIDGE_TOTAL_FLOW_axis=1
+      axisvalues.CGK_GRASSRIDGE_TOTAL_FLOW_axis=1
       break;
       case"Coega Kop to Coega IDZ Total Flow":
-      axisValues.CGK_COEGA_TOTAL_FLOW_axis=1
+      axisvalues.CGK_COEGA_TOTAL_FLOW_axis=1
       break;
       case"Coega Kop to Motherwell Total Flow":
-      axisValues.CGK_MOTHERWELL_FLOW_RATE_axis = 1
+      axisvalues.CGK_MOTHERWELL_FLOW_RATE_axis = 1
       break;
 
       case"Coega Kop from Grassridge Flow Rate":
-      axisValues.CGK_GRASSRIDGE_FLOW_RATE_axis =1
+      axisvalues.CGK_GRASSRIDGE_FLOW_RATE_axis =1
       break;
 
       case "Greenbushes Reservoir Level":
-      axisValues.GB_axis = 1
+      axisvalues.GB_axis = 1
         break;
 
 
         case "Greenbushes Flow Rate":
-          axisValues.GBFR_axis = 1
+          axisvalues.GBFR_axis = 1
             break;
 
             case "St Georges Borehole Flow Rate":

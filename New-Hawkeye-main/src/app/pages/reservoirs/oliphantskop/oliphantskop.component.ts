@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
-import {OliphantskopService}from 'src/app/Service-Files/Reservoir/reservoir.service';
 import {Common} from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { EChartsOption } from 'echarts';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
+import { pageBuilderMethod } from 'src/app/Service-Files/pageBuilder/pageBuilder.service';
+import { variables } from '../../../class/trendpicker';
 @Component({
   selector: 'app-oliphantskop',
   templateUrl: './oliphantskop.component.html',
@@ -34,7 +34,7 @@ export class OliphantskopComponent implements OnInit {
 
   data: any=[];
 
-  constructor(public recieve:Common,private pm:pagePostMethod, private pt: PostTrend ) {
+  constructor(public recieve:Common,private pm:pagePostMethod, private pt: PostTrend,public pbm:pageBuilderMethod ) {
 
 
 
@@ -46,21 +46,17 @@ export class OliphantskopComponent implements OnInit {
 
 
    reservoirTitle:any ="Reservoir"
-
+   commsTitle:any = "Communication"
 
   ngOnInit() {
 
 
 
 
-    this.intervalLoop = this.pm.findPageData("nmbm_olip_r", "R_CurrentVals").subscribe((result) => {
-      this.data =  result;
+    this.intervalLoop =   this.pbm.findPageData(this.collectionName).subscribe((result) => {
+      this.variable =  result.variables;
 
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-
-
-    this.variable.comms = Common.getLastUpdate(this.variable.oli_ut)
+      
     });
 
 
@@ -77,8 +73,8 @@ export class OliphantskopComponent implements OnInit {
   }
 
   siteTitle:any = "Olifantskop";
-  trendTag:any = ["level"]
-  collectionName:any ="OLI_LVL_TREND"
+  trendTag:any = ["level1"]
+  collectionName:any ="WBLK_OLIF_RES_BTU01"
   levelArr: any[]=[];
   range:any
   options: EChartsOption;

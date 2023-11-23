@@ -156,7 +156,7 @@ gw_klm_kruis14_res_ful:{
     this.intervalLoop = this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+    
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.variable.comms = Common.getLastUpdate(this.variable.gw_klm_kruis14_UT)
@@ -227,7 +227,7 @@ gw_klm_kruis14_res_ful:{
 
       trend = data;
 
-      console.log(trend)
+
       this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
       this.options2 = Common.getOptionsForLine(this.options2,"Pressure Bar", trend.FlowRateArr[1])
       this.isLoading = false;

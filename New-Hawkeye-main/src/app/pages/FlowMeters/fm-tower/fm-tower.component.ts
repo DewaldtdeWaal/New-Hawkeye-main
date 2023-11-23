@@ -136,13 +136,11 @@ faultArr:any=[
 
       trend = data;
 
-      console.log(trend)
       this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate Ml/d",trend.FlowRateArr[0],"Total Flow Ml",trend.TotalFlowArr[0]);
-
       this.options2 = Common.getOptionsForLine(this.options2,"Pressure Bar",trend.FlowRateArr[1])
       this.isLoading = false;
 
-      console.log(trend.FlowRateArr[1])
+
     })
 
   }
@@ -152,7 +150,7 @@ faultArr:any=[
 
     this.intervalLoop = this.pm.findPageData("nmbm_fmt_fm", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+      
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.comms = Common.getLastUpdate(this.variable.fmt_FM_UT)
       var alarm1: any [] = [this.faultVariable.fmt_FM_CHAMBER_TAMP,this.faultVariable.fmt_FM_SOLAR_PANEL_TAMP,this.faultVariable.fmt_FM_DOOR_OPENED]

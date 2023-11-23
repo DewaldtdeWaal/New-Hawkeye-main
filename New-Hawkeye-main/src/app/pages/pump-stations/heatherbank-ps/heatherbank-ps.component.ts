@@ -209,7 +209,7 @@ theme:any = localStorage.getItem("theme");
 
     this.intervalLoop = this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.comms = Common.getLastUpdate(this.variable.hb_R_UT)
       var alarm1: any [] = [this.faultVariable.hb_P1_NO_FLOW_FAULT,this.faultVariable.hb_P1_PUMP_CB_TRIP_FAULT,this.faultVariable.hb_P1_STARTUP_FAULT,this.faultVariable.hb_P1_ESTOP_FAULT ]

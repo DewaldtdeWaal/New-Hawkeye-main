@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 
 import { Common } from 'src/app/class/common';
+import { pageBuilderMethod } from 'src/app/Service-Files/pageBuilder/pageBuilder.service';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 
@@ -13,11 +14,6 @@ import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 export class AirportresComponent implements OnInit {
 
   variable :any= {
-    air_prt_R_comms_UT: null,
-    air_prt_R_lvl: null,
-    air_prt_R_battery_unit_UT: null,
-    air_prt_R_battery_lvl: null,
-     comms: null,
      }
 
 
@@ -34,7 +30,7 @@ export class AirportresComponent implements OnInit {
        intervalLoop: any
        data:any=[]
        pageVariable:any
-     constructor(public recieve:Common, private pm:pagePostMethod,private pt: PostTrend ) { }
+     constructor(public recieve:Common,private pt: PostTrend,public pbm:pageBuilderMethod ) { }
      range:any
 
      DateArr: any[]=[];
@@ -84,24 +80,17 @@ export class AirportresComponent implements OnInit {
       
     }
 
-    trendTag:any = ["air_prt_R_lvl"]
-collectionName:any ="AIR_PRT_LVL"
+    trendTag:any = ["level1"]
+collectionName:any ="WBLK_AIRP_RES_BTU01"
 
- 
+commsTitle:string = "Communication"
    ngOnInit() {
 
   
-    this.intervalLoop = this.pm.findPageData("air_prt", "R_CurrentVals").subscribe((result) => {
-      this.data =  result;
+    this.intervalLoop =   this.pbm.findPageData("WBLK_AIRP_RES_BTU01").subscribe((result) => {
+      this.variable =  result.variables;
 
-      console.log(this.data)
-     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
-    this.variable.comms = Common.getLastUpdateBattery(this.variable.air_prt_R_comms_UT, this.variable.air_prt_R_battery_unit_UT);
-
-
-
-
-
+    this.variable.level1 = this.variable.level1.slice(0,-1)
     });
 
   }

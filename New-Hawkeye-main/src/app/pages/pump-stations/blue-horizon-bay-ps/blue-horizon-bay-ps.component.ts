@@ -164,7 +164,7 @@ faultArr:any=[
     this.intervalLoop = this.pm.findPageData("nmbm_bh_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.comms = Common.getLastUpdate(this.variable.bhb_PS_UT)

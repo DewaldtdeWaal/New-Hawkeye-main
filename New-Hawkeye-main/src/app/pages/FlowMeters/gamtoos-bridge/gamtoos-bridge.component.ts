@@ -88,7 +88,7 @@ export class GamtoosBridgeComponent implements OnInit {
 
     this.range = $event;
 
-    console.log(this.range.value)
+
 
     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
@@ -110,7 +110,7 @@ export class GamtoosBridgeComponent implements OnInit {
   ngOnInit(){
     this.intervalLoop = this.pm.findPageData("nmbm_gt_brg_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+
       this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
       this.variable.comms = Common.getLastUpdate(this.variable.fpt_gt_brg_ut)
 

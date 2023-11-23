@@ -77,7 +77,7 @@ export class GlendinningvaleftpComponent implements OnInit {
 
       trend = data;
 
-      console.log(trend)
+
 
       this.options1 = this.recieve.getOptionsBarAndLine2("Reservoir Inlet Flow Rate Ml/d",trend.FlowRateArr[0],"Boreholes Combined Flow Rate Ml/d",trend.FlowRateArr[1],"Reservoir Inlet Total Flow Ml",trend.TotalFlowArr[0],"Boreholes Combined Total Flow m³",trend.TotalFlowArr[1],"Ml  m³","Ml/d");
       this.options2 = Common.getOptionsForLine(this.options2, "Inlet Pressure bar", trend.FlowRateArr[2])

@@ -254,6 +254,9 @@ GlenWTWSelected:boolean[]=[]
 HankSewagePSListArr:string[]=[]
 HankSewagePSSelected:boolean[]=[]
 
+paraStFrancTagListArr:string[]=[]
+paraStFrancSelected:boolean[]=[]
+
 showResMenu: boolean = false;
 showPSMenu: boolean = false;
 showTrendsMenu: boolean = false;
@@ -356,7 +359,8 @@ this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningval
 this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
 this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
 this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " )
-
+this.ReadSelectedValues(this.paraStFrancTagListArr, this.paraStFrancSelected, "Paradise Beach")
+	
 
 this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
 this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
@@ -541,7 +545,19 @@ this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
                     count++;
                     this.showRes = true;
                     break;
-                
+
+            case "NMB_PARA_BEA_ST_FRANCIS_FPT":
+            if(count>=1){count = 0}
+            this.paraStFrancTagListArr[count]="Flow Rate";
+            count++;
+            this.paraStFrancTagListArr[count]="Total Flow";
+            count++;
+            this.paraStFrancTagListArr[count]="St Francis Total Flow";
+            count++;
+            this.paraStFrancTagListArr[count]="St Francis Flow Rate";
+            count++;
+            this.showFPT= true;
+            break
             
                     case "NMB_GLEN_FPT":
                       if(count>=1){count = 0}
@@ -1473,6 +1489,8 @@ break;
     this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
 this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
 this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
+this.ReadSelectedValues(this.paraStFrancTagListArr, this.paraStFrancSelected, "Paradise Beach")
+	
     this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
     // Pump Stations
     this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
@@ -1571,6 +1589,7 @@ this.effTagsSelected=[];
 this.kruisRSelected=[]
 this.LINTRESSelected=[];
 this.GlenResSelected=[]
+this.paraStFrancSelected=[]
 this.GlenFPTSelected=[]
 this.GlenWTWSelected=[]
 this.ngtTagsSelected=[];

@@ -91,7 +91,7 @@ tagArr:any=[
     this.intervalLoop = this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
            this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
         this.variable.comms = Common.getLastUpdateBattery(this.variable.bergen_r_ut, this.variable.bergen_r_poll_ut)
     });

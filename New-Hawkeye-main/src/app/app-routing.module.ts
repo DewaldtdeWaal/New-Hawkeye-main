@@ -139,13 +139,16 @@ import { CsvComponent} from './pages/trends/csv/csv.component';
 
 import {IsuzuComponent} from './pages/automotive/isuzu/isuzu.component';
 
-import {TestPickerComponent} from './pages/trends/test-picker/test-picker.component';
+import { DemoTrendComponent } from './pages/trends/demo-trend/demo-trend.component';
 
 import {LeeSamualsDriveComponent} from './pages/zones/lee-samuals-drive/lee-samuals-drive.component';
  import {McNoughtontownshipsouthComponent} from './pages/zones/mc-noughtontownshipsouth/mc-noughtontownshipsouth.component';
  import { RowallanParkExtensionComponent } from './pages/zones/rowallan-park-extension/rowallan-park-extension.component';
  import { RosedaleComponent } from './pages/zones/rosedale/rosedale.component';
  import { HankeySewageComponent } from './pages/pump-stations/hankey-sewage/hankey-sewage.component';
+
+ import { DemoSelectorComponent } from './pages/trends/demo-trend/demo-selector/demo-selector.component';
+
 
 const routes: Routes = [
 
@@ -289,6 +292,7 @@ const routes: Routes = [
 {path: 'hawkeye/wtw/glendinningvalewtw', component: GlendinningvalewtwComponent, canActivate:[AuthGuard]},
 //Trends:
 
+{path: 'hawkeye/trends/demoTrend',component: DemoTrendComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/trends/trendpickerV2',component: TrendpickerV2Component,canActivate:[AuthGuard]},
 {path: 'hawkeye/trends/tag-selector',component: TagSelectorComponent},
 {path: 'hawkeye/trends/add-preset',component: AddPresetComponent,canActivate:[AuthGuard]},
@@ -296,9 +300,8 @@ const routes: Routes = [
 {path: 'hawkeye/trends/edit-preset',component: EditPresetComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/trends/waplaastrends',component: WaplaastrendsComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/trends/csv', component: CsvComponent, canActivate:[AuthGuard]},
-{path: 'hawkeye/trends/test-picker', component:TestPickerComponent, canActivate:[AuthGuard]},
 
-
+{path: 'hawkeye/trends/demo-trend/demo-selector', component: DemoSelectorComponent, canActivate:[AuthGuard]},
 ];
 
 

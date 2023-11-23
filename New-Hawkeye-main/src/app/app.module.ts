@@ -128,7 +128,7 @@ import { Kareedouwk2Component } from './pages/groundwater/kareedouwk2/kareedouwk
 import { KareedouwkresComponent } from './pages/reservoirs/kareedouwkres/kareedouwkres.component';
 import { HumerailComponent } from './pages/groundwater/humerail/humerail.component';
 import { GamtoosBreakWaterComponent } from './pages/FlowMeters/gamtoos-break-water/gamtoos-break-water.component';
-import { TestPickerComponent } from './pages/trends/test-picker/test-picker.component';
+
 import { NmbmAddUserComponent } from './pages/sub-admin/nmbm-add-user/nmbm-add-user.component';
 import { NmbmEditAccountsComponent } from './pages/sub-admin/nmbm-edit-accounts/nmbm-edit-accounts.component';
 import { NmbmManageAccountsComponent } from './pages/sub-admin/nmbm-manage-accounts/nmbm-manage-accounts.component';
@@ -178,6 +178,8 @@ import { PageWithThreeTrendsComponent } from './components/page-with-three-trend
 import { PageWithTwoTrendsNoWrapperComponent } from './components/page-with-two-trends-no-wrapper/page-with-two-trends-no-wrapper.component';
 import { PageWithTrendNoWrapperComponent } from './components/page-with-trend-no-wrapper/page-with-trend-no-wrapper.component';
 import { CommonCommsComponent } from './components/common-comms/common-comms.component';
+import { DemoTrendComponent } from './pages/trends/demo-trend/demo-trend.component';
+import { DemoSelectorComponent } from './pages/trends/demo-trend/demo-selector/demo-selector.component';
 
 
 const appRoutes: Routes = [
@@ -313,7 +315,6 @@ const appRoutes: Routes = [
     KareedouwkresComponent,
     HumerailComponent,
     GamtoosBreakWaterComponent,
-    TestPickerComponent,
     NmbmAddUserComponent,
     NmbmManageAccountsComponent,
     NmbmEditAccountsComponent,
@@ -361,6 +362,8 @@ const appRoutes: Routes = [
     PageWithTwoTrendsNoWrapperComponent,
     PageWithTrendNoWrapperComponent,
     CommonCommsComponent,
+    DemoTrendComponent,
+    DemoSelectorComponent,
 
 
 

@@ -649,7 +649,7 @@ recieveDate($event: any){
 
   this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
     trend = data;
-    console.log(trend);
+     ;
 
     this.options1 = Common.getOptionsBarAndLine(this.options1, "Flow Rate Ml/d",trend.FlowRateArr[0], "Total Flow Ml", trend.TotalFlowArr[0])
     this.isLoading = false;

@@ -31,7 +31,7 @@ export class ElandsjagtComponent implements OnInit {
 
     this.intervalLoop = this.pm.findPageData("nmbm_elands_wtw", "WTW_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
      this.variable.comms = Common.getLastUpdate(this.variable.wtw_elands_ut)
 
@@ -65,7 +65,7 @@ export class ElandsjagtComponent implements OnInit {
 
       trend = data;
 
-      console.log(trend)
+       
       this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow kl",trend.TotalFlowArr[0]);
       this.options2 = Common.getOptionsForLine(this.options2, "Pressure",trend.FlowRateArr[1])
       this.isLoading = false;

@@ -157,7 +157,7 @@ description:"Pepper Spray Alarm",
     this.pm.findPageData("nmbm_drift_res", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.comms = Common.getLastUpdate(this.variable.drift_r_ut)

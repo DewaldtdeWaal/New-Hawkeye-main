@@ -68,7 +68,7 @@ export class HoldingComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("graaf", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

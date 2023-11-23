@@ -47,7 +47,7 @@ export class KougaMainLineComponent implements OnInit {
     this.intervalLoop2 =  this.pbm.findPageData("WBLK_KOUG_FMU_BTU03").subscribe((result) => {
       this.variables2 =  result.variables;
 
-      console.log(this.variables2)
+    
 
       this.variablesMatric2=[{
         label:"Pressure",

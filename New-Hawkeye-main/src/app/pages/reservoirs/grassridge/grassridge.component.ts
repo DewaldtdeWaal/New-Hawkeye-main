@@ -47,7 +47,7 @@ gr_R_UT:null,
 
     this.intervalLoop = this.pm.findPageData("nmbm_gr_wtw_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
      this.comms = Common.getLastUpdate(this.variable.gr_R_UT)
@@ -111,7 +111,7 @@ gr_R_UT:null,
    this.pt.getLevel(this.flowCollections, this.flowTags,start,end).then((data) => {
     trend = data;
 
-    console.log(trend)
+
 
     this.options2 = this.recieve.getOptionsForLine2("Ml/d","Inlet Flow",trend.LevelArr[0],"Outlet Flow",trend.LevelArr[1])
    })

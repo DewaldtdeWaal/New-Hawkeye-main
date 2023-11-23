@@ -60,7 +60,6 @@ ngOnInit() {
 
   this.intervalLoop = this.pm.findPageData("nmbm_bush_r", "R_CurrentVals").subscribe((result) => {
     this.data =  result;
-    console.log(this.data)
     this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
     this.variable.comms = Common.getLastUpdate(this.variable.bush_UT)
 
@@ -100,7 +99,7 @@ recieveDate($event: any){
  this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collection,this.totalFlowTags,this.flowTags,start,end).then((data) => {
    trend=data
 
-   console.log(trend)
+
    this.options1 = this.recieve.getOptionsBarAndLine2("Soccomon Pipe Flow Rate Ml/d",trend.FlowRateArr[0],"Steel Pipe Flow Rate Ml/d",trend.FlowRateArr[1],"Soccomon Pipe Total Flow Ml",trend.TotalFlowArr[0],"Steel Pipe Total Flow Ml",trend.TotalFlowArr[1],"m³","Ml/d")
 
    this.options2 = this.recieve.getOptionsBarAndLine2("Borehole Combined Flow Rate Ml/d", trend.FlowRateArr[2],"Pumpstation Flow Rate Ml/d", trend.FlowRateArr[3],"Borehole Combined Total Flow Ml", trend.TotalFlowArr[2],"Pumpstation Total Flow Ml", trend.TotalFlowArr[3],"Ml","Ml/d")

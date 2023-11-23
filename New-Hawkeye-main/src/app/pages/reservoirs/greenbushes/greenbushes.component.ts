@@ -62,7 +62,7 @@ export class GreenbushesComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_gb_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

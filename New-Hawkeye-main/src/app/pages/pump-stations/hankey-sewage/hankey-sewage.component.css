@@ -127,3 +127,73 @@
     padding-top: 0;
   
   }
+
+  .grid-span-three{
+    display:grid;
+    grid-column: 1/span 3;
+    margin: 0 auto;
+    font-weight: 300;
+    text-decoration: underline;
+    grid-template-rows: 25px;
+
+  }
+
+
+  .led-box {
+    width: 25%;
+    margin: 0;
+    float: left;
+  }
+  
+  .led-box p {
+    font-size: 12px;
+    text-align: center;
+    margin: 1em;
+  }
+  
+  .led-red {
+    margin: 0 ;
+    margin-right: auto;
+    width: 10px;
+    height: 10px;
+    border:1px solid rgb(88, 88, 88);
+    border-radius: 50%;
+    background-color: #ff0000;
+  
+  }
+  
+  
+  .led-white {
+    margin: 0 ;
+    margin-right: auto;
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border:1px solid rgb(88, 88, 88);
+    border-radius: 50%;
+    box-shadow:  inset #f3f3f3 0 -1px 9px;
+  }
+  
+  
+  
+  .led-green {
+    margin: 0 ;
+    margin-right: auto;
+    width: 10px;
+    height: 10px;
+    border:1px solid rgb(88, 88, 88);
+    border-radius: 50%;
+    background-color: #00ff0d;
+  }
+
+  .led-grey {
+    margin: 0 ;
+    margin-right: auto;
+  
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border:1px solid rgb(88, 88, 88);
+    border-radius: 50%;
+    box-shadow:  inset #585858 0 -1px 9px;
+  }

@@ -75,7 +75,8 @@ export class MotherwellresComponent implements OnInit
 
 
 
-
+        // this.variable.mw_r_north_cham_res_lvl += "%";
+        // this.variable.mw_r_south_cham_res_lvl += "%"
 
 
       });

@@ -9,13 +9,12 @@ import { ReportService } from 'src/app/Service-Files/report.service';
 import { UsersService } from 'src/app/Service-Files/users.service';
 import { WebSocketService } from 'src/app/Service-Files/web-socket.service';
 import { TrendPickerService } from '../../trendpicker.service';
-
 @Component({
-  selector: 'app-tag-selector',
-  templateUrl: './tag-selector.component.html',
-  styleUrls: ['./tag-selector.component.css']
+  selector: 'app-demo-selector',
+  templateUrl: './demo-selector.component.html',
+  styleUrls: ['./demo-selector.component.css']
 })
-export class TagSelectorComponent implements OnInit {
+export class DemoSelectorComponent implements OnInit {
 
   Right = new FormControl();
 
@@ -1459,7 +1458,7 @@ this.tps.selectedTags=this.selectedTags
 this.tps.rightSelectedTags=this.Right.value
 
 //setTimeout(() => {
-  this.router.navigate(['/hawkeye/trends/trendpickerV2'])
+  this.router.navigate(['/hawkeye/trends/demoTrend'])
 // }, 1000);
   }
 

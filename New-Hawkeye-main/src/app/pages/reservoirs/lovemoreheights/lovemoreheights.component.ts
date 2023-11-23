@@ -60,7 +60,7 @@ export class LovemoreheightsComponent implements OnInit {
     this.pm.findPageData("nmbm_lh_ps_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

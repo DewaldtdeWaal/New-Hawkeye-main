@@ -44,7 +44,7 @@ export class StGeorgesResComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_st_georges_wtw", "WTW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

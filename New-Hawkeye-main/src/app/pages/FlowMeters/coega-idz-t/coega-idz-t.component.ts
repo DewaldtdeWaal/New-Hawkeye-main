@@ -125,7 +125,7 @@ export class CoegaIDZTComponent implements OnInit {
 
     this.intervalLoop = this.pm.findPageData("nmbm_cidzt_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+      
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.comms = Common.getLastUpdate(this.variable.fpt_cidzt_ut)
 

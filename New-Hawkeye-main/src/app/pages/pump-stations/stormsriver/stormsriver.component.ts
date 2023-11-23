@@ -234,7 +234,7 @@ quarrypump2faulttabledatasource:any;
     this.intervalLoop = this.pm.findPageData("storms_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
       this.theme = localStorage.getItem("theme");
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.variable.comms = Common.getLastUpdate(this.variable.ps_storm_UT)

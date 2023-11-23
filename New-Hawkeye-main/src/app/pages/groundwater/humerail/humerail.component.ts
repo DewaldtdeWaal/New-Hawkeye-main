@@ -114,7 +114,7 @@ export class HumerailComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_hum_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.comms = Common.getLastUpdate(this.variable.hum_gw_last_update)
 

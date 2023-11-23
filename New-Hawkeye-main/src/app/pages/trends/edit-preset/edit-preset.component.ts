@@ -305,6 +305,10 @@ GlenWTWSelected:boolean[]=[]
 HankSewagePSListArr:string[]=[]
 HankSewagePSSelected:boolean[]=[]
 
+paraStFrancTagListArr:string[]=[]
+paraStFrancSelected:boolean[]=[]
+
+
   constructor(private su: ServerURLService,private ts:TrendPickerService,private http: HttpClient, public rs: ReportService,private authService: AuthService, private userService: UsersService, private webSocketService: WebSocketService,
       private tps:TrendPickerService,private router: Router
   ) {
@@ -349,6 +353,8 @@ this.ReadSelectedValues(this.tinroofTagListArr,this.tinroofTagsSelected, "Tin Ro
 this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
 this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
 this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
+this.ReadSelectedValues(this.paraStFrancTagListArr, this.paraStFrancSelected, "Paradise Beach")
+	
 // Pump Stations
 this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
 this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")
@@ -868,6 +874,20 @@ this.showWTW= true;
 
             this.showRes= true;
               break;
+
+              case "NMB_PARA_BEA_ST_FRANCIS_FPT":
+                if(count>=1){count = 0}
+                this.paraStFrancTagListArr[count]="Flow Rate";
+                count++;
+                this.paraStFrancTagListArr[count]="Total Flow";
+                count++;
+                this.paraStFrancTagListArr[count]="St Francis Total Flow";
+                count++;
+                this.paraStFrancTagListArr[count]="St Francis Flow Rate";
+                count++;
+    this.showFPT= true;
+                break
+
       case "NMB_CHT_R":
         if (count>=1 ){count = 0}
         this.chtTagListArr[count]="North Chamber Level"
@@ -1538,6 +1558,22 @@ if(this.selectedSites)
               case "Chelsea Reservoir Greenbushes 600 mm Total Flow":
                 this.cheTagsSelected[5]=true
                 break;
+
+                case "Paradise Beach Flow Rate":
+                  this.paraStFrancSelected[0] = true;
+                  break;
+
+                  case "Paradise Beach Total Flow":
+                  this.paraStFrancSelected[1] = true;
+                  break;
+
+                  case "Paradise Beach St Francis Total Flow":
+                  this.paraStFrancSelected[2] = true;
+                  break;
+
+                  case "Paradise Beach St Francis Flow Rate":
+                  this.paraStFrancSelected[3] = true;
+                  break;
 
         case "Grassridge East Chamber Level":
           this.grTagsSelected[0]=true
@@ -2275,6 +2311,8 @@ var oldPresetDescription = this.presetDescription
     this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
     this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
     this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
+    this.ReadSelectedValues(this.paraStFrancTagListArr, this.paraStFrancSelected, "Paradise Beach")
+	
     // Pump Stations
     this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
     this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")

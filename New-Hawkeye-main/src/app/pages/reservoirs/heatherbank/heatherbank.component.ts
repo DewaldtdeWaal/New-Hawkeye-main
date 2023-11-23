@@ -86,7 +86,7 @@ hb_R_UT:null,
     this.intervalLoop = this.pm.findPageData("heaterbank_pump", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

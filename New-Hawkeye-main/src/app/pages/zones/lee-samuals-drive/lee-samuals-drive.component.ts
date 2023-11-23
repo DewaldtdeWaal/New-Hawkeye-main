@@ -71,7 +71,7 @@ export class LeeSamualsDriveComponent implements OnInit {
   
       trend = data;
 
-      console.log(trend)
+       
        this.TotalFlowArr = trend.TotalFlowArr[0];
 
 

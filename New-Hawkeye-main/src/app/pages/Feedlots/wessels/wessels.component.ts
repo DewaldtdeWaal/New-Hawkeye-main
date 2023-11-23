@@ -239,7 +239,7 @@ variable :any= {
     this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then(data => {
       trend=data
 
-      console.log(trend)
+
       this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
       this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
       this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
@@ -282,7 +282,7 @@ variable :any= {
  this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then(data => {
   trend=data
 
-  console.log(trend)
+
   this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
   this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
   this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];
@@ -328,7 +328,6 @@ variable :any= {
     this.rs.Post_Wessels_Total_Feeds(array, this.showSilos).then(data => {
       trend=data
 
-      console.log(trend)
       this.TF24_wes1_fl_feed_A_arr = trend.dayArr[0];
       this.TF24_wes1_fl_feed_B_arr = trend.dayArr[1];
       this.TF24_wes1_fl_feed_C_arr = trend.dayArr[2];

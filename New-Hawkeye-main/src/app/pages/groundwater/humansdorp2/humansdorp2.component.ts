@@ -201,13 +201,13 @@ show6:any
     this.intervalLoop = this.pm.findPageData("klm_hup2_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+      
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.variable.comms = Common.getLastUpdate(this.variable.hup2_ut)
 
-     var alarmG:any []=[this.faultVariable.hup2_voltage,this.faultVariable.hup2_pump_general_fault,this.faultVariable.hup2_borehole_level_pr_fault,this.faultVariable.hup2_battery,this.faultVariable.hup2_charge,this.faultVariable.hup2_trip_fault,this.faultVariable.hup2_no_flow_fault,this.faultVariable.hup2_24_timer,this.faultVariable.hup2_stop_level,this.faultVariable.hup2_fault,this.faultVariable.hup2_estop_active,this.faultVariable.hup2_pump_suf]
+       var alarmG:any []=[this.faultVariable.hup2_voltage,this.faultVariable.hup2_pump_general_fault,this.faultVariable.hup2_borehole_level_pr_fault,this.faultVariable.hup2_battery,this.faultVariable.hup2_charge,this.faultVariable.hup2_trip_fault,this.faultVariable.hup2_no_flow_fault,this.faultVariable.hup2_24_timer,this.faultVariable.hup2_stop_level,this.faultVariable.hup2_fault,this.faultVariable.hup2_estop_active,this.faultVariable.hup2_pump_suf]
 
-     this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
+       this.generalfaultdatasource = new MatTableDataSource(Common.getAlarmValue(alarmG))
     });
 
 

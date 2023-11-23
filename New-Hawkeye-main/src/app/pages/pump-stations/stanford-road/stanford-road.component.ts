@@ -197,7 +197,7 @@ p4_btn:any= false
     this.intervalLoop = this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.variable.comms = Common.getLastUpdate(this.variable.stan_ps_ut)

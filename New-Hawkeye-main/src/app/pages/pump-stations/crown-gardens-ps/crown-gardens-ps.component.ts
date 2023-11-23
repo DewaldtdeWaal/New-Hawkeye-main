@@ -403,7 +403,7 @@ cg_P3_POWER:null,
   ngOnInit() {
     this.intervalLoop = this.pm.findPageData("rw_cg_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.comms = Common.getLastUpdate(this.variable.cg_G_UT)
 

@@ -74,7 +74,7 @@ comms:any;
 
     this.intervalLoop = this.pm.findPageData("nmbm_vs_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
      this.comms = Common.getLastUpdate(this.variable.vs_R_UT)

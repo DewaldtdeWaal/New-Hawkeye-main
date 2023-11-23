@@ -50,7 +50,7 @@ export class KruisfonteinRComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("Kuis", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable = Common.getRouteDatas(this.tagArr,this.variable,this.data)
      this.variable.comms = Common.getLastUpdate(this.variable.klm_kruisR_ut)
     });

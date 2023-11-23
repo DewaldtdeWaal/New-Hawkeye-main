@@ -146,7 +146,7 @@ alarmTrip: 1
 
     this.intervalLoop = this.pm.findPageData("nmbm_kwano_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       var alarm1: any [] = [this.faultVariable.kwano_r_solar_alarm,this.faultVariable.kwano_r_pepper_spray_alarm,this.faultVariable.kwano_r_door_alarm ]
       this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))

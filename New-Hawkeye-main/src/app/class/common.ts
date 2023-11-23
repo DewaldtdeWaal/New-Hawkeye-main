@@ -662,7 +662,7 @@ var comms:any
 //This function is there for 1 bar chart
 public static getOptions(options:any,DateArr:any,flowTrendName:any,lineName:any, dataArr:any){
 
-  console.log(DateArr)
+
   const {theme, tooltipBackground} = this.getTheme();
 
   options = {

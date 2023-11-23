@@ -92,7 +92,7 @@ export class StormsriverWTWComponent implements OnInit {
   this.intervalLoop = this.pm.findPageData("storms_wtw", "WTW_CurrentVals").subscribe((result) => {
     this.data =  result;
     this.theme = localStorage.getItem("theme");
-    console.log(this.data)
+     
    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
    this.variable.comms = Common.getLastUpdate(this.variable.wtw_storms_UT)
 

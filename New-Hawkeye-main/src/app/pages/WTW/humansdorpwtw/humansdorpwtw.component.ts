@@ -46,7 +46,7 @@ export class HumansdorpwtwComponent implements OnInit {
 
     this.pm.findPageData("klm_hup_wtw", "WTW_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
      this.variable.comms = Common.getLastUpdate(this.variable.klm_hup_wtw_ut)
 
@@ -82,7 +82,7 @@ export class HumansdorpwtwComponent implements OnInit {
   
         trend = data;
   
-        console.log(trend)
+         
         this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
         this.isLoading = false;
       })

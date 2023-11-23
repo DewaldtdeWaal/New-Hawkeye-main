@@ -63,7 +63,7 @@ export class VanriebeeckComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_vrh_ps_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

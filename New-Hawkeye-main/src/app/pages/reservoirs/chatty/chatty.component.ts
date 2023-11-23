@@ -75,7 +75,7 @@ export class ChattyComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 
@@ -112,7 +112,7 @@ export class ChattyComponent implements OnInit {
     //   this.pm.findPageData("nmbm_cht_ps_res", "PS_CurrentVals").subscribe((result) => {
     //     this.data =  result;
 
-    //     console.log(this.data)
+    //      
     //    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

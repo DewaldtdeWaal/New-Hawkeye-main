@@ -188,7 +188,7 @@ displayedColumns :string[]= ['alarm', 'description'];
 
     this.intervalLoop = this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+
 
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.variable.comms = Common.getLastUpdate(this.variable.gw_kark_k1_UT);

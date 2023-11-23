@@ -54,7 +54,7 @@ export class McNoughtontownshipsouthComponent implements OnInit {
   
       trend = data;
 
-      console.log(trend)
+       
 
 
       

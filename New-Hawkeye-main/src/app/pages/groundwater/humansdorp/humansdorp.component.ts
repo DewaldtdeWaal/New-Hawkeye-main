@@ -195,7 +195,7 @@ show6:any
 
       trend = data;
 
-      console.log(trend)
+       
       this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow m³",trend.TotalFlowArr[0]);
       this.isLoading = false;
     })
@@ -237,7 +237,7 @@ show6:any
 
     this.intervalLoop = this.pm.findPageData("klm_hup_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+      
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       this.variable.comms = Common.getLastUpdate(this.variable.hup1_ut)
 

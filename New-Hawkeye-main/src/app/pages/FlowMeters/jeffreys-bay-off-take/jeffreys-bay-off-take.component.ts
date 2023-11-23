@@ -45,7 +45,7 @@ variables:any
     this.intervalLoop =  this.pbm.findPageData("WBLK_KOUG_FMU_BTU05").subscribe((result) => {
       this.variables =  result.variables;
 
-      console.log(this.variables)
+
 
       this.variablesMatric =[
       {
@@ -98,7 +98,7 @@ variables:any
    this.pt.getTotalFlowAndFlowRate(this.totalFlowCollectionName, this.totalFlowTags,this.flowTags,start,end).then((data) => {
     trend=data
 
-    console.log(trend)
+
   
   
     this.options = Common.getOptionsBarAndLine(this.options, "Flow Rate l/s",  trend.flowRateArr[0], "Total Flow m³", trend.TotalFlowArr[0] )

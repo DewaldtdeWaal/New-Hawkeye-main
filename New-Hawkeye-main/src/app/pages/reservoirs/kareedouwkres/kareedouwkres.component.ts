@@ -103,7 +103,7 @@ export class KareedouwkresComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_kark_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

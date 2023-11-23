@@ -41,7 +41,7 @@ variables:any
     this.intervalLoop =  this.pbm.findPageData(this.collectionName).subscribe((result) => {
       this.variables =  result.variables;
 
-      console.log(this.variables)
+
 
       this.variablesMatric =[{
         label:"Pressure",
@@ -96,7 +96,7 @@ recieveDate($event: any){
  this.pt.getTotalFlowAndFlowRate(this.totalFlowCollectionName, this.totalFlowTags,this.flowTags,start,end).then((data) => {
   trend=data
 
-  console.log(trend.flowRateArr)
+
 
   this.options = Common.getOptionsBarAndLine(this.options, "Flow Rate l/s",  trend.flowRateArr[0], "Total Flow m³", trend.TotalFlowArr[0] )
   this.options2 = Common.getOptionsForLine(this.options2,"Pressure Bar", trend.flowRateArr[1])

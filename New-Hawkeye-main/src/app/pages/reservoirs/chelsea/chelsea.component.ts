@@ -115,7 +115,7 @@ DateArr: any;
     this.intervalLoop = this.pm.findPageData("nmbm_che_ps_res", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

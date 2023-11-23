@@ -36,7 +36,7 @@ export class MalibarComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_mali_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
 

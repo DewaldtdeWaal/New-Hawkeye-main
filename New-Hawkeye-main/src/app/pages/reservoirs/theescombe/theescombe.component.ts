@@ -44,7 +44,7 @@ tc_RL:null,
 
     this.intervalLoop = this.pm.findPageData("nmbm_tc_ps_r", "R_CurrentVals").subscribe((result) => {
       this.variable =  result;
-      console.log(this.data)
+       
    //  this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
      this.comms = Common.getLastUpdate(this.variable.tc_R_UT)

@@ -352,6 +352,13 @@ export class AuthGuard implements CanActivate {
                 url="TSI_STORMS_PS"
                 break;
 
+                case "/trends/demoTrend":
+                  url = "V2_PICKER_TRENDS"
+                  break;
+
+                  case "/trends/demo-trend/demo-selector":
+                    url = "V2_PICKER_TRENDS"
+                    break;
 
                 case "/pumpstations/hankey-sewage":
                   url = "KOU_HANK_SEW_PS"

@@ -67,7 +67,7 @@ setTimeout(() => {
       var trend:any
 
       trend= data
-      console.log(trend);
+       ;
 
     this.firstName = trend.firstname_Arr;
     this.secondName = trend.secondName_Arr;

@@ -159,7 +159,7 @@ trendNameTwo:any = "Pressure Data"
     this.intervalLoop = this.pm.findPageData("nmbm_uit_fc_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+      
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
 

@@ -347,6 +347,11 @@ var hank_ps_p1_speed_arr = []
 var hank_ps_p2_speed_arr = []
 var hank_ps_p3_speed_arr = []
 
+var para_flow_rate_arr = []
+var para_total_flow_arr = []
+var para_st_flow_rate_arr = []
+var para_st_total_flow_arr = []
+
 //#endregion
 
 
@@ -656,7 +661,7 @@ case "Holding Reservoir Level":
   break;
 
 case "Olifantskop Reservoir Level":
-  trendData(OLI_LVL_array,"level", "OLI_LVL_TREND", query  )
+  trendData(OLI_LVL_array,"level1", "WBLK_OLIF_RES_BTU01", query  )
   count++
   break;
 
@@ -791,24 +796,24 @@ case "Storms River Quarry Level":
     break;
 
     case "Humansdorp Off Take Total Flow":
-      TOTALFLOWTRENDDATA(HUM_OFF_TAKE_TF_arr,"humansdorp_off_TF","HUMANSDORP_OFF_TAKE_TF",query)
+      TOTALFLOWTRENDDATA(HUM_OFF_TAKE_TF_arr,"flowtotal1","WBLK_KOUG_FMU_BTU04",query)
     count++;
     break;
 
     case "Humansdorp Off Take Pressure":
-      trendData(HUM_OFF_TAKE_BAR_arr,"humansdorp_off_take_pressure","HUMANSDORP_OFF_TAKE",query)
+      trendData(HUM_OFF_TAKE_BAR_arr,"pressure1","WBLK_KOUG_FMU_BTU04",query)
     count++;
     break;
 
     case "Humansdorp Off Take Battery Level":
-      trendData(HUM_OFF_TAKE_BAT_arr,"humansdorp_off_take_battery_level","HUMANSDORP_OFF_TAKE",query)
+      trendData(HUM_OFF_TAKE_BAT_arr,"battery_status","WBLK_KOUG_FMU_BTU04",query)
       count++;
       break;
 
-    case "Kouga Main Line Battery Level":
-      trendData(KOU_MAIN_LINE_BAT_arr,"kou_main_line_battery_level","KOU_MAIN_LINE",query)
-      count++;
-      break;
+      case "Kouga Main Line Battery Level":
+        trendData(KOU_MAIN_LINE_BAT_arr,"battery_status","WBLK_KOUG_FMU_BTU02",query)
+        count++;
+        break;
 
       case "Kouga Main Line Pressure":
         trendData(KOU_MAIN_LINE_BAR_arr,"kou_main_line_pressure","KOU_MAIN_LINE",query)
@@ -820,15 +825,26 @@ case "Storms River Quarry Level":
         count++;
         break;
 
-        case "Paradise Beach Total Flow":
-          TOTALFLOWTRENDDATA(PARA_BEA_TF_arr,"jb_Para_Bea_TF","JB_PB_SFO_TOTAL_FLOW",query)
-        count++;
-        break;
-
-      case "Paradise/St Francis Battery Level":
-        trendData(ST_FRAN_PARA_BEA_BAT_arr,"jb_PB_SFO_battery_level","JB_PB_SFO_BATTERY",query)
-      count++;
+      case "Paradise Beach Flow Rate":
+      trendData( para_flow_rate_arr,"flowrate2","WBLK_KOUG_FMU_BTU01", query)  
+      count++
       break;
+
+        case "Paradise Beach Total Flow":
+        trendData(para_total_flow_arr ,"flowtotal2","WBLK_KOUG_FMU_BTU01", query)  
+        count++
+         break;
+
+      case "Paradise Beach St Francis Total Flow":
+      trendData( para_st_flow_rate_arr,"flowrate2","WBLK_KOUG_FMU_BTU01", query)  
+      count++
+      break;
+
+      case "Paradise Beach St Francis Flow Rate":
+      trendData( para_st_total_flow_arr,"flowrate1","WBLK_KOUG_FMU_BTU01", query)  
+      count++
+      break;
+
 
       case "Ons Paradys Battery Level":
         trendData(ONS_PARA_BAT_arr,"ons_para_battery_level","ONS_PARA_BATTERY",query)
@@ -841,12 +857,12 @@ case "Storms River Quarry Level":
         break;
 
       case "Jeffreys Bay Off Take Total Flow":
-        TOTALFLOWTRENDDATA(JEFF_OFF_TAKE_TF_arr,"jeff_bay_off_take_total_flow","JEFF_BAY_TAKE_OFF",query)
+        TOTALFLOWTRENDDATA(JEFF_OFF_TAKE_TF_arr,"flowtotal1","WBLK_KOUG_FMU_BTU05",query)
       count++;
       break
 
       case "Jeffreys Bay Off Take Battery Level":
-        trendData(JEFF_OFF_TAKE_BAT_arr,"jeff_bay_off_take_battery_level", "JEFF_BAY_TAKE_OFF_Battery_Level",query)
+        trendData(JEFF_OFF_TAKE_BAT_arr,"flowrate1", "WBLK_KOUG_FMU_BTU05",query)
       count++;
       break;
 
@@ -969,11 +985,11 @@ count++;
 break;
 
 case "Bethelsdorp Pressure":
-  trendData(BETH_PRESS_array ,'pressure' ,"FPT_BETH_TREND",query)
+  trendData(BETH_PRESS_array ,'pressure1' ,"WDNR_BETH_FMU_BTU01",query)
 count++;
 break;
 case "Bethelsdorp Flow Rate":
-  trendData( BETH_FLOW_RATE_array,'flowrate',"FPT_BETH_TREND",query)
+  trendData( BETH_FLOW_RATE_array,'flowrate1',"WDNR_BETH_FMU_BTU01",query)
 count++;
 break;
 
@@ -983,11 +999,11 @@ count++;
 break;
 
 case "Bethelsdorp Battery Level":
-  trendData(BETH_BATTERY_STATUS_array,'batterylvl',"FPT_BETH_TF",query)
+  trendData(BETH_BATTERY_STATUS_array,'battery_status',"WDNR_BETH_FMU_BTU01",query)
 count++;
 break;
 case "Bethelsdorp Total Flow":
-  TOTALFLOWTRENDDATA(BETH_TOTAL_FLOW_array,'totalFlow',"FPT_BETH_TF",query)
+  trendData(BETH_TOTAL_FLOW_array,'flowtotal1',"WDNR_BETH_FMU_BTU01",query)
 count++;
 break;
 
@@ -1506,7 +1522,7 @@ count++;
 
 
         case "Airport Reservoir Level":
-          trendData(AIR_PRT_LVL_arr,"air_prt_R_lvl","AIR_PRT_LVL", query);
+          trendData(AIR_PRT_LVL_arr,"level1","WBLK_AIRP_RES_BTU01", query);
           count++;
           break
 
@@ -2070,6 +2086,10 @@ JEFF_OFF_TAKE_BAT_arr,
      ELA_P_arr,
      drift_R_total_flow_1_arr,
 drift_R_total_flow_2_arr,
+para_flow_rate_arr,
+para_total_flow_arr,
+para_st_flow_rate_arr,
+para_st_total_flow_arr,
         });
      }, seconds);
 

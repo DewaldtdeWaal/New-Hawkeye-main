@@ -71,7 +71,8 @@ Event0(){
   this.intervalLoop = this.pm.findPageData("isuzu_auto", "AUTO_CurrentVals").subscribe((result) => {
     this.data =  result;
 
-    console.log(this.data)
+
+
    this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
    this.comms = Common.getLastUpdate(this.variable.isuzu_ut)
   });
@@ -98,7 +99,7 @@ Event0(){
           var theme:any
           var tooltipBackground:any;
 
-//console.log(this.userService.theme)
+
 if (localStorage.getItem("theme") == "dark-theme"||localStorage.getItem("theme") == "dark-theme")
           {
             theme = '#FFFFFF'

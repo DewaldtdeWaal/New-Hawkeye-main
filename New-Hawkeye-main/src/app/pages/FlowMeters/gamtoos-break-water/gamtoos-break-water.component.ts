@@ -115,7 +115,7 @@ export class GamtoosBreakWaterComponent implements OnInit {
   ngOnInit() {
     this.intervalLoop = this.pm.findPageData("nmbm_gbw_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+      
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
        this.variable.comms = Common.getLastUpdate(this.variable.gbw_ut)
        var alarm1: any [] = [this.faultVariable.gbw_fault_door_opened,this.faultVariable.gbw_fault_high_pressure_fault,this.faultVariable.gbw_fault_MAC_limit_read,this.faultVariable.gbw_surge_arrest_fault,this.faultVariable.gbw_valve_fault,this.faultVariable.gbw_volt_fault,this.faultVariable.gbw_gen_fault];
@@ -153,7 +153,7 @@ export class GamtoosBreakWaterComponent implements OnInit {
      this.pt.getLevel(this.collectionName, this.trendTag,start,end).then((data) => {
       trend=data
 
-      console.log(trend)
+
       this.isLoading = false;
 
       this.options1 = Common.getOptionsForLine(this.options1,"Flow Rate Ml/d",trend.LevelArr[0])

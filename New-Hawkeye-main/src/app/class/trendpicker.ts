@@ -298,11 +298,21 @@ export const trendArray = [
 "hank_ps_p1_speed_arr",
 "hank_ps_p2_speed_arr",
 "hank_ps_p3_speed_arr",
+
+"para_flow_rate_arr",
+"para_total_flow_arr",
+"para_st_flow_rate_arr",
+"para_st_total_flow_arr",
   ]
 
 
   //make this axis map a hash map
   export const siteVariableMap = {
+
+    "Paradise Beach Flow Rate":"para_flow_rate_arr",
+    "Paradise Beach Total Flow":"para_total_flow_arr",
+    "Paradise Beach St Francis Total Flow":"para_st_flow_rate_arr",
+    "Paradise Beach St Francis Flow Rate":"para_st_total_flow_arr",
 
     "Hankey Sewage Pumpstation 1 Total Flow":"hank_ps_g_total_flow_1_arr",
     "Hankey Sewage Pumpstation 2 Total Flow":"hank_ps_g_total_flow_2_arr",
@@ -398,7 +408,6 @@ export const trendArray = [
   "Ons Paradys Total Flow":"ONS_PARA_TF_arr",
   "Ons Paradys Battery Level":"ONS_PARA_BAT_arr",
   "St Francis Offtake Total Flow" :"ST_FRAN_OFF_TF_arr",
-  "Paradise Beach Total Flow":"PARA_BEA_TF_arr",
   "Paradise/St Francis Battery Level" :"ST_FRAN_PARA_BEA_BAT_arr",
   "Gamtoos Break Water Pressure" :"GBW_ACT_BAR_arr",
   "Gamtoos Break Water Flow Rate" :"GBW_FLO_RAT_arr",
@@ -595,6 +604,11 @@ export const trendArray = [
 
   export const axisMap = {
 
+    "Paradise Beach Flow Rate":"para_flow_rate_axis",
+    "Paradise Beach Total Flow":"para_total_flow_axis",
+    "Paradise Beach St Francis Total Flow":"para_st_flow_rate_axis",
+    "Paradise Beach St Francis Flow Rate":"para_st_total_flow_axis",
+
     "Hankey Sewage Pumpstation 1 Total Flow":"hank_ps_g_total_flow_1_axis",
     "Hankey Sewage Pumpstation 2 Total Flow":"hank_ps_g_total_flow_2_axis",
     "Hankey Sewage Pumpstation SUMP Level":"hank_ps_g_sump_level_axis",
@@ -683,7 +697,6 @@ export const trendArray = [
   "Ons Paradys Total Flow":"ONS_PARA_TF_axis",
   "Ons Paradys Battery Level":"ONS_PARA_BAT_axis",
   "St Francis Offtake Total Flow" :"ST_FRAN_OFF_TF_axis",
-  "Paradise Beach Total Flow":"PARA_BEA_TF_axis",
   "Paradise/St Francis Battery Level" :"ST_FRAN_PARA_BEA_BAT_axis",
   "Gamtoos Break Water Pressure" :"GBW_ACT_BAR_axis",
   "Gamtoos Break Water Flow Rate" :"GBW_FLO_RAT_axis",
@@ -878,6 +891,10 @@ export const trendArray = [
 
   export const axisValues={
 
+    para_flow_rate_axis:0,
+para_total_flow_axis:0,
+para_st_flow_rate_axis:0,
+para_st_total_flow_axis:0,
 
     hank_ps_g_total_flow_1_axis:0,
     hank_ps_g_total_flow_2_axis:0,
@@ -1162,6 +1179,24 @@ lint_res_lvl_Axis:0,
 
 
 export const variables:any = {
+  glen_FTP_WTW_P1_rtm_arr:[],
+glen_FTP_WTW_P2_rtm_arr:[],
+glen_FTP_WTW_P1_stn_arr:[],
+glen_FTP_WTW_P2_stn_arr:[],
+glen_FTP_WTW_ph_arr:[],
+glen_FTP_WTW_orp_arr:[],
+hank_ps_g_total_flow_1_arr:[],
+hank_ps_g_total_flow_2_arr:[],
+hank_ps_g_sump_level_arr:[],
+hank_ps_g_flow_rate_1_arr:[],
+hank_ps_g_flow_rate_2_arr:[],
+hank_ps_p1_speed_arr:[],
+hank_ps_p2_speed_arr:[],
+hank_ps_p3_speed_arr:[],
+para_flow_rate_arr:[],
+para_total_flow_arr:[],
+para_st_flow_rate_arr:[],
+para_st_total_flow_arr:[],
     BERGEN_RES_R_LVL_arr:[],
     WOLWAS_RES_R_LVL_arr:[],
     UMI_RES_R_LVL_arr:[],

@@ -862,6 +862,20 @@
                         </div>
                         </mat-expansion-panel>
 
+                        <mat-expansion-panel *ngIf="paraStFrancTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
+                          <mat-expansion-panel-header>
+                          <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
+                            Paradise Beach
+                          </mat-panel-title>
+                              <mat-panel-description style="color: rgb(132, 0, 255);">
+  
+                               </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div *ngFor="let d of paraStFrancTagListArr; index as i">
+                            <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="paraStFrancSelected[i]" >{{d}}</mat-checkbox>
+                          </div>
+                          </mat-expansion-panel>
+
 
                         <mat-expansion-panel *ngIf="onsParadysTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
                           <mat-expansion-panel-header>

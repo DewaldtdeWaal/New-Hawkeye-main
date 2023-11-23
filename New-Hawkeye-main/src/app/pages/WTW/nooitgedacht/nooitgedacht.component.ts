@@ -46,7 +46,7 @@ export class NooitgedachtComponent implements OnInit {
   ngOnInit(){
     this.intervalLoop = this.pm.findPageData("nmbm_ngt_wtw", "WTW_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
      this.variable.comms = Common.getLastUpdate(this.variable.wtw_ngt_ut)
 

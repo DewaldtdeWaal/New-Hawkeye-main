@@ -40,7 +40,7 @@ rd_r_ut:null,
 
     this.intervalLoop = this.pm.findPageData("nmbm_rd_r", "R_CurrentVals").subscribe((result) => {
       this.data =  result;
-      console.log(this.data)
+       
      this.variable =   Common.getRouteDatas(this.tagArr,this.variable,this.data)
 
      this.comms = Common.getLastUpdate(this.variable.rd_r_ut)

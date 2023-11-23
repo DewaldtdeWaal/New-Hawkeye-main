@@ -187,7 +187,7 @@ theme:any = localStorage.getItem("theme")
     this.intervalLoop = this.pm.findPageData("nmbm_bf_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.comms = Common.getLastUpdate(this.variable.bf_PS_UT)

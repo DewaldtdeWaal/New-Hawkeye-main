@@ -125,7 +125,7 @@ export class NmuEffluentPsComponent implements OnInit {
     this.intervalLoop = this.pm.findPageData("nmbm_nmu_eff_ps", "PS_CurrentVals").subscribe((result) => {
       this.data =  result;
 
-      console.log(this.data)
+       
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
      this.variable.comms = Common.getLastUpdate(this.variable.nmu_eff_ps_ut)
