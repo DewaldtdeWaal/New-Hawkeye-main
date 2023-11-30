@@ -4,7 +4,7 @@ import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { EChartsOption } from 'echarts';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 import { pageBuilderMethod } from 'src/app/Service-Files/pageBuilder/pageBuilder.service';
-import { variables } from '../../../class/trendpicker';
+
 @Component({
   selector: 'app-oliphantskop',
   templateUrl: './oliphantskop.component.html',

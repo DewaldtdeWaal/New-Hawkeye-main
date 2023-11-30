@@ -46,13 +46,13 @@ export class ElandsjagtComponent implements OnInit {
   }
 
   isLoading:any
-  collectionName:any ="NMBM_NPP_GW_TREND"
+  collectionName:any ="WTW_ELANDS_TREND"
   range:any;
   options1: EChartsOption;
   options2: EChartsOption;
   tfCollection:any = "NPP_TF_Trend";
   totalFlowTags :any = ["totalflow"]
-  flowTags :any = ["flowRate","delivery_pressure"]
+  flowTags :any = ["wtw_elands_FR","wtw_elands_P"]
   siteTitle:unknown = "Elandsjagt"
   options2Name:unknown = "Pressure Data"
   recieveDate($event: any){
@@ -61,13 +61,15 @@ export class ElandsjagtComponent implements OnInit {
     this.isLoading = true;
     const {start, end} = Common.getStartEnd(this.range.value.start,this.range.value.end);
 
-    this.pt.getFlowAndTotalFlowCollection(this.tfCollection,this.collectionName,this.totalFlowTags,this.flowTags,start,end).then((data) => {
+    this.pt.getLevel(this.collectionName ,this.flowTags, start,end).then((data) => {
 
       trend = data;
 
+      console.log(trend)
+
        
-      this.options1 = Common.getOptionsBarAndLine(this.options1,"Flow Rate l/s",trend.FlowRateArr[0],"Total Flow kl",trend.TotalFlowArr[0]);
-      this.options2 = Common.getOptionsForLine(this.options2, "Pressure",trend.FlowRateArr[1])
+      this.options1 = Common.getOptionsForLine(this.options1,"Flow Rate l/s",trend.LevelArr[0]);
+      this.options2 = Common.getOptionsForLine(this.options2, "Pressure (bar)",trend.LevelArr[1])
       this.isLoading = false;
     })
 

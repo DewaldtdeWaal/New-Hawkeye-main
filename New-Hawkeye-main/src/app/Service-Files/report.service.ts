@@ -95,12 +95,6 @@ Get_CGK_Total_Flows_Dates(startDate: string, endDate:string):Observable<any[]>{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-
-
-
 async GetTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ){
   const sites : Sites={
     sites: sitesChosen,
@@ -108,10 +102,16 @@ async GetTrend_Sites( sitesChosen: any[], newStart:string, newEnd:string ){
     endDate: newEnd
   };
 
-  return  this.http.post(this.su.trendURL+"/trends/reslevels/customrestrends", sites).toPromise().then(data =>{
+  return  this.http.post(this.su.trendURL+"/trends/reslevels/demo/customrestrends", sites).toPromise().then(data =>{
     return data;
   });
 }
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

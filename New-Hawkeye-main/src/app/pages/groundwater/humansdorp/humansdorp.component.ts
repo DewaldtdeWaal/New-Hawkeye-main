@@ -201,39 +201,32 @@ show6:any
     })
 
   }
-  ngOnInit() {
 
+   siteShowMapping:any = {
+    "KLM_HUP2_GW": 'show2',
+    "KLM_HUP3_GW": 'show3',
+    "KLM_HUP4_GW": 'show4',
+    "KLM_HUP6_GW": 'show6'
+  };
+  showProperty:any
+  ngOnInit() {
     this.userSites = this.authService.getUserSites();
     this.authListenerSubs = this.authService.getAuthStatusListener()
     .subscribe(() => {
       this.userSites = this.authService.getUserSites();
     })
+  
+
+  
     for (let i = 0; i < this.userSites.length; i++) {
-
-      switch (this.userSites[i]) {
-
-
-      case "KLM_HUP2_GW":
-        this.show2 = true;
-        break;
-
-
-        case "KLM_HUP3_GW":
-          this.show3 = true;
-          break;
-
-
-		    case "KLM_HUP4_GW":
-          this.show4 = true;
-          break;
-
-
-		    case "KLM_HUP6_GW":
-          this.show6 = true;
-          break;
-
+       this.showProperty = this.siteShowMapping[this.userSites[i]];
+      if (this.showProperty) {
+        this.showProperty = true;
       }
     }
+  
+  
+    
 
     this.intervalLoop = this.pm.findPageData("klm_hup_gw", "GRDW_CurrentVals").subscribe((result) => {
       this.data =  result;

@@ -22,6 +22,8 @@ rightSelectedSites:any[]
 rightSelectedTags:any[]
 //selectedTagsV2:string[]=[]
 
+
+
   constructor(private http: HttpClient,private su: ServerURLService) {}
 
 

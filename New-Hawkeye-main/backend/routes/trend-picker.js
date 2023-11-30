@@ -420,7 +420,6 @@ switch(sitesChosen[i]){
 
 
               case "Glendinningvale Pump 1 Run Time":
-                console.log("Glendinning isn")
                 trendData(glen_FTP_WTW_P1_rtm_arr,"glen_FTP_WTW_P1_rtm","NMBM_GLEN_TF_trend",query)
                 count++;
                 break;
@@ -499,10 +498,7 @@ switch(sitesChosen[i]){
   break;
 
 
-  case "Isuzu Oven 1 VSD Speed":
-  trendData(isuzu_oven1_vsd_speed_arr,"isuzu_oven1_vsd_speed","ISUZU_TREND",query)
-  count++;
-  break;
+
 
   case "Isuzu Oven 1 Heat Exchanger Temperature":
     trendData(isuzu_oven1_heat_ecvh_temp_arr,"isuzu_oven1_heat_ecvh_temp","ISUZU_TREND",query)
@@ -836,7 +832,7 @@ case "Storms River Quarry Level":
          break;
 
       case "Paradise Beach St Francis Total Flow":
-      trendData( para_st_flow_rate_arr,"flowrate2","WBLK_KOUG_FMU_BTU01", query)  
+      trendData( para_st_flow_rate_arr,"flowtotal1","WBLK_KOUG_FMU_BTU01", query)  
       count++
       break;
 
@@ -1938,6 +1934,15 @@ BUSH_STEEL_TF_arr,
 BUSH_SOCO_TF_arr,
 BUSH_PUMP_TF_arr,
 BUSH_GW_TF_arr,
+
+hank_ps_g_total_flow_1_arr,
+hank_ps_g_total_flow_2_arr,
+hank_ps_g_sump_level_arr,
+hank_ps_g_flow_rate_1_arr,
+hank_ps_g_flow_rate_2_arr,
+hank_ps_p1_speed_arr,
+hank_ps_p2_speed_arr,
+hank_ps_p3_speed_arr,
 
 
  isuzu_oven1_vsd_speed_arr,

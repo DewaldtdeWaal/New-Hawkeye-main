@@ -4,8 +4,6 @@ import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
 import { pageBuilderMethod } from 'src/app/Service-Files/pageBuilder/pageBuilder.service';
 import { Common } from 'src/app/class/common';
 import { pageBuilder } from 'src/app/class/pageBulder';
-import { variable } from '@angular/compiler/src/output/output_ast';
-import { variables } from '../../../class/trendpicker';
 import { concat } from 'rxjs';
 
 @Component({

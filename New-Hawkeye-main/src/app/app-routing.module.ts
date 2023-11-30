@@ -135,7 +135,7 @@ import { AddPresetComponent } from './pages/trends/add-preset/add-preset.compone
 import { ManagePresetComponent } from './pages/trends/manage-preset/manage-preset.component';
 import { EditPresetComponent } from './pages/trends/edit-preset/edit-preset.component';
 import { WaplaastrendsComponent } from './pages/trends/waplaastrends/waplaastrends.component';
-import { CsvComponent} from './pages/trends/csv/csv.component';
+
 
 import {IsuzuComponent} from './pages/automotive/isuzu/isuzu.component';
 
@@ -299,7 +299,6 @@ const routes: Routes = [
 {path: 'hawkeye/trends/manage-preset',component: ManagePresetComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/trends/edit-preset',component: EditPresetComponent,canActivate:[AuthGuard]},
 {path: 'hawkeye/trends/waplaastrends',component: WaplaastrendsComponent,canActivate:[AuthGuard]},
-{path: 'hawkeye/trends/csv', component: CsvComponent, canActivate:[AuthGuard]},
 
 {path: 'hawkeye/trends/demo-trend/demo-selector', component: DemoSelectorComponent, canActivate:[AuthGuard]},
 ];

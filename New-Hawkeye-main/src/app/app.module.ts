@@ -115,7 +115,7 @@ import { DamcampComponent } from './pages/reservoirs/damcamp/damcamp.component';
 import { KroonvaleComponent } from './pages/reservoirs/kroonvale/kroonvale.component';
 import { MotherwellresComponent } from './pages/reservoirs/motherwellres/motherwellres.component';
 
-import { CsvComponent } from './pages/trends/csv/csv.component';
+
 import {IsuzuComponent} from './pages/automotive/isuzu/isuzu.component'
 import { Humansdorp6Component } from './pages/groundwater/humansdorp6/humansdorp6.component';
 import { TestComponent } from './pages/pump-stations/test/test.component';
@@ -180,6 +180,8 @@ import { PageWithTrendNoWrapperComponent } from './components/page-with-trend-no
 import { CommonCommsComponent } from './components/common-comms/common-comms.component';
 import { DemoTrendComponent } from './pages/trends/demo-trend/demo-trend.component';
 import { DemoSelectorComponent } from './pages/trends/demo-trend/demo-selector/demo-selector.component';
+import { DatePipe } from '@angular/common';
+import { TrendPickerDisplayComponent } from './components/trend-picker-display/trend-picker-display.component';
 
 
 const appRoutes: Routes = [
@@ -302,7 +304,6 @@ const appRoutes: Routes = [
     DamcampComponent,
     KroonvaleComponent,
     MotherwellresComponent,
-    CsvComponent,
     IsuzuComponent,
     Humansdorp6Component,
     TestComponent,
@@ -364,6 +365,7 @@ const appRoutes: Routes = [
     CommonCommsComponent,
     DemoTrendComponent,
     DemoSelectorComponent,
+    TrendPickerDisplayComponent,
 
 
 
@@ -375,7 +377,7 @@ const appRoutes: Routes = [
 // ],
 
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}, DatePipe,
     []
   ],
 
