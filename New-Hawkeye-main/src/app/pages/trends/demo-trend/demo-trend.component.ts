@@ -80,253 +80,307 @@ userSites:string[];
   topPosToStartShowing = 100;
 
 
+  isuzuArr:any[]=["Isuzu Oven 1 VSD Speed","Isuzu Oven 1 Heat Exchanger Temperature","Isuzu Oven 1 Temperature 1","Isuzu Oven 1 Temperature 2","Isuzu Oven 2 VSD Speed","Isuzu Oven 2 Heat Exchanger Temperature","Isuzu Oven 2 Temperature 1","Isuzu Oven 2 Temperature 2"];
   isuzuTagListArr:string[]=[];
   isuzuSelected:boolean[]=[];
 
 
-
+  airPortArr:any[]=["Airport Reservoir Level"];
   airPortTagListArr:string[]=[];
   airPortSelected:boolean[]=[];
 
 
+    kruisArr:any[]=["Kruisfontein Reservoir Level"];
     kruisRTagListArr:string[]=[];
     kruisRSelected:boolean[]=[];
 
+    kruis12GWArr:any[]=["Kruisfontein Borhole 12 Level","Kruisfontein Borhole 12 Current","Kruisfontein Borhole 12 Pressure","Kruisfontein Borhole 12 Flow Rate","Kruisfontein Borhole 12 Total Flow"];
     kruis12GWTagListArr:string[]=[];
     kruis12GWSelected:boolean[]=[];
 
+    kruis13GWArr:any[]=["Kruisfontein Borhole 13 Level","Kruisfontein Borhole 13 Current","Kruisfontein Borhole 13 Pressure","Kruisfontein Borhole 13 Flow Rate","Kruisfontein Borhole 13 Total Flow"];
     kruis13GWTagListArr:string[]=[];
     kruis13GWSelected:boolean[]=[];
 
+    kruis14GWArr:any[]=["Kruisfontein Borhole 14 Level","Kruisfontein Borhole 14 Current","Kruisfontein Borhole 14 Pressure","Kruisfontein Borhole 14 Flow Rate","Kruisfontein Borhole 14 Total Flow"];
     kruis14GWTagListArr:string[]=[];
     kruis14GWSelected:boolean[]=[];
 
+    schoeArr:any[]=["Schoemanshoek Pressure","Schoemanshoek Level","Schoemanshoek Actuator Position","Schoemanshoek Actuator Set Point","Schoemanshoek Actuator Valve Feedback Signal","Schoemanshoek Actuator Valve Command Signal","Schoemanshoek Reservoir Level Signal Error","Schoemanshoek Actuator Valve Fault","Schoemanshoek Actuator Valve Torque Fail Close","Schoemanshoek Actuator Valve Torque Fail Open","Schoemanshoek General Fault","Schoemanshoek Actuator General Fault","Schoemanshoek Actuator Valve Timeout"];
     schoeTagListArr:string[]=[];
     schoeTagsSelected:boolean[]=[];
 
+    emerArr:any[]=["Emerald Hill Reservoir Level","Emerald Hill Flow Rate","Emerald Hill Total Flow"];
     emerTagListArr:string[]=[];
     emerTagsSelected:boolean[]=[];
 
+    bhbArr:any[]=["Blue Horizon Bay Reservoir Level"];
     bhbTagListArr:string[]=[];
     bhbTagsSelected:boolean[]=[];
 
+    chtArr:any[]=["Chatty North Chamber Level","Chatty South Chamber Level","Chatty Overhead Level","Chatty Flow Rate"];
     chtTagListArr:string[]=[];
     chtTagsSelected:boolean[]=[];
 
+    driftArr:any[]=["Driftsands Reservoir Level","Driftsands Flow Rate 1","Driftsands Flow Rate 2","Driftsands Total Flow 1","Driftsands Total Flow 2"];
     driftTagListArr:string[]=[];
     driftTagsSelected:boolean[]=[];
 
+    cheArr:any[]=["Chelsea Reservoir West Chamber Level","Chelsea Reservoir East Chamber Level","Chelsea Reservoir Summit 1200 mm Flow Rate","Chelsea Reservoir Summit 1200 mm Total Flow", "Chelsea Reservoir Greenbushes 600 mm Flow Rate","Chelsea Reservoir Greenbushes 600 mm Total Flow"];
     cheTagListArr:string[]=[];
     cheTagsSelected:boolean[]=[];
 
+    chePSArr:any[]=["Chelsea Pumpstation 1 Actual Speed","Chelsea Pumpstation 1 Delivery Pressure","Chelsea Pumpstation 1 Suction Pressure","Chelsea Pumpstation 2 Actual Speed","Chelsea Pumpstation 2 Delivery Pressure","Chelsea Pumpstation 2 Suction Pressure","Chelsea Pumpstation 3 Actual Speed","Chelsea Pumpstation 3 Delivery Pressure","Chelsea Pumpstation 3 Suction Pressure", "Chelsea Pumpstation 4 Actual Speed","Chelsea Pumpstation 4 Delivery Pressure","Chelsea Pumpstation 4 Suction Pressure","Chelsea Pumpstation 700 Flow Rate","Chelsea Pumpstation 700 Total Flow"]
     chePSTagListArr:string[]=[];
     chePSTagsSelected:boolean[]=[];
 
+    gbwArr:any[]=["Gamtoos Break Water Pressure","Gamtoos Break Water Flow Rate"];
     gbwTagListArr:string[]=[];
     gbwTagsSelected:boolean[]=[];
 
+    cgkArr:any[]=["Coega Kop Reservoir Pressure","Coega Kop Inlet Chamber 2 Ml","Coega Kop to Coega IDZ Flow Rate","Coega Kop to Motherwell Flow Rate","Coega Kop from Grassridge Flow Rate","Coega Kop from Grassridge Total Flow","Coega Kop to Coega IDZ Total Flow","Coega Kop to Motherwell Total Flow","Coega IDZ Outlet Total Flow to Coega Kop Reservoir","Coega Kop North Chamber 17 Ml"]
     cgkTagListArr:string[]=[];
     cgkTagsSelected:boolean[]=[];
 
+    stGeorgeArr:any[]=["St Georges Borehole Flow Rate","St Georges Borehole Total Flow","St Georges Emerald Hill Flow Rate","St Georges Emerald Hill Total Flow"];
     stGeorgeTagListArr:string[]=[]
     stGeorgeTagsSelected:boolean[]=[];
 
+    bergenArr:any[]=["Bergendal Reservoir Level"];
     bergenTagListArr:string[]=[]
     bergenTagsSelected:boolean[]=[];
 
+    wolwasArr:any[]=["Wolwas Reservoir Level"];
     wolwasTagListArr:string[]=[]
     wolwasTagsSelected:boolean[]=[];
 
+    umiArr:any[]=["Umasizakhe Reservoir Level"];
     umiTagListArr:string[]=[]
     umiTagsSelected:boolean[]=[];
 
+    kroonArr:any[]=["Kroonvale Reservoir Level"];
     kroonTagListArr:string[]=[]
     kroonTagsSelected:boolean[]=[];
 
+    tinroofArr:any[]=["Tin Roof Reservoir Level"];
     tinroofTagListArr:string[]=[]
     tinroofTagsSelected:boolean[]=[];
 
+    damcampArr:any[]=["Damcamp Reservoir Level"];
     damcampTagListArr:string[]=[]
     damcampTagsSelected:boolean[]=[];
 
+    holdingArr:any[]=["Holding Reservoir Level"];
     holdingTagListArr:string[]=[]
     holdingTagsSelected:boolean[]=[];
 
+    cgkIDZArr:any[]=["Coega IDZ Flow Rate","Coega Motherwell Flow Rate"];
     cgkIDZTagListArr:string[]=[];
     cgkIDZTagsSelected:boolean[]=[];
 
+    cgArr:any[]=["Crown Gardens Suction Pressure","Crown Gardens Delivery Pressure","Crown Gardens Sump Level","Crown Gardens Tower 1 Level","Crown Gardens Tower 1 Inlet Flow","Crown Gardens Tower 1 Outlet Flow","Crown Gardens Tower 2 Level","Crown Gardens Tower 2 Inlet Flow","Crown Gardens Tower 2 Outlet Flow"];
     cgTagListArr:string[]=[];
     cgTagsSelected:boolean[]=[];
 
+    fmtArr:any[]=["FM Tower Flow Rate","FM Tower Pressure","FM Tower Total Flow"];
     fmtTagListArr:string[]=[];
     fmtTagsSelected:boolean[]=[];
 
+    gamtoosArr:any[]=["Gamtoos Bridge Steel Pipe Flow Rate","Gamtoos Bridge Socoman Pipe Flow Rate","Gamtoos Bridge Steel Pipe Pressure","Gamtoos Bridge Socoman Pipe Pressure"];
     gamtoosTagListArr:string[]=[];
     gamtoosTagsSelected:boolean[]=[];
 
+    grArr:any[]=["Grassridge East Chamber Level","Grassridge West Chamber Level","Grassridge Inlet Flow","Grassridge Outlet Flow"];
     grTagListArr:string[]=[];
     grTagsSelected:boolean[]=[];
 
+    gbArr:any[]=["Greenbushes Reservoir Level","Greenbushes Flow Rate"];
     gbTagListArr:string[]=[];
     gbTagsSelected:boolean[]=[];
 
+    hbArr:any[]=["Heatherbank Reservoir Level"];
     hbTagListArr:string[]=[];
     hbTagsSelected:boolean[]=[];
 
+    hbpArr:any[]=["Heatherbank Pumpstation 1 Current","Heatherbank Pumpstation 2 Current","Heatherbank Pumpstation 3 Current","Heatherbank Pumpstation 1 Run Hours","Heatherbank Pumpstation 2 Run Hours","Heatherbank Pumpstation 3 Run Hours"];
     hbpTagListArr:string[]=[];
     bhpTagsSelected:boolean[]=[];
 
+    lhArr:any[]=["Lovemore Heights Reservoir Level","Lovemore Heights Overhead Tank"];
     lhTagListArr:string[]=[];
     lhTagsSelected:boolean[]=[];
 
+    mwArr:any[]=["Motherwell Flow Rate","Motherwell Delivery Pressure","Motherwell Suction Pressure","Motherwell Total Flow","Motherwell Pump 1 Speed","Motherwell Pump 2 Speed","Motherwell Pump 3 Speed","Motherwell Pump 4 Speed"];
     mwTagListArr:string[]=[];
     mwTagsSelected:boolean[]=[];
 
+    mwrArr:any[]=["Motherwell Reservoir North Chamber Level","Motherwell Reservoir South Chamber Level"];
     mwrTagListArr:string[]=[]
     mwrTagsSelected:boolean[]=[]
 
+    npArr:any[]=["Newton Park Pool Pressure","Newton Park Pool Flow Rate","Newton Park Pool Water Level", "Newton Park Pool Total Flow"];
     npTagListArr:string[]=[];
     npTagsSelected:boolean[]=[];
 
+    effArr:any[]=[  "NMU Effluent Flow Rate","NMU Effluent Delivery Pressure","NMU Effluent Dam Level","NMU Effluent Pump 1 Speed","NMU Effluent Pump 2 Speed","NMU Effluent Pump 3 Speed","NMU Effluent Jockey Pump Speed"];
     effTagListArr:string[]=[];
     effTagsSelected:boolean[]=[];
 
+    ngtArr:any[]=[ "Nooitgedacht High Level Flow Rate", "Nooitgedacht Low Level Flow Rate"];
     ngtTagListArr:string[]=[];
     ngtTagsSelected:boolean[]=[];
 
+    rdArr:any[]=["Rosedale Reservoir Level"];
     rdTagListArr:string[]=[];
     rdTagsSelected:boolean[]=[];
 
+    stanArr:any[]=["Stanford Road Flow Rate","Stanford Road Delivery Pressure", "Stanford Road Suction Pressure", "Stanford Road Pump 1 Frequency","Stanford Road Pump 2 Frequency", "Stanford Road Pump 3 Frequency", "Stanford Road Pump 4 Frequency"];
     stanTagListArr:string[]=[];
     stanTagsSelected:boolean[]=[];
 
+    maliArr:any[]=["Malabar Reservoir Level"];
     maliTagListArr:string[]=[];
     maliTagsSelected:boolean[]=[];
 
+    smArr:any[]=["Summit Reservoir Level","Summit Flow Rate"];
     smTagListArr:string[]=[];
     smTagsSelected:boolean[]=[];
 
+    thArr:any[]=["Theescombe Reservoir Level"];
     thTagListArr:string[]=[];
     thTagsSelected:boolean[]=[];
 
+    uitArr:any[]=["Uitenhage FC Flow Rate","Uitenhage FC Pressure"];
     uitTagListArr:string[]=[];
     uitTagsSelected:boolean[]=[];
 
+    vrhArr:any[]=["Van Riebeeck Hoogte Delivery Level","Van Riebeeck Hoogte Suction Level"];
     vrhTagListArr:string[]=[];
     vrhTagsSelected:boolean[]=[];
 
+    vsArr:any[]=["Van Stadens Reservoir Level"];
     vsTagListArr:string[]=[];
     vsTagsSelected:boolean[]=[];
 
+    bethArr:any[]=["Bethelsdorp Battery Level","Bethelsdorp Flow Rate","Bethelsdorp Pressure","Bethelsdorp Total Flow"];
     bethTagListArr:string[]=[]
     bethTagSelected:boolean[]=[]
 
+    hup1Arr:any[]=["HD1 Flow Rate","HD1 Water Level","HD1 Water Total Flow"];
     hup1TagListArr:string[]=[]
     hup1TagSelected:boolean[]=[]
 
+    hup2Arr:any[]=["HD2C Flow Rate","HD2C Water Level", "HD2C Water Total Flow"];
     hup2TagListArr:string[]=[]
     hup2TagSelected:boolean[]=[]
 
+    hup3Arr:any[]=["HD3 Flow Rate", "HD3 Water Level", "HD3 Water Total Flow"];
     hup3TagListArr:string[]=[]
     hup3TagSelected:boolean[]=[]
 
+    hup4Arr:any[]=["HD4 Flow Rate","HD4 Water Level", "HD4 Water Total Flow"];
     hup4TagListArr:string[]=[]
     hup4TagSelected:boolean[]=[]
 
+    hup6Arr:any[]=["HD6 Flow Rate","HD6 Water Level", "HD6 Water Total Flow"];
     hup6TagListArr:string[]=[]
     hup6TagSelected:boolean[]=[]
 
+    stormsArr:any[]=["Storms River Quarry Level","Storms River Gorge Level"];
     stormsTagListArr:string[]=[]
     stormsTagSelected:boolean[]=[]
 
+    karkArr:any[]=[ "Kareedouw K1 Total Flow","Kareedouw K1 Flow Rate","Kareedouw K1 Current", "Kareedouw K1 Level","Kareedouw K2 Total Flow", "Kareedouw K2 Flow Rate","Kareedouw K2 Current", "Kareedouw K2 Level"];
     karkTagListArr:string[]=[];
     karkTagSelected:boolean[]=[];
 
+    humGroundArr:any[]=["Humerail Borehol Level","Humerail Raw Water Tank Level","Humerail Final Water Tank Level"];
     humGroundListArr:string[]=[]
     humGroundSelected:boolean[]=[]
 
+    humOffTakeArr:any[]=["Humansdorp Off Take Total Flow","Humansdorp Off Take Pressure","Humansdorp Off Take Battery Level"];
     humOffTakeTagListArr:string[]=[]
     humOffTakeSelected:boolean[]=[]
 
+    jeffBayOffArr:any[]=["Jeffreys Bay Off Take Total Flow","Jeffreys Bay Off Take Battery Level"];
     jeffBayOffTakeTagListArr:string[]=[]
     jeffBayOffTakeSelected:boolean[]=[]
 
+    kougaMainLineArr:any[]=["Kouga Main Line Battery Level","Kouga Main Line Pressure"];
     kougaMainLineTagListArr:string[]=[]
     kougaMainLineSelected:boolean[]=[]
 
+    onsParadysArr:any[]=["Ons Paradys Total Flow","Ons Paradys Battery Level"];
     onsParadysTagListArr:string[]=[]
     onsParadysSelected:boolean[]=[]
 
-    paraStFrancTagListArr:string[]=[]
-    paraStFrancSelected:boolean[]=[]
-
+    stormsWTWArr:any[]=["Storms River Holding Reservoir Level","Storms River Overhead Tank Level"]
     stormsWTWTagListArr:string[]=[]
     stormsWTWTagSelected:boolean[]=[]
 
+    oliArr:any[]=["Olifantskop Reservoir Level"]
     oliTagListArr:string[]=[]
     oliTagSelected:boolean[]=[]
 
-    // bushyPSTagListArr:string[]=[];
-    // bushyPSSelected:boolean[]=[];
-
+    bushyFPTArr:any[]=[ "Bushy Park Pumpstation Flow Rate","Bushy Park Pumpstation Total Flow","Bushy Park Combined Borehole Flow Rate","Bushy Park Combined Total Flow", "Bushy Park Holding Tank Level", "Bushy Park Soccoman Flow Rate", "Bushy Park Soccoman Pressure","Bushy Park Soccoman Total Flow","Bushy Park Steel Flow Rate", "Bushy Park Steel Pressure","Bushy Park Steel Total Flow"]
     bushyFPTTagListArr:string[]=[];
     bushyFPTSelected:boolean[]=[];
 
   selectedTags:string[]=[]
   rightSelectedTags:string[]
 
+    elandArr:any[]=["Elandsjagt Flow Rate", "Elandsjagt Pressure"]
     elandTagListArr:string[]=[]
     elandTagSelected:boolean[]=[]
 
-
+    klmArr:any[]=["Humansdorp Inlet Flow Rate","Humansdorp Inlet Total Flow"]
     klmWtwInletListArr:string[]=[]
     klmWtwInletSelected:boolean[]=[]
 
+    kwanoArr:any[]=[ "Kwanobuhle Reservoir Level","Kwanobuhle Reservoir Flow Rate 1","Kwanobuhle Reservoir Flow Rate 2","Kwanobuhle Reservoir Total Flow 1","Kwanobuhle Reservoir Total Flow 2"]
     kwanoListArr:string[]=[]
     kwanoSelected:boolean[]=[]
 
+    LSDArr:any[]=[ "Lee Samuals Drive Pressure","Lee Samuals Drive Total Flow", "Lee Samuals Drive Flow Rate"]
     LSDListArr:string[]=[]
     LSDSelected:boolean[]=[]
 
+    MNTArr:any[]=["McNoughton Township South Pressure","McNoughton Township South Total Flow","McNoughton Township South Flow Rate"]
     MNTSListArr:string[]=[]
     MNTSSelected:boolean[]=[]
 
-
+    RPEArr:any[]=["Rosedale Reservoir Total Flow","Rosedale Reservoir Flow Rate"]
     RPEListArr:string[]=[]
     RPESelected:boolean[]=[]
 
+    RRArr:any[]=["Rowallan Park Extension Pressure","Rowallan Park Extension Total Flow","Rowallan Park Extension Flow Rate"]
     RRListArr:string[]=[]
     RRSelected:boolean[]=[]
 
-
+    LINTWTWArr:any[]=["Linton Back Wash Flow Rate", "Linton Back Wash Total Flow","Linton Raw Water Flow Rate","Linton Raw Water Total Flow","Linton Final Water Flow Rate","Linton Final Water Total Flow"]
     LINTWTWListArr:string[]=[]
     LINTWTWSelected:boolean[]=[]
 
+    LINTRESArr:any[]=["Linton Reservoir Level"]
     LINTRESListArr:string[]=[]
     LINTRESSelected:boolean[]=[]
 
-
+    GlenResArr:any[]=["Glendinningvale Reservoir Level"]
     GlenResListArr:string[]=[]
     GlenResSelected:boolean[]=[]
     
+    GlenFPTArr:any[]=["Glendinningvale Inlet Pressure","Glendinningvale Inlet Flow Rate","Glendinningvale Inlet Total Flow","Glendinningvale Borehole Flow Rate","Glendinningvale Borehole Total Flow"]
     GlenFPTListArr:string[]=[]
     GlenFPTSelected:boolean[]=[]
 
+    GlenWTWArr:any[]=["Glendinningvale Pump 1 Run Time","Glendinningvale Pump 2 Run Time","Glendinningvale Pump 1 Number Of Starts","Glendinningvale Pump 2 Number Of Starts","Glendinningvale Potential of Hydrogen","Glendinningvale Oxidation Reduction Potential"]
     GlenWTWListArr:string[]=[]
     GlenWTWSelected:boolean[]=[]
-
-
-
 
 
     siteData:any = siteData;
 
   constructor(private su: ServerURLService,private http: HttpClient,private tps:TrendPickerService,public dialog: MatDialog ,public rs: ReportService,public authService: AuthService, private renderer: Renderer2,private datePipe: DatePipe) {
-
-
-
-
-
 
     this.showDownloadButton = false
     window.addEventListener("load", () => {
@@ -871,7 +925,6 @@ break;
 
 
           case "NMB_GT_BRG_FPT":
-
           if (count>=1 ){count = 0}
               this.gamtoosTagListArr[count]="Steel Pipe Flow Rate"
         count++
@@ -1055,7 +1108,9 @@ break;
                 count++
                 this.hup6TagListArr[count] ="Total Flow"
                 count++
-                 break
+                 break;
+
+
        //Water Treatment works
        case "NMB_NGT_WTW":
         if (count>=1 ){count = 0}
@@ -1148,8 +1203,6 @@ break;
           count++
           break;
 
-
-
             case "NMB_BUSH_FPT":
               if(count>=1){count = 0}
               this.bushyFPTTagListArr[count]="Pumpstation Flow Rate";
@@ -1162,7 +1215,6 @@ break;
               count++;
               this.bushyFPTTagListArr[count]="Holding Tank Level";
               count++;
-
               this.bushyFPTTagListArr[count]="Soccoman Flow Rate"
               count++
               this.bushyFPTTagListArr[count]="Soccoman Pressure"
@@ -1191,16 +1243,11 @@ break;
                 count++;
                 this.LINTWTWListArr[count]="Final Water Total Flow"
                 count++;
-
                 break;
-
-
-
                 case "NMB_LIN_R":
                   if(count>=1){count = 0}
                   this.LINTRESListArr[count]="Level"
                   count++
-  
                   break;
 
                   case "NMB_GLEN_R":
@@ -1400,7 +1447,6 @@ onPresetSelect(resp:any){
   this.gamtoosTagsSelected=[];
   this.grTagsSelected=[];
   this.oliTagSelected=[];
-  // this.bushyPSSelected = [];
   this.bushyFPTSelected = [];
   this.gbTagsSelected=[];
   this.hbTagsSelected=[];
@@ -1527,30 +1573,30 @@ for (let m = 0; m < this.selectedSites[i].length; m++) {
                   this.kruis13GWSelected[3] = true;
                   break;
 
-                  case "Kruisfontein Borhole 13 Total Flow":
-                    this.kruis13GWSelected[4] = true;
-                    break;
+      case "Kruisfontein Borhole 13 Total Flow":
+        this.kruis13GWSelected[4] = true;
+        break;
 
 
-                    case "Kruisfontein Borhole 14 Level":
-                      this.kruis14GWSelected[0] = true;
-                      break;
+      case "Kruisfontein Borhole 14 Level":
+        this.kruis14GWSelected[0] = true;
+        break;
 
-                      case "Kruisfontein Borhole 14 Current":
-                        this.kruis14GWSelected[1] = true;
-                        break;
+      case "Kruisfontein Borhole 14 Current":
+        this.kruis14GWSelected[1] = true;
+        break;
 
-                      case "Kruisfontein Borhole 14 Pressure":
-                        this.kruis14GWSelected[2] = true;
-                        break;
+      case "Kruisfontein Borhole 14 Pressure":
+        this.kruis14GWSelected[2] = true;
+        break;
 
-                        case "Kruisfontein Borhole 14 Flow Rate":
-                          this.kruis14GWSelected[3] = true;
-                          break;
+      case "Kruisfontein Borhole 14 Flow Rate":
+        this.kruis14GWSelected[3] = true;
+        break;
 
-                          case "Kruisfontein Borhole 14 Total Flow":
-                            this.kruis14GWSelected[4] = true;
-                            break;
+      case "Kruisfontein Borhole 14 Total Flow":
+        this.kruis14GWSelected[4] = true;
+        break;
 
 
     //Reservoir
@@ -1596,35 +1642,35 @@ for (let m = 0; m < this.selectedSites[i].length; m++) {
               this.bushyFPTSelected[3] = true;
               break;
 
-            case "Bushy Park Holding Tank Level":
-              this.bushyFPTSelected[4] = true;
-              break;
+    case "Bushy Park Holding Tank Level":
+      this.bushyFPTSelected[4] = true;
+      break;
 
 
-              case "Bushy Park Soccoman Flow Rate":
-              this.bushyFPTSelected[5] = true;
-              break;
+    case "Bushy Park Soccoman Flow Rate":
+    this.bushyFPTSelected[5] = true;
+    break;
 
-             case  "Bushy Park Soccoman Pressure":
-               this.bushyFPTSelected[6] = true;
-               break;
+    case  "Bushy Park Soccoman Pressure":
+      this.bushyFPTSelected[6] = true;
+      break;
 
-             case "Bushy Park Soccoman Total Flow":
-               this.bushyFPTSelected[7] = true;
-               break;
+    case "Bushy Park Soccoman Total Flow":
+      this.bushyFPTSelected[7] = true;
+      break;
 
-               case "Bushy Park Steel Flow Rate":
-                this.bushyFPTSelected[8] = true;
-                break;
+  case "Bushy Park Steel Flow Rate":
+   this.bushyFPTSelected[8] = true;
+   break;
 
-            case "Bushy Park Steel Pressure":
-            this.bushyFPTSelected[9] = true;
-            break;
+  case "Bushy Park Steel Pressure":
+  this.bushyFPTSelected[9] = true;
+  break;
 
 
-            case "Bushy Park Steel Total Flow":
-              this.bushyFPTSelected[10] = true;
-              break;
+ case "Bushy Park Steel Total Flow":
+   this.bushyFPTSelected[10] = true;
+   break;
 
 
 
@@ -1736,17 +1782,17 @@ case "Olifantskop Reservoir Level":
                   this.schoeTagsSelected[9]=true;
                 break;
 
-                  case "Schoemanshoek General Fault":
-                    this.schoeTagsSelected[10]=true;
+                case "Schoemanshoek General Fault":
+                  this.schoeTagsSelected[10]=true;
+                break;
+
+                case "Schoemanshoek Actuator General Fault":
+                  this.schoeTagsSelected[11]=true;
                   break;
 
-                    case "Schoemanshoek Actuator General Fault":
-                      this.schoeTagsSelected[11]=true;
-                      break;
-
-                      case "Schoemanshoek Actuator Valve Timeout":
-                        this.schoeTagsSelected[12]=true;
-                        break;
+                 case "Schoemanshoek Actuator Valve Timeout":
+                   this.schoeTagsSelected[12]=true;
+                   break;
 
 
   case "Chelsea Reservoir West Chamber Level":
@@ -1847,9 +1893,6 @@ case "Olifantskop Reservoir Level":
   case "Van Stadens Reservoir Level":
     this.vsTagsSelected[0]=true
   break;
-
-
-
 
   case "Chatty North Chamber Level":
   this.chtTagsSelected[0]=true
@@ -2124,32 +2167,32 @@ this.cgTagsSelected[0]=true
   break;
 
   case"NMU Effluent Flow Rate":
-  this.effTagsSelected[0]=true
+  this.effTagsSelected[0]=true;
   break;
   case"NMU Effluent Delivery Pressure":
-  this.effTagsSelected[1]=true
+  this.effTagsSelected[1]=true;
   break;
   case"NMU Effluent Dam Level":
-  this.effTagsSelected[2]=true
+  this.effTagsSelected[2]=true;
   break;
   case"NMU Effluent Pump 1 Speed":
-  this.effTagsSelected[3]=true
+  this.effTagsSelected[3]=true;
   break;
   case"NMU Effluent Pump 2 Speed":
-  this.effTagsSelected[4]=true
+  this.effTagsSelected[4]=true;
   break;
   case"NMU Effluent Pump 3 Speed":
-  this.effTagsSelected[5]=true
+  this.effTagsSelected[5]=true;
   break;
   case"NMU Effluent Jockey Pump Speed":
-  this.effTagsSelected[6]=true
+  this.effTagsSelected[6]=true;
   break;
 
   case "Motherwell Flow Rate":
-    this.mwTagsSelected[0]=true
+    this.mwTagsSelected[0]=true;
     break;
     case "Motherwell Delivery Pressure":
-      this.mwTagsSelected[1]=true
+      this.mwTagsSelected[1]=true;
     break;
     case "Motherwell Suction Pressure":
       this.mwTagsSelected[2]=true;
@@ -2175,9 +2218,6 @@ this.cgTagsSelected[0]=true
          this.mwTagsSelected[7]=true;
       break;
 
-
-
-
     case "Motherwell Reservoir North Chamber Level":
           this.mwrTagsSelected[0] = true;
       break;
@@ -2188,19 +2228,19 @@ this.cgTagsSelected[0]=true
 
 
   // Stanford Road
-  case "Stanford Road Flow Rate":this.stanTagsSelected[0]=true
+  case "Stanford Road Flow Rate":this.stanTagsSelected[0]=true;
   break;
-  case "Stanford Road Delivery Pressure":this.stanTagsSelected[1]=true
+  case "Stanford Road Delivery Pressure":this.stanTagsSelected[1]=true;
   break;
-  case "Stanford Road Suction Pressure":this.stanTagsSelected[2]=true
+  case "Stanford Road Suction Pressure":this.stanTagsSelected[2]=true;
   break;
-  case "Stanford Road Pump 1 Frequency":this.stanTagsSelected[3]=true
+  case "Stanford Road Pump 1 Frequency":this.stanTagsSelected[3]=true;
   break;
   case "Stanford Road Pump 2 Frequency":this.stanTagsSelected[4]=true
   break;
-  case "Stanford Road Pump 3 Frequency":this.stanTagsSelected[5]=true
+  case "Stanford Road Pump 3 Frequency":this.stanTagsSelected[5]=true;
   break;
-  case "Stanford Road Pump 4 Frequency":this.stanTagsSelected[6]=true
+  case "Stanford Road Pump 4 Frequency":this.stanTagsSelected[6]=true;
   break;
 
   case "Malabar Reservoir Level":this.maliTagsSelected[0] = true;
@@ -2209,67 +2249,67 @@ this.cgTagsSelected[0]=true
 
   //Ground Water
   case "Newton Park Pool Pressure":
-    this.npTagsSelected[0]=true
+    this.npTagsSelected[0]=true;
   break;
   case "Newton Park Pool Flow Rate":
-    this.npTagsSelected[1]=true
+    this.npTagsSelected[1]=true;
   break;
   case "Newton Park Pool Water Level":
-    this.npTagsSelected[2]=true
+    this.npTagsSelected[2]=true;
   break;
   case "Newton Park Pool Total Flow":
-    this.npTagsSelected[3]=true
+    this.npTagsSelected[3]=true;
     break;
 
 
     case "HD1 Flow Rate":
-      this.hup1TagSelected[0]=true
+      this.hup1TagSelected[0]=true;
     break;
     case "HD1 Water Level":
-      this.hup1TagSelected[1]=true
+      this.hup1TagSelected[1]=true;
     break;
     case "HD1 Water Total Flow":
-      this.hup1TagSelected[2]=true
+      this.hup1TagSelected[2]=true;
     break;
 
     case "HD2C Flow Rate":
-      this.hup2TagSelected[0]=true
+      this.hup2TagSelected[0]=true;
     break;
     case "HD2C Water Level":
-      this.hup2TagSelected[1]=true
+      this.hup2TagSelected[1]=true;
     break;
 
     case "HD2C Water Total Flow":
-      this.hup2TagSelected[2]=true
+      this.hup2TagSelected[2]=true;
     break;
     case "HD3 Flow Rate":
-      this.hup3TagSelected[0]=true
+      this.hup3TagSelected[0]=true;
     break;
     case "HD3 Water Level":
-      this.hup3TagSelected[1]=true
+      this.hup3TagSelected[1]=true;
     break;
     case "HD3 Water Total Flow":
-      this.hup3TagSelected[2]=true
+      this.hup3TagSelected[2]=true;
     break;
 
     case "HD4 Flow Rate":
-      this.hup4TagSelected[0]=true
+      this.hup4TagSelected[0]=true;
     break;
     case "HD4 Water Level":
-      this.hup4TagSelected[1]=true
+      this.hup4TagSelected[1]=true;
     break;
 
     case "HD4 Water Total Flow":
-      this.hup4TagSelected[2]=true
+      this.hup4TagSelected[2]=true;
     break;
     case "HD6 Flow Rate":
-      this.hup6TagSelected[0]=true
+      this.hup6TagSelected[0]=true;
     break;
     case "HD6 Water Level":
-      this.hup6TagSelected[1]=true
+      this.hup6TagSelected[1]=true;
     break;
     case "HD6 Water Total Flow":
-      this.hup6TagSelected[2]=true
+      this.hup6TagSelected[2]=true;
     break;
 
 
@@ -2468,79 +2508,79 @@ if(pName ==this.PresetList[i]){
 
 this.count = 0
 // Reservoirs
-this.ReadSelectedValues(this.isuzuTagListArr, this.isuzuSelected, "Isuzu Oven ")
-this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
-this.ReadSelectedValues(this.airPortTagListArr, this.airPortSelected, "Airport ")
-this.ReadSelectedValues(this.kruis12GWTagListArr, this.kruis12GWSelected, "Kruisfontein Borhole 12 ")
-this.ReadSelectedValues(this.kruis13GWTagListArr, this.kruis13GWSelected, "Kruisfontein Borhole 13 ")
-this.ReadSelectedValues(this.kruis14GWTagListArr, this.kruis14GWSelected, "Kruisfontein Borhole 14 ")
-this.ReadSelectedValues(this.stGeorgeTagListArr, this.stGeorgeTagsSelected, "St Georges ")
-this.ReadSelectedValues(this.emerTagListArr,this.emerTagsSelected, "Emerald Hill ")
-this.ReadSelectedValues(this.bhbTagListArr,this.bhbTagsSelected, "Blue Horizon Bay ")
-this.ReadSelectedValues(this.chtTagListArr,this.chtTagsSelected, "Chatty ")
-this.ReadSelectedValues(this.driftTagListArr,this.driftTagsSelected,"Driftsands ")
-this.ReadSelectedValues(this.cheTagListArr,this.cheTagsSelected, "Chelsea ")
-this.ReadSelectedValues(this.cgkTagListArr,this.cgkTagsSelected, "Coega Kop ")
-this.ReadSelectedValues(this.grTagListArr,this.grTagsSelected, "Grassridge ")
-this.ReadSelectedValues(this.oliTagListArr,this.oliTagSelected,"Olifantskop ")
-this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ")
-this.ReadSelectedValues(this.gbTagListArr,this.gbTagsSelected, "Greenbushes ")
-this.ReadSelectedValues(this.hbTagListArr,this.hbTagsSelected, "Heatherbank ")
-this.ReadSelectedValues(this.hbpTagListArr,this.bhpTagsSelected, "Heatherbank Pumpstation ")
-this.ReadSelectedValues(this.lhTagListArr,this.lhTagsSelected, "Lovemore Heights ")
-this.ReadSelectedValues(this.rdTagListArr,this.rdTagsSelected, "Rosedale ")
-this.ReadSelectedValues(this.schoeTagListArr,this.schoeTagsSelected, "Schoemanshoek ")
-this.ReadSelectedValues(this.smTagListArr,this.smTagsSelected, "Summit ")
-this.ReadSelectedValues(this.thTagListArr,this.thTagsSelected, "Theescombe ")
-this.ReadSelectedValues(this.vrhTagListArr,this.vrhTagsSelected, "Van Riebeeck Hoogte ")
-this.ReadSelectedValues(this.vsTagListArr,this.vsTagsSelected, "Van Stadens ")
-this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
-this.ReadSelectedValues(this.bergenTagListArr,this.bergenTagsSelected, "Bergendal ")
-this.ReadSelectedValues(this.wolwasTagListArr,this.wolwasTagsSelected, "Wolwas ")
-this.ReadSelectedValues(this.umiTagListArr,this.umiTagsSelected, "Umasizakhe ")
-this.ReadSelectedValues(this.kroonTagListArr,this.kroonTagsSelected, "Kroonvale ")
-this.ReadSelectedValues(this.holdingTagListArr,this.holdingTagsSelected, "Holding ")
-this.ReadSelectedValues(this.damcampTagListArr,this.damcampTagsSelected, "Damcamp ")
-this.ReadSelectedValues(this.tinroofTagListArr,this.tinroofTagsSelected, "Tin Roof ")
-this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
-this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")
-this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ")
-this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ")
-this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ")
-this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ")
-this.ReadSelectedValues(this.karkTagListArr, this.karkTagSelected,"Kareedouw ")
-this.ReadSelectedValues(this.maliTagListArr,  this.maliTagsSelected, "Malabar ")
-this.ReadSelectedValues(this.gbwTagListArr,this.gbwTagsSelected, "Gamtoos Break Water ")
-this.ReadSelectedValues(this.cgkIDZTagListArr,this.cgkIDZTagsSelected, "Coega ")
-this.ReadSelectedValues(this.fmtTagListArr,this.fmtTagsSelected, "FM Tower ")
-this.ReadSelectedValues(this.gamtoosTagListArr,this.gamtoosTagsSelected, "Gamtoos Bridge ")
-this.ReadSelectedValues(this.uitTagListArr,this.uitTagsSelected, "Uitenhage Flow Chamber ")
-this.ReadSelectedValues(this.bethTagListArr,this.bethTagSelected, "Bethelsdorp ")
-this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail ")
-this.ReadSelectedValues(this.humOffTakeTagListArr,this.humOffTakeSelected,"Humansdorp ")
-this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ")
-this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ")
-this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ")
-this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ")
-this.ReadSelectedValues(this.hup1TagListArr,this.hup1TagSelected, "HD1 ")
-this.ReadSelectedValues(this.hup2TagListArr,this.hup2TagSelected, "HD2C ")
-this.ReadSelectedValues(this.hup3TagListArr,this.hup3TagSelected, "HD3 ")
-this.ReadSelectedValues(this.hup4TagListArr,this.hup4TagSelected, "HD4 ")
-this.ReadSelectedValues(this.hup6TagListArr,this.hup6TagSelected, "HD6 ")
-this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
-this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
-this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
-this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
-this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
-this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
-this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " )
-this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
-this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
-this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " )
-this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
-this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
-this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
-this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
+this.ReadSelectedValues(this.isuzuTagListArr, this.isuzuSelected, "Isuzu Oven ");
+this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ");
+this.ReadSelectedValues(this.airPortTagListArr, this.airPortSelected, "Airport ");
+this.ReadSelectedValues(this.kruis12GWTagListArr, this.kruis12GWSelected, "Kruisfontein Borhole 12 ");
+this.ReadSelectedValues(this.kruis13GWTagListArr, this.kruis13GWSelected, "Kruisfontein Borhole 13 ");
+this.ReadSelectedValues(this.kruis14GWTagListArr, this.kruis14GWSelected, "Kruisfontein Borhole 14 ");
+this.ReadSelectedValues(this.stGeorgeTagListArr, this.stGeorgeTagsSelected, "St Georges ");
+this.ReadSelectedValues(this.emerTagListArr,this.emerTagsSelected, "Emerald Hill ");
+this.ReadSelectedValues(this.bhbTagListArr,this.bhbTagsSelected, "Blue Horizon Bay ");
+this.ReadSelectedValues(this.chtTagListArr,this.chtTagsSelected, "Chatty ");
+this.ReadSelectedValues(this.driftTagListArr,this.driftTagsSelected,"Driftsands ");
+this.ReadSelectedValues(this.cheTagListArr,this.cheTagsSelected, "Chelsea ");
+this.ReadSelectedValues(this.cgkTagListArr,this.cgkTagsSelected, "Coega Kop ");
+this.ReadSelectedValues(this.grTagListArr,this.grTagsSelected, "Grassridge ");
+this.ReadSelectedValues(this.oliTagListArr,this.oliTagSelected,"Olifantskop ");
+this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ");
+this.ReadSelectedValues(this.gbTagListArr,this.gbTagsSelected, "Greenbushes ");
+this.ReadSelectedValues(this.hbTagListArr,this.hbTagsSelected, "Heatherbank ");
+this.ReadSelectedValues(this.hbpTagListArr,this.bhpTagsSelected, "Heatherbank Pumpstation ");
+this.ReadSelectedValues(this.lhTagListArr,this.lhTagsSelected, "Lovemore Heights ");
+this.ReadSelectedValues(this.rdTagListArr,this.rdTagsSelected, "Rosedale ");
+this.ReadSelectedValues(this.schoeTagListArr,this.schoeTagsSelected, "Schoemanshoek ");
+this.ReadSelectedValues(this.smTagListArr,this.smTagsSelected, "Summit ");
+this.ReadSelectedValues(this.thTagListArr,this.thTagsSelected, "Theescombe ");
+this.ReadSelectedValues(this.vrhTagListArr,this.vrhTagsSelected, "Van Riebeeck Hoogte ");
+this.ReadSelectedValues(this.vsTagListArr,this.vsTagsSelected, "Van Stadens ");
+this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ");
+this.ReadSelectedValues(this.bergenTagListArr,this.bergenTagsSelected, "Bergendal ");
+this.ReadSelectedValues(this.wolwasTagListArr,this.wolwasTagsSelected, "Wolwas ");
+this.ReadSelectedValues(this.umiTagListArr,this.umiTagsSelected, "Umasizakhe ");
+this.ReadSelectedValues(this.kroonTagListArr,this.kroonTagsSelected, "Kroonvale ");
+this.ReadSelectedValues(this.holdingTagListArr,this.holdingTagsSelected, "Holding ");
+this.ReadSelectedValues(this.damcampTagListArr,this.damcampTagsSelected, "Damcamp ");
+this.ReadSelectedValues(this.tinroofTagListArr,this.tinroofTagsSelected, "Tin Roof ");
+this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ");
+this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ");
+this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ");
+this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ");
+this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ");
+this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ");
+this.ReadSelectedValues(this.karkTagListArr, this.karkTagSelected,"Kareedouw ");
+this.ReadSelectedValues(this.maliTagListArr,  this.maliTagsSelected, "Malabar ");
+this.ReadSelectedValues(this.gbwTagListArr,this.gbwTagsSelected, "Gamtoos Break Water ");
+this.ReadSelectedValues(this.cgkIDZTagListArr,this.cgkIDZTagsSelected, "Coega ");
+this.ReadSelectedValues(this.fmtTagListArr,this.fmtTagsSelected, "FM Tower ");
+this.ReadSelectedValues(this.gamtoosTagListArr,this.gamtoosTagsSelected, "Gamtoos Bridge ");
+this.ReadSelectedValues(this.uitTagListArr,this.uitTagsSelected, "Uitenhage Flow Chamber ");
+this.ReadSelectedValues(this.bethTagListArr,this.bethTagSelected, "Bethelsdorp ");
+this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail ");
+this.ReadSelectedValues(this.humOffTakeTagListArr,this.humOffTakeSelected,"Humansdorp ");
+this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ");
+this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ");
+this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ");
+this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ");
+this.ReadSelectedValues(this.hup1TagListArr,this.hup1TagSelected, "HD1 ");
+this.ReadSelectedValues(this.hup2TagListArr,this.hup2TagSelected, "HD2C ");
+this.ReadSelectedValues(this.hup3TagListArr,this.hup3TagSelected, "HD3 ");
+this.ReadSelectedValues(this.hup4TagListArr,this.hup4TagSelected, "HD4 ");
+this.ReadSelectedValues(this.hup6TagListArr,this.hup6TagSelected, "HD6 ");
+this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ");
+this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ");
+this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ");
+this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ");
+this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ");
+this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " );
+this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
+this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " );
+this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " );
+this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " );
+this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " );
+this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ");
+this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " );
+this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " );
 // console.log( this.selectedTags)
   }
 
@@ -2658,10 +2698,6 @@ returnAverageMinMax(array:any[]){
 }
 
 
-
-
-
-
 DateConfiguration(){
   var start = this.range.value.start;
   var end = this.range.value.end;
@@ -2706,24 +2742,16 @@ async buildAxis(dataStructure: any) {
   }
 
   let fileInfo;
-  const axisMap: AxisMap = this.objMap;
 
-  console.log("axisMap");
-  console.log(axisMap);
-  console.log("axisMap");
 
   for (let i = 0; i < this.selectedTags.length; i++) {
     const siteName = this.selectedTags[i];
 
-    console.log("this.selectedTags[i]")
-    console.log(this.selectedTags[i].toString())
-    console.log("this.selectedTags[i]")
+
     const arr = this.objMap.get(this.selectedTags[i]);
 
 
-    console.log("arr")
-    console.log(arr)
-    console.log("arr")
+
     if (!arr) {
       throw new Error(`Invalid site name: ${siteName}`);
     }

@@ -324,91 +324,86 @@ this.count = 0
 
 
 // Reservoirs
-this.ReadSelectedValues(this.stGeorgeTagListArr, this.stGeorgeTagsSelected, "St Georges ")
-this.ReadSelectedValues(this.maliTagListArr,  this.maliTagsSelected, "Malabar ")
-this.ReadSelectedValues(this.emerTagListArr,this.emerTagsSelected, "Emerald Hill ")
-this.ReadSelectedValues(this.airPortTagListArr, this.airPortSelected, "Airport ")
-this.ReadSelectedValues(this.bhbTagListArr,this.bhbTagsSelected, "Blue Horizon Bay ")
-this.ReadSelectedValues(this.chtTagListArr,this.chtTagsSelected, "Chatty ")
-this.ReadSelectedValues(this.cheTagListArr,this.cheTagsSelected, "Chelsea ")
-this.ReadSelectedValues(this.cgkTagListArr,this.cgkTagsSelected, "Coega Kop ")
-this.ReadSelectedValues(this.driftTagListArr,this.driftTagsSelected,"Driftsands ")
-this.ReadSelectedValues(this.isuzuTagListArr, this.isuzuSelected, "Isuzu Oven ")
-this.ReadSelectedValues(this.grTagListArr,this.grTagsSelected, "Grassridge ")
-this.ReadSelectedValues(this.gbTagListArr,this.gbTagsSelected, "Greenbushes ")
-this.ReadSelectedValues(this.hbTagListArr,this.hbTagsSelected, "Heatherbank ")
-this.ReadSelectedValues(this.hbpTagListArr,this.bhpTagsSelected, "Heatherbank Pumpstation ")
-this.ReadSelectedValues(this.lhTagListArr,this.lhTagsSelected, "Lovemore Heights ")
-this.ReadSelectedValues(this.rdTagListArr,this.rdTagsSelected, "Rosedale ")
-this.ReadSelectedValues(this.smTagListArr,this.smTagsSelected, "Summit ")
-this.ReadSelectedValues(this.schoeTagListArr,this.schoeTagsSelected, "Schoemanshoek ")
-this.ReadSelectedValues(this.thTagListArr,this.thTagsSelected, "Theescombe ")
-this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ")
-
-this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " )
-this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
-
-this.ReadSelectedValues(this.vrhTagListArr,this.vrhTagsSelected, "Van Riebeeck Hoogte ")
-this.ReadSelectedValues(this.vsTagListArr,this.vsTagsSelected, "Van Stadens ")
-this.ReadSelectedValues(this.oliTagListArr,this.oliTagSelected,"Olifantskop ")
-this.ReadSelectedValues(this.bergenTagListArr,this.bergenTagsSelected, "Bergendal ")
-this.ReadSelectedValues(this.wolwasTagListArr,this.wolwasTagsSelected, "Wolwas ")
-this.ReadSelectedValues(this.umiTagListArr,this.umiTagsSelected, "Umasizakhe ")
-this.ReadSelectedValues(this.kroonTagListArr,this.kroonTagsSelected, "Kroonvale ")
-this.ReadSelectedValues(this.karkTagListArr, this.karkTagSelected,"Kareedouw ")
-
-this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " )
+this.ReadSelectedValues(this.stGeorgeTagListArr, this.stGeorgeTagsSelected, "St Georges ");
+this.ReadSelectedValues(this.maliTagListArr,  this.maliTagsSelected, "Malabar ");
+this.ReadSelectedValues(this.emerTagListArr,this.emerTagsSelected, "Emerald Hill ");
+this.ReadSelectedValues(this.airPortTagListArr, this.airPortSelected, "Airport ");
+this.ReadSelectedValues(this.bhbTagListArr,this.bhbTagsSelected, "Blue Horizon Bay ");
+this.ReadSelectedValues(this.chtTagListArr,this.chtTagsSelected, "Chatty ");
+this.ReadSelectedValues(this.cheTagListArr,this.cheTagsSelected, "Chelsea ");
+this.ReadSelectedValues(this.cgkTagListArr,this.cgkTagsSelected, "Coega Kop ");
+this.ReadSelectedValues(this.driftTagListArr,this.driftTagsSelected,"Driftsands ");
+this.ReadSelectedValues(this.isuzuTagListArr, this.isuzuSelected, "Isuzu Oven ");
+this.ReadSelectedValues(this.grTagListArr,this.grTagsSelected, "Grassridge ");
+this.ReadSelectedValues(this.gbTagListArr,this.gbTagsSelected, "Greenbushes ");
+this.ReadSelectedValues(this.hbTagListArr,this.hbTagsSelected, "Heatherbank ");
+this.ReadSelectedValues(this.hbpTagListArr,this.bhpTagsSelected, "Heatherbank Pumpstation ");
+this.ReadSelectedValues(this.lhTagListArr,this.lhTagsSelected, "Lovemore Heights ");
+this.ReadSelectedValues(this.rdTagListArr,this.rdTagsSelected, "Rosedale ");
+this.ReadSelectedValues(this.smTagListArr,this.smTagsSelected, "Summit ");
+this.ReadSelectedValues(this.schoeTagListArr,this.schoeTagsSelected, "Schoemanshoek ");
+this.ReadSelectedValues(this.thTagListArr,this.thTagsSelected, "Theescombe ");
+this.ReadSelectedValues(this.kwanoListArr, this.kwanoSelected, "Kwanobuhle Reservoir ");
+this.ReadSelectedValues(this.LSDListArr,this.LSDSelected,"Lee Samuals Drive " );
+this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ");
+this.ReadSelectedValues(this.vrhTagListArr,this.vrhTagsSelected, "Van Riebeeck Hoogte ");
+this.ReadSelectedValues(this.vsTagListArr,this.vsTagsSelected, "Van Stadens ");
+this.ReadSelectedValues(this.oliTagListArr,this.oliTagSelected,"Olifantskop ");
+this.ReadSelectedValues(this.bergenTagListArr,this.bergenTagsSelected, "Bergendal ");
+this.ReadSelectedValues(this.wolwasTagListArr,this.wolwasTagsSelected, "Wolwas ");
+this.ReadSelectedValues(this.umiTagListArr,this.umiTagsSelected, "Umasizakhe ");
+this.ReadSelectedValues(this.kroonTagListArr,this.kroonTagsSelected, "Kroonvale ");
+this.ReadSelectedValues(this.karkTagListArr, this.karkTagSelected,"Kareedouw ");
+this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservoir " );
 this.ReadSelectedValues(this.GlenResListArr,this.GlenResSelected,"Glendinningvale Reservoir " );
-this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " )
-this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " )
-this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
-this.ReadSelectedValues(this.paraStFrancTagListArr, this.paraStFrancSelected, "Paradise Beach ")
-this.ReadSelectedValues(this.holdingTagListArr,this.holdingTagsSelected, "Holding ")
-this.ReadSelectedValues(this.damcampTagListArr,this.damcampTagsSelected, "Damcamp ")
-this.ReadSelectedValues(this.tinroofTagListArr,this.tinroofTagsSelected, "Tin Roof ")
-this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ")
-
-this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail ")
+this.ReadSelectedValues(this.GlenFPTListArr,this.GlenFPTSelected,"Glendinningvale " );
+this.ReadSelectedValues(this.GlenWTWListArr,this.GlenWTWSelected,"Glendinningvale " );
+this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " );
+this.ReadSelectedValues(this.paraStFrancTagListArr, this.paraStFrancSelected, "Paradise Beach ");
+this.ReadSelectedValues(this.holdingTagListArr,this.holdingTagsSelected, "Holding ");
+this.ReadSelectedValues(this.damcampTagListArr,this.damcampTagsSelected, "Damcamp ");
+this.ReadSelectedValues(this.tinroofTagListArr,this.tinroofTagsSelected, "Tin Roof ");
+this.ReadSelectedValues(this.klmWtwInletListArr , this.klmWtwInletSelected, "Humansdorp Inlet ");
+this.ReadSelectedValues(this.humGroundListArr, this.humGroundSelected, "Humerail ");
 // Pump Stations
-this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ")
-this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ")
-this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ")
-this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ")
-this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ")
-this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ")
+this.ReadSelectedValues(this.cgTagListArr,this.cgTagsSelected, "Crown Gardens ");
+this.ReadSelectedValues(this.mwTagListArr,this.mwTagsSelected, "Motherwell ");
+this.ReadSelectedValues(this.mwrTagListArr, this.mwrTagsSelected, "Motherwell Reservoir ");
+this.ReadSelectedValues(this.stanTagListArr,this.stanTagsSelected, "Stanford Road ");
+this.ReadSelectedValues(this.stormsTagListArr, this.stormsTagSelected, "Storms River ");
+this.ReadSelectedValues(this.chePSTagListArr,this.chePSTagsSelected, "Chelsea ");
 // FPT
-
-this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ")
-this.ReadSelectedValues(this.cgkIDZTagListArr,this.cgkIDZTagsSelected, "Coega ")
-this.ReadSelectedValues(this.fmtTagListArr,this.fmtTagsSelected, "FM Tower ")
-this.ReadSelectedValues(this.gamtoosTagListArr,this.gamtoosTagsSelected, "Gamtoos Bridge ")
-this.ReadSelectedValues(this.uitTagListArr,this.uitTagsSelected, "Uitenhage Flow Chamber ")
-this.ReadSelectedValues(this.bethTagListArr,this.bethTagSelected, "Bethelsdorp ")
-this.ReadSelectedValues(this.humOffTakeTagListArr,this.humOffTakeSelected,"Humansdorp ")
-this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ")
-this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ")
-this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ")
-this.ReadSelectedValues(this.gbwTagListArr,this.gbwTagsSelected, "Gamtoos Break Water ")
-// this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ")
-this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ")
-this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ")
-this.ReadSelectedValues(this.kruis12GWTagListArr, this.kruis12GWSelected, "Kruisfontein Borhole 12 ")
-this.ReadSelectedValues(this.kruis13GWTagListArr, this.kruis13GWSelected, "Kruisfontein Borhole 13 ")
-this.ReadSelectedValues(this.kruis14GWTagListArr, this.kruis14GWSelected, "Kruisfontein Borhole 14 ")
-// Groundwater
-this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ")
-this.ReadSelectedValues(this.hup1TagListArr,this.hup1TagSelected, "HD1 ")
-this.ReadSelectedValues(this.hup2TagListArr,this.hup2TagSelected, "HD2C ")
-this.ReadSelectedValues(this.hup3TagListArr,this.hup3TagSelected, "HD3 ")
-this.ReadSelectedValues(this.hup4TagListArr,this.hup4TagSelected, "HD4 ")
-this.ReadSelectedValues(this.hup6TagListArr,this.hup6TagSelected, "HD6 ")
-//Water Treatment works
-this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ")
-this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ")
-this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ")
-this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
-this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
-this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " )
+this.ReadSelectedValues(this.effTagListArr,this.effTagsSelected, "NMU Effluent ");
+this.ReadSelectedValues(this.cgkIDZTagListArr,this.cgkIDZTagsSelected, "Coega ");
+this.ReadSelectedValues(this.fmtTagListArr,this.fmtTagsSelected, "FM Tower ");
+this.ReadSelectedValues(this.gamtoosTagListArr,this.gamtoosTagsSelected, "Gamtoos Bridge ");
+this.ReadSelectedValues(this.uitTagListArr,this.uitTagsSelected, "Uitenhage Flow Chamber ");
+this.ReadSelectedValues(this.bethTagListArr,this.bethTagSelected, "Bethelsdorp ");
+this.ReadSelectedValues(this.humOffTakeTagListArr,this.humOffTakeSelected,"Humansdorp ");
+this.ReadSelectedValues(this.jeffBayOffTakeTagListArr,this.jeffBayOffTakeSelected,"Jeffreys Bay ");
+this.ReadSelectedValues(this.kougaMainLineTagListArr,this.kougaMainLineSelected,"Kouga Main Line ");
+this.ReadSelectedValues(this.onsParadysTagListArr,this.onsParadysSelected,"Ons Paradys ");
+this.ReadSelectedValues(this.gbwTagListArr,this.gbwTagsSelected, "Gamtoos Break Water ");
+// this.ReadSelectedValues(this.bushyPSTagListArr, this.bushyPSSelected, "Bushy Park ");
+this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy Park ");
+this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ");
+this.ReadSelectedValues(this.kruis12GWTagListArr, this.kruis12GWSelected, "Kruisfontein Borhole 12 ");
+this.ReadSelectedValues(this.kruis13GWTagListArr, this.kruis13GWSelected, "Kruisfontein Borhole 13 ");
+this.ReadSelectedValues(this.kruis14GWTagListArr, this.kruis14GWSelected, "Kruisfontein Borhole 14 ");
+// Groundwater;
+this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ");
+this.ReadSelectedValues(this.hup1TagListArr,this.hup1TagSelected, "HD1 ");
+this.ReadSelectedValues(this.hup2TagListArr,this.hup2TagSelected, "HD2C ");
+this.ReadSelectedValues(this.hup3TagListArr,this.hup3TagSelected, "HD3 ");
+this.ReadSelectedValues(this.hup4TagListArr,this.hup4TagSelected, "HD4 ");
+this.ReadSelectedValues(this.hup6TagListArr,this.hup6TagSelected, "HD6 ");
+//Water Treatment works;
+this.ReadSelectedValues(this.ngtTagListArr,this.ngtTagsSelected, "Nooitgedacht ");
+this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "Storms River ");
+this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ");
+this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " );
+this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " );
+this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " );
 }, 500);
 
 
@@ -437,23 +432,7 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
       this.userEmail = this.authService.getUserEmail();
     })
 
-
-
-    // this.http.post("http://localhost:3000/get-user-preset-names", {userEmail:this.userEmail}).subscribe(
-    //   (data:any)=>{
-
-    //     for (let i = 0; i < data.record.length; i++) {
-    //       this.PresetList[i] = data.record[i].presetName
-    //       this.selectedSites.push(data.record[i].selectedSites )
-    //     }
-    //   },
-    //   err=>{
-    //     console.log(err)
-
-    //    } )
-
-
-    var count=0
+    var count=0;
     this.showAuto = false;
     this.showRes = false;
     this.showPS = false;
@@ -673,18 +652,18 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
             break;
             case "NMB_CHE_R":
               if (count>=1 ){count = 0}
-              this.cheTagListArr[count]="Reservoir West Chamber Level"
-              count++
-              this.cheTagListArr[count]="Reservoir East Chamber Level"
-              count++
-              this.cheTagListArr[count]="Reservoir Summit 1200 mm Flow Rate"
-              count++
-              this.cheTagListArr[count]="Reservoir Summit 1200 mm Total Flow"
-              count++
-              this.cheTagListArr[count]="Reservoir Greenbushes 600 mm Flow Rate"
-              count++
-              this.cheTagListArr[count]="Reservoir Greenbushes 600 mm Total Flow"
-              count++
+              this.cheTagListArr[count]="Reservoir West Chamber Level";
+              count++;
+              this.cheTagListArr[count]="Reservoir East Chamber Level";
+              count++;
+              this.cheTagListArr[count]="Reservoir Summit 1200 mm Flow Rate";
+              count++;
+              this.cheTagListArr[count]="Reservoir Summit 1200 mm Total Flow";
+              count++;
+              this.cheTagListArr[count]="Reservoir Greenbushes 600 mm Flow Rate";
+              count++;
+              this.cheTagListArr[count]="Reservoir Greenbushes 600 mm Total Flow";
+              count++;
 
             this.showRes= true;
               break;
@@ -693,47 +672,47 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
 
             case "NMB_CHE_PS":
               if (count>=1 ){count = 0}
-        this.chePSTagListArr[count]="Pumpstation 1 Actual Speed"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 1 Delivery Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 1 Suction Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 2 Actual Speed"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 2 Delivery Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 2 Suction Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 3 Actual Speed"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 3 Delivery Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 3 Suction Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 4 Actual Speed"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 4 Delivery Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 4 Suction Pressure"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 700 Flow Rate"
-        count++
-        this.chePSTagListArr[count]="Pumpstation 700 Total Flow"
-        count++
+        this.chePSTagListArr[count]="Pumpstation 1 Actual Speed";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 1 Delivery Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 1 Suction Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 2 Actual Speed";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 2 Delivery Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 2 Suction Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 3 Actual Speed";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 3 Delivery Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 3 Suction Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 4 Actual Speed";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 4 Delivery Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 4 Suction Pressure";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 700 Flow Rate";
+        count++;
+        this.chePSTagListArr[count]="Pumpstation 700 Total Flow";
+        count++;
           this.showPS = true;
               break;
 
 
           case "NMB_CHT_R":
             if (count>=1 ){count = 0}
-            this.chtTagListArr[count]="North Chamber Level"
+            this.chtTagListArr[count]="North Chamber Level";
             count++;
-            this.chtTagListArr[count]="South Chamber Level"
+            this.chtTagListArr[count]="South Chamber Level";
             count++;
-            this.chtTagListArr[count]="Overhead Level"
+            this.chtTagListArr[count]="Overhead Level";
             count++;
-            this.chtTagListArr[count]="Flow Rate"
+            this.chtTagListArr[count]="Flow Rate";
             count++;
             this.showRes= true;
 
@@ -742,19 +721,19 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
             break;
             case "TSI_STORMS_PS":
               if(count>=1){count = 0}
-              this.stormsTagListArr[count]="Quarry Level"
-          count++
-              this.stormsTagListArr[count]="Gorge Level"
-           count++
+              this.stormsTagListArr[count]="Quarry Level";
+          count++;
+              this.stormsTagListArr[count]="Gorge Level";
+           count++;
 
            this.showPS = true;
                 break;
                 case "TSI_STORMS_WTW":
                   if(count>=1){count = 0}
-                  this.stormsWTWTagListArr[count]="Holding Reservoir Level"
-              count++
-                  this.stormsWTWTagListArr[count]="Overhead Tank Level"
-               count++
+                  this.stormsWTWTagListArr[count]="Holding Reservoir Level";
+              count++;
+                  this.stormsWTWTagListArr[count]="Overhead Tank Level";
+               count++;
                this.showWTW= true;
                     break;
           case "NMB_VRH_R":
@@ -932,58 +911,58 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
 
                 case"NMB_SCHOE_R":
                 if (count>=1 ){count = 0}
-                this.schoeTagListArr[count]="Pressure"
+                this.schoeTagListArr[count]="Pressure";
                 count++;
-                this.schoeTagListArr[count]="Level"
+                this.schoeTagListArr[count]="Level";
                 count++;
-                this.schoeTagListArr[count]="Actuator Position"
+                this.schoeTagListArr[count]="Actuator Position";
                 count++;
-                this.schoeTagListArr[count]="Actuator Set Point"
+                this.schoeTagListArr[count]="Actuator Set Point";
                 count++;
-                this.schoeTagListArr[count]="Actuator Valve Feedback Signal"
+                this.schoeTagListArr[count]="Actuator Valve Feedback Signal";
                 count++;
-                  this.schoeTagListArr[count]="Actuator Valve Command Signal"
+                  this.schoeTagListArr[count]="Actuator Valve Command Signal";
                 count++;
-                this.schoeTagListArr[count]="Reservoir Level Signal Error"
+                this.schoeTagListArr[count]="Reservoir Level Signal Error";
                 count++;
-                  this.schoeTagListArr[count]="Actuator Valve Fault"
+                  this.schoeTagListArr[count]="Actuator Valve Fault";
                 count++;
-                this.schoeTagListArr[count]="Actuator Valve Torque Fail Close"
+                this.schoeTagListArr[count]="Actuator Valve Torque Fail Close";
                 count++;
-                  this.schoeTagListArr[count]="Actuator Valve Torque Fail Open"
+                  this.schoeTagListArr[count]="Actuator Valve Torque Fail Open";
                 count++;
-                this.schoeTagListArr[count]="General Fault"
+                this.schoeTagListArr[count]="General Fault";
                 count++;
-                  this.schoeTagListArr[count]="Actuator General Fault"
+                  this.schoeTagListArr[count]="Actuator General Fault";
                 count++;
-                this.schoeTagListArr[count]="Actuator Valve Timeout"
+                this.schoeTagListArr[count]="Actuator Valve Timeout";
                 count++;
                 this.showRes= true;
                 break;
             //FPT Sites
             case"NMB_HUP_OFF_TAKE_FPT":
             if(count>=1){count=0}
-            this.humOffTakeTagListArr[count]="Off Take Total Flow"
+            this.humOffTakeTagListArr[count]="Off Take Total Flow";
             count++;
-            this.humOffTakeTagListArr[count]="Off Take Pressure"
+            this.humOffTakeTagListArr[count]="Off Take Pressure";
             count++
-            this.humOffTakeTagListArr[count]="Off Take Battery Level"
+            this.humOffTakeTagListArr[count]="Off Take Battery Level";
             count++;
             this.showFPT = true;
             break;
 
             case"NMB_JEFF_BAY_OFF_TAKE_FPT":
             if(count>=1){count=0}
-            this.jeffBayOffTakeTagListArr[count]="Off Take Total Flow"
+            this.jeffBayOffTakeTagListArr[count]="Off Take Total Flow";
             count++;
-            this.jeffBayOffTakeTagListArr[count]="Off Take Battery Level"
+            this.jeffBayOffTakeTagListArr[count]="Off Take Battery Level";
             count++;
             this.showFPT = true;
             break;
 
             case"NMB_KOU_MAIN_LINE_FPT":
             if(count>=1){count=0}
-            this.kougaMainLineTagListArr[count]="Battery Level"
+            this.kougaMainLineTagListArr[count]="Battery Level";
             count++;
             this.kougaMainLineTagListArr[count]="Pressure";
             count++;
@@ -992,9 +971,9 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
 
             case"NMB_ONS_PARA_FPT":
             if(count>=1){count=0}
-            this.onsParadysTagListArr[count]="Total Flow"
+            this.onsParadysTagListArr[count]="Total Flow";
             count++;
-            this.onsParadysTagListArr[count]="Battery Level"
+            this.onsParadysTagListArr[count]="Battery Level";
             count++;
             this.showFPT = true;
             break;
@@ -1011,14 +990,14 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
 
             case "NMB_BETH_FPT":
               if (count>=1 ){count = 0}
-              this.bethTagListArr[count]="Battery Level"
-              count++
-              this.bethTagListArr[count]="Flow Rate"
-              count++
-              this.bethTagListArr[count]="Pressure"
-              count++
-              this.bethTagListArr[count]="Total Flow"
-              count++
+              this.bethTagListArr[count]="Battery Level";
+              count++;
+              this.bethTagListArr[count]="Flow Rate";
+              count++;
+              this.bethTagListArr[count]="Pressure";
+              count++;
+              this.bethTagListArr[count]="Total Flow";
+              count++;
               this.showFPT = true;
               break;
               case "NMB_FMT_FPT":
@@ -1033,10 +1012,10 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
                 break;
             case "NMB_CIDZT_FPT":
               if (count>=1 ){count = 0}
-              this.cgkIDZTagListArr[count]="IDZ Flow Rate"
-        count++
-              this.cgkIDZTagListArr[count]="Motherwell Flow Rate"
-        count++
+              this.cgkIDZTagListArr[count]="IDZ Flow Rate";
+        count++;
+              this.cgkIDZTagListArr[count]="Motherwell Flow Rate";
+        count++;
         this.showFPT = true;
               break;
             case "NMB_GT_BRG_FPT":
@@ -1243,22 +1222,6 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
                     this.showRes = true;
                     break;
 
-                    // case "NMB_BUSH_PS":
-                    //   if(count>=1){count = 0}
-                    //   this.bushyPSTagListArr[count]="Soccoman Flow Rate"
-                    //   count++
-                    //   this.bushyPSTagListArr[count]="Soccoman Pressure"
-                    //   count++
-                    //   this.bushyPSTagListArr[count]="Soccoman Total Flow"
-                    //   count++
-                    //   this.bushyPSTagListArr[count]="Steel Flow Rate"
-                    //   count++
-                    //   this.bushyPSTagListArr[count]="Steel Pressure"
-                    //   count++
-                    //   this.bushyPSTagListArr[count]="Steel Total Flow"
-                    //   count++
-                    //   this.showPS = true;
-                    //   break;
 
                       case "NMB_BUSH_FPT":
                         if(count>=1){count = 0}
@@ -1272,7 +1235,6 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
                         count++;
                         this.bushyFPTTagListArr[count]="Holding Tank Level";
                         count++;
-
                         this.bushyFPTTagListArr[count]="Soccoman Flow Rate"
                         count++
                         this.bushyFPTTagListArr[count]="Soccoman Pressure"
@@ -1289,43 +1251,44 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
                         break;
             case "RW_CG_PS":
               if (count>=1 ){count = 0}
-              this.cgTagListArr[count]="Suction Pressure"
-        count++
-              this.cgTagListArr[count]="Delivery Pressure"
-        count++
-              this.cgTagListArr[count]="Sump Level"
-        count++
-              this.cgTagListArr[count]="Tower 1 Level"
-        count++
-              this.cgTagListArr[count]="Tower 1 Inlet Flow"
-        count++
-              this.cgTagListArr[count]="Tower 1 Outlet Flow"
-        count++
-              this.cgTagListArr[count]="Tower 2 Level"
-        count++
-              this.cgTagListArr[count]="Tower 2 Inlet Flow"
-        count++
-              this.cgTagListArr[count]="Tower 2 Outlet Flow"
-        count++
-        this.showPS = true;
+              this.cgTagListArr[count]="Suction Pressure";
+              count++;
+              this.cgTagListArr[count]="Delivery Pressure";
+              count++;
+              this.cgTagListArr[count]="Sump Level";
+              count++;
+              this.cgTagListArr[count]="Tower 1 Level";
+              count++;
+              this.cgTagListArr[count]="Tower 1 Inlet Flow";
+              count++;
+              this.cgTagListArr[count]="Tower 1 Outlet Flow";
+              count++;
+              this.cgTagListArr[count]="Tower 2 Level";
+              count++;
+              this.cgTagListArr[count]="Tower 2 Inlet Flow";
+              count++;
+              this.cgTagListArr[count]="Tower 2 Outlet Flow";
+              count++;
+              this.showPS = true;
               break;
 
             case "NMU_NMU_EFF":
               if (count>=1 ){count = 0}
-              this.effTagListArr[count]="Flow Rate"
-              count++
+              this.effTagListArr[count]="Flow Rate";
+              count++;
               this.effTagListArr[count]="Delivery Pressure"
-              count++
+              count++;
               this.effTagListArr[count]="Dam Level"
-              count++
+              count++;
               this.effTagListArr[count]="Pump 1 Speed"
-              count++
+              count++;
               this.effTagListArr[count]="Pump 2 Speed"
-              count++
+              count++;
               this.effTagListArr[count]="Pump 3 Speed"
-              count++
+              count++;
               this.effTagListArr[count]="Jockey Pump Speed"
-              count++
+              count++;
+              this.showPS = true;
       break;
 
       /////////////////////////////////////////WTW
@@ -1469,9 +1432,10 @@ this.tps.rightSelectedTags=this.Right.value
 
 
     for (let i = 0; i < arr.length; i++) {
-      if(selectedArr[i]==true){
+      if(selectedArr[i]==true)
+      {
         this.selectedTags[this.count]= name + arr[i]
-        this.count++
+        this.count++;
       }
     }
   }
