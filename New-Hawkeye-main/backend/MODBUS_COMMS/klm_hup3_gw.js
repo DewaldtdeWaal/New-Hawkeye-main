@@ -118,8 +118,6 @@ gvar.hup3_run_hours= (parseInt(cc[0].toFixed(1)));
 
 if(gvar.hup3_voltage!=undefined || gvar.hup3_voltage!=null){
 
-var MongoClient = require('mongodb').MongoClient;
-var url= gvar.standardConnectionString;
 
 
 var firstValue={

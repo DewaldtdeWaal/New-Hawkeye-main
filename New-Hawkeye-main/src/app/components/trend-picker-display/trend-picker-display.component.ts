@@ -609,34 +609,34 @@ export class TrendPickerDisplayComponent implements OnInit {
 
           case "NMB_CHE_PS":
             if (count>=1 ){count = 0}
-      this.chePSTagListArr[count]="Pumpstation 1 Actual Speed"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 1 Delivery Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 1 Suction Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 2 Actual Speed"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 2 Delivery Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 2 Suction Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 3 Actual Speed"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 3 Delivery Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 3 Suction Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 4 Actual Speed"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 4 Delivery Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 4 Suction Pressure"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 700 Flow Rate"
-      count++
-      this.chePSTagListArr[count]="Pumpstation 700 Total Flow"
-      count++
+      this.chePSTagListArr[count]="Pumpstation 1 Actual Speed";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 1 Delivery Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 1 Suction Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 2 Actual Speed";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 2 Delivery Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 2 Suction Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 3 Actual Speed";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 3 Delivery Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 3 Suction Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 4 Actual Speed";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 4 Delivery Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 4 Suction Pressure";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 700 Flow Rate";
+      count++;
+      this.chePSTagListArr[count]="Pumpstation 700 Total Flow";
+      count++;
             break;
 
 
@@ -645,21 +645,21 @@ export class TrendPickerDisplayComponent implements OnInit {
         case "NMB_CHT_R":
           if (count>=1 ){count = 0}
           this.chtTagListArr[count]="North Chamber Level"
-    count++
+          count++
           this.chtTagListArr[count]="South Chamber Level"
-    count++
+          count++
           this.chtTagListArr[count]="Overhead Level"
-    count++
-    this.chtTagListArr[count]="Flow Rate"
-    count++
+          count++
+          this.chtTagListArr[count]="Flow Rate"
+          count++
+          break;
 
-break;
       case "TSI_STORMS_PS":
         if(count>=1){count = 0}
         this.stormsTagListArr[count]="Quarry Level"
-    count++
+        count++
         this.stormsTagListArr[count]="Gorge Level"
-     count++
+        count++
 
           break;
 
@@ -704,20 +704,20 @@ break;
 
           case"NMB_HUP_OFF_TAKE_FPT":
           if(count>=1){count=0}
-          this.humOffTakeTagListArr[count]="Off Take Total Flow"
+          this.humOffTakeTagListArr[count]="Off Take Total Flow";
+          count++;;
+          this.humOffTakeTagListArr[count]="Off Take Pressure";
           count++;
-          this.humOffTakeTagListArr[count]="Off Take Pressure"
-          count++
-          this.humOffTakeTagListArr[count]="Off Take Battery Level"
+          this.humOffTakeTagListArr[count]="Off Take Battery Level";
           count++;
           break;
 
 
           case "HUM_HUM_GW":
             if(count>=1){count=0}
-            this.humGroundListArr[count]="Borehol Level"
+            this.humGroundListArr[count]="Borehol Level";
             count++;
-            this.humGroundListArr[count]="Raw Water Tank Level"
+            this.humGroundListArr[count]="Raw Water Tank Level";
             count++;
             this.humGroundListArr[count]="Final Water Tank Level"
             count++;
@@ -734,7 +734,7 @@ break;
 
           case"NMB_KOU_MAIN_LINE_FPT":
           if(count>=1){count=0}
-          this.kougaMainLineTagListArr[count]="Battery Level"
+          this.kougaMainLineTagListArr[count]="Battery Level";
           count++;
           this.kougaMainLineTagListArr[count]="Pressure";
           count++
@@ -840,10 +840,10 @@ break;
 
                 case "NMB_BETH_FPT":
                   if(count>=1){count = 0}
-                  this.bethTagListArr[count] = "Battery Level"
-                  count++
-                  this.bethTagListArr[count]="Flow Rate"
-                  count++
+                  this.bethTagListArr[count] = "Battery Level";
+                  count++;
+                  this.bethTagListArr[count]="Flow Rate";
+                  count++;
                   this.bethTagListArr[count] = "Pressure"
                   count++
                   this.bethTagListArr[count]="Total Flow"
@@ -877,22 +877,22 @@ break;
 
           case "NMB_MW_PS":
             if (count>=1 ){count = 0}
-                this.mwTagListArr[count]="Flow Rate"
-          count++
-                this.mwTagListArr[count]="Delivery Pressure"
-          count++
-          this.mwTagListArr[count]="Suction Pressure"
-          count++
-          this.mwTagListArr[count]="Total Flow"
-          count++
-          this.mwTagListArr[count]="Pump 1 Speed"
-          count++
-          this.mwTagListArr[count]="Pump 2 Speed"
-          count++
-          this.mwTagListArr[count]="Pump 3 Speed"
-          count++
-          this.mwTagListArr[count]="Pump 4 Speed"
-          count++
+            this.mwTagListArr[count]="Flow Rate"
+            count++
+            this.mwTagListArr[count]="Delivery Pressure"
+            count++
+            this.mwTagListArr[count]="Suction Pressure"
+            count++
+            this.mwTagListArr[count]="Total Flow"
+            count++
+            this.mwTagListArr[count]="Pump 1 Speed"
+            count++
+            this.mwTagListArr[count]="Pump 2 Speed"
+            count++
+            this.mwTagListArr[count]="Pump 3 Speed"
+            count++
+            this.mwTagListArr[count]="Pump 4 Speed"
+            count++
                 break;
 
                 case "NMB_MW_R":
@@ -1245,11 +1245,11 @@ break;
    }
 
 
-   ReadSelectedValues(arr:string[],selectedArr:boolean[], name:string){
+   ReadSelectedValues(arr:string[],selectedArr:boolean[]){
     for (let i = 0; i < arr.length; i++) {
   
       if(selectedArr[i]==true){
-        this.selectedTags[this.count]= name + arr[i]
+        this.selectedTags[this.count] = arr[i]
         this.count++;
       }
     }
