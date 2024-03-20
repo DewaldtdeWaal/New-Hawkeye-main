@@ -303,9 +303,14 @@ userSites:string[];
     GlenFPTSelected:boolean[]=[]
 
     GlenWTWListArr:string[]=[]
-    GlenWTWSelected:boolean[]=[]
+   GlenWTWSelected:boolean[]=[]
 
+  BloemFMListArr:string[]=[]
+  BloemFMListSelected: boolean[] = [];
 
+  hankSewagePSListArr: string[] = []
+  hankSewagePSListSelected: boolean[] = []
+  
 
 
 
@@ -455,7 +460,40 @@ userSites:string[];
                 count++;
                 this.kruis14GWTagListArr[count]="Total Flow";
                 count++;
-                break;
+          break;
+        
+        case "NMB_BLOEM_FM_ZS":
+          if (count >= 1) { count = 0 }
+          this.BloemFMListArr[count] = "Flow Rate";
+          count++;
+          this.BloemFMListArr[count] = "Total Flow";
+          count++;
+          this.BloemFMListArr[count] = "Battery Level";
+          count++;
+
+          break;
+        
+        
+        case "KOU_HANK_SEW_PS":
+          if (count >= 1) { count = 0 }
+          this.hankSewagePSListArr[count] = "Flow Rate 1";
+          count++;
+          this.hankSewagePSListArr[count] = "Flow Rate 2";
+          count++;
+          this.hankSewagePSListArr[count] = "Average Current";
+          count++;
+          this.hankSewagePSListArr[count] = "Pump 1 Speed";
+          count++;
+          this.hankSewagePSListArr[count] = "Pump 2 Speed";
+          count++;
+          this.hankSewagePSListArr[count] = "Pump 3 Speed";
+          count++;
+          this.hankSewagePSListArr[count] = "Total Flow 1";
+          count++;
+          this.hankSewagePSListArr[count] = "Total Flow 2";
+          count++;
+
+          break;
 
           case "GRF_BERGEN_R":
             if (count>=1 ){count = 0}
@@ -769,7 +807,7 @@ break;
           if(count>=1){count=0}
           this.jeffBayOffTakeTagListArr[count]="Off Take Total Flow"
           count++;
-          this.jeffBayOffTakeTagListArr[count]="Off Take Battery Level"
+          this.jeffBayOffTakeTagListArr[count]="Off Take Flow Rate"
           count++;
 
           break;
@@ -779,6 +817,10 @@ break;
           this.kougaMainLineTagListArr[count]="Battery Level"
           count++;
           this.kougaMainLineTagListArr[count]="Pressure";
+          count++;
+          this.kougaMainLineTagListArr[count]="Flow Rate"
+          count++;
+          this.kougaMainLineTagListArr[count]="Total Flow";
           count++
           break;
 
@@ -811,6 +853,7 @@ break;
           this.grTagListArr[count]="Outlet Flow"
           count++
           break;
+        
         case "NMB_GB_R":
           if (count>=1 ){count = 0}
           this.gbTagListArr[count]="Reservoir Level"
@@ -823,7 +866,19 @@ break;
             if (count>=1 ){count = 0}
             this.rdTagListArr[count]="Reservoir Level"
             count++
-            break;
+          break;
+        
+        
+        case "NMB_STAN_R_PS":
+          if (count >= 1) { count = 0 }
+          this.stanTagListArr[count] = "Common Suction Pressure";
+          count++;
+          this.stanTagListArr[count] = "Common Delivery Pressure";
+          count++;
+          this.stanTagListArr[count] = "Flow Rate";
+          count++;
+          break;
+        
             case "NMB_SM_R":
               if (count>=1 ){count = 0}
               this.smTagListArr[count]="Reservoir Level"
@@ -893,24 +948,7 @@ break;
                   count++
                   break;
 
-          //Pump Stations
-          case "NMB_STAN_R_PS":
-            if (count>=1 ){count = 0}
-            this.stanTagListArr[count]="Flow Rate"
-          count++
-            this.stanTagListArr[count]="Delivery Pressure"
-          count++
-            this.stanTagListArr[count]="Suction Pressure"
-          count++
-            this.stanTagListArr[count]="Pump 1 Frequency"
-          count++
-            this.stanTagListArr[count]="Pump 2 Frequency"
-          count++
-            this.stanTagListArr[count]="Pump 3 Frequency"
-          count++
-            this.stanTagListArr[count]="Pump 4 Frequency"
-          count++
-            break;
+       
 
             case "NMB_MALI_R":
               if(count>=1){count = 0}
@@ -1431,7 +1469,8 @@ onPresetSelect(resp:any){
   this.klmWtwInletSelected=[]
   this.kwanoSelected=[]
   this.selectedTags=[]
-
+  this.hankSewagePSListSelected=[]
+  this.BloemFMListSelected=[]
 var pName = resp.value
 
   for (let i = 0; i < this.PresetList.length; i++) {
@@ -1892,6 +1931,21 @@ case "Olifantskop Reservoir Level":
       case "Heatherbank Pumpstation 3 Run Hours":
         this.bhpTagsSelected[5]=true;
       break;
+    
+    
+    case "Stanford Road Common Suction Pressure":
+      this.stanTagsSelected[0] = true;
+      break;
+    
+    case "Stanford Road Common Delivery Pressure":
+      this.stanTagsSelected[1] = true;
+      break;
+    
+    case "Stanford Road Flow Rate":
+      this.stanTagsSelected[2] = true;
+      break;
+    
+    
   case "Lovemore Heights Reservoir Level":
     this.lhTagsSelected[0]=true
   break;
@@ -1937,12 +1991,29 @@ case "Olifantskop Reservoir Level":
       this.humGroundSelected[2] = true;
       break;
 
+    
+    
+    case "Kouga Main Line Pressure":
+      this.kougaMainLineSelected[0] = true;
+      break;
+    
+    case "Kouga Main Line Battery Level":
+      this.kougaMainLineSelected[1] = true
+      break;
+    
+    case "Kouga Main Line Flow Rate":
+      this.kougaMainLineSelected[2] = true
+      break;
+    
+    case "Kouga Main Line Total Flow":
+      this.kougaMainLineSelected[3] = true
+      break;
 
       case "Jeffreys Bay Off Take Total Flow":
         this.jeffBayOffTakeSelected[0] = true;
         break;
 
-        case "Jeffreys Bay Off Take Battery Level":
+        case "Jeffreys Bay Off Take Flow Rate":
           this.jeffBayOffTakeSelected[1] = true;
           break;
 
@@ -2178,20 +2249,7 @@ this.cgTagsSelected[0]=true
 
 
   // Stanford Road
-  case "Stanford Road Flow Rate":this.stanTagsSelected[0]=true
-  break;
-  case "Stanford Road Delivery Pressure":this.stanTagsSelected[1]=true
-  break;
-  case "Stanford Road Suction Pressure":this.stanTagsSelected[2]=true
-  break;
-  case "Stanford Road Pump 1 Frequency":this.stanTagsSelected[3]=true
-  break;
-  case "Stanford Road Pump 2 Frequency":this.stanTagsSelected[4]=true
-  break;
-  case "Stanford Road Pump 3 Frequency":this.stanTagsSelected[5]=true
-  break;
-  case "Stanford Road Pump 4 Frequency":this.stanTagsSelected[6]=true
-  break;
+
 
   case "Malabar Reservoir Level":this.maliTagsSelected[0] = true;
   break;
@@ -2413,7 +2471,55 @@ case "Humansdorp Inlet Flow Rate":
    
                             case "Glendinningvale Borehole Total Flow":
                             this.GlenFPTSelected[4]=true;
-                            break;
+      break;
+    
+    
+    case "Bloemendal Res FM Flow Rate":
+      this.BloemFMListSelected[0] = true;
+      break;
+    
+    case "Bloemendal Res FM Total Flow":
+      this.BloemFMListSelected[1] = true;
+      break;
+    
+    case "Bloemendal Res FM Battery Level":
+      this.BloemFMListSelected[2] = true;
+      break;
+    
+    
+    case "Hankey Sewage Flow Rate 1":
+      this.hankSewagePSListSelected[0]=true
+      break;
+    
+    case "Hankey Sewage Flow Rate 2":
+      this.hankSewagePSListSelected[1]=true
+      break;
+    
+    case "Hankey Sewage Average Current":
+      this.hankSewagePSListSelected[2]=true
+      break;
+    
+    case "Hankey Sewage Pump 1 Speed":
+      this.hankSewagePSListSelected[3]=true
+      break;
+    
+    case "Hankey Sewage Pump 2 Speed":
+      this.hankSewagePSListSelected[4]=true
+      break;
+    
+    case "Hankey Sewage Pump 3 Speed":
+      this.hankSewagePSListSelected[5]=true
+      break;
+    
+    case "Hankey Sewage Total Flow 1":
+      this.hankSewagePSListSelected[6]=true
+      break;
+    
+    case "Hankey Sewage Total Flow 2":
+      this.hankSewagePSListSelected[7]=true
+      break;
+    
+    
 
 
                             case "Glendinningvale Pump 1 Run Time":
@@ -2530,7 +2636,13 @@ this.ReadSelectedValues(this.LINTRESListArr,this.LINTRESSelected,"Linton Reservo
 this.ReadSelectedValues(this.LINTWTWListArr,this.LINTWTWSelected,"Linton " )
 this.ReadSelectedValues(this.MNTSListArr,this.MNTSSelected,"McNoughton Township South ")
 this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " )
-this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " )
+  this.ReadSelectedValues(this.RPEListArr, this.RPESelected, "Rosedale Reservoir ")
+  this.ReadSelectedValues(this.BloemFMListArr, this.BloemFMListSelected, "Bloemendal Res FM ")
+  
+this.ReadSelectedValues(this.hankSewagePSListArr,this.hankSewagePSListSelected,"Hankey Sewage ")
+
+  
+
 // console.log( this.selectedTags)
   }
 

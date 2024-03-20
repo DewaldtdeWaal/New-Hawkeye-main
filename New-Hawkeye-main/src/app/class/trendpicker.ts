@@ -22,54 +22,6 @@
       "database":"WBLK_KOUG_FMU_BTU01",
       "field":"flowrate1",
        yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation 1 Total Flow":{
-      name:"Hankey Sewage Pumpstation 1 Total Flow",
-      "database":"NMBM_HANK_TOTAL_FLOW_TREND",
-      "field":"hank_ps_g_total_flow_1",
-       yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation 2 Total Flow":{
-      name:"Hankey Sewage Pumpstation 2 Total Flow",
-      "database":"NMBM_HANK_TOTAL_FLOW_TREND",
-      "field":"hank_ps_g_total_flow_2",
-       yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation SUMP Level":{
-      name:"Hankey Sewage Pumpstation SUMP Level",
-      "database":"HANK_FLOW_TREND",
-      "field":"hank_ps_g_sump_level",
-       yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation 1 Flow Rate":{
-      name:"Hankey Sewage Pumpstation 1 Flow Rate",
-      "database":"HANK_FLOW_TREND",
-      "field":"hank_ps_g_flow_rate_1",
-       yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation 2 Flow Rate":{
-      name:"Hankey Sewage Pumpstation 2 Flow Rate",
-      "database":"HANK_FLOW_TREND",
-      "field":"hank_ps_g_flow_rate_2",
-       yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation 1 Speed":{
-      name:"Hankey Sewage Pumpstation 1 Speed",
-      "database":"HANK_FLOW_TREND",
-      "field":"hank_ps_g_flow_rate_2",
-       yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation 2 Speed":{
-      name:"Hankey Sewage Pumpstation 2 Speed",
-      "database":"HANK_FLOW_TREND",
-      "field":"hank_ps_p2_speed",
-       yAxisIndex:0,
-    },
-    "Hankey Sewage Pumpstation 3 Speed":{
-      name:"Hankey Sewage Pumpstation 3 Speed",
-      "database":"HANK_FLOW_TREND",
-      "field":"hank_ps_p3_speed",
-       yAxisIndex:0,
     },"Glendinningvale Pump 1 Run Time":{
       name:"Glendinningvale Pump 1 Run Time",
       "database":"NMBM_GLEN_TF_trend",
@@ -433,8 +385,8 @@
       "database":"WBLK_KOUG_FMU_BTU05",
        yAxisIndex:0,
     },
-    "Jeffreys Bay Off Take Battery Level":{
-      name:"Jeffreys Bay Off Take Battery Level",
+    "Jeffreys Bay Off Take Flow Rate":{
+      name:"Jeffreys Bay Off Take Flow Rate",
       "field":"flowrate1",
       "database":"WBLK_KOUG_FMU_BTU05",
        yAxisIndex:0,
@@ -451,6 +403,19 @@
       "database":"WBLK_KOUG_FMU_BTU02",
        yAxisIndex:0,
     },
+   "Kouga Main Line Flow Rate":{
+      name:"Kouga Main Line Flow Rate",
+      "field":"flowrate1",
+      "database":"WBLK_KOUG_FMU_BTU02",
+       yAxisIndex:0,
+    },
+    "Kouga Main Line Total Flow":{
+      name:"Kouga Main Line Total Flow",
+      "field":"flowtotal1",
+      "database":"WBLK_KOUG_FMU_BTU02",
+       yAxisIndex:0,
+    },
+
     "Ons Paradys Total Flow":{
       name:"Ons Paradys Total Flow",
       "field":"ons_para_TF",
@@ -1155,51 +1120,9 @@
       "database":"KLM_HUP6_TF_TREND",
            yAxisIndex:0,
         },
-        "Stanford Road Delivery Pressure":{
-          name:"Stanford Road Delivery Pressure",
-          "field":"delivery_pressure",
-      "database":"NMBM_STAN_BPS_TREND",
-           yAxisIndex:0,
-        },
-        "Stanford Road Suction Pressure":{
-          name:"Stanford Road Suction Pressure",
-            "field":"suction_pressure",
-            "database":"NMBM_STAN_BPS_TREND",
-             yAxisIndex:0,
-          },
-          "Stanford Road Flow Rate":{
-            name:"Stanford Road Flow Rate",
-            "field":"flowRate",
-            "database":"NMBM_STAN_BPS_TREND",
-             yAxisIndex:0,
-          },
-          "Stanford Road Pump 1 Frequency":{
-            name:"Stanford Road Pump 1 Frequency",
-            "field":"p1_actfreq",
-            "database":"NMBM_STAN_BPS_TREND",
-             yAxisIndex:0,
-          },
-          "Stanford Road Pump 2 Frequency":{
-            name:"Stanford Road Pump 2 Frequency",
-            "field":"p2_actfreq",
-            "database":"NMBM_STAN_BPS_TREND",
-             yAxisIndex:0,
-          },
-          "Stanford Road Pump 3 Frequency":{
-            name:"Stanford Road Pump 3 Frequency",
-            "field":"p3_actfreq",
-            "database":"NMBM_STAN_BPS_TREND",
-             yAxisIndex:0,
-          },
-          "Stanford Road Pump 4 Frequency":{
-            name:"Stanford Road Pump 4 Frequency",
-            "field":"p4_actfreq",
-            "database":"NMBM_STAN_BPS_TREND",
-             yAxisIndex:0,
-          },
           "Motherwell Delivery Pressure":{
             name:"Motherwell Delivery Pressure",
-            "field":"p4_actfreq",
+            "field":"delivery_pressure",
             "database":"NMBM_STAN_BPS_TREND",
              yAxisIndex:0,
           },
@@ -1557,5 +1480,93 @@
                             "field":"level",
                             "database":"LIN_R_LVL",
                              yAxisIndex:0,
+                            },
+                             "Bloemendal Res FM Flow Rate":{
+                            name:"Bloemendal Res FM Flow Rate",
+                            "field":"flowrate1",
+                            "database":"WDNR_BLOE_RES_OUT01",
+                             yAxisIndex:0,
+                            },
+                             "Bloemendal Res FM Total Flow":{
+                            name:"Bloemendal Res FM Total Flow",
+                            "field":"totaliser1",
+                            "database":"WDNR_BLOE_RES_OUT01",
+                             yAxisIndex:0,
+                              },
+                                "Bloemendal Res FM Battery Level":{
+                            name:"Bloemendal Res FM Battery Level",
+                            "field":"battery_status",
+                            "database":"WDNR_BLOE_RES_OUT01",
+                             yAxisIndex:0,
+                            },
+                          "Stanford Road Common Suction Pressure": {
+                            name: "Stanford Road Common Suction Pressure",
+                            "field": "suction_pressure",
+                            "database": "NMBM_STAN_BPS_TREND",
+                            yAxisIndex:0,
+                            },
+                          "Stanford Road Common Delivery Pressure": {
+                            name: "Stanford Road Common Delivery Pressure",
+                            "field": "delivery_pressure",
+                            "database": "NMBM_STAN_BPS_TREND",
+                            yAxisIndex:0,
                           },
+                          "Stanford Road Flow Rate": {
+                            name: "Stanford Road Flow Rate",
+                            "field": "flowRate",
+                            "database": "NMBM_STAN_BPS_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Flow Rate 1": {
+                            name: "Hankey Sewage Flow Rate 1",
+                            "field": "hank_ps_g_flow_rate_1",
+                            "database": "HANK_FLOW_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Flow Rate 2": {
+                            name: "Hankey Sewage Flow Rate 2",
+                            "field": "hank_ps_g_flow_rate_2",
+                            "database": "HANK_FLOW_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Average Current": {
+                            name: "Hankey Sewage Average Current",
+                            "field": "hank_ps_g_average_current",
+                            "database": "HANK_FLOW_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Pump 1 Speed": {
+                            name: "Hankey Sewage Pump 1 Speed",
+                            "field": "hank_ps_p1_speed",
+                            "database": "HANK_FLOW_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Pump 2 Speed": {
+                            name: "Hankey Sewage Pump 2 Speed",
+                            "field": "hank_ps_p2_speed",
+                            "database": "HANK_FLOW_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Pump 3 Speed": {
+                            name: "Hankey Sewage Pump 3 Speed",
+                            "field": "hank_ps_p3_speed",
+                            "database": "HANK_FLOW_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Total Flow 1": {
+                            name: "Hankey Sewage Total Flow 1",
+                            "field": "hank_ps_g_total_flow_1",
+                            "database": "HANK_TF_TREND",
+                            yAxisIndex:0,
+                          },
+                          "Hankey Sewage Total Flow 2": {
+                            name: "Hankey Sewage Total Flow 2",
+                            "field": "hank_ps_g_total_flow_2",
+                            "database": "HANK_TF_TREND",
+                            yAxisIndex:0,
+                          },
+                   
+                          
+
+                          
                         }

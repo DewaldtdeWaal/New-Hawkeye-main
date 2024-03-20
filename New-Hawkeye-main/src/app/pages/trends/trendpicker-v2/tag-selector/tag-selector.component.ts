@@ -245,12 +245,16 @@ export class TagSelectorComponent implements OnInit {
   GlenWTWListArr:string[]=[]
   GlenWTWSelected:boolean[]=[]
 
-  HankSewagePSListArr:string[]=[]
-  HankSewagePSSelected:boolean[]=[]
 
+
+  BloemFMListArr:string[]=[]
+  BloemFMListSelected: boolean[] = []
 
   paraStFrancTagListArr:string[]=[]
-  paraStFrancSelected:boolean[]=[]
+  paraStFrancSelected: boolean[] = []
+  
+    hankSewagePSListArr: string[] = []
+  hankSewagePSListSelected: boolean[] = []
 
 showAutoMenu: boolean = false
 showResMenu: boolean = false;
@@ -389,7 +393,9 @@ this.ReadSelectedValues(this.bushyFPTTagListArr, this.bushyFPTSelected, "Bushy P
 this.ReadSelectedValues(this.kruisRTagListArr, this.kruisRSelected, "Kruisfontein ");
 this.ReadSelectedValues(this.kruis12GWTagListArr, this.kruis12GWSelected, "Kruisfontein Borhole 12 ");
 this.ReadSelectedValues(this.kruis13GWTagListArr, this.kruis13GWSelected, "Kruisfontein Borhole 13 ");
-this.ReadSelectedValues(this.kruis14GWTagListArr, this.kruis14GWSelected, "Kruisfontein Borhole 14 ");
+      this.ReadSelectedValues(this.kruis14GWTagListArr, this.kruis14GWSelected, "Kruisfontein Borhole 14 ");
+      
+      
 // Groundwater;
 this.ReadSelectedValues(this.npTagListArr,this.npTagsSelected, "Newton Park Pool ");
 this.ReadSelectedValues(this.hup1TagListArr,this.hup1TagSelected, "HD1 ");
@@ -403,7 +409,9 @@ this.ReadSelectedValues(this.stormsWTWTagListArr, this.stormsWTWTagSelected, "St
 this.ReadSelectedValues(this.elandTagListArr,this.elandTagSelected, "Elandsjagt ");
 this.ReadSelectedValues(this.RRListArr,this.RRSelected,"Rowallan Park Extension " );
 this.ReadSelectedValues(this.RPEListArr,this.RPESelected,"Rosedale Reservoir " );
-this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hankey Sewage Pumpstation " );
+this.ReadSelectedValues(this.BloemFMListArr, this.BloemFMListSelected, "Bloemendal Res FM ");
+      
+this.ReadSelectedValues(this.hankSewagePSListArr,this.hankSewagePSListSelected,"Hankey Sewage ")
 }, 500);
 
 
@@ -588,7 +596,28 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
               this.hbpTagListArr[count]="3 Run Hours";
               count++;
               this.showPS = true;
-              break;
+          break;
+        
+        case "KOU_HANK_SEW_PS":
+          if (count >= 1) { count = 0 }
+          this.hankSewagePSListArr[count] = "Flow Rate 1";
+          count++;
+          this.hankSewagePSListArr[count] = "Flow Rate 2";
+          count++;
+          this.hankSewagePSListArr[count] = "Average Current";
+          count++;
+          this.hankSewagePSListArr[count] = "Pump 1 Speed";
+          count++;
+          this.hankSewagePSListArr[count] = "Pump 2 Speed";
+          count++;
+          this.hankSewagePSListArr[count] = "Pump 3 Speed";
+          count++;
+          this.hankSewagePSListArr[count] = "Total Flow 1";
+          count++;
+          this.hankSewagePSListArr[count] = "Total Flow 2";
+          count++;
+          this.showPS = true;
+          break;
 
 
             case "NMB_AIR_PRT":
@@ -771,7 +800,20 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
               this.rdTagListArr[count]="Reservoir Level"
         count++
         this.showRes= true;
-        break;
+          break;
+        
+        
+          case "NMB_STAN_R_PS":
+          if (count >= 1) { count = 0 }
+          this.stanTagListArr[count] = "Common Suction Pressure";
+          count++;
+          this.stanTagListArr[count] = "Common Delivery Pressure";
+          count++;
+          this.stanTagListArr[count] = "Flow Rate";
+          count++;
+          this.showPS = true;
+          break;
+		  
 
         case "NMB_DRIFT_R":
           if(count>=1){count = 0}
@@ -861,26 +903,7 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
             this.showWTW = true;
             break;
 
-            case "KOU_HANK_SEW_PS":
-              if (count>=1 ){count = 0}
-              this.HankSewagePSListArr[count]="1 Total Flow"
-              count++;
-              this.HankSewagePSListArr[count]="2 Total Flow"
-              count++;
-              this.HankSewagePSListArr[count]="SUMP Level"
-              count++;
-              this.HankSewagePSListArr[count]="1 Flow Rate"
-              count++;
-              this.HankSewagePSListArr[count]="2 Flow Rate"
-              count++;
-              this.HankSewagePSListArr[count]="1 Speed"
-              count++;
-              this.HankSewagePSListArr[count]="2 Speed"
-              count++;
-              this.HankSewagePSListArr[count]="3 Speed"
-              count++;
-              this.showPS = true;
-              break;
+           
 
                   case "KOU_KARK2_GW":
                     if (count >=4)
@@ -905,7 +928,18 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
                 this.karkTagListArr[count]= "K2 Level"
               count++
             }
-                break;
+          break;
+        
+            case "NMB_BLOEM_FM_ZS":
+          if (count >= 1) { count = 0 }
+          this.BloemFMListArr[count] = "Flow Rate";
+          count++;
+          this.BloemFMListArr[count] = "Total Flow";
+          count++;
+          this.BloemFMListArr[count] = "Battery Level";
+          count++;
+          this.showZones = true;
+          break;
 
 
 
@@ -955,20 +989,23 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
             if(count>=1){count=0}
             this.jeffBayOffTakeTagListArr[count]="Off Take Total Flow";
             count++;
-            this.jeffBayOffTakeTagListArr[count]="Off Take Battery Level";
+      this.jeffBayOffTakeTagListArr[count]="Off Take Flow Rate"
             count++;
             this.showFPT = true;
             break;
 
-            case"NMB_KOU_MAIN_LINE_FPT":
-            if(count>=1){count=0}
-            this.kougaMainLineTagListArr[count]="Battery Level";
-            count++;
-            this.kougaMainLineTagListArr[count]="Pressure";
-            count++;
-            this.showFPT = true;
-            break;
-
+           case"NMB_KOU_MAIN_LINE_FPT":
+          if(count>=1){count=0}
+          this.kougaMainLineTagListArr[count]="Battery Level"
+          count++;
+          this.kougaMainLineTagListArr[count]="Pressure";
+          count++;
+          this.kougaMainLineTagListArr[count]="Flow Rate"
+          count++;
+          this.kougaMainLineTagListArr[count]="Total Flow";
+          count++;
+		          this.showFPT = true;
+          break;
             case"NMB_ONS_PARA_FPT":
             if(count>=1){count=0}
             this.onsParadysTagListArr[count]="Total Flow";
@@ -1175,20 +1212,7 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
             //Pump Stations
             case "NMB_STAN_R_PS":
               if (count>=1 ){count = 0}
-              this.stanTagListArr[count]="Flow Rate"
-            count++
-              this.stanTagListArr[count]="Delivery Pressure"
-            count++
-              this.stanTagListArr[count]="Suction Pressure"
-            count++
-              this.stanTagListArr[count]="Pump 1 Frequency"
-            count++
-              this.stanTagListArr[count]="Pump 2 Frequency"
-            count++
-              this.stanTagListArr[count]="Pump 3 Frequency"
-            count++
-              this.stanTagListArr[count]="Pump 4 Frequency"
-            count++
+             
             this.showPS = true;
               break;
 
@@ -1419,7 +1443,9 @@ this.ReadSelectedValues(this.HankSewagePSListArr,this.HankSewagePSSelected,"Hank
     window.scrollTo(0,0);
 
 this.tps.selectedTags=this.selectedTags
-this.tps.rightSelectedTags=this.Right.value
+    this.tps.rightSelectedTags = this.Right.value
+    
+    console.log(this.tps.selectedTags)
 
 //setTimeout(() => {
   this.router.navigate(['/hawkeye/trends/trendpickerV2'])

@@ -402,11 +402,6 @@ export class MotherwellComponent implements OnInit {
     },
 
   }
-
-  // tableDataPump1: PeriodicElement[] = [];
-  // tableDataPump2: PeriodicElement[] = [];
-  // tableDataPump3: PeriodicElement[] = [];
-
   displayedColumns :string[]= ['alarm', 'description'];
 
   dataSourceP1:any

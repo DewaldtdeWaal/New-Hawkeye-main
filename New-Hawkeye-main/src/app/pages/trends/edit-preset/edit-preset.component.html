@@ -608,6 +608,21 @@
               </mat-expansion-panel>
 
 
+                  <mat-expansion-panel *ngIf="hankSewagePSListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false'>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title style="color: var(--overview-table-filter-color);">
+                        Hankey Sewage
+                      </mat-panel-title>
+                      <mat-panel-description style="color: rgb(170, 185, 34);">
+                  
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let d of hankSewagePSListArr; index as i">
+                      <mat-checkbox style="color: var(--overview-table-filter-color);" color="primary"[(ngModel)]="hankSewagePSListSelected[i]">{{d}}</mat-checkbox>
+                    </div>
+                  </mat-expansion-panel>
+
+
               <mat-expansion-panel *ngIf="hbpTagListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
                 <mat-expansion-panel-header>
                 <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
@@ -622,19 +637,7 @@
                 </div>
                 </mat-expansion-panel>
 
-              <mat-expansion-panel *ngIf="HankSewagePSListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
-                <mat-expansion-panel-header>
-                <mat-panel-title  style="color: var(--overview-table-filter-color);"  >
-                  Hankey Sewage Pumpstation
-                </mat-panel-title>
-                    <mat-panel-description  style="color: blue;">
-
-    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div *ngFor="let d of HankSewagePSListArr; index as i">
-                  <mat-checkbox  style="color: var(--overview-table-filter-color);"   color="primary" [(ngModel)]="HankSewagePSSelected[i]" >{{d}}</mat-checkbox>
-                </div>
-                </mat-expansion-panel>
+             
 
               <mat-expansion-panel  *ngIf="mwTagListArr[0]!=undefined" style="background-color: var(--form-background-color);" expanded='false' >
                 <mat-expansion-panel-header>
@@ -1075,6 +1078,22 @@
     <mat-icon class="menu-button" [ngClass]="{'rotated' : showZoneMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
     <div *ngIf="showZoneMenu==true">
         <div style="width: 90%; margin-left: 17px;">
+
+
+
+          <mat-expansion-panel *ngIf="BloemFMListArr[0]!=undefined" style="  background-color: var(--form-background-color);" expanded='false'>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="color: var(--overview-table-filter-color);">
+                Bloemendal Res FM
+              </mat-panel-title>
+              <mat-panel-description style="color: rgb(180, 41, 41);">
+          
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngFor="let d of BloemFMListArr; index as i">
+              <mat-checkbox style="color: var(--overview-table-filter-color);" color="primary" [(ngModel)]="BloemFMListSelected[i]">{{d}}</mat-checkbox>
+            </div>
+          </mat-expansion-panel>
 
           <mat-expansion-panel *ngIf="LSDListArr[0]!=undefined"   style="  background-color: var(--form-background-color);" expanded='false' >
             <mat-expansion-panel-header>

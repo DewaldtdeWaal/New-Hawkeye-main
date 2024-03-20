@@ -34,15 +34,7 @@ export class OliphantskopComponent implements OnInit {
 
   data: any=[];
 
-  constructor(public recieve:Common,private pm:pagePostMethod, private pt: PostTrend,public pbm:pageBuilderMethod ) {
-
-
-
-
-
-
-
-   }
+  constructor(public recieve:Common,private pm:pagePostMethod, private pt: PostTrend,public pbm:pageBuilderMethod ) {   }
 
 
    reservoirTitle:any ="Reservoir"
@@ -56,6 +48,7 @@ export class OliphantskopComponent implements OnInit {
     this.intervalLoop =   this.pbm.findPageData(this.collectionName).subscribe((result) => {
       this.variable =  result.variables;
 
+    
       
     });
 

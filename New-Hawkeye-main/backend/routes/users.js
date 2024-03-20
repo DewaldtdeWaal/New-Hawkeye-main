@@ -89,14 +89,7 @@ UserSettings.findOne({userEmail: req.body.userEmail})
 
 
 
-//  router.post('/logout', function(req,res){
-//     // console.log(req.body.userEmail)
-//     // var userEmail = req.body.userEmail;
-//     //  LoggedInUser.findOneAndRemove({userEmail:userEmail}).then({})
-//         res.status(200).json({
-//           message: "User Deleted",
-//         })
-//        })
+
 
 
 

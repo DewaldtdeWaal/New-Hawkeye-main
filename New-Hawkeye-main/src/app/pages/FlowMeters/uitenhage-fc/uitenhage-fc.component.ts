@@ -43,10 +43,10 @@ export class UitenhageFCComponent implements OnInit {
 
 
   siteTitle:any = "Uitenhage"
-  flowTags:any = ["flowRate","pressure"];
+  flowTags:any = ["flow_rate","pressure"];
   totalFlowTags:any=["totalFlow"];
   totalFlowCollectionName:any ="FPT_UIT_FC_TF";
-  collection:any = "FM_FMT_TREND";
+  collection:any = "FPT_UIT_FC_TREND";
 
 
   recieveDate($event: any){
@@ -153,24 +153,16 @@ trendNameTwo:any = "Pressure Data"
   constructor(public rs: ReportService,public us: UsersService, public ls:ListeningService, public recieve:Common,private pm:pagePostMethod ,private pt: PostTrend) {  }
 
   ngOnInit(){
-
-
-
     this.intervalLoop = this.pm.findPageData("nmbm_uit_fc_fpt", "FPT_CurrentVals").subscribe((result) => {
       this.data =  result;
 
+      Common.getRouteWithFaults(this.tagArr, this.variable, this.data, this.faultArr, this.faultVariable)
       
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
-
-
     this.variable.comms = Common.getLastUpdate(this.variable.fpt_uit_fc_ut)
-
 
     var alarm1: any [] = [this.faultVariable.fpt_uit_fc_surge_arrester_fault,this.faultVariable.fpt_uit_fc_charger_fault,this.faultVariable.fpt_uit_fc_remote_io_comms,this.faultVariable.fpt_uit_fc_pressure_analog_signal,this.faultVariable.fpt_uit_fc_flow_meter_comms]
     this.dataSource =new MatTableDataSource(Common.getAlarmValue(alarm1))
     });
-
-
 
   }
 

@@ -112,7 +112,9 @@ export class HumerailComponent implements OnInit {
   ngOnInit() {
 
     this.intervalLoop = this.pm.findPageData("nmbm_hum_gw", "GRDW_CurrentVals").subscribe((result) => {
-      this.data =  result;
+      this.data = result;
+      
+      console.log(this.data)
 
        
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)

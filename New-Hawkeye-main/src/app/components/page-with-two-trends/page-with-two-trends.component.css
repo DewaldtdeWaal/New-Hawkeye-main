@@ -163,7 +163,8 @@
   
   @media screen and (min-height : 500px)
   {
-    .chart { margin-left: auto;
+    .chart { 
+      margin-left: auto;
       margin-right: auto;
       background-color: var(--form-background-color);
       height: 500px;

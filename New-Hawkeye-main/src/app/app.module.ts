@@ -182,6 +182,7 @@ import { DemoTrendComponent } from './pages/trends/demo-trend/demo-trend.compone
 import { DemoSelectorComponent } from './pages/trends/demo-trend/demo-selector/demo-selector.component';
 import { DatePipe } from '@angular/common';
 import { TrendPickerDisplayComponent } from './components/trend-picker-display/trend-picker-display.component';
+import { BloemdalefmresComponent } from './pages/zones/bloemdalefmres/bloemdalefmres.component';
 
 
 const appRoutes: Routes = [
@@ -366,6 +367,7 @@ const appRoutes: Routes = [
     DemoTrendComponent,
     DemoSelectorComponent,
     TrendPickerDisplayComponent,
+    BloemdalefmresComponent,
 
 
 

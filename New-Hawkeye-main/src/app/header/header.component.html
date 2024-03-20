@@ -1,5 +1,4 @@
-
-<mat-sidenav-container fullscreen >
+<mat-sidenav-container fullscreen>
 
   <mat-sidenav mode="over" #sidenav position="start" >
     <button style="width: 100%;" mat-button class="item" routerLink="hawkeye/home"(click)="sidenav.toggle()"><mat-icon  mat-list-icon style="padding-right: 10%;" >home</mat-icon>Home</button><br>
@@ -18,19 +17,14 @@
   <div class="submenu" [ngClass]="{'expanded' : showDriveMenu}" *ngIf="showDriveMenu==true" (click)="sidenav.toggle()" >
   <div *ngFor="let i of userSites">
     <button  *ngIf="i=='ADMIN'" style="width: 100%" mat-button class="item" routerLink="hawkeye/drivers/driver"> Drivers</button>
-    <!-- <button *ngIf="i=='ADMIN'" style="width: 100%" mat-button class="item" routerLink="hawkeye/drivers/driverEdit">Edit Driver</button> -->
     <button *ngIf="i=='ADMIN'" style="width: 100%" mat-button class="item" routerLink="hawkeye/drivers/manageDriver">Manage Driver</button>
 
   </div>
   </div>
 
-
-
-
 <button *ngIf="countNmbm!=0"  (click)="showNmbmMenu = !showNmbmMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">lock</mat-icon><b>NMBM</b>
 <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
 <div class="submenu" [ngClass]="{'expanded' : showNmbmMenu}" *ngIf="showNmbmMenu==true">
-
 
   <button *ngIf="countSubNmbm!=0"  (click)="showNmbmSubMenu = !showNmbmSubMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">lock</mat-icon><b>Admin</b>
     <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmSubMenu}"*ngIf="subExpanded || subShowing" >expand_more</mat-icon></button>
@@ -41,12 +35,9 @@
       </div>
   </div>
 
-
   <button *ngIf="countR!=0"  (click)="showNmbmResMenu = !showNmbmResMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">water</mat-icon><b>Reservoirs</b>
     <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmResMenu}"*ngIf="subExpanded || subShowing" >expand_more</mat-icon></button>
     <div class="submenu" [ngClass]="{'expanded' : showNmbmResMenu}" *ngIf="showNmbmResMenu==true" (click)="sidenav.toggle()" >
-
-
       <div *ngFor="let i of userSites">
         <button *ngIf="i=='NMB_AIR_PRT'" mat-menu-item class="item" routerLink="hawkeye/reservoirs/airportres">Airport</button>
         <button *ngIf="i=='NMB_EMERALD_R'" mat-menu-item class="item" routerLink="/hawkeye/reservoirs/emeraldhill">Emerald Hill</button>
@@ -70,16 +61,10 @@
         <button *ngIf="i=='NMB_MW_R'" mat-menu-item class="item" routerLink="/hawkeye/reservoirs/motherwellres">Motherwell</button>
         <button *ngIf="i=='NMB_MALI_R'" mat-menu-item class="item" routerLink="/hawkeye/reservoirs/malibar">Malabar</button>
         <button *ngIf="i=='NMB_STG_R'" mat-menu-item class="item" routerLink = "hawkeye/reservoirs/st-georges-res">St Georges</button>
-
         <button *ngIf="i=='NMB_LIN_R'" mat-menu-item class = "item" routerLink="/hawkeye/reservoirs/linton">Linton</button>
-
         <button *ngIf="i=='NMB_GLEN_R'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/reservoirs/glendinningvaleres">Glendinningvale</button>
-
       </div>
 </div>
-
-
-
 
 <button *ngIf="countPS!=0"  (click)="showNmbmPSMenu = !showNmbmPSMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">list_alt</mat-icon><b>Pump Stations</b>
 <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmPSMenu}"*ngIf="subExpanded || subShowing" >expand_more</mat-icon></button>
@@ -87,7 +72,6 @@
   <div *ngFor="let i of userSites">
           <button *ngIf="i=='HWK_PO'" mat-menu-item class="item" routerLink="hawkeye/pumpstations/nmb-ps-overview">Pumpstation Overview</button>
           <button *ngIf="i=='NMB_BHB_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/bluehorizonbay">Blue Horizon Bay</button>
-
           <button *ngIf="i=='NMB_VS_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/vanstadens">Van Stadens</button>
           <button *ngIf="i=='NMB_LH_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/lovemoreheights">Lovemore Heights</button>
           <button *ngIf="i=='NMB_BFT_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/buffelsfontein">Buffelsfontein</button>
@@ -99,28 +83,15 @@
           <button *ngIf="i=='NMB_VW_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/verwoerd">Verwoerd</button>
           <button *ngIf="i=='NMB_STAN_R_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/stanford-road">Stanford Road</button>
           <button *ngIf="i=='NMB_MW_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/motherwell">Motherwell</button>
-
   </div>
-
-
-
-
 </div>
 
 <button *ngIf="countGW!=0"  (click)="showNmbmGWMenu = !showNmbmGWMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">vertical_align_top</mat-icon><b>Ground Water</b>
 <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmGWMenu}"*ngIf="subExpanded || subShowing" >expand_more</mat-icon></button>
 <div class="submenu" [ngClass]="{'expanded' : showNmbmGWMenu}" *ngIf="showNmbmGWMenu==true" (click)="sidenav.toggle()" >
   <div *ngFor="let i of userSites">
-
     <button *ngIf="i=='NMB_NPP_GW'" mat-menu-item class="item" routerLink="/hawkeye/groundwater/newtonparkpool">Newton Park Pool</button>
-
-
-
   </div>
-
-
-
-
 </div>
 
 <button *ngIf="countFPT!=0"  (click)="showNmbmFPTMenu = !showNmbmFPTMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">arrow_right_alt</mat-icon><b>FPT</b>
@@ -141,10 +112,7 @@
     <button *ngIf="i=='NMB_HUP_OFF_TAKE_FPT'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/fptsites/humansdorp-offtake">Humansdorp Offtake</button>
     <button *ngIf="i=='NMB_GLEN_FPT'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/fptsites/glendinningvaleftp">Glendinningvale</button>
   </div>
-
 </div>
-
-
 
 <button *ngIf="countWTW!=0" (click)="showWTW_Menu = !showWTW_Menu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">opacity</mat-icon><b>WTW</b>
 <mat-icon class="menu-button" [ngClass]="{'rotated' : showWTW_Menu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
@@ -157,29 +125,23 @@
           </div>
        </div>
 
-
        <button *ngIf="countZS!=0"  (click)="showNmbmZSMenu = !showNmbmZSMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">open_with</mat-icon><b>Zones</b>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showNmbmZSMenu}"*ngIf="subExpanded || subShowing" >expand_more</mat-icon></button>
         <div class="submenu" [ngClass]="{'expanded' : showNmbmZSMenu}" *ngIf="showNmbmZSMenu==true" (click)="sidenav.toggle()" >
           <div *ngFor="let i of userSites">
             <button *ngIf="i=='NMB_LSD_ZS'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/zones/lee-samuals-drive">Lee Samuals Drive</button>
             <button *ngIf="i=='NMB_MNTS_ZS'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/zones/mc-noughtontownshipsouth">McNoughton Township South</button>
-
             <button *ngIf="i=='NMB_RD_ZS'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/zones/rosedale">Rosedale</button>
             <button *ngIf="i=='NMB_RPE_ZS'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/zones/rowallan-park-extension">Rowallan Park Extension</button>
 
+                  <button *ngIf="i=='NMB_BLOEM_FM_ZS'" style="width: 100%;" mat-button class="item" routerLink="hawkeye/zones/bloemresfm">Bloemendal Res FM</button>
           </div>
       </div>
-
      </div>
-
-
 
 <button *ngIf="countNonNmbm!=0"  (click)="showNonNmbmMenu = !showNonNmbmMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">lock</mat-icon><b>Sites</b>
 <mat-icon class="menu-button" [ngClass]="{'rotated' : showNonNmbmMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
 <div class="submenu" [ngClass]="{'expanded' : showNonNmbmMenu}" *ngIf="showNonNmbmMenu==true">
-
-
 
       <button *ngIf="countAuto!=0"  (click)="showAuto = !showAuto" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">directions_car</mat-icon><b>Automotive</b>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showAuto}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
@@ -188,11 +150,7 @@
         <div *ngFor="let i of userSites">
         <button *ngIf="i=='ISUZU_AUTO'" mat-menu-item class="item" routerLink="/hawkeye/automotive/isuzu">Isuzu</button>
         </div>
-
       </div>
-
-
-
 
     <button *ngIf="countR!=0"  (click)="showResMenu = !showResMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">water</mat-icon><b>Reservoirs</b>
       <mat-icon class="menu-button" [ngClass]="{'rotated' : showResMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
@@ -210,8 +168,6 @@
         <button *ngIf="i=='GRF_UMA_R'" mat-menu-item class="item" routerLink="/hawkeye/reservoirs/umasizakhe">Umasizakhe</button>
         <button *ngIf="i=='GRF_WOL_R'" mat-menu-item class="item" routerLink="/hawkeye/reservoirs/wolwas">Wolwas</button>
         <button *ngIf="i=='KLM_KUI_R'" mat-menu-item class = "item" routerLink="/hawkeye/reservoirs/kruisfontein-r">Kruisfontein</button>
-
-  
       </div>
     </div>
 
@@ -220,7 +176,6 @@
 
     <div class="submenu" [ngClass]="{'expanded' : showPSMenu}" *ngIf="showPSMenu==true" (click)="sidenav.toggle()" >
       <div *ngFor="let i of userSites">
-          <!-- <button *ngIf="i=='TEST_PUMPSTATION'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/test-pumpstation">Test Pumpstation</button> -->
           <button *ngIf="i=='HWK_PO'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/ps-overview">Pumpstation Overview</button>
           <button *ngIf="i=='RW_CG_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/crowngardens">Crown Gardens</button>
           <button *ngIf="i=='HWK_DEMO_PS'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/demo-ps">Demo Pump Station</button>
@@ -230,7 +185,6 @@
           <button *ngIf="i=='NMB_TEST'" mat-menu-item class="item" routerLink="/hawkeye/pumpstations/test">TEST</button>
           </div>
       </div>
-
 
 
        <button *ngIf="countGW!=0" (click)="showGWMenu = !showGWMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">vertical_align_top</mat-icon><b>Ground Water</b>
@@ -245,7 +199,6 @@
            <button *ngIf="i=='KOU_KARK1_GW'" mat-menu-item class="item" routerLink="/hawkeye/groundwater/kareedouwk1">Kareedouw K1</button>
            <button *ngIf="i=='KOU_KARK2_GW'" mat-menu-item class="item" routerLink="/hawkeye/groundwater/kareedouwk2">Kareedouw K2</button>
            <button *ngIf="i=='HUM_HUM_GW'" mat-menu-item class="item" routerLink="/hawkeye/groundwater/humerail">Humerail</button>
-
            <button *ngIf="i=='KLM_KUI_12_GW'" mat-menu-item class = "item" routerLink="/hawkeye/groundwater/kruisfontein-gw12">Kruisfontein 12</button>
            <button *ngIf="i=='KLM_KUI_13_GW'" mat-menu-item class = "item" routerLink="/hawkeye/groundwater/kruisfontein-gw13">Kruisfontein 13</button>
            <button *ngIf="i=='KLM_KUI_14_GW'" mat-menu-item class = "item" routerLink="/hawkeye/groundwater/kruisfontein-gw14">Kruisfontein 14</button>
@@ -258,23 +211,8 @@
           <div class="submenu" [ngClass]="{'expanded' : showFLMenu}" *ngIf="showFLMenu==true" (click)="sidenav.toggle()" >
                     <div  *ngFor="let i of userSites">
                       <button *ngIf="i=='WES_FL'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/feedlots/wessels">Waplaas</button>
-                      <!-- <button *ngIf="i=='WES_FL'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/feedlots/waplaasinput">Waplaas Input</button> -->
-
                     </div>
                  </div>
-
-
-
-      <!-- <button *ngIf="countFPT!=0" (click)="showFM_Menu = !showFM_Menu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">arrow_right_alt</mat-icon><b>FPT</b>
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : showFM_Menu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
-        <div class="submenu" [ngClass]="{'expanded' : showFM_Menu}" *ngIf="showFM_Menu==true" (click)="sidenav.toggle()" >
-
-                  <div  *ngFor="let i of userSites">
-                    <button *ngIf="i=='HWK_FO'" style="width: 100%;" mat-button class="item"  routerLink="hawkeye/fptsites/fpt-overview">FPT Overview</button>
-                  </div>
-                </div> -->
-
-
 
      <button *ngIf="countWTW!=0" (click)="showWTW_Menu = !showWTW_Menu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">opacity</mat-icon><b>WTW</b>
        <mat-icon class="menu-button" [ngClass]="{'rotated' : showWTW_Menu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon></button>
@@ -284,8 +222,6 @@
                                   <button *ngIf="i=='KLM_HUP_WTW'" style="width: 100%;" mat-button class="item"  routerLink="/hawkeye/wtw/humansdorpwtw">Humansdorp Inlet</button>
                  </div>
               </div>
-
-
             </div>
 
 <button  *ngIf="countT!=0"  (click)="showTrendsMenu = !showTrendsMenu" style="width: 100%;" mat-button class="item" ><mat-icon  mat-list-icon style="padding-right: 10%;">bar_chart</mat-icon><b>Trends</b>

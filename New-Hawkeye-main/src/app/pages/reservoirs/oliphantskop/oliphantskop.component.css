@@ -54,15 +54,10 @@
 .grid-container-communicationStatus-column3-img{
   display: grid;
   grid-column: 3;
-
   width:20px;
   height: 20px;
-
   justify-items: center;
   align-items: center;
-
-
-
 }
 
 .grid-container-flow-meters-general-column3{

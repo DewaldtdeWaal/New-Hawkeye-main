@@ -1,8 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-
-
-
-
 .light-theme {
   /* --header-account-name-text-color: rgb(235, 0, 0); */
   --page-background-color:rgb(250, 250, 250);
@@ -12,97 +7,66 @@
   --form-box-shadows: rgb(233, 233, 233);
   --form-text-color2: rgb(88, 88, 88);
   --form-textbox-background-color: rgb(210, 210, 210);
-
   --res-level-C1-border: rgb(89, 105, 128);
   --res-level-C1-background-color: rgb(255, 255, 255);
   --res-level-C2-b-border: #ffffff;
   --res-level-C2-b-background-color: rgb(179, 199, 236);
   --res-level-fill-background: rgb(255, 255, 255);
   --res-level-text-color: rgb(88, 88, 88);
-
   --button-http-request-color: rgb(89, 105, 128);
-
-
   --h1-heading-title:#ffffff;
-
   --toggle-BC:rgb(88, 88, 88);
   --toggle-text-color:rgb(255, 255, 255);
-
   --ps-table-shadadows:rgb(255, 255, 255);
   --ps-table-td-fault-color:rgb(253, 244, 244);
   --ps-table-td-color:rgb(88, 88, 88);
   --ps-table-th-color:rgb(88, 88, 88);
-
   --overview-res-table-td:rgb(88, 88, 88);
---overview-res-table-th:rgb(88, 88, 88);
---overview-table-color: #ffffff;
---overview-table-filter-color:rgb(88, 88, 88);
-
-
+  --overview-res-table-th:rgb(88, 88, 88);
+  --overview-table-color: #ffffff;
+  --overview-table-filter-color:rgb(88, 88, 88);
 }
 
 .dark-theme {
   --page-background-color:rgb(77, 78, 82);
-
   --mat-toolbar-background-color: rgb(89, 105, 128);
---color:#0000;
+  --color:#0000;
   --form-background-color: #2c2e35;
   --form-text-color: rgb(255, 255, 255);
   --form-box-shadows: rgb(61, 61, 61);
   --form-text-color2: rgb(255, 255, 255);
   --form-textbox-background-color: rgb(105, 98, 98);
-
-
-
-
-
   --res-level-C1-border: rgb(255, 255, 255);
   --res-level-C1-background-color: rgb(83, 83, 83);
   --res-level-C2-b-border: #2c2e35;
   --res-level-C2-b-background-color: rgb(89, 105, 128);
   --res-level-fill-background: #2c2e35;
   --res-level-text-color: rgb(255, 255, 255);
-
   --button-http-request-color: rgb(89, 105, 128);
-
   --h1-heading-title:#ffffff;
-
   --toggle-BC:rgb(88, 88, 88);
   --toggle-text-color:rgb(255, 255, 255);
-
   --ps-table-shadadows:rgb(255, 255, 255);
   --ps-table-td-fault-color: #9c2020;
   --ps-table-td-color:rgb(255, 255, 255);
   --ps-table-th-color:rgb(255, 255, 255);
-
-
---overview-res-table-td:rgb(255, 255, 255);
---overview-res-table-th:rgb(255, 255, 255);
---overview-table-color: #2c2e35;
---overview-table-filter-color:rgb(255, 255, 255);
-
-
-
-
+  --overview-res-table-td:rgb(255, 255, 255);
+  --overview-res-table-th:rgb(255, 255, 255);
+  --overview-table-color: #2c2e35;
+  --overview-table-filter-color:rgb(255, 255, 255);
 }
 
-
-body { margin: 0;
-    color: var(--header-account-name-text-color);
-
+body { 
+  margin: 0;
+  color: var(--header-account-name-text-color);
   font-family: 'Rubik', sans-serif !important;
-
   font-size: 16px !important;
-  font-weight: 100 !important;;
+  font-weight: 100 !important;
   /* background-color:rgb(255, 0, 0) !important; */
 }
 h1{
-
   font-family: 'Rubik', sans-serif !important;
-
 }
-
-
 
 .toggle {
 width: 100%;

@@ -310,8 +310,10 @@ while (lastUpdate != undefined) {
        
           case "NMB_CGK_R":
             if(variable.nmb_cgk_r_reservoir_level  != null || variable.nmb_cgk_r_reservoir_level != undefined){
-
-              this.cgk_comms=  this.getCommunicationStatusBattery(variable.nmb_cgk_r_ut,this.cgk_comms, variable.coe_kop_cloud_r_level)
+           console.log("variable.nmb_cgk_r_ut")
+              console.log(variable.coe_kop_cloud_r_level)
+                console.log("variable.nmb_cgk_r_ut")
+              this.cgk_comms=  this.getCommunicationStatusBattery(variable.nmb_cgk_r_ut,this.cgk_comms, variable.coe_kop_cloud_r_ut)
               const cgkData = [
                 { name: "Coega Kop Inlet Chamber 2 Ml", level: variable.nmb_cgk_r_reservoir_level},
                 { name: "Coega Kop North Chamber 17 Ml",level:variable.coe_kop_cloud_r_level}

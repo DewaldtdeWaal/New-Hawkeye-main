@@ -8,6 +8,8 @@ import { ReportService } from 'src/app/Service-Files/report.service';
 import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
+import { pageBuilderMethod } from 'src/app/Service-Files/pageBuilder/pageBuilder.service';
+
 export interface PeriodicElement{
   alarm: string;
   description: string;
@@ -107,7 +109,7 @@ faultArr:any=[
 ]
 
 tagArr:any=[
-"last_update",
+"nmb_cgk_r_ut",
 "reservoir_level",
 "grassridge_inlet_flow_rate",
 "grassridge_inlet_total",
@@ -132,7 +134,7 @@ tagArr:any=[
 ]
 
 variable:any ={
-  last_update:null,
+  nmb_cgk_r_ut:null,
   reservoir_level:null,
   grassridge_inlet_flow_rate:null,
   grassridge_inlet_total:null,
@@ -160,7 +162,7 @@ range = new FormGroup({
 });
 totalFlowTrendTag:any =["motherwelltotalflow","grassridgetotalflow","coegatotalflow"];
 flowTrendTag:any = ["nmb_cgk_r_motherwell_outlet_flow_rate","nmb_cgk_r_grassridge_inlet_flow_rate","nmb_cgk_r_coega_idz_outlet_flow_rate","coe_kop_cloud_r_level","level"]
-
+flowTrendTag2:any = ["level1"]
 totalFlowCollection:any = "NMBM_CGK_R_TotalFlow";
 FlowCollection:any = "NMBM_CGK_R_Trend";
 
@@ -170,34 +172,54 @@ CoegaIDZTTFArr: any[]=[];
 
 motherWellFRArr: any[]=[];
 grassRidgeFRArr: any[]=[];
-CoegaIDZTFRArr: any[]=[];
+  CoegaIDZTFRArr: any[] = []
+  flowArr:any[]=[]
 
 recieveDate($event: any){
   this.isLoading = true
   var trend :any;
   this.range = $event;
-  var start;
-  var end
-
+  var start: any;
+  var end: any
+  var trend2 :any
 
   this.pt.getFlowAndTotalFlowCollection(this.totalFlowCollection,this.FlowCollection,this.totalFlowTrendTag,this.flowTrendTag,start,end).then((data) => {
  
     trend = data;
 
+    this.options = this.recieve.getOptionsBarAndLine3("Motherwell Flow Rate Ml/d", trend.FlowRateArr[0], "Grassridge Flow Rate Ml/d", trend.FlowRateArr[1], "Coega IDZ Flow Rate Ml/d", trend.FlowRateArr[2], "Motherwell Total Flow", trend.TotalFlowArr[0], "Grassridge Total Flow Ml", trend.TotalFlowArr[1], "Coega IDZ Total Flow Ml", trend.TotalFlowArr[2], "Ml", "Ml/d",);
+    
+  
 
-    console.log(trend)
+  
+this.flowArr = trend.FlowRateArr[4]
+   
 
-    this.options = this.recieve.getOptionsBarAndLine3("Motherwell Flow Rate Ml/d",trend.FlowRateArr[0],"Grassridge Flow Rate Ml/d",trend.FlowRateArr[1],"Coega IDZ Flow Rate Ml/d",trend.FlowRateArr[2],"Motherwell Total Flow",trend.TotalFlowArr[0],"Grassridge Total Flow Ml",trend.TotalFlowArr[1],"Coega IDZ Total Flow Ml",trend.TotalFlowArr[2],"Ml","Ml/d", );
+  
+     console.log("this.flowArr")
+    console.log(this.flowArr)
+    console.log("this.flowArr")
 
-    this.options2 = this.recieve.getOptionsForLine2("%","North Chamber 17 %",trend.FlowRateArr[3],"North Chamber 2 %",trend.FlowRateArr[4]);
 
+      this.pt.getLevel(this.collectionName, this.flowTrendTag2, start, end).then((data) => { 
+
+    console.log(data)
+
+    trend2 = data
+
+    this.options2 = this.recieve.getOptionsForLine2("%", "North Chamber 17 %", trend2.LevelArr[0], "Inlet Chamber 2 %",  trend.FlowRateArr[4]);
+    
     this.isLoading = false
   })
+
+  })
+
+
 
 
 }
 
-  constructor(public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend,) {
+  constructor(public rs: ReportService, public us: UsersService,public recieve:Common ,private pm:pagePostMethod,private pt: PostTrend,public pbm:pageBuilderMethod) {
 
 
 
@@ -207,6 +229,11 @@ recieveDate($event: any){
 
   }
   isLoading: boolean = true;
+  intervalLoop2: any;
+  collectionName: any = "WBLK_COEG_RES_BTU01"
+  
+  variable2: any
+  commsTitle:any = "North Chamber Communication"
   ngOnInit() {
 
     this.intervalLoop = this.pm.findPageData("cgk", "R_CurrentVals").subscribe((result) => {
@@ -215,15 +242,29 @@ recieveDate($event: any){
       Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
       var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.nmb_cgk_r_mother_outlet_flow_meter_analog_signal]
       var alarm1: any [] = [this.faultVariable.fault_status,this.faultVariable.reservoir_warning_level,this.faultVariable.reservoir_level_sensor,this.faultVariable.chargerstatus,this.faultVariable.grassridge_inlet_flow_meter,this.faultVariable.coega_outlet_flow_meter,this.faultVariable.motherwell_outlet_flow_meter_analog_signal]
-      this.comms = Common.getLastUpdate(this.variable.last_update)
+      this.comms = Common.getLastUpdate(this.variable.nmb_cgk_r_ut)
       this.NCcomms = Common.getLastUpdateBattery(this.variable.coe_kop_cloud_r_ut,this.variable.coe_kop_r_battery_poll_ut)
       this.generalfaulttabledatasource = new MatTableDataSource(Common.getAlarmValue(alarm1))
     });
 
 
 
+    
+    this.intervalLoop2 =   this.pbm.findPageData(this.collectionName).subscribe((result) => {
+      this.variable2 = result.variables;
+      
+ 
+      this.NC17ML = this.variable2.level1
+
+    
+      
+    });
 
   }
+
+  NC17ML:any
+
+
   ngOnDestroy():void{
     if(this.intervalLoop){
       this.intervalLoop.unsubscribe();

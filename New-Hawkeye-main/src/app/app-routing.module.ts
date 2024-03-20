@@ -61,11 +61,6 @@ import { GlendinningvaleresComponent } from './pages/reservoirs/glendinningvaler
 import { LintonresComponent } from './pages/reservoirs/lintonres/lintonres.component';
 import { NmbOverviewComponent } from './pages/reservoirs/nmb-overview/nmb-overview.component';
 
-
-// import {GlendinningvaleComponent} from './pages/groundwater/glendinningvale/glendinningvale.component';
-
-
-
 //Feedlots
 import {WesselsComponent} from './pages/Feedlots/wessels/wessels.component';
 //Ground Water
@@ -149,6 +144,7 @@ import {LeeSamualsDriveComponent} from './pages/zones/lee-samuals-drive/lee-samu
 
  import { DemoSelectorComponent } from './pages/trends/demo-trend/demo-selector/demo-selector.component';
 
+ import { BloemdalefmresComponent } from './pages/zones/bloemdalefmres/bloemdalefmres.component';
 
 const routes: Routes = [
 
@@ -265,7 +261,9 @@ const routes: Routes = [
 {path: 'hawkeye/zones/lee-samuals-drive', component:LeeSamualsDriveComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/zones/mc-noughtontownshipsouth', component:McNoughtontownshipsouthComponent, canActivate:[AuthGuard]},
 {path: 'hawkeye/zones/rowallan-park-extension', component:RowallanParkExtensionComponent, canActivate:[AuthGuard]},
-{path: 'hawkeye/zones/rosedale', component:RosedaleComponent, canActivate:[AuthGuard]},
+  { path: 'hawkeye/zones/rosedale', component: RosedaleComponent, canActivate: [AuthGuard] },
+
+  {path: 'hawkeye/zones/bloemresfm', component:BloemdalefmresComponent, canActivate:[AuthGuard]},
 
 //GroundWater
 {path: 'hawkeye/groundwater/newtonparkpool',component: NewtonparkpoolComponent, canActivate:[AuthGuard]},

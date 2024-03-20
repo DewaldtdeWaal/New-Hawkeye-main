@@ -70,6 +70,11 @@
       <h3 style="padding-top: 8px; ">Status</h3></div>
       <div class="div-form">
         <div class="grid-container-flow-meters-flowrate" >
+        <div *ngIf="variable.tc_R_status_comms==1" class="grid-container-column-1"><div class="column1-led-green"></div></div>
+        <div *ngIf="variable.tc_R_status_comms==0" class="grid-container-column-1"><div class="column1-led-red"></div></div>
+        <div class="grid-container-column-2">Comms:</div>
+        <div *ngIf="variable.tc_R_status_comms==1" class="grid-container-column-4">Ok </div>
+        <div *ngIf="variable.tc_R_status_comms==0" class="grid-container-column-4">Not Ok</div>
         <div  *ngIf="variable.tc_R_HIGH_FLOAT==1" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
         <div  *ngIf="variable.tc_R_HIGH_FLOAT==0" class="grid-container-column-1" ><div class="column1-led-red"></div></div>
         <div class="grid-container-column-2">Float High:</div>
@@ -77,9 +82,26 @@
         <div  *ngIf="variable.tc_R_HIGH_FLOAT==0" class="grid-container-column-4" >Not Ok</div>
         <div  *ngIf="variable.tc_R_LOW_FLOAT==0" class="grid-container-column-1" ><div class="column1-led-green"></div></div>
         <div  *ngIf="variable.tc_R_LOW_FLOAT==1" class="grid-container-column-1" ><div class="column1-led-grey"></div></div>
-        <div class="grid-container-column-2">Float low:</div>
+        <div class="grid-container-column-2">Float Low:</div>
         <div  *ngIf="variable.tc_R_LOW_FLOAT==0" class="grid-container-column-4" >Ok</div>
         <div  *ngIf="variable.tc_R_LOW_FLOAT==1" class="grid-container-column-4" >Not Ok</div>
+        <div *ngIf="variable.tc_R_surge_arrestor==1" class="grid-container-column-1"><div class="column1-led-green"></div></div>
+        <div *ngIf="variable.tc_R_surge_arrestor==0" class="grid-container-column-1"><div class="column1-led-red"></div></div>
+        <div class="grid-container-column-2">Surge Arrestor:</div>
+        <div *ngIf="variable.tc_R_surge_arrestor==1" class="grid-container-column-4">Ok </div>
+        <div *ngIf="variable.tc_R_surge_arrestor==0" class="grid-container-column-4">Not Ok</div>
+        <div *ngIf="variable.tc_R_bat_charger==1" class="grid-container-column-1"><div class="column1-led-green"></div></div>
+        <div *ngIf="variable.tc_R_bat_charger==0" class="grid-container-column-1"><div class="column1-led-red"></div></div>
+        <div class="grid-container-column-2">Battery Charger:</div>
+        <div *ngIf="variable.tc_R_bat_charger==1" class="grid-container-column-4">Ok </div>
+        <div *ngIf="variable.tc_R_bat_charger==0" class="grid-container-column-4">Not Ok</div>
+        <div *ngIf="variable.tc_R_panel_door==1" class="grid-container-column-1"><div class="column1-led-green"></div></div>
+        <div *ngIf="variable.tc_R_panel_door==0" class="grid-container-column-1"><div class="column1-led-red"></div></div>
+        <div class="grid-container-column-2">Panel Door:</div>
+        <div *ngIf="variable.tc_R_panel_door==1" class="grid-container-column-4">Closed</div>
+        <div *ngIf="variable.tc_R_panel_door==0" class="grid-container-column-4">Open</div>
+
+
           </div>
         </div>
         </form>

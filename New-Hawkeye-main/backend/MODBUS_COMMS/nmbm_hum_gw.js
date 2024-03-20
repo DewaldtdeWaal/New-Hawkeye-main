@@ -52,13 +52,13 @@ function readVal_HUM_GW(){
 
         gvar.hum_gw_voltage_ok = m[0];
         gvar.hum_gw_VSD_Fault = m[5]
-gvar.hum_gw_borehole_low_level_fault = m[6]
-gvar.hum_gw_raw_water_tank_low_level_fault = m[7]
-gvar.hum_gw_raw_water_tank_high_level_fault = m[8]
+        gvar.hum_gw_borehole_low_level_fault = m[6]
+        gvar.hum_gw_raw_water_tank_low_level_fault = m[7]
+        gvar.hum_gw_raw_water_tank_high_level_fault = m[8]
+        gvar.hum_gw_final_water_tank_low_level_fault = m[9]
+        gvar.hum_gw_final_water_tank_high_level_fault = m[10]
 
-gvar.hum_gw_final_water_tank_high_level_fault = m[10]
 
-gvar.hum_gw_final_water_tank_low_level_fault = m[9]
 
         if(m[1] == 1){
           gvar.hum_gw_mode = "Auto";

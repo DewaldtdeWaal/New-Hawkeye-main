@@ -35,10 +35,6 @@ function readVal_KARK_K1_GW(){
         socket.end();
         mbtimeout = mbCycleTime;
 
-        console.log("kark1")
-        console.log(val)
-        console.log("kark1")
-
 /////////////////////////////////////////////Input code
           gvar.gw_kark_k1_UT = Date().slice(4,Date().length-41);
 
@@ -87,19 +83,13 @@ function readVal_KARK_K1_GW(){
           gvar.gw_kark_k1_flow_comms = m[12]
           gvar.gw_kark_k1_warning_level = m[13]
 
-
-
-          gvar.gw_kark_k1_level  = (val[3]/100).toFixed(2);
           gvar.gw_kark_k1_run_hours = (val[2])
+          gvar.gw_kark_k1_level  = (val[3]/100).toFixed(2);
           gvar.gw_kark_k1_flow_rate = (val[4]/100).toFixed(2)
           gvar.gw_kark_k1_total_flow = (val[5]/10).toFixed(1);
           gvar.gw_kark_k1_current = (val[8]/100).toFixed(2);
-
           gvar.gw_kark_k1_run_time_remaining = parseFloat(val[6])
           gvar.gw_kark_k1_rest_time_remaining = parseFloat(val[7])
-
-          var MongoClient = require('mongodb').MongoClient;
-          var url= gvar.standardConnectionString;
 
           var firstValue ={
             gw_kark_k1_UT:gvar.gw_kark_k1_UT,

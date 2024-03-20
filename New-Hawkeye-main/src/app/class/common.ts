@@ -122,7 +122,7 @@ export class Common  {
             type:'value',
             name:leftAxisName,//leftAxisName
           
-            min:0,
+            
             axisLabel:{
               formatter:'{value} ',
               color:theme,
@@ -132,7 +132,7 @@ export class Common  {
               type:'value',
               name:rightAxisName,
               nameTextStyle: { color: theme},
-              min:0,
+              
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,
@@ -244,7 +244,7 @@ public getOptionsDataFor6DataPoints(leftAxisName:any,rightAxisName:any, options1
               type:'value',
               name:leftAxisName,//leftAxisName
             
-              min:0,
+              
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,
@@ -254,7 +254,7 @@ public getOptionsDataFor6DataPoints(leftAxisName:any,rightAxisName:any, options1
                 type:'value',
                 name:rightAxisName,
                 nameTextStyle: { color: theme},
-                min:0,
+                
                 axisLabel:{
                   formatter:'{value} ',
                   color:theme,
@@ -507,7 +507,7 @@ public  getOptionsForLine8(symbol:any,flowTrendName1:any, dataArr1:any,flowTrend
             type:'value',
             name:symbol,
           
-            min:0,
+            
             axisLabel:{
               formatter:'{value} ',
               color:theme,
@@ -517,7 +517,7 @@ public  getOptionsForLine8(symbol:any,flowTrendName1:any, dataArr1:any,flowTrend
               type:'value',
               name:symbol,
               nameTextStyle: { color: theme},
-              min:0,
+              
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,
@@ -763,22 +763,19 @@ public static getOptionsForLine(options:any,flowTrendName:any, dataArr:any){
       top:'10%',
       bottom: '10%',
       containLabel: true
-  },
+    },
   toolbox:{
     feature: {
     feature: {
       saveAsImage: {}
     }
-
     }},
     dataZoom:[{
-
       type: 'slider',
       start: 0,
       end: 100,
       paddingTop:'10px',
-      handleSize: 8
-  
+      handleSize: 8,
       },
       { start: 0,
        end:100}
@@ -791,8 +788,8 @@ public static getOptionsForLine(options:any,flowTrendName:any, dataArr:any){
         },
          trigger: 'axis',
          position: ['10%', '10%']
-  
-       },     legend:{
+    },
+    legend: {
         top:'auto',
         type:'scroll',
         textStyle: {color:theme },
@@ -821,7 +818,7 @@ public static getOptionsForLine(options:any,flowTrendName:any, dataArr:any){
               type:'value',
               name:flowTrendName,
               nameTextStyle: { color: theme},
-              min:0,
+              
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,
@@ -883,7 +880,6 @@ public static getOptionsBarAndLine(options:any,flowTrendName:any, flowTrendData:
       end: 100,
       paddingTop:'10px',
       handleSize: 8
-  
       },
       { start: 0,
        end:100}
@@ -895,9 +891,7 @@ public static getOptionsBarAndLine(options:any,flowTrendName:any, flowTrendData:
           type: 'cross'
         },
          trigger: 'axis',
-  
          position: ['10%', '10%']
-  
        },      
        legend:{
           top:'auto',
@@ -916,11 +910,9 @@ public static getOptionsBarAndLine(options:any,flowTrendName:any, flowTrendData:
             },
             yAxis: [
               {
-                nameTextStyle: { color: theme},
+              nameTextStyle: { color: theme},
               type:'value',
               name:totalFlowName,
-            
-              min:0,
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,
@@ -1037,7 +1029,7 @@ public  getOptionsBarAndLine2(lineName:any, lineData:any,lineName2:any, lineData
               type:'value',
               name:leftAxisName, 
             
-              min:0,
+              
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,
@@ -1163,7 +1155,7 @@ public  getOptionsBarAndLine3(lineName:any, lineData:any,lineName2:any, lineData
               type:'value',
               name:rightAxisName,
             
-              min:0,
+              
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,
@@ -1303,7 +1295,7 @@ public getOptionsBarAndLine4(leftAxisName:any,rightAxisName:any, lineName:any, l
               type:'value',
               name:rightAxisName,
             
-              min:0,
+              
               axisLabel:{
                 formatter:'{value} ',
                 color:theme,

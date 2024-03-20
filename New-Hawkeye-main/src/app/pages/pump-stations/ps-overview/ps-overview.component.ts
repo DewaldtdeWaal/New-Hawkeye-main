@@ -14,7 +14,6 @@ export interface PeriodicElement {
   url:any;
 }
 
-
 @Component({
   selector: 'app-ps-overview',
   templateUrl: './ps-overview.component.html',
@@ -26,7 +25,6 @@ export class PsOverviewComponent implements OnInit {
   userSites:string[];
   public authListenerSubs!: Subscription;
   data: any=[];
-
   responseData: any= []
   variable = {
   stan_ps_ut: null,
@@ -45,16 +43,11 @@ export class PsOverviewComponent implements OnInit {
   nmu_eff_ps_ut: null,
   tc_R_UT: null,
   }
-
-
   ELEMENT_DATA: PeriodicElement[] = [];
   filterValue: any="";
   @ViewChild(MatSort) sort: MatSort;
   dataSource:any;
-
-
   resOverviewInterval: any;
-
   bhb_PS_comms:any
   lh_comms: any;
   tc_R_comms: any;
@@ -71,8 +64,6 @@ export class PsOverviewComponent implements OnInit {
   cht_comms:any;
   hb_R_comms:any
 
-
-
   constructor(private route:resOverviewRouteComponent,private authService: AuthService, private ws:WebSocketService ,private router: Router ,public recieve:Common,private pm:pagePostMethod ) {
 
     this.userSites = this.authService.getUserSites();
@@ -80,35 +71,16 @@ export class PsOverviewComponent implements OnInit {
     .subscribe(() => {
       this.userSites = this.authService.getUserSites();
     })
-
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-
-
-
   }
 
-
-
   ngOnInit() {
-
-
-
-
-
-
     this.intervalLoop = this.pm.findPageData("PS_OVERVIEW", "PUMP_CurrentVals").subscribe((result) => {
 
       this.variable = result
-
-
       this.renderPage(this.variable)
     });
-
-
-
-
   }
-
 
   getCommunicationStatus(lastUpdate:any, communication_status:any) {
 
@@ -133,10 +105,7 @@ while (updateTime != undefined) {
       return communication_status;
     }
     }
-
-
   }
-
 
   listening(name:any, Communication_status:any,  Count:any,URL:any  ){
 
@@ -155,7 +124,6 @@ applyFilter(event: Event) {
 navigateToSite(element:any){
   let route = element;
   this.router.navigate([route]);
-
 }
 intervalLoop:any
 ngOnDestroy():void{
@@ -165,18 +133,10 @@ ngOnDestroy():void{
   }
 }
 
-
-
 async renderPage(variable:any){
-
-  console.log(variable);
-
-
     var count=0;
     for (var i = 0; i < this.userSites.length; i++){
       switch (this.userSites[i]) {
-
-
         case "NMU_NMU_EFF":
           if(this.variable.nmu_eff_ps_ut != null || this.variable.nmu_eff_ps_ut  != undefined){
           this.nmu_eff_ps_comms = this.getCommunicationStatus(this.variable.nmu_eff_ps_ut, this.nmu_eff_ps_comms)
@@ -184,9 +144,6 @@ async renderPage(variable:any){
           count++;
         }
           break;
-      
-      
-      
             case "RW_CG_PS":
           if(this.variable.cg_G_UT  != null || this.variable.cg_G_UT  != undefined){
           this.cg_G_comms = this.getCommunicationStatus(this.variable.cg_G_UT, this.cg_G_comms)
@@ -194,9 +151,6 @@ async renderPage(variable:any){
           count++;
         }
           break;
-      
-      
-      
               case "TSI_STORMS_PS":
             if(this.variable.ps_storm_UT  != null || this.variable.ps_storm_UT  != undefined){
             this.ps_storm_comms = this.getCommunicationStatus(this.variable.ps_storm_UT, this.ps_storm_comms)
@@ -204,14 +158,7 @@ async renderPage(variable:any){
             count++;
           }
             break;
-     
-
-
       }
       }
-
-
 }
-
-
 }

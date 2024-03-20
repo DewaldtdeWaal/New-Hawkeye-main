@@ -105,7 +105,8 @@ export const siteMap = {
   "NMB_MNTS_ZS": "nmb_MNTS_ZS_CHECKED",
   "NMB_RD_ZS":"NMB_RD_ZS_CHECKED",
   "NMB_RPE_ZS":"NMB_RPE_ZS_CHECKED",
-  "KOU_HANK_SEW_PS":"KOU_HANK_SEW_PS_CHECKED"
+  "KOU_HANK_SEW_PS": "KOU_HANK_SEW_PS_CHECKED",
+  "NMB_BLOEM_FM_ZS":"NMB_BLOEM_FM_ZS_CHECKED"
 
 };
 
@@ -114,7 +115,8 @@ export const sitesAvailable:any={
   klm_HUP_WTW_CHECKED:false,
   nmb_LSD_ZS_CHECKED:false,
   NMB_RD_ZS_CHECKED:false,
-NMB_RPE_ZS_CHECKED:false,
+  NMB_RPE_ZS_CHECKED: false,
+NMB_BLOEM_FM_ZS_CHECKED:false,
 nmb_MNTS_ZS_CHECKED:false,
   HWK_RO_CHECKED:false,
   klm_KUI_R_CHECKED:false,
@@ -566,6 +568,9 @@ export class addUser  {
       userSites.push("NMB_RPE_ZS")
     }
 
+    if (form.value.NMB_BLOEM_FM_ZS) {
+      userSites.push("NMB_BLOEM_FM_ZS")
+    }
 
     if(form.value.TSI_STORMS_WTW)
     {

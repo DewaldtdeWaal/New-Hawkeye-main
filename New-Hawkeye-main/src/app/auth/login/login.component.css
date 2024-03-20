@@ -1,24 +1,6 @@
 *{background-color: white;}
 
 
-
-/* ::ng-deep.mat-form-field-label {
-  color: rgb(255, 0, 0) !important;
-
- }
-
- ::ng-deep.mat-form-field-underline {
-  background-color: rgb(255, 0, 0) !important;
-
-}
-.staticColorLabel{
-  color: rgb(255, 0, 0) !important;
-} */
-/* .staticColorUnderline
-{
-  background-color: grey !important;
-} */
-
 mat-form-field{
   width: 300px;
 

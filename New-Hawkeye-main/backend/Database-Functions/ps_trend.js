@@ -570,8 +570,85 @@ che_ps_walk_drive_off_500_mm_total_flow: {type: Number},
              }setTimeout(Chelsea_TF, 60000);
           }
 
+        var hank_Trend_shema = mongoose.Schema({
+          date: { type: Date },
+          hank_ps_g_flow_rate_1: {type: Number},
+          hank_ps_g_flow_rate_2: {type: Number},
+          hank_ps_g_average_current: {type: Number},
+          hank_ps_p1_speed: {type: Number},
+          hank_ps_p2_speed: {type: Number},
+          hank_ps_p3_speed: {type: Number},
+        })
+      
+        function hank_flow_Scheme() {
+            var now =  new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var hour = now.getHours();
+            var min = now.getMinutes();
+            var fiveMinAgo = Get_5Min_Ago();
+          var updateTimeVW = Get_UpdateTimeMS(gvar.hank_up)
+          
+             var date = year + "-" + month + "-" + day +" "+ hour +":"+ min;
 
+          if (min % 10 === 0) {
+            if (gvar.hank_ps_g_flow_rate_1 == undefined || gvar.hank_ps_g_flow_rate_1 == null ||
+              gvar.hank_ps_g_flow_rate_2 == undefined || gvar.hank_ps_g_flow_rate_2 == null ||
+              gvar.hank_ps_g_average_current == undefined || gvar.hank_ps_g_average_current == null ||
+              gvar.hank_ps_p1_speed == undefined || gvar.hank_ps_p1_speed == null ||
+              gvar.hank_ps_p2_speed == undefined || gvar.hank_ps_p2_speed == null ||
+              gvar.hank_ps_p3_speed == undefined || gvar.hank_ps_p3_speed == null ||
+              updateTimeVW < fiveMinAgo) { }
+            else {
+              var WW_PS_NMU_EFF_TREND = mongoose.model('HANK_FLOW_TREND',hank_Trend_shema,'HANK_FLOW_TREND')
+              var ps_NMU_EFF_TREND = new WW_PS_NMU_EFF_TREND({
+                date: date,
+                hank_ps_g_flow_rate_1:gvar.hank_ps_g_flow_rate_1,
+                hank_ps_g_flow_rate_2:gvar.hank_ps_g_flow_rate_2,
+                hank_ps_g_average_current:gvar.hank_ps_g_average_current,
+                hank_ps_p1_speed:gvar.hank_ps_p1_speed,
+                hank_ps_p2_speed:gvar.hank_ps_p2_speed,
+                hank_ps_p3_speed:gvar.hank_ps_p3_speed,
+              })
+               ps_NMU_EFF_TREND.save()
+            }
+          }setTimeout(hank_flow_Scheme, 60000);
+        }
 
+        var hank_tf_Trend_shema = mongoose.Schema({
+          date: { type: Date },
+          hank_ps_g_total_flow_1: { type: Number },
+          hank_ps_g_total_flow_2: {type: Number},
+        })
+
+          function hank_tf_Scheme() {
+            var now =  new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var hour = now.getHours();
+            var min = now.getMinutes();
+            var fiveMinAgo = Get_5Min_Ago();
+            var updateTimeVW = Get_UpdateTimeMS(gvar.hank_up)
+            
+              var date = year + "-" + month + "-" + day +" "+ hour +":"+ min;
+
+            if (hour == 23 && min == 55) {
+             if(gvar.hank_ps_g_total_flow_1 == undefined || gvar.hank_ps_g_total_flow_1 == null ||
+               gvar.hank_ps_g_total_flow_2 == undefined || gvar.hank_ps_g_total_flow_2 == null ||
+                updateTimeVW < fiveMinAgo) { }
+             else {
+                 var WW_PS_NMU_EFF_TREND = mongoose.model('HANK_TF_TREND',hank_tf_Trend_shema,'HANK_TF_TREND')
+               var ps_NMU_EFF_TREND = new WW_PS_NMU_EFF_TREND({
+                date: date,
+                 hank_ps_g_total_flow_1:gvar.hank_ps_g_total_flow_1,
+                  hank_ps_g_total_flow_2:gvar.hank_ps_g_total_flow_2,
+               })
+               ps_NMU_EFF_TREND.save();
+              }
+          }setTimeout(hank_tf_Scheme, 60000);
+        }
 
  function Get_UpdateTimeMS(UT){
   var updateTime = UT

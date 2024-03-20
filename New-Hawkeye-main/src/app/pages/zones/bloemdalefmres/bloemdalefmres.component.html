@@ -1,0 +1,65 @@
+<div style="background-color: var(--page-background-color);">
+    <div class="div-heading-title">
+        <h1 style="padding-top: 8px; ">{{siteTitle}}</h1>
+    </div>
+    <div class="wrapper-grid">
+
+        <app-panel [title]=commsTitle>
+
+
+            <app-comms-panel [lastUpdate]=variables.lastupdate [communicationStatus]=variables.comms
+                [batteryUnit]=variables.battery_status>
+
+
+            </app-comms-panel>
+
+
+        </app-panel>
+
+
+
+        <app-panel [title]=statusTitle>
+            <br>
+
+
+            <app-two-column [array]="variablesMatric" style="margin-bottom: 15px;"></app-two-column>
+
+
+            <br>
+
+
+        </app-panel>
+
+
+    </div>
+
+
+    <div style="margin-bottom: 1px ;margin-left: auto; margin-right: auto; margin-top:30px;height:50px;width:350px; -color: var(--form-text-color);"
+        class="div-form">
+        <h3 style="padding-top: 10px; color: var(--form-text-color); ">Total Flow Trend</h3>
+    </div>
+    <section class="ps-form" fxLayoutAlign="center ">
+        <form fxLayout="column" #f="ngForm" (click)="onDateFilter()">
+            <div style="margin-bottom: 1px" class="div-form">
+                <mat-form-field style="padding-left: 10px;">
+                    <mat-label>Enter a date range</mat-label>
+                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                        <input style="color:  var(--form-text-color);" matStartDate formControlName="start"
+                            placeholder="Start date">
+                        <input matEndDate formControlName="end" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+                <button style="margin-left: 20px;" mat-raised-button>SEARCH</button>
+            </div>
+        </form>
+    </section>
+    <br>
+    <mat-progress-bar style="background-color: black" *ngIf="isLoading==true" style
+        mode="indeterminate"></mat-progress-bar>
+    <br>
+    <div id="main" echarts [options]="options" class="chart"></div>
+    <br>
+    <br>
+    <div style="background-color: var(--page-background-color);"></div>

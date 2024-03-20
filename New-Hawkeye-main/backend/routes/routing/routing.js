@@ -119,12 +119,7 @@ router.post("/pageValues", async (req, res) => {
      if(err) throw err;
      res.status(200).json(data);
    })
-
   }
 })
-
-
-
-
 
 module.exports = router;

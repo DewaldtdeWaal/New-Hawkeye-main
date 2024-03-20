@@ -162,7 +162,8 @@ displayedColumns :string[]= ['alarm', 'description'];
   gw_kark_k1_flow_comms:{
     value:null,
     alarm: "Fault",
-    description:"Flow Comms Failure"
+    description: "Flow Comms Failure",
+    alarmTrip:1
   }
 
   }

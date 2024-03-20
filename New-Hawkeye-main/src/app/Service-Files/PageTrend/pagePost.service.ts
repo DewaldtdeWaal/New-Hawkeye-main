@@ -127,9 +127,6 @@ async getFlowAndTotalFlowCollection(totalFlowCollection:any,flowCollectionName:a
   return  this.http.post(this.su.serverURL+"/post/FlowAndCollectionTrend", site).toPromise().then(data =>{
 
 
-    console.log(data)
-
-
     return data
   });
 }

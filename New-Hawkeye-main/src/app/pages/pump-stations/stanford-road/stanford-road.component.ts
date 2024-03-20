@@ -18,6 +18,7 @@ import { Common } from 'src/app/class/common';
 import { pagePostMethod } from 'src/app/Service-Files/route/route.service';
 import { EChartsOption } from 'echarts';
 import { PostTrend } from 'src/app/Service-Files/PageTrend/pagePost.service';
+import { svgImage } from 'src/app/Service-Files/SVGImage/svgImage.service';
 export interface PeriodicElement {
   alarm: string;
   description: string;
@@ -114,36 +115,20 @@ p4_btn:any= false
     dataSourceP2:any
     dataSourceP3:any
     dataSourceP4:any
+    dataSourceP5:any
 
 
     theme:any = localStorage.getItem("theme");
   data: any=[];
-  faultVariable:any={
-  stan_p1_alarmstrip: {
-    value: null,
-  alarm:"Fault",
-  description:"Alarm Trip",
-    alarmTrip: 1
-  },
-  stan_p2_alarmstrip: {
-    value: null,
-  alarm:"Fault",
-  description:"Alarm Trip",
-    alarmTrip: 1
-  },
-  stan_p3_alarmstrip: {
-    value: null,
-  alarm:"Fault",
-  description:"Alarm Trip",
-    alarmTrip: 1
-  },
-  stan_p4_alarmstrip: {
-    value: null,
-  alarm:"Fault",
-  description:"Alarm Trip",
-    alarmTrip: 1
-  }
-}
+
+  
+siteTitle:any = "Standford Road";
+  pump1="Pump 1"
+  pump2="Pump 2"
+  pump3="Pump 3"
+  pump4 = "Pump 4"
+   pump5="Pump 5"
+  titleG ="General"
 
    tagArr:any =[
     "stan_ps_ut",//0
@@ -185,33 +170,601 @@ p4_btn:any= false
   ]
 
   faultArr:any=[
-    "stan_p1_alarmstrip",//8
-    "stan_p2_alarmstrip",//16
-    "stan_p3_alarmstrip",//24
-    "stan_p4_alarmstrip",//32
+"stan_p_p1_pump_valves_not_ok",
+"stan_p_p1_bypass_valves_closed",
+"stan_p_p1_vsd_fault",
+"stan_p_p1_temp_fault",
+"stan_p_p1_condition_monitoring_fault",
+"stan_p_p1_pressure_fault",
+"stan_p_p1_no_flow_fault",
+"stan_p_p1_emergency_stop_fault",
+"stan_p_p1_start_delay_timer_active",
+"stan_p_p1_flow_meter_fault",
+"stan_p_p1_main_plc_comms_fault",
+"stan_p_p2_pump_valves_not_ok",
+"stan_p_p2_bypass_valves_closed",
+"stan_p_p2_vsd_fault",
+"stan_p_p2_temp_fault",
+"stan_p_p2_condition_monitoring_fault",
+"stan_p_p2_pressure_fault",
+"stan_p_p2_no_flow_fault",
+"stan_p_p2_emergency_stop_fault",
+"stan_p_p2_start_delay_timer_active",
+"stan_p_p2_flow_meter_fault",
+"stan_p_p2_main_plc_comms_fault",
+"stan_p_p3_pump_valves_not_ok",
+"stan_p_p3_bypass_valves_closed",
+"stan_p_p3_vsd_fault",
+"stan_p_p3_temp_fault",
+"stan_p_p3_condition_monitoring_fault",
+"stan_p_p3_pressure_fault",
+"stan_p_p3_no_flow_fault",
+"stan_p_p3_emergency_stop_fault",
+"stan_p_p3_start_delay_timer_active",
+"stan_p_p3_flow_meter_fault",
+"stan_p_p3_main_plc_comms_fault",
+"stan_p_p4_pump_valves_not_ok",
+"stan_p_p4_bypass_valves_closed",
+"stan_p_p4_vsd_fault",
+"stan_p_p4_temp_fault",
+"stan_p_p4_condition_monitoring_fault",
+"stan_p_p4_pressure_fault",
+"stan_p_p4_no_flow_fault",
+"stan_p_p4_emergency_stop_fault",
+"stan_p_p4_start_delay_timer_active",
+"stan_p_p4_flow_meter_fault",
+"stan_p_p4_main_plc_comms_fault",
+"stan_p_p5_pump_valves_not_ok",
+"stan_p_p5_bypass_valves_closed",
+"stan_p_p5_vsd_fault",
+"stan_p_p5_temp_fault",
+"stan_p_p5_condition_monitoring_fault",
+"stan_p_p5_pressure_fault",
+"stan_p_p5_no_flow_fault",
+"stan_p_p5_emergency_stop_fault",
+"stan_p_p5_start_delay_timer_active",
+"stan_p_p5_flow_meter_fault",
+"stan_p_p5_main_plc_comms_fault",
   ]
+
+  faultVariable: any = {
+stan_p_p1_pump_valves_not_ok:{
+  value:null,
+  alarm:"Fault",
+  description:"Pump Valves Not Ok",
+  alarmTrip:1,
+},
+stan_p_p1_bypass_valves_closed:{
+  value:null,
+  alarm:"Fault",
+  description:"Bypass Valves Closed",
+  alarmTrip:1,
+},
+stan_p_p1_vsd_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"VSD Fault",
+  alarmTrip:1,
+},
+stan_p_p1_temp_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Temp Fault",
+  alarmTrip:1,
+},
+stan_p_p1_condition_monitoring_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Condition Monitoring Fault",
+  alarmTrip:1,
+},
+stan_p_p1_pressure_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Pressure Fault",
+  alarmTrip:1,
+},
+stan_p_p1_no_flow_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"No Flow Fault",
+  alarmTrip:1,
+},
+stan_p_p1_emergency_stop_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Emergency Stop Fault",
+  alarmTrip:1,
+},
+stan_p_p1_start_delay_timer_active:{
+  value:null,
+  alarm:"Fault",
+  description:"Start Delay Timer Active",
+  alarmTrip:1,
+},
+stan_p_p1_flow_meter_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Flow Meter Fault",
+  alarmTrip:1,
+},
+stan_p_p1_main_plc_comms_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Main PLC Comms Fault",
+  alarmTrip:1,
+    },
+stan_p_p2_pump_valves_not_ok:{
+  value:null,
+  alarm:"Fault",
+  description:"Pump Valves Not Ok",
+  alarmTrip:1,
+},
+stan_p_p2_bypass_valves_closed:{
+  value:null,
+  alarm:"Fault",
+  description:"Bypass Valves Closed",
+  alarmTrip:1,
+},
+stan_p_p2_vsd_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"VSD Fault",
+  alarmTrip:1,
+},
+stan_p_p2_temp_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Temp Fault",
+  alarmTrip:1,
+},
+stan_p_p2_condition_monitoring_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Condition Monitoring Fault",
+  alarmTrip:1,
+},
+stan_p_p2_pressure_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Pressure Fault",
+  alarmTrip:1,
+},
+stan_p_p2_no_flow_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"No Flow Fault",
+  alarmTrip:1,
+},
+stan_p_p2_emergency_stop_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Emergency Stop Fault",
+  alarmTrip:1,
+},
+stan_p_p2_start_delay_timer_active:{
+  value:null,
+  alarm:"Fault",
+  description:"Start Delay Timer Active",
+  alarmTrip:1,
+},
+stan_p_p2_flow_meter_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Flow Meter Fault",
+  alarmTrip:1,
+},
+stan_p_p2_main_plc_comms_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Main PLC Comms Fault",
+  alarmTrip:1,
+},stan_p_p3_pump_valves_not_ok:{
+  value:null,
+  alarm:"Fault",
+  description:"Pump Valves Not Ok",
+  alarmTrip:1,
+},
+stan_p_p3_bypass_valves_closed:{
+  value:null,
+  alarm:"Fault",
+  description:"Bypass Valves Closed",
+  alarmTrip:1,
+},
+stan_p_p3_vsd_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"VSD Fault",
+  alarmTrip:1,
+},
+stan_p_p3_temp_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Temp Fault",
+  alarmTrip:1,
+},
+stan_p_p3_condition_monitoring_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Condition Monitoring Fault",
+  alarmTrip:1,
+},
+stan_p_p3_pressure_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Pressure Fault",
+  alarmTrip:1,
+},
+stan_p_p3_no_flow_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"No Flow Fault",
+  alarmTrip:1,
+},
+stan_p_p3_emergency_stop_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Emergency Stop Fault",
+  alarmTrip:1,
+},
+stan_p_p3_start_delay_timer_active:{
+  value:null,
+  alarm:"Fault",
+  description:"Start Delay Timer Active",
+  alarmTrip:1,
+},
+stan_p_p3_flow_meter_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Flow Meter Fault",
+  alarmTrip:1,
+},
+stan_p_p3_main_plc_comms_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Main PLC Comms Fault",
+  alarmTrip:1,
+},stan_p_p4_pump_valves_not_ok:{
+  value:null,
+  alarm:"Fault",
+  description:"Pump Valves Not Ok",
+  alarmTrip:1,
+},
+stan_p_p4_bypass_valves_closed:{
+  value:null,
+  alarm:"Fault",
+  description:"Bypass Valves Closed",
+  alarmTrip:1,
+},
+stan_p_p4_vsd_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"VSD Fault",
+  alarmTrip:1,
+},
+stan_p_p4_temp_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Temp Fault",
+  alarmTrip:1,
+},
+stan_p_p4_condition_monitoring_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Condition Monitoring Fault",
+  alarmTrip:1,
+},
+stan_p_p4_pressure_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Pressure Fault",
+  alarmTrip:1,
+},
+stan_p_p4_no_flow_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"No Flow Fault",
+  alarmTrip:1,
+},
+stan_p_p4_emergency_stop_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Emergency Stop Fault",
+  alarmTrip:1,
+},
+stan_p_p4_start_delay_timer_active:{
+  value:null,
+  alarm:"Fault",
+  description:"Start Delay Timer Active",
+  alarmTrip:1,
+},
+stan_p_p4_flow_meter_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Flow Meter Fault",
+  alarmTrip:1,
+},
+stan_p_p4_main_plc_comms_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Main PLC Comms Fault",
+  alarmTrip:1,
+},stan_p_p5_pump_valves_not_ok:{
+  value:null,
+  alarm:"Fault",
+  description:"Pump Valves Not Ok",
+  alarmTrip:1,
+},
+stan_p_p5_bypass_valves_closed:{
+  value:null,
+  alarm:"Fault",
+  description:"Bypass Valves Closed",
+  alarmTrip:1,
+},
+stan_p_p5_vsd_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"VSD Fault",
+  alarmTrip:1,
+},
+stan_p_p5_temp_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Temp Fault",
+  alarmTrip:1,
+},
+stan_p_p5_condition_monitoring_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Condition Monitoring Fault",
+  alarmTrip:1,
+},
+stan_p_p5_pressure_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Pressure Fault",
+  alarmTrip:1,
+},
+stan_p_p5_no_flow_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"No Flow Fault",
+  alarmTrip:1,
+},
+stan_p_p5_emergency_stop_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Emergency Stop Fault",
+  alarmTrip:1,
+},
+stan_p_p5_start_delay_timer_active:{
+  value:null,
+  alarm:"Fault",
+  description:"Start Delay Timer Active",
+  alarmTrip:1,
+},
+stan_p_p5_flow_meter_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Flow Meter Fault",
+  alarmTrip:1,
+},
+stan_p_p5_main_plc_comms_fault:{
+  value:null,
+  alarm:"Fault",
+  description:"Main PLC Comms Fault",
+  alarmTrip:1,
+},
+
+  }
+
+  variablesMatricG:any = {}
+  variablesMatric1:any = {}
+  variablesMatric2:any = {}
+  variablesMatric3:any = {}
+  variablesMatric4: any = {}
+  variablesMatric5: any = {}
+  
+  pumpColor1:any
+  pumpColor2:any
+  pumpColor3:any
+  pumpColor4: any
+  pumpColor5: any
+  
+    Pump:any = "Pump";
+
+    
 
   constructor(private http: HttpClient,private pt: PostTrend, private su:ServerURLService, private cl:ControlLogService, private pm:pagePostMethod, private as:AuthService,  private site_Control: SiteControlService,  private onOf: StanOnOffService,public recieve:Common ) {
 
+    this.intervalLoop = this.pm.findPageData("nmbm_stan_ps_new", "PS_CurrentVals").subscribe((result) => {
+      this.variable = result;
 
-    this.intervalLoop = this.pm.findPageData("nmbm_stan_ps", "PS_CurrentVals").subscribe((result) => {
-      this.data =  result;
 
+      console.log(this.variable)
+      
+      console.log(this.data)
+
+      this.variable.comms = Common.getLastUpdate(this.variable.stan_g_p_new_ut)
+
+      this.variable.stan_p_p1_modes = svgImage.returnMotherwellWord(this.variable.stan_p_p1_mode)
+      this.variable.stan_p_p2_modes = svgImage.returnMotherwellWord(this.variable.stan_p_p2_mode)
+      this.variable.stan_p_p3_modes = svgImage.returnMotherwellWord(this.variable.stan_p_p3_mode)
+      this.variable.stan_p_p4_modes = svgImage.returnMotherwellWord(this.variable.stan_p_p4_mode)
+      this.variable.stan_p_p5_modes = svgImage.returnMotherwellWord(this.variable.stan_p_p5_mode)
+
+      this.pumpColor1 = svgImage.getSVGColor(this.variable.stan_p_p1_status)
+      this.pumpColor2 = svgImage.getSVGColor(this.variable.stan_p_p2_status)
+      this.pumpColor3 = svgImage.getSVGColor(this.variable.stan_p_p3_status)
+      this.pumpColor4 = svgImage.getSVGColor(this.variable.stan_p_p4_status)
+      this.pumpColor5 = svgImage.getSVGColor(this.variable.stan_p_p5_status)
+      
+
+
+  this.variablesMatricG = [{
+        rowType:"TextRow",
+        label:"Common Suction Pressure",
+        value:this.variable.stan_g_p_com_suc_pres+ " bar"
+      },
+      {
+        rowType:"TextRow",
+        label:"Common Delivery Pressure",
+        value:this.variable.stan_g_p_com_del_pres+ " bar"
+      },
+      {
+        rowType:"TextRow",
+        label:"Flow Rate",
+        value:this.variable.stan_g_p_flow_rate+ " Ml/d"
+      },
+      {
+        rowType:"TextRow",
+        label:"Total Flow",
+        value:this.variable.stan_g_p_tf + " Ml"
+      },
+      {
+        rowType:"TextRow",
+        label:"Total Flow Required",
+        value:this.variable.stan_g_p_flow_rate_req+ " Ml/d"
+      },
+      // {
+      //   rowType:"TextRow",
+      //   label:"Number of Pumps Required",
+      //   value:this.variable.stan_g_p_num_of_pump_req
+      // },
+    ]
+    this.variablesMatric1 = [{
+        rowType:"TextRow",
+        label:"Mode",
+        value:this.variable.stan_p_p1_modes
+      },{
+      rowType:"TextRow",
+      label:"Status",
+      value:this.variable.stan_p_p1_status
+    },{
+      rowType:"TextRow",
+      label:"Run Time Hours",
+      value:this.variable.stan_p_p1_run_time_hours
+    },{
+      rowType:"TextRow",
+      label:"Number of Starts",
+      value:this.variable.stan_p_p1_pump_start
+    },
+    {
+      rowType:"TextRow",
+      label:"Speed",
+      value:this.variable.stan_p_p1_pump_speed+" rpm"
+    },
+
+  ]
+    this.variablesMatric2  = [{
+        rowType:"TextRow",
+        label:"Mode",
+        value:this.variable.stan_p_p2_modes
+      },{
+      rowType:"TextRow",
+      label:"Status",
+      value:this.variable.stan_p_p2_status
+    },{
+      rowType:"TextRow",
+      label:"Run Time Hours",
+      value:this.variable.stan_p_p2_run_time_hours
+    },{
+      rowType:"TextRow",
+      label:"Number of Starts",
+      value:this.variable.stan_p_p2_pump_start
+    },
+    {
+      rowType:"TextRow",
+      label:"Speed",
+      value:this.variable.stan_p_p2_pump_speed+" rpm"
+    },
+
+  ]
+    this.variablesMatric3  = [{
+        rowType:"TextRow",
+        label:"Mode",
+        value:this.variable.stan_p_p3_modes
+      },{
+      rowType:"TextRow",
+      label:"Status",
+      value:this.variable.stan_p_p3_status
+    },{
+      rowType:"TextRow",
+      label:"Run Time Hours",
+      value:this.variable.stan_p_p3_run_time_hours
+    },{
+      rowType:"TextRow",
+      label:"Number of Starts",
+      value:this.variable.stan_p_p3_pump_start
+    },
+    {
+      rowType:"TextRow",
+      label:"Speed",
+      value:this.variable.stan_p_p3_pump_speed+" rpm"
+    },
+
+  ]
+    this.variablesMatric4  = [{
+        rowType:"TextRow",
+        label:"Mode",
+        value:this.variable.stan_p_p4_modes
+      },{
+      rowType:"TextRow",
+      label:"Status",
+      value:this.variable.stan_p_p4_status
+    },{
+      rowType:"TextRow",
+      label:"Run Time Hours",
+      value:this.variable.stan_p_p4_run_time_hours
+    },{
+      rowType:"TextRow",
+      label:"Number of Starts",
+      value:this.variable.stan_p_p4_pump_start
+    },
+    {
+      rowType:"TextRow",
+      label:"Speed",
+      value:this.variable.stan_p_p4_pump_speed+" rpm"
+    },
+
+  ]
+    this.variablesMatric5  = [{
+        rowType:"TextRow",
+        label:"Mode",
+        value:this.variable.stan_p_p5_modes
+      },{
+      rowType:"TextRow",
+      label:"Status",
+      value:this.variable.stan_p_p5_status
+    },{
+      rowType:"TextRow",
+      label:"Run Time Hours",
+      value:this.variable.stan_p_p5_run_time_hours
+    },{
+      rowType:"TextRow",
+      label:"Number of Starts",
+      value:this.variable.stan_p_p5_pump_start
+    },
+    {
+      rowType:"TextRow",
+      label:"Speed",
+      value:this.variable.stan_p_p5_pump_speed+" rpm"
+    },]
+    
+    Common.getFaultRouteDatas(this.faultArr, this.faultVariable, this.variable);
+
+    var alarm1: any[] = [this.faultVariable.stan_p_p1_pump_valves_not_ok,this.faultVariable.stan_p_p1_bypass_valves_closed,this.faultVariable.stan_p_p1_vsd_fault,this.faultVariable.stan_p_p1_temp_fault,this.faultVariable.stan_p_p1_condition_monitoring_fault,this.faultVariable.stan_p_p1_pressure_fault,this.faultVariable.stan_p_p1_no_flow_fault,this.faultVariable.stan_p_p1_emergency_stop_fault,this.faultVariable.stan_p_p1_start_delay_timer_active,this.faultVariable.stan_p_p1_flow_meter_fault,this.faultVariable.stan_p_p1_main_plc_comms_fault];
+    var alarm2: any[] = [this.faultVariable.stan_p_p2_pump_valves_not_ok,this.faultVariable.stan_p_p2_bypass_valves_closed,this.faultVariable.stan_p_p2_vsd_fault,this.faultVariable.stan_p_p2_temp_fault,this.faultVariable.stan_p_p2_condition_monitoring_fault,this.faultVariable.stan_p_p2_pressure_fault,this.faultVariable.stan_p_p2_no_flow_fault,this.faultVariable.stan_p_p2_emergency_stop_fault,this.faultVariable.stan_p_p2_start_delay_timer_active,this.faultVariable.stan_p_p2_flow_meter_fault,this.faultVariable.stan_p_p2_main_plc_comms_fault];
+    var alarm3: any[] = [this.faultVariable.stan_p_p3_pump_valves_not_ok,this.faultVariable.stan_p_p3_bypass_valves_closed,this.faultVariable.stan_p_p3_vsd_fault,this.faultVariable.stan_p_p3_temp_fault,this.faultVariable.stan_p_p3_condition_monitoring_fault,this.faultVariable.stan_p_p3_pressure_fault,this.faultVariable.stan_p_p3_no_flow_fault,this.faultVariable.stan_p_p3_emergency_stop_fault,this.faultVariable.stan_p_p3_start_delay_timer_active,this.faultVariable.stan_p_p3_flow_meter_fault,this.faultVariable.stan_p_p3_main_plc_comms_fault];
+    var alarm4: any[] = [this.faultVariable.stan_p_p4_pump_valves_not_ok,this.faultVariable.stan_p_p4_bypass_valves_closed,this.faultVariable.stan_p_p4_vsd_fault,this.faultVariable.stan_p_p4_temp_fault,this.faultVariable.stan_p_p4_condition_monitoring_fault,this.faultVariable.stan_p_p4_pressure_fault,this.faultVariable.stan_p_p4_no_flow_fault,this.faultVariable.stan_p_p4_emergency_stop_fault,this.faultVariable.stan_p_p4_start_delay_timer_active,this.faultVariable.stan_p_p4_flow_meter_fault,this.faultVariable.stan_p_p4_main_plc_comms_fault];
+    var alarm5: any[] = [this.faultVariable.stan_p_p5_pump_valves_not_ok,this.faultVariable.stan_p_p5_bypass_valves_closed,this.faultVariable.stan_p_p5_vsd_fault,this.faultVariable.stan_p_p5_temp_fault,this.faultVariable.stan_p_p5_condition_monitoring_fault,this.faultVariable.stan_p_p5_pressure_fault,this.faultVariable.stan_p_p5_no_flow_fault,this.faultVariable.stan_p_p5_emergency_stop_fault,this.faultVariable.stan_p_p5_start_delay_timer_active,this.faultVariable.stan_p_p5_flow_meter_fault,this.faultVariable.stan_p_p5_main_plc_comms_fault];
        
-      Common.getRouteWithFaults(this.tagArr,this.variable,this.data,this.faultArr,this.faultVariable)
 
-     this.variable.comms = Common.getLastUpdate(this.variable.stan_ps_ut)
-
-     var alarm1: any [] = [this.faultVariable.stan_p1_alarmstrip]
-     var alarm2: any [] = [this.faultVariable.stan_p2_alarmstrip]
-     var alarm3: any [] = [this.faultVariable.stan_p3_alarmstrip]
-     var alarm4: any [] = [this.faultVariable.stan_p4_alarmstrip]
-
-     this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
-     this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
-     this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
-     this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
-
+    this.dataSourceP1 = new MatTableDataSource(Common.getAlarmValue(alarm1))
+    this.dataSourceP2 = new MatTableDataSource(Common.getAlarmValue(alarm2))
+    this.dataSourceP3 = new MatTableDataSource(Common.getAlarmValue(alarm3))
+    this.dataSourceP4 = new MatTableDataSource(Common.getAlarmValue(alarm4))
+    this.dataSourceP5 = new MatTableDataSource(Common.getAlarmValue(alarm5))
 
     })
     this.onOf.GetSiteValues()
@@ -222,14 +775,6 @@ p4_btn:any= false
       this.pump3OnOff = this.data.routingArray[0].p3_run;
       this.pump4OnOff = this.data.routingArray[0].p4_run;
     })
-
-
-    //   setTimeout(()=>{
-
-
-
-
-    // },1000)
 
     this.userSites = this.as.getUserSites();
     this.firstName = this.as.getFirstName();
@@ -243,48 +788,24 @@ p4_btn:any= false
       const findval = this.userSites.includes("NMB_STAN_R_PS_CON")
       if(findval== true){
         this.controlAccess=true;
-      }
+    }
+    
 
-
-
+  
   }
 
-
-
-
-
   ngOnInit() {
-
-
-
-
-
     this.site_Control.getStanControlByte().subscribe((resp:any)=>{
-
       this.stan_hawkeye_enable_control =  resp.ps_control
       this.stan_ps_scada_speed_sp = resp.ps_speed
-
       this.stan_p1_scada_run_command= resp.p1_run
       this.stan_p2_scada_run_command= resp.p2_run
       this.stan_p3_scada_run_command= resp.p3_run
       this.stan_p4_scada_run_command= resp.p4_run
 
-
       })
 
-
-
-
-
-
-
-
-
-
   }
-
-
-
 
   onP1PowerClickOn(){
 
@@ -534,7 +1055,7 @@ getCurrentDate(){
 
 
 
-siteTitle:any = "Standford Road";
+
 isLoading:boolean ;
 options1:EChartsOption;
 options2:EChartsOption;

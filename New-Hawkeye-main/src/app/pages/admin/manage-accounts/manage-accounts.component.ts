@@ -29,7 +29,7 @@ export class ManageAccountsComponent implements OnInit {
 
   filterValue: any="";
   ELEMENT_DATA: PeriodicElement[] = [];
-  displayedColumns :string[]= ['firstName', 'secondName', 'userEmail']
+  displayedColumns :string[] = ['firstName', 'secondName', 'userEmail']
   dataSource:any;
   clickedRows = new Set<PeriodicElement>();
   email:any;
